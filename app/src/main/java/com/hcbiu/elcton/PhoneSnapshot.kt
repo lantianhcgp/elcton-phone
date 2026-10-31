@@ -1,17 +1,36 @@
 package com.hcbiu.elcton
 
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
+
+/** Reject JSON coercions and numbers outside the exact integer range shared with JavaScript. */
+internal fun exactInteger(value: Any?): Long? = when (value) {
+    is Byte, is Short, is Int, is Long -> (value as Number).toLong().takeIf { it in -9007199254740990L..9007199254740990L }
+    else -> null
+}
+
+internal fun semesterDate(start: String): java.time.LocalDate {
+    require(Regex("[0-9]{4}-[0-9]{2}-[0-9]{2}").matches(start) && start.take(4) != "0000") { "学期日期格式错误" }
+    return java.time.LocalDate.parse(start)
+}
 
 /** Strict ingress; this probe does not silently normalize newer schemas or drop courses. */
 object PhoneSnapshot {
-    fun encode(raw: String): String {
+    fun encode(raw: String): String = try {
+        encodeDocument(raw)
+    } catch (_: JSONException) {
+        // JSON exception messages can include the original course/teacher text. Never propagate them.
+        throw IllegalArgumentException("课表 JSON 格式或字段无效")
+    }
+    private fun encodeDocument(raw: String): String {
         require(raw.length <= 65536) { "输入过长" }
         val input = JSONObject(raw)
-        require(input.optString("schema") == "elcton.schedule" && input.optInt("version") == 1) { "仅支持 elcton.schedule v1" }
-        val start = input.getJSONObject("settings").getString("semesterStart")
-        require(Regex("\\d{4}-\\d{2}-\\d{2}").matches(start)) { "学期日期格式错误" }
-        java.time.LocalDate.parse(start)
+        require(input.opt("schema") == "elcton.schedule" && exactInteger(input.opt("version")) == 1L) { "仅支持 elcton.schedule v1" }
+        val startValue = input.getJSONObject("settings").opt("semesterStart")
+        require(startValue is String) { "学期日期格式错误" }
+        val start = startValue
+        semesterDate(start)
         val list = input.getJSONArray("courses")
         require(list.length() <= 200) { "课程数量超出当前保护上限" }
         val ids = mutableSetOf<String>()
@@ -23,8 +42,9 @@ object PhoneSnapshot {
         }
         fun number(c: JSONObject, key: String, low: Int, high: Int): Int {
             val value = c.get(key)
-            require(value is Number && value.toDouble() == value.toInt().toDouble() && value.toInt() in low..high) { "字段 $key 范围错误" }
-            return value.toInt()
+            val integer = exactInteger(value)
+            require(integer != null && integer in low.toLong()..high.toLong()) { "字段 $key 范围错误" }
+            return integer.toInt()
         }
         fun time(c: JSONObject, key: String): String {
             val value = str(c, key, 5)

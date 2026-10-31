@@ -62,12 +62,12 @@ class MainActivity : ComponentActivity() {
             val output=java.io.ByteArrayOutputStream();val buffer=ByteArray(4096)
             while(true){val count=stream.read(buffer);if(count<0)break;require(output.size()+count<=65536){"导入文件过大"};output.write(buffer,0,count)}
             output.toString("UTF-8")
-        } ?: error("无法读取文件") }.onSuccess { prepareImport(it) }.onFailure { notice="导入失败：${it.message}" }
+        } ?: error("无法读取文件") }.onSuccess { prepareImport(it) }.onFailure { notice="导入失败：${UserFacingError.validation(it.message)}" }
     }
     private val exportFile = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
         if(uri!=null)runCatching {
             contentResolver.openOutputStream(uri)?.use { it.write(book.wireJson().toByteArray(Charsets.UTF_8)) } ?: error("无法写入文件")
-        }.onSuccess { notice="课表已导出" }.onFailure { notice="导出失败：${it.message}" }
+        }.onSuccess { notice="课表已导出" }.onFailure { notice="导出失败：${UserFacingError.validation(it.message)}" }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,10 +84,10 @@ class MainActivity : ComponentActivity() {
     private fun save(next: ScheduleBook): Boolean = try {
         check(loadError==null){"请先恢复无法读取的课表"}
         store.save(next);book=next;notice="已保存在手机，尚未同步到手表";true
-    } catch(e:Exception){notice=e.message?:"保存失败，原课表保留";false}
+    } catch(e:Exception){notice=UserFacingError.validation(e.message);false}
     private fun prepareImport(raw: String, remoteRevision: Long = 0) {
         runCatching { book.importSnapshot(raw,remoteRevision) }.onSuccess { pendingImport=it;showImport=false }
-            .onFailure { notice="无法导入：${it.message}" }
+            .onFailure { notice="无法导入：${UserFacingError.validation(it.message)}" }
     }
     @Composable private fun Product() {
         val titles=listOf("今日课程","周课表","设备同步","设置")
@@ -198,13 +198,13 @@ class MainActivity : ComponentActivity() {
         var from by remember(key){mutableStateOf(existing?.startTime?:"08:00")};var to by remember(key){mutableStateOf(existing?.endTime?:"08:45")}
         var week by remember(key){mutableStateOf(existing?.weekType?:"all")};var color by remember(key){mutableIntStateOf(existing?.colorIndex?:0)}
         var error by remember(key){mutableStateOf("")};var delete by remember(key){mutableStateOf(false)};var overlap by remember(key){mutableStateOf<Course?>(null)}
-        fun commit(c:Course){runCatching{book.put(c)}.onSuccess{if(save(it)){editing=false;editingCourse=null}}.onFailure{error=it.message?:"课程字段无效"}}
+        fun commit(c:Course){runCatching{book.put(c)}.onSuccess{if(save(it)){editing=false;editingCourse=null}}.onFailure{error=UserFacingError.validation(it.message)}}
         Column(Modifier.fillMaxSize()){
             Row(Modifier.fillMaxWidth().padding(horizontal=12.dp),horizontalArrangement=Arrangement.SpaceBetween){TextButton(onClick={editing=false}){Text("返回")};Button(onClick={
                 if(name.isBlank()){error="请输入课程名称";return@Button}
                 val a=first.toIntOrNull();val b=last.toIntOrNull();if(a==null||b==null){error="请填写有效节次";return@Button}
                 val c=Course(id,name.trim(),location.trim(),teacher.trim(),day,a,b,from.trim(),to.trim(),week,color)
-                runCatching{book.put(c)}.onFailure{error=it.message?:"课程字段无效"}.onSuccess{if(book.overlaps(c).isNotEmpty())overlap=c else commit(c)}
+                runCatching{book.put(c)}.onFailure{error=UserFacingError.validation(it.message)}.onSuccess{if(book.overlaps(c).isNotEmpty())overlap=c else commit(c)}
             },modifier=Modifier.testTag("course-save")){Text("保存")}}
             Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){
                 if(error.isNotEmpty())Text(error,color=MaterialTheme.colorScheme.error)
@@ -241,7 +241,7 @@ class MainActivity : ComponentActivity() {
             TextButton(onClick={confirmClear=true},enabled=loadError==null,modifier=Modifier.testTag("clear-book")){Text("清空手机课表",color=MaterialTheme.colorScheme.error)}
             HorizontalDivider();Text("隐私与兼容性",style=MaterialTheme.typography.titleMedium)
             Text("课表保存在两端应用本地；同步不使用自建云服务。设备能力、签名和运动健康授权决定是否可通信，不把 FIT3 作为型号白名单。",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
-            Text("0.2.2 · 测试构建\nWear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("0.2.3 · 测试构建\nWear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(32.dp))
         }
     }
@@ -250,7 +250,7 @@ class MainActivity : ComponentActivity() {
             Text("使用 elcton.schedule v1。先检查内容，再确认导入。",style=MaterialTheme.typography.bodySmall)
             OutlinedTextField(raw,{raw=it},Modifier.fillMaxWidth().heightIn(min=160.dp,max=300.dp).testTag("import-input"),label={Text("JSON 内容")})
             if(error.isNotEmpty())Text(error,color=MaterialTheme.colorScheme.error)
-        }},confirmButton={TextButton(onClick={runCatching{book.importSnapshot(raw)}.onSuccess{pendingImport=it;showImport=false}.onFailure{error=it.message?:"无效课表"}},modifier=Modifier.testTag("import-check")){Text("检查")}},dismissButton={TextButton(onClick={showImport=false}){Text("取消")}})
+        }},confirmButton={TextButton(onClick={runCatching{book.importSnapshot(raw)}.onSuccess{pendingImport=it;showImport=false}.onFailure{error=UserFacingError.validation(it.message)}},modifier=Modifier.testTag("import-check")){Text("检查")}},dismissButton={TextButton(onClick={showImport=false}){Text("取消")}})
     }
     @Composable private fun Devices(){
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal=20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){

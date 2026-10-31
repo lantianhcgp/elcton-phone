@@ -35,6 +35,17 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
     private var closed=false
     private var awaitingPermission=false
     private var handshakeAttempts=0
+    private var awaitingReady=false
+    private val sendAttempts=SendAttempts()
+    private val total=OperationDeadline()
+    private var totalTimer:Runnable?=null
+    private fun finishTotal(){totalTimer?.let(handler::removeCallbacks);totalTimer=null;total.clear()}
+    private fun beginTotal(message:String){
+        finishTotal();total.begin(android.os.SystemClock.elapsedRealtime(),45000)
+        val gen=generation
+        val run=Runnable{if(!closed&&gen==generation&&total.expired(android.os.SystemClock.elapsedRealtime()))fail(message)}
+        totalTimer=run;handler.postDelayed(run,45000)
+    }
     private val watchPackage="watchapp.nexus.0zzip"
     private val watchFingerprint="8926257d1bd9ff653dcd84100d53cbbabbd39371fdda5126dfb37429e55c67be"
     private fun publish(s:State){state=s;update(s)}
@@ -42,11 +53,11 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
     private fun cancelTimer(){timer?.let(handler::removeCallbacks);timer=null}
     private fun deadline(ms:Long,block:()->Unit){cancelTimer();val gen=generation;val r=Runnable{if(!closed&&gen==generation)block()};timer=r;handler.postDelayed(r,ms)}
     private fun fail(message:String){
-        generation++;cancelTimer();session=null;exporting=null;awaitingPermission=false;unregister()
+        generation++;sendAttempts.invalidate();cancelTimer();finishTotal();session=null;exporting=null;awaitingPermission=false;awaitingReady=false;unregister()
         publish(state.copy(status="操作未完成",detail=message.take(200),ready=false,busy=false))
     }
     private fun describe(e:Exception):String {
-        val raw="${e.javaClass.simpleName}: ${e.message.orEmpty()}".take(240)
+        val raw=UserFacingError.diagnostic(e)
         state=state.copy(diagnostic=raw)
         android.util.Log.w("ElctonWear",raw)
         return UserFacingError.explain(e.message.orEmpty())
@@ -99,13 +110,13 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
                 val callback=Receiver{message->main{
                     if(gen!=generation||message.type!=Message.MESSAGE_TYPE_DATA)return@main
                     val bytes=message.data?:return@main
-                    if(bytes.size<=1024)onMessage(bytes.toString(Charsets.UTF_8))
+                    if(bytes.size<=1024 && bytes.all{it.toInt() in 32..126})onMessage(bytes.toString(Charsets.US_ASCII))
                 }}
                 receiver=callback;device=selected
                 deadline(15000){fail("接收器注册超时，未发送课表。")}
-                p2p.registerReceiver(selected,callback).addOnSuccessListener{main{
-                    if(gen!=generation)return@main
-                    handshakeAttempts=0
+                p2p.registerReceiver(selected,callback).addOnSuccessListener{handler.post{
+                    if(closed||activity.isFinishing||gen!=generation){try{p2p.unregisterReceiver(callback)}catch(_:Exception){};return@post}
+                    handshakeAttempts=0;awaitingReady=true
                     publish(state.copy(status="等待手表准备",detail="可在手表进入：周视图 → 同步 → 开始接收。手机正在尝试检测对端。"))
                     // Ping may bring supported peers to foreground. Never send data before READY.
                     try {p2p.ping(selected,object:PingCallback{override fun onPingResult(code:Int)=main{
@@ -122,8 +133,7 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
         deadline(5000){if(++handshakeAttempts<=3)hello()else fail("未收到手表准备回执。请进入手表同步页并点开始接收；还没有发送课表。")}
     }
     private fun onMessage(raw:String){
-        val m=try{JSONObject(raw)}catch(_:Exception){return}
-        if(m.optString("protocol")!="elcton.sync"||m.optInt("version")!=1||m.optString("sender")!="watch")return
+        val m=PacketIngress.watch(raw)?:return
         val type=m.optString("type")
         val export=exporting
         if(export!=null){
@@ -139,8 +149,9 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
                 if(export.error!=null){fail("手表导出内容校验失败，手机旧课表保留。");return}
                 val result=export.result
                 if(result!=null){
-                    val validated=try{PhoneSnapshot.encode(result)}catch(e:Exception){fail("手表导出格式无效：${e.message}");return}
-                    send("{"+Wire.header("EXPORT_DONE",export.id)+"}");exporting=null
+                    val validated=try{PhoneSnapshot.encode(result)}catch(e:Exception){fail("手表导出格式无效：${UserFacingError.validation(e.message)}");return}
+                    finishTotal();sendAttempts.invalidate()
+                    send("{"+Wire.header("EXPORT_DONE",export.id)+"}",reportFailure=false);exporting=null
                     publish(state.copy(status="手表课表已取回",detail="请在导入预览中决定是否替换手机课表。",busy=false))
                     importCandidate(validated,export.sourceRevision)
                 }else requestExportPacket()
@@ -148,7 +159,8 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
             }
             return
         }
-        if(type=="READY"&&session==null){
+        if(type=="READY"&&session==null&&awaitingReady){
+            awaitingReady=false;sendAttempts.invalidate()
             val budget=m.optInt("maxBytes",0)
             if(budget !in 1..32768){fail("对端能力信息无效，未发送课表。");return}
             cancelTimer()
@@ -160,26 +172,28 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
         }
         val current=session?:return
         if(!current.reply(type,m.optString("transferId"),m.optInt("seq",-99),m.optString("digest"),m.optLong("sourceRevision"),m.optString("code")))return
-        cancelTimer()
+        cancelTimer();sendAttempts.invalidate()
         if(current.complete){
+            finishTotal()
             session=null
             val now=System.currentTimeMillis()
             baselines.edit().putString(state.selected+".dataset",current.datasetId).putString(state.selected+".digest",current.digest)
                 .putLong(state.selected+".revision",current.revision).putLong(state.selected+".at",now).apply()
             publish(state.copy(status="同步成功",detail="手表已保存并读回确认。",busy=false,digest=current.digest,dirty=false,
                 revision=current.revision,datasetId=current.datasetId,hasData=true,lastSuccessAt=now))
-        }else if(current.error!=null)fail("手表未接受本次提交：${current.error}。原有课表仍保留。")else transmitCurrent()
+        }else if(current.error!=null)fail("手表未确认本次提交（${current.error}）。请重新连接核对最终课表，不把取消或发送回执当作回滚证据。")else transmitCurrent()
     }
     fun publishSnapshot(text:String,force:Boolean,datasetId:String,revision:Long){
         if(!state.ready||state.busy||device==null)return
-        val validated=try{PhoneSnapshot.encode(text)}catch(e:Exception){fail(e.message?:"手机课表无效");return}
+        val validated=try{PhoneSnapshot.encode(text)}catch(e:Exception){fail(UserFacingError.validation(e.message));return}
         if(validated.length>state.maxBytes){fail("课表超出当前手表的安全接收容量，未截断或发送。请查看兼容报告。");return}
         if(state.datasetId==datasetId&&!state.dirty&&state.digest==Wire.crc32(validated)){
             publish(state.copy(status="已是最新课表",detail="手表内容与手机一致，无需重复写入。"));return
         }
         try{session=TransferSession(validated,"t-"+System.currentTimeMillis().toString(36),datasetId,maxOf(1L,revision),state.digest,force)
+            beginTotal("同步总时限已到。请重新连接核对手表最终版本；未把发送成功当作保存成功。")
             publish(state.copy(status="正在同步",detail="等待手表确认接收，旧课表尚未替换。",busy=true));transmitCurrent()
-        }catch(e:Exception){fail(e.message?:"同步初始化失败")}
+        }catch(e:Exception){fail(UserFacingError.validation(e.message))}
     }
     private fun transmitCurrent(){
         val current=session?:return
@@ -191,6 +205,7 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
     fun requestExport(){
         if(!state.ready||state.busy||device==null)return
         exporting=ExportSession("e-"+System.currentTimeMillis().toString(36));exportRetries=0
+        beginTotal("回传总时限已到，手机课表未自动改变。请重新连接再取回。")
         publish(state.copy(status="从手表读取课表",detail="手机已有课表不会自动替换。",busy=true))
         requestExportPacket()
     }
@@ -200,22 +215,24 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
         send("{"+Wire.header(type,export.id)+(if(export.initialized)",\"seq\":"+export.nextSequence else "")+"}")
         deadline(5000){if(exporting===export){if(exportRetries++<3)requestExportPacket()else fail("手表回传超时，手机课表未改变。")}}
     }
-    private fun send(text:String){
-        val peer=device?:return;val gen=generation;val sendingSession=session;val sendingExport=exporting
-        if(text.toByteArray(Charsets.UTF_8).size>1024){fail("消息超出传输上限，未发送。");return}
-        try{p2p.send(peer,Message.Builder().setPayload(text.toByteArray(Charsets.UTF_8)).build(),object:SendCallback{
+    private fun send(text:String,reportFailure:Boolean=true){
+        val peer=device?:return;val gen=generation;val attempt=sendAttempts.issue()
+        if(text.length>1024||text.any{it.code !in 32..126}){if(reportFailure)fail("消息超出传输上限，未发送。");return}
+        fun accepts()=gen==generation&&sendAttempts.accepts(attempt)
+        try{p2p.send(peer,Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(),object:SendCallback{
             override fun onSendResult(code:Int)=main{
-                if(gen!=generation||session!==sendingSession||exporting!==sendingExport)return@main
-                if(code!=207)fail("Wear Engine 发送失败（$code），没有成功保存证据。")else session?.transportSucceeded()
+                if(!accepts())return@main
+                if(code!=207){if(reportFailure)fail("Wear Engine 发送失败（$code），没有成功保存证据。")}else session?.transportSucceeded()
             }
             override fun onSendProgress(progress:Long){}
-        }).addOnFailureListener{e->main{if(gen==generation&&session===sendingSession&&exporting===sendingExport)fail(describe(e))}}}catch(e:Exception){fail(describe(e))}
+        }).addOnFailureListener{e->main{if(reportFailure&&accepts())fail(describe(e))}}
+        }catch(e:Exception){if(reportFailure&&accepts())fail(describe(e))}
     }
     fun cancel(){
         val id=session?.transferId?:exporting?.id
-        if(id!=null)send("{"+Wire.header("CANCEL",id)+"}")
-        generation++;cancelTimer();session=null;exporting=null;awaitingPermission=false;unregister()
-        publish(state.copy(status="已断开",detail="同步已停止；两端保留本地课表。",busy=false,ready=false))
+        if(id!=null)send("{"+Wire.header("CANCEL",id)+"}",reportFailure=false)
+        generation++;sendAttempts.invalidate();cancelTimer();finishTotal();session=null;exporting=null;awaitingPermission=false;awaitingReady=false;unregister()
+        publish(state.copy(status="已断开",detail="已停止等待回执；若已进入保存阶段，请重新连接核对最终课表。手机不会自动导入或合并。",busy=false,ready=false))
     }
     private fun unregister(){receiver?.let{try{p2p.unregisterReceiver(it)}catch(_:Exception){}};receiver=null;device=null}
     fun onBackground(){if(!awaitingPermission)cancel()}

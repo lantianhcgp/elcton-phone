@@ -21,13 +21,20 @@ class ProductUiTest {
         // Semantics becoming idle does not guarantee that SurfaceFlinger has the new frame.
         // Wait for an actual HWUI frame commit before taking the full-screen/IME image.
         val committed = java.util.concurrent.CountDownLatch(1)
-        ui.runOnUiThread {
-            val decor = ui.activity.window.decorView
-            check(decor.isHardwareAccelerated) { "UI evidence requires a hardware-rendered window" }
-            decor.viewTreeObserver.registerFrameCommitCallback { committed.countDown() }
-            decor.invalidate()
+        if (!name.endsWith("-picker")) {
+            ui.runOnUiThread {
+                val decor = ui.activity.window.decorView
+                check(decor.isHardwareAccelerated) { "UI evidence requires a hardware-rendered window" }
+                decor.viewTreeObserver.registerFrameCommitCallback { committed.countDown() }
+                decor.invalidate()
+            }
+            check(committed.await(5, java.util.concurrent.TimeUnit.SECONDS)) { "Frame commit timed out: $name" }
+        } else {
+            // SAF belongs to DocumentsUI; our stopped activity cannot commit a visible frame.
+            check(device.wait(Until.hasObject(By.pkg("com.google.android.documentsui")), 5000) ||
+                  device.wait(Until.hasObject(By.pkg("com.android.documentsui")), 5000)) { "SAF window not visible" }
+            device.waitForIdle(1000)
         }
-        check(committed.await(5, java.util.concurrent.TimeUnit.SECONDS)) { "Frame commit timed out: $name" }
         val directory=java.io.File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir,"qa-evidence")
         check(directory.isDirectory || directory.mkdirs()) { "Cannot create private evidence directory" }
         // In-process capture avoids shell screencap racing the IME surface and shell uiautomator idle failures.

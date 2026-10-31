@@ -11,7 +11,6 @@ import com.huawei.wearengine.device.Device
 import com.huawei.wearengine.p2p.Message
 import com.huawei.wearengine.p2p.Receiver
 import com.huawei.wearengine.p2p.SendCallback
-import com.huawei.wearengine.p2p.PingCallback
 import org.json.JSONObject
 
 /** Actual SDK adapter. Device-reported state and APPLIED are the only success evidence. */
@@ -118,10 +117,7 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
                     if(closed||activity.isFinishing||gen!=generation){try{p2p.unregisterReceiver(callback)}catch(_:Exception){};return@post}
                     handshakeAttempts=0;awaitingReady=true
                     publish(state.copy(status="等待手表准备",detail="可在手表进入：周视图 → 同步 → 开始接收。手机正在尝试检测对端。"))
-                    // Ping may bring supported peers to foreground. Never send data before READY.
-                    try {p2p.ping(selected,object:PingCallback{override fun onPingResult(code:Int)=main{
-                        if(gen==generation&&!state.ready&&code==200)fail("手表应用未安装，未发送课表。")
-                    }}).addOnFailureListener{e->main{if(gen==generation)android.util.Log.w("ElctonWear","Ping unavailable: ${e.javaClass.simpleName}")}}}catch(_:Exception){}
+                    // Foreground receive page only; automatic peer wake is not yet verified.
                     hello()
                 }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}
             }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}

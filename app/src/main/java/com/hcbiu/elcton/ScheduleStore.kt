@@ -27,7 +27,8 @@ class ScheduleStore(context: Context) {
     }
     @Synchronized fun save(book: ScheduleBook) {
         val text=book.storageJson()
-        check(ScheduleBook.decode(text)==book){"课表校验不一致"}
+        val decoded=ScheduleBook.decode(text)
+        check(decoded.datasetId==book.datasetId && decoded.revision==book.revision && decoded.wireJson()==book.wireJson()) {"课表校验不一致"}
         val previous=last
         if(previous!=null && previous!=book)write(backup,previous.storageJson())
         write(main,text)

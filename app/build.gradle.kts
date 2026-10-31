@@ -9,8 +9,8 @@ android {
         applicationId = "com.hcbiu.elcton"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0-probe"
+        versionCode = 2
+        versionName = "0.2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }
@@ -27,4 +27,9 @@ dependencies {
     implementation("com.huawei.hms:wearengine:5.0.3.301")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.json:json:20240303")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

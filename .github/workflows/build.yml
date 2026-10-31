@@ -21,7 +21,7 @@ jobs:
       - name: Ensure Android build prerequisites
         run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-34" "build-tools;34.0.0"'
       - name: Unit tests and actual APK
-        run: gradle testDebugUnitTest assembleDebug --no-daemon --stacktrace
+        run: gradle testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --stacktrace
       - name: Stable production signing and verification
         env:
           ELCTON_KEYSTORE_B64: ${{ secrets.ELCTON_KEYSTORE_B64 }}
@@ -38,7 +38,10 @@ jobs:
           BT="$ANDROID_HOME/build-tools/34.0.0"
           "$BT/zipalign" -f 4 app/build/outputs/apk/debug/app-debug.apk "$RUNNER_TEMP/aligned.apk"
           "$BT/apksigner" sign --ks "$RUNNER_TEMP/elcton.jks" --ks-key-alias elcton --ks-pass env:ELCTON_SIGN_PASS --key-pass env:ELCTON_SIGN_PASS --out dist/elcton-phone-probe.apk "$RUNNER_TEMP/aligned.apk"
+          "$BT/zipalign" -f 4 app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk "$RUNNER_TEMP/test-aligned.apk"
+          "$BT/apksigner" sign --ks "$RUNNER_TEMP/elcton.jks" --ks-key-alias elcton --ks-pass env:ELCTON_SIGN_PASS --key-pass env:ELCTON_SIGN_PASS --out dist/elcton-ui-tests.apk "$RUNNER_TEMP/test-aligned.apk"
           "$BT/apksigner" verify --print-certs dist/elcton-phone-probe.apk > dist/apk-signature.txt
+          "$BT/apksigner" verify --print-certs dist/elcton-ui-tests.apk > dist/test-signature.txt
           python3 -c 'import os,re,pathlib; s=pathlib.Path("dist/apk-signature.txt").read_text(); m=re.search(r"certificate SHA-256 digest: ([0-9a-fA-F]+)",s); assert m and m.group(1).lower()==os.environ["EXPECTED_SIGN_SHA256"].lower(), "Signing identity mismatch"'
           rm "$RUNNER_TEMP/elcton.jks"
           printf '%s\n' "$GITHUB_SHA" > dist/source-sha.txt

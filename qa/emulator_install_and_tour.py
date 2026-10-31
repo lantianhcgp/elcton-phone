@@ -25,6 +25,10 @@ with tarfile.open(fileobj=io.BytesIO(archive.stdout),mode='r:') as captured:
         assert contents is not None
         (product/name).write_bytes(contents.read())
 logs=shell('logcat -d -v brief');(out/'logcat.txt').write_text(logs)
+passed=bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and 'INSTRUMENTATION_FAILED' not in result
+if not passed:
+    (out/'report.json').write_text(json.dumps({'passed':False,'source_sha':sources[0].read_text().strip(),'instrumentation':result},indent=2))
+    raise AssertionError(result)
 shots=[];hierarchies=[];ime_checks=[]
 for p in sorted((out/'product').rglob('*.png')):
     im=Image.open(p).convert('RGB');stats=ImageStat.Stat(im);entry={'name':p.name,'size':list(im.size),'mean':sum(stats.mean)/3,'stddev':sum(stats.stddev)/3}

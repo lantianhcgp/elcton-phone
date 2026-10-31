@@ -23,7 +23,7 @@ class ProductUiTest {
         // In-process capture avoids shell screencap racing the IME surface and shell uiautomator idle failures.
         check(device.takeScreenshot(java.io.File(directory,"$name.png"))) { "Screenshot failed: $name" }
         device.dumpWindowHierarchy(java.io.File(directory,"$name.xml"))
-        val navigation=ui.onAllNodesWithTag("nav-week").fetchSemanticsNodes().firstOrNull()?.boundsInWindow
+        val navigation=if(name.endsWith("-picker")) null else ui.onAllNodesWithTag("nav-week").fetchSemanticsNodes().firstOrNull()?.boundsInWindow
         java.io.File(directory,"$name-state.json").writeText(org.json.JSONObject().apply {
             put("name",name)
             put("imeVisible",ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true)

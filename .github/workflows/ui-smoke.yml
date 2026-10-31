@@ -1,0 +1,58 @@
+name: android-ui-smoke
+on:
+  workflow_dispatch:
+    inputs:
+      build_run:
+        description: Successful android-probe build run
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the exact signed APK
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.build_run }}
+          path: incoming
+      - name: Display dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libpulse0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libgl1 libopengl0 libglu1-mesa libxcb-cursor0
+          python3 -m pip install Pillow==11.2.1
+      - name: Enable KVM
+        run: |
+          printf 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"\n' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Start and verify X display
+        run: |
+          Xvfb :99 -screen 0 1280x1600x24 > "$RUNNER_TEMP/xvfb.log" 2>&1 &
+          python3 qa/wait_x.py
+      - name: Exercise real APK without a paired device
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          DISPLAY: ':99'
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          emulator-options: -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none
+          script: |
+            APK=$(python3 -c 'from pathlib import Path; p=list(Path("incoming").rglob("elcton-phone-probe.apk")); assert len(p)==1,p;print(p[0])')
+            adb install -r "$APK"
+            python3 qa/emulator_tour.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-ui-${{ github.sha }}
+          path: qa-evidence/
+          if-no-files-found: warn

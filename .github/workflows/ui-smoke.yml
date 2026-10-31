@@ -46,10 +46,7 @@ jobs:
           profile: pixel_2
           disable-animations: true
           emulator-options: -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none
-          script: |
-            APK=$(python3 -c 'from pathlib import Path; p=list(Path("incoming").rglob("elcton-phone-probe.apk")); assert len(p)==1,p;print(p[0])')
-            adb install -r "$APK"
-            python3 qa/emulator_tour.py
+          script: python3 qa/emulator_install_and_tour.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

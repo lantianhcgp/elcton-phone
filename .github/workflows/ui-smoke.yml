@@ -45,7 +45,9 @@ jobs:
           arch: x86_64
           profile: pixel_2
           disable-animations: true
-          emulator-options: -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none
+          ram-size: 2048M
+          heap-size: 512M
+          emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics
           script: python3 qa/emulator_install_and_tour.py
       - uses: actions/upload-artifact@v4
         if: always()

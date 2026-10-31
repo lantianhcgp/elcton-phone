@@ -3,6 +3,12 @@ from typing import cast
 import subprocess,sys,re,json,io,tarfile,xml.etree.ElementTree as ET
 from PIL import Image,ImageStat
 out=Path('qa-evidence');out.mkdir(exist_ok=True)
+
+def preserve_failure(result):
+    (out/'report.json').write_text(json.dumps({'passed':False,'stage':'instrumentation',
+        'source_sha':sources[0].read_text().strip(),'exit_code':result.returncode,
+        'instrumentation':result.stdout.decode(errors='replace'),
+        'stderr':result.stderr.decode(errors='replace')},indent=2))
 main=list(Path('incoming').rglob('elcton-phone-probe.apk'))
 tests=list(Path('incoming').rglob('elcton-ui-tests.apk'))
 assert len(main)==1 and len(tests)==1,(main,tests)
@@ -13,7 +19,21 @@ def shell(command):
 for apk in (main[0],tests[0]):subprocess.run(['adb','install','-r',str(apk)],check=True)
 shell('pm clear com.hcbiu.elcton');shell('svc power stayon true');shell('settings put system screen_off_timeout 2147483647');shell('input keyevent KEYCODE_WAKEUP');shell('wm dismiss-keyguard')
 command='am instrument -w -r -e class com.hcbiu.elcton.ProductUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner'
-result=shell(command);(out/'instrumentation.txt').write_text(result)
+# Preserve a live host-side log even if the emulator/ADB dies during instrumentation.
+with (out/'logcat-live.txt').open('wb') as log:
+    live=subprocess.Popen(['adb','logcat','-v','brief'],stdout=log,stderr=subprocess.STDOUT)
+    try:
+        executed=subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,timeout=420)
+    finally:
+        live.terminate()
+        try:live.wait(timeout=10)
+        except subprocess.TimeoutExpired:live.kill();live.wait()
+(out/'instrumentation.txt').write_text(executed.stdout.decode(errors='replace'))
+(out/'instrumentation-stderr.txt').write_text(executed.stderr.decode(errors='replace'))
+result=executed.stdout.decode(errors='replace')
+if executed.returncode:
+    preserve_failure(executed)
+    raise RuntimeError('Instrumentation or emulator disconnected; preserved output and live logcat')
 archive=subprocess.run(['adb','shell'],input=b'run-as com.hcbiu.elcton tar -cf - -C files qa-evidence\n',capture_output=True,check=True)
 product=out/'product';product.mkdir(exist_ok=True)
 with tarfile.open(fileobj=io.BytesIO(archive.stdout),mode='r:') as captured:

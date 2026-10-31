@@ -24,7 +24,7 @@ jobs:
       - name: Display dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libpulse0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libgl1 libopengl0 libglu1-mesa libxcb-cursor0
+          sudo apt-get install -y xvfb x11-utils libpulse0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libgl1 libopengl0 libglu1-mesa libxcb-cursor0
           python3 -m pip install Pillow==11.2.1
       - name: Enable KVM
         run: |

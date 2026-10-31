@@ -63,7 +63,7 @@ data class ScheduleBook(val datasetId: String, val revision: Long, val semesterS
             (it.weekType=="all" || course.weekType=="all" || it.weekType==course.weekType)
     }
     companion object {
-        fun empty(id: String, semester: String) = ScheduleBook(id,0,semester,emptyList())
+        fun empty(id: String, semester: String) = ScheduleBook(id,1,semester,emptyList())
         fun decode(raw: String): ScheduleBook {
             val original=JSONObject(raw)
             val normalized=JSONObject(PhoneSnapshot.encode(raw))

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries><package android:name="com.huawei.health" /></queries>
+    <application android:label="hc课程表" android:theme="@android:style/Theme.Material.Light.NoActionBar"
+        android:allowBackup="false" android:usesCleartextTraffic="false" android:supportsRtl="true">
+        <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=118599721" />
+        <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
+            <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+        </activity>
+    </application>
+</manifest>

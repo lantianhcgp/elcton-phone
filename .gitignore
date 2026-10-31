@@ -1,0 +1,15 @@
+.gradle/
+build/
+**/build/
+.idea/
+local.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+.env*
+agconnect-services.json
+signing.properties
+.ai-memory/*/
+.cache/

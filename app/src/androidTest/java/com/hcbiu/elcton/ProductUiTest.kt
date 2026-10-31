@@ -4,6 +4,10 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.Until
+import java.util.regex.Pattern
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,11 +23,56 @@ class ProductUiTest {
         automation.executeShellCommand("screencap -p /sdcard/Download/elcton-qa/$name.png").use { p -> java.io.FileInputStream(p.fileDescriptor).readBytes() }
         automation.executeShellCommand("uiautomator dump /sdcard/Download/elcton-qa/$name.xml").use { p -> java.io.FileInputStream(p.fileDescriptor).readBytes() }
     }
+    private val device get() = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    private fun waitForApp() {
+        ui.waitUntil(10000) { ui.onAllNodesWithTag("nav-settings").fetchSemanticsNodes().isNotEmpty() }
+    }
+    private fun saveExportFile() {
+        ui.onNodeWithText("保存文件").performClick()
+        val filename = device.wait(Until.findObject(By.clazz("android.widget.EditText")),10000)
+            ?: throw AssertionError("SAF filename field not found")
+        filename.text = "elcton-qa-export.json"
+        shot("23-file-export-picker")
+        val save = device.wait(Until.findObject(By.text(Pattern.compile("(?i)save|保存"))),5000)
+            ?: throw AssertionError("SAF save action not found")
+        save.click()
+        waitForApp()
+        ui.waitUntil(10000) { ui.onAllNodesWithText("课表已导出").fetchSemanticsNodes().isNotEmpty() }
+        shot("24-file-exported")
+    }
+    private fun importExportedFile() {
+        ui.onNodeWithTag("nav-settings").performClick()
+        ui.onNodeWithTag("import-file").performScrollTo().performClick()
+        val exported = device.wait(Until.findObject(By.text("elcton-qa-export.json")),10000)
+            ?: throw AssertionError("SAF exported timetable not found")
+        shot("25-file-import-picker")
+        exported.click()
+        waitForApp()
+        ui.waitUntil(10000) { ui.onAllNodesWithTag("import-confirm").fetchSemanticsNodes().isNotEmpty() }
+        shot("26-file-import-preview")
+        ui.onNodeWithTag("import-confirm").performClick()
+        ui.onNodeWithTag("nav-week").performClick()
+        ui.onNodeWithTag("week-day-6").performClick()
+        ui.onNodeWithText("数学测试课程").assertExists()
+        shot("27-file-imported-course")
+        ui.activityRule.scenario.recreate()
+        ui.onNodeWithTag("nav-week").performClick()
+        ui.onNodeWithTag("week-day-6").performClick()
+        ui.onNodeWithText("数学测试课程").assertExists()
+        shot("28-restarted-file-import")
+    }
     @Test fun inspectAllProductScreensAndCriticalEditsInOneSession() {
         ui.onNodeWithTag("nav-today").assertExists();shot("01-today-empty")
         ui.onNodeWithTag("nav-week").performClick();shot("02-week-empty")
         ui.onNodeWithTag("add-course").performClick();shot("03-editor-empty")
         ui.onNodeWithTag("course-save").performClick();ui.onNodeWithText("请输入课程名称").assertExists();shot("04-editor-invalid")
+        ui.onNodeWithTag("course-name").performClick()
+        ui.waitUntil(7000) { ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true }
+        ui.onNodeWithTag("course-save").assertIsDisplayed()
+        ui.onNodeWithTag("nav-week").assertIsDisplayed()
+        shot("29-keyboard-visible")
+        device.pressBack()
+        ui.waitForIdle()
         ui.onNodeWithTag("course-name").performTextInput("语文测试课程")
         ui.onNodeWithTag("course-teacher").performTextInput("测试教师")
         ui.onNodeWithTag("course-location").performTextInput("A301")
@@ -44,7 +93,7 @@ class ProductUiTest {
         ui.onNodeWithTag("import-check").performClick();shot("11-import-preview")
         ui.onNodeWithTag("import-cancel").performClick()
         ui.onNodeWithTag("export-preview").performScrollTo().performClick();shot("12-export-preview")
-        ui.onNodeWithText("关闭").performClick()
+        saveExportFile()
         ui.onNodeWithTag("nav-devices").performClick();shot("13-device")
         ui.onNodeWithTag("scan-devices").performClick()
         ui.waitUntil(20000) { ui.onAllNodesWithText("未安装华为运动健康",substring=true).fetchSemanticsNodes().isNotEmpty() }
@@ -74,5 +123,6 @@ class ProductUiTest {
         ui.onNodeWithTag("nav-today").performClick();shot("22-return-today")
         val loaded=ScheduleStore(ui.activity).load()
         org.junit.Assert.assertTrue("empty import persists after a fresh store",loaded.courses.isEmpty())
+        importExportedFile()
     }
 }

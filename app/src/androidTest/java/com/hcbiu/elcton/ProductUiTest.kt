@@ -18,6 +18,16 @@ class ProductUiTest {
     @get:Rule val ui = createAndroidComposeRule<MainActivity>()
     private fun shot(name: String) {
         ui.waitForIdle()
+        // Semantics becoming idle does not guarantee that SurfaceFlinger has the new frame.
+        // Wait for an actual HWUI frame commit before taking the full-screen/IME image.
+        val committed = java.util.concurrent.CountDownLatch(1)
+        ui.runOnUiThread {
+            val decor = ui.activity.window.decorView
+            check(decor.isHardwareAccelerated) { "UI evidence requires a hardware-rendered window" }
+            decor.viewTreeObserver.registerFrameCommitCallback { committed.countDown() }
+            decor.invalidate()
+        }
+        check(committed.await(5, java.util.concurrent.TimeUnit.SECONDS)) { "Frame commit timed out: $name" }
         val directory=java.io.File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir,"qa-evidence")
         check(directory.isDirectory || directory.mkdirs()) { "Cannot create private evidence directory" }
         // In-process capture avoids shell screencap racing the IME surface and shell uiautomator idle failures.
@@ -85,7 +95,10 @@ class ProductUiTest {
     @Test fun inspectAllProductScreensAndCriticalEditsInOneSession() {
         ui.onNodeWithTag("nav-today").assertExists();shot("01-today-empty")
         ui.onNodeWithTag("nav-week").performClick();shot("02-week-empty")
-        ui.onNodeWithTag("add-course").performClick();shot("03-editor-empty")
+        ui.onNodeWithTag("add-course").performClick()
+        ui.onNodeWithTag("course-name").assertIsDisplayed()
+        ui.onNodeWithTag("course-save").assertIsDisplayed()
+        shot("03-editor-empty")
         ui.onNodeWithTag("course-save").performClick();ui.onNodeWithText("请输入课程名称").assertExists();shot("04-editor-invalid")
         val navigationBeforeKeyboard=ui.onNodeWithTag("nav-week").fetchSemanticsNode().boundsInWindow.bottom
         ui.onNodeWithTag("course-name").performClick()

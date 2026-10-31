@@ -51,9 +51,13 @@ class ProductUiTest {
         shot("14-device-unavailable")
         ui.onNodeWithTag("nav-week").performClick();ui.onNodeWithTag("week-day-6").performClick()
         ui.onNodeWithText("数学测试课程").performClick()
-        ui.onNodeWithTag("course-delete").performClick();shot("15-delete-confirm")
-        ui.onNodeWithTag("delete-confirm").performClick()
-        ui.onAllNodesWithText("数学测试课程").assertCountEquals(0);shot("16-course-deleted")
-        ui.onNodeWithTag("nav-today").performClick();shot("17-return-today")
+        ui.onNodeWithTag("course-delete").performScrollTo().assertIsDisplayed()
+        shot("15-editor-bottom")
+        ui.onNodeWithTag("course-delete").performClick()
+        ui.waitUntil(5000) { ui.onAllNodesWithTag("delete-confirm").fetchSemanticsNodes().isNotEmpty() }
+        shot("16-delete-confirm")
+        ui.onNodeWithTag("delete-confirm").assertIsDisplayed().performClick()
+        ui.onAllNodesWithText("数学测试课程").assertCountEquals(0);shot("17-course-deleted")
+        ui.onNodeWithTag("nav-today").performClick();shot("18-return-today")
     }
 }

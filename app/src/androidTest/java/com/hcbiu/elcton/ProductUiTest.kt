@@ -18,12 +18,33 @@ class ProductUiTest {
     @get:Rule val ui = createAndroidComposeRule<MainActivity>()
     private fun shot(name: String) {
         ui.waitForIdle()
-        val automation=InstrumentationRegistry.getInstrumentation().uiAutomation
-        automation.executeShellCommand("mkdir -p /sdcard/Download/elcton-qa").use { p -> java.io.FileInputStream(p.fileDescriptor).readBytes() }
-        automation.executeShellCommand("screencap -p /sdcard/Download/elcton-qa/$name.png").use { p -> java.io.FileInputStream(p.fileDescriptor).readBytes() }
-        automation.executeShellCommand("uiautomator dump /sdcard/Download/elcton-qa/$name.xml").use { p -> java.io.FileInputStream(p.fileDescriptor).readBytes() }
+        val directory=java.io.File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir,"qa-evidence")
+        check(directory.isDirectory || directory.mkdirs()) { "Cannot create private evidence directory" }
+        // In-process capture avoids shell screencap racing the IME surface and shell uiautomator idle failures.
+        check(device.takeScreenshot(java.io.File(directory,"$name.png"))) { "Screenshot failed: $name" }
+        device.dumpWindowHierarchy(java.io.File(directory,"$name.xml"))
+        val navigation=ui.onAllNodesWithTag("nav-week").fetchSemanticsNodes().firstOrNull()?.boundsInWindow
+        java.io.File(directory,"$name-state.json").writeText(org.json.JSONObject().apply {
+            put("name",name)
+            put("imeVisible",ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true)
+            put("screenHeight",device.displayHeight)
+            put("navigationBottom",navigation?.bottom ?: org.json.JSONObject.NULL)
+        }.toString())
     }
     private val device get() = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    private fun waitForKeyboard(baselineNavigationBottom: Float) {
+        val automation=InstrumentationRegistry.getInstrumentation().uiAutomation
+        val ime=automation.executeShellCommand("settings get secure default_input_method").use { p ->
+            java.io.FileInputStream(p.fileDescriptor).readBytes().toString(Charsets.UTF_8).trim().substringBefore('/')
+        }
+        check(ime.isNotEmpty() && ime != "null") { "No installed input method" }
+        check(device.wait(Until.hasObject(By.pkg(ime)),10000)) { "Input-method window not visible" }
+        ui.waitUntil(10000) {
+            val bottom=ui.onNodeWithTag("nav-week").fetchSemanticsNode().boundsInWindow.bottom
+            ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true &&
+                bottom < baselineNavigationBottom-device.displayHeight*0.15f
+        }
+    }
     private fun waitForApp() {
         ui.waitUntil(10000) { ui.onAllNodesWithTag("nav-settings").fetchSemanticsNodes().isNotEmpty() }
     }
@@ -66,8 +87,9 @@ class ProductUiTest {
         ui.onNodeWithTag("nav-week").performClick();shot("02-week-empty")
         ui.onNodeWithTag("add-course").performClick();shot("03-editor-empty")
         ui.onNodeWithTag("course-save").performClick();ui.onNodeWithText("请输入课程名称").assertExists();shot("04-editor-invalid")
+        val navigationBeforeKeyboard=ui.onNodeWithTag("nav-week").fetchSemanticsNode().boundsInWindow.bottom
         ui.onNodeWithTag("course-name").performClick()
-        ui.waitUntil(7000) { ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true }
+        waitForKeyboard(navigationBeforeKeyboard)
         ui.onNodeWithTag("course-save").assertIsDisplayed()
         ui.onNodeWithTag("nav-week").assertIsDisplayed()
         shot("29-keyboard-visible")

@@ -10,6 +10,7 @@ class ScheduleBookTest {
     )
     @Test fun emptyBookIsNotDemonstrationData() {
         val b = ScheduleBook.empty("book1", "2026-09-01")
+        assertTrue("initial publication revision must be positive", b.revision > 0)
         assertEquals(0, b.courses.size)
         assertEquals("book1", b.datasetId)
         assertEquals(b, ScheduleBook.decode(b.storageJson()))

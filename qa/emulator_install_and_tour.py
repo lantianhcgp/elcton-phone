@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import cast
-import subprocess,sys,re,json,io,tarfile,xml.etree.ElementTree as ET
+import subprocess,sys,re,json,io,tarfile,os,xml.etree.ElementTree as ET
 from PIL import Image,ImageStat
 out=Path('qa-evidence');out.mkdir(exist_ok=True)
 
@@ -17,8 +17,15 @@ assert len(sources)==1 and sources[0].read_text().strip()==subprocess.check_outp
 def shell(command):
     return subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,check=True).stdout.decode(errors='replace')
 for apk in (main[0],tests[0]):subprocess.run(['adb','install','-r',str(apk)],check=True)
+navigation_mode=os.environ.get('QA_NAVIGATION_MODE','three-button')
+assert navigation_mode in ('three-button','gestural'),navigation_mode
+overlay='com.android.internal.systemui.navbar.'+('threebutton' if navigation_mode=='three-button' else 'gestural')
+shell('cmd overlay enable-exclusive --category '+overlay)
+active_overlays=shell('cmd overlay list')
+assert '[x] '+overlay in active_overlays,'Navigation overlay not enabled: '+active_overlays
+(out/'environment.json').write_text(json.dumps({'navigation_mode':navigation_mode,'overlay':overlay,'sdk':shell('getprop ro.build.version.sdk').strip(),'overlays':active_overlays},indent=2))
 shell('pm clear com.hcbiu.elcton');shell('svc power stayon true');shell('settings put system screen_off_timeout 2147483647');shell('input keyevent KEYCODE_WAKEUP');shell('wm dismiss-keyguard')
-command='am instrument -w -r -e class com.hcbiu.elcton.ProductUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner'
+command='am instrument -w -r -e navigation_mode '+navigation_mode+' -e class com.hcbiu.elcton.ProductUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner'
 # Preserve a live host-side log even if the emulator/ADB dies during instrumentation.
 with (out/'logcat-live.txt').open('wb') as log:
     live=subprocess.Popen(['adb','logcat','-v','brief'],stdout=log,stderr=subprocess.STDOUT)
@@ -49,6 +56,8 @@ passed=bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and
 if not passed:
     (out/'report.json').write_text(json.dumps({'passed':False,'source_sha':sources[0].read_text().strip(),'instrumentation':result},indent=2))
     raise AssertionError(result)
+# Keep a fail-closed report until every gate (including screenshot pixels) passes.
+(out/'report.json').write_text(json.dumps({'passed':False,'stage':'verification-pending','source_sha':sources[0].read_text().strip(),'instrumentation':result},indent=2))
 shots=[];hierarchies=[];ime_checks=[]
 for p in sorted((out/'product').rglob('*.png')):
     im=Image.open(p).convert('RGB');stats=ImageStat.Stat(im);entry={'name':p.name,'size':list(im.size),'mean':sum(stats.mean)/3,'stddev':sum(stats.stddev)/3}
@@ -61,18 +70,19 @@ for p in sorted((out/'product').rglob('*.png')):
     state=json.loads(p.with_name(p.stem+'-state.json').read_text())
     if p.stem=='29-keyboard-visible':
         bottom=state['navigationBottom'];assert state['imeVisible'] and isinstance(bottom,(int,float)) and bottom<im.height*.78,'Keyboard did not resize the app viewport'
-        ys=[y for y in range(60,im.height-120) if max(abs(cast(tuple[int,int,int],im.getpixel((1,y)))[i]-(21,26,35)[i]) for i in range(3))<=2]
-        runs=[]
-        for y in ys:
-            if not runs or y>runs[-1][1]+1:runs.append([y,y])
-            else:runs[-1][1]=y
-        candidates=[r for r in runs if r[1]-r[0]>=180];assert len(candidates)==1,('Navigation band not visible',runs)
-        nav=candidates[0];assert nav[1]<im.height*.78,('Keyboard screenshot is actually a full-height app',nav)
+        nav=[int(state['navigationTop']),int(bottom)-1]
+        assert nav[1]-nav[0]>=180 and nav[1]<im.height*.78,('Navigation is not visible above keyboard',nav)
+        for y in (nav[0]+10,nav[1]-10):
+            assert im.getpixel((1,y))==(12,15,21),('Navigation color mismatch',y,im.getpixel((1,y)))
         sample=[cast(tuple[int,int,int],im.getpixel((x,y))) for y in range(nav[1]+90,im.height-170,8) for x in range(12,im.width-12,8)]
         fraction=sum(min(rgb)>180 for rgb in sample)/len(sample);assert fraction>.45,('No rendered input-method keyboard',fraction)
         ime_checks.append({'file':p.name,'navigation':nav,'keyboard_bright_fraction':fraction,'passed':True})
-passed=bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and 'INSTRUMENTATION_FAILED' not in result
-(out/'report.json').write_text(json.dumps({'passed':passed,'scope':'product UI/real APK in Android emulator; no physical paired watch','source_sha':sources[0].read_text().strip(),'shots':shots,'hierarchies':hierarchies,'keyboard_pixel_checks':ime_checks,'instrumentation':result},indent=2))
-print(json.dumps({'passed':passed,'screenshots':len(shots)}));assert passed,result
 assert len(shots)==28 and len(hierarchies)==28 and len(ime_checks)==1,'Incomplete component-tour coverage'
 assert not re.search(r'FATAL EXCEPTION[\s\S]{0,1000}Process: com\.hcbiu\.elcton',logs),'Application crashed'
+pixel_run=subprocess.run([sys.executable,'qa/verify_system_bars.py','--product',str(product),'--out',str(out/'system-bar-pixels.json')],capture_output=True,text=True)
+(out/'system-bar-pixels.log').write_text(pixel_run.stdout+pixel_run.stderr)
+pixels=json.loads((out/'system-bar-pixels.json').read_text()) if (out/'system-bar-pixels.json').is_file() else {'passed':False}
+passed=pixel_run.returncode==0 and pixels.get('passed') is True
+(out/'report.json').write_text(json.dumps({'passed':passed,'scope':'product UI/real APK in Android emulator; no physical paired watch','source_sha':sources[0].read_text().strip(),'shots':shots,'hierarchies':hierarchies,'keyboard_pixel_checks':ime_checks,'system_bar_pixels':pixels,'instrumentation':result},indent=2))
+print(json.dumps({'passed':passed,'screenshots':len(shots),'pixel_scenes':pixels.get('scenes',0)}))
+assert passed,'System bar pixels failed; see system-bar-pixels.json and .log'

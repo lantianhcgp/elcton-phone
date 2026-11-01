@@ -16,8 +16,60 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ProductUiTest {
     @get:Rule val ui = createAndroidComposeRule<MainActivity>()
+    private fun assertWindowChrome() {
+        ui.runOnUiThread {
+            val window = ui.activity.window
+            val background = ui.activity.getColor(R.color.phone_background)
+            org.junit.Assert.assertEquals("status bar follows the page", background, window.statusBarColor)
+            org.junit.Assert.assertEquals("system navigation follows the page", background, window.navigationBarColor)
+            org.junit.Assert.assertEquals("no different navigation divider", background, window.navigationBarDividerColor)
+            val darkIcons = android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            org.junit.Assert.assertEquals("light icons on the dark window", 0, window.decorView.systemUiVisibility and darkIcons)
+            org.junit.Assert.assertFalse("no status bar contrast scrim", window.isStatusBarContrastEnforced)
+            org.junit.Assert.assertFalse("no navigation contrast scrim", window.isNavigationBarContrastEnforced)
+        }
+    }
+    private val chromeScenes = setOf(
+        "01-today-empty", "02-week-empty", "03-editor-empty", "04-editor-invalid",
+        "05-week-course", "06-editor-filled", "07-week-edited", "08-settings",
+        "09-settings-invalid", "13-device", "14-device-unavailable",
+        "15-editor-bottom", "17-course-deleted", "20-restored-course",
+        "21-confirmed-empty-import", "22-return-today", "24-file-exported",
+        "27-file-imported-course", "28-restarted-file-import", "29-keyboard-visible"
+    )
+    private val navigationMode get() = InstrumentationRegistry.getArguments().getString("navigation_mode", "three-button")!!
+    private fun hasRenderedChrome(file: java.io.File): Boolean {
+        val bitmap = android.graphics.BitmapFactory.decodeFile(file.absolutePath) ?: return false
+        try {
+            fun visible(bounds: android.graphics.Rect?, threshold: Int): Boolean {
+                if (bounds == null || bounds.isEmpty || bounds.left < 0 || bounds.top < 0 ||
+                    bounds.right > bitmap.width || bounds.bottom > bitmap.height) return false
+                var count = 0
+                for (y in bounds.top until bounds.bottom) for (x in bounds.left until bounds.right) {
+                    val rgb = bitmap.getPixel(x, y)
+                    if (android.graphics.Color.red(rgb) > threshold && android.graphics.Color.green(rgb) > threshold &&
+                        android.graphics.Color.blue(rgb) > threshold && ++count >= 12) return true
+                }
+                return false
+            }
+            val label = device.findObject(By.pkg("com.hcbiu.elcton").text("今日")) ?: return false
+            if (!visible(label.visibleBounds, 100)) return false
+            val insets = ui.activity.window.decorView.rootWindowInsets ?: return false
+            if (insets.isVisible(android.view.WindowInsets.Type.ime())) return true
+            return when (navigationMode) {
+                "three-button" -> listOf("back", "home_button", "recent_apps").all {
+                    visible(device.findObject(By.res("com.android.systemui", it))?.visibleBounds, 180)
+                }
+                "gestural" -> visible(android.graphics.Rect(bitmap.width / 3,
+                    bitmap.height - insets.getInsets(android.view.WindowInsets.Type.navigationBars()).bottom,
+                    bitmap.width * 2 / 3, bitmap.height), 180)
+                else -> error("Unknown navigation mode: $navigationMode")
+            }
+        } finally { bitmap.recycle() }
+    }
     private fun shot(name: String) {
         ui.waitForIdle()
+        if (!name.endsWith("-picker")) assertWindowChrome()
         // Semantics becoming idle does not guarantee that SurfaceFlinger has the new frame.
         // Wait for an actual HWUI frame commit before taking the full-screen/IME image.
         val committed = java.util.concurrent.CountDownLatch(1)
@@ -37,14 +89,25 @@ class ProductUiTest {
         }
         val directory=java.io.File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir,"qa-evidence")
         check(directory.isDirectory || directory.mkdirs()) { "Cannot create private evidence directory" }
-        // In-process capture avoids shell screencap racing the IME surface and shell uiautomator idle failures.
-        check(device.takeScreenshot(java.io.File(directory,"$name.png"))) { "Screenshot failed: $name" }
+        // Color-only margins can hide an uncommitted first frame or a SystemUI icon fade.
+        // Poll actual captured pixels against live bounds; do not sleep and assume readiness.
+        val screenshot = java.io.File(directory,"$name.png")
+        if (name in chromeScenes) {
+            ui.waitUntil(10000) {
+                device.takeScreenshot(screenshot) && hasRenderedChrome(screenshot)
+            }
+        } else {
+            check(device.takeScreenshot(screenshot)) { "Screenshot failed: $name" }
+        }
         device.dumpWindowHierarchy(java.io.File(directory,"$name.xml"))
         val navigation=if(name.endsWith("-picker")) null else ui.onAllNodesWithTag("nav-week").fetchSemanticsNodes().firstOrNull()?.boundsInWindow
         java.io.File(directory,"$name-state.json").writeText(org.json.JSONObject().apply {
             put("name",name)
+            put("navigationMode",navigationMode)
             put("imeVisible",ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true)
             put("screenHeight",device.displayHeight)
+            put("statusBarHeight",ui.activity.window.decorView.rootWindowInsets?.getInsets(android.view.WindowInsets.Type.statusBars())?.top ?: 0)
+            put("navigationTop",navigation?.top ?: org.json.JSONObject.NULL)
             put("navigationBottom",navigation?.bottom ?: org.json.JSONObject.NULL)
         }.toString())
     }

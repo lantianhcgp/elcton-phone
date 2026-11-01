@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- One background for the launch window, system chrome and Compose page. -->
+    <color name="phone_background">#0C0F15</color>
+    <style name="Theme.Elcton" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/phone_background</item>
+        <item name="android:statusBarColor">@color/phone_background</item>
+        <item name="android:navigationBarColor">@color/phone_background</item>
+        <item name="android:navigationBarDividerColor">@color/phone_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+</resources>

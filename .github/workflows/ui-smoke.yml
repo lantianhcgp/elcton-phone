@@ -6,6 +6,18 @@ on:
         description: Successful android-probe build run
         required: true
         type: string
+      api_level:
+        description: Android API level for this API30+ instrumentation suite (phone is API33)
+        required: true
+        type: choice
+        options: ['33', '30', '34']
+        default: '33'
+      navigation_mode:
+        description: System navigation used in the screenshot checks
+        required: true
+        type: choice
+        options: [three-button, gestural]
+        default: three-button
 permissions:
   contents: read
   actions: read
@@ -26,6 +38,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb x11-utils libpulse0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libgl1 libopengl0 libglu1-mesa libxcb-cursor0
           python3 -m pip install Pillow==11.2.1
+          python3 -B qa/test_capture_readiness.py
+          python3 -B qa/test_final_report_gate.py
       - name: Enable KVM
         run: |
           printf 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"\n' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -39,8 +53,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         env:
           DISPLAY: ':99'
+          QA_NAVIGATION_MODE: ${{ inputs.navigation_mode }}
         with:
-          api-level: 30
+          api-level: ${{ inputs.api_level }}
           target: google_apis
           arch: x86_64
           profile: pixel_2

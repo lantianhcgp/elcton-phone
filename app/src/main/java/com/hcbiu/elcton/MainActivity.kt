@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
@@ -76,7 +77,7 @@ class MainActivity : ComponentActivity() {
         displayWeek=book.weekAt(LocalDate.now())
         probe=WearProbe(this,{ probeState=it }) { raw,revision -> prepareImport(raw,revision) }
         setContent {
-            MaterialTheme(colorScheme=darkColorScheme(primary=Color(0xFFAAA5FF),background=Color(0xFF0C0F15),surface=Color(0xFF171C25),surfaceVariant=Color(0xFF222936),onSurface=Color(0xFFEDF0F7),onSurfaceVariant=Color(0xFFA6AFBF))) {
+            MaterialTheme(colorScheme=darkColorScheme(primary=Color(0xFFAAA5FF),background=colorResource(R.color.phone_background),surface=Color(0xFF171C25),surfaceVariant=Color(0xFF222936),onSurface=Color(0xFFEDF0F7),onSurfaceVariant=Color(0xFFA6AFBF))) {
                 Product()
             }
         }
@@ -92,13 +93,14 @@ class MainActivity : ComponentActivity() {
     @Composable private fun Product() {
         val titles=listOf("今日课程","周课表","设备同步","设置")
         Scaffold(
+            containerColor=MaterialTheme.colorScheme.background,
             topBar={ Surface(color=MaterialTheme.colorScheme.background) {
                 Row(Modifier.fillMaxWidth().padding(horizontal=20.dp,vertical=16.dp),horizontalArrangement=Arrangement.SpaceBetween) {
                     Column { Text(if(editing)"编辑课程" else titles[tab],style=MaterialTheme.typography.headlineSmall);Text("hc课程表",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant) }
                     Text("第${book.weekAt(LocalDate.now())}周",style=MaterialTheme.typography.labelLarge,color=MaterialTheme.colorScheme.primary,modifier=Modifier.padding(top=8.dp))
                 }
             }},
-            bottomBar={ NavigationBar(containerColor=Color(0xFF151A23)) {
+            bottomBar={ NavigationBar(containerColor=MaterialTheme.colorScheme.background,tonalElevation=0.dp) {
                 listOf("今日","课表","设备","设置").forEachIndexed { index,label ->
                     NavigationBarItem(selected=tab==index,modifier=Modifier.testTag(listOf("nav-today","nav-week","nav-devices","nav-settings")[index]),
                         onClick={tab=index;editing=false;editingCourse=null},icon={TabGlyph(index,tab==index)},label={Text(label)})
@@ -137,17 +139,18 @@ class MainActivity : ComponentActivity() {
     }
     @Composable private fun TabGlyph(index:Int,selected:Boolean) {
         val color=if(selected)MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+        val background=MaterialTheme.colorScheme.background
         Canvas(Modifier.size(22.dp)) {
             val unit=size.width/10;val stroke=unit*.65f
             when(index){
                 0->{drawCircle(color,radius=unit*3.2f,center=center,style=androidx.compose.ui.graphics.drawscope.Stroke(stroke));drawLine(color,center,Offset(center.x,unit*2.4f),stroke);drawLine(color,center,Offset(unit*7.6f,center.y),stroke)}
                 1->{drawRect(color,topLeft=Offset(unit,unit*1.6f),size=androidx.compose.ui.geometry.Size(unit*8,unit*7.3f),style=androidx.compose.ui.graphics.drawscope.Stroke(stroke));drawLine(color,Offset(unit,unit*4),Offset(unit*9,unit*4),stroke);drawCircle(color,unit*.55f,Offset(unit*3.2f,unit*6.4f));drawCircle(color,unit*.55f,Offset(unit*6.8f,unit*6.4f))}
                 2->{drawRoundRect(color,topLeft=Offset(unit*2,unit),size=androidx.compose.ui.geometry.Size(unit*6,unit*8),cornerRadius=androidx.compose.ui.geometry.CornerRadius(unit),style=androidx.compose.ui.graphics.drawscope.Stroke(stroke));drawLine(color,Offset(unit*3.5f,unit*7),Offset(unit*6.5f,unit*7),stroke)}
-                else->{for(i in 0..2){val y=unit*(2+i*3);drawLine(color,Offset(unit,y),Offset(unit*9,y),stroke);drawCircle(MaterialThemeColorFallback(),unit,Offset(unit*(if(i==1)6f else 3f),y));drawCircle(color,unit,Offset(unit*(if(i==1)6f else 3f),y),style=androidx.compose.ui.graphics.drawscope.Stroke(stroke))}}
+                else->{for(i in 0..2){val y=unit*(2+i*3);drawLine(color,Offset(unit,y),Offset(unit*9,y),stroke);drawCircle(background,unit,Offset(unit*(if(i==1)6f else 3f),y));drawCircle(color,unit,Offset(unit*(if(i==1)6f else 3f),y),style=androidx.compose.ui.graphics.drawscope.Stroke(stroke))}}
             }
         }
     }
-    private fun MaterialThemeColorFallback()=Color(0xFF151A23)
+
     @Composable private fun NoticeBlock() {
         val text=loadError?:notice
         if(text.isNotEmpty())Text(text,color=if(loadError!=null)MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,style=MaterialTheme.typography.bodySmall,modifier=Modifier.fillMaxWidth().padding(bottom=8.dp))
@@ -241,7 +244,7 @@ class MainActivity : ComponentActivity() {
             TextButton(onClick={confirmClear=true},enabled=loadError==null,modifier=Modifier.testTag("clear-book")){Text("清空手机课表",color=MaterialTheme.colorScheme.error)}
             HorizontalDivider();Text("隐私与兼容性",style=MaterialTheme.typography.titleMedium)
             Text("课表保存在两端应用本地；同步不使用自建云服务。设备能力、签名和运动健康授权决定是否可通信，不把 FIT3 作为型号白名单。",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
-            Text("0.2.3 · 测试构建\nWear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("0.2.4 · 测试构建\nWear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(32.dp))
         }
     }

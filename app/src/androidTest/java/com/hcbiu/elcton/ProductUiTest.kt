@@ -16,8 +16,22 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ProductUiTest {
     @get:Rule val ui = createAndroidComposeRule<MainActivity>()
+    private fun assertWindowChrome() {
+        ui.runOnUiThread {
+            val window = ui.activity.window
+            val background = ui.activity.getColor(R.color.phone_background)
+            org.junit.Assert.assertEquals("status bar follows the page", background, window.statusBarColor)
+            org.junit.Assert.assertEquals("system navigation follows the page", background, window.navigationBarColor)
+            org.junit.Assert.assertEquals("no different navigation divider", background, window.navigationBarDividerColor)
+            val darkIcons = android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            org.junit.Assert.assertEquals("light icons on the dark window", 0, window.decorView.systemUiVisibility and darkIcons)
+            org.junit.Assert.assertFalse("no status bar contrast scrim", window.isStatusBarContrastEnforced)
+            org.junit.Assert.assertFalse("no navigation contrast scrim", window.isNavigationBarContrastEnforced)
+        }
+    }
     private fun shot(name: String) {
         ui.waitForIdle()
+        if (!name.endsWith("-picker")) assertWindowChrome()
         // Semantics becoming idle does not guarantee that SurfaceFlinger has the new frame.
         // Wait for an actual HWUI frame commit before taking the full-screen/IME image.
         val committed = java.util.concurrent.CountDownLatch(1)
@@ -45,6 +59,8 @@ class ProductUiTest {
             put("name",name)
             put("imeVisible",ui.activity.window.decorView.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime()) == true)
             put("screenHeight",device.displayHeight)
+            put("statusBarHeight",ui.activity.window.decorView.rootWindowInsets?.getInsets(android.view.WindowInsets.Type.statusBars())?.top ?: 0)
+            put("navigationTop",navigation?.top ?: org.json.JSONObject.NULL)
             put("navigationBottom",navigation?.bottom ?: org.json.JSONObject.NULL)
         }.toString())
     }

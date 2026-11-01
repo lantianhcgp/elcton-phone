@@ -6,6 +6,17 @@ on:
         description: Successful android-probe build run
         required: true
         type: string
+      api_level:
+        description: Android API level (user phone is Android 13 / API 33)
+        required: true
+        type: string
+        default: '33'
+      navigation_mode:
+        description: System navigation used in the screenshot checks
+        required: true
+        type: choice
+        options: [three-button, gestural]
+        default: three-button
 permissions:
   contents: read
   actions: read
@@ -39,8 +50,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         env:
           DISPLAY: ':99'
+          QA_NAVIGATION_MODE: ${{ inputs.navigation_mode }}
         with:
-          api-level: 30
+          api-level: ${{ inputs.api_level }}
           target: google_apis
           arch: x86_64
           profile: pixel_2

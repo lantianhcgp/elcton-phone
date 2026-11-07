@@ -25,6 +25,11 @@ TOKENS = {
 }
 ROLE_NAMES = ('background','surface','primary','primaryContainer','onPrimaryContainer','surfaceHigh','surfaceHighest','onSurface','error')
 COURSE = ('8FA8FF','B49BFF','69C9B6','E7AD77','DD91B9','81BCD9','A7C57F','B5BCCA')
+BUSINESS_FILES = {'timetable.json','timetable-last-good.json','timetable.json.bak','timetable-last-good.json.bak'}
+
+def valid_business_snapshot(value):
+    return isinstance(value,dict) and set(value)==BUSINESS_FILES and all(
+        isinstance(v,str) and (v=='ABSENT' or re.fullmatch(r'[0-9a-f]{64}',v)) for v in value.values())
 STATES = tuple((p,m) for p in PALETTES for m in ('LIGHT','DARK'))
 PHASES = ('warm',) + tuple('cold-'+p.lower()+'-'+m.lower() for p,m in STATES) + ('system', 'cold-system')
 
@@ -139,17 +144,45 @@ def inspect_capture(picture):
             metrics['nested_field_sample']=image.getpixel(point)
         elif scene=='editor-bottom':
             opts=state['courseColorBounds']; assert set(opts)==set(str(i) for i in range(8)), 'Eight business colors missing'
+            selected=state['courseColorsSelected']
+            assert isinstance(selected,list) and len(selected)==1 and type(selected[0]) is int and 0<=selected[0]<8, 'Exactly one selected course color required'
             for i,raw in enumerate(COURSE):
                 r=box(opts[str(i)]); assert inside(r,width,height) and r[3]<nav_top, 'Business color point clipped'
                 assert pixels(image,r,mix(expected['surfaceHighest'],rgb(raw),.30 if dark else .46))>=12, 'Untoned or wrong business color point'
+                if i==selected[0]:
+                    cx,cy=(r[0]+r[2])/2,(r[1]+r[3])/2
+                    radius=15*density; inner=radius-2.6*density
+                    ring_ink=sum(close(image.getpixel((x,y)),expected['primary'])
+                        for y in range(r[1],r[3]) for x in range(r[0],r[2])
+                        if inner**2<=(x+.5-cx)**2+(y+.5-cy)**2<=radius**2)
+                    assert ring_ink>=max(12,round(14*density*density)), 'Selected course outline not rendered'
+                    center=(round(cx-7*density),round(cy-7*density),round(cx+7*density),round(cy+7*density))
+                    assert pixels(image,center,expected['onSurface'])>=4, 'Selected course checkmark not rendered'
             r=box(state['deleteBounds']); assert inside(r,width,height) and r[3]<nav_top
             assert pixels(image,r,expected['error'])>=12, 'Delete semantic ink missing'
             center=((r[0]+r[2])//2,r[1]+max(5,round(6*density)))
             assert close(image.getpixel(center),expected['background']), 'Deletion competes as filled primary action'
             metrics['business_colors']=8
-        elif scene!='week':
+            metrics['selected_course_color']=selected[0]
+        elif scene=='week':
+            text_values={n.get('text') for n in app}
+            assert {'M3E配色验收','上一周','下一周'}<=text_values, 'Actual QA week page/course is absent'
+            assert not text_values&{'保存','课程名称','删除课程','配色'}, 'Week capture is a different actual page'
+            block=state['weekTimeBlock']; assert isinstance(block,dict), 'No actual CourseCard time block'
+            r=box(block['bounds']);index=block['colorIndex']
+            assert type(index) is int and 0<=index<8 and inside(r,width,height) and r[3]<nav_top, 'Invalid visible course time block'
+            assert pixels(image,r,mix(expected['surfaceHighest'],rgb(COURSE[index]),.30 if dark else .46))>=40, 'CourseCard time block not tonal'
+            for text in ('08:00','08:45'):
+                nodes=[n for n in app if n.get('text')==text]
+                assert len(nodes)==1 and inside((b:=box(nodes[0].get('bounds'))),width,height), 'QA course time glyphs absent'
+                assert r[0]<=b[0]<b[2]<=r[2]+2 and r[1]<=b[1]<b[3]<=r[3]+2, 'Time glyphs belong to another CourseCard'
+                assert pixels(image,b,expected['onSurface'])>=5, 'CourseCard time glyphs are not visible'
+            title=next(n for n in app if n.get('text')=='M3E配色验收')
+            assert pixels(image,box(title.get('bounds')),expected['onSurface'])>=12, 'Course title not visible in selected scheme'
+            metrics['course_time_block_index']=index
+        else:
             raise AssertionError('Unsupported scene')
-        assert isinstance(state['businessHashes'],dict) and state['businessHashes'], 'No business preservation snapshot'
+        assert valid_business_snapshot(state['businessHashes']), 'Incomplete or malformed four-file business snapshot'
         result.update(passed=True,metrics=metrics)
     except (AssertionError,OSError,ValueError,TypeError,KeyError,ET.ParseError) as error:
         result['errors'].append(str(error))
@@ -182,7 +215,7 @@ def check_capture_provenance(reports, processes, navigation_mode, qa_run):
             errors.append(report['name']+': capture PID differs from cold process receipt')
         if state['navigationMode']!=navigation_mode:
             errors.append(report['name']+': navigation input differs')
-        if state['businessHashes']!=process.get('businessBefore'):
+        if not valid_business_snapshot(state['businessHashes']) or state['businessHashes']!=process.get('businessBefore'):
             errors.append(report['name']+': business snapshot differs from phase start')
         if state['captureId'] in seen:
             errors.append(report['name']+': reused capture identity')
@@ -199,6 +232,7 @@ def verify_product(product,host):
             r=json.loads((product/('r3-'+phase+'-result.json')).read_text())
             assert r['passed'] is True and r['phase']==phase and r['navigationMode']==host['navigation_mode']
             assert type(r['pid']) is int and r['pid']>0, 'Invalid phase PID'
+            assert valid_business_snapshot(r['businessBefore']) and valid_business_snapshot(r['businessAfter']), 'Invalid business before/after snapshot'
             assert r['businessBefore']==r['businessAfter'], 'Palette choices changed business files'
             started=json.loads((product/('r3-'+phase+'-process.json')).read_text())
             assert r['qaRun']==started['qaRun']==host['qa_run'], 'Process receipt belongs to another run'

@@ -29,6 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
@@ -259,7 +261,8 @@ class MainActivity : ComponentActivity() {
             Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){
                 Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.Top,
                     horizontalArrangement=Arrangement.spacedBy(12.dp)){
-                    Surface(color=tonalCourseColor(colors[c.colorIndex]),contentColor=M3x.OnSurface,shape=M3x.Field) {
+                    Surface(color=tonalCourseColor(colors[c.colorIndex]),contentColor=M3x.OnSurface,shape=M3x.Field,
+                        modifier=Modifier.semantics { this[CourseColorIndexKey] = c.colorIndex }) {
                         Column(Modifier.padding(horizontal=12.dp,vertical=10.dp),verticalArrangement=Arrangement.spacedBy(3.dp)) {
                             Text(c.startTime,style=MaterialTheme.typography.titleSmall)
                             Text(c.endTime,style=MaterialTheme.typography.labelSmall)
@@ -356,7 +359,8 @@ class MainActivity : ComponentActivity() {
                     Text("课程颜色",style=MaterialTheme.typography.labelLarge,color=M3x.Ink)
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
                         colors.forEachIndexed{i,c->
-                            Box(Modifier.weight(1f).height(48.dp).clickable{color=i}.testTag("course-color-$i"),
+                            Box(Modifier.weight(1f).height(48.dp).clickable{color=i}.testTag("course-color-$i")
+                                .semantics { selected = color==i },
                                 contentAlignment=androidx.compose.ui.Alignment.Center){
                                 Box(Modifier.size(30.dp).background(tonalCourseColor(c),CircleShape)
                                     .border(2.dp,if(color==i)M3x.Ink else Color.Transparent,CircleShape),

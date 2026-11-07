@@ -78,6 +78,13 @@ class PaletteUiTest {
             val colors=JSONObject()
             for(i in 0..7) bounds("course-color-$i")?.let { colors.put(i.toString(),it) }
             put("courseColorBounds",colors)
+            put("courseColorsSelected",JSONArray((0..7).filter { selected("course-color-$it") }))
+            val blocks=ui.onAllNodes(SemanticsMatcher.keyIsDefined(CourseColorIndexKey),useUnmergedTree=true).fetchSemanticsNodes()
+            put("weekTimeBlock",if(blocks.size==1) JSONObject().apply {
+                val node=blocks.single();val b=node.boundsInWindow
+                put("bounds",JSONArray(listOf(b.left,b.top,b.right,b.bottom)))
+                put("colorIndex",node.config[CourseColorIndexKey])
+            } else JSONObject.NULL)
             put("businessHashes",businessHashes())
         }
         ui.runOnUiThread {
@@ -193,8 +200,11 @@ class PaletteUiTest {
     private fun editorAndWeek(prefix:String) {
         openFixture();ui.onNodeWithTag("course-delete").performScrollTo().assertIsDisplayed()
         for(i in 0..7)ui.onNodeWithTag("course-color-$i").assertIsDisplayed()
+        ui.onNodeWithTag("course-color-0").assertIsSelected()
         capture(prefix+"-editor-bottom","editor-bottom")
         ui.onNodeWithTag("nav-week").performClick();ui.onNodeWithTag("week-day-6").performClick()
+        ui.onNodeWithText("M3E配色验收").assertIsDisplayed()
+        ui.onNodeWithText("上一周").assertIsDisplayed()
         capture(prefix+"-week","week")
     }
     private fun createFixture() {

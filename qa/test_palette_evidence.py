@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from PIL import Image, ImageDraw
-from qa.verify_palette_evidence import inspect_capture, check_processes, check_capture_provenance, mix, rgb, roles, COURSE
+from qa.verify_palette_evidence import inspect_capture, check_processes, check_capture_provenance, mix, rgb, roles, COURSE, valid_business_snapshot
 
 
 class PaletteEvidenceTest(unittest.TestCase):
@@ -39,7 +39,7 @@ class PaletteEvidenceTest(unittest.TestCase):
         state = {'mode':'LIGHT','palette':'PURPLE','systemDark':True,'pid':120,'navigationMode':'three-button',
             'screenWidth':360,'screenHeight':800,'navigationTop':640,'navigationBottom':750,
             'statusBarHeight':24,'systemNavigationHeight':50,'imeVisible':False,'chromeArgb':-395777,'uiFlags':8208,
-            'paletteOptions':options,'modeSelected':'LIGHT','businessHashes':{'timetable.json':'abc'},'scene':'options',
+            'paletteOptions':options,'modeSelected':'LIGHT','businessHashes':{'timetable.json':'a'*64,'timetable-last-good.json':'b'*64,'timetable.json.bak':'ABSENT','timetable-last-good.json.bak':'ABSENT'},'scene':'options',
             'density':1.0,'qaRun':'synthetic-run'}
         sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
         receipt = {'name':picture.stem,'phase':'warm','qaRun':'synthetic-run','captureId':'synthetic-unit-only','stable':True,'xmlStable':True,
@@ -84,7 +84,7 @@ class PaletteEvidenceTest(unittest.TestCase):
         phases['b']['pid']=22
         self.assertEqual(['Cold phases reuse an actual process'],check_processes(phases,host))
 
-    def editor_fixture(self, directory, raw_colors=False):
+    def editor_fixture(self, directory, raw_colors=False, selected_indicator=True):
         root=Path(directory);options=self.fixture(directory)
         receipt=json.loads(options.with_name(options.stem+'-state.json').read_text())
         p=root/'r3-purple-light-editor-bottom.png'
@@ -96,10 +96,13 @@ class PaletteEvidenceTest(unittest.TestCase):
             color_bounds[str(i)]=[x,y,x+38,y+48]
             color=rgb(color) if raw_colors else mix(tokens['surfaceHighest'],rgb(color),.46)
             draw.ellipse((x+4,y+9,x+33,y+38),fill=color)
+            if i==0 and selected_indicator:
+                draw.ellipse((x+4,y+9,x+33,y+38),outline=tokens['primary'],width=2)
+                draw.line([(x+14,y+24),(x+18,y+28),(x+25,y+19)],fill=tokens['onSurface'],width=3)
         draw.rectangle((140,530,205,545),fill=tokens['error'])
         receipt['name']=p.stem;receipt['phase']='warm'
         for key in ('before','after'):
-            receipt[key].update(scene='editor-bottom',courseColorBounds=color_bounds,deleteBounds=[20,510,340,566])
+            receipt[key].update(scene='editor-bottom',courseColorBounds=color_bounds,courseColorsSelected=[0],deleteBounds=[20,510,340,566])
         image.save(p);p.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/></hierarchy>')
         receipt['pngSha256']=hashlib.sha256(p.read_bytes()).hexdigest()
         receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(p.with_suffix('.xml').read_bytes()).hexdigest()
@@ -122,9 +125,10 @@ class PaletteEvidenceTest(unittest.TestCase):
             self.assertFalse(inspect_capture(p)['passed'])
 
     def test_cold_capture_pid_phase_and_unique_id_are_actually_bound(self):
-        states={'cold-purple-light':{'pid':130,'qaRun':'synthetic-run','businessBefore':{'timetable.json':'abc'}}}
+        snapshot={'timetable.json':'a'*64,'timetable-last-good.json':'b'*64,'timetable.json.bak':'ABSENT','timetable-last-good.json.bak':'ABSENT'}
+        states={'cold-purple-light':{'pid':130,'qaRun':'synthetic-run','businessBefore':snapshot}}
         row={'name':'r3-purple-light-cold','passed':True,'metrics':{'phase':'cold-purple-light','pid':130,
-             'businessHashes':{'timetable.json':'abc'},'navigationMode':'three-button','qaRun':'synthetic-run','captureId':'capture-1'}}
+             'businessHashes':{'timetable.json':'a'*64,'timetable-last-good.json':'b'*64,'timetable.json.bak':'ABSENT','timetable-last-good.json.bak':'ABSENT'},'navigationMode':'three-button','qaRun':'synthetic-run','captureId':'capture-1'}}
         self.assertEqual([],check_capture_provenance([row],states,'three-button','synthetic-run'))
         row['metrics']['pid']=120
         self.assertIn('capture PID',str(check_capture_provenance([row],states,'three-button','synthetic-run')))
@@ -141,6 +145,89 @@ class PaletteEvidenceTest(unittest.TestCase):
         self.assertEqual([],check_processes({'cold':{'pid':123}},host))
         host['cold']['force_stop']['target_pid_after']='122'
         self.assertEqual(['cold: no verified force-stop'],check_processes({'cold':{'pid':123}},host))
+
+    def test_palette_verifier_rejects_incomplete_business_hashes(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=self.fixture(d)
+            state=p.with_name(p.stem+'-state.json');r=json.loads(state.read_text())
+            for key in ('before','after'):
+                r[key]['businessHashes']={'timetable.json':'abc'}
+            state.write_text(json.dumps(r))
+            self.assertFalse(inspect_capture(p)['passed'])
+
+    def test_options_frame_with_consistent_week_metadata_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=self.fixture(d);r=json.loads(p.with_name(p.stem+'-state.json').read_text())
+            week=p.with_name('r3-purple-light-week.png');week.write_bytes(p.read_bytes())
+            week.with_suffix('.xml').write_bytes(p.with_suffix('.xml').read_bytes());r['name']=week.stem
+            for key in ('before','after'):r[key]['scene']='week'
+            week.with_name(week.stem+'-state.json').write_text(json.dumps(r))
+            self.assertFalse(inspect_capture(week)['passed'])
+
+    def test_editor_frame_without_selected_indicator_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            valid=inspect_capture(self.editor_fixture(d));self.assertTrue(valid['passed'],valid)
+            invalid=inspect_capture(self.editor_fixture(d,selected_indicator=False))
+            self.assertFalse(invalid['passed'])
+            self.assertIn('Selected course outline',str(invalid['errors']))
+
+    def week_fixture(self, directory, time_fill='tonal'):
+        root=Path(directory); options=self.fixture(directory)
+        receipt=json.loads(options.with_name(options.stem+'-state.json').read_text())
+        picture=root/'r3-purple-light-week.png';tokens=roles('PURPLE',False)
+        image=Image.new('RGB',(360,800),tokens['background']);draw=ImageDraw.Draw(image)
+        block=[40,300,114,370]
+        fill={'tonal':mix(tokens['surfaceHighest'],rgb(COURSE[0]),.46),
+              'raw':rgb(COURSE[0]),'blank':tokens['background']}[time_fill]
+        draw.rectangle(block,fill=fill)
+        text_specs=[('上一周',[20,190,80,212]),('下一周',[280,190,340,212]),
+                    ('M3E配色验收',[130,305,290,330]),('08:00',[48,312,90,325]),
+                    ('08:45',[48,343,90,354]),('今日',[20,672,50,694])]
+        xml='<hierarchy>'
+        for text,b in text_specs:
+            draw.rectangle((b[0]+2,b[1]+3,b[2]-2,b[3]-3),fill=(98,86,113) if text=='今日' else tokens['onSurface'])
+            xml+=f'<node package="com.hcbiu.elcton" text="{text}" bounds="[{b[0]},{b[1]}][{b[2]},{b[3]}]"/>'
+        xml+='</hierarchy>';picture.with_suffix('.xml').write_text(xml);image.save(picture)
+        for key in ('before','after'):
+            receipt[key].update(scene='week',weekTimeBlock={'bounds':block,'colorIndex':0})
+        receipt['name']=picture.stem;receipt['pngSha256']=hashlib.sha256(picture.read_bytes()).hexdigest()
+        receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(picture.with_suffix('.xml').read_bytes()).hexdigest()
+        picture.with_name(picture.stem+'-state.json').write_text(json.dumps(receipt))
+        return picture
+
+    def test_actual_week_content_gate_has_valid_baseline_and_rejects_only_raw_or_blank_block(self):
+        with tempfile.TemporaryDirectory() as d:
+            valid=inspect_capture(self.week_fixture(d));self.assertTrue(valid['passed'],valid)
+            for fill in ('raw','blank'):
+                with self.subTest(fill=fill):
+                    bad=inspect_capture(self.week_fixture(d,time_fill=fill))
+                    self.assertFalse(bad['passed'],bad)
+                    self.assertIn('CourseCard time block not tonal',str(bad['errors']))
+
+    def test_four_file_snapshot_rejects_missing_keys_and_only_malformed_hash(self):
+        valid={name:('ABSENT' if name.endswith('.bak') else 'a'*64)
+               for name in ('timetable.json','timetable-last-good.json','timetable.json.bak','timetable-last-good.json.bak')}
+        self.assertTrue(valid_business_snapshot(valid))
+        bad=valid.copy();bad.pop('timetable.json.bak');self.assertFalse(valid_business_snapshot(bad))
+        bad=valid.copy();bad['timetable.json']='not-a-hash';self.assertFalse(valid_business_snapshot(bad))
+        self.assertFalse(valid_business_snapshot({'timetable.json':'abc'}))
+
+    def test_selected_color_checkmark_and_semantics_fail_independently(self):
+        with tempfile.TemporaryDirectory() as d:
+            picture=self.editor_fixture(d);receipt_path=picture.with_name(picture.stem+'-state.json')
+            receipt=json.loads(receipt_path.read_text());tokens=roles('PURPLE',False)
+            image=Image.open(picture).convert('RGB');draw=ImageDraw.Draw(image)
+            draw.rectangle((31,466,46,482),fill=mix(tokens['surfaceHighest'],rgb(COURSE[0]),.46))
+            image.save(picture);receipt['pngSha256']=hashlib.sha256(picture.read_bytes()).hexdigest();receipt_path.write_text(json.dumps(receipt))
+            invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+            self.assertIn('Selected course checkmark',str(invalid['errors']))
+            for selected in ([],[0,1]):
+                picture=self.editor_fixture(d);receipt_path=picture.with_name(picture.stem+'-state.json')
+                receipt=json.loads(receipt_path.read_text())
+                for key in ('before','after'):receipt[key]['courseColorsSelected']=selected
+                receipt_path.write_text(json.dumps(receipt))
+                invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+                self.assertIn('Exactly one selected course color',str(invalid['errors']))
 
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()

@@ -177,6 +177,9 @@ internal fun ThemeOptions() {
     }
 }
 
+/** Read-only UI semantics for the visible course time block; never writes the business colorIndex. */
+internal val CourseColorIndexKey = androidx.compose.ui.semantics.SemanticsPropertyKey<Int>("CourseColorIndex")
+
 /** The stored colorIndex stays untouched; presentation only mixes business hues into tonal surfaces. */
 @Composable
 internal fun tonalCourseColor(color: Color): Color =

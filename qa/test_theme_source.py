@@ -35,6 +35,13 @@ class ThemeSourceTest(unittest.TestCase):
         self.assertTrue(theme_checks(source + '\nfun broken(){ ScheduleStore(context).save(book) }'))
         self.assertTrue(theme_checks(source + '\nLaunchedEffect(Unit){ probe.cancel() }'))
 
+    def test_capture_uses_same_xml_without_stale_accessibility_handles(self):
+        source = (ROOT/'app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt').read_text()
+        self.assertIn('snapshot(xmlBefore)', source)
+        self.assertIn('snapshot(xml)', source)
+        self.assertNotIn('device.findObjects(By.pkg(pkg))', source)
+        self.assertIn('rendered(picture, xml, after, dark, needsIme)', source)
+
     def test_settings_exposes_three_accessible_options_after_semester(self):
         activity = ACTIVITY.read_text()
         components = COMPONENTS.read_text()

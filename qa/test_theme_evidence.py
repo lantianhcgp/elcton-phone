@@ -66,6 +66,12 @@ class ThemeEvidenceTest(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'overlaps'):
             keyboard_content_bounds(state, 300, 600)
 
+    def test_keyboard_background_probe_stays_out_of_real_drop_shadow(self):
+        from verify_theme_evidence import background_probe_rows
+        state = dict(navigationTop=838, navigationBottom=1048, imeBottom=872, imeBounds=[0,1025,1080,1920])
+        self.assertEqual((10, 640, 943), background_probe_rows(state, 1920, True))
+        self.assertTrue(all(y < 1025 for y in background_probe_rows(state, 1920, True)))
+
     def test_visible_keyboard_error_and_bound_png_xml_are_accepted(self):
         with tempfile.TemporaryDirectory() as d:
             result = inspect_capture(self.fixture(d))

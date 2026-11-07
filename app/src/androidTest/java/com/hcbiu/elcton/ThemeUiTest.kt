@@ -20,6 +20,8 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.w3c.dom.Element
+import javax.xml.parsers.DocumentBuilderFactory
 import java.io.File
 import java.io.FileInputStream
 import java.security.MessageDigest
@@ -48,10 +50,21 @@ class ThemeUiTest {
         FileInputStream(it.fileDescriptor).readBytes().toString(Charsets.UTF_8).trim()
     }
     private fun imePackage() = shell("settings get secure default_input_method").substringBefore('/')
-    private fun imeBounds(): Rect? {
+    private fun xmlNodes(file: File): List<Element> {
+        val parser = DocumentBuilderFactory.newInstance().apply { isExpandEntityReferences = false }
+        val nodes = parser.newDocumentBuilder().parse(file).getElementsByTagName("node")
+        return (0 until nodes.length).map { nodes.item(it) as Element }
+    }
+    private fun nodeBounds(element: Element): Rect? {
+        val parts = element.getAttribute("bounds").split('[', ']', ',').filter { it.isNotEmpty() }
+        if (parts.size != 4) return null
+        val values = parts.map { it.toIntOrNull() ?: return null }
+        return Rect(values[0], values[1], values[2], values[3]).takeUnless { it.isEmpty }
+    }
+    private fun imeBounds(file: File): Rect? {
         val pkg = imePackage()
         if (pkg.isEmpty() || pkg == "null") return null
-        val all = device.findObjects(By.pkg(pkg)).map { it.visibleBounds }.filter { !it.isEmpty }
+        val all = xmlNodes(file).filter { it.getAttribute("package") == pkg }.mapNotNull { nodeBounds(it) }
         if (all.isEmpty()) return null
         return Rect(all.first()).apply { all.drop(1).forEach { union(it) } }
     }
@@ -68,10 +81,10 @@ class ThemeUiTest {
             assertFalse(window.isNavigationBarContrastEnforced)
         }
     }
-    private fun snapshot(): JSONObject {
+    private fun snapshot(xml: File): JSONObject {
         val nav = ui.onNodeWithTag("nav-week").fetchSemanticsNode().boundsInWindow
         val error = ui.onAllNodesWithText("请输入有效日期（YYYY-MM-DD）").fetchSemanticsNodes().firstOrNull()?.boundsInWindow
-        val ime = imeBounds()
+        val ime = imeBounds(xml)
         val result = JSONObject().apply {
             put("mode", mode()); put("systemDark", systemDark()); put("pid", Process.myPid())
             put("screenWidth", device.displayWidth); put("screenHeight", device.displayHeight)
@@ -110,19 +123,20 @@ class ThemeUiTest {
         }
         check(latch.await(5, TimeUnit.SECONDS)) { "No committed theme frame" }
     }
-    private fun rendered(file: File, state: JSONObject, dark: Boolean, needsIme: Boolean): Boolean {
+    private fun rendered(file: File, xml: File, state: JSONObject, dark: Boolean, needsIme: Boolean): Boolean {
         val bitmap = BitmapFactory.decodeFile(file.absolutePath) ?: return false
         try {
             val expected = if (dark) 0xFF0C0F15.toInt() else 0xFFF9F5FF.toInt()
             val navBottom = state.getDouble("navigationBottom").toInt()
-            for (y in listOf(10, bitmap.height / 3, navBottom - 10)) {
+            val navProbe = if (needsIme) (state.getDouble("navigationTop").toInt()+navBottom)/2 else navBottom-10
+            for (y in listOf(10, bitmap.height / 3, navProbe)) {
                 if (y !in 0 until bitmap.height) return false
                 for (x in listOf(1, 2, bitmap.width - 3, bitmap.width - 2)) {
                     if (bitmap.getPixel(x, y) != expected) return false
                 }
             }
-            val label = device.findObject(By.pkg("com.hcbiu.elcton").text("今日")) ?: return false
-            val box = label.visibleBounds
+            val label = xmlNodes(xml).firstOrNull { it.getAttribute("package") == "com.hcbiu.elcton" && it.getAttribute("text") == "今日" } ?: return false
+            val box = nodeBounds(label) ?: return false
             var contrasting = 0
             for (y in box.top until box.bottom) for (x in box.left until box.right) {
                 val rgb = bitmap.getPixel(x, y)
@@ -164,18 +178,18 @@ class ThemeUiTest {
         while (System.nanoTime() < deadline) {
             attempt++
             committedFrame()
-            val before = snapshot()
             val id = UUID.randomUUID().toString()
             val picture = File(attempts, "$name-$attempt.png")
             val xml = File(attempts, "$name-$attempt.xml")
             val xmlBefore = File(attempts, "$name-$attempt-before.xml")
             device.dumpWindowHierarchy(xmlBefore)
+            val before = snapshot(xmlBefore)
             check(device.takeScreenshot(picture)) { "Theme screenshot failed" }
             device.dumpWindowHierarchy(xml)
-            val after = snapshot()
+            val after = snapshot(xml)
             val xmlStable = hash(xmlBefore) == hash(xml)
             val stable = before.toString() == after.toString() && xmlStable
-            val pixelReady = stable && rendered(picture, after, dark, needsIme)
+            val pixelReady = stable && rendered(picture, xml, after, dark, needsIme)
             val receipt = JSONObject().apply {
                 put("name", name); put("captureId", id); put("phase", phase); put("attempt", attempt)
                 put("expectedDark", dark); put("requiresIme", needsIme)

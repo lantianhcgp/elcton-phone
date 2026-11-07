@@ -52,6 +52,11 @@ def count_ink(image, rect, dark, step=1):
     return count
 
 
+def background_probe_rows(state, height, needs_ime):
+    nav_y = (int(state['navigationTop'])+int(state['navigationBottom']))//2 if needs_ime else int(state['navigationBottom'])-10
+    return (10, height//3, nav_y)
+
+
 def keyboard_content_bounds(state, width, height):
     raw = box(state['imeBounds'])
     assert inside(raw, width, height), 'Input method outside screenshot window'
@@ -93,7 +98,7 @@ def inspect_capture(picture):
         assert (width, height) == (state['screenWidth'], state['screenHeight']), 'Wrong capture resolution'
         nav_top, nav_bottom = int(state['navigationTop']), int(state['navigationBottom'])
         assert state['statusBarHeight'] < nav_top < nav_bottom <= height, 'Navigation outside active window'
-        edge = [(x, y) for y in (10, height//3, nav_bottom-10) for x in (1, 2, width-3, width-2)]
+        edge = [(x, y) for y in background_probe_rows(state, height, receipt['requiresIme']) for x in (1, 2, width-3, width-2)]
         assert all(image.getpixel(p) == expected for p in edge), 'PNG palette has not caught up to theme state'
         root = ET.parse(hierarchy).getroot()
         nodes = list(root.iter('node'))

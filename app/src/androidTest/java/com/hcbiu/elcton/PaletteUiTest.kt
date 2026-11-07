@@ -33,7 +33,8 @@ class PaletteUiTest {
     private val args get() = InstrumentationRegistry.getArguments()
     private val phase get() = args.getString("palette_phase")!!
     private val navigationMode get() = args.getString("navigation_mode")!!
-    private val directory get() = File(instrumentation.targetContext.filesDir,"qa-palette-evidence").apply {
+    private val qaRun get() = args.getString("palette_run")!!.also { java.util.UUID.fromString(it) }
+    private val directory get() = File(instrumentation.targetContext.filesDir,"qa-palette-evidence/$qaRun").apply {
         check(isDirectory || mkdirs())
     }
     private val prefs get() = instrumentation.targetContext.getSharedPreferences("ui-theme",Context.MODE_PRIVATE)
@@ -59,7 +60,7 @@ class PaletteUiTest {
     private fun selected(tag:String):Boolean = ui.onAllNodesWithTag(tag).fetchSemanticsNodes().firstOrNull()?.config?.getOrElse(androidx.compose.ui.semantics.SemanticsProperties.Selected) { false } ?: false
     private fun currentState(scene:String):JSONObject {
         val result=JSONObject().apply {
-            put("scene",scene);put("palette",palette());put("mode",mode());put("pid",Process.myPid())
+            put("scene",scene);put("palette",palette());put("mode",mode());put("pid",Process.myPid());put("qaRun",qaRun)
             put("systemDark",systemDark());put("navigationMode",navigationMode)
             put("screenWidth",device.displayWidth);put("screenHeight",device.displayHeight)
             put("density",ui.activity.resources.displayMetrics.density)
@@ -145,7 +146,7 @@ class PaletteUiTest {
             val stable=xmlStable && before.toString()==after.toString()
             val pixelReady=stable && ready(picture,xml,after)
             val receipt=JSONObject().apply {
-                put("name",name);put("phase",phase);put("attempt",attempt);put("captureId",java.util.UUID.randomUUID().toString())
+                put("name",name);put("phase",phase);put("qaRun",qaRun);put("attempt",attempt);put("captureId",java.util.UUID.randomUUID().toString())
                 put("expectedPalette",palette());put("expectedDark",dark());put("before",before);put("after",after)
                 put("stable",stable);put("xmlStable",xmlStable);put("pixelReady",pixelReady)
                 put("pngSha256",hash(picture));put("xmlSha256",hash(xml));put("xmlBeforeSha256",hash(xmlBefore))
@@ -177,6 +178,8 @@ class PaletteUiTest {
     private fun options(name:String) {
         settings();ui.onNodeWithTag("palette-pink").performScrollTo()
         for(p in palettes)ui.onNodeWithTag("palette-${p.lowercase()}").assertIsDisplayed()
+            .assert(SemanticsMatcher.expectValue(androidx.compose.ui.semantics.SemanticsProperties.Role,
+                androidx.compose.ui.semantics.Role.RadioButton))
         ui.onNodeWithTag("palette-${palette().lowercase()}").assertIsSelected()
         capture(name,"options")
     }
@@ -211,7 +214,7 @@ class PaletteUiTest {
         ui.waitUntil(15000){ui.onAllNodesWithTag("nav-today").fetchSemanticsNodes().isNotEmpty()}
         assertEquals("true",args.getString("previous_force_stop"))
         File(directory,"r3-$phase-process.json").writeText(JSONObject().put("pid",Process.myPid()).put("phase",phase)
-            .put("mode",mode()).put("palette",palette()).put("previousHostForceStop",true).toString())
+            .put("mode",mode()).put("palette",palette()).put("qaRun",qaRun).put("previousHostForceStop",true).toString())
         if(phase=="warm")createFixture()
         val before=businessHashes()
         when {
@@ -249,7 +252,7 @@ class PaletteUiTest {
         val after=businessHashes();assertEquals(before.toString(),after.toString())
         File(directory,"r3-$phase-result.json").writeText(JSONObject().apply {
             put("passed",true);put("phase",phase);put("pid",Process.myPid());put("mode",mode());put("palette",palette())
-            put("navigationMode",navigationMode);put("businessBefore",before);put("businessAfter",after)
+            put("navigationMode",navigationMode);put("qaRun",qaRun);put("businessBefore",before);put("businessAfter",after)
         }.toString())
         if(phase=="cold-system") {
             // Remove only the named emulator QA course; never runs on a physical phone.

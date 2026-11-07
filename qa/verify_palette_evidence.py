@@ -54,14 +54,24 @@ def pixels(image, rect, color, tolerance=3):
                for y in range(rect[1],rect[3],2) for x in range(rect[0],rect[2],2))
 
 
-def required():
-    names = []
+def capture_manifest():
+    manifest = {}
     for p,m in STATES:
         key=p.lower()+'-'+m.lower()
-        names.extend('r3-'+key+'-'+scene for scene in ('options','semester','editor-bottom','week','cold'))
-    names.extend('r3-'+p.lower()+'-system-'+m for p in PALETTES for m in ('light','dark'))
-    names.extend(('r3-system-cold','r3-restored-purple-dark'))
-    return tuple(names)
+        for scene in ('options','semester','editor-bottom','week'):
+            manifest['r3-'+key+'-'+scene] = {'scene':scene,'phase':'warm','palette':p,'mode':m,'dark':m=='DARK'}
+        manifest['r3-'+key+'-cold'] = {'scene':'options','phase':'cold-'+key,'palette':p,'mode':m,'dark':m=='DARK'}
+    for p in PALETTES:
+        for dark in (False,True):
+            manifest['r3-'+p.lower()+'-system-'+('dark' if dark else 'light')] = {
+                'scene':'options','phase':'system','palette':p,'mode':'SYSTEM','dark':dark}
+    manifest['r3-system-cold'] = {'scene':'options','phase':'cold-system','palette':'PINK','mode':'SYSTEM','dark':True}
+    manifest['r3-restored-purple-dark'] = {'scene':'options','phase':'cold-system','palette':'PURPLE','mode':'DARK','dark':True}
+    return manifest
+
+
+def required():
+    return tuple(capture_manifest())
 
 
 def inspect_capture(picture):
@@ -74,7 +84,12 @@ def inspect_capture(picture):
         assert receipt['xmlStable'] is True and receipt['xmlBeforeSha256']==receipt['xmlSha256'], 'XML changed across screenshot'
         assert receipt['stable'] is True and receipt['before']==receipt['after'] and receipt['pixelReady'] is True, 'Unstable/uncommitted frame'
         assert receipt['captureId'] and receipt['name']==picture.stem, 'Unbound scene'
+        expected_capture=capture_manifest()[picture.stem]
         state=receipt['after']; palette=state['palette']; dark=receipt['expectedDark']
+        assert receipt['phase']==expected_capture['phase'] and state['scene']==expected_capture['scene'], 'Capture scene/phase is not bound to manifest'
+        assert (palette,state['mode'],dark)==(expected_capture['palette'],expected_capture['mode'],expected_capture['dark']), 'Requested capture combination is absent'
+        assert type(state['pid']) is int and state['pid']>0, 'Invalid process identity'
+        assert isinstance(state['qaRun'],str) and state['qaRun'] and receipt['qaRun']==state['qaRun'], 'Run identity unbound'
         assert palette in PALETTES and palette==receipt['expectedPalette'] and type(dark) is bool
         assert state['mode'] in ('LIGHT','DARK','SYSTEM')
         if state['scene']=='options': assert state['modeSelected']==state['mode'], 'Mode control is not selected'
@@ -96,7 +111,7 @@ def inspect_capture(picture):
         today=[n for n in app if n.get('text')=='今日']; assert today, 'Navigation label missing'
         label=box(today[0].get('bounds')); assert inside(label,width,height)
         assert count_ink(image,label,dark)>=12, 'Navigation glyphs not composed'
-        scene=state['scene']; metrics={'palette':palette,'theme':state['mode'],'dark':dark,'pid':state['pid'],'scene':scene,'captureId':receipt['captureId']}
+        scene=state['scene']; metrics={'palette':palette,'theme':state['mode'],'dark':dark,'pid':state['pid'],'scene':scene,'phase':receipt['phase'],'qaRun':state['qaRun'],'captureId':receipt['captureId'],'navigationMode':state['navigationMode'],'businessHashes':state['businessHashes']}
         density=state['density']; assert isinstance(density,(int,float)) and 0<density<=5
         if scene=='options':
             opts=state['paletteOptions']; assert set(opts)==set(PALETTES), 'Six palette bounds required'
@@ -155,6 +170,26 @@ def check_processes(processes,host_phases):
     return errors
 
 
+def check_capture_provenance(reports, processes, navigation_mode, qa_run):
+    errors=[]
+    seen=set()
+    for report in reports:
+        if not report['passed']: continue
+        state=report['metrics']; phase=state['phase']; process=processes.get(phase,{})
+        if state['qaRun']!=qa_run or process.get('qaRun')!=qa_run:
+            errors.append(report['name']+': evidence run identity differs')
+        if state['pid']!=process.get('pid'):
+            errors.append(report['name']+': capture PID differs from cold process receipt')
+        if state['navigationMode']!=navigation_mode:
+            errors.append(report['name']+': navigation input differs')
+        if state['businessHashes']!=process.get('businessBefore'):
+            errors.append(report['name']+': business snapshot differs from phase start')
+        if state['captureId'] in seen:
+            errors.append(report['name']+': reused capture identity')
+        seen.add(state['captureId'])
+    return errors
+
+
 def verify_product(product,host):
     product=Path(product); reports=[inspect_capture(product/(name+'.png')) for name in required()]
     errors=[r['name']+': '+str(r['errors']) for r in reports if not r['passed']]
@@ -163,11 +198,20 @@ def verify_product(product,host):
         try:
             r=json.loads((product/('r3-'+phase+'-result.json')).read_text())
             assert r['passed'] is True and r['phase']==phase and r['navigationMode']==host['navigation_mode']
+            assert type(r['pid']) is int and r['pid']>0, 'Invalid phase PID'
             assert r['businessBefore']==r['businessAfter'], 'Palette choices changed business files'
+            started=json.loads((product/('r3-'+phase+'-process.json')).read_text())
+            assert r['qaRun']==started['qaRun']==host['qa_run'], 'Process receipt belongs to another run'
+            assert started['phase']==phase and started['pid']==r['pid'] and started['previousHostForceStop'] is True, 'Phase launch receipt differs'
+            if phase.startswith('cold-'):
+                sample='r3-system-cold' if phase=='cold-system' else 'r3-'+phase.removeprefix('cold-')+'-cold'
+                expectation=capture_manifest()[sample]
+                assert (started['palette'],started['mode'])==(expectation['palette'],expectation['mode']), 'Cold initial preferences differ from requested combination'
             processes[phase]=r
         except (AssertionError,OSError,ValueError,KeyError) as error:
             errors.append(phase+': '+str(error))
     errors.extend(check_processes(processes,host.get('phases',{})))
+    errors.extend(check_capture_provenance(reports,processes,host['navigation_mode'],host['qa_run']))
     lookup={r['name']:r.get('metrics',{}) for r in reports}
     for p,m in STATES:
         key='r3-'+p.lower()+'-'+m.lower()

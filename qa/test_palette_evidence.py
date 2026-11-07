@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from PIL import Image, ImageDraw
-from qa.verify_palette_evidence import inspect_capture, check_processes
+from qa.verify_palette_evidence import inspect_capture, check_processes, check_capture_provenance, mix, rgb, roles, COURSE
 
 
 class PaletteEvidenceTest(unittest.TestCase):
@@ -40,9 +40,9 @@ class PaletteEvidenceTest(unittest.TestCase):
             'screenWidth':360,'screenHeight':800,'navigationTop':640,'navigationBottom':750,
             'statusBarHeight':24,'systemNavigationHeight':50,'imeVisible':False,'chromeArgb':-395777,'uiFlags':8208,
             'paletteOptions':options,'modeSelected':'LIGHT','businessHashes':{'timetable.json':'abc'},'scene':'options',
-            'density':1.0}
+            'density':1.0,'qaRun':'synthetic-run'}
         sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-        receipt = {'name':picture.stem,'phase':'matrix','captureId':'synthetic-unit-only','stable':True,'xmlStable':True,
+        receipt = {'name':picture.stem,'phase':'warm','qaRun':'synthetic-run','captureId':'synthetic-unit-only','stable':True,'xmlStable':True,
             'pixelReady':True,'expectedDark':False,'expectedPalette':'PURPLE','before':state,'after':state.copy(),
             'pngSha256':sha(picture),'xmlSha256':sha(hierarchy),'xmlBeforeSha256':sha(hierarchy)}
         picture.with_name(picture.stem+'-state.json').write_text(json.dumps(receipt))
@@ -78,7 +78,76 @@ class PaletteEvidenceTest(unittest.TestCase):
             receipt = json.loads(path.read_text()); receipt['before']['paletteOptions'].pop('TEAL'); receipt['after']['paletteOptions'].pop('TEAL')
             path.write_text(json.dumps(receipt))
             self.assertFalse(inspect_capture(picture)['passed'])
-        self.assertTrue(check_processes({'a':{'pid':22},'b':{'pid':22}}, {'a':{},'b':{}}))
+        host={k:{'force_stop':{'target_pid_after':'','test_pid_after':''},'exit_code':0,'passed':True,'stdout':'OK (1 test)'} for k in ('a','b')}
+        phases={'a':{'pid':22},'b':{'pid':23}}
+        self.assertEqual([],check_processes(phases,host))
+        phases['b']['pid']=22
+        self.assertEqual(['Cold phases reuse an actual process'],check_processes(phases,host))
+
+    def editor_fixture(self, directory, raw_colors=False):
+        root=Path(directory);options=self.fixture(directory)
+        receipt=json.loads(options.with_name(options.stem+'-state.json').read_text())
+        p=root/'r3-purple-light-editor-bottom.png'
+        image=Image.new('RGB',(360,800),(249,245,255));draw=ImageDraw.Draw(image)
+        draw.rectangle((22,674,48,690),fill=(98,86,113))
+        color_bounds={};tokens=roles('PURPLE',False)
+        for i,color in enumerate(COURSE):
+            x=20+i*40;y=450
+            color_bounds[str(i)]=[x,y,x+38,y+48]
+            color=rgb(color) if raw_colors else mix(tokens['surfaceHighest'],rgb(color),.46)
+            draw.ellipse((x+4,y+9,x+33,y+38),fill=color)
+        draw.rectangle((140,530,205,545),fill=tokens['error'])
+        receipt['name']=p.stem;receipt['phase']='warm'
+        for key in ('before','after'):
+            receipt[key].update(scene='editor-bottom',courseColorBounds=color_bounds,deleteBounds=[20,510,340,566])
+        image.save(p);p.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/></hierarchy>')
+        receipt['pngSha256']=hashlib.sha256(p.read_bytes()).hexdigest()
+        receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(p.with_suffix('.xml').read_bytes()).hexdigest()
+        p.with_name(p.stem+'-state.json').write_text(json.dumps(receipt))
+        return p
+
+    def test_valid_editor_frame_and_only_raw_color_mutation_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            valid=inspect_capture(self.editor_fixture(d))
+            self.assertTrue(valid['passed'],valid)
+            raw=inspect_capture(self.editor_fixture(d,raw_colors=True))
+            self.assertFalse(raw['passed'],raw)
+            self.assertIn('Untoned or wrong business color point',str(raw['errors']))
+
+    def test_filename_cannot_bypass_requested_editor_scene(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=self.editor_fixture(d);path=p.with_name(p.stem+'-state.json')
+            receipt=json.loads(path.read_text());receipt['before']['scene']=receipt['after']['scene']='week'
+            path.write_text(json.dumps(receipt))
+            self.assertFalse(inspect_capture(p)['passed'])
+
+    def test_cold_capture_pid_phase_and_unique_id_are_actually_bound(self):
+        states={'cold-purple-light':{'pid':130,'qaRun':'synthetic-run','businessBefore':{'timetable.json':'abc'}}}
+        row={'name':'r3-purple-light-cold','passed':True,'metrics':{'phase':'cold-purple-light','pid':130,
+             'businessHashes':{'timetable.json':'abc'},'navigationMode':'three-button','qaRun':'synthetic-run','captureId':'capture-1'}}
+        self.assertEqual([],check_capture_provenance([row],states,'three-button','synthetic-run'))
+        row['metrics']['pid']=120
+        self.assertIn('capture PID',str(check_capture_provenance([row],states,'three-button','synthetic-run')))
+        row['metrics']['pid']=130
+        row['metrics']['phase']='warm'
+        self.assertTrue(check_capture_provenance([row],states,'three-button','synthetic-run'))
+        row['metrics']['phase']='cold-purple-light'
+        self.assertIn('reused capture identity',str(check_capture_provenance([row,row],states,'three-button','synthetic-run')))
+        row['metrics']['qaRun']='previous-run'
+        self.assertIn('run identity differs',str(check_capture_provenance([row],states,'three-button','synthetic-run')))
+
+    def test_verified_stop_is_independent_of_pid_reuse_test(self):
+        host={'cold':{'force_stop':{'target_pid_after':'','test_pid_after':''},'exit_code':0,'passed':True,'stdout':'OK (1 test)'}}
+        self.assertEqual([],check_processes({'cold':{'pid':123}},host))
+        host['cold']['force_stop']['target_pid_after']='122'
+        self.assertEqual(['cold: no verified force-stop'],check_processes({'cold':{'pid':123}},host))
+
+    def test_harvest_failure_cannot_reuse_previous_run_directory(self):
+        source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()
+        self.assertIn("assert not palette_target.exists()",source)
+        self.assertIn("qa-palette-evidence/'+palette_run",source)
+        self.assertIn('collected=harvest_palettes()',source)
+        self.assertIn('if not phase_passed or not collected:',source)
 
 
 if __name__ == '__main__':

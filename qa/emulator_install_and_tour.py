@@ -75,20 +75,25 @@ theme_report=verify_product(out/'theme-product',host)
 assert theme_report['passed'],'PNG/XML/state theme gate failed: '+str(theme_report['errors'])
 # Independent palette suite: real user choices, explicit light/dark + system, host-cold processes.
 from verify_palette_evidence import PHASES as PALETTE_PHASES, verify_product as verify_palettes
+import uuid
+palette_run=str(uuid.uuid4())
+palette_target=out/'palette-product'
+assert not palette_target.exists(),'Palette harvest requires a new run-specific destination'
+palette_target.mkdir()
 
 def harvest_palettes():
-    archive=subprocess.run(['adb','shell'],input=b'run-as com.hcbiu.elcton tar -cf - -C files qa-palette-evidence\n',capture_output=True)
+    archive=subprocess.run(['adb','shell'],input=('run-as com.hcbiu.elcton tar -cf - -C files qa-palette-evidence/'+palette_run+'\n').encode(),capture_output=True)
     if archive.returncode or not archive.stdout:
         (out/'palette-harvest-error.txt').write_text(archive.stderr.decode(errors='replace'))
         return False
-    target=out/'palette-product';target.mkdir(exist_ok=True)
+    target=palette_target
     try:
         with tarfile.open(fileobj=io.BytesIO(archive.stdout),mode='r:') as captured:
             for member in captured.getmembers():
                 if not member.isfile():continue
                 relative=Path(member.name)
-                assert relative.parts[0]=='qa-palette-evidence' and '..' not in relative.parts,member.name
-                destination=target.joinpath(*relative.parts[1:]);destination.parent.mkdir(parents=True,exist_ok=True)
+                assert relative.parts[:2]==('qa-palette-evidence',palette_run) and '..' not in relative.parts,member.name
+                destination=target.joinpath(*relative.parts[2:]);destination.parent.mkdir(parents=True,exist_ok=True)
                 content=captured.extractfile(member);assert content is not None
                 destination.write_bytes(content.read())
         return True
@@ -96,7 +101,7 @@ def harvest_palettes():
         (out/'palette-harvest-error.txt').write_text(str(error))
         return False
 
-palette_host={'passed':False,'source_sha':sources[0].read_text().strip(),'navigation_mode':navigation_mode,'phases':{}}
+palette_host={'passed':False,'qa_run':palette_run,'source_sha':sources[0].read_text().strip(),'navigation_mode':navigation_mode,'phases':{}}
 for phase in PALETTE_PHASES:
     shell('am force-stop com.hcbiu.elcton');shell('am force-stop com.hcbiu.elcton.test')
     stop={'target_pid_after':shell('pidof com.hcbiu.elcton; test "$?" -le 1').strip(),'test_pid_after':shell('pidof com.hcbiu.elcton.test; test "$?" -le 1').strip()}
@@ -104,7 +109,7 @@ for phase in PALETTE_PHASES:
     if phase=='warm':shell('cmd uimode night no')
     # Keep explicit modes under the opposite real system night state.
     if phase.startswith('cold-') and phase!='cold-system':shell('cmd uimode night '+('yes' if phase.endswith('-light') else 'no'))
-    command=('am instrument -w -r -e navigation_mode '+navigation_mode+' -e palette_phase '+phase+
+    command=('am instrument -w -r -e navigation_mode '+navigation_mode+' -e palette_phase '+phase+' -e palette_run '+palette_run+
         ' -e previous_force_stop true -e class com.hcbiu.elcton.PaletteUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner')
     executed=subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,timeout=600)
     result=executed.stdout.decode(errors='replace')
@@ -112,8 +117,8 @@ for phase in PALETTE_PHASES:
     palette_host['phases'][phase]={'passed':phase_passed,'exit_code':executed.returncode,'force_stop':stop,'stdout':result,'stderr':executed.stderr.decode(errors='replace')}
     (out/f'palette-{phase}-instrumentation.txt').write_text(result+executed.stderr.decode(errors='replace'))
     (out/'palette-host.json').write_text(json.dumps(palette_host,indent=2)+'\n')
-    harvest_palettes()
-    if not phase_passed:
+    collected=harvest_palettes()
+    if not phase_passed or not collected:
         (out/'report.json').write_text(json.dumps({'passed':False,'stage':'palette-'+phase,'source_sha':palette_host['source_sha'],'instrumentation':result},indent=2))
         (out/'palette-failure-logcat.txt').write_text(shell('logcat -d -v brief'))
         raise AssertionError('Palette phase failed: '+phase+'; preserve raw output/attempts')

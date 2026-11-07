@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
         displayWeek=book.weekAt(LocalDate.now())
         probe=WearProbe(this,{ probeState=it }) { raw,revision -> prepareImport(raw,revision) }
         setContent {
-            MaterialTheme(colorScheme=darkColorScheme(primary=Color(0xFFAAA5FF),background=colorResource(R.color.phone_background),surface=Color(0xFF171C25),surfaceVariant=Color(0xFF222936),onSurface=Color(0xFFEDF0F7),onSurfaceVariant=Color(0xFFA6AFBF))) {
+            M3xTheme {
                 Product()
             }
         }

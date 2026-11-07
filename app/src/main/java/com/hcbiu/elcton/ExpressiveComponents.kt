@@ -160,12 +160,14 @@ internal fun ThemeOptions() {
                             Row(Modifier.padding(horizontal = 12.dp, vertical = 14.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                Surface(shape = CircleShape, color = preview.primary, contentColor = preview.onPrimary) {
+                                Surface(shape = CircleShape, color = preview.primary, contentColor = preview.onPrimary,
+                                    modifier = Modifier.testTag("palette-preview-${palette.name.lowercase()}")) {
                                     Box(Modifier.size(24.dp), contentAlignment = Alignment.Center) {
                                         if (selected) Text("✓", style = MaterialTheme.typography.labelMedium)
                                     }
                                 }
-                                Text(palette.label, style = MaterialTheme.typography.labelLarge)
+                                Text(palette.label, style = MaterialTheme.typography.labelLarge,
+                                    modifier = Modifier.testTag("palette-label-${palette.name.lowercase()}"))
                             }
                         }
                     }

@@ -62,6 +62,8 @@ class PaletteSourceTest(unittest.TestCase):
         self.assertIn('shape = CircleShape', components)
         palette_section = components.split('Text("配色"', 1)[1].split('/** The stored colorIndex', 1)[0]
         self.assertIn('role = Role.RadioButton', palette_section)
+        self.assertIn('palette-preview-${palette.name.lowercase()}',palette_section)
+        self.assertIn('palette-label-${palette.name.lowercase()}',palette_section)
         self.assertIn('selectableGroup()', palette_section)
         self.assertIn('containerColor: Color = M3x.SurfaceHigh', components)
         self.assertIn('contentColor: Color = M3x.OnSurface', components)

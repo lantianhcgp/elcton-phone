@@ -54,7 +54,7 @@ class PaletteUiTest {
     private fun shell(command:String) = instrumentation.uiAutomation.executeShellCommand(command).use {
         FileInputStream(it.fileDescriptor).readBytes().toString(Charsets.UTF_8).trim()
     }
-    private fun bounds(tag:String):JSONArray? = ui.onAllNodesWithTag(tag).fetchSemanticsNodes().firstOrNull()?.boundsInWindow?.let {
+    private fun bounds(tag:String, unmerged:Boolean=false):JSONArray? = ui.onAllNodesWithTag(tag,useUnmergedTree=unmerged).fetchSemanticsNodes().firstOrNull()?.boundsInWindow?.let {
         JSONArray(listOf(it.left,it.top,it.right,it.bottom))
     }
     private fun selected(tag:String):Boolean = ui.onAllNodesWithTag(tag).fetchSemanticsNodes().firstOrNull()?.config?.getOrElse(androidx.compose.ui.semantics.SemanticsProperties.Selected) { false } ?: false
@@ -68,7 +68,9 @@ class PaletteUiTest {
             put("navigationTop",nav.top);put("navigationBottom",nav.bottom)
             val options=JSONObject()
             for(p in palettes) bounds("palette-${p.lowercase()}")?.let {
-                options.put(p,JSONObject().put("bounds",it).put("selected",selected("palette-${p.lowercase()}")))
+                options.put(p,JSONObject().put("bounds",it).put("selected",selected("palette-${p.lowercase()}"))
+                    .put("previewBounds",bounds("palette-preview-${p.lowercase()}",true)?:JSONObject.NULL)
+                    .put("labelBounds",bounds("palette-label-${p.lowercase()}",true)?:JSONObject.NULL))
             }
             put("paletteOptions",options)
             val selectedModes = listOf("LIGHT","DARK","SYSTEM").filter { selected("theme-${it.lowercase()}") }
@@ -184,9 +186,14 @@ class PaletteUiTest {
     }
     private fun options(name:String) {
         settings();ui.onNodeWithTag("palette-pink").performScrollTo()
-        for(p in palettes)ui.onNodeWithTag("palette-${p.lowercase()}").assertIsDisplayed()
-            .assert(SemanticsMatcher.expectValue(androidx.compose.ui.semantics.SemanticsProperties.Role,
-                androidx.compose.ui.semantics.Role.RadioButton))
+        val labels=listOf("紫","蓝","绿","青","橙","粉")
+        for((index,p) in palettes.withIndex()) {
+            ui.onNodeWithTag("palette-${p.lowercase()}").assertIsDisplayed()
+                .assert(SemanticsMatcher.expectValue(androidx.compose.ui.semantics.SemanticsProperties.Role,
+                    androidx.compose.ui.semantics.Role.RadioButton))
+            ui.onNodeWithTag("palette-label-${p.lowercase()}",useUnmergedTree=true).assertTextEquals(labels[index])
+                .assert(hasAnyAncestor(hasTestTag("palette-${p.lowercase()}")))
+        }
         ui.onNodeWithTag("palette-${palette().lowercase()}").assertIsSelected()
         capture(name,"options")
     }

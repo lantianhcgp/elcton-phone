@@ -10,7 +10,7 @@ from qa.verify_palette_evidence import inspect_capture, check_processes, check_c
 
 
 class PaletteEvidenceTest(unittest.TestCase):
-    def fixture(self, directory, bad_container=False, wrong_palette=False, duplicate=False):
+    def fixture(self, directory, bad_container=False, wrong_palette=False, duplicate=False, checkmark=True):
         root = Path(directory)
         picture = root/'r3-purple-light-options.png'
         image = Image.new('RGB', (360, 800), (249, 245, 255) if not wrong_palette else (249, 249, 255))
@@ -23,14 +23,17 @@ class PaletteEvidenceTest(unittest.TestCase):
         for i, (name, (label, primary)) in enumerate(specs.items()):
             x, y = 20+i%3*105, 160+i//3*80
             selected = name=='PURPLE' or (duplicate and name=='BLUE')
-            options[name] = {'bounds': [x,y,x+95,y+60], 'selected': selected}
+            options[name] = {'bounds': [x,y,x+95,y+60], 'selected': selected,
+                             'previewBounds':[x+12,y+18,x+36,y+42],'labelBounds':[x+44,y+24,x+66,y+46]}
             base = (234,221,255) if selected else (240,234,247)
             draw.rectangle((x,y,x+94,y+59), fill=base)
             if selected:
                 draw.rectangle((x,y,x+94,y+1), fill=(103,80,164))
             draw.ellipse((x+12,y+18,x+35,y+41), fill='#'+primary)
+            if selected and checkmark:
+                draw.line([(x+19,y+29),(x+23,y+33),(x+29,y+24)],fill=(255,255,255),width=3)
             draw.rectangle((x+44,y+28,x+55,y+39), fill=(33,0,93))
-            xml += f'<node package="com.hcbiu.elcton" text="{label}" selected="{str(selected).lower()}" bounds="[{x},{y}][{x+95},{y+60}]"/>'
+            xml += f'<node package="com.hcbiu.elcton" text="{label}" selected="{str(selected).lower()}" bounds="[{x+44},{y+24}][{x+66},{y+46}]"/>'
         xml += '</hierarchy>'
         if bad_container:
             draw.rectangle((24,187,27,193), fill=(12,15,21))
@@ -228,6 +231,30 @@ class PaletteEvidenceTest(unittest.TestCase):
                 receipt_path.write_text(json.dumps(receipt))
                 invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
                 self.assertIn('Exactly one selected course color',str(invalid['errors']))
+
+    def test_selected_palette_missing_only_preview_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            picture=self.fixture(d);receipt_path=picture.with_name(picture.stem+'-state.json')
+            r=json.loads(receipt_path.read_text());image=Image.open(picture).convert('RGB')
+            ImageDraw.Draw(image).rectangle((31,177,57,202),fill=(234,221,255))
+            image.save(picture);r['pngSha256']=hashlib.sha256(picture.read_bytes()).hexdigest();receipt_path.write_text(json.dumps(r))
+            invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+            self.assertIn('Palette local preview',str(invalid['errors']))
+
+    def test_unselected_palette_labels_cannot_swap_with_correct_preview_and_metadata(self):
+        with tempfile.TemporaryDirectory() as d:
+            picture=self.fixture(d);receipt_path=picture.with_name(picture.stem+'-state.json')
+            r=json.loads(receipt_path.read_text());xml=picture.with_suffix('.xml')
+            text=xml.read_text().replace('text="蓝"','text="TMP"').replace('text="绿"','text="蓝"').replace('text="TMP"','text="绿"')
+            xml.write_text(text);r['xmlSha256']=r['xmlBeforeSha256']=hashlib.sha256(xml.read_bytes()).hexdigest();receipt_path.write_text(json.dumps(r))
+            invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+            self.assertIn('Chinese label not bound',str(invalid['errors']))
+
+    def test_selected_palette_checkmark_is_independently_required(self):
+        with tempfile.TemporaryDirectory() as d:
+            valid=inspect_capture(self.fixture(d));self.assertTrue(valid['passed'],valid)
+            invalid=inspect_capture(self.fixture(d,checkmark=False));self.assertFalse(invalid['passed'],invalid)
+            self.assertIn('Selected palette checkmark',str(invalid['errors']))
 
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()

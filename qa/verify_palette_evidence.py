@@ -23,6 +23,7 @@ TOKENS = {
  'ORANGE': {'light': 'FFF8F5 FFF8F5 8B4F25 FFDBC8 6F3810 F6E5DC F0DFD7 221A15 BA1A1A', 'dark': '1A120D 1A120D FFB689 6F3810 FFDBC8 312823 3D332D F0DFD7 FFB4AB'},
  'PINK': {'light': 'FFF8F8 FFF8F8 8B4A62 FFD9E3 6F334A F4E4E7 EFDFE2 22191C BA1A1A', 'dark': '191114 191114 FFB0CA 6F334A FFD9E3 31282A 3C3235 EFDFE2 FFB4AB'},
 }
+PREVIEW_ON_PRIMARY_DARK = dict(zip(PALETTES,('381E72','02315F','0F380D','003734','512300','541D34')))
 ROLE_NAMES = ('background','surface','primary','primaryContainer','onPrimaryContainer','surfaceHigh','surfaceHighest','onSurface','error')
 COURSE = ('8FA8FF','B49BFF','69C9B6','E7AD77','DD91B9','81BCD9','A7C57F','B5BCCA')
 BUSINESS_FILES = {'timetable.json','timetable-last-good.json','timetable.json.bak','timetable-last-good.json.bak'}
@@ -128,11 +129,19 @@ def inspect_capture(picture):
                 padding=max(4,round(density*5))
                 probes=[(r[0]+padding,(r[1]+r[3])//2+offset) for offset in (0,1,2)]
                 assert all(close(image.getpixel(point),base) for point in probes), 'Palette option has foreign/contrasting tonal container'
-                assert pixels(image,r,roles(p,dark)['primary'])>=20, 'Palette round preview is absent or not scheme-bound'
+                preview=box(opts[p]['previewBounds']);text_bounds=box(opts[p]['labelBounds'])
+                for b in (preview,text_bounds):
+                    assert inside(b,width,height) and r[0]<=b[0]<b[2]<=r[2]+1 and r[1]<=b[1]<b[3]<=r[3]+1, 'Palette label/preview not bound to its option'
+                assert abs(preview[2]-preview[0]-24*density)<=3 and abs(preview[3]-preview[1]-24*density)<=3, 'Preview is not the actual 24dp circle'
+                assert r[0]+round(9*density)<=preview[0] and preview[2]<=text_bounds[0], 'Preview overlaps option outline or label'
+                assert pixels(image,preview,roles(p,dark)['primary'])>=20, 'Palette local preview is absent or not scheme-bound'
                 label_nodes=[n for n in app if n.get('text')==LABELS[p]]; assert len(label_nodes)==1, 'Chinese palette label missing/duplicated'
                 label_box=box(label_nodes[0].get('bounds')); assert inside(label_box,width,height)
+                assert all(abs(x-y)<=2 for x,y in zip(label_box,text_bounds)), 'Chinese label not bound to matching palette control'
                 assert pixels(image,label_box,expected['onPrimaryContainer'] if p==palette else expected['onSurface'])>=4, 'Palette label ink not composed'
                 if p==palette:
+                    mark=rgb(PREVIEW_ON_PRIMARY_DARK[p]) if dark else (255,255,255)
+                    assert pixels(image,preview,mark)>=3, 'Selected palette checkmark not composed'
                     strip=(r[0]+r[2])//2
                     assert any(close(image.getpixel((strip,y)),expected['primary']) for y in range(r[1],r[1]+max(3,round(3*density)))), 'Selection outline not rendered'
             metrics['palette_options']=6

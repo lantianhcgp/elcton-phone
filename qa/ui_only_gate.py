@@ -76,6 +76,7 @@ def between(text, start, end):
 def callbacks(text):
     patterns = (
         r"onClick\s*=\s*(\{)",
+        r"onDismissRequest\s*=\s*(\{)",
         r"\.clickable\s*(\{)",
         r"(?:OutlinedTextField|ExpressiveField)\s*\([^,]+,\s*(\{)",
     )

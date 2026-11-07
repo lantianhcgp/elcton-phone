@@ -382,16 +382,15 @@ class MainActivity : ComponentActivity() {
                 Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
                     horizontalArrangement=Arrangement.spacedBy(12.dp)){
                     Text("学期",style=MaterialTheme.typography.headlineSmall,modifier=Modifier.weight(1f))
-                    ExpressivePill("第${book.weekAt(LocalDate.now())}周",color=M3x.Brand,contentColor=M3x.OnBrand)
+                    Button(onClick={runCatching{book.withSemester(semester)}.onSuccess{if(save(it))displayWeek=it.weekAt(LocalDate.now())}.onFailure{dateError="请输入有效日期（YYYY-MM-DD）"}},
+                        modifier=Modifier.heightIn(min=48.dp).testTag("semester-save"),shape=M3x.Pill,
+                        colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand)){
+                        Text("保存学期")
+                    }
                 }
                 Text("第一周按该日期所在的周一起算。",style=MaterialTheme.typography.bodySmall)
                 ExpressiveField(semester,{semester=it;dateError=""},Modifier.fillMaxWidth().testTag("semester-input"),label={Text("学期开始日期")},singleLine=true)
                 if(dateError.isNotEmpty())ExpressiveNotice(dateError,isError=true)
-                Button(onClick={runCatching{book.withSemester(semester)}.onSuccess{if(save(it))displayWeek=it.weekAt(LocalDate.now())}.onFailure{dateError="请输入有效日期（YYYY-MM-DD）"}},
-                    modifier=Modifier.fillMaxWidth().heightIn(min=48.dp).testTag("semester-save"),shape=M3x.Pill,
-                    colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand)){
-                    Text("保存学期")
-                }
             }
             ExpressivePanel {
                 SectionHeading("导入与备份")

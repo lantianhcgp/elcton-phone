@@ -105,6 +105,98 @@ def enabled_conditions(text):
     return collections.Counter(values)
 
 
+def syntax_mask(text):
+    """Hide literals/comments without changing offsets for balanced-call parsing."""
+    chars = list(text)
+    i = 0
+    while i < len(text):
+        start = i
+        if text.startswith("//", i):
+            end = text.find("\n", i)
+            i = len(text) if end < 0 else end
+        elif text.startswith("/*", i):
+            end = text.find("*/", i + 2)
+            assert end >= 0, "Unclosed comment"
+            i = end + 2
+        elif text.startswith('"""', i):
+            end = text.find('"""', i + 3)
+            assert end >= 0, "Unclosed raw string"
+            i = end + 3
+        elif text[i] in ('"', "'"):
+            quote = text[i]
+            i += 1
+            while i < len(text):
+                if text[i] == "\\":
+                    i += 2
+                elif text[i] == quote:
+                    i += 1
+                    break
+                else:
+                    i += 1
+        else:
+            i += 1
+            continue
+        chars[start:i] = " " * (i - start)
+    return "".join(chars)
+
+
+def control_bindings(text):
+    """Bind each action and enabled predicate to its tag/label and dialog context."""
+    mask = syntax_mask(text)
+    stack, spans = [], []
+    for i, char in enumerate(mask):
+        if char == "(":
+            stack.append(i)
+        elif char == ")":
+            assert stack, "Unbalanced Kotlin call"
+            spans.append((stack.pop(), i))
+    assert not stack, "Unbalanced Kotlin call"
+    function_starts = list(re.finditer(r"@Composable\s+private\s+fun\s+(\w+)", text))
+    targets = (r"onClick\s*=\s*(\{)", r"onDismissRequest\s*=\s*(\{)",
+               r"(?:OutlinedTextField|ExpressiveField)\s*\([^,]+,\s*(\{)")
+    bindings = []
+    for pattern in targets:
+        for match in re.finditer(pattern, text):
+            pos = match.start(1)
+            containing = sorted(((a, b) for a, b in spans if a < pos < b), key=lambda pair: pair[1] - pair[0])
+            assert containing, "Callback has no owner"
+            a, b = containing[0]
+            owner = re.search(r"(\w+)\s*$", text[:a])
+            assert owner, "Unnamed callback owner"
+            name = owner.group(1)
+            args = text[a + 1:b]
+            end = b + 1
+            while end < len(mask) and mask[end].isspace():
+                end += 1
+            content = block(text, end) if end < len(mask) and mask[end] == "{" else ""
+            tag_match = re.search(r'\.testTag\(', args)
+            tag = None
+            if tag_match:
+                tag_start = a + 1 + tag_match.end() - 1
+                tag_end = next(q for p, q in spans if p == tag_start)
+                tag = normalized(text[tag_start + 1:tag_end])
+            labels = re.findall(r'Text\(("(?:\\.|[^"\\])*")', content)
+            if name in ("OutlinedTextField", "ExpressiveField"):
+                labels = re.findall(r'label\s*=\s*\{\s*Text\(("(?:\\.|[^"\\])*")', args)
+            if name == "AlertDialog":
+                tag = None
+                labels = re.findall(r'title\s*=\s*\{\s*Text\(("(?:\\.|[^"\\])*")', args)
+            identity = ("tag:" + tag) if tag else ("label:" + "|".join(labels))
+            assert tag or labels, "Control has no stable semantic identity: " + name
+            dialogs = []
+            for outer_a, outer_b in reversed(containing[1:]):
+                outer_name = re.search(r"(\w+)\s*$", text[:outer_a])
+                if outer_name and outer_name.group(1) == "AlertDialog":
+                    title = re.search(r'title\s*=\s*\{\s*Text\(("(?:\\.|[^"\\])*")', text[outer_a:outer_b])
+                    assert title, "Dialog has no title"
+                    dialogs.append(title.group(1))
+            function = next((m.group(1) for m in reversed(function_starts) if m.start() < pos), "")
+            role = "dismiss" if "onDismissRequest" in pattern else "input" if "TextField" in pattern else "click"
+            enabled = enabled_conditions(args)
+            bindings.append((function, tuple(dialogs), identity, role, normalized(block(text, pos)), tuple(sorted(enabled.items()))))
+    return collections.Counter(bindings)
+
+
 def activity_checks(old, new):
     errors = []
     protected = (
@@ -129,6 +221,11 @@ def activity_checks(old, new):
         errors.append("Action/value-change callback drift")
     if enabled_conditions(old) != enabled_conditions(new):
         errors.append("Enabled-state condition drift")
+    try:
+        if control_bindings(old) != control_bindings(new):
+            errors.append("Control/callback/enabled binding drift")
+    except (AssertionError, AttributeError) as error:
+        errors.append("Control binding parse failed: " + str(error))
     tags = r'\.testTag\(("(?:\\.|[^"\\])*")\)'
     if collections.Counter(re.findall(tags, old)) != collections.Counter(re.findall(tags, new)):
         errors.append("Product testTag drift")
@@ -173,6 +270,13 @@ def main():
         ):
             assert before in new, label
             negative[label] = bool(activity_checks(old, new.replace(before, after, 1)))
+        first, second = "{probe.authorizeAndScan()}", "{probe.cancel()}"
+        assert new.count(first) == new.count(second) == 1
+        swapped = new.replace(first, "CALLBACK_SWAP_SENTINEL").replace(second, first).replace("CALLBACK_SWAP_SENTINEL", second)
+        negative["callback ownership swap"] = "Control/callback/enabled binding drift" in activity_checks(old, swapped)
+        first, second = "enabled=!probeState.busy", "enabled=probeState.ready&&!probeState.busy"
+        enabled_swap = new.replace(first, "ENABLED_SWAP_SENTINEL", 1).replace(second, first, 1).replace("ENABLED_SWAP_SENTINEL", second)
+        negative["enabled ownership swap"] = "Control/callback/enabled binding drift" in activity_checks(old, enabled_swap)
         negative["non-UI file whitelist"] = "app/src/main/java/com/hcbiu/elcton/WearProbe.kt" not in ALLOWED
         assert all(negative.values()), ("Guard self-test failed", negative)
     report = {"passed": not errors, "base": BASE, "head": git("rev-parse", "HEAD"),

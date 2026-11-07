@@ -95,18 +95,37 @@ class MainActivity : ComponentActivity() {
         Scaffold(
             containerColor=MaterialTheme.colorScheme.background,
             topBar={ Surface(color=MaterialTheme.colorScheme.background) {
-                Row(Modifier.fillMaxWidth().padding(horizontal=20.dp,vertical=16.dp),horizontalArrangement=Arrangement.SpaceBetween) {
-                    Column { Text(if(editing)"编辑课程" else titles[tab],style=MaterialTheme.typography.headlineSmall);Text("hc课程表",style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant) }
-                    Text("第${book.weekAt(LocalDate.now())}周",style=MaterialTheme.typography.labelLarge,color=MaterialTheme.colorScheme.primary,modifier=Modifier.padding(top=8.dp))
+                Row(Modifier.fillMaxWidth().padding(horizontal=20.dp,vertical=16.dp),
+                    verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                    horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+                    Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(8.dp)) {
+                        Row(verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                            horizontalArrangement=Arrangement.spacedBy(7.dp)) {
+                            Box(Modifier.size(8.dp).background(M3x.Accent,CircleShape))
+                            Text("hc课程表",style=MaterialTheme.typography.labelMedium,color=M3x.Track)
+                        }
+                        Text(if(editing)"编辑课程" else titles[tab],style=MaterialTheme.typography.headlineMedium)
+                    }
+                    ExpressivePill("第${book.weekAt(LocalDate.now())}周",
+                        color=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)
                 }
             }},
             bottomBar={ NavigationBar(containerColor=MaterialTheme.colorScheme.background,tonalElevation=0.dp) {
                 listOf("今日","课表","设备","设置").forEachIndexed { index,label ->
                     NavigationBarItem(selected=tab==index,modifier=Modifier.testTag(listOf("nav-today","nav-week","nav-devices","nav-settings")[index]),
-                        onClick={tab=index;editing=false;editingCourse=null},icon={TabGlyph(index,tab==index)},label={Text(label)})
+                        colors=NavigationBarItemDefaults.colors(selectedIconColor=M3x.OnPrimaryContainer,
+                            selectedTextColor=M3x.Track,indicatorColor=M3x.PrimaryContainer,
+                            unselectedIconColor=M3x.OnSurfaceVariant,unselectedTextColor=M3x.OnSurfaceVariant),
+                        onClick={tab=index;editing=false;editingCourse=null},icon={TabGlyph(index,tab==index)},
+                        label={Text(label,style=MaterialTheme.typography.labelMedium)})
                 }
             }},
-            floatingActionButton={if(!editing&&tab<=1&&loadError==null)FloatingActionButton(onClick={editingCourse=null;editing=true},modifier=Modifier.testTag("add-course"),containerColor=MaterialTheme.colorScheme.primary) { Text("＋",style=MaterialTheme.typography.headlineMedium) }}
+            floatingActionButton={if(!editing&&tab<=1&&loadError==null)FloatingActionButton(
+                onClick={editingCourse=null;editing=true},modifier=Modifier.size(64.dp).testTag("add-course"),
+                shape=M3x.Panel,containerColor=M3x.PrimaryContainer,contentColor=M3x.OnPrimaryContainer,
+                elevation=FloatingActionButtonDefaults.elevation(defaultElevation=0.dp,pressedElevation=2.dp)) {
+                Text("＋",style=MaterialTheme.typography.headlineLarge)
+            }}
         ){padding->
             Box(Modifier.fillMaxSize().padding(padding)) {
                 if(editing)CourseEditor(editingCourse)
@@ -138,8 +157,8 @@ class MainActivity : ComponentActivity() {
         if(diagnostics)AlertDialog(onDismissRequest={diagnostics=false},title={Text("连接诊断")},text={SelectionContainer{Text(probeState.diagnostic.ifEmpty{"暂无错误记录"},style=MaterialTheme.typography.bodySmall,fontFamily=FontFamily.Monospace)}},confirmButton={TextButton(onClick={diagnostics=false}){Text("关闭")}})
     }
     @Composable private fun TabGlyph(index:Int,selected:Boolean) {
-        val color=if(selected)MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
-        val background=MaterialTheme.colorScheme.background
+        val color=if(selected)M3x.OnPrimaryContainer else M3x.OnSurfaceVariant
+        val background=if(selected)M3x.PrimaryContainer else MaterialTheme.colorScheme.background
         Canvas(Modifier.size(22.dp)) {
             val unit=size.width/10;val stroke=unit*.65f
             when(index){
@@ -153,42 +172,111 @@ class MainActivity : ComponentActivity() {
 
     @Composable private fun NoticeBlock() {
         val text=loadError?:notice
-        if(text.isNotEmpty())Text(text,color=if(loadError!=null)MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,style=MaterialTheme.typography.bodySmall,modifier=Modifier.fillMaxWidth().padding(bottom=8.dp))
+        if(text.isNotEmpty())ExpressiveNotice(text,isError=loadError!=null,modifier=Modifier.padding(bottom=8.dp))
     }
     @Composable private fun Today() {
         val now=LocalDate.now();val week=book.weekAt(now);val list=book.forDay(now.dayOfWeek.value,week)
-        LazyColumn(Modifier.fillMaxSize(),contentPadding=PaddingValues(20.dp,0.dp,20.dp,100.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
-            item{NoticeBlock();Text("${now.monthValue}月${now.dayOfMonth}日 · ${dayLabel(now.dayOfWeek.value)}",style=MaterialTheme.typography.titleMedium)}
+        LazyColumn(Modifier.fillMaxSize(),contentPadding=PaddingValues(20.dp,0.dp,20.dp,100.dp),verticalArrangement=Arrangement.spacedBy(14.dp)) {
+            item{
+                NoticeBlock()
+                ExpressivePanel(color=M3x.PrimaryContainer,contentColor=M3x.OnPrimaryContainer) {
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                        horizontalArrangement=Arrangement.spacedBy(16.dp)) {
+                        Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)) {
+                            Text("${now.monthValue}月${now.dayOfMonth}日",style=MaterialTheme.typography.displaySmall)
+                            Text(dayLabel(now.dayOfWeek.value),style=MaterialTheme.typography.titleMedium)
+                        }
+                        Surface(shape=M3x.Field,color=M3x.Track) {
+                            CalendarArtwork(Modifier.padding(10.dp))
+                        }
+                    }
+                    Row(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                        ExpressivePill("第${week}周",color=M3x.Brand,contentColor=M3x.OnBrand)
+                        ExpressivePill("${list.size} 门课程",color=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)
+                    }
+                }
+            }
             if(list.isEmpty())item{EmptyMessage("今天没有课程","在手机添加课程，或在设置导入已有课表。")}
             items(list,key={it.id}){course->CourseCard(course)}
         }
     }
     @Composable private fun Week() {
         Column(Modifier.fillMaxSize()) {
-            Column(Modifier.padding(horizontal=20.dp)){NoticeBlock()
-                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){TextButton(onClick={displayWeek=maxOf(1,displayWeek-1)}){Text("上一周")};Text("第${displayWeek}周 · ${if(displayWeek%2==1)"单周" else "双周"}",modifier=Modifier.padding(top=12.dp));TextButton(onClick={displayWeek++}){Text("下一周")}}
-                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(3.dp)){for(day in 1..7){Surface(color=if(selectedDay==day)MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,shape=RoundedCornerShape(12.dp),modifier=Modifier.weight(1f).height(42.dp).testTag("week-day-$day").clickable{selectedDay=day}){Box(contentAlignment=androidx.compose.ui.Alignment.Center){Text(dayLabel(day).takeLast(1),color=if(selectedDay==day)Color(0xFF17203A) else MaterialTheme.colorScheme.onSurface)}}}}
+            Column(Modifier.padding(horizontal=20.dp)){
+                NoticeBlock()
+                ExpressivePanel(color=M3x.Surface,contentColor=M3x.OnSurface) {
+                    Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                        horizontalArrangement=Arrangement.spacedBy(4.dp)) {
+                        TextButton(onClick={displayWeek=maxOf(1,displayWeek-1)},contentPadding=PaddingValues(6.dp)){
+                            Text("上一周",style=MaterialTheme.typography.labelMedium)
+                        }
+                        Box(Modifier.weight(1f),contentAlignment=androidx.compose.ui.Alignment.Center) {
+                            ExpressivePill("第${displayWeek}周 · ${if(displayWeek%2==1)"单周" else "双周"}",
+                                color=M3x.PrimaryContainer,contentColor=M3x.OnPrimaryContainer)
+                        }
+                        TextButton(onClick={displayWeek++},contentPadding=PaddingValues(6.dp)){
+                            Text("下一周",style=MaterialTheme.typography.labelMedium)
+                        }
+                    }
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(4.dp)){
+                        for(day in 1..7){
+                            Surface(color=if(selectedDay==day)M3x.PrimaryContainer else M3x.SurfaceHigh,
+                                shape=if(selectedDay==day)M3x.Pill else M3x.Field,
+                                modifier=Modifier.weight(1f).heightIn(min=48.dp).testTag("week-day-$day").clickable{selectedDay=day}){
+                                Box(Modifier.padding(vertical=14.dp),contentAlignment=androidx.compose.ui.Alignment.Center){
+                                    Text(dayLabel(day).takeLast(1),style=MaterialTheme.typography.labelLarge,
+                                        color=if(selectedDay==day)M3x.OnPrimaryContainer else M3x.OnSurfaceVariant)
+                                }
+                            }
+                        }
+                    }
+                }
                 Spacer(Modifier.height(16.dp))
             }
             val list=book.forDay(selectedDay,displayWeek)
-            LazyColumn(Modifier.fillMaxSize(),contentPadding=PaddingValues(20.dp,0.dp,20.dp,100.dp),verticalArrangement=Arrangement.spacedBy(12.dp)){
+            LazyColumn(Modifier.fillMaxSize(),contentPadding=PaddingValues(20.dp,0.dp,20.dp,100.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){
                 if(list.isEmpty())item{EmptyMessage("这天没有课程","切换星期或添加新课程。")}
                 items(list,key={it.id}){CourseCard(it)}
             }
         }
     }
-    @Composable private fun EmptyMessage(title:String,body:String){Column(Modifier.fillMaxWidth().padding(vertical=32.dp),verticalArrangement=Arrangement.spacedBy(12.dp)){Text(title,style=MaterialTheme.typography.titleLarge);Text(body,style=MaterialTheme.typography.bodyMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)}}
-    @Composable private fun CourseCard(c:Course) {
-        Surface(color=MaterialTheme.colorScheme.surface,shape=RoundedCornerShape(18.dp),modifier=Modifier.fillMaxWidth().clickable{editingCourse=c;editing=true}){
-            Row(Modifier.padding(16.dp),horizontalArrangement=Arrangement.spacedBy(14.dp)){
-                Box(Modifier.width(4.dp).height(72.dp).background(colors[c.colorIndex],RoundedCornerShape(2.dp)))
-                Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)){
-                    Text(c.name,style=MaterialTheme.typography.titleMedium,maxLines=2,overflow=TextOverflow.Ellipsis)
-                    Text("${c.startTime}—${c.endTime} · ${c.startPeriod}—${c.endPeriod}节",style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant)
-                    val place=listOf(c.teacher,c.location).filter{it.isNotEmpty()}.joinToString(" · ")
-                    if(place.isNotEmpty())Text(place,style=MaterialTheme.typography.bodySmall,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1,overflow=TextOverflow.Ellipsis)
+    @Composable private fun EmptyMessage(title:String,body:String){
+        ExpressivePanel(color=M3x.Surface,contentColor=M3x.OnSurface) {
+            Row(verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                horizontalArrangement=Arrangement.spacedBy(16.dp)) {
+                Surface(color=M3x.TertiaryContainer,shape=M3x.Field) {
+                    CalendarArtwork(Modifier.padding(6.dp))
                 }
-                Text(when(c.weekType){"odd"->"单周";"even"->"双周";else->"每周"},style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.primary)
+                Text(title,style=MaterialTheme.typography.titleLarge,modifier=Modifier.weight(1f))
+            }
+            Text(body,style=MaterialTheme.typography.bodyMedium,color=M3x.OnSurfaceVariant)
+        }
+    }
+    @Composable private fun CourseCard(c:Course) {
+        Surface(color=M3x.Surface,shape=M3x.Panel,modifier=Modifier.fillMaxWidth().clickable{editingCourse=c;editing=true}){
+            Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){
+                Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.Top,
+                    horizontalArrangement=Arrangement.spacedBy(12.dp)){
+                    Surface(color=colors[c.colorIndex],contentColor=M3x.OnTertiaryContainer,shape=M3x.Field) {
+                        Column(Modifier.padding(horizontal=12.dp,vertical=10.dp),verticalArrangement=Arrangement.spacedBy(3.dp)) {
+                            Text(c.startTime,style=MaterialTheme.typography.titleSmall)
+                            Text(c.endTime,style=MaterialTheme.typography.labelSmall)
+                        }
+                    }
+                    Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(8.dp)){
+                        Text(c.name,style=MaterialTheme.typography.titleMedium,maxLines=2,overflow=TextOverflow.Ellipsis)
+                        val place=listOf(c.teacher,c.location).filter{it.isNotEmpty()}.joinToString(" · ")
+                        if(place.isNotEmpty())Text(place,style=MaterialTheme.typography.bodySmall,color=M3x.OnSurfaceVariant,
+                            maxLines=1,overflow=TextOverflow.Ellipsis)
+                    }
+                }
+                Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                    horizontalArrangement=Arrangement.spacedBy(8.dp)){
+                    Text("${c.startTime}—${c.endTime} · ${c.startPeriod}—${c.endPeriod}节",
+                        style=MaterialTheme.typography.bodySmall,color=M3x.OnSurfaceVariant,modifier=Modifier.weight(1f))
+                    ExpressivePill(when(c.weekType){"odd"->"单周";"even"->"双周";else->"每周"},
+                        color=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)
+                }
             }
         }
     }
@@ -203,25 +291,83 @@ class MainActivity : ComponentActivity() {
         var error by remember(key){mutableStateOf("")};var delete by remember(key){mutableStateOf(false)};var overlap by remember(key){mutableStateOf<Course?>(null)}
         fun commit(c:Course){runCatching{book.put(c)}.onSuccess{if(save(it)){editing=false;editingCourse=null}}.onFailure{error=UserFacingError.validation(it.message)}}
         Column(Modifier.fillMaxSize()){
-            Row(Modifier.fillMaxWidth().padding(horizontal=12.dp),horizontalArrangement=Arrangement.SpaceBetween){TextButton(onClick={editing=false}){Text("返回")};Button(onClick={
+            Row(Modifier.fillMaxWidth().padding(horizontal=20.dp,vertical=4.dp),
+                verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
+                horizontalArrangement=Arrangement.SpaceBetween){
+                TextButton(onClick={editing=false}){Text("返回")}
+                Button(onClick={
                 if(name.isBlank()){error="请输入课程名称";return@Button}
                 val a=first.toIntOrNull();val b=last.toIntOrNull();if(a==null||b==null){error="请填写有效节次";return@Button}
                 val c=Course(id,name.trim(),location.trim(),teacher.trim(),day,a,b,from.trim(),to.trim(),week,color)
                 runCatching{book.put(c)}.onFailure{error=UserFacingError.validation(it.message)}.onSuccess{if(book.overlaps(c).isNotEmpty())overlap=c else commit(c)}
-            },modifier=Modifier.testTag("course-save")){Text("保存")}}
-            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){
-                if(error.isNotEmpty())Text(error,color=MaterialTheme.colorScheme.error)
-                OutlinedTextField(name,{name=it;error=""},Modifier.fillMaxWidth().testTag("course-name"),label={Text("课程名称")},singleLine=true)
-                Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){OutlinedTextField(teacher,{teacher=it},Modifier.weight(1f).testTag("course-teacher"),label={Text("教师")},singleLine=true);OutlinedTextField(location,{location=it},Modifier.weight(1f).testTag("course-location"),label={Text("地点")},singleLine=true)}
-                Text("上课星期",style=MaterialTheme.typography.labelLarge)
-                Row(horizontalArrangement=Arrangement.spacedBy(3.dp)){for(d in 1..7){Surface(color=if(day==d)MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,shape=RoundedCornerShape(12.dp),modifier=Modifier.weight(1f).height(40.dp).testTag("course-day-$d").clickable{day=d}){Box(contentAlignment=androidx.compose.ui.Alignment.Center){Text(dayLabel(d).takeLast(1),color=if(day==d)Color(0xFF17203A) else MaterialTheme.colorScheme.onSurface)}}}}
-                Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){OutlinedTextField(first,{first=it},Modifier.weight(1f).testTag("course-first"),label={Text("开始节次")},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Number));OutlinedTextField(last,{last=it},Modifier.weight(1f).testTag("course-last"),label={Text("结束节次")},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Number))}
-                Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){OutlinedTextField(from,{from=it},Modifier.weight(1f).testTag("course-start"),label={Text("开始时间")},singleLine=true);OutlinedTextField(to,{to=it},Modifier.weight(1f).testTag("course-end"),label={Text("结束时间")},singleLine=true)}
-                Text("周次规则",style=MaterialTheme.typography.labelLarge)
-                Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){listOf("all" to "每周","odd" to "单周","even" to "双周").forEach{(value,label)->FilterChip(selected=week==value,onClick={week=value},label={Text(label)},modifier=Modifier.testTag("course-week-$value"))}}
-                Text("课程颜色",style=MaterialTheme.typography.labelLarge)
-                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){colors.forEachIndexed{i,c->Box(Modifier.size(30.dp).background(c,CircleShape).clickable{color=i}.testTag("course-color-$i"),contentAlignment=androidx.compose.ui.Alignment.Center){if(color==i)Text("✓",color=Color(0xFF10131B))}}}
-                if(existing!=null)OutlinedButton(onClick={delete=true},modifier=Modifier.fillMaxWidth().testTag("course-delete")){Text("删除课程",color=MaterialTheme.colorScheme.error)}
+                },modifier=Modifier.heightIn(min=48.dp).testTag("course-save"),shape=M3x.Pill,
+                    contentPadding=PaddingValues(horizontal=28.dp,vertical=12.dp),
+                    colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand)){
+                    Text("保存")
+                }
+            }
+            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(16.dp)){
+                if(error.isNotEmpty())ExpressiveNotice(error,isError=true)
+                ExpressivePanel {
+                    SectionHeading("课程信息")
+                    ExpressiveField(name,{name=it;error=""},Modifier.fillMaxWidth().testTag("course-name"),label={Text("课程名称")},singleLine=true)
+                    Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){
+                        ExpressiveField(teacher,{teacher=it},Modifier.weight(1f).testTag("course-teacher"),label={Text("教师")},singleLine=true)
+                        ExpressiveField(location,{location=it},Modifier.weight(1f).testTag("course-location"),label={Text("地点")},singleLine=true)
+                    }
+                }
+                ExpressivePanel {
+                    SectionHeading("上课安排")
+                    Text("上课星期",style=MaterialTheme.typography.labelLarge,color=M3x.Track)
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(4.dp)){
+                        for(d in 1..7){
+                            Surface(color=if(day==d)M3x.PrimaryContainer else M3x.SurfaceHigh,
+                                shape=if(day==d)M3x.Pill else M3x.Field,
+                                modifier=Modifier.weight(1f).heightIn(min=48.dp).testTag("course-day-$d").clickable{day=d}){
+                                Box(Modifier.padding(vertical=14.dp),contentAlignment=androidx.compose.ui.Alignment.Center){
+                                    Text(dayLabel(d).takeLast(1),style=MaterialTheme.typography.labelLarge,
+                                        color=if(day==d)M3x.OnPrimaryContainer else M3x.OnSurfaceVariant)
+                                }
+                            }
+                        }
+                    }
+                    Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){
+                        ExpressiveField(first,{first=it},Modifier.weight(1f).testTag("course-first"),label={Text("开始节次")},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Number))
+                        ExpressiveField(last,{last=it},Modifier.weight(1f).testTag("course-last"),label={Text("结束节次")},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Number))
+                    }
+                    Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){
+                        ExpressiveField(from,{from=it},Modifier.weight(1f).testTag("course-start"),label={Text("开始时间")},singleLine=true)
+                        ExpressiveField(to,{to=it},Modifier.weight(1f).testTag("course-end"),label={Text("结束时间")},singleLine=true)
+                    }
+                }
+                ExpressivePanel {
+                    Text("周次规则",style=MaterialTheme.typography.titleMedium)
+                    Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
+                        listOf("all" to "每周","odd" to "单周","even" to "双周").forEach{(value,label)->
+                            FilterChip(selected=week==value,onClick={week=value},label={Text(label)},
+                                shape=M3x.Pill,border=null,
+                                colors=FilterChipDefaults.filterChipColors(containerColor=M3x.SurfaceHigh,labelColor=M3x.OnSurfaceVariant,
+                                    selectedContainerColor=M3x.PrimaryContainer,selectedLabelColor=M3x.OnPrimaryContainer),
+                                modifier=Modifier.heightIn(min=48.dp).testTag("course-week-$value"))
+                        }
+                    }
+                    Text("课程颜色",style=MaterialTheme.typography.labelLarge,color=M3x.Track)
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
+                        colors.forEachIndexed{i,c->
+                            Box(Modifier.weight(1f).height(48.dp).clickable{color=i}.testTag("course-color-$i"),
+                                contentAlignment=androidx.compose.ui.Alignment.Center){
+                                Box(Modifier.size(if(color==i)32.dp else 26.dp).background(c,CircleShape),
+                                    contentAlignment=androidx.compose.ui.Alignment.Center){
+                                    if(color==i)Text("✓",color=Color(0xFF10131B),style=MaterialTheme.typography.labelLarge)
+                                }
+                            }
+                        }
+                    }
+                }
+                if(existing!=null)FilledTonalButton(onClick={delete=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("course-delete"),
+                    shape=M3x.Pill,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.ErrorContainer,contentColor=M3x.OnErrorContainer)){
+                    Text("删除课程")
+                }
                 Spacer(Modifier.height(24.dp))
             }
         }

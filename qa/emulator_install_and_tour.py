@@ -25,6 +25,57 @@ active_overlays=shell('cmd overlay list')
 assert '[x] '+overlay in active_overlays,'Navigation overlay not enabled: '+active_overlays
 (out/'environment.json').write_text(json.dumps({'navigation_mode':navigation_mode,'overlay':overlay,'sdk':shell('getprop ro.build.version.sdk').strip(),'overlays':active_overlays},indent=2))
 shell('pm clear com.hcbiu.elcton');shell('svc power stayon true');shell('settings put system screen_off_timeout 2147483647');shell('input keyevent KEYCODE_WAKEUP');shell('wm dismiss-keyguard')
+def harvest_theme():
+    archive=subprocess.run(['adb','shell'],input=b'run-as com.hcbiu.elcton tar -cf - -C files qa-theme-evidence\n',capture_output=True)
+    if archive.returncode or not archive.stdout:
+        (out/'theme-harvest-error.txt').write_text(archive.stderr.decode(errors='replace'))
+        return False
+    target=out/'theme-product';target.mkdir(exist_ok=True)
+    try:
+        with tarfile.open(fileobj=io.BytesIO(archive.stdout),mode='r:') as captured:
+            for member in captured.getmembers():
+                if not member.isfile():continue
+                relative=Path(member.name)
+                assert relative.parts[0]=='qa-theme-evidence' and '..' not in relative.parts,member.name
+                destination=target.joinpath(*relative.parts[1:])
+                destination.parent.mkdir(parents=True,exist_ok=True)
+                contents=captured.extractfile(member);assert contents is not None
+                destination.write_bytes(contents.read())
+        return True
+    except (tarfile.TarError,AssertionError) as error:
+        (out/'theme-harvest-error.txt').write_text(str(error))
+        return False
+
+# New theme suite uses real UI selections; frozen legacy dark assertions remain untouched.
+from verify_theme_evidence import PHASES,verify_product
+host={'passed':False,'source_sha':sources[0].read_text().strip(),'navigation_mode':navigation_mode,'phases':{}}
+shell('cmd uimode night no')
+for phase in PHASES:
+    shell('am force-stop com.hcbiu.elcton');shell('am force-stop com.hcbiu.elcton.test')
+    stop={'target_pid_after':shell('pidof com.hcbiu.elcton; test "$?" -le 1').strip(),'test_pid_after':shell('pidof com.hcbiu.elcton.test; test "$?" -le 1').strip()}
+    assert stop['target_pid_after']=='' and stop['test_pid_after']=='','Theme phase did not get a fresh process'
+    if phase=='cold-system-dark':shell('cmd uimode night yes')
+    command=('am instrument -w -r -e navigation_mode '+navigation_mode+' -e theme_phase '+phase+
+        ' -e previous_force_stop true -e class com.hcbiu.elcton.ThemeUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner')
+    executed=subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,timeout=420)
+    result=executed.stdout.decode(errors='replace')
+    phase_passed=executed.returncode==0 and bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and 'INSTRUMENTATION_FAILED' not in result
+    host['phases'][phase]={'passed':phase_passed,'exit_code':executed.returncode,'force_stop':stop,'stdout':result,'stderr':executed.stderr.decode(errors='replace')}
+    (out/f'theme-{phase}-instrumentation.txt').write_text(result+executed.stderr.decode(errors='replace'))
+    (out/'theme-host.json').write_text(json.dumps(host,indent=2)+'\n')
+    harvest_theme()
+    if not phase_passed:
+        (out/'report.json').write_text(json.dumps({'passed':False,'stage':'theme-'+phase,'source_sha':host['source_sha'],'instrumentation':result},indent=2))
+        (out/'theme-failure-logcat.txt').write_text(shell('logcat -d -v brief'))
+        raise AssertionError('Theme UI phase failed: '+phase+'; see raw instrumentation and capture attempts')
+host['passed']=True
+(out/'theme-host.json').write_text(json.dumps(host,indent=2)+'\n')
+theme_report=verify_product(out/'theme-product',host)
+(out/'theme-report.json').write_text(json.dumps(theme_report,indent=2)+'\n')
+assert theme_report['passed'],'PNG/XML/state theme gate failed: '+str(theme_report['errors'])
+# LAST phase really selects DARK through UI. Only emulator night mode is reset for legacy IME pixels.
+shell('am force-stop com.hcbiu.elcton');shell('cmd uimode night no')
+assert 'name="mode">DARK<' in shell('run-as com.hcbiu.elcton cat shared_prefs/ui-theme.xml'),'Legacy test requires an actual stored dark selection'
 command='am instrument -w -r -e navigation_mode '+navigation_mode+' -e class com.hcbiu.elcton.ProductUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner'
 # Preserve a live host-side log even if the emulator/ADB dies during instrumentation.
 with (out/'logcat-live.txt').open('wb') as log:
@@ -83,6 +134,6 @@ pixel_run=subprocess.run([sys.executable,'qa/verify_system_bars.py','--product',
 (out/'system-bar-pixels.log').write_text(pixel_run.stdout+pixel_run.stderr)
 pixels=json.loads((out/'system-bar-pixels.json').read_text()) if (out/'system-bar-pixels.json').is_file() else {'passed':False}
 passed=pixel_run.returncode==0 and pixels.get('passed') is True
-(out/'report.json').write_text(json.dumps({'passed':passed,'scope':'product UI/real APK in Android emulator; no physical paired watch','source_sha':sources[0].read_text().strip(),'shots':shots,'hierarchies':hierarchies,'keyboard_pixel_checks':ime_checks,'system_bar_pixels':pixels,'instrumentation':result},indent=2))
+(out/'report.json').write_text(json.dumps({'passed':passed,'scope':'product UI/real APK in Android emulator; no physical paired watch','source_sha':sources[0].read_text().strip(),'shots':shots,'hierarchies':hierarchies,'keyboard_pixel_checks':ime_checks,'system_bar_pixels':pixels,'theme_ui':theme_report,'instrumentation':result},indent=2))
 print(json.dumps({'passed':passed,'screenshots':len(shots),'pixel_scenes':pixels.get('scenes',0)}))
 assert passed,'System bar pixels failed; see system-bar-pixels.json and .log'

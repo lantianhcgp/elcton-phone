@@ -14,7 +14,12 @@ from pathlib import Path
 BASE = "519f0d5450f77ce4ba757a644b2144607b0a5c06"
 ACTIVITY = "app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
 ALLOWED = {ACTIVITY, "app/src/main/java/com/hcbiu/elcton/M3xTheme.kt",
-           "app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt", "qa/ui_only_gate.py"}
+           "app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt", "qa/ui_only_gate.py",
+           "app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt",
+           "qa/test_theme_source.py", "qa/test_theme_evidence.py", "qa/verify_theme_evidence.py",
+           "qa/emulator_install_and_tour.py"}
+UI_HELPERS = {"app/src/main/java/com/hcbiu/elcton/M3xTheme.kt",
+              "app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt"}
 
 
 def git(*args):
@@ -240,6 +245,28 @@ def activity_checks(old, new):
     return errors
 
 
+def theme_checks(source):
+    """A narrow exception for the user-requested presentation-only preference."""
+    errors = []
+    forbidden = r"\b(?:ScheduleStore|WearProbe|TransferSession|PacketIngress|PhoneSnapshot|ScheduleBook|LaunchedEffect|DisposableEffect|rememberCoroutineScope|File|HttpClient|URL)\b"
+    if re.search(forbidden, syntax_mask(source)):
+        errors.append("Theme helper touches business/data/network or asynchronous effects")
+    reads = re.findall(r'getSharedPreferences\s*\(([^)]*)\)', source)
+    if reads != ['"ui-theme", Context.MODE_PRIVATE']:
+        errors.append("Theme preferences must use only the isolated ui-theme namespace")
+    writes = re.findall(r'put\w+\s*\(([^)]*)\)', source)
+    if writes != ['"mode", mode.name'] or re.search(r'\.(?:clear|remove|commit)\s*\(', source):
+        errors.append("Theme preferences may only apply the mode enum")
+    if re.findall(r'getString\s*\(([^)]*)\)', source) != ['"mode", ThemeMode.LIGHT.name']:
+        errors.append("Theme preferences must have the literal LIGHT fallback")
+    if source.count('mutableStateOf(') != 1:
+        errors.append("Only one presentation theme state is permitted")
+    if not all(token in source for token in ('ThemeMode.LIGHT -> false', 'ThemeMode.DARK -> true',
+                                              'ThemeMode.SYSTEM -> isSystemInDarkTheme()')):
+        errors.append("Theme mode resolution does not match the three-way contract")
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--self-test", action="store_true")
@@ -257,8 +284,13 @@ def main():
                   if not p.startswith("qa/__pycache__/") and p not in ALLOWED)
     staged = set(git("diff", "--cached", "--name-only").splitlines())
     errors.extend("Forbidden staged file: " + p for p in sorted(staged - ALLOWED))
-    for p in sorted(ALLOWED - {ACTIVITY, "qa/ui_only_gate.py"}):
-        if Path(p).exists() and re.search(r"\b(?:ScheduleStore|WearProbe|TransferSession|PacketIngress|PhoneSnapshot)\b|mutableStateOf|LaunchedEffect", Path(p).read_text()):
+    for p in sorted(UI_HELPERS):
+        if not Path(p).exists():
+            continue
+        helper = Path(p).read_text()
+        if p.endswith("/M3xTheme.kt"):
+            errors.extend(theme_checks(helper))
+        elif re.search(r"\b(?:ScheduleStore|WearProbe|TransferSession|PacketIngress|PhoneSnapshot)\b|mutableStateOf|LaunchedEffect", helper):
             errors.append("New UI helper depends on business/state side effects: " + p)
     negative = {}
     if args.self_test:

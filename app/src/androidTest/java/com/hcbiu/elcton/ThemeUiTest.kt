@@ -133,8 +133,13 @@ class ThemeUiTest {
             if (needsIme) {
                 if (!state.getBoolean("imeVisible") || state.isNull("imeBounds")) return false
                 val ime = state.getJSONArray("imeBounds")
-                val top = ime.getInt(1).coerceAtLeast(0); val bottom = ime.getInt(3).coerceAtMost(bitmap.height)
-                if (bottom - top < bitmap.height * .14 || top < navBottom - 12) return false
+                // Gboard's accessibility union includes a drop shadow above its actual window.
+                // Keep raw bounds in the receipt; validate content using the independent IME inset.
+                val insetTop = bitmap.height - state.getInt("imeBottom")
+                if (insetTop < navBottom - 12 || ime.getInt(1) > insetTop + 12) return false
+                val top = maxOf(ime.getInt(1), insetTop).coerceAtLeast(0)
+                val bottom = minOf(ime.getInt(3), bitmap.height - state.getInt("systemNavigationHeight"))
+                if (bottom - top < bitmap.height * .14) return false
                 if (state.isNull("dateErrorBounds")) return false
                 val error = state.getJSONArray("dateErrorBounds")
                 if (error.getDouble(1) < state.getInt("statusBarHeight") || error.getDouble(3) >= state.getDouble("navigationTop")) return false

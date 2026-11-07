@@ -54,6 +54,18 @@ class ThemeEvidenceTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             self.assertFalse(inspect_capture(self.fixture(d, mismatched=True))['passed'])
 
+    def test_keyboard_shadow_above_inset_is_ignored_but_raw_evidence_is_retained(self):
+        from verify_theme_evidence import keyboard_content_bounds
+        state = dict(imeBounds=[0,392,300,570], imeBottom=200, navigationBottom=380, systemNavigationHeight=30)
+        self.assertEqual((0, 400, 300, 570), keyboard_content_bounds(state, 300, 600))
+        self.assertEqual([0, 392, 300, 570], state['imeBounds'])
+
+    def test_actual_keyboard_inset_overlapping_navigation_fails(self):
+        from verify_theme_evidence import keyboard_content_bounds
+        state = dict(imeBounds=[0,360,300,570], imeBottom=240, navigationBottom=380, systemNavigationHeight=30)
+        with self.assertRaisesRegex(AssertionError, 'overlaps'):
+            keyboard_content_bounds(state, 300, 600)
+
     def test_visible_keyboard_error_and_bound_png_xml_are_accepted(self):
         with tempfile.TemporaryDirectory() as d:
             result = inspect_capture(self.fixture(d))

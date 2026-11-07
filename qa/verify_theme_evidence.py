@@ -52,6 +52,17 @@ def count_ink(image, rect, dark, step=1):
     return count
 
 
+def keyboard_content_bounds(state, width, height):
+    raw = box(state['imeBounds'])
+    assert inside(raw, width, height), 'Input method outside screenshot window'
+    inset_top = height - int(state['imeBottom'])
+    assert inset_top >= state['navigationBottom']-12, 'Actual keyboard inset overlaps app navigation'
+    assert raw[1] <= inset_top+12, 'IME hierarchy is below the active keyboard inset'
+    effective = (raw[0], max(raw[1], inset_top), raw[2], min(raw[3], height-int(state['systemNavigationHeight'])))
+    assert inside(effective, width, height) and effective[3]-effective[1] > height*.14, 'Keyboard content is empty or too small'
+    return effective
+
+
 def inspect_capture(picture):
     picture = Path(picture)
     result = {'name': picture.stem, 'passed': False, 'errors': []}
@@ -98,9 +109,7 @@ def inspect_capture(picture):
                    'system_dark': state['systemDark'], 'pid': state['pid'], 'capture_id': receipt['captureId']}
         if receipt['requiresIme']:
             assert state['imeVisible'] is True and state['imeBottom'] > height*.14, 'Actual IME inset missing'
-            ime = box(state['imeBounds'])
-            assert inside(ime, width, height), 'Input method outside screenshot window'
-            assert ime[1] >= nav_bottom-12 and ime[3]-ime[1] > height*.14, 'IME not below visible app navigation'
+            ime = keyboard_content_bounds(state, width, height)
             ime_nodes = [n for n in nodes if n.get('package') == state['imePackage']]
             assert ime_nodes, 'Actual input-method hierarchy missing'
             rendered_boxes = [box(n.get('bounds')) for n in ime_nodes if n.get('bounds')]
@@ -119,7 +128,7 @@ def inspect_capture(picture):
             assert all(abs(a-b) <= 8 for a, b in zip(xml_error, error)), 'Date XML and state bounds disagree'
             error_ink = count_ink(image, error, dark)
             assert error_ink >= 12, 'Date error text not rendered in PNG'
-            metrics.update({'ime_bounds': list(ime), 'keyboard_bright_fraction': bright,
+            metrics.update({'ime_bounds': list(ime), 'raw_ime_bounds': state['imeBounds'], 'keyboard_bright_fraction': bright,
                             'keyboard_ink_pixels': keyboard_ink, 'date_error_bounds': list(error), 'error_ink_pixels': error_ink})
         else:
             assert state['imeVisible'] is False, 'Unexpected IME in theme screenshot'

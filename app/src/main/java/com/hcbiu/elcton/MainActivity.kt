@@ -9,6 +9,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -257,7 +259,7 @@ class MainActivity : ComponentActivity() {
             Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){
                 Row(Modifier.fillMaxWidth(),verticalAlignment=androidx.compose.ui.Alignment.Top,
                     horizontalArrangement=Arrangement.spacedBy(12.dp)){
-                    Surface(color=colors[c.colorIndex],contentColor=M3x.OnTertiaryContainer,shape=M3x.Field) {
+                    Surface(color=tonalCourseColor(colors[c.colorIndex]),contentColor=M3x.OnSurface,shape=M3x.Field) {
                         Column(Modifier.padding(horizontal=12.dp,vertical=10.dp),verticalArrangement=Arrangement.spacedBy(3.dp)) {
                             Text(c.startTime,style=MaterialTheme.typography.titleSmall)
                             Text(c.endTime,style=MaterialTheme.typography.labelSmall)
@@ -356,22 +358,24 @@ class MainActivity : ComponentActivity() {
                         colors.forEachIndexed{i,c->
                             Box(Modifier.weight(1f).height(48.dp).clickable{color=i}.testTag("course-color-$i"),
                                 contentAlignment=androidx.compose.ui.Alignment.Center){
-                                Box(Modifier.size(if(color==i)32.dp else 26.dp).background(c,CircleShape),
+                                Box(Modifier.size(30.dp).background(tonalCourseColor(c),CircleShape)
+                                    .border(2.dp,if(color==i)M3x.Ink else Color.Transparent,CircleShape),
                                     contentAlignment=androidx.compose.ui.Alignment.Center){
-                                    if(color==i)Text("✓",color=Color(0xFF10131B),style=MaterialTheme.typography.labelLarge)
+                                    if(color==i)Text("✓",color=M3x.OnSurface,style=MaterialTheme.typography.labelLarge)
                                 }
                             }
                         }
                     }
                 }
-                if(existing!=null)FilledTonalButton(onClick={delete=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("course-delete"),
-                    shape=M3x.Pill,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.ErrorContainer,contentColor=M3x.OnErrorContainer)){
+                if(existing!=null)OutlinedButton(onClick={delete=true},modifier=Modifier.padding(top=8.dp).fillMaxWidth().heightIn(min=52.dp).testTag("course-delete"),
+                    shape=M3x.Pill,border=BorderStroke(1.dp,MaterialTheme.colorScheme.error.copy(alpha=.45f)),
+                    colors=ButtonDefaults.outlinedButtonColors(containerColor=Color.Transparent,contentColor=MaterialTheme.colorScheme.error)){
                     Text("删除课程")
                 }
                 Spacer(Modifier.height(24.dp))
             }
         }
-        if(delete)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={delete=false},title={Text("删除这门课程？")},text={Text("只修改手机课表，之后主动同步才会更新手表。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={if(save(book.remove(id))){editing=false;delete=false}},modifier=Modifier.testTag("delete-confirm")){Text("删除")}},dismissButton={TextButton(onClick={delete=false}){Text("取消")}})
+        if(delete)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={delete=false},title={Text("删除这门课程？")},text={Text("只修改手机课表，之后主动同步才会更新手表。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=MaterialTheme.colorScheme.error,contentColor=MaterialTheme.colorScheme.onError),onClick={if(save(book.remove(id))){editing=false;delete=false}},modifier=Modifier.testTag("delete-confirm")){Text("删除")}},dismissButton={TextButton(onClick={delete=false}){Text("取消")}})
         if(overlap!=null)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={overlap=null},title={Text("上课时间重叠")},text={Text("与已有课程存在同星期、同周次的时间重叠。不会自动删除任何课程，是否仍保存？")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={val c=overlap!!;overlap=null;commit(c)}){Text("仍然保存")}},dismissButton={TextButton(onClick={overlap=null}){Text("返回修改")}})
     }
     @Composable private fun Settings(){
@@ -389,7 +393,9 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 if(dateError.isNotEmpty())ExpressiveNotice(dateError,isError=true)
-                ExpressiveField(semester,{semester=it;dateError=""},Modifier.fillMaxWidth().testTag("semester-input"),label={Text("学期开始日期")},singleLine=true)
+                ExpressiveField(semester,{semester=it;dateError=""},Modifier.fillMaxWidth().testTag("semester-input"),label={Text("学期开始日期")},singleLine=true,
+                    containerColor=M3x.NestedPrimaryContainer,contentColor=M3x.OnPrimaryContainer,
+                    labelColor=M3x.OnPrimaryContainer.copy(alpha=.78f))
                 Text("第一周按该日期所在的周一起算。",style=MaterialTheme.typography.bodySmall)
             }
             ThemeOptions()

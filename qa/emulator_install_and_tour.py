@@ -73,7 +73,56 @@ host['passed']=True
 theme_report=verify_product(out/'theme-product',host)
 (out/'theme-report.json').write_text(json.dumps(theme_report,indent=2)+'\n')
 assert theme_report['passed'],'PNG/XML/state theme gate failed: '+str(theme_report['errors'])
-# LAST phase really selects DARK through UI. Only emulator night mode is reset for legacy IME pixels.
+# Independent palette suite: real user choices, explicit light/dark + system, host-cold processes.
+from verify_palette_evidence import PHASES as PALETTE_PHASES, verify_product as verify_palettes
+
+def harvest_palettes():
+    archive=subprocess.run(['adb','shell'],input=b'run-as com.hcbiu.elcton tar -cf - -C files qa-palette-evidence\n',capture_output=True)
+    if archive.returncode or not archive.stdout:
+        (out/'palette-harvest-error.txt').write_text(archive.stderr.decode(errors='replace'))
+        return False
+    target=out/'palette-product';target.mkdir(exist_ok=True)
+    try:
+        with tarfile.open(fileobj=io.BytesIO(archive.stdout),mode='r:') as captured:
+            for member in captured.getmembers():
+                if not member.isfile():continue
+                relative=Path(member.name)
+                assert relative.parts[0]=='qa-palette-evidence' and '..' not in relative.parts,member.name
+                destination=target.joinpath(*relative.parts[1:]);destination.parent.mkdir(parents=True,exist_ok=True)
+                content=captured.extractfile(member);assert content is not None
+                destination.write_bytes(content.read())
+        return True
+    except (tarfile.TarError,AssertionError) as error:
+        (out/'palette-harvest-error.txt').write_text(str(error))
+        return False
+
+palette_host={'passed':False,'source_sha':sources[0].read_text().strip(),'navigation_mode':navigation_mode,'phases':{}}
+for phase in PALETTE_PHASES:
+    shell('am force-stop com.hcbiu.elcton');shell('am force-stop com.hcbiu.elcton.test')
+    stop={'target_pid_after':shell('pidof com.hcbiu.elcton; test "$?" -le 1').strip(),'test_pid_after':shell('pidof com.hcbiu.elcton.test; test "$?" -le 1').strip()}
+    assert stop['target_pid_after']==stop['test_pid_after']=='','Palette process not cold'
+    if phase=='warm':shell('cmd uimode night no')
+    # Keep explicit modes under the opposite real system night state.
+    if phase.startswith('cold-') and phase!='cold-system':shell('cmd uimode night '+('yes' if phase.endswith('-light') else 'no'))
+    command=('am instrument -w -r -e navigation_mode '+navigation_mode+' -e palette_phase '+phase+
+        ' -e previous_force_stop true -e class com.hcbiu.elcton.PaletteUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner')
+    executed=subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,timeout=600)
+    result=executed.stdout.decode(errors='replace')
+    phase_passed=executed.returncode==0 and bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and 'INSTRUMENTATION_FAILED' not in result
+    palette_host['phases'][phase]={'passed':phase_passed,'exit_code':executed.returncode,'force_stop':stop,'stdout':result,'stderr':executed.stderr.decode(errors='replace')}
+    (out/f'palette-{phase}-instrumentation.txt').write_text(result+executed.stderr.decode(errors='replace'))
+    (out/'palette-host.json').write_text(json.dumps(palette_host,indent=2)+'\n')
+    harvest_palettes()
+    if not phase_passed:
+        (out/'report.json').write_text(json.dumps({'passed':False,'stage':'palette-'+phase,'source_sha':palette_host['source_sha'],'instrumentation':result},indent=2))
+        (out/'palette-failure-logcat.txt').write_text(shell('logcat -d -v brief'))
+        raise AssertionError('Palette phase failed: '+phase+'; preserve raw output/attempts')
+palette_host['passed']=True
+(out/'palette-host.json').write_text(json.dumps(palette_host,indent=2)+'\n')
+palette_report=verify_palettes(out/'palette-product',palette_host)
+(out/'palette-report.json').write_text(json.dumps(palette_report,indent=2)+'\n')
+assert palette_report['passed'],'Independent palette pixel/cold gate failed: '+str(palette_report['errors'])
+# Both added suites really end in PURPLE+DARK through UI; legacy tests remain frozen.
 shell('am force-stop com.hcbiu.elcton');shell('cmd uimode night no')
 assert 'name="mode">DARK<' in shell('run-as com.hcbiu.elcton cat shared_prefs/ui-theme.xml'),'Legacy test requires an actual stored dark selection'
 command='am instrument -w -r -e navigation_mode '+navigation_mode+' -e class com.hcbiu.elcton.ProductUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner'
@@ -134,6 +183,6 @@ pixel_run=subprocess.run([sys.executable,'qa/verify_system_bars.py','--product',
 (out/'system-bar-pixels.log').write_text(pixel_run.stdout+pixel_run.stderr)
 pixels=json.loads((out/'system-bar-pixels.json').read_text()) if (out/'system-bar-pixels.json').is_file() else {'passed':False}
 passed=pixel_run.returncode==0 and pixels.get('passed') is True
-(out/'report.json').write_text(json.dumps({'passed':passed,'scope':'product UI/real APK in Android emulator; no physical paired watch','source_sha':sources[0].read_text().strip(),'shots':shots,'hierarchies':hierarchies,'keyboard_pixel_checks':ime_checks,'system_bar_pixels':pixels,'theme_ui':theme_report,'instrumentation':result},indent=2))
+(out/'report.json').write_text(json.dumps({'passed':passed,'scope':'product UI/real APK in Android emulator; no physical paired watch','source_sha':sources[0].read_text().strip(),'shots':shots,'hierarchies':hierarchies,'keyboard_pixel_checks':ime_checks,'system_bar_pixels':pixels,'theme_ui':theme_report,'palette_ui':palette_report,'instrumentation':result},indent=2))
 print(json.dumps({'passed':passed,'screenshots':len(shots),'pixel_scenes':pixels.get('scenes',0)}))
 assert passed,'System bar pixels failed; see system-bar-pixels.json and .log'

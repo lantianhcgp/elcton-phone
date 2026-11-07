@@ -17,7 +17,9 @@ ALLOWED = {ACTIVITY, "app/src/main/java/com/hcbiu/elcton/M3xTheme.kt",
            "app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt", "qa/ui_only_gate.py",
            "app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt",
            "qa/test_theme_source.py", "qa/test_theme_evidence.py", "qa/verify_theme_evidence.py",
-           "qa/emulator_install_and_tour.py"}
+           "qa/emulator_install_and_tour.py", "qa/test_palette_source.py",
+           "app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt",
+           "qa/verify_palette_evidence.py", "qa/test_palette_evidence.py"}
 UI_HELPERS = {"app/src/main/java/com/hcbiu/elcton/M3xTheme.kt",
               "app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt"}
 
@@ -255,15 +257,25 @@ def theme_checks(source):
     if reads != ['"ui-theme", Context.MODE_PRIVATE']:
         errors.append("Theme preferences must use only the isolated ui-theme namespace")
     writes = re.findall(r'put\w+\s*\(([^)]*)\)', source)
-    if writes != ['"mode", mode.name'] or re.search(r'\.(?:clear|remove|commit)\s*\(', source):
-        errors.append("Theme preferences may only apply the mode enum")
-    if re.findall(r'getString\s*\(([^)]*)\)', source) != ['"mode", ThemeMode.LIGHT.name']:
-        errors.append("Theme preferences must have the literal LIGHT fallback")
-    if source.count('mutableStateOf(') != 1:
-        errors.append("Only one presentation theme state is permitted")
+    if writes != ['"mode", mode.name', '"palette", palette.name'] or re.search(r'\.(?:clear|remove|commit)\s*\(', source):
+        errors.append("Theme preferences may only apply the mode and palette enums to their own keys")
+    if re.findall(r'getString\s*\(([^)]*)\)', source) != ['"mode", ThemeMode.LIGHT.name', '"palette", ThemePalette.PURPLE.name']:
+        errors.append("Theme preferences must have the literal LIGHT and PURPLE fallbacks")
+    if source.count('mutableStateOf(') != 2:
+        errors.append("Only the two orthogonal presentation theme states are permitted")
     if not all(token in source for token in ('ThemeMode.LIGHT -> false', 'ThemeMode.DARK -> true',
                                               'ThemeMode.SYSTEM -> isSystemInDarkTheme()')):
         errors.append("Theme mode resolution does not match the three-way contract")
+    for signature, expected in (
+        ('fun select(mode: ThemeMode)', normalized('{ this.mode = mode\n preferences.edit().putString("mode", mode.name).apply() }')),
+        ('fun selectPalette(palette: ThemePalette)', normalized('{ this.palette = palette\n preferences.edit().putString("palette", palette.name).apply() }')),
+    ):
+        try:
+            opening = source.index('{', source.index(signature))
+            if normalized(block(source, opening)) != expected:
+                errors.append('Presentation selection has unexpected state/write effects: '+signature)
+        except (AssertionError, ValueError):
+            errors.append('Presentation selection missing or unparseable: '+signature)
     return errors
 
 

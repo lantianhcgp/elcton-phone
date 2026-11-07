@@ -1,6 +1,10 @@
 package com.hcbiu.elcton
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.selection.selectable
@@ -15,6 +19,8 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
@@ -54,7 +60,10 @@ internal fun ExpressiveField(
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
     singleLine: Boolean = false,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    containerColor: Color = M3x.SurfaceHigh,
+    contentColor: Color = M3x.OnSurface,
+    labelColor: Color = M3x.OnSurfaceVariant
 ) {
     TextField(
         value = value,
@@ -65,16 +74,16 @@ internal fun ExpressiveField(
         keyboardOptions = keyboardOptions,
         shape = M3x.Field,
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = M3x.SurfaceHigh,
-            unfocusedContainerColor = M3x.SurfaceHigh,
-            focusedTextColor = M3x.OnSurface,
-            unfocusedTextColor = M3x.OnSurface,
-            focusedLabelColor = M3x.Ink,
-            unfocusedLabelColor = M3x.OnSurfaceVariant,
+            focusedContainerColor = containerColor,
+            unfocusedContainerColor = containerColor,
+            focusedTextColor = contentColor,
+            unfocusedTextColor = contentColor,
+            focusedLabelColor = contentColor,
+            unfocusedLabelColor = labelColor,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-            cursorColor = M3x.Ink
+            cursorColor = contentColor
         )
     )
 }
@@ -125,8 +134,54 @@ internal fun ThemeOptions() {
             ThemeMode.DARK -> "暗色主题，选中后立即生效。"
             ThemeMode.SYSTEM -> "主题随系统的深浅色设置自动切换。"
         }, style = MaterialTheme.typography.bodySmall, color = M3x.OnSurfaceVariant)
+        Text("配色", style = MaterialTheme.typography.labelLarge, color = M3x.Ink)
+        val dark = when (preference.mode) {
+            ThemeMode.LIGHT -> false
+            ThemeMode.DARK -> true
+            ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        }
+        Column(Modifier.fillMaxWidth().selectableGroup(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            ThemePalette.values().toList().chunked(3).forEach { row ->
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    row.forEach { palette ->
+                        val selected = preference.palette == palette
+                        val preview = expressiveColorScheme(palette, dark)
+                        Surface(
+                            color = if (selected) M3x.PrimaryContainer else M3x.SurfaceHigh,
+                            contentColor = if (selected) M3x.OnPrimaryContainer else M3x.OnSurface,
+                            shape = M3x.Field,
+                            border = BorderStroke(if (selected) 2.dp else 1.dp,
+                                if (selected) M3x.Ink else MaterialTheme.colorScheme.outlineVariant.copy(alpha = .35f)),
+                            modifier = Modifier.weight(1f).heightIn(min = 60.dp)
+                                .testTag("palette-${palette.name.lowercase()}")
+                                .selectable(selected = selected, role = Role.RadioButton,
+                                    onClick = { preference.selectPalette(palette) })
+                        ) {
+                            Row(Modifier.padding(horizontal = 12.dp, vertical = 14.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                Surface(shape = CircleShape, color = preview.primary, contentColor = preview.onPrimary) {
+                                    Box(Modifier.size(24.dp), contentAlignment = Alignment.Center) {
+                                        if (selected) Text("✓", style = MaterialTheme.typography.labelMedium)
+                                    }
+                                }
+                                Text(palette.label, style = MaterialTheme.typography.labelLarge)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Text("配色与主题独立，选中后立即生效并自动保存。",
+            style = MaterialTheme.typography.bodySmall, color = M3x.OnSurfaceVariant)
     }
 }
+
+/** The stored colorIndex stays untouched; presentation only mixes business hues into tonal surfaces. */
+@Composable
+internal fun tonalCourseColor(color: Color): Color =
+    color.copy(alpha = if (MaterialTheme.colorScheme.background.luminance() < .5f) .30f else .46f)
+        .compositeOver(MaterialTheme.colorScheme.surfaceContainerHighest)
 
 /** Decorative calendar; no fabricated course, progress, or connection state. */
 @Composable

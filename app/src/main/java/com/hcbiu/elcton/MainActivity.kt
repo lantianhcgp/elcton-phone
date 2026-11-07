@@ -389,8 +389,8 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 if(dateError.isNotEmpty())ExpressiveNotice(dateError,isError=true)
-                else Text("第一周按该日期所在的周一起算。",style=MaterialTheme.typography.bodySmall)
                 ExpressiveField(semester,{semester=it;dateError=""},Modifier.fillMaxWidth().testTag("semester-input"),label={Text("学期开始日期")},singleLine=true)
+                Text("第一周按该日期所在的周一起算。",style=MaterialTheme.typography.bodySmall)
             }
             ExpressivePanel {
                 SectionHeading("导入与备份")

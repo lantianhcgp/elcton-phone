@@ -101,6 +101,36 @@ def harvest_palettes():
         (out/'palette-harvest-error.txt').write_text(str(error))
         return False
 
+def execute_palette_phase(phase,command,stop):
+    timeout_error=None
+    try:
+        executed=subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,timeout=600)
+        stdout,stderr,exit_code=executed.stdout,executed.stderr,executed.returncode
+    except subprocess.TimeoutExpired as error:
+        timeout_error=error
+        stdout,stderr,exit_code=error.stdout or b'',error.stderr or b'',None
+    # Preserve the exact wire bytes as well as readable output before any fallible harvest/logcat.
+    (out/f'palette-{phase}-stdout.bin').write_bytes(stdout)
+    (out/f'palette-{phase}-stderr.bin').write_bytes(stderr)
+    result=stdout.decode(errors='replace');errors=stderr.decode(errors='replace')
+    phase_passed=timeout_error is None and exit_code==0 and bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and 'INSTRUMENTATION_FAILED' not in result
+    palette_host['phases'][phase]={'passed':phase_passed,'exit_code':exit_code,'timed_out':timeout_error is not None,'force_stop':stop,'stdout':result,'stderr':errors}
+    (out/f'palette-{phase}-instrumentation.txt').write_text(result+errors)
+    (out/'palette-host.json').write_text(json.dumps(palette_host,indent=2)+'\n')
+    if not phase_passed:
+        (out/'report.json').write_text(json.dumps({'passed':False,'stage':'palette-'+phase,'source_sha':palette_host['source_sha'],'instrumentation':result,'stderr':errors,'timed_out':timeout_error is not None},indent=2))
+    try:
+        collected=harvest_palettes()
+    except Exception as error:
+        collected=False
+        (out/'palette-harvest-error.txt').write_text(type(error).__name__+': '+str(error))
+    if not phase_passed or not collected:
+        (out/'report.json').write_text(json.dumps({'passed':False,'stage':'palette-'+phase,'source_sha':palette_host['source_sha'],'instrumentation':result,'stderr':errors,'timed_out':timeout_error is not None,'harvested':collected},indent=2))
+        try: (out/'palette-failure-logcat.txt').write_text(shell('logcat -d -v brief'))
+        except Exception as error: (out/'palette-logcat-error.txt').write_text(type(error).__name__+': '+str(error))
+        if timeout_error is not None: raise timeout_error
+        raise AssertionError('Palette phase failed: '+phase+'; preserve raw output/attempts')
+
 palette_host={'passed':False,'qa_run':palette_run,'source_sha':sources[0].read_text().strip(),'navigation_mode':navigation_mode,'phases':{}}
 for phase in PALETTE_PHASES:
     shell('am force-stop com.hcbiu.elcton');shell('am force-stop com.hcbiu.elcton.test')
@@ -111,17 +141,7 @@ for phase in PALETTE_PHASES:
     if phase.startswith('cold-') and phase!='cold-system':shell('cmd uimode night '+('yes' if phase.endswith('-light') else 'no'))
     command=('am instrument -w -r -e navigation_mode '+navigation_mode+' -e palette_phase '+phase+' -e palette_run '+palette_run+
         ' -e previous_force_stop true -e class com.hcbiu.elcton.PaletteUiTest com.hcbiu.elcton.test/androidx.test.runner.AndroidJUnitRunner')
-    executed=subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,timeout=600)
-    result=executed.stdout.decode(errors='replace')
-    phase_passed=executed.returncode==0 and bool(re.search(r'OK \(1 test\)',result)) and 'FAILURES' not in result and 'INSTRUMENTATION_FAILED' not in result
-    palette_host['phases'][phase]={'passed':phase_passed,'exit_code':executed.returncode,'force_stop':stop,'stdout':result,'stderr':executed.stderr.decode(errors='replace')}
-    (out/f'palette-{phase}-instrumentation.txt').write_text(result+executed.stderr.decode(errors='replace'))
-    (out/'palette-host.json').write_text(json.dumps(palette_host,indent=2)+'\n')
-    collected=harvest_palettes()
-    if not phase_passed or not collected:
-        (out/'report.json').write_text(json.dumps({'passed':False,'stage':'palette-'+phase,'source_sha':palette_host['source_sha'],'instrumentation':result},indent=2))
-        (out/'palette-failure-logcat.txt').write_text(shell('logcat -d -v brief'))
-        raise AssertionError('Palette phase failed: '+phase+'; preserve raw output/attempts')
+    execute_palette_phase(phase,command,stop)
 palette_host['passed']=True
 (out/'palette-host.json').write_text(json.dumps(palette_host,indent=2)+'\n')
 palette_report=verify_palettes(out/'palette-product',palette_host)

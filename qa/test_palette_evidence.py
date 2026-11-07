@@ -256,6 +256,35 @@ class PaletteEvidenceTest(unittest.TestCase):
             invalid=inspect_capture(self.fixture(d,checkmark=False));self.assertFalse(invalid['passed'],invalid)
             self.assertIn('Selected palette checkmark',str(invalid['errors']))
 
+    def test_palette_timeout_preserves_partial_output_and_attempts(self):
+        import ast
+        import subprocess
+        from unittest.mock import patch
+        tree=ast.parse(Path(__file__).with_name('emulator_install_and_tour.py').read_text())
+        helper=next((n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='execute_palette_phase'),None)
+        self.assertIsNotNone(helper,'Palette timeout execution helper absent')
+        assert helper is not None
+        calls=[]
+        with tempfile.TemporaryDirectory() as d:
+            out=Path(d)
+            timeout=subprocess.TimeoutExpired(['adb','shell'],600,output=b'partial instrument\x00\xff',stderr=b'partial stderr\xff')
+            def harvest():
+                calls.append('harvest');(out/'attempt.bin').write_bytes(b'preserved attempt');return True
+            def shell(command):
+                calls.append(command);return 'real mock logcat'
+            host={'passed':False,'source_sha':'c'*40,'phases':{}}
+            scope={'subprocess':subprocess,'re':__import__('re'),'json':json,'out':out,'palette_host':host,'harvest_palettes':harvest,'shell':shell}
+            exec(compile(ast.Module(body=[helper],type_ignores=[]),'actual-palette-helper','exec'),scope)
+            with patch.object(subprocess,'run',side_effect=timeout):
+                with self.assertRaises(subprocess.TimeoutExpired):scope['execute_palette_phase']('warm','instrument command',{'target_pid_after':'','test_pid_after':''})
+            self.assertEqual((out/'palette-warm-stdout.bin').read_bytes(),timeout.output)
+            self.assertEqual((out/'palette-warm-stderr.bin').read_bytes(),timeout.stderr)
+            self.assertEqual((out/'attempt.bin').read_bytes(),b'preserved attempt')
+            self.assertEqual(calls,['harvest','logcat -d -v brief'])
+            saved=json.loads((out/'palette-host.json').read_text());self.assertFalse(saved['phases']['warm']['passed']);self.assertTrue(saved['phases']['warm']['timed_out'])
+            self.assertFalse(json.loads((out/'report.json').read_text())['passed'])
+            self.assertEqual((out/'palette-failure-logcat.txt').read_text(),'real mock logcat')
+
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()
         self.assertIn("assert not palette_target.exists()",source)

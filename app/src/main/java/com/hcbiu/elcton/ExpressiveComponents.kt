@@ -3,10 +3,14 @@ package com.hcbiu.elcton
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -34,7 +38,7 @@ internal fun ExpressivePill(
     label: String,
     modifier: Modifier = Modifier,
     color: Color = M3x.SurfaceHigh,
-    contentColor: Color = M3x.Track
+    contentColor: Color = M3x.Ink
 ) {
     Surface(modifier = modifier, shape = M3x.Pill, color = color, contentColor = contentColor) {
         Text(label, style = MaterialTheme.typography.labelMedium,
@@ -65,12 +69,12 @@ internal fun ExpressiveField(
             unfocusedContainerColor = M3x.SurfaceHigh,
             focusedTextColor = M3x.OnSurface,
             unfocusedTextColor = M3x.OnSurface,
-            focusedLabelColor = M3x.Track,
+            focusedLabelColor = M3x.Ink,
             unfocusedLabelColor = M3x.OnSurfaceVariant,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-            cursorColor = M3x.Track
+            cursorColor = M3x.Ink
         )
     )
 }
@@ -85,9 +89,42 @@ internal fun ExpressiveNotice(text: String, isError: Boolean, modifier: Modifier
         Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(if (isError) "!" else "•", style = MaterialTheme.typography.titleMedium,
-                color = if (isError) M3x.OnErrorContainer else M3x.Track)
+                color = if (isError) M3x.OnErrorContainer else M3x.Ink)
             Text(text, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
         }
+    }
+}
+
+/** Theme is independent of semester editing and all import/export actions. */
+@Composable
+internal fun ThemeOptions() {
+    val preference = LocalThemePreference.current
+    ExpressivePanel(modifier = Modifier.testTag("theme-options")) {
+        SectionHeading("外观", "主题")
+        Row(Modifier.fillMaxWidth().selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            ThemeMode.values().forEach { mode ->
+                val selected = preference.mode == mode
+                Surface(
+                    color = if (selected) M3x.PrimaryContainer else M3x.SurfaceHigh,
+                    contentColor = if (selected) M3x.OnPrimaryContainer else M3x.OnSurfaceVariant,
+                    shape = M3x.Field,
+                    modifier = Modifier.weight(1f).heightIn(min = 84.dp)
+                        .testTag("theme-${mode.name.lowercase()}")
+                        .selectable(selected = selected, role = Role.RadioButton, onClick = { preference.select(mode) })
+                ) {
+                    Column(Modifier.padding(horizontal = 6.dp, vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(if (selected) "✓" else "○", style = MaterialTheme.typography.titleMedium)
+                        Text(mode.label, style = MaterialTheme.typography.labelMedium)
+                    }
+                }
+            }
+        }
+        Text(when (preference.mode) {
+            ThemeMode.LIGHT -> "亮色为默认主题，选中后立即生效。"
+            ThemeMode.DARK -> "暗色主题，选中后立即生效。"
+            ThemeMode.SYSTEM -> "主题随系统的深浅色设置自动切换。"
+        }, style = MaterialTheme.typography.bodySmall, color = M3x.OnSurfaceVariant)
     }
 }
 

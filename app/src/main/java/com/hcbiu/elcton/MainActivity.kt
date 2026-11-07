@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                         Row(verticalAlignment=androidx.compose.ui.Alignment.CenterVertically,
                             horizontalArrangement=Arrangement.spacedBy(7.dp)) {
                             Box(Modifier.size(8.dp).background(M3x.Accent,CircleShape))
-                            Text("hc课程表",style=MaterialTheme.typography.labelMedium,color=M3x.Track)
+                            Text("hc课程表",style=MaterialTheme.typography.labelMedium,color=M3x.Ink)
                         }
                         Text(if(editing)"编辑课程" else titles[tab],style=MaterialTheme.typography.headlineMedium)
                     }
@@ -114,7 +114,7 @@ class MainActivity : ComponentActivity() {
                 listOf("今日","课表","设备","设置").forEachIndexed { index,label ->
                     NavigationBarItem(selected=tab==index,modifier=Modifier.testTag(listOf("nav-today","nav-week","nav-devices","nav-settings")[index]),
                         colors=NavigationBarItemDefaults.colors(selectedIconColor=M3x.OnPrimaryContainer,
-                            selectedTextColor=M3x.Track,indicatorColor=M3x.PrimaryContainer,
+                            selectedTextColor=M3x.Ink,indicatorColor=M3x.PrimaryContainer,
                             unselectedIconColor=M3x.OnSurfaceVariant,unselectedTextColor=M3x.OnSurfaceVariant),
                         onClick={tab=index;editing=false;editingCourse=null},icon={TabGlyph(index,tab==index)},
                         label={Text(label,style=MaterialTheme.typography.labelMedium)})
@@ -318,7 +318,7 @@ class MainActivity : ComponentActivity() {
                 }
                 ExpressivePanel {
                     SectionHeading("上课安排")
-                    Text("上课星期",style=MaterialTheme.typography.labelLarge,color=M3x.Track)
+                    Text("上课星期",style=MaterialTheme.typography.labelLarge,color=M3x.Ink)
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(4.dp)){
                         for(d in 1..7){
                             Surface(color=if(day==d)M3x.PrimaryContainer else M3x.SurfaceHigh,
@@ -351,7 +351,7 @@ class MainActivity : ComponentActivity() {
                                 modifier=Modifier.heightIn(min=48.dp).testTag("course-week-$value"))
                         }
                     }
-                    Text("课程颜色",style=MaterialTheme.typography.labelLarge,color=M3x.Track)
+                    Text("课程颜色",style=MaterialTheme.typography.labelLarge,color=M3x.Ink)
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
                         colors.forEachIndexed{i,c->
                             Box(Modifier.weight(1f).height(48.dp).clickable{color=i}.testTag("course-color-$i"),
@@ -392,17 +392,18 @@ class MainActivity : ComponentActivity() {
                 ExpressiveField(semester,{semester=it;dateError=""},Modifier.fillMaxWidth().testTag("semester-input"),label={Text("学期开始日期")},singleLine=true)
                 Text("第一周按该日期所在的周一起算。",style=MaterialTheme.typography.bodySmall)
             }
+            ThemeOptions()
             ExpressivePanel {
                 SectionHeading("导入与备份")
                 Column(verticalArrangement=Arrangement.spacedBy(8.dp)) {
                     FilledTonalButton(onClick={showImport=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("import-paste"),
                         shape=M3x.Field,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.SurfaceHigh,contentColor=M3x.OnSurface)){
-                        Text("粘贴 JSON 导入",modifier=Modifier.weight(1f));Text("↗",color=M3x.Track)
+                        Text("粘贴 JSON 导入",modifier=Modifier.weight(1f));Text("↗",color=M3x.Ink)
                     }
                     FilledTonalButton(onClick={openFile.launch(arrayOf("application/json","text/plain","application/octet-stream"))},
                         modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("import-file"),shape=M3x.Field,
                         colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.SurfaceHigh,contentColor=M3x.OnSurface)){
-                        Text("从文件导入",modifier=Modifier.weight(1f));Text("↗",color=M3x.Track)
+                        Text("从文件导入",modifier=Modifier.weight(1f));Text("↗",color=M3x.Ink)
                     }
                     FilledTonalButton(onClick={showExport=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("export-preview"),
                         shape=M3x.Field,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)){
@@ -410,7 +411,7 @@ class MainActivity : ComponentActivity() {
                     }
                     if(store.hasBackup())FilledTonalButton(onClick={confirmRestore=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("restore-backup"),
                         shape=M3x.Field,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.SurfaceHigh,contentColor=M3x.OnSurface)){
-                        Text("恢复上一版本",modifier=Modifier.weight(1f));Text("↗",color=M3x.Track)
+                        Text("恢复上一版本",modifier=Modifier.weight(1f));Text("↗",color=M3x.Ink)
                     }
                 }
                 TextButton(onClick={confirmClear=true},enabled=loadError==null,modifier=Modifier.testTag("clear-book")){
@@ -421,7 +422,7 @@ class MainActivity : ComponentActivity() {
                 SectionHeading("隐私与兼容性")
                 Text("课表保存在两端应用本地；同步不使用自建云服务。设备能力、签名和运动健康授权决定是否可通信，不把 FIT3 作为型号白名单。",
                     style=MaterialTheme.typography.bodySmall,color=M3x.OnSurfaceVariant)
-                ExpressivePill("0.2.4 · 测试构建",color=M3x.SurfaceHigh,contentColor=M3x.Track)
+                ExpressivePill("0.2.4 · 测试构建",color=M3x.SurfaceHigh,contentColor=M3x.Ink)
                 Text("Wear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=M3x.OnSurfaceVariant)
             }
             Spacer(Modifier.height(32.dp))

@@ -106,7 +106,7 @@ class PaletteEvidenceTest(unittest.TestCase):
         receipt['name']=p.stem;receipt['phase']='warm'
         for key in ('before','after'):
             receipt[key].update(scene='editor-bottom',courseColorBounds=color_bounds,courseColorsSelected=[0],deleteBounds=[20,510,340,566])
-        image.save(p);p.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/></hierarchy>')
+        image.save(p);p.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/><node package="com.hcbiu.elcton" class="android.view.View" bounds="[20,510][340,566]"><node package="com.hcbiu.elcton" text="删除课程" bounds="[140,530][205,546]"/></node></hierarchy>')
         receipt['pngSha256']=hashlib.sha256(p.read_bytes()).hexdigest()
         receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(p.with_suffix('.xml').read_bytes()).hexdigest()
         p.with_name(p.stem+'-state.json').write_text(json.dumps(receipt))
@@ -119,6 +119,30 @@ class PaletteEvidenceTest(unittest.TestCase):
             raw=inspect_capture(self.editor_fixture(d,raw_colors=True))
             self.assertFalse(raw['passed'],raw)
             self.assertIn('Untoned or wrong business color point',str(raw['errors']))
+
+    def test_delete_button_can_touch_but_never_cross_navigation(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=self.editor_fixture(d); path=p.with_name(p.stem+'-state.json')
+            receipt=json.loads(path.read_text())
+            for key in ('before','after'):
+                receipt[key]['deleteBounds'][3]=receipt[key]['navigationTop']
+            xml=p.with_suffix('.xml');xml.write_text(xml.read_text().replace('[20,510][340,566]','[20,510][340,640]'))
+            receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(xml.read_bytes()).hexdigest()
+            path.write_text(json.dumps(receipt))
+            touching=inspect_capture(p);self.assertTrue(touching['passed'],touching)
+            for key in ('before','after'):receipt[key]['deleteBounds'][3]+=1
+            path.write_text(json.dumps(receipt))
+            crossing=inspect_capture(p);self.assertFalse(crossing['passed'],crossing)
+            self.assertIn('Delete button crosses navigation',str(crossing['errors']))
+
+    def test_delete_xml_cannot_be_stale_even_when_its_hashes_are_consistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=self.editor_fixture(d);valid=inspect_capture(p);self.assertTrue(valid['passed'],valid)
+            xml=p.with_suffix('.xml');xml.write_text(xml.read_text().replace('[20,510][340,566]','[20,500][340,556]'))
+            path=p.with_name(p.stem+'-state.json');receipt=json.loads(path.read_text())
+            receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(xml.read_bytes()).hexdigest();path.write_text(json.dumps(receipt))
+            invalid=inspect_capture(p);self.assertFalse(invalid['passed'],invalid)
+            self.assertIn('Delete XML/state bounds disagree',str(invalid['errors']))
 
     def test_filename_cannot_bypass_requested_editor_scene(self):
         with tempfile.TemporaryDirectory() as d:

@@ -89,6 +89,23 @@ class PaletteSourceTest(unittest.TestCase):
         base = subprocess.check_output(['git', 'show', '519f0d5450f77ce4ba757a644b2144607b0a5c06:app/src/main/java/com/hcbiu/elcton/MainActivity.kt'], cwd=ROOT, text=True)
         self.assertEqual([], activity_checks(base, activity))
 
+    def test_palette_capture_refreshes_cache_and_rejects_stale_scene_after_dismissing_ime(self):
+        source=(ROOT/'app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt').read_text()
+        self.assertIn('private fun dismissKeyboard()',source)
+        self.assertIn('hideSoftInputFromWindow',source)
+        self.assertIn('window.insetsController?.hide(WindowInsets.Type.ime())',source)
+        self.assertIn('private fun freshHierarchy(file:File)',source)
+        # API33 UiAutomation.setServiceInfo explicitly clears its connection cache.
+        self.assertIn('automation.serviceInfo=checkNotNull(automation.serviceInfo)',source)
+        self.assertEqual(1,source.count('device.dumpWindowHierarchy('))
+        self.assertIn('freshHierarchy(xmlBefore)',source)
+        self.assertIn('freshHierarchy(xml)',source)
+        self.assertIn('sceneMatches(nodes,state)',source)
+        self.assertIn('sameBounds(parent,option.getJSONArray("bounds"))',source)
+        self.assertIn('sameBounds(parent,state.getJSONArray("deleteBounds"))',source)
+        self.assertIn('dismissKeyboard();ui.onNodeWithTag("nav-today")',source)
+        self.assertIn('dismissKeyboard()\n        ui.onNodeWithTag("course-save")',source)
+
     def test_palette_preference_gate_rejects_cross_keys_unknown_keys_and_extra_state(self):
         from qa.ui_only_gate import theme_checks
         source = THEME.read_text()

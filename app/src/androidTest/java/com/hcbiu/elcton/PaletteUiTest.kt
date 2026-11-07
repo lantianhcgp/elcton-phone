@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.Process
 import android.view.View
 import android.view.WindowInsets
+import android.view.inputmethod.InputMethodManager
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -115,6 +116,62 @@ class PaletteUiTest {
         val pair=colors.getValue(palette())
         return android.graphics.Color.parseColor("#"+if(dark())pair.second else pair.first)
     }
+    private fun dismissKeyboard() {
+        ui.runOnUiThread {
+            val window=ui.activity.window
+            val manager=ui.activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(window.decorView.windowToken,0)
+            window.insetsController?.hide(WindowInsets.Type.ime())
+            ui.activity.currentFocus?.clearFocus()
+        }
+        ui.waitUntil(5000) {
+            var visible=true
+            ui.runOnUiThread { visible=ui.activity.window.decorView.rootWindowInsets?.isVisible(WindowInsets.Type.ime())==true }
+            !visible
+        }
+    }
+    private fun freshHierarchy(file:File) {
+        val automation=instrumentation.uiAutomation
+        // API33 has no public clearCache(); setServiceInfo clears this connection's cache.
+        // Keep the same flags/service info, then fetch actual nodes instead of a stable stale tree.
+        automation.serviceInfo=checkNotNull(automation.serviceInfo)
+        device.dumpWindowHierarchy(file)
+    }
+    private fun sameBounds(node:org.w3c.dom.Element?,expected:JSONArray):Boolean {
+        if(node==null)return false
+        val actual=node.getAttribute("bounds").split('[',']',',').filter{it.isNotEmpty()}.map{it.toInt()}
+        return actual.size==4 && (0..3).all { kotlin.math.abs(actual[it]-expected.getDouble(it))<=2 }
+    }
+    private fun sceneMatches(nodes:org.w3c.dom.NodeList,state:JSONObject):Boolean {
+        val app=(0 until nodes.length).map { nodes.item(it) as org.w3c.dom.Element }
+            .filter { it.getAttribute("package")=="com.hcbiu.elcton" }
+        val text=app.map { it.getAttribute("text") }.toSet()
+        when(state.getString("scene")) {
+            "options" -> {
+                if("配色" !in text || "删除课程" in text)return false
+                for((i,p) in palettes.withIndex()) {
+                    val matches=app.filter { it.getAttribute("text")==listOf("紫","蓝","绿","青","橙","粉")[i] }
+                    if(matches.size!=1)return false
+                    val label=matches.single();val option=state.getJSONObject("paletteOptions").getJSONObject(p)
+                    val parent=label.parentNode as? org.w3c.dom.Element
+                    if(!sameBounds(label,option.getJSONArray("labelBounds")) || !sameBounds(parent,option.getJSONArray("bounds")))return false
+                }
+            }
+            "semester" -> {
+                val fields=app.filter { it.getAttribute("class")=="android.widget.EditText" && sameBounds(it,state.getJSONArray("semesterBounds")) }
+                if(fields.size!=1 || "学期开始日期" !in text || "保存学期" !in text)return false
+            }
+            "editor-bottom" -> {
+                val labels=app.filter { it.getAttribute("text")=="删除课程" }
+                if(labels.size!=1 || "配色" in text)return false
+                val parent=labels.single().parentNode as? org.w3c.dom.Element
+                if(!sameBounds(parent,state.getJSONArray("deleteBounds")))return false
+            }
+            "week" -> if(!text.containsAll(listOf("M3E配色验收","上一周","下一周")) || text.any { it in listOf("保存","课程名称","删除课程","配色") })return false
+            else -> return false
+        }
+        return true
+    }
     private fun ready(picture:File,xml:File,state:JSONObject):Boolean {
         val bitmap=BitmapFactory.decodeFile(picture.absolutePath)?:return false
         try {
@@ -125,6 +182,7 @@ class PaletteUiTest {
                 for(x in listOf(1,2,bitmap.width-3,bitmap.width-2))if(bitmap.getPixel(x,y)!=expected)return false
             }
             val nodes=DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xml).getElementsByTagName("node")
+            if(!sceneMatches(nodes,state))return false
             var ink=0
             for(i in 0 until nodes.length) {
                 val e=nodes.item(i) as org.w3c.dom.Element
@@ -149,8 +207,8 @@ class PaletteUiTest {
             attempt++;committedFrame()
             val picture=File(attempts,"$name-$attempt.png")
             val xmlBefore=File(attempts,"$name-$attempt-before.xml");val xml=File(attempts,"$name-$attempt.xml")
-            device.dumpWindowHierarchy(xmlBefore);val before=currentState(scene)
-            check(device.takeScreenshot(picture));device.dumpWindowHierarchy(xml);val after=currentState(scene)
+            freshHierarchy(xmlBefore);val before=currentState(scene)
+            check(device.takeScreenshot(picture));freshHierarchy(xml);val after=currentState(scene)
             val xmlStable=hash(xmlBefore)==hash(xml)
             val stable=xmlStable && before.toString()==after.toString()
             val pixelReady=stable && ready(picture,xml,after)
@@ -170,7 +228,7 @@ class PaletteUiTest {
         error("Palette PNG/XML/state failed to converge: $name")
     }
     private fun settings() {
-        ui.onNodeWithTag("nav-today").performClick();ui.onNodeWithTag("nav-settings").performClick();ui.waitForIdle()
+        dismissKeyboard();ui.onNodeWithTag("nav-today").performClick();ui.onNodeWithTag("nav-settings").performClick();ui.waitForIdle()
     }
     private fun chooseMode(value:String) {
         val before=businessHashes().toString();val oldPalette=palette()
@@ -220,6 +278,7 @@ class PaletteUiTest {
         ui.onNodeWithTag("nav-week").performClick();ui.onNodeWithTag("add-course").performClick()
         ui.onNodeWithTag("course-name").performTextInput("M3E配色验收")
         ui.onNodeWithTag("course-day-6").performScrollTo().performClick()
+        dismissKeyboard()
         ui.onNodeWithTag("course-save").performClick();ui.waitForIdle()
     }
     private fun setSystemDark(value:Boolean) {

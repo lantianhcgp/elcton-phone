@@ -112,7 +112,9 @@ def inspect_capture(picture):
         for y in (10,height//3,nav_bottom-10,height-8):
             for x in (1,2,width-3,width-2):
                 assert image.getpixel((x,y))==expected['background'], 'Framebuffer palette differs from persisted selection'
-        app=[n for n in ET.parse(xml).getroot().iter('node') if n.get('package')=='com.hcbiu.elcton']
+        xml_root=ET.parse(xml).getroot()
+        parents={child:parent for parent in xml_root.iter() for child in parent}
+        app=[n for n in xml_root.iter('node') if n.get('package')=='com.hcbiu.elcton']
         assert app, 'No actual App hierarchy'
         today=[n for n in app if n.get('text')=='今日']; assert today, 'Navigation label missing'
         label=box(today[0].get('bounds')); assert inside(label,width,height)
@@ -167,7 +169,10 @@ def inspect_capture(picture):
                     assert ring_ink>=max(12,round(14*density*density)), 'Selected course outline not rendered'
                     center=(round(cx-7*density),round(cy-7*density),round(cx+7*density),round(cy+7*density))
                     assert pixels(image,center,expected['onSurface'])>=4, 'Selected course checkmark not rendered'
-            r=box(state['deleteBounds']); assert inside(r,width,height) and r[3]<nav_top
+            r=box(state['deleteBounds']); assert inside(r,width,height) and r[3]<=nav_top, 'Delete button crosses navigation'
+            labels=[n for n in app if n.get('text')=='删除课程']; assert len(labels)==1, 'Actual delete label missing/duplicated'
+            parent=parents.get(labels[0]); assert parent is not None, 'Delete XML parent absent'
+            assert all(abs(x-y)<=2 for x,y in zip(box(parent.get('bounds')),r)), 'Delete XML/state bounds disagree'
             assert pixels(image,r,expected['error'])>=12, 'Delete semantic ink missing'
             center=((r[0]+r[2])//2,r[1]+max(5,round(6*density)))
             assert close(image.getpixel(center),expected['background']), 'Deletion competes as filled primary action'

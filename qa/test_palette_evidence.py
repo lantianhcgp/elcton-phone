@@ -309,6 +309,40 @@ class PaletteEvidenceTest(unittest.TestCase):
             self.assertFalse(json.loads((out/'report.json').read_text())['passed'])
             self.assertEqual((out/'palette-failure-logcat.txt').read_text(),'real mock logcat')
 
+    def test_unselected_palette_extra_outline_or_checkmark_is_rejected_from_png_alone(self):
+        for marker in ('outline','checkmark'):
+            with self.subTest(marker=marker), tempfile.TemporaryDirectory() as d:
+                picture=self.fixture(d);self.assertTrue(inspect_capture(picture)['passed'])
+                path=picture.with_name(picture.stem+'-state.json');receipt=json.loads(path.read_text())
+                option=receipt['after']['paletteOptions']['BLUE']
+                image=Image.open(picture).convert('RGB');draw=ImageDraw.Draw(image)
+                if marker=='outline':
+                    x1,y1,x2,_=option['bounds']
+                    draw.rectangle((x1,y1,x2-1,y1+1),fill=roles('PURPLE',False)['primary'])
+                else:
+                    x1,y1,x2,y2=option['previewBounds'];cx,cy=(x1+x2)//2,(y1+y2)//2
+                    draw.line([(cx-5,cy),(cx-1,cy+4),(cx+5,cy-5)],fill=(255,255,255),width=3)
+                image.save(picture);receipt['pngSha256']=hashlib.sha256(picture.read_bytes()).hexdigest()
+                path.write_text(json.dumps(receipt))
+                invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+                self.assertIn('Unselected palette '+marker,str(invalid['errors']))
+
+    def test_unselected_course_extra_outline_or_checkmark_is_rejected_from_png_alone(self):
+        for marker in ('outline','checkmark'):
+            with self.subTest(marker=marker), tempfile.TemporaryDirectory() as d:
+                picture=self.editor_fixture(d);self.assertTrue(inspect_capture(picture)['passed'])
+                path=picture.with_name(picture.stem+'-state.json');receipt=json.loads(path.read_text())
+                x1,y1,x2,y2=receipt['after']['courseColorBounds']['1'];cx,cy=(x1+x2)//2,(y1+y2)//2
+                image=Image.open(picture).convert('RGB');draw=ImageDraw.Draw(image)
+                if marker=='outline':
+                    draw.ellipse((cx-15,cy-15,cx+14,cy+14),outline=roles('PURPLE',False)['primary'],width=2)
+                else:
+                    draw.line([(cx-5,cy),(cx-1,cy+4),(cx+5,cy-5)],fill=roles('PURPLE',False)['onSurface'],width=3)
+                image.save(picture);receipt['pngSha256']=hashlib.sha256(picture.read_bytes()).hexdigest()
+                path.write_text(json.dumps(receipt))
+                invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+                self.assertIn('Unselected course '+marker,str(invalid['errors']))
+
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()
         self.assertIn("assert not palette_target.exists()",source)

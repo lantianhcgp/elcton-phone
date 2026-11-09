@@ -60,6 +60,21 @@ def pixels(image, rect, color, tolerance=3):
                for y in range(rect[1],rect[3],2) for x in range(rect[0],rect[2],2))
 
 
+def palette_outline_pixels(image, rect, color, density):
+    # Only the 2dp rounded control border plus antialias margin, never preview/label ink.
+    edge=3*density;radius=16*density
+    def within(x,y,bounds,corner):
+        left,top,right,bottom=bounds
+        if not (left<=x<right and top<=y<bottom):return False
+        cx=min(max(x,left+corner),right-corner)
+        cy=min(max(y,top+corner),bottom-corner)
+        return (x-cx)**2+(y-cy)**2<=corner**2
+    inset=(rect[0]+edge,rect[1]+edge,rect[2]-edge,rect[3]-edge)
+    return sum(close(image.getpixel((x,y)),color)
+        for y in range(rect[1],rect[3]) for x in range(rect[0],rect[2])
+        if within(x+.5,y+.5,rect,radius) and not within(x+.5,y+.5,inset,radius-edge))
+
+
 def capture_manifest():
     manifest = {}
     for p,m in STATES:
@@ -141,11 +156,18 @@ def inspect_capture(picture):
                 label_box=box(label_nodes[0].get('bounds')); assert inside(label_box,width,height)
                 assert all(abs(x-y)<=2 for x,y in zip(label_box,text_bounds)), 'Chinese label not bound to matching palette control'
                 assert pixels(image,label_box,expected['onPrimaryContainer'] if p==palette else expected['onSurface'])>=4, 'Palette label ink not composed'
+                strip=(r[0]+r[2])//2
+                outline=any(close(image.getpixel((strip,y)),expected['primary'])
+                    for y in range(r[1],r[1]+max(3,round(3*density))))
+                mark=rgb(PREVIEW_ON_PRIMARY_DARK[p]) if dark else (255,255,255)
                 if p==palette:
-                    mark=rgb(PREVIEW_ON_PRIMARY_DARK[p]) if dark else (255,255,255)
                     assert pixels(image,preview,mark)>=3, 'Selected palette checkmark not composed'
-                    strip=(r[0]+r[2])//2
-                    assert any(close(image.getpixel((strip,y)),expected['primary']) for y in range(r[1],r[1]+max(3,round(3*density)))), 'Selection outline not rendered'
+                    assert outline, 'Selection outline not rendered'
+                else:
+                    assert palette_outline_pixels(image,r,expected['primary'],density)==0, 'Unselected palette outline is rendered'
+                    cx,cy=(preview[0]+preview[2])/2,(preview[1]+preview[3])/2
+                    center=(round(cx-10*density),round(cy-10*density),round(cx+10*density),round(cy+10*density))
+                    assert pixels(image,center,mark)==0, 'Unselected palette checkmark is rendered'
             metrics['palette_options']=6
         elif scene=='semester':
             r=box(state['semesterBounds']); assert inside(r,width,height) and r[3]<nav_top, 'Date field clipped'
@@ -160,15 +182,18 @@ def inspect_capture(picture):
             for i,raw in enumerate(COURSE):
                 r=box(opts[str(i)]); assert inside(r,width,height) and r[3]<nav_top, 'Business color point clipped'
                 assert pixels(image,r,mix(expected['surfaceHighest'],rgb(raw),.30 if dark else .46))>=12, 'Untoned or wrong business color point'
+                cx,cy=(r[0]+r[2])/2,(r[1]+r[3])/2
+                radius=15*density; inner=radius-2.6*density
+                ring_ink=sum(close(image.getpixel((x,y)),expected['primary'])
+                    for y in range(r[1],r[3]) for x in range(r[0],r[2])
+                    if inner**2<=(x+.5-cx)**2+(y+.5-cy)**2<=radius**2)
+                center=(round(cx-7*density),round(cy-7*density),round(cx+7*density),round(cy+7*density))
                 if i==selected[0]:
-                    cx,cy=(r[0]+r[2])/2,(r[1]+r[3])/2
-                    radius=15*density; inner=radius-2.6*density
-                    ring_ink=sum(close(image.getpixel((x,y)),expected['primary'])
-                        for y in range(r[1],r[3]) for x in range(r[0],r[2])
-                        if inner**2<=(x+.5-cx)**2+(y+.5-cy)**2<=radius**2)
                     assert ring_ink>=max(12,round(14*density*density)), 'Selected course outline not rendered'
-                    center=(round(cx-7*density),round(cy-7*density),round(cx+7*density),round(cy+7*density))
                     assert pixels(image,center,expected['onSurface'])>=4, 'Selected course checkmark not rendered'
+                else:
+                    assert ring_ink==0, 'Unselected course outline is rendered'
+                    assert pixels(image,center,expected['onSurface'])==0, 'Unselected course checkmark is rendered'
             r=box(state['deleteBounds']); assert inside(r,width,height) and r[3]<=nav_top, 'Delete button crosses navigation'
             labels=[n for n in app if n.get('text')=='删除课程']; assert len(labels)==1, 'Actual delete label missing/duplicated'
             parent=parents.get(labels[0]); assert parent is not None, 'Delete XML parent absent'

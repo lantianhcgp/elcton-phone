@@ -78,9 +78,17 @@ class PaletteUiTest {
             put("modeSelected",selectedModes.singleOrNull()?:"INVALID")
             put("semesterBounds",bounds("semester-input")?:JSONObject.NULL)
             put("deleteBounds",bounds("course-delete")?:JSONObject.NULL)
-            val colors=JSONObject()
-            for(i in 0..7) bounds("course-color-$i")?.let { colors.put(i.toString(),it) }
-            put("courseColorBounds",colors)
+            val colors=JSONObject();val touches=JSONObject()
+            for(i in 0..7) {
+                val node=ui.onAllNodesWithTag("course-color-$i").fetchSemanticsNodes().singleOrNull()?:continue
+                val b=node.boundsInWindow;colors.put(i.toString(),JSONArray(listOf(b.left,b.top,b.right,b.bottom)))
+                // Accessibility uses expanded touch geometry, not the narrow visual slot.
+                val t=node.touchBoundsInRoot.translate(node.positionInWindow-node.positionInRoot)
+                touches.put(i.toString(),JSONArray(listOf(t.left,t.top,t.right,t.bottom)))
+            }
+            put("courseColorBounds",colors);put("courseColorTouchBounds",touches)
+            val colorLabel=ui.onAllNodesWithText("课程颜色").fetchSemanticsNodes().singleOrNull()?.boundsInWindow
+            put("courseColorLabelBounds",colorLabel?.let { JSONArray(listOf(it.left,it.top,it.right,it.bottom)) }?:JSONObject.NULL)
             put("courseColorsSelected",JSONArray((0..7).filter { selected("course-color-$it") }))
             val blocks=ui.onAllNodes(SemanticsMatcher.keyIsDefined(CourseColorIndexKey),useUnmergedTree=true).fetchSemanticsNodes()
             put("weekTimeBlock",if(blocks.size==1) JSONObject().apply {
@@ -142,6 +150,32 @@ class PaletteUiTest {
         val actual=node.getAttribute("bounds").split('[',']',',').filter{it.isNotEmpty()}.map{it.toInt()}
         return actual.size==4 && (0..3).all { kotlin.math.abs(actual[it]-expected.getDouble(it))<=2 }
     }
+    private fun courseColorAccessibilityBounds(state:JSONObject,index:Int):JSONArray {
+        val touches=state.getJSONObject("courseColorTouchBounds")
+        val b=touches.getJSONArray(index.toString())
+        val right=if(index<7)minOf(b.getDouble(2),touches.getJSONArray((index+1).toString()).getDouble(0))else b.getDouble(2)
+        return JSONArray(listOf(kotlin.math.round(b.getDouble(0)),kotlin.math.round(b.getDouble(1)),kotlin.math.round(right),kotlin.math.round(b.getDouble(3))))
+    }
+    private fun courseColorsMatch(app:List<org.w3c.dom.Element>,state:JSONObject):Boolean {
+        val labels=app.filter { it.getAttribute("text")=="课程颜色" }
+        if(labels.size!=1 || !sameBounds(labels.single(),state.getJSONArray("courseColorLabelBounds")))return false
+        val parent=labels.single().parentNode
+        val selected=state.getJSONArray("courseColorsSelected")
+        if(selected.length()!=1 || selected.getInt(0) !in 0..7)return false
+        val row=state.getJSONObject("courseColorTouchBounds").getJSONArray("0")
+        if(app.count { it.parentNode==parent && it.getAttribute("checkable")=="true" &&
+            it.getAttribute("bounds").split('[',']',',').filter(String::isNotEmpty).map(String::toDouble).let { b -> b.size==4 && b[1]<row.getDouble(3) && b[3]>row.getDouble(1) } }!=8)return false
+        val matched=mutableSetOf<org.w3c.dom.Element>()
+        for(i in 0..7) {
+            val expected=courseColorAccessibilityBounds(state,i)
+            val candidates=app.filter { it.parentNode==parent && sameBounds(it,expected) }
+            if(candidates.size!=1)return false
+            val node=candidates.single();if(!matched.add(node))return false
+            if(node.getAttribute("checkable")!="true" || node.getAttribute("checked")!=(i==selected.getInt(0)).toString())return false
+            if(node.getAttribute("enabled")!="true" || node.getAttribute("visible-to-user")!="true")return false
+        }
+        return true
+    }
     private fun sceneMatches(nodes:org.w3c.dom.NodeList,state:JSONObject):Boolean {
         val app=(0 until nodes.length).map { nodes.item(it) as org.w3c.dom.Element }
             .filter { it.getAttribute("package")=="com.hcbiu.elcton" }
@@ -167,7 +201,7 @@ class PaletteUiTest {
                 val labels=app.filter { it.getAttribute("text")=="删除课程" }
                 if(labels.size!=1 || "配色" in text)return false
                 val parent=labels.single().parentNode as? org.w3c.dom.Element
-                if(!sameBounds(parent,state.getJSONArray("deleteBounds")))return false
+                if(!sameBounds(parent,state.getJSONArray("deleteBounds")) || !courseColorsMatch(app,state))return false
             }
             "week" -> if(!text.containsAll(listOf("M3E配色验收","上一周","下一周")) || text.any { it in listOf("保存","课程名称","删除课程","配色") })return false
             else -> return false

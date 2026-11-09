@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 import re
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -58,6 +59,12 @@ def close(a,b,tolerance=3):
 def pixels(image, rect, color, tolerance=3):
     return sum(close(image.getpixel((x,y)),color,tolerance)
                for y in range(rect[1],rect[3],2) for x in range(rect[0],rect[2],2))
+
+
+def color_present(image, rect, color, tolerance=3):
+    # Exclusion is a full-resolution presence check; a 1px stroke must not evade a sampled grid.
+    return any(close(image.getpixel((x,y)),color,tolerance)
+               for y in range(rect[1],rect[3]) for x in range(rect[0],rect[2]))
 
 
 def palette_outline_pixels(image, rect, color, density):
@@ -170,9 +177,7 @@ def inspect_capture(picture):
                     assert outline, 'Selection outline not rendered'
                 else:
                     assert palette_outline_pixels(image,r,expected['primary'],density)==0, 'Unselected palette outline is rendered'
-                    cx,cy=(preview[0]+preview[2])/2,(preview[1]+preview[3])/2
-                    center=(round(cx-10*density),round(cy-10*density),round(cx+10*density),round(cy+10*density))
-                    assert pixels(image,center,mark)==0, 'Unselected palette checkmark is rendered'
+                    assert not color_present(image,preview,mark), 'Unselected palette checkmark is rendered'
             metrics['palette_options']=6
         elif scene=='semester':
             r=box(state['semesterBounds']); assert inside(r,width,height) and r[3]<nav_top, 'Date field clipped'
@@ -190,6 +195,26 @@ def inspect_capture(picture):
             opts=state['courseColorBounds']; assert set(opts)==set(str(i) for i in range(8)), 'Eight business colors missing'
             selected=state['courseColorsSelected']
             assert isinstance(selected,list) and len(selected)==1 and type(selected[0]) is int and 0<=selected[0]<8, 'Exactly one selected course color required'
+            touches=state['courseColorTouchBounds']; assert set(touches)==set(str(j) for j in range(8)), 'Course color accessibility touch rectangles missing'
+            label_nodes=[n for n in app if n.get('text')=='课程颜色']; assert len(label_nodes)==1, 'Course color accessibility label missing/duplicated'
+            label=label_nodes[0];label_bounds=box(state['courseColorLabelBounds'])
+            assert inside(label_bounds,width,height) and all(abs(x-y)<=2 for x,y in zip(box(label.get('bounds')),label_bounds)), 'Course color accessibility label bounds disagree'
+            color_parent=parents.get(label);assert color_parent is not None, 'Course color accessibility parent missing'
+            row=box(touches['0'])
+            controls=[n for n in app if parents.get(n) is color_parent and n.get('checkable')=='true' and
+                      (b:=box(n.get('bounds')))[1]<row[3] and b[3]>row[1]]
+            assert len(controls)==8, 'Course color accessibility controls missing/duplicated'
+            assert pixels(image,label_bounds,expected['onSurface'])>=4, 'Course color accessibility label not rendered'
+            for i in range(8):
+                t=touches[str(i)];assert isinstance(t,list) and len(t)==4 and all(type(v) in (int,float) and math.isfinite(v) for v in t), 'Course color accessibility touch rectangle malformed'
+                right=min(t[2],touches[str(i+1)][0]) if i<7 else t[2]
+                actual_bounds=box([t[0],t[1],right,t[3]])
+                assert inside(actual_bounds,width,height), 'Course color accessibility point clipped'
+                nodes=[n for n in controls if all(abs(x-y)<=2 for x,y in zip(box(n.get('bounds')),actual_bounds))]
+                assert len(nodes)==1, 'Course color accessibility bounds missing/duplicated'
+                node=nodes[0]
+                assert node.get('checked')==str(i==selected[0]).lower(), 'Course color accessibility checked state stale'
+                assert node.get('enabled')=='true' and node.get('visible-to-user')=='true', 'Course color accessibility control hidden/disabled'
             for i,raw in enumerate(COURSE):
                 r=box(opts[str(i)]); assert inside(r,width,height) and r[3]<nav_top, 'Business color point clipped'
                 assert pixels(image,r,mix(expected['surfaceHighest'],rgb(raw),.30 if dark else .46))>=12, 'Untoned or wrong business color point'
@@ -204,7 +229,7 @@ def inspect_capture(picture):
                     assert pixels(image,center,expected['onSurface'])>=4, 'Selected course checkmark not rendered'
                 else:
                     assert ring_ink==0, 'Unselected course outline is rendered'
-                    assert pixels(image,center,expected['onSurface'])==0, 'Unselected course checkmark is rendered'
+                    assert not color_present(image,r,expected['onSurface']), 'Unselected course checkmark is rendered'
             r=box(state['deleteBounds']); assert inside(r,width,height) and r[3]<=nav_top, 'Delete button crosses navigation'
             labels=[n for n in app if n.get('text')=='删除课程']; assert len(labels)==1, 'Actual delete label missing/duplicated'
             parent=parents.get(labels[0]); assert parent is not None, 'Delete XML parent absent'

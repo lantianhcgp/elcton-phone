@@ -109,7 +109,18 @@ class PaletteEvidenceTest(unittest.TestCase):
         receipt['name']=p.stem;receipt['phase']='warm'
         for key in ('before','after'):
             receipt[key].update(scene='editor-bottom',courseColorBounds=color_bounds,courseColorsSelected=[0],deleteBounds=[20,510,340,566])
-        image.save(p);p.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/><node package="com.hcbiu.elcton" class="android.view.View" bounds="[20,510][340,566]"><node package="com.hcbiu.elcton" text="删除课程" bounds="[140,530][205,546]"/></node></hierarchy>')
+        # Compose accessibility expands a narrow clickable slot to 48dp and later siblings clip overlap.
+        # These are fixture inputs, not device receipts; all existing test assertions remain unchanged.
+        touch_bounds={str(i):[b[0]-5,b[1],b[2]+5,b[3]] for i,b in enumerate(color_bounds.values())}
+        for key in ('before','after'):
+            receipt[key].update(courseColorTouchBounds=touch_bounds,courseColorLabelBounds=[20,412,128,434])
+        draw.rectangle((22,416,124,430),fill=tokens['onSurface'])
+        controls='<node package="com.hcbiu.elcton" text="课程颜色" bounds="[20,412][128,434]"/>'
+        for i,b in enumerate(touch_bounds.values()):
+            right=min(b[2],touch_bounds[str(i+1)][0]) if i<7 else b[2]
+            controls+=(f'<node package="com.hcbiu.elcton" class="android.view.View" checkable="true" checked="{str(i==0).lower()}" '
+                       f'clickable="{str(i!=0).lower()}" enabled="true" visible-to-user="true" bounds="[{b[0]},{b[1]}][{right},{b[3]}]"/>')
+        image.save(p);p.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/><node package="com.hcbiu.elcton" class="android.view.View" bounds="[15,400][345,500]">'+controls+'</node><node package="com.hcbiu.elcton" class="android.view.View" bounds="[20,510][340,566]"><node package="com.hcbiu.elcton" text="删除课程" bounds="[140,530][205,546]"/></node></hierarchy>')
         receipt['pngSha256']=hashlib.sha256(p.read_bytes()).hexdigest()
         receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(p.with_suffix('.xml').read_bytes()).hexdigest()
         p.with_name(p.stem+'-state.json').write_text(json.dumps(receipt))
@@ -409,6 +420,56 @@ class PaletteEvidenceTest(unittest.TestCase):
                 path.write_text(json.dumps(receipt))
                 invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
                 self.assertIn('Palette accessibility',str(invalid['errors']))
+
+    def test_one_pixel_palette_checkmarks_cannot_hide_at_any_grid_offset(self):
+        for dx in range(2):
+            for dy in range(2):
+                with self.subTest(dx=dx,dy=dy),tempfile.TemporaryDirectory() as d:
+                    p=self.fixture(d);baseline=inspect_capture(p);self.assertTrue(baseline['passed'],baseline)
+                    im=Image.open(p).convert('RGB');ImageDraw.Draw(im).line([(144+dx,190+dy),(148+dx,194+dy),(154+dx,188+dy)],fill=(255,255,255),width=1)
+                    im.save(p);path=p.with_name(p.stem+'-state.json');receipt=json.loads(path.read_text());receipt['pngSha256']=hashlib.sha256(p.read_bytes()).hexdigest();path.write_text(json.dumps(receipt))
+                    result=inspect_capture(p);self.assertFalse(result['passed'],result)
+                    self.assertIn('Unselected palette checkmark is rendered',str(result['errors']))
+
+    def test_one_pixel_course_checkmarks_cannot_hide_at_any_grid_offset(self):
+        for dx in range(2):
+            for dy in range(2):
+                with self.subTest(dx=dx,dy=dy),tempfile.TemporaryDirectory() as d:
+                    p=self.editor_fixture(d);baseline=inspect_capture(p);self.assertTrue(baseline['passed'],baseline)
+                    im=Image.open(p).convert('RGB');ImageDraw.Draw(im).line([(83+dx,455+dy),(87+dx,459+dy),(93+dx,453+dy)],fill=(33,0,93),width=1)
+                    im.save(p);path=p.with_name(p.stem+'-state.json');receipt=json.loads(path.read_text());receipt['pngSha256']=hashlib.sha256(p.read_bytes()).hexdigest();path.write_text(json.dumps(receipt))
+                    result=inspect_capture(p);self.assertFalse(result['passed'],result)
+                    self.assertIn('Unselected course checkmark is rendered',str(result['errors']))
+
+    def test_editor_xml_color_row_requires_all_current_accessibility_controls(self):
+        import xml.etree.ElementTree as ET
+        for mutation in ('no-label','missing-all','one-missing','duplicate','wrong-bounds','previous-selection','extra-checked','missing-checked','not-checkable','disabled','not-visible','wrong-parent'):
+            with self.subTest(mutation=mutation),tempfile.TemporaryDirectory() as d:
+                picture=self.editor_fixture(d);baseline=inspect_capture(picture);self.assertTrue(baseline['passed'],baseline)
+                xml=picture.with_suffix('.xml');tree=ET.parse(xml);root=tree.getroot()
+                label=next(n for n in root.iter('node') if n.get('text')=='课程颜色')
+                parent=next(n for n in root if label in list(n))
+                controls=[n for n in parent if n.get('checkable')=='true']
+                if mutation=='no-label':parent.remove(label)
+                elif mutation=='missing-all':
+                    for n in controls:parent.remove(n)
+                elif mutation=='one-missing':parent.remove(controls[7])
+                elif mutation=='duplicate':parent.append(ET.fromstring(ET.tostring(controls[1])))
+                elif mutation=='wrong-bounds':controls[1].set('bounds','[65,455][105,503]')
+                elif mutation=='previous-selection':controls[0].set('checked','false');controls[1].set('checked','true')
+                elif mutation=='extra-checked':controls[1].set('checked','true')
+                elif mutation=='missing-checked':controls[0].attrib.pop('checked')
+                elif mutation=='not-checkable':controls[1].set('checkable','false')
+                elif mutation=='disabled':controls[1].set('enabled','false')
+                elif mutation=='not-visible':controls[1].set('visible-to-user','false')
+                else:parent.remove(controls[1]);root.append(controls[1])
+                tree.write(xml,encoding='utf-8')
+                path=picture.with_name(picture.stem+'-state.json');receipt=json.loads(path.read_text())
+                receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(xml.read_bytes()).hexdigest();path.write_text(json.dumps(receipt))
+                self.assertEqual(receipt['pngSha256'],hashlib.sha256(picture.read_bytes()).hexdigest())
+                self.assertEqual(receipt['before'],receipt['after'])
+                result=inspect_capture(picture);self.assertFalse(result['passed'],result)
+                self.assertIn('Course color accessibility',str(result['errors']))
 
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()

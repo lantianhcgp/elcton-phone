@@ -155,6 +155,8 @@ class PaletteUiTest {
                     val label=matches.single();val option=state.getJSONObject("paletteOptions").getJSONObject(p)
                     val parent=label.parentNode as? org.w3c.dom.Element
                     if(!sameBounds(label,option.getJSONArray("labelBounds")) || !sameBounds(parent,option.getJSONArray("bounds")))return false
+                    // API33 reports checked on the checkable option parent, not its decorative RadioButton child.
+                    if(parent==null || parent.getAttribute("checkable")!="true" || parent.getAttribute("checked")!=option.getBoolean("selected").toString())return false
                 }
             }
             "semester" -> {

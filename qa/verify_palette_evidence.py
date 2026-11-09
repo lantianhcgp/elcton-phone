@@ -155,6 +155,11 @@ def inspect_capture(picture):
                 label_nodes=[n for n in app if n.get('text')==LABELS[p]]; assert len(label_nodes)==1, 'Chinese palette label missing/duplicated'
                 label_box=box(label_nodes[0].get('bounds')); assert inside(label_box,width,height)
                 assert all(abs(x-y)<=2 for x,y in zip(label_box,text_bounds)), 'Chinese label not bound to matching palette control'
+                parent=parents.get(label_nodes[0]);assert parent is not None, 'Palette accessibility parent absent'
+                assert parent.get('package')=='com.hcbiu.elcton' and parent.get('checkable')=='true', 'Palette accessibility parent is not checkable'
+                assert parent.get('checked')==str(opts[p]['selected']).lower(), 'Palette accessibility checked state is stale'
+                parent_box=box(parent.get('bounds'));assert inside(parent_box,width,height)
+                assert all(abs(x-y)<=2 for x,y in zip(parent_box,r)), 'Palette accessibility parent bounds disagree'
                 assert pixels(image,label_box,expected['onPrimaryContainer'] if p==palette else expected['onSurface'])>=4, 'Palette label ink not composed'
                 strip=(r[0]+r[2])//2
                 outline=any(close(image.getpixel((strip,y)),expected['primary'])
@@ -171,6 +176,12 @@ def inspect_capture(picture):
             metrics['palette_options']=6
         elif scene=='semester':
             r=box(state['semesterBounds']); assert inside(r,width,height) and r[3]<nav_top, 'Date field clipped'
+            texts={n.get('text') for n in app}
+            assert {'学期开始日期','保存学期'}<=texts, 'Actual semester scene markers absent'
+            fields=[n for n in app if n.get('class')=='android.widget.EditText']
+            assert len(fields)==1, 'Actual semester EditText missing/duplicated'
+            actual=box(fields[0].get('bounds'));assert inside(actual,width,height)
+            assert all(abs(a-b)<=2 for a,b in zip(actual,r)), 'Actual semester XML/state bounds disagree'
             inset=max(3,round(8*density)); point=(r[0]+inset,r[1]+(r[3]-r[1])//2)
             assert close(image.getpixel(point),mix(expected['primaryContainer'],expected['surface'],.24)), 'Date field jumps out of its tonal parent'
             assert pixels(image,r,expected['onPrimaryContainer'])>=12, 'Date field content not rendered'

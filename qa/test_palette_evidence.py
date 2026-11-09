@@ -33,7 +33,10 @@ class PaletteEvidenceTest(unittest.TestCase):
             if selected and checkmark:
                 draw.line([(x+19,y+29),(x+23,y+33),(x+29,y+24)],fill=(255,255,255),width=3)
             draw.rectangle((x+44,y+28,x+55,y+39), fill=(33,0,93))
-            xml += f'<node package="com.hcbiu.elcton" text="{label}" selected="{str(selected).lower()}" bounds="[{x+44},{y+24}][{x+66},{y+46}]"/>'
+            # Actual API33 shape: checked semantics live on the option parent; RadioButton is decorative.
+            xml += (f'<node package="com.hcbiu.elcton" class="android.view.View" checkable="true" checked="{str(selected).lower()}" selected="false" bounds="[{x},{y}][{x+95},{y+60}]">'
+                    f'<node package="com.hcbiu.elcton" text="{label}" selected="false" bounds="[{x+44},{y+24}][{x+66},{y+46}]"/>'
+                    f'<node package="com.hcbiu.elcton" class="android.widget.RadioButton" checkable="false" checked="false" selected="false" bounds="[{x},{y}][{x+95},{y+60}]"/></node>')
         xml += '</hierarchy>'
         if bad_container:
             draw.rectangle((24,187,27,193), fill=(12,15,21))
@@ -342,6 +345,70 @@ class PaletteEvidenceTest(unittest.TestCase):
                 path.write_text(json.dumps(receipt))
                 invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
                 self.assertIn('Unselected course '+marker,str(invalid['errors']))
+
+    def semester_fixture(self, directory):
+        root=Path(directory);options=self.fixture(directory)
+        receipt=json.loads(options.with_name(options.stem+'-state.json').read_text())
+        picture=root/'r3-purple-light-semester.png';tokens=roles('PURPLE',False)
+        image=Image.new('RGB',(360,800),tokens['background']);draw=ImageDraw.Draw(image)
+        draw.rectangle((22,674,48,690),fill=(98,86,113))
+        field=[30,300,330,356];draw.rectangle(field,fill=mix(tokens['primaryContainer'],tokens['surface'],.24))
+        draw.rectangle((50,316,150,336),fill=tokens['onPrimaryContainer'])
+        image.save(picture)
+        picture.with_suffix('.xml').write_text('<hierarchy><node package="com.hcbiu.elcton" text="今日" bounds="[20,672][50,694]"/><node package="com.hcbiu.elcton" text="学期开始日期" bounds="[30,250][160,280]"/><node package="com.hcbiu.elcton" class="android.widget.EditText" text="2026-09-01" bounds="[30,300][330,356]"/><node package="com.hcbiu.elcton" text="保存学期" bounds="[160,380][230,402]"/></hierarchy>')
+        receipt['name']=picture.stem
+        for key in ('before','after'):receipt[key].update(scene='semester',semesterBounds=field)
+        receipt['pngSha256']=hashlib.sha256(picture.read_bytes()).hexdigest()
+        receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(picture.with_suffix('.xml').read_bytes()).hexdigest()
+        picture.with_name(picture.stem+'-state.json').write_text(json.dumps(receipt))
+        return picture
+
+    def test_valid_semester_fixture_and_xml_only_scene_or_field_mutations(self):
+        import xml.etree.ElementTree as ET
+        for mutation in ('today-only','no-title','no-save','no-field','wrong-bounds','duplicate-field'):
+            with self.subTest(mutation=mutation),tempfile.TemporaryDirectory() as directory:
+                picture=self.semester_fixture(directory);valid=inspect_capture(picture)
+                self.assertTrue(valid['passed'],valid)
+                xml=picture.with_suffix('.xml');tree=ET.parse(xml);root=tree.getroot()
+                field=next(n for n in root if n.get('class')=='android.widget.EditText')
+                if mutation=='today-only':
+                    for n in list(root):
+                        if n.get('text')!='今日':root.remove(n)
+                elif mutation in ('no-title','no-save'):
+                    target='学期开始日期' if mutation=='no-title' else '保存学期'
+                    root.remove(next(n for n in root if n.get('text')==target))
+                elif mutation=='no-field':root.remove(field)
+                elif mutation=='wrong-bounds':field.set('bounds','[40,300][340,356]')
+                else:root.append(ET.fromstring(ET.tostring(field)))
+                tree.write(xml,encoding='utf-8')
+                path=picture.with_name(picture.stem+'-state.json');receipt=json.loads(path.read_text())
+                receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(xml.read_bytes()).hexdigest()
+                path.write_text(json.dumps(receipt))
+                invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+                self.assertIn('semester',str(invalid['errors']).lower())
+
+    def test_xml_only_palette_selection_must_match_live_option(self):
+        import xml.etree.ElementTree as ET
+        for mutation in ('previous-selection','extra-checked','none-checked','not-checkable','missing-checked','wrong-parent-bounds'):
+            with self.subTest(mutation=mutation),tempfile.TemporaryDirectory() as directory:
+                picture=self.fixture(directory);baseline=inspect_capture(picture)
+                self.assertTrue(baseline['passed'],baseline)
+                xml=picture.with_suffix('.xml');tree=ET.parse(xml)
+                parents={child:parent for parent in tree.iter() for child in parent}
+                controls={n.get('text'):parents[n] for n in tree.iter('node') if n.get('text') in ('紫','蓝')}
+                if mutation=='previous-selection':
+                    controls['紫'].set('checked','false');controls['蓝'].set('checked','true')
+                elif mutation=='extra-checked':controls['蓝'].set('checked','true')
+                elif mutation=='none-checked':controls['紫'].set('checked','false')
+                elif mutation=='not-checkable':controls['紫'].set('checkable','false')
+                elif mutation=='missing-checked':controls['紫'].attrib.pop('checked')
+                else:controls['紫'].set('bounds','[30,160][125,220]')
+                tree.write(xml,encoding='utf-8')
+                path=picture.with_name(picture.stem+'-state.json');receipt=json.loads(path.read_text())
+                receipt['xmlSha256']=receipt['xmlBeforeSha256']=hashlib.sha256(xml.read_bytes()).hexdigest()
+                path.write_text(json.dumps(receipt))
+                invalid=inspect_capture(picture);self.assertFalse(invalid['passed'],invalid)
+                self.assertIn('Palette accessibility',str(invalid['errors']))
 
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()

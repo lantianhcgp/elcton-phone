@@ -114,7 +114,7 @@ class PaletteEvidenceTest(unittest.TestCase):
         touch_bounds={str(i):[b[0]-5,b[1],b[2]+5,b[3]] for i,b in enumerate(color_bounds.values())}
         for key in ('before','after'):
             receipt[key].update(courseColorTouchBounds=touch_bounds,courseColorLabelBounds=[20,412,128,434])
-        draw.rectangle((22,416,124,430),fill=tokens['onSurface'])
+        draw.rectangle((22,416,124,430),fill=tokens['primary'])
         controls='<node package="com.hcbiu.elcton" text="课程颜色" bounds="[20,412][128,434]"/>'
         for i,b in enumerate(touch_bounds.values()):
             right=min(b[2],touch_bounds[str(i+1)][0]) if i<7 else b[2]
@@ -470,6 +470,38 @@ class PaletteEvidenceTest(unittest.TestCase):
                 self.assertEqual(receipt['before'],receipt['after'])
                 result=inspect_capture(picture);self.assertFalse(result['passed'],result)
                 self.assertIn('Course color accessibility',str(result['errors']))
+
+    def test_course_color_label_uses_real_primary_role_in_all_twelve_schemes(self):
+        from qa.verify_palette_evidence import STATES
+        root=Path(__file__).resolve().parents[1]
+        source=(root/'app/src/main/java/com/hcbiu/elcton/MainActivity.kt').read_text()
+        theme=(root/'app/src/main/java/com/hcbiu/elcton/M3xTheme.kt').read_text()
+        self.assertIn('Text("课程颜色",style=MaterialTheme.typography.labelLarge,color=M3x.Ink)',source)
+        self.assertIn('val Ink: Color @Composable get() = MaterialTheme.colorScheme.primary',theme)
+        for palette,mode in STATES:
+            with self.subTest(palette=palette,mode=mode),tempfile.TemporaryDirectory() as d:
+                picture=self.editor_fixture(d);old=roles('PURPLE',False);new=roles(palette,mode=='DARK')
+                recolor={old[role]:new[role] for role in ('background','primary','onSurface','error')}
+                recolor[(98,86,113)]=new['primary']
+                recolor.update({mix(old['surfaceHighest'],rgb(c),.46):mix(new['surfaceHighest'],rgb(c),.30 if mode=='DARK' else .46) for c in COURSE})
+                image=Image.open(picture).convert('RGB');raw=image.tobytes()
+                image.putdata([recolor.get(pixel,pixel) for pixel in zip(raw[::3],raw[1::3],raw[2::3])])
+                # Independent application/source contract: M3x.Ink is primary, not onSurface.
+                ImageDraw.Draw(image).rectangle((22,416,124,430),fill=new['primary'])
+                target=picture.with_name(f'r3-{palette.lower()}-{mode.lower()}-editor-bottom.png');image.save(target)
+                target.with_suffix('.xml').write_bytes(picture.with_suffix('.xml').read_bytes())
+                receipt=json.loads(picture.with_name(picture.stem+'-state.json').read_text())
+                receipt.update(name=target.stem,expectedPalette=palette,expectedDark=mode=='DARK',pngSha256=hashlib.sha256(target.read_bytes()).hexdigest())
+                chrome=0xFF000000|(new['background'][0]<<16)|(new['background'][1]<<8)|new['background'][2]
+                for key in ('before','after'):
+                    receipt[key].update(palette=palette,mode=mode,chromeArgb=chrome-(1<<32),uiFlags=0 if mode=='DARK' else 8208)
+                state_path=target.with_name(target.stem+'-state.json');state_path.write_text(json.dumps(receipt))
+                baseline=inspect_capture(target);self.assertTrue(baseline['passed'],baseline)
+                for ink in (new['onSurface'],new['background']):
+                    ImageDraw.Draw(image).rectangle((22,416,124,430),fill=ink);image.save(target)
+                    receipt['pngSha256']=hashlib.sha256(target.read_bytes()).hexdigest();state_path.write_text(json.dumps(receipt))
+                    result=inspect_capture(target);self.assertFalse(result['passed'],result)
+                    self.assertIn('Course color accessibility label not rendered',str(result['errors']))
 
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()

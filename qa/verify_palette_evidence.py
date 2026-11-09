@@ -204,7 +204,7 @@ def inspect_capture(picture):
             controls=[n for n in app if parents.get(n) is color_parent and n.get('checkable')=='true' and
                       (b:=box(n.get('bounds')))[1]<row[3] and b[3]>row[1]]
             assert len(controls)==8, 'Course color accessibility controls missing/duplicated'
-            assert pixels(image,label_bounds,expected['onSurface'])>=4, 'Course color accessibility label not rendered'
+            assert pixels(image,label_bounds,expected['primary'])>=4, 'Course color accessibility label not rendered'
             for i in range(8):
                 t=touches[str(i)];assert isinstance(t,list) and len(t)==4 and all(type(v) in (int,float) and math.isfinite(v) for v in t), 'Course color accessibility touch rectangle malformed'
                 right=min(t[2],touches[str(i+1)][0]) if i<7 else t[2]

@@ -503,6 +503,88 @@ class PaletteEvidenceTest(unittest.TestCase):
                     result=inspect_capture(target);self.assertFalse(result['passed'],result)
                     self.assertIn('Course color accessibility label not rendered',str(result['errors']))
 
+    def test_palette_harvest_subprocess_has_bounded_timeout_and_valid_run_archive(self):
+        import ast
+        import io
+        import subprocess
+        import tarfile
+        from types import SimpleNamespace
+        tree=ast.parse(Path(__file__).with_name('emulator_install_and_tour.py').read_text())
+        helper=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='harvest_palettes')
+        run_id='bounded-harvest-fixture';content=b'independent captured attempt'
+        wire=io.BytesIO()
+        with tarfile.open(fileobj=wire,mode='w') as archive:
+            entry=tarfile.TarInfo('qa-palette-evidence/'+run_id+'/attempt.bin');entry.size=len(content)
+            archive.addfile(entry,io.BytesIO(content))
+        calls=[]
+        def transport(argv,**kwargs):
+            self.assertEqual(argv,['adb','shell'])
+            self.assertTrue(kwargs.get('capture_output'))
+            self.assertEqual(kwargs['input'],('run-as com.hcbiu.elcton tar -cf - -C files qa-palette-evidence/'+run_id+'\n').encode())
+            deadline=kwargs.get('timeout')
+            self.assertIsInstance(deadline,(int,float),'Real palette harvest transport is unbounded')
+            self.assertGreater(deadline,0);self.assertLessEqual(deadline,60)
+            calls.append(deadline)
+            return subprocess.CompletedProcess(argv,0,stdout=wire.getvalue(),stderr=b'')
+        with tempfile.TemporaryDirectory() as directory:
+            out=Path(directory);target=out/'palette-product';target.mkdir()
+            scope={'subprocess':SimpleNamespace(run=transport,TimeoutExpired=subprocess.TimeoutExpired),'io':io,'tarfile':tarfile,
+                   'Path':Path,'out':out,'palette_target':target,'palette_run':run_id}
+            exec(compile(ast.Module(body=[helper],type_ignores=[]),'actual-bounded-palette-harvest','exec'),scope)
+            self.assertTrue(scope['harvest_palettes']())
+            self.assertEqual((target/'attempt.bin').read_bytes(),content)
+            self.assertEqual(len(calls),1)
+
+    def test_palette_timeout_recovery_bounds_real_helpers_and_preserves_both_failures(self):
+        import ast
+        import io
+        import re
+        import subprocess
+        import tarfile
+        from types import SimpleNamespace
+        tree=ast.parse(Path(__file__).with_name('emulator_install_and_tour.py').read_text())
+        helpers: list[ast.stmt]=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ('shell','harvest_palettes','execute_palette_phase')]
+        self.assertEqual(len(helpers),3)
+        for logcat_timeout in (False,True):
+            with self.subTest(logcat_timeout=logcat_timeout),tempfile.TemporaryDirectory() as directory:
+                out=Path(directory);target=out/'palette-product';target.mkdir()
+                original=subprocess.TimeoutExpired(['adb','shell'],600,output=b'instrument partial\x00\xff',stderr=b'instrument stderr\xff')
+                harvest_error=subprocess.TimeoutExpired(['adb','shell'],60,output=b'tar partial\x00\xff',stderr=b'tar stderr\xff')
+                logcat_error=subprocess.TimeoutExpired(['adb','shell'],60,output=b'logcat partial\x00\xff',stderr=b'logcat stderr\xff')
+                calls=[]
+                def transport(argv,**kwargs):
+                    command=kwargs['input'].decode().strip();calls.append((command,kwargs.get('timeout')))
+                    self.assertEqual(argv,['adb','shell'])
+                    if command=='instrument command':raise original
+                    if command.startswith('run-as com.hcbiu.elcton tar -cf - '):raise harvest_error
+                    self.assertEqual(command,'logcat -d -v brief')
+                    if logcat_timeout:raise logcat_error
+                    return subprocess.CompletedProcess(argv,0,stdout=b'bounded logcat output',stderr=b'')
+                host={'passed':False,'source_sha':'d'*40,'phases':{}}
+                scope={'subprocess':SimpleNamespace(run=transport,TimeoutExpired=subprocess.TimeoutExpired),'io':io,'tarfile':tarfile,
+                       'Path':Path,'out':out,'palette_target':target,'palette_run':'recovery-fixture','palette_host':host,'json':json,'re':re}
+                exec(compile(ast.Module(body=helpers,type_ignores=[]),'actual-recovery-helpers','exec'),scope)
+                with self.assertRaises(subprocess.TimeoutExpired) as raised:
+                    scope['execute_palette_phase']('warm','instrument command',{'target_pid_after':'','test_pid_after':''})
+                self.assertIs(raised.exception,original,'Recovery replaced the original instrumentation failure')
+                self.assertEqual(len(calls),3);self.assertEqual(calls[0][1],600)
+                for command,deadline in calls[1:]:
+                    self.assertIsInstance(deadline,(int,float),'Recovery transport is unbounded: '+command)
+                    self.assertGreater(deadline,0);self.assertLessEqual(deadline,60)
+                for prefix,error in (('palette-warm',original),('palette-harvest-timeout',harvest_error)):
+                    for stream,wire in (('stdout',error.stdout),('stderr',error.stderr)):
+                        path=out/(prefix+'-'+stream+'.bin');self.assertTrue(path.exists(),'Timeout wire bytes lost: '+path.name)
+                        self.assertEqual(path.read_bytes(),wire)
+                report=json.loads((out/'report.json').read_text())
+                self.assertFalse(report['passed']);self.assertTrue(report['timed_out']);self.assertFalse(report['harvested'])
+                self.assertIn('TimeoutExpired',(out/'palette-harvest-error.txt').read_text())
+                if logcat_timeout:
+                    self.assertIn('TimeoutExpired',(out/'palette-logcat-error.txt').read_text())
+                    for stream,wire in (('stdout',logcat_error.stdout),('stderr',logcat_error.stderr)):
+                        path=out/('palette-logcat-timeout-'+stream+'.bin');self.assertTrue(path.exists(),'Logcat timeout bytes lost')
+                        self.assertEqual(path.read_bytes(),wire)
+                else:self.assertEqual((out/'palette-failure-logcat.txt').read_text(),'bounded logcat output')
+
     def test_harvest_failure_cannot_reuse_previous_run_directory(self):
         source=Path(__file__).with_name('emulator_install_and_tour.py').read_text()
         self.assertIn("assert not palette_target.exists()",source)

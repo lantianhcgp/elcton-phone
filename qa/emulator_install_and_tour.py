@@ -15,7 +15,7 @@ assert len(main)==1 and len(tests)==1,(main,tests)
 sources=list(Path('incoming').rglob('source-sha.txt'))
 assert len(sources)==1 and sources[0].read_text().strip()==subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'APK/test/source identity mismatch'
 def shell(command):
-    return subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,check=True).stdout.decode(errors='replace')
+    return subprocess.run(['adb','shell'],input=(command+'\n').encode(),capture_output=True,check=True,timeout=60).stdout.decode(errors='replace')
 for apk in (main[0],tests[0]):subprocess.run(['adb','install','-r',str(apk)],check=True)
 navigation_mode=os.environ.get('QA_NAVIGATION_MODE','three-button')
 assert navigation_mode in ('three-button','gestural'),navigation_mode
@@ -82,7 +82,12 @@ assert not palette_target.exists(),'Palette harvest requires a new run-specific 
 palette_target.mkdir()
 
 def harvest_palettes():
-    archive=subprocess.run(['adb','shell'],input=('run-as com.hcbiu.elcton tar -cf - -C files qa-palette-evidence/'+palette_run+'\n').encode(),capture_output=True)
+    try:
+        archive=subprocess.run(['adb','shell'],input=('run-as com.hcbiu.elcton tar -cf - -C files qa-palette-evidence/'+palette_run+'\n').encode(),capture_output=True,timeout=60)
+    except subprocess.TimeoutExpired as error:
+        (out/'palette-harvest-timeout-stdout.bin').write_bytes(error.stdout or b'')
+        (out/'palette-harvest-timeout-stderr.bin').write_bytes(error.stderr or b'')
+        raise
     if archive.returncode or not archive.stdout:
         (out/'palette-harvest-error.txt').write_text(archive.stderr.decode(errors='replace'))
         return False
@@ -127,7 +132,11 @@ def execute_palette_phase(phase,command,stop):
     if not phase_passed or not collected:
         (out/'report.json').write_text(json.dumps({'passed':False,'stage':'palette-'+phase,'source_sha':palette_host['source_sha'],'instrumentation':result,'stderr':errors,'timed_out':timeout_error is not None,'harvested':collected},indent=2))
         try: (out/'palette-failure-logcat.txt').write_text(shell('logcat -d -v brief'))
-        except Exception as error: (out/'palette-logcat-error.txt').write_text(type(error).__name__+': '+str(error))
+        except Exception as error:
+            if isinstance(error,subprocess.TimeoutExpired):
+                (out/'palette-logcat-timeout-stdout.bin').write_bytes(error.stdout or b'')
+                (out/'palette-logcat-timeout-stderr.bin').write_bytes(error.stderr or b'')
+            (out/'palette-logcat-error.txt').write_text(type(error).__name__+': '+str(error))
         if timeout_error is not None: raise timeout_error
         raise AssertionError('Palette phase failed: '+phase+'; preserve raw output/attempts')
 

@@ -13,3 +13,4 @@ agconnect-services.json
 signing.properties
 .ai-memory/*/
 .cache/
+.diag-build/

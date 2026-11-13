@@ -17,7 +17,7 @@ class WearEngineConfigTest {
     private val root: Path = generateSequence(Paths.get("").toAbsolutePath()) { it.parent }
         .first { Files.isRegularFile(it.resolve("app/src/main/AndroidManifest.xml")) }
     private val manifest = root.resolve("app/src/main/AndroidManifest.xml")
-    private val probe = Files.readString(root.resolve("app/src/main/java/com/hcbiu/elcton/WearProbe.kt"))
+    private val probe = root.resolve("app/src/main/java/com/hcbiu/elcton/WearProbe.kt").toFile().readText(Charsets.UTF_8)
     private val certificate = Files.newInputStream(root.resolve("app/src/test/resources/watch-development-cert.pem")).use {
         CertificateFactory.getInstance("X.509").generateCertificate(it)
     }
@@ -76,9 +76,9 @@ class WearEngineConfigTest {
 
     @Test fun unrelatedWearEngineIntegrationIsPreserved() {
         assertEquals("watchapp.nexus.0zzip", constant("watchPackage"))
-        val xml = Files.readString(manifest)
+        val xml = manifest.toFile().readText(Charsets.UTF_8)
         assertTrue(xml.contains("android:value=\"appid=118599721\""))
         assertTrue(xml.contains("android:name=\"com.huawei.health\""))
-        assertTrue(Files.readString(root.resolve("app/build.gradle.kts")).contains("com.huawei.hms:wearengine:5.0.3.301"))
+        assertTrue(root.resolve("app/build.gradle.kts").toFile().readText(Charsets.UTF_8).contains("com.huawei.hms:wearengine:5.0.3.301"))
     }
 }

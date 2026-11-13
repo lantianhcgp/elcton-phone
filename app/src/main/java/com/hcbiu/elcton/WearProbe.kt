@@ -46,7 +46,8 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
         totalTimer=run;handler.postDelayed(run,45000)
     }
     private val watchPackage="watchapp.nexus.0zzip"
-    private val watchFingerprint="8926257d1bd9ff653dcd84100d53cbbabbd39371fdda5126dfb37429e55c67be"
+    // Lite identity: bundleName + '_' + Base64(SEC1 uncompressed certificate EC point), not a cert hash/SPKI.
+    private val watchFingerprint="watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM="
     private fun publish(s:State){state=s;update(s)}
     private fun main(block:()->Unit):Unit {handler.post{if(!closed&&!activity.isFinishing)block()}}
     private fun cancelTimer(){timer?.let(handler::removeCallbacks);timer=null}

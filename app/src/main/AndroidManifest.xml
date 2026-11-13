@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
     <queries><package android:name="com.huawei.health" /></queries>
     <application android:label="hc课程表" android:theme="@style/Theme.Elcton"
         android:allowBackup="false" android:usesCleartextTraffic="false" android:supportsRtl="true">

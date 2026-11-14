@@ -6,6 +6,10 @@ on:
         description: Successful android-probe build run
         required: true
         type: string
+      build_sha:
+        description: Exact source SHA of the signed APK (optional for QA-only workflow repairs)
+        required: false
+        type: string
       api_level:
         description: Android API level for this API30+ instrumentation suite (phone is API33)
         required: true
@@ -33,6 +37,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.build_sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Download the exact signed APK
         uses: actions/download-artifact@v4
         with:

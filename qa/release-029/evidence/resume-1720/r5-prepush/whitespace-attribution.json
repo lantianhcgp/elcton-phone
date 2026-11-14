@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "source_test_config_strict": true,
+  "only_RESUME_blank_at_eof_exception": true,
+  "raw_red_preserved": true,
+  "gates": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        ".",
+        ":(exclude)qa/release-029/evidence/**",
+        ":(exclude)qa/release-029/RESUME-CHANGES.md"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=-blank-at-eof",
+        "diff",
+        "--check",
+        "--",
+        "qa/release-029/RESUME-CHANGES.md"
+      ],
+      "exit": 0
+    }
+  ]
+}

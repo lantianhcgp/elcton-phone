@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "qa/mcp_http_selftest.py",
+    "--classpath",
+    "qa/release-029/evidence/resume-1720/host-final-r5/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+  ],
+  "exit": 0,
+  "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+}

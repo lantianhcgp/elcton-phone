@@ -1,0 +1,24 @@
+[
+  {
+    "session": "20261114_175934_279832",
+    "message_id": 355662,
+    "finish_reason": "stop",
+    "end_reason": "agent_close",
+    "delegation_exit_reason": "completed",
+    "axis": "standards",
+    "bytes": 1151,
+    "sha256": "fbafa1c16a0659be3b15a41cdfe2ce3d67548f1a64aa78bfcaf6088aa0895cf9",
+    "scope": "unaltered completed child final message from canonical read-only session DB; live previews truncated"
+  },
+  {
+    "session": "20261114_175929_3300df",
+    "message_id": 355669,
+    "finish_reason": "stop",
+    "end_reason": "agent_close",
+    "delegation_exit_reason": "completed",
+    "axis": "spec",
+    "bytes": 1077,
+    "sha256": "61b0f64e9e02573ca80cf82276a077733a5a47afdfc4bf071dd3c2ee88176ac4",
+    "scope": "unaltered completed child final message from canonical read-only session DB; live previews truncated"
+  }
+]

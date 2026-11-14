@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "one exact override variance correction; runtime callback bytes unchanged",
+  "before_sha256": "007472a68e723e201ac634edbc88341e8f483cc424029cd2bc232c85e357bda2",
+  "after_sha256": "7d9c481c982113046eac0c69e17ebe1a0a2083cf2b2cdf148450f0da4e421f56",
+  "before_bytes": 42788,
+  "after_bytes": 42784,
+  "ci_failure_run": 43582496281,
+  "tests_unmodified": []
+}

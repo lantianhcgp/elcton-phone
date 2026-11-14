@@ -525,7 +525,7 @@ class MainActivity : ComponentActivity() {
             requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),8766)
         }
     }
-    override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,grantResults:IntArray){
+    override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<String>,grantResults:IntArray){
         super.onRequestPermissionsResult(requestCode,permissions,grantResults)
         if(requestCode==8766)McpKeepAlive.resumeChoice(this)
     }

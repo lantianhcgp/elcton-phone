@@ -1,0 +1,9 @@
+/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/verify_system_bars.py:57: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  light = sum(min(cast(tuple[int, int, int], pixel)) > 100 for pixel in image.crop((left, top, right, base)).getdata())
+/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/verify_system_bars.py:73: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  for pixel in image.crop((bounds[0], bounds[1], bounds[2], bounds[3])).getdata())
+...............................s.................................................................
+----------------------------------------------------------------------
+Ran 96 tests in 14.117s
+
+OK (skipped=1)

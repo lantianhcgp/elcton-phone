@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "local_merge_sha": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+  "remote_branch": "release/0.2.9-20261114",
+  "remote_sha": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+  "scope": "exact remote branch readback after push; notCI execution"
+}

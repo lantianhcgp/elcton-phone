@@ -9,3 +9,5 @@
 - 最终独立回执要同时绑定全部产品/测试/QA/workflow候选清单和完整current.diff（包含未跟踪新增文件）。候选身份绿不代替审查绿；模拟器/JVM不代替真机。
 - 续跑补跑classpath客户端发现4例2失败：原4工具McpHost被URL15项严格检查拒绝。保留首失败日志和三个原测试/夹具逐字快照，仅加入严格release-tools输入选择，既有4工具host无参行为及HTTP3784断言不变。版本构建测试等值10/0.2.8→明确11/0.2.9，原非READY分支不动；完整归因见TEST-ATTRIBUTION.md。不存在测试删除、断言放宽或把源码版本判断当AndroidPASS。
 - R3双轴原始回执分别保存，产品候选与后续QA迁移清单不可混用；R4须独立审阅完整最新输入，产品37文件SHA若无漂移须逐项证明。
+- 首次真实Android CI 43582496281在compileDebugKotlin拒绝MainActivity权限回调签名Array<out String>，父类要求Array<String>；完整原失败日志/before已保留。仅去override参数out方差，回调内容、权限处理、全部测试、SDK/签名不动。R5完整重新绑定、独立双轴增量核验，必须以新SHA真实Android CI过为准。
+

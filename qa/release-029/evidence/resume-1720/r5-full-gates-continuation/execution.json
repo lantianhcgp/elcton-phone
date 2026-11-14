@@ -1,0 +1,30 @@
+[
+  {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "qa",
+      "-p",
+      "test_*.py"
+    ],
+    "exit_code": 0,
+    "log_sha256": "597144afdd2f722dd356a7f6b92df3f8592f05774c279ac1b21b07d75636a14d"
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/mcp_http_selftest.py",
+      "--classpath",
+      "qa/release-029/evidence/resume-1720/host-final-r5/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar",
+      "--out",
+      "qa/release-029/evidence/resume-1720/r5-full-gates-continuation/http"
+    ],
+    "exit_code": 2,
+    "log_sha256": "60afd1a8dc42a7322e4aa247854828690d08cddc7e67205263155c30b54b63a5"
+  }
+]

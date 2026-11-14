@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hcbiu.elcton.SnapshotPrivacyAuditTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-14T03:34:24" hostname="runnervmccnms" time="0.005">
+  <properties/>
+  <testcase name="parserErrorsAreGenericButKnownLocalValidationIsActionable" classname="com.hcbiu.elcton.SnapshotPrivacyAuditTest" time="0.001"/>
+  <testcase name="storageRevisionCannotBeCoercedOrExceededAndYearZeroCannotBeEdited" classname="com.hcbiu.elcton.SnapshotPrivacyAuditTest" time="0.002"/>
+  <testcase name="semesterAndCourseStringsCannotBeCoercedFromOtherJsonTypes" classname="com.hcbiu.elcton.SnapshotPrivacyAuditTest" time="0.001"/>
+  <testcase name="diagnosticContainsOnlyExceptionTypeNotMessageOrCause" classname="com.hcbiu.elcton.SnapshotPrivacyAuditTest" time="0.001"/>
+  <testcase name="unknownFailureNeverPromisesThatBothSchedulesWereUntouched" classname="com.hcbiu.elcton.SnapshotPrivacyAuditTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

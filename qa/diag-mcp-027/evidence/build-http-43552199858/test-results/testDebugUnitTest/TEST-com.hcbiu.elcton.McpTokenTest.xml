@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hcbiu.elcton.McpTokenTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-14T03:34:24" hostname="runnervmccnms" time="0.014">
+  <properties/>
+  <testcase name="emptyMalformedAndOversizedTokensFailClosed" classname="com.hcbiu.elcton.McpTokenTest" time="0.007"/>
+  <testcase name="symbolicTokenAndDirectoryAreRejected" classname="com.hcbiu.elcton.McpTokenTest" time="0.001"/>
+  <testcase name="firstRunCreatesRandomStablePrivateToken" classname="com.hcbiu.elcton.McpTokenTest" time="0.005"/>
+  <testcase name="existingTokenPermissionsAreHardened" classname="com.hcbiu.elcton.McpTokenTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

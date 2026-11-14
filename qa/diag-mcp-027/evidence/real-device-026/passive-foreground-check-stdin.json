@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-11-14T03:35:56.505833+00:00",
+  "exit": 0,
+  "bytes": 90144,
+  "markerComplete": false,
+  "reportedResumedCount": 1,
+  "elctonResumed": true,
+  "foregroundStatus": "conclusive",
+  "priorEmptyReadNotBackgroundProof": true,
+  "appNotLaunched": true,
+  "onlyRead": true
+}

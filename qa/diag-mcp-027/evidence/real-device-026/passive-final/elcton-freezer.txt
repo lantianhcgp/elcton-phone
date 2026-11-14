@@ -1,0 +1,18 @@
+Frozen processes:[3726, 4741, 5040, 5097, 5855, 26275, 26494, 26578, 27017]
+2026-11-13T23:09:31.748086 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:09:49.736825 - THAW uid = 10838 pid = [ 5954 ]  reason : Activity Front caller : 1000
+2026-11-13T23:09:54.741997 - FZ uid = 10838 pid = [ 5954 ]  reason : from system caller : 1
+2026-11-13T23:12:05.508129 - THAW uid = 10838 pid = [ 5954 ]  reason : activity start caller : 1
+2026-11-13T23:12:21.159299 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:17:26.017655 - THAW uid = 10838 pid = [ 5954 ]  reason : activity start caller : 1
+2026-11-13T23:17:54.438004 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:18:00.357306 - THAW uid = 10838 pid = [ 5954 ]  reason : Sync Binder caller : 1000
+2026-11-13T23:18:05.374854 - FZ uid = 10838 pid = [ 5954 ]  reason : from system caller : 1
+2026-11-13T23:18:19.072352 - THAW uid = 10838 pid = [ 5954 ]  reason : Activity Front caller : 1000
+2026-11-14T06:59:23.461244 - FZ uid = 10838 pid = [ 25405 ]  reason : tobg caller : 1
+2026-11-14T07:02:28.522591 - THAW uid = 10838 pid = [ 25405 ]  reason : activity start caller : 1
+2026-11-14T07:03:09.653062 - FZ uid = 10838 pid = [ 25405 ]  reason : tobg caller : 1
+2026-11-14T07:14:59.645336 - THAW uid = 10838 pid = [ 25405 ]  reason : Signal caller : 1000
+2026-11-14T08:28:43.485320 - FZ uid = 10838 pid = [ 31852 ]  reason : off new process caller : 1
+2026-11-14T10:27:37.516378 - THAW uid = 10838 pid = [ 26578 ]  reason : screen on caller : 1
+2026-11-14T10:27:45.225913 - FZ uid = 10838 pid = [ 26578 ]  reason : tobg caller : 1

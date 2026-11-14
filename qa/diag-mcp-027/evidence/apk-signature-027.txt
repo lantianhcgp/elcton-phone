@@ -1,0 +1,4 @@
+Signer #1 certificate DN: CN=elcton-phone, OU=Android, O=elcton, C=CN
+Signer #1 certificate SHA-256 digest: fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94
+Signer #1 certificate SHA-1 digest: b91079b7f4db132f0fa1df20f074f7b46ed2e6b8
+Signer #1 certificate MD5 digest: be70dba622fd42dcf764071541aa1fe3

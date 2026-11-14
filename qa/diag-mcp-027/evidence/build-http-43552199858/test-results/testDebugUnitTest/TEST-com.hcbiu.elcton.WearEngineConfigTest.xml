@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hcbiu.elcton.WearEngineConfigTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-14T03:34:24" hostname="runnervmccnms" time="0.071">
+  <properties/>
+  <testcase name="publicCertificateAndRawPointArePinned" classname="com.hcbiu.elcton.WearEngineConfigTest" time="0.031"/>
+  <testcase name="unrelatedWearEngineIntegrationIsPreserved" classname="com.hcbiu.elcton.WearEngineConfigTest" time="0.003"/>
+  <testcase name="litePeerFingerprintUsesBundleAndRawPublicKey" classname="com.hcbiu.elcton.WearEngineConfigTest" time="0.003"/>
+  <testcase name="scopeAuthenticationHasInternetPermission" classname="com.hcbiu.elcton.WearEngineConfigTest" time="0.024"/>
+  <testcase name="fingerprintIsNeitherSpkiNorAsciiHexEncoding" classname="com.hcbiu.elcton.WearEngineConfigTest" time="0.006"/>
+  <testcase name="peerFingerprintDecodesToActualCertificateEcPoint" classname="com.hcbiu.elcton.WearEngineConfigTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,15 @@
+{
+  "timeUtc": "2026-11-14T03:38:06.094813+00:00",
+  "curlExit": 28,
+  "responseBytes": 0,
+  "tokenSource": "rish/run-as private in memory",
+  "url": "http://127.0.0.1:8766/mcp",
+  "noAdbForward": true,
+  "noInstallOrLaunch": true,
+  "physicalAppVersion": "0.2.6/code8",
+  "not027DeploymentProof": true,
+  "scopeErrorFound": false,
+  "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "urllibError": "URLError: <urlopen error timed out>",
+  "urllibBytes": 0
+}

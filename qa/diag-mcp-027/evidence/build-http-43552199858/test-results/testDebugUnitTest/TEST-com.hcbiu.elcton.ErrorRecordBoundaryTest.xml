@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hcbiu.elcton.ErrorRecordBoundaryTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-11-14T03:34:24" hostname="runnervmccnms" time="0.088">
+  <properties/>
+  <testcase name="cyclicCauseChainTerminatesWithExplicitMarker" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.0"/>
+  <testcase name="messageGetterFailureStillPreservesCodeAndNestedCause" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.002"/>
+  <testcase name="codeSupplierFailureIsReportedWithoutStoppingTheCauseChain" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.001"/>
+  <testcase name="causeGetterFailurePreservesFullOriginalMessageAndReportsReadFailure" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.003"/>
+  <testcase name="causeGetterFailureCannotReplaceTheOriginalBusinessFailureExit" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.001"/>
+  <testcase name="nestedCauseGetterFailureRetainsTheWholeCapturedPrefix" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.004"/>
+  <testcase name="preservesLongMultilineUnicodeMessageWithoutEllipsis" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.002"/>
+  <testcase name="ordinaryDeepCauseChainIsNotTruncatedOrMarkedAsAReadFailure" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.069"/>
+  <testcase name="diagnosticFailureMetadataNeverReadsTheFailingThrowablePayload" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.001"/>
+  <testcase name="preservesNullMessageAndCodeOnNestedCause" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.001"/>
+  <testcase name="identityCycleDetectionNeverInvokesThrowableEqualityOrHashCode" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.0"/>
+  <testcase name="providedMessageStillIsolatesCodeAndCauseFailures" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.0"/>
+  <testcase name="providedPrimaryMessageIsNeverReadAgainWhileNestedMessagesAreCapturedOnce" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.002"/>
+  <testcase name="providedNullMessageDoesNotFallBackToTheThrowableGetter" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.001"/>
+  <testcase name="errorCodeAccessorFailureCannotHideOriginalMessage" classname="com.hcbiu.elcton.ErrorRecordBoundaryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

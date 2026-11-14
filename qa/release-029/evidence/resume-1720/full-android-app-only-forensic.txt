@@ -1,0 +1,340 @@
+W/ConfigFileUtils( 1270): Failed to read asset ChimeraModuleSetList.pb: java.io.FileNotFoundException: ChimeraModuleSetList.pb
+V/BackupManagerService(  484): [UserID:0] restoreAtInstall pkg=com.hcbiu.elcton token=1 restoreSet=0
+D/CarrierServices( 3016): hasMinGmsVersion: true isEnabled: true
+I/android_emulator_multidisplay_JNI( 1619): multidisplay pipe connected!!!
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_ADDED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton
+I/SdkSandboxManager(  484): No SDKs used. Skipping SDK data reconcilation for CallingInfo{mUid=10174, mPackageName='com.hcbiu.elcton'}
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_ADDED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton
+I/GsaVoiceInteractionSrv( 1609): O received Intent { act=android.intent.action.PACKAGE_ADDED dat=package: flg=0x4000010 (has extras) }
+I/Telecom (  484): DefaultDialerCache: Refreshing default dialer for user 0: now com.google.android.dialer: DDC.oR@ANg
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton
+W/binder:484_1(  484): type=1400 audit(0.0:12): avc: denied { getopt } for scontext=u:r:system_server:s0 tcontext=u:r:shell:s0 tclass=unix_stream_socket permissive=0
+W/binder:484_1(  484): type=1400 audit(0.0:13): avc: denied { getopt } for scontext=u:r:system_server:s0 tcontext=u:r:shell:s0 tclass=unix_stream_socket permissive=0
+I/Telecom (  484): DefaultDialerCache: Refreshing default dialer for user 0: now com.google.android.dialer: DDC.oR@ANk
+W/BackupTransportManager(  484): Package com.hcbiu.elcton enabled setting: 0
+D/CompatibilityChangeReporter(  484): Compat change id reported: 135634846; UID 10140; state: DISABLED
+W/ActivityManager(  484): Slow operation: 67ms so far, now at startProcess: done starting proc!
+I/GmsModuleFndr( 1270): Beginning GMS chimera module scan
+D/CarrierSvcBindHelper(  980): onPackageAdded: com.hcbiu.elcton
+D/CarrierSvcBindHelper(  980): No carrier app for: 0
+D/ImsResolver(  980): maybeAddedImsService, packageName: com.google.android.youtube
+W/ProviderHelper( 1053): Unknown dynamite feature providerinstaller.dynamite
+D/CarrierSvcBindHelper(  980): onPackageModified: com.hcbiu.elcton
+D/CarrierSvcBindHelper(  980): No carrier app for: 0
+I/Bugle   ( 3252): BugleApplicationBase: Bugle version: messages.android_20221208_01_rc02_alldpi.x86_64.phone
+I/Watchdog(  484): Resuming HandlerChecker: PackageManager for reason: native_lib_extract. Pause count: 0
+V/BackupManagerService(  484): [UserID:0] restoreAtInstall pkg=com.hcbiu.elcton.test token=2 restoreSet=0
+V/BackupManagerService(  484): [UserID:0] Finishing install immediately
+D/PackageInstallerSession(  484): Marking session 2017521865 as applied
+D/MultiInternetWifiNetworkFactory(  484): got request NetworkRequest [ REQUEST id=88, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10120 RequestorUid: 10120 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]
+I/SdkSandboxManager(  484): No SDKs used. Skipping SDK data reconcilation for CallingInfo{mUid=10175, mPackageName='com.hcbiu.elcton.test'}
+E/GmsTaskScheduler( 1053): sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+I/InputReader(  484): Reconfiguring input devices, changes=KEYBOARD_LAYOUTS | 
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_ADDED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton.test
+W/binder:484_11(  484): type=1400 audit(0.0:19): avc: denied { getopt } for scontext=u:r:system_server:s0 tcontext=u:r:shell:s0 tclass=unix_stream_socket permissive=0
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_ADDED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton.test
+D/ControlsListingControllerImpl(  761): ServiceConfig reloaded, count: 0
+I/GsaVoiceInteractionSrv( 1609): O received Intent { act=android.intent.action.PACKAGE_ADDED dat=package: flg=0x4000010 (has extras) }
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton.test
+V/MediaPlayerList(  953): mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+D/MediaPlayerList(  953): Name of package changed: com.hcbiu.elcton.test
+W/BackupTransportManager(  484): Package com.hcbiu.elcton.test enabled setting: 0
+D/ControlsListingControllerImpl(  761): ServiceConfig reloaded, count: 0
+D/TelephonyProvider(  980): subIdString = 1 subId = 1
+W/system_server(  484): Long monitor contention with owner binder:484_D (1510) at void com.android.server.alarm.AlarmManagerService.setImpl(int, long, long, long, android.app.PendingIntent, android.app.IAlarmListener, java.lang.String, int, android.os.WorkSource, android.app.AlarmManager$AlarmClockInfo, int, java.lang.String, android.os.Bundle, int)(AlarmManagerService.java:2318) waiters=0 in void com.android.server.alarm.AlarmManagerService$AlarmHandler.handleMessage(android.os.Message) for 429ms
+I/ActivityManager(  484): Force stopping com.hcbiu.elcton appid=10174 user=0: clear data
+W/Looper  (  484): Slow dispatch took 467ms main h=com.android.server.alarm.AlarmManagerService$AlarmHandler c=null m=7
+W/system_server(  484): Long monitor contention with owner android.fg (507) at android.content.res.Configuration com.android.server.wm.ActivityTaskManagerService.getGlobalConfigurationForPid(int)(ActivityTaskManagerService.java:1128) waiters=1 in boolean com.android.server.wm.WindowManagerService.getWindowInsets(android.view.WindowManager$LayoutParams, int, android.view.InsetsState) for 313ms
+W/Looper  (  484): Slow dispatch took 661ms android.fg h=android.os.Handler c=com.android.server.om.OverlayManagerService$$ExternalSyntheticLambda1@7fb8e06 m=0
+I/ActivityManager(  484): Force stopping com.hcbiu.elcton appid=10174 user=-1: clearApplicationUserData
+E/SystemServiceRegistry(  913): No service published for: ethernet
+E/SystemServiceRegistry(  913): android.os.ServiceManager$ServiceNotFoundException: No service published for: ethernet
+I/BugleRcs( 3252): RcsAvailabilityUpdaterRemote: updateRcsAvailability, hint: SINGLE_REGISTRATION_CAPABILITY_UPDATE
+D/ImsResolver(  980): maybeAddedImsService, packageName: com.hcbiu.elcton
+I/SnapshotHandler( 3252): Unable to retrieve flag snapshot for com.google.android.libraries.notifications.platform#com.google.android.apps.messaging, using defaults.
+I/RcsClientLib( 3252): Disconnecting ChatSessionService
+D/ImsResolver(  980): maybeAddedImsService, packageName: com.hcbiu.elcton
+D/CompatibilityChangeReporter( 1015): Compat change id reported: 163400105; UID 10151; state: ENABLED
+W/TextView( 1015): onProvideContentCaptureStructure(): calling assumeLayout()
+D/PackageManager(  484): Clear ephemeral installer activity
+D/CarrierSvcBindHelper(  980): onPackageAdded: com.hcbiu.elcton.test
+D/NetworkMonitor/101(  913): PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=122ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sat, 14 Nov 2026 10:15:41 GMT], X-Android-Received-Millis=[1794651341427], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1794651341414]}
+W/TransactionTracing(  363): Could not find layer handle 0x7d202d1bdf30
+I/RcsClientLib( 3252): shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+D/CarrierSvcBindHelper(  980): onPackageModified: com.hcbiu.elcton.test
+D/CarrierSvcBindHelper(  980): No carrier app for: 0
+I/BlockstoreModuleInit( 1270): scheduleOneOffTaskIfAlreadyScheduled finished [CONTEXT service_id=258 ]
+D/CompatibilityChangeReporter(  484): Compat change id reported: 161252188; UID 10093; state: DISABLED
+D/CarrierSvcBindHelper(  980): onHandleForceStop: [com.hcbiu.elcton]
+I/FontLog ( 1053): Query [Google Sans:500] resolved to {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+I/RcsClientLib( 3252): com.google.android.rcs.client.provisioning.singleregistration.SingleRegistrationVendorImsService connected
+I/EsimModuleInit( 1270): onHandleIntent action: com.google.android.gms.chimera.container.CONTAINER_UPDATED [CONTEXT service_id=333 ]
+D/ImsResolver(  980): maybeAddedImsService, packageName: com.hcbiu.elcton.test
+D/ImsResolver(  980): maybeAddedImsService, packageName: com.hcbiu.elcton.test
+I/SimDialogProhibitService( 1083): No SimDialogActivity for dismiss.
+D/PackageManager(  484): Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+I/CarrierServices( 3016): [58] fjp.y: Bugle is default SMS app: true
+I/ActivityManager(  484): Force stopping com.hcbiu.elcton appid=10174 user=0: from pid 3617
+D/EGL_emulation( 1270): eglCreateContext: 0x7a5c4440bd90: maj 3 min 0 rcv 3
+I/CarrierServices( 3016): [56] fjp.f: RCS Configuration storage in Bugle is disabled by p/h flag, using ProvisioningEngineStateCacheUtil.getProvisioningConfigurationForGivenSimIfExist()
+I/BugleRcs( 3252): com.google.android.rcs.client.locationsharing.LocationSharingService RCS service connected
+I/ActivityManager(  484): Force stopping com.hcbiu.elcton.test appid=10175 user=0: from pid 3636
+I/binder  (    0): release 3263:3263 transaction 124428 out, still active
+I/binder  (    0): undelivered TRANSACTION_COMPLETE
+I/CarrierServices( 3016): [64] fhf.b: Bugle has minimum required RCS permissions: true
+D/CarrierSvcBindHelper(  980): onHandleForceStop: [com.hcbiu.elcton]
+W/binder:2888_1( 2888): type=1400 audit(0.0:20): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=269 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+D/AndroidRuntime( 3654): Calling main entry com.android.commands.am.Am
+D/CarrierSvcBindHelper(  980): No carrier app for: 0
+D/CarrierSvcBindHelper(  980): onHandleForceStop: [com.hcbiu.elcton.test]
+D/CarrierSvcBindHelper(  980): No carrier app for: 0
+D/CarrierConfigLoader(  980): mHandler: EVENT_DO_FETCH_DEFAULT phoneId: 0
+I/ActivityManager(  484): Force stopping com.hcbiu.elcton appid=10174 user=0: start instr
+D/CarrierConfigLoader(  980): File not found : /data/user_de/0/com.android.phone/files/carrierconfig-com.android.carrierconfig-override-89860***************-1.xml
+D/CompatibilityChangeReporter(  484): Compat change id reported: 135634846; UID 10174; state: DISABLED
+D/Zygote  (  289): Forked child process 3684
+I/ActivityManager(  484): Start proc 3684:com.hcbiu.elcton/u0a174 for added application com.hcbiu.elcton
+D/CompatibilityChangeReporter(  484): Compat change id reported: 168419799; UID 10126; state: DISABLED
+D/CompatibilityChangeReporter(  484): Compat change id reported: 273564678; UID 10126; state: DISABLED
+D/PackageManager(  484): Clear ephemeral installer activity
+D/PersistedStoragePackageUninstalledReceiver(  762): Received android.intent.action.PACKAGE_DATA_CLEARED for com.hcbiu.elcton for u0
+I/Telephony(  980): TelecomAccountRegistry: onSubscriptionsChanged - update accounts
+I/DialerLegacyVoicemailNotificationReceiver( 1426): com.android.dialer.app.calllog.LegacyVoicemailNotificationReceiver.onReceive:101 received legacy voicemail notification
+I/resolv  (  285): res_nmkquery: (QUERY, IN, AAAA)
+W/ziparchive( 3684): Unable to open '/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.dm': No such file or directory
+W/ziparchive( 3684): Unable to open '/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.dm': No such file or directory
+I/NearbyDiscovery( 1053): DiscoveryService created [CONTEXT service_id=265 ]
+D/ConnectivityService(  484): requestNetwork for uid/pid:1000/484 asUid: 10125 activeRequest: null callbackRequest: 98 [NetworkRequest [ REQUEST id=99, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10125 RequestorUid: 1000 RequestorPkg: android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+D/BoundBrokerSvc( 1270): onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{fa10c0 com.google.android.apps.messaging/10109} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{fa10c0 com.google.android.apps.messaging/10109} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{200753e com.google.android.gm/10144} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{200753e com.google.android.gm/10144} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{9deff9f com.google.android.apps.docs/10125} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{9deff9f com.google.android.apps.docs/10125} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{9cf78ec com.android.remoteprovisioner/10150} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{9cf78ec com.android.remoteprovisioner/10150} BLOCKED
+D/DhcpClient(  913): Received packet: 02:15:b2:00:00:00 OFFER, ip /10.0.2.16, mask /255.255.255.0, DNS servers: /10.0.2.3 , gateways [/10.0.2.2], lease time 86400, domain null
+I/DefaultPermGrantPolicy(  484): Revoking permissions from disabled data services for user:0
+I/Fitness ( 1053): OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+W/ziparchive( 3684): Unable to open '/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.dm': No such file or directory
+W/ziparchive( 3684): Unable to open '/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.dm': No such file or directory
+E/Netd    (  285): no such netId 100
+I/netd    (  285): networkAddRouteParcel(100, RouteInfoParcel{destination: 10.0.2.0/24, ifName: wlan0, nextHop: , mtu: 0}) -> ServiceSpecificException(64, "Machine is not on the network") <0.03ms>
+W/Conscrypt( 1270): 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+D/nativeloader( 3684): Configuring classloader-namespace for other apk /system/framework/android.test.runner.jar:/system/framework/android.test.mock.jar:/system/framework/android.test.base.jar:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/lib/x86_64:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.hcbiu.elcton
+W/ChimeraUtils( 1053): Module com.google.android.gms.nearby_en missing resource null(0)
+I/CarrierServices( 3016): [38] fhf.b: Config state is not ACCEPTED, provisioning still in progress
+I/Nearby  ( 1053): is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+V/GraphicsEnvironment( 3684): ANGLE Developer option for 'com.hcbiu.elcton' set to: 'default'
+D/ConnectivityService(  484): NetReassign [101 : null → 100] [c 0] [a 1] [i 0]
+D/WifiConfigStore(  484): Writing to stores completed in 41 ms.
+I/resolv  (  285): doQuery: rcode=0, ancount=8, return value=161
+V/GraphicsEnvironment( 3684): ANGLE GameManagerService for com.hcbiu.elcton: false
+V/GraphicsEnvironment( 3684): Neither updatable production driver nor prerelease driver is supported.
+I/resolv  (  285): res_nmkquery: (QUERY, IN, AAAA)
+I/BugleRcs( 3252): RcsAvailabilityUpdaterRemote: updateRcsAvailabilityPostProcess, Get Updated RcsAvailability, RcsAvailability: BUGLE_LOADING_AVAILABILITY_IN_PROGRESS, SimId: redacted-pii[0-chars]
+D/nativeloader( 3684): Configuring classloader-namespace for other apk /system/framework/android.test.mock.jar. target_sdk_version=34, uses_libraries=ALL, library_path=/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/lib/x86_64:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/lib/x86_64, permitted_path=/data:/mnt/expand
+D/ApplicationLoaders( 3684): Returning zygote-cached class loader: /system/framework/android.test.base.jar
+I/CarrierServices( 3016): [65] EventHubProxy.unsubscribe: Removing event listener 187510711 for category 3 for hub UI
+W/om.hcbiu.elcton( 3684): ClassLoaderContext shared library size mismatch. Expected=0, found=2 (PCL[] | PCL[]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]})
+D/nativeloader( 3684): Configuring classloader-namespace for other apk /system/framework/android.test.runner.jar. target_sdk_version=34, uses_libraries=ALL, library_path=/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/lib/x86_64:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/lib/x86_64, permitted_path=/data:/mnt/expand
+I/CarrierServices( 3016): [54] fcw.d: (PEv2-SM-144770827): DisabledState: event Connectivity event [null]
+W/om.hcbiu.elcton( 3684): ClassLoaderContext shared library size mismatch. Expected=0, found=3 (PCL[] | PCL[]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]#PCL[/system/framework/android.test.runner.jar*2649186567]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]}};PCL[/system/framework/android.test.runner.jar*2649186567:/system/framework/android.test.mock.jar*4109917914:/system/framework/android.test.base.jar*2876549756:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk*3738845380:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes2.dex*2978641768:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes3.dex*2678828133:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes4.dex*1457280112:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk*731075480:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes2.dex*2012067438:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes3.dex*3274501843:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes4.dex*1690264890])
+I/CarrierServices( 3016): [56] fne.handleMessage: RcsEngineImpl[DUAL_REG]:[a5405280-9096]>Handler: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference
+W/om.hcbiu.elcton( 3684): ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*2649186567]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]#PCL[/system/framework/android.test.runner.jar*2649186567]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]}};PCL[/system/framework/android.test.runner.jar*2649186567:/system/framework/android.test.mock.jar*4109917914:/system/framework/android.test.base.jar*2876549756:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk*3738845380:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes2.dex*2978641768:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes3.dex*2678828133:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes4.dex*1457280112:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk*731075480:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes2.dex*2012067438:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes3.dex*3274501843:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes4.dex*1690264890])
+I/CarrierServices( 3016): [57] etr.c: Connected state: [1], networkType: [WIFI]
+I/CarrierServices( 3016): [56] fjp.f: RCS Configuration storage in Bugle is disabled by p/h flag, using ProvisioningEngineStateCacheUtil.getProvisioningConfigurationForGivenSimIfExist()
+E/WakeLock( 1053): GCM_HB_ALARM release without a matched acquire!
+W/om.hcbiu.elcton( 3684): ClassLoaderContext classpath size mismatch. expected=0, found=2 (PCL[] | PCL[/system/framework/android.test.runner.jar*2649186567:/system/framework/android.test.mock.jar*4109917914]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]#PCL[/system/framework/android.test.runner.jar*2649186567]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]}};PCL[/system/framework/android.test.runner.jar*2649186567:/system/framework/android.test.mock.jar*4109917914:/system/framework/android.test.base.jar*2876549756:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk*3738845380:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes2.dex*2978641768:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes3.dex*2678828133:/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk!classes4.dex*1457280112:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk*731075480:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes2.dex*2012067438:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes3.dex*3274501843:/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk!classes4.dex*1690264890])
+W/ziparchive( 3684): Unable to open '/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.dm': No such file or directory
+W/ziparchive( 3684): Unable to open '/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.dm': No such file or directory
+V/ClearcutMetricXmitter( 3016): Transmission is done.
+I/CarrierServices( 3016): [36] EventHubProxy.unsubscribe: Removing event listener 89211684 for category 5 for hub UI
+I/DckStubModuleInit( 1270): Loading stub module components [CONTEXT service_id=289 ]
+W/ziparchive( 3684): Unable to open '/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.dm': No such file or directory
+W/ziparchive( 3684): Unable to open '/data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.dm': No such file or directory
+W/Parcel  (  761): Expecting binder but got null!
+I/Dck     ( 1270): doesDeviceHaveSupportedWirelessCapabilities: wccSysProp:0, wccMendel:1, deviceWccOverride:false [CONTEXT service_id=289 ]
+I/RcsClientLib( 3252): shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+W/om.hcbiu.elcton( 3684): type=1400 audit(0.0:24): avc: denied { read } for name="u:object_r:incremental_prop:s0" dev="tmpfs" ino=190 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:incremental_prop:s0 tclass=file permissive=0 app=com.hcbiu.elcton
+I/CarrierServices( 3016): [64] fhf.b: Bugle has minimum required RCS permissions: true
+I/CarrierServices( 3016): [64] fjp.x: Rcs is enabled from user settings: true
+W/om.hcbiu.elcton( 3684): type=1400 audit(0.0:25): avc: denied { read } for name="filesystems" dev="proc" ino=4026532078 scontext=u:r:untrusted_app:s0:c174,c256,c512,c768 tcontext=u:object_r:proc_filesystems:s0 tclass=file permissive=0 app=com.hcbiu.elcton
+D/NetworkSecurityConfig( 3684): Using Network Security Config from resource network_security_config debugBuild: true
+D/NetworkSecurityConfig( 3684): Using Network Security Config from resource network_security_config debugBuild: true
+I/AndroidJUnitRunner( 3684): newApplication com.hcbiu.elcton.ElctonApplication
+W/SystemServiceRegistry( 2888): No service published for: persistent_data_block
+I/resolv  (  285): GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+D/CellBroadcastReceiver( 1378): mockmodem is running? = false
+I/TestRunner( 3684): started: inspectThemeAndPersistencePhase(com.hcbiu.elcton.ThemeUiTest)
+D/BtGatt.GattService(  953): registerScanner() - UUID=d7dff869-71c0-4b3a-ae07-e1cafca315cb
+I/RcsClientLib( 3252): shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+E/AndroidXTracer( 3684): enableTracing failed. You may need to upgrade your androidx.tracing:tracing version
+E/AndroidXTracer( 3684): java.lang.NoSuchMethodError: No static method forceEnableAppTracing()V in class Landroidx/tracing/Trace; or its super classes (declaration of 'androidx.tracing.Trace' appears in /data/app/~~3lTD7HwMcL_Fy07vpud6bA==/com.hcbiu.elcton-DNRTK4Z9AVWBVZGawSF0Vg==/base.apk)
+E/AndroidXTracer( 3684): 	at androidx.test.platform.tracing.AndroidXTracer.enableTracing(AndroidXTracer.java:57)
+E/AndroidXTracer( 3684): 	at androidx.test.platform.tracing.Tracing.<init>(Tracing.java:53)
+D/EGL_emulation( 1015): app_time_stats: avg=548.11ms min=432.07ms max=664.15ms count=2
+I/ActivityTaskManager(  484): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity} from uid 10174
+I/NetworkScheduler.Stats( 1053): Task com.google.android.gms/com.google.android.gms.auth.account.be.legacy.AuthCronService started execution. cause:5 exec_start_elapsed_seconds: 66 [CONTEXT service_id=218 ]
+I/CarrierServices( 3016): [65] fjp.y: Bugle is default SMS app: true
+W/ChimeraUtils( 1053): Module com.google.android.gms.nearby_en missing resource null(0)
+D/CoreBackPreview(  484): Window{5a2cf64 u0 Splash Screen com.hcbiu.elcton}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9ae21c9, mPriority=0}
+W/Looper  (  484): Slow dispatch took 151ms main h=android.os.Handler c=<recycled PooledLambda@fccdbef> m=0
+W/.gms.persistent( 1053): Long monitor contention with owner lowpool[6] (3007) at void bytb.u(byps, int)(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3) waiters=0 in int bytb.l(bysm, aphn) for 434ms
+D/LocalImageResolver(  761): Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: PRE_ON_CREATE
+V/ActivityScenario( 3684): Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+W/system_server(  484): Long monitor contention with owner binder:484_2 (503) at android.content.res.CompatibilityInfo com.android.server.wm.ActivityTaskManagerService$LocalService.compatibilityInfoForPackage(android.content.pm.ApplicationInfo)(ActivityTaskManagerService.java:5934) waiters=0 in void com.android.server.wm.WindowManagerService.finishDrawingWindow(com.android.server.wm.Session, android.view.IWindow, android.view.SurfaceControl$Transaction, int) for 105ms
+W/Looper  (  484): Drained
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: CREATED
+V/ActivityScenario( 3684): Update currentActivityStage to CREATED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: STARTED
+V/ActivityScenario( 3684): Update currentActivityStage to STARTED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/AppWidgetServiceImpl(  484): Provider info from ComponentInfo{com.google.android.apps.docs/com.google.android.apps.docs.drive.widget.suggestion.SuggestionAppWidgetProvider} won't be persisted.
+D/AppWidgetServiceImpl(  484): Provider info from ComponentInfo{com.google.android.apps.docs/com.google.android.apps.docs.drive.widget.CakemixAppWidgetProvider} won't be persisted.
+D/CompatibilityChangeReporter(  484): Compat change id reported: 174042936; UID 10159; state: DISABLED
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: RESUMED
+V/ActivityScenario( 3684): Update currentActivityStage to RESUMED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/CompatibilityChangeReporter( 3684): Compat change id reported: 237531167; UID 10174; state: DISABLED
+W/Parcel  ( 3684): Expecting binder but got null!
+W/system_server(  484): Long monitor contention with owner main (484) at boolean com.android.server.job.JobSchedulerService.isBatteryCharging()(JobSchedulerService.java:3423) waiters=0 in void com.android.server.job.controllers.QuotaController$TempAllowlistTracker.onAppRemoved(int) for 446ms
+D/CoreBackPreview(  484): Window{7d26763 u0 com.hcbiu.elcton/com.hcbiu.elcton.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c26090, mPriority=0}
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: PAUSED
+V/ActivityScenario( 3684): Update currentActivityStage to PAUSED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+I/NearbySharing( 1270): SharingTileService destroyed [CONTEXT service_id=194 ]
+I/Choreographer(  761): Skipped 156 frames!  The application may be doing too much work on its main thread.
+D/TrafficStats( 2888): tagSocket(110) with statsTag=0x1809, statsUid=-1
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{e3a3397 com.google.android.as/10116} BLOCKED
+E/RemoteAugmentedAutofillService(  484): Bad service name for flags 1048704: com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAugmentedAutofillService
+D/TrafficStats( 2888): tagSocket(110) with statsTag=0x1809, statsUid=-1
+I/Auth    ( 1270): [SupervisedAccountIntentOperation] This operation is disabled
+I/BlockstoreStorage( 1270): Clearing Blockstore Data for package com.hcbiu.elcton [CONTEXT service_id=258 ]
+I/BlockstoreStorage( 1270): Keyless data not found or its IsLastInstallationData = false. [CONTEXT service_id=258 ]
+W/om.hcbiu.elcton( 3684): Verification of void androidx.compose.runtime.LaunchedEffectImpl.onAbandoned() took 113.776ms (158.20 bytecodes/s) (1704B approximate peak alloc)
+I/resolv  (  285): doQuery: rcode=0, ancount=8, return value=164
+I/FontLog ( 1053): Package com.hcbiu.elcton.test has no metadata [CONTEXT service_id=132 ]
+W/GCM     ( 1053): Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package: flg=0x4000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+I/resolv  (  285): res_nmkquery: (QUERY, IN, AAAA)
+D/EGL_emulation(  761): app_time_stats: avg=545.08ms min=66.74ms max=1023.41ms count=2
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{6b50a7a com.google.android.googlequicksearchbox/10119} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{6b50a7a com.google.android.googlequicksearchbox/10119} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{8a2d22b com.google.android.apps.messaging/10109} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{8a2d22b com.google.android.apps.messaging/10109} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{19ec688 com.google.android.apps.docs/10125} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{19ec688 com.google.android.apps.docs/10125} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{7408243 com.hcbiu.elcton/10174} -> PackageSetting{6482821 com.google.android.settings.intelligence/10107} BLOCKED
+I/AppsFilter(  484): interaction: PackageSetting{13d1f9 com.hcbiu.elcton.test/10175} -> PackageSetting{6482821 com.google.android.settings.intelligence/10107} BLOCKED
+D/LocalImageResolver(  761): Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+D/LocalImageResolver(  761): Couldn't use ImageDecoder for drawable, falling back to non-resized load.
+E/AppOps  (  484): Bad call made by uid 10119. Package "com.google.android.gms" does not belong to uid 10119.
+D/ProfileInstaller( 3684): Installing profile for com.hcbiu.elcton
+E/AppOps  (  484): Bad call made by uid 10119. Package "com.google.android.gms" does not belong to uid 10119.
+I/resolv  (  285): res_nsend: used send_dg 79 terrno: 0
+I/NotificationService(  484): Cannot find enqueued record for key: 0|android|13|PreBootBroadcaster|1000
+W/InputManager-JNI(  484): Input channel object '5a2cf64 Splash Screen com.hcbiu.elcton (client)' was disposed without first being removed with the input manager!
+W/WindowManager(  484): Failed looking up window session=Session{6a926ba 761:u0a10157} callers=com.android.server.wm.WindowManagerService.windowForClientLocked:6050 com.android.server.wm.Session.setOnBackInvokedCallbackInfo:943 android.view.IWindowSession$Stub.onTransact:1180 
+E/WindowManager(  484): setOnBackInvokedCallback(): No window state for package:com.android.systemui
+I/GmsDebugLogger( 1270): [53] +tflite_dynamite:-1
+I/AiAiEcho( 1576): EchoSearch: AppFetcherImpl is initialized with [19] apps [time=9, reason=com.hcbiu.elcton is added]
+D/CarrierSvcBindHelper(  980): onPackageModified: com.google.android.settings.intelligence
+D/CarrierSvcBindHelper(  980): No carrier app for: 0
+I/resolv  (  285): res_nmkquery: (QUERY, IN, AAAA)
+I/AiAiEcho( 1576): EchoSearch: AppFetcherImpl is initialized with [19] apps [time=4, reason=com.hcbiu.elcton.test is added]
+I/resolv  (  285): res_nsend: used send_dg 182 terrno: 0
+I/resolv  (  285): doQuery: rcode=0, ancount=8, return value=182
+I/RcsClientLib( 3252): shouldUseCarrierServicesJibeService: true, CarrierServices rcs service found: true
+I/Icing   ( 1270): doRemovePackageData com.hcbiu.elcton
+D/CompatibilityChangeReporter( 2147): Compat change id reported: 150939131; UID 10123; state: ENABLED
+D/CompatibilityChangeReporter( 1633): Compat change id reported: 150939131; UID 10121; state: ENABLED
+D/CompatibilityChangeReporter(  484): Compat change id reported: 161252188; UID 10175; state: DISABLED
+I/ActivityTaskManager(  484): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.hcbiu.elcton.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} from uid 10174
+D/CompatibilityChangeReporter(  484): Compat change id reported: 265464455; UID 10175; state: DISABLED
+D/CompatibilityChangeReporter(  484): Compat change id reported: 265452344; UID 10175; state: DISABLED
+D/CompatibilityChangeReporter(  484): Compat change id reported: 194833441; UID 10175; state: ENABLED
+D/CoreBackPreview(  484): Window{6bc77bf u0 Splash Screen com.hcbiu.elcton.test}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c1019d5, mPriority=0}
+I/resolv  (  285): GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+I/resolv  (  285): GetAddrInfoHandler::run: {100 786532 100 983140 10120 0}
+W/ActivityManager(  484): Slow operation: 564ms so far, now at startProcess: building log message
+I/ActivityManager(  484): Start proc 4324:com.hcbiu.elcton.test/u0a175 for next-top-activity {com.hcbiu.elcton.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity}
+W/ActivityManager(  484): Slow operation: 564ms so far, now at startProcess: starting to update pids map
+W/ActivityManager(  484): Slow operation: 566ms so far, now at startProcess: done updating pids map
+D/ApplicationLoaders( 4324): Returning zygote-cached class loader: /system/framework/android.test.base.jar
+D/nativeloader( 4324): Configuring classloader-namespace for other apk /system/framework/android.test.mock.jar. target_sdk_version=34, uses_libraries=ALL, library_path=/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.hcbiu.elcton.test
+D/ApplicationLoaders( 4324): Returning zygote-cached class loader: /system/framework/android.test.base.jar
+W/biu.elcton.test( 4324): ClassLoaderContext shared library size mismatch. Expected=0, found=2 (PCL[] | PCL[]{PCL[/system/framework/android.test.base.jar*2876549756]#PCL[/system/framework/android.test.mock.jar*4109917914]})
+D/nativeloader( 4324): Configuring classloader-namespace for other apk /system/framework/android.test.runner.jar. target_sdk_version=34, uses_libraries=ALL, library_path=/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.hcbiu.elcton.test
+W/ziparchive( 4324): Unable to open '/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.dm': No such file or directory
+W/ziparchive( 4324): Unable to open '/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.dm': No such file or directory
+I/ImsResolver(  980): Received BOOT_COMPLETED
+D/ImsResolver(  980): maybeAddedImsService, packageName: null
+D/ImsResolver(  980): startDynamicQuery: Service queried, waiting for response.
+D/nativeloader( 4324): Configuring classloader-namespace for other apk /data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~gWciJDFrB4TgE-VJm8IMHA==/com.hcbiu.elcton.test-zxzJzLgbwl4tNL_NmosnxQ==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.hcbiu.elcton.test
+D/FastPairService(  484): onReceive: ACTION_SCREEN_ON or boot complete.
+D/CarrierConfigLoader(  980): mHandler: EVENT_SYSTEM_UNLOCKED phoneId: 0
+E/GmsTaskScheduler( 1053): sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+V/GraphicsEnvironment( 4324): ANGLE Developer option for 'com.hcbiu.elcton.test' set to: 'default'
+V/GraphicsEnvironment( 4324): ANGLE GameManagerService for com.hcbiu.elcton.test: false
+V/GraphicsEnvironment( 4324): Neither updatable production driver nor prerelease driver is supported.
+D/NetworkSecurityConfig( 4324): No Network Security Config specified, using platform default
+I/BugleRcs( 3252): com.google.android.rcs.client.transportcontrol.TransportControlService RCS service connected
+D/CoreBackPreview(  484): Window{6c809ee u0 com.hcbiu.elcton.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@413bea1, mPriority=0}
+E/GmsTaskScheduler( 1053): sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+W/ServiceManager(  363): Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10175 pid=4324
+E/Vision  ( 1270): Couldn't read checkbot setting: android.provider.Settings$SettingNotFoundException: multi_cb
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: STOPPED
+V/ActivityScenario( 3684): Update currentActivityStage to STOPPED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/CompatibilityChangeReporter( 4352): Compat change id reported: 183155436; UID 10122; state: ENABLED
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: DESTROYED
+V/ActivityScenario( 3684): Update currentActivityStage to DESTROYED, currentActivity=null
+I/BugleNetwork( 3252): NewLightTickleFcmHandler: Successfully handled firebase new token.
+I/BugleRcsEngine( 3252): [100] bgvu.z: (Sim): Ignoring duplicate SIM state: LOADED
+W/InputManager-JNI(  484): Input channel object '7d26763 com.hcbiu.elcton/com.hcbiu.elcton.MainActivity (client)' was disposed without first being removed with the input manager!
+W/WindowManager(  484): Failed looking up window session=Session{66db7f4 3684:u0a10174} callers=com.android.server.wm.WindowManagerService.windowForClientLocked:6050 com.android.server.wm.Session.setOnBackInvokedCallbackInfo:943 android.view.IWindowSession$Stub.onTransact:1180 
+E/WindowManager(  484): setOnBackInvokedCallback(): No window state for package:com.hcbiu.elcton
+W/TransactionTracing(  363): Could not find layer handle 0x7d202d1bd990
+W/TransactionTracing(  363): Could not find layer handle 0x7d202d1c0b10
+D/IdlingRegistry( 3684): Unregistering idling resources: [androidx.compose.ui.test.junit4.EspressoLink@741aef4]
+E/TestRunner( 3684): failed: inspectThemeAndPersistencePhase(com.hcbiu.elcton.ThemeUiTest)
+D/PackageManager(  484): Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+E/TestRunner( 3684): ----- begin exception -----
+E/TestRunner( 3684): 	at androidx.compose.ui.test.SemanticsNodeInteractionCollection.fetchSemanticsNodes$default(SemanticsNodeInteraction.kt:249)
+E/TestRunner( 3684): 	at com.hcbiu.elcton.ThemeUiTest$inspectThemeAndPersistencePhase$1.invoke(ThemeUiTest.kt:271)
+E/TestRunner( 3684): 	at com.hcbiu.elcton.ThemeUiTest$inspectThemeAndPersistencePhase$1.invoke(ThemeUiTest.kt:271)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:424)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:306)
+E/TestRunner( 3684): 	at com.hcbiu.elcton.ThemeUiTest.inspectThemeAndPersistencePhase(ThemeUiTest.kt:271)
+E/TestRunner( 3684): 	at java.lang.reflect.Method.invoke(Native Method)
+E/TestRunner( 3684): 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+I/BugleDataModel( 3252): FixupMessageStatusOnStartupAction: sendFailedCnt: 0, downloadFailedCnt: 0, partsProcessingFailedCnt: 0
+I/TestRunner( 3684): finished: inspectThemeAndPersistencePhase(com.hcbiu.elcton.ThemeUiTest)
+D/PackageManager(  484): Clear ephemeral installer activity
+I/ImsCallbackAM [0](  980): Local callback removed: android.telephony.ims.ImsMmTelManager$CapabilityCallback$CapabilityBinder@692dc6
+I/ImsCallbackAM [0](  980): Local callback removed: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder@5df0187
+W/InputManager-JNI(  484): Input channel object '6bc77bf Splash Screen com.hcbiu.elcton.test (client)' was disposed without first being removed with the input manager!
+I/Telephony(  980): TelecomAccountRegistry: setupAccounts: Found 1 phones.  Attempting to register.
+I/Telephony(  980): TelecomAccountRegistry: setupAccounts: Phone with subscription id 1
+W/TransactionTracing(  363): Could not find layer handle 0x7d202d1c1350
+I/ActivityManager(  484): Force stopping com.hcbiu.elcton appid=10174 user=0: finished inst
+I/SystemUpdateManagerService(  484): No existing info file /data/system/system-update-info.xml
+I/ActivityManager(  484): Killing 3684:com.hcbiu.elcton/u0a174 (adj 0): stop com.hcbiu.elcton due to finished inst
+I/        (    0): roidJUnitRunner (3977) used greatest stack depth: 11048 bytes left
+I/libprocessgroup(  484): Successfully killed process cgroup uid 10174 pid 3684 in 6ms
+W/oid.documentsui( 3688): Long monitor contention with owner pool-28-thread-4 (4403) at void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId)(ProvidersCache.java:646) waiters=2 in void com.android.documentsui.roots.ProvidersCache$MultiProviderUpdateTask.handleDocumentsProvider(android.content.pm.ProviderInfo, com.android.documentsui.base.UserId) for 553ms
+W/InputManager-JNI(  484): Input channel object '6c809ee com.hcbiu.elcton.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+W/WindowManager(  484): Failed looking up window session=Session{8d26233 4324:u0a10175} callers=com.android.server.wm.WindowManagerService.windowForClientLocked:6050 com.android.server.wm.Session.setOnBackInvokedCallbackInfo:943 android.view.IWindowSession$Stub.onTransact:1180 
+E/WindowManager(  484): setOnBackInvokedCallback(): No window state for package:com.hcbiu.elcton.test
+W/TransactionTracing(  363): Could not find layer handle 0x7d202d1bfbb0
+W/TransactionTracing(  363): Could not find layer handle 0x7d202d1bf190
+W/Conscrypt( 1053): 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@231818047@23.18.18 (190800-535401451):0)
+V/ActivityManager(  484): Got obituary of 3684:com.hcbiu.elcton
+W/ActivityManager(  484): setHasOverlayUi called on unknown pid: 3684
+I/Zygote  (  289): Process 3684 exited due to signal 9 (Killed)

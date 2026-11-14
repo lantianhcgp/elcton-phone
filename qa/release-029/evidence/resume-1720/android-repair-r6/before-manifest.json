@@ -1,0 +1,26 @@
+[
+  {
+    "path": "app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+    "before": "qa/release-029/evidence/resume-1720/android-repair-r6/MainActivity.kt.original",
+    "bytes": 42784,
+    "sha256": "7d9c481c982113046eac0c69e17ebe1a0a2083cf2b2cdf148450f0da4e421f56"
+  },
+  {
+    "path": "app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt",
+    "before": "qa/release-029/evidence/resume-1720/android-repair-r6/ThemeUiTest.kt.original",
+    "bytes": 18098,
+    "sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10"
+  },
+  {
+    "path": "qa/emulator_install_and_tour.py",
+    "before": "qa/release-029/evidence/resume-1720/android-repair-r6/emulator_install_and_tour.py.original",
+    "bytes": 16729,
+    "sha256": "a710a0251f3209e12d5aa092c29fc7a8ad32e0d9cdc5e20a98c09587809a3731"
+  },
+  {
+    "path": "qa/diag_emulator_smoke.py",
+    "before": "qa/release-029/evidence/resume-1720/android-repair-r6/diag_emulator_smoke.py.original",
+    "bytes": 41068,
+    "sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "source_sha": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "package": "com.hcbiu.elcton",
+  "versionCode": 11,
+  "versionName": "0.2.9",
+  "signer_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+  "apk_sha256": "eb9ec0dcc8dafdc0ffb5a31fb3fbb7df767f70054c9a1eafe48c77051161df1c",
+  "bytes": 8237316,
+  "delivery_path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.9-code11-9d3b873-合并还账-signed.apk",
+  "old_deliveries_unchanged": [
+    {
+      "path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.8-code10-2097f32-p2p-signed.apk",
+      "bytes": 8183987,
+      "sha256": "d5778fd80f1bd3758d0c9f2cead660af49aaf6912e2638dc16616bec808bc633"
+    },
+    {
+      "path": "/storage/emulated/0/haps/elcton-20261114-P2P准备回执-1.1.15-73c7823.hap",
+      "bytes": 835972,
+      "sha256": "8865474d76d278f6d61050f4cebca1c1a70b0f5f391f653523d9c9018c91bac0"
+    }
+  ],
+  "scope": "actual CI binary manifest/signature/hash/exclusive phone storage copy; physical tests PENDING"
+}

@@ -1,0 +1,60 @@
+{
+  "fetched": true,
+  "run": "43584098560",
+  "source_sha": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "conclusion": "failure",
+  "inventory": {
+    "run.json": {
+      "bytes": 4971,
+      "sha256": "77fa840c16102f0c07450d1d59929213106cd38bd6ef3023a03761962348e1c6"
+    },
+    "artifacts.json": {
+      "bytes": 953,
+      "sha256": "146d1f41196b2a33d6f8937403e31c761a459fb0ee18af55ed0c855db769ae09"
+    },
+    "download.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "download.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "artifact/client-gradle-classpath.log": {
+      "bytes": 3341,
+      "sha256": "f16cd6ca57029f47ad2fdacdc78ab92b2d58178ccf29f45331cf6f05ae2f76a0"
+    },
+    "artifact/client-jvm-regression.log": {
+      "bytes": 823,
+      "sha256": "7631e30ef90383c54cb4b21de2b577fa9f31a29f6c904ab995c6afacecb93c82"
+    },
+    "artifact/client-jvm-selftest.log": {
+      "bytes": 281,
+      "sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+    },
+    "artifact/environment.json": {
+      "bytes": 4135,
+      "sha256": "67df10c1f7bd472477ed3c7185faadb0c87f46fd31348109bcffd3a276a3087b"
+    },
+    "artifact/report.json": {
+      "bytes": 5044,
+      "sha256": "b8f80808cc75ab5b59c910175f72621e5bd8d7e3c614bcc5fb347bebf1d9c3f2"
+    },
+    "artifact/theme-failure-logcat.txt": {
+      "bytes": 3473746,
+      "sha256": "c56ab264581f63ac9fd62c84abe5b403ff451639650aa8e777468c949c314e60"
+    },
+    "artifact/theme-harvest-error.txt": {
+      "bytes": 66,
+      "sha256": "3fc14ddce611e0d5dfde8ba713902927346ab0c5ee50c73c47b7de8239082f6b"
+    },
+    "artifact/theme-host.json": {
+      "bytes": 5247,
+      "sha256": "e4ae6eadf58043b8a4aef06c3a0e8e20e91178bf9fbeca80f141b3fde066534b"
+    },
+    "artifact/theme-initial-instrumentation.txt": {
+      "bytes": 4824,
+      "sha256": "988a8b5cd6a4bbd793452f6aad46577604a529626ad151b44e2c45f0fe0e2fa5"
+    }
+  }
+}

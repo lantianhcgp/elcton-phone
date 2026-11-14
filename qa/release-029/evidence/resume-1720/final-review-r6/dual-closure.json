@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "reviewed_files": 123,
+  "scope": "original independent raw replies exact R6 delta binding; not AndroidPASS",
+  "bindings": {
+    "candidate_before_sha256": "c6d4e3c41fb98b449157cbe9bf86990c85098095e35c3065f43c89091aac9140",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "product_files": 37,
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "reviewed_files": 123,
+    "reviewed_manifest_sha256": "ced5d6d229c8da36b5fe07dbe545b885ec13c9592bd87211b2f5ade9a32a0984",
+    "diff_sha256": "8b0fa35c2ffc41b08862a2877c05ae7b56f684340c32e2077156a0d640c5b626",
+    "diff_bytes": 488683,
+    "scope": "exact candidate identity only; independent approval pending"
+  },
+  "axes": [
+    {
+      "axis": "spec",
+      "raw_sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+      "passed": true
+    },
+    {
+      "axis": "standards",
+      "raw_sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c",
+      "passed": true
+    }
+  ]
+}

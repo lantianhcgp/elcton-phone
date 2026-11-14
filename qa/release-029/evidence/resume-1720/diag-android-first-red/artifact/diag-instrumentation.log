@@ -1,0 +1,56 @@
+INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.DiagnosticsUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.hcbiu.elcton.DiagnosticsUiTest:
+INSTRUMENTATION_STATUS: test=passiveRuntimePersistsAndShowsCompleteSyntheticError
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.DiagnosticsUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Action performScrollTo() failed.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (TestTag = 'diagnostics')
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrDie(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrDie$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNode(SemanticsNodeInteraction.kt:84)
+	at androidx.compose.ui.test.ActionsKt.performScrollTo(Actions.kt:72)
+	at com.hcbiu.elcton.DiagnosticsUiTest.passiveRuntimePersistsAndShowsCompleteSyntheticError(DiagnosticsUiTest.kt:205)
+
+INSTRUMENTATION_STATUS: stream=
+Error in passiveRuntimePersistsAndShowsCompleteSyntheticError(com.hcbiu.elcton.DiagnosticsUiTest):
+java.lang.AssertionError: Action performScrollTo() failed.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (TestTag = 'diagnostics')
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrDie(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrDie$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNode(SemanticsNodeInteraction.kt:84)
+	at androidx.compose.ui.test.ActionsKt.performScrollTo(Actions.kt:72)
+	at com.hcbiu.elcton.DiagnosticsUiTest.passiveRuntimePersistsAndShowsCompleteSyntheticError(DiagnosticsUiTest.kt:205)
+
+INSTRUMENTATION_STATUS: test=passiveRuntimePersistsAndShowsCompleteSyntheticError
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 8.707
+There was 1 failure:
+1) passiveRuntimePersistsAndShowsCompleteSyntheticError(com.hcbiu.elcton.DiagnosticsUiTest)
+java.lang.AssertionError: Action performScrollTo() failed.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (TestTag = 'diagnostics')
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrDie(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrDie$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNode(SemanticsNodeInteraction.kt:84)
+	at androidx.compose.ui.test.ActionsKt.performScrollTo(Actions.kt:72)
+	at com.hcbiu.elcton.DiagnosticsUiTest.passiveRuntimePersistsAndShowsCompleteSyntheticError(DiagnosticsUiTest.kt:205)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
+s_glBindAttribLocation: bind attrib 0 name position
+s_glBindAttribLocation: bind attrib 1 name color
+s_glBindAttribLocation: bind attrib 2 name localCoord

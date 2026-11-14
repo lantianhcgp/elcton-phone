@@ -1,0 +1,26 @@
+{
+  "axis": "standards",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [
+    "Inherited tooling-only whitespace warning: cumulative git diff --check flags RESUME-CHANGES.md's final blank line, also present in R5. R6-only diff check passes; address only under separate cleanup authorization."
+  ],
+  "summary": "Independent R6 delta standards/security-smell review passes with verified R5 coverage, not a fresh business-runtime re-audit. Rehashed all 123 reviewed files and 37 product files; reconstructed the complete 488683-byte current diff and compared all 62 sections against R5. Coverage sets are identical. Only MainActivity changes among products: one exact whole-file replacement copies the existing sync snapshot and fills an empty diagnostic from the synchronized Application diagnostics.latestFull reader. Nonempty diagnostics retain precedence; no engine write, second runtime, SDK call or diagnostic I/O is introduced. All other 36 product bindings, all 34 Kotlin test files and both archived Android harnesses remain byte-identical. Candidate changes only MainActivity after-text/hash; the remaining diff delta is its attributed RESUME note. Signing, loopback/auth, thread guards and transport are unchanged. Only standards-raw.txt created. No product tests rerun; this SHA grants neither Android PASS nor physical PASS.",
+  "latestproduct_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_manifest_sha256": "ced5d6d229c8da36b5fe07dbe545b885ec13c9592bd87211b2f5ade9a32a0984",
+  "diff_sha256": "8b0fa35c2ffc41b08862a2877c05ae7b56f684340c32e2077156a0d640c5b626",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "current_head": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "reviewed_files": 123,
+  "product_files": 37,
+  "diff_bytes": 488683,
+  "android_status": "pending",
+  "full_ui_original_retry": "43584098560 RED; unmodified retry, not R6 product acceptance",
+  "physical_status": "pending",
+  "android_pass_granted": false,
+  "physical_pass_granted": false
+}

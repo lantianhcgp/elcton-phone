@@ -1,0 +1,258 @@
+ui	Exercise real APK without a paired device	﻿2026-11-14T10:13:40.7989804Z ##[group]Run reactivecircus/android-emulator-runner@v2
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7990226Z with:
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7990459Z   api-level: 33
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7990707Z   target: google_apis
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7990962Z   arch: x86_64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7991197Z   profile: pixel_2
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7991461Z   disable-animations: true
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7991734Z   ram-size: 2048M
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7991977Z   heap-size: 512M
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7992589Z   emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7993575Z   script: if [ "$QA_SUITE" = diagnostics ]; then python3 -B qa/diag_emulator_smoke.py; else python3 qa/emulator_install_and_tour.py; fi
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7994199Z   cores: 2
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7994425Z   avd-name: test
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7994685Z   force-avd-creation: true
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7994978Z   emulator-boot-timeout: 600
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7995268Z   emulator-port: 5554
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7995568Z   disable-spellchecker: false
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7995946Z   disable-linux-hw-accel: auto
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7996260Z   enable-hw-keyboard: false
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7996778Z   channel: stable
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7997018Z env:
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7997324Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7997815Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7998293Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7998714Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7999130Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.7999766Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8000244Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8000774Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8001248Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8001598Z   GRADLE_USER_HOME: /home/runner/.gradle
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8001935Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8002284Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8002770Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8003304Z   DEVELOCITY_INJECTION_CUSTOM_VALUE: gradle-actions
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8003675Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8003981Z   DISPLAY: :99
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8004232Z   QA_NAVIGATION_MODE: three-button
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8004523Z   QA_SUITE: full
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8004770Z ##[endgroup]
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8570113Z ##[group]Configure emulator
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8573054Z API level: 33
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8574830Z System image API level: 33
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8575911Z target: google_apis
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8592422Z CPU architecture: x86_64
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8593088Z Hardware profile: pixel_2
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8593553Z Cores: 2
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8593988Z RAM size: 2048M
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8594438Z Heap size: 512M
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8594902Z SD card path or size: 
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8595371Z Disk size: 
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8595782Z AVD name: test
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8596225Z force avd creation: true
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8596965Z Emulator boot timeout: 600
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8597457Z emulator port: 5554
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8598545Z emulator options: -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8599258Z disable animations: true
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8599573Z disable spellchecker: false
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8599898Z disable Linux hardware acceleration: false
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8600255Z enable hardware keyboard: false
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8600561Z Channel: 0 (stable)
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8600816Z Script:
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8601340Z if [ "$QA_SUITE" = diagnostics ]; then python3 -B qa/diag_emulator_smoke.py; else python3 qa/emulator_install_and_tour.py; fi
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8602279Z Pre emulator launch script:
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8602786Z ##[endgroup]
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8603217Z ##[group]Install Android SDK
+ui	Exercise real APK without a paired device	2026-11-14T10:13:40.8667643Z [command]/usr/bin/sh -c \yes | sdkmanager --licenses > /dev/null
+ui	Exercise real APK without a paired device	2026-11-14T10:13:44.3959019Z Installing latest build tools, platform tools, and platform.
+ui	Exercise real APK without a paired device	2026-11-14T10:13:44.3975305Z [command]/usr/bin/sh -c \sdkmanager --install 'build-tools;37.0.0' platform-tools 'platforms;android-33'> /dev/null
+ui	Exercise real APK without a paired device	2026-11-14T10:13:50.0306901Z Installing latest emulator.
+ui	Exercise real APK without a paired device	2026-11-14T10:13:50.0323892Z [command]/usr/bin/sh -c \sdkmanager --install emulator --channel=0 > /dev/null
+ui	Exercise real APK without a paired device	2026-11-14T10:13:57.9138239Z Installing system images.
+ui	Exercise real APK without a paired device	2026-11-14T10:13:57.9154565Z [command]/usr/bin/sh -c \sdkmanager --install 'system-images;android-33;google_apis;x86_64' --channel=0 > /dev/null
+ui	Exercise real APK without a paired device	2026-11-14T10:14:38.6552630Z ##[endgroup]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:38.6553925Z ##[group]Create AVD
+ui	Exercise real APK without a paired device	2026-11-14T10:14:38.6554584Z Creating AVD.
+ui	Exercise real APK without a paired device	2026-11-14T10:14:38.6573463Z [command]/usr/bin/sh -c \echo no | avdmanager create avd --force -n test --package 'system-images;android-33;google_apis;x86_64' --device 'pixel_2'
+ui	Exercise real APK without a paired device	2026-11-14T10:14:39.5747458Z Loading local repository...                                                     
+ui	Exercise real APK without a paired device	2026-11-14T10:14:39.6208486Z [=========                              ] 25% Loading local repository...       
+ui	Exercise real APK without a paired device	2026-11-14T10:14:39.6209422Z Auto-selecting single ABI x86_64
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0589338Z [command]/usr/bin/sh -c \printf 'hw.cpu.ncore=2\nhw.ramSize=2048M\nhw.heapSize=512M\n' >> /home/runner/.android/avd/test.avd/config.ini
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0613661Z ##[endgroup]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0615702Z ##[group]Launch Emulator
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0616238Z Starting emulator.
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0635567Z [command]/usr/bin/sh -c \/usr/local/lib/android/sdk/emulator/emulator -port 5554 -avd test -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics &
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0748909Z INFO         | Android emulator version 37.2.13.0 (build_id 16740729) (CL:N/A)
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0749728Z INFO         | Graphics backend: gfxstream
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.0750395Z INFO         | Found systemPath /usr/local/lib/android/sdk/system-images/android-33/google_apis/x86_64/
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8493141Z INFO         | Saving last run QEMU version for the AVD to 2
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8494034Z INFO         | Guest GLES Driver: Auto (ext controls)
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8494975Z INFO         | emuglConfig_init: vulkan_mode_selected:swiftshader gles_mode_selected:swiftshader
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8495908Z INFO         | Checking system compatibility:
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8496780Z INFO         |   Checking: hasSufficientDiskSpace
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8497500Z INFO         |      Ok: Disk space requirements to run avd: `test` are met
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8498204Z INFO         |   Checking: hasSufficientHwGpu
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8498912Z INFO         |      Ok: Hardware GPU compatibility checks are not required
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8499578Z INFO         |   Checking: hasSufficientSystem
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8500028Z INFO         |      Ok: System requirements to run avd: `test` are met
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8501083Z WARNING      | Feature QuickbootFileBacked is disabled due to stability issues, if you really want that, the environment variable ANDROID_EMU_FORCE_QUICKBOOT_FILE_BACKED need to set to 1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8502018Z ERROR        | Unable to connect to adb daemon on port: 5037
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8516272Z INFO         | Storing crashdata in: /tmp/android-runner/emu-crash-37.2.13.db, detection is enabled for process: 4461
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8517787Z INFO         | Initializing gfxstream backend
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8528325Z INFO         | startOpenglesRendererImpl: gpu info
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8528935Z INFO         | 
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8530779Z INFO         | initIcdPaths: ICD set to 'swiftshader', using Swiftshader ICD
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8532114Z INFO         | Setting ICD filenames for the loader = /usr/local/lib/android/sdk/emulator/lib64/vulkan/vk_swiftshader_icd.json
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8533476Z INFO         | SharedLibrary::open for [/usr/local/lib/android/sdk/emulator/qemu/linux-x86_64/lib64/vulkan/libvulkan.so]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8534654Z INFO         | SharedLibrary::open for [/usr/local/lib/android/sdk/emulator/qemu/linux-x86_64/lib64/vulkan/libvulkan.so.1]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8535735Z INFO         | SharedLibrary::open for [/usr/local/lib/android/sdk/emulator/lib64/vulkan/libvulkan.so]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8536678Z INFO         | Added library: /usr/local/lib/android/sdk/emulator/lib64/vulkan/libvulkan.so
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8582902Z INFO         | Selecting Vulkan device: SwiftShader Device (Subzero), Version: 1.3.0
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.8583893Z INFO         | Using Vulkan externalMemoryMode: OpaqueFd for VkEmulation
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9143412Z INFO         | Format VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16 does not support YCbCr sampler conversion
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9174804Z INFO         | SharedLibrary::open for [libX11]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9175803Z WARNING      | Could not open libX11.so, try libX11.so.6
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9176616Z INFO         | SharedLibrary::open for [libX11.so.6]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9177291Z INFO         | SharedLibrary::open for [libX11-xcb]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9178172Z WARNING      | Could not open libX11-xcb.so, try libX11-xcb.so.1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9179030Z INFO         | SharedLibrary::open for [libX11-xcb.so.1]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9258188Z INFO         | Initializing VkEmulation features:
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9259059Z INFO         |     glInteropSupported: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9267005Z INFO         |     useDeferredCommands: true
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9267579Z INFO         |     createResourceWithRequirements: true
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9268007Z INFO         |     useVulkanComposition: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9268404Z INFO         |     useVulkanNativeSwapchain: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9268813Z INFO         |     enable guestRenderDoc: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9269204Z INFO         |     ASTC LDR emulation mode: Gpu
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9269719Z INFO         |     enable ETC2 emulation: true
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9270149Z INFO         |     enable Ycbcr emulation: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9270709Z INFO         |     guestVulkanOnly: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9271227Z INFO         |     useDedicatedAllocations: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9271942Z INFO         |     guestVulkanMaxApiVersion: 1.3.0
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9272708Z INFO         |     enableProtectedMemoryEmulation: false
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9273588Z INFO         | Graphics Adapter Vendor Google (Google Inc.)
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9274602Z INFO         | Graphics Adapter Android Emulator OpenGL ES Translator (Google SwiftShader)
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9275698Z INFO         | Graphics API Version OpenGL ES 3.0 (OpenGL ES 3.0 SwiftShader 4.0.0.1)
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9279713Z INFO         | Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_packed_depth_stencil GL_OES_vertex_half_float GL_OES_standard_derivatives GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9283488Z INFO         | Graphics Device Extensions N/A
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9284120Z INFO         | Disabling sparse binding feature support
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9357031Z INFO         | Sending adb public key [QAAAAP3pQ9yrxIEDKO8rTL2Om08MQ/s1uPFjPUmyQf5aa0NPh0+r0W6uAGGa0uHmaHccTJRGKn1Z77IolwuRf4+uE5jfg1kzQob86BsmYWgxyRw8mLivv+XnQ328j/GH7Jmd5KRSW1uIbqrnYGEuF+hqHYBiEzAxmHk45dm2LpE63p/tAGmzXd+lA3YpliKxh77JEf1E5UraJ9HSZGvMw0hNg1JpCHJUak9z9uzIzhT6AWZJ5Me54mV2UOdDxoMP0jXHEOfgrNf9dV1QmoNBCVzkRdl07IB0F7K9CmQCkYP4VCO3hjyGthHfjL338K8MloafPd7/h/qXotX/08EZfVyZExBRZ5iiMZRlmXzSlOsRhpIH6SFaPJgiVFek983AH5xGmGA9O93TxiaKNl/jwMGOr3USmveGGgSnlzGOvejzBnlLwenkmLX9Sd0QlFfdRNw7FVF1YPz//OMEpj0RxjJd0CQvVN/+KBcUkt56ESxmaWf/p5x03ykFo2a1L1B2Dqxmxxf852ISCE181ZPMHmvzVPsNyKx3JrTq22ae5q/4LG60yfv+kcFlaKxU+am3M7c3NfB5V/6QitI+hX717frQ9Tcx/l/AjTrkl1xVIhxGK6xJazHC2A1C9/npphTQ+Wzc1bpWNMUxspRe8aNEfz3a7X9TewTtrmZ1b5RgiochbbcZhuCOawEAAQA= runner@unknown]
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9363857Z INFO         | Userspace boot properties:
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9364769Z INFO         |   androidboot.boot_devices=pci0000:00/0000:00:03.0 pci0000:00/0000:00:06.0
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9365827Z INFO         |   androidboot.dalvik.vm.heapsize=512m
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9367041Z INFO         |   androidboot.debug.hwui.renderer=skiagl
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9367940Z INFO         |   androidboot.debug.sf.nobootanimation=1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9368844Z INFO         |   androidboot.hardware=ranchu
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9369677Z INFO         |   androidboot.hardware.gltransport=pipe
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9370596Z INFO         |   androidboot.hardware.vulkan=ranchu
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9371371Z INFO         |   androidboot.logcat=*:V
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9372226Z INFO         |   androidboot.opengles.version=196608
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9372987Z INFO         |   androidboot.qemu=1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9379505Z INFO         |   androidboot.qemu.adb.pubkey=QAAAAP3pQ9yrxIEDKO8rTL2Om08MQ/s1uPFjPUmyQf5aa0NPh0+r0W6uAGGa0uHmaHccTJRGKn1Z77IolwuRf4+uE5jfg1kzQob86BsmYWgxyRw8mLivv+XnQ328j/GH7Jmd5KRSW1uIbqrnYGEuF+hqHYBiEzAxmHk45dm2LpE63p/tAGmzXd+lA3YpliKxh77JEf1E5UraJ9HSZGvMw0hNg1JpCHJUak9z9uzIzhT6AWZJ5Me54mV2UOdDxoMP0jXHEOfgrNf9dV1QmoNBCVzkRdl07IB0F7K9CmQCkYP4VCO3hjyGthHfjL338K8MloafPd7/h/qXotX/08EZfVyZExBRZ5iiMZRlmXzSlOsRhpIH6SFaPJgiVFek983AH5xGmGA9O93TxiaKNl/jwMGOr3USmveGGgSnlzGOvejzBnlLwenkmLX9Sd0QlFfdRNw7FVF1YPz//OMEpj0RxjJd0CQvVN/+KBcUkt56ESxmaWf/p5x03ykFo2a1L1B2Dqxmxxf852ISCE181ZPMHmvzVPsNyKx3JrTq22ae5q/4LG60yfv+kcFlaKxU+am3M7c3NfB5V/6QitI+hX717frQ9Tcx/l/AjTrkl1xVIhxGK6xJazHC2A1C9/npphTQ+Wzc1bpWNMUxspRe8aNEfz3a7X9TewTtrmZ1b5RgiochbbcZhuCOawEAAQA= runner@unknown
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9386233Z INFO         |   androidboot.qemu.avd_name=test
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9387409Z INFO         |   androidboot.qemu.camera_hq_edge_processing=0
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9388326Z INFO         |   androidboot.qemu.camera_protocol_ver=1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9389305Z INFO         |   androidboot.qemu.cpuvulkan.version=4202496
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9390300Z INFO         |   androidboot.qemu.gltransport.drawFlushInterval=800
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9391340Z INFO         |   androidboot.qemu.gltransport.name=pipe
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9392204Z INFO         |   androidboot.qemu.hwcodec.avcdec=2
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9393164Z INFO         |   androidboot.qemu.hwcodec.hevcdec=2
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9394040Z INFO         |   androidboot.qemu.hwcodec.vpxdec=2
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9395125Z INFO         |   androidboot.qemu.settings.system.screen_off_timeout=2147483647
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9396150Z INFO         |   androidboot.qemu.skin=1080x1920
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9397264Z INFO         |   androidboot.qemu.virtiowifi=1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9398133Z INFO         |   androidboot.qemu.vsync=60
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9399125Z INFO         |   androidboot.serialno=EMULATOR37X2X13X0
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9400203Z INFO         |   androidboot.vbmeta.digest=cc2acf6c582b63336b71fe51ed136e1a7a577e9e868ae7ba916ef6b3965324e5
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9401063Z INFO         |   androidboot.vbmeta.hash_alg=sha256
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9401718Z INFO         |   androidboot.vbmeta.size=6592
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9402337Z INFO         |   androidboot.veritymode=enforcing
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9564386Z WARNING: cannnot unmap ptr 0x72b6e3201000 as it is in the protected range from 0x72b663200000 to 0x72b6e3400000
+ui	Exercise real APK without a paired device	2026-11-14T10:14:40.9955857Z INFO         | Monitoring duration of emulator setup.
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9770189Z INFO         | Successfully initialized netsim WiFi
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9799102Z INFO         | Activated packet streamer for bluetooth emulation
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9831364Z INFO         | Setting display: 0 configuration to: 1080x1920, dpi: 420x420 
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9832092Z INFO         | setDisplayActiveConfig: id:0, 1080x1920
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9832797Z INFO         | emulatorSetupEnvironment: Environment scene is not required
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9903573Z USER_INFO    | Emulator is performing a full startup. This may take upto two minutes, or more.
+ui	Exercise real APK without a paired device	2026-11-14T10:14:41.9904798Z WARNING      | Failed to process .ini file /home/runner/.android/emu-update-last-check.ini for reading.
+ui	Exercise real APK without a paired device	2026-11-14T10:14:42.0805158Z WARNING      | Failed to process .ini file /home/runner/.android/emu-update-last-check.ini for reading.
+ui	Exercise real APK without a paired device	2026-11-14T10:14:50.0682492Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:14:50.0724943Z * daemon not running; starting now at tcp:5037
+ui	Exercise real APK without a paired device	2026-11-14T10:14:50.2811509Z * daemon started successfully
+ui	Exercise real APK without a paired device	2026-11-14T10:14:50.2816177Z adb: device offline
+ui	Exercise real APK without a paired device	2026-11-14T10:14:50.2825768Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:52.2872487Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:14:52.2917395Z adb: device offline
+ui	Exercise real APK without a paired device	2026-11-14T10:14:52.2923686Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+ui	Exercise real APK without a paired device	2026-11-14T10:14:54.2954999Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:14:54.3651052Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:14:56.3947967Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:14:56.4240573Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:14:58.4311564Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:14:58.4522735Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:00.4597079Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:00.4807352Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:02.4862862Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:02.5021365Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:04.5077965Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:04.5326053Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:06.5400617Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:06.5860080Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:08.5928402Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:08.6105827Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:10.6144142Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:10.6429453Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:12.6484683Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:12.6781136Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:14.6818651Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:14.7302018Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:16.7366267Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:16.7657387Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:18.7717132Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:18.8096805Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:20.8162327Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:20.9160257Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:15:22.5140000Z INFO         | Boot completed in 42412 ms
+ui	Exercise real APK without a paired device	2026-11-14T10:15:22.5141996Z INFO         | Increasing screen off timeout, logcat buffer size to 2M.
+ui	Exercise real APK without a paired device	2026-11-14T10:15:22.9257960Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+ui	Exercise real APK without a paired device	2026-11-14T10:15:23.0213989Z 1
+ui	Exercise real APK without a paired device	2026-11-14T10:15:23.0230130Z Emulator booted.
+ui	Exercise real APK without a paired device	2026-11-14T10:15:23.0268912Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell input keyevent 82
+ui	Exercise real APK without a paired device	2026-11-14T10:15:27.5547624Z Disabling animations.
+ui	Exercise real APK without a paired device	2026-11-14T10:15:27.5566985Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell settings put global window_animation_scale 0.0
+ui	Exercise real APK without a paired device	2026-11-14T10:15:27.8081275Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell settings put global transition_animation_scale 0.0
+ui	Exercise real APK without a paired device	2026-11-14T10:15:28.1435649Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell settings put global animator_duration_scale 0.0
+ui	Exercise real APK without a paired device	2026-11-14T10:15:28.3913007Z ##[endgroup]
+ui	Exercise real APK without a paired device	2026-11-14T10:15:28.3948347Z [command]/usr/bin/sh -c if [ "$QA_SUITE" = diagnostics ]; then python3 -B qa/diag_emulator_smoke.py; else python3 qa/emulator_install_and_tour.py; fi
+ui	Exercise real APK without a paired device	2026-11-14T10:15:28.8647670Z Serving...
+ui	Exercise real APK without a paired device	2026-11-14T10:15:29.8616219Z All files should be loaded. Notifying the device.
+ui	Exercise real APK without a paired device	2026-11-14T10:15:37.6107367Z Performing Incremental Install
+ui	Exercise real APK without a paired device	2026-11-14T10:15:37.6127647Z Success
+ui	Exercise real APK without a paired device	2026-11-14T10:15:37.6146848Z Install command complete in 8755 ms
+ui	Exercise real APK without a paired device	2026-11-14T10:15:37.6897504Z Serving...
+ui	Exercise real APK without a paired device	2026-11-14T10:15:38.0862382Z All files should be loaded. Notifying the device.
+ui	Exercise real APK without a paired device	2026-11-14T10:15:39.3125051Z Performing Incremental Install
+ui	Exercise real APK without a paired device	2026-11-14T10:15:39.3128044Z Success
+ui	Exercise real APK without a paired device	2026-11-14T10:15:39.3129612Z Install command complete in 1626 ms
+ui	Exercise real APK without a paired device	2026-11-14T10:15:53.5790305Z ERROR        | Failed to find ColorBuffer: 158
+ui	Exercise real APK without a paired device	2026-11-14T10:15:53.5801463Z ERROR        | Failed to bind to texture: invalid color buffer.
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9434469Z Traceback (most recent call last):
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9504017Z   File "/home/runner/work/elcton-phone/elcton-phone/qa/emulator_install_and_tour.py", line 70, in <module>
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9563558Z ##[error]    raise AssertionError('Theme UI phase failed: '+phase+'; see raw instrumentation and capture attempts')
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9566130Z AssertionError: Theme UI phase failed: initial; see raw instrumentation and capture attempts
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9632120Z ##[error]The process '/usr/bin/sh' failed with exit code 1
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9640900Z ##[group]Terminate Emulator
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9651199Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 emu kill
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9719168Z OK: killing emulator, bye bye
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9719968Z OK
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9721533Z INFO         | Wait for emulator (pid 4461) 20 seconds to shutdown gracefully before kill;you can set environment variable ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL(in seconds) to change the default value (20 seconds)
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9722986Z 
+ui	Exercise real APK without a paired device	2026-11-14T10:16:03.9723723Z ##[endgroup]
+ui	Exercise real APK without a paired device	2026-11-14T10:16:04.0060246Z USER_INFO    | Snapshots have been disabled by the user, save request is ignored.
+ui	Exercise real APK without a paired device	2026-11-14T10:16:04.0061543Z INFO         | Saving snapshot 'default_boot' took 0 ms
+ui	Exercise real APK without a paired device	2026-11-14T10:16:04.0212032Z ERROR        | stop: Not implemented
+ui	Exercise real APK without a paired device	2026-11-14T10:16:04.0226946Z WARNING      | Emulator client has not yet been configured.. Call configure me first!
+ui	Exercise real APK without a paired device	2026-11-14T10:16:04.0459738Z INFO         | removeAll
+ui	Exercise real APK without a paired device	2026-11-14T10:16:04.0869677Z WARNING      | Netsim Wifi dns:///localhost:40647 is gone due to Stream removed (CANCELLED)

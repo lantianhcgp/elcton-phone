@@ -1,0 +1,5 @@
+usage: mcp_http_selftest.py [-h] (--classpath CLASSPATH | --url URL)
+                            [--token-file TOKEN_FILE | --adb-token PACKAGE]
+                            [--adb-token-path ADB_TOKEN_PATH]
+                            [--adb-serial ADB_SERIAL]
+mcp_http_selftest.py: error: unrecognized arguments: --stress --out qa/release-029/evidence/resume-1720/r6-http/wire

@@ -1,0 +1,103 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [],
+  "summary": "R6 passes the scoped SPEC delta review, carrying forward the bound R5 cumulative review rather than claiming a fresh whole-product audit. Independently regenerated the 37-product/123-reviewed-file manifests, verified every live file hash, and reproduced the entire 488683-byte cumulative reviewed-scope diff. Exactly one product hunk restores the observer's diagnostic fallback; all 34 existing Kotlin test files remain byte-identical to 9d3b873. No new missing implementation requirements or scope creep found. This is not Android PASS, APK/signing acceptance, or phone acceptance.",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "actual_head": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "reviewed_files": 123,
+  "product_files": 37,
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_manifest_sha256": "ced5d6d229c8da36b5fe07dbe545b885ec13c9592bd87211b2f5ade9a32a0984",
+  "diff_sha256": "8b0fa35c2ffc41b08862a2877c05ae7b56f684340c32e2077156a0d640c5b626",
+  "diff_bytes": 488683,
+  "binding_verification": {
+    "manifest_hash_encoding": "SHA256 of sorted compact JSON, separators=(',', ':'), ensure_ascii=False, without trailing newline; not the pretty-printed manifest file bytes",
+    "independent_manifest_regeneration_exact": true,
+    "all_live_product_and_reviewed_hashes_match": true,
+    "complete_cumulative_diff_reproduced": true,
+    "diff_scope": "git diff --no-ext-diff e034de2 -- <all 123 sorted reviewed-manifest paths>; exact byte match to R6 current.diff",
+    "cumulative_diff_sections": 62,
+    "sections_unchanged_from_r5": 59,
+    "changed_sections": [
+      "app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "qa/release-029/RESUME-CHANGES.md",
+      "qa/release-029/approved-release-delta.json"
+    ],
+    "new_or_removed_cumulative_sections": [],
+    "candidate_before_equals_r5_after": true,
+    "live_candidate_equals_r6_after": true,
+    "candidate_changed_fields_only": [
+      "/patches/app/src/main/java/com/hcbiu/elcton/MainActivity.kt/0/after",
+      "/patches/app/src/main/java/com/hcbiu/elcton/MainActivity.kt/0/after_sha256"
+    ]
+  },
+  "prior_coverage": {
+    "path": "qa/release-029/evidence/resume-1720/final-review-r5/spec-raw.txt",
+    "raw_sha256": "61b0f64e9e02573ca80cf82276a077733a5a47afdfc4bf071dd3c2ee88176ac4",
+    "passed": true,
+    "raw_bindings_verified": true,
+    "r5_product_manifest_matches_9d3b873": true,
+    "r5_cumulative_diff_reproduced": true,
+    "product_manifest_sha256": "c8c3038b48f3a1e828d13ad37f20307bbc6e14f21bac0e9a8bb5621c0639bcf8",
+    "reviewed_manifest_sha256": "35841133176889abd4de9e81a9b2a6df180d04392af27e0b943b606eaaf6cf78",
+    "diff_sha256": "57dd96fa0ddf8fff6d9de4f4d656ed69358f49821b594672577c0e2c57133e47"
+  },
+  "delta_verification": {
+    "only_changed_product_file": "app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+    "product_hunks_vs_9d3b873": 1,
+    "before_sha256": "7d9c481c982113046eac0c69e17ebe1a0a2083cf2b2cdf148450f0da4e421f56",
+    "after_sha256": "a12fc52736c9a9dc6d87afa6e836994b18a0fce42785b44829166f5de1d5d458",
+    "location": "MainActivity.kt:47-55",
+    "before": "probeState=phone.sync",
+    "after": "probeState=phone.sync.let { state -> state.copy(diagnostic=state.diagnostic.ifEmpty { (application as ElctonApplication).diagnostics.latestFull() }) }",
+    "reasoning": "The original e034de2 onCreate:82 seeded the displayed diagnostic from Application.diagnostics.latestFull(). PhoneRuntime.observe immediately invokes the observer; after business extraction it overwrote that display state with an empty engine diagnostic. Devices gates the diagnostic button on probeState.diagnostic being nonempty. The restored UI-only copy preserves an existing nonempty engine diagnostic and uses the existing synchronized diagnostic getter only when empty. It neither writes engine state nor creates a second runtime/business chain.",
+    "unchanged": [
+      "PhoneRuntime, SyncEngine, permissions, lifecycle and action implementations",
+      "Diagnostic dialog and full-text display assertions",
+      "SDK, signing configuration, release identity and candidate guard/approval policy"
+    ]
+  },
+  "test_integrity": {
+    "comparison_commit": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+    "existing_kotlin_test_files": 34,
+    "byte_identical_files": 34,
+    "changed_files": [],
+    "added_or_missing_kotlin_test_files": [],
+    "diagnostics_assertions_retained": "DiagnosticsUiTest.kt:191-198 retains persisted full-error/journal assertions; :202-203 retains both Application identity assertions; :205-225 retains the diagnostic-button, full text, layout, no-ellipsis, scroll and close assertions.",
+    "theme_ui_test_byte_identical_to_e034de2": true,
+    "android_harnesses_equal_archived_originals": [
+      "qa/emulator_install_and_tour.py",
+      "qa/diag_emulator_smoke.py"
+    ],
+    "tests_executed_by_this_review": false
+  },
+  "spec_evidence": {
+    "path": "qa/release-029/SPEC.md",
+    "sha256": "e8f2f1bec4420ae99714b8aa22910540a7b649725aa4e8349a551c0daae8888b",
+    "architecture_quote_line_7": "Activity只是观察状态与调用动作；MCP同一实例、同一状态机。",
+    "test_integrity_quote_line_13": "每新工具有测试，原89与0.2.7相关测试不删不skip。",
+    "repair_requirement": "verify EXACT one UI observer fallback restore and all34 existing tests unchanged from9d3b873",
+    "missing_requirement_quotes": []
+  },
+  "acceptance_limits": {
+    "android_pass": false,
+    "release_acceptance": false,
+    "diagnostic_regression": "Pre-R6 RED remains evidence; the source correction has not been established as passing Android instrumentation by this review.",
+    "original_theme_suite": "Unmodified. ROOT-CAUSE.md reports NoCompose on first frame without an observed fatal; the archived retry readback is queued on 9d3b873. No passing rerun or product-crash conclusion is claimed.",
+    "new_r6_exact_apk_and_signing": "Pending real CI/regression and exact new-artifact verification; prior 9d3b873 build/153 Gradle tests do not validate the R6 source change.",
+    "required_certificate_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "delivery_requirement_quote_line_17": "真实回归、CI APK 0.2.9/code11及apksigner fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "phone_requirement_quote_line_19": "本棒不安装不拉起不点击，一律pending。",
+    "phone_actions_performed": false,
+    "old_0_2_8_and_1_1_15": "No old-package writes or phone actions performed by this reviewer; their preservation remains mandatory, not a newly asserted APK audit."
+  },
+  "files_created_or_modified_by_this_review": [
+    "qa/release-029/evidence/resume-1720/final-review-r6/spec-raw.txt"
+  ],
+  "issues_encountered": []
+}

@@ -1,0 +1,123 @@
+{
+  "conclusion": "",
+  "headSha": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "jobs": [
+    {
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "databaseId": 132414003049,
+      "name": "build",
+      "startedAt": "2026-11-14T10:08:23Z",
+      "status": "in_progress",
+      "steps": [
+        {
+          "completedAt": "2026-11-14T10:08:26Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-14T10:08:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T10:08:27Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-11-14T10:08:26Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T10:08:27Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v4",
+          "number": 3,
+          "startedAt": "2026-11-14T10:08:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T10:08:39Z",
+          "conclusion": "success",
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "number": 4,
+          "startedAt": "2026-11-14T10:08:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T10:08:45Z",
+          "conclusion": "success",
+          "name": "Ensure Android build prerequisites",
+          "number": 5,
+          "startedAt": "2026-11-14T10:08:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Unit tests and actual APK",
+          "number": 6,
+          "startedAt": "2026-11-14T10:08:45Z",
+          "status": "in_progress"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Real Kotlin diagnostic HTTP selftest",
+          "number": 7,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Diagnostic HTTP logs (including failures)",
+          "number": 8,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Stable production signing and verification",
+          "number": 9,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 10,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "number": 18,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run actions/setup-java@v4",
+          "number": 19,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run actions/checkout@v4",
+          "number": 20,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        }
+      ],
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43583832086/job/132414003049"
+    }
+  ],
+  "status": "in_progress",
+  "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43583832086"
+}

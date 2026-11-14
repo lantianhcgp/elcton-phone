@@ -1,0 +1,8 @@
+{
+  "run": 43584098560,
+  "attempt": 2,
+  "artifact": 14110740302,
+  "archive_sha256": "6f09fff04d41eadc2063ee6dc160714e2a664c35f9bb1e8c0857295c43948355",
+  "files": 9,
+  "conclusion": "failure"
+}

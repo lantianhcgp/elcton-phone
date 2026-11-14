@@ -49,7 +49,10 @@ class MainActivity : ComponentActivity() {
         loadError=phone.schedule.state.loadError
         notice=phone.schedule.state.notice
         pendingImport=phone.schedule.state.pendingImport
-        probeState=phone.sync
+        // Preserve the pre-extraction diagnostic fallback after Activity recreation.
+        probeState=phone.sync.let { state -> state.copy(diagnostic=state.diagnostic.ifEmpty {
+            (application as ElctonApplication).diagnostics.latestFull()
+        }) }
     }
     private var book by mutableStateOf(ScheduleBook.empty("initial", "2026-09-01"))
     private var tab by mutableIntStateOf(0)

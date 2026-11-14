@@ -1,0 +1,7 @@
+{
+  "product_delta": "only UI observer diagnostic fallback restored; engine/permissions/lifecycle/actions unchanged",
+  "source_before_sha256": "7d9c481c982113046eac0c69e17ebe1a0a2083cf2b2cdf148450f0da4e421f56",
+  "source_after_sha256": "a12fc52736c9a9dc6d87afa6e836994b18a0fce42785b44829166f5de1d5d458",
+  "all_existing_kotlin_tests_byte_unchanged": 34,
+  "passed": true
+}

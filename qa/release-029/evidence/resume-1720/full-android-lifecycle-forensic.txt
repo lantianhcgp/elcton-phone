@@ -1,0 +1,87 @@
+I/TestRunner( 3684): run started: 1 tests
+I/TestRunner( 3684): started: inspectThemeAndPersistencePhase(com.hcbiu.elcton.ThemeUiTest)
+D/IdlingRegistry( 3684): Registering idling resources: [androidx.compose.ui.test.junit4.EspressoLink@741aef4]
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: PRE_ON_CREATE
+V/ActivityScenario( 3684): Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: CREATED
+V/ActivityScenario( 3684): Update currentActivityStage to CREATED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: STARTED
+V/ActivityScenario( 3684): Update currentActivityStage to STARTED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: RESUMED
+V/ActivityScenario( 3684): Update currentActivityStage to RESUMED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: PAUSED
+V/ActivityScenario( 3684): Update currentActivityStage to PAUSED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: STOPPED
+V/ActivityScenario( 3684): Update currentActivityStage to STOPPED, currentActivity=com.hcbiu.elcton.MainActivity@cddf93e
+D/LifecycleMonitor( 3684): Lifecycle status change: com.hcbiu.elcton.MainActivity@cddf93e in: DESTROYED
+V/ActivityScenario( 3684): Update currentActivityStage to DESTROYED, currentActivity=null
+D/IdlingRegistry( 3684): Unregistering idling resources: [androidx.compose.ui.test.junit4.EspressoLink@741aef4]
+E/TestRunner( 3684): failed: inspectThemeAndPersistencePhase(com.hcbiu.elcton.ThemeUiTest)
+E/TestRunner( 3684): ----- begin exception -----
+E/TestRunner( 3684): java.lang.IllegalStateException: No compose hierarchies found in the app. Possible reasons include: (1) the Activity that calls setContent did not launch; (2) setContent was not called; (3) setContent was called before the ComposeTestRule ran. If setContent is called by the Activity, make sure the Activity is launched after the ComposeTestRule runs
+E/TestRunner( 3684): 	at androidx.compose.ui.test.TestContext.getAllSemanticsNodes$ui_test_release(TestOwner.kt:87)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.TestContext.getAllSemanticsNodes$ui_test_release$default(TestOwner.kt:81)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.SemanticsNodeInteractionCollection.fetchSemanticsNodes(SemanticsNodeInteraction.kt:256)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.SemanticsNodeInteractionCollection.fetchSemanticsNodes$default(SemanticsNodeInteraction.kt:249)
+E/TestRunner( 3684): 	at com.hcbiu.elcton.ThemeUiTest$inspectThemeAndPersistencePhase$1.invoke(ThemeUiTest.kt:271)
+E/TestRunner( 3684): 	at com.hcbiu.elcton.ThemeUiTest$inspectThemeAndPersistencePhase$1.invoke(ThemeUiTest.kt:271)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:424)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:306)
+E/TestRunner( 3684): 	at com.hcbiu.elcton.ThemeUiTest.inspectThemeAndPersistencePhase(ThemeUiTest.kt:271)
+E/TestRunner( 3684): 	at java.lang.reflect.Method.invoke(Native Method)
+E/TestRunner( 3684): 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+E/TestRunner( 3684): 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+E/TestRunner( 3684): 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+E/TestRunner( 3684): 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+E/TestRunner( 3684): 	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:54)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invoke(AndroidComposeTestRule.android.kt:272)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invoke(AndroidComposeTestRule.android.kt:271)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.withDisposableContent(ComposeUiTest.android.kt:495)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1$1.invoke(ComposeUiTest.android.kt:327)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.withComposeIdlingResource(ComposeUiTest.android.kt:379)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.access$withComposeIdlingResource(ComposeUiTest.android.kt:230)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invoke(ComposeUiTest.android.kt:326)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.withWindowRecomposer(ComposeUiTest.android.kt:353)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.access$withWindowRecomposer(ComposeUiTest.android.kt:230)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1.invoke(ComposeUiTest.android.kt:325)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.withTestCoroutines(ComposeUiTest.android.kt:366)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.access$withTestCoroutines(ComposeUiTest.android.kt:230)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1.invoke(ComposeUiTest.android.kt:324)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.EspressoLink.withStrategy(EspressoLink.android.kt:66)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invoke(ComposeUiTest.android.kt:323)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.IdlingResourceRegistry.withRegistry(IdlingResourceRegistry.jvm.kt:157)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1.invoke(ComposeUiTest.android.kt:322)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.ComposeRootRegistry.withRegistry(ComposeRootRegistry.android.kt:146)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.runTest(ComposeUiTest.android.kt:321)
+E/TestRunner( 3684): 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1.evaluate(AndroidComposeTestRule.android.kt:271)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+E/TestRunner( 3684): 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+E/TestRunner( 3684): 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+E/TestRunner( 3684): 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+E/TestRunner( 3684): 	at androidx.test.ext.junit.runners.AndroidJUnit4.run(AndroidJUnit4.java:162)
+E/TestRunner( 3684): 	at org.junit.runners.Suite.runChild(Suite.java:128)
+E/TestRunner( 3684): 	at org.junit.runners.Suite.runChild(Suite.java:27)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+E/TestRunner( 3684): 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+E/TestRunner( 3684): 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+E/TestRunner( 3684): 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+E/TestRunner( 3684): 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:68)
+E/TestRunner( 3684): 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)
+E/TestRunner( 3684): 	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:463)
+E/TestRunner( 3684): 	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2361)
+E/TestRunner( 3684): ----- end exception -----
+I/TestRunner( 3684): finished: inspectThemeAndPersistencePhase(com.hcbiu.elcton.ThemeUiTest)
+I/TestRunner( 3684): run finished: 1 tests, 1 failed, 0 ignored

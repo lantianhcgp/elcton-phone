@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "scope": "real CI Android emulator; SYNTHETIC diagnostic; no paired watch",
+  "stage": "diagnostics-instrumentation",
+  "sourceSha": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "apkSha256": {
+    "main": "eb9ec0dcc8dafdc0ffb5a31fb3fbb7df767f70054c9a1eafe48c77051161df1c",
+    "tests": "bbb3ed16d2dd49acb9428e51c63d1e400b5911518220c294bf18e6e2b744f2ac"
+  },
+  "certificates": {
+    "main": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "tests": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94"
+  },
+  "serial": "emulator-5554",
+  "navigationMode": "three-button",
+  "sdk": "33",
+  "qaRun": "bd662c47-4bca-472d-8ab5-e6ceacd9237a",
+  "failure": "AssertionError: Real diagnostic instrumentation failed; full logs/evidence retained"
+}

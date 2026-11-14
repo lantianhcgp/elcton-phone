@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "actual_binary_identity": [
+    "com.hcbiu.elcton",
+    "11",
+    "0.2.9"
+  ],
+  "source_sha": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+  "apks": [
+    {
+      "file": "qa/release-029/evidence/resume-1720/download-9d3b873/artifact/dist/elcton-phone-probe.apk",
+      "bytes": 8237316,
+      "sha256": "eb9ec0dcc8dafdc0ffb5a31fb3fbb7df767f70054c9a1eafe48c77051161df1c",
+      "cert": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94"
+    },
+    {
+      "file": "qa/release-029/evidence/resume-1720/download-9d3b873/artifact/dist/elcton-ui-tests.apk",
+      "bytes": 1182151,
+      "sha256": "bbb3ed16d2dd49acb9428e51c63d1e400b5911518220c294bf18e6e2b744f2ac",
+      "cert": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94"
+    }
+  ]
+}

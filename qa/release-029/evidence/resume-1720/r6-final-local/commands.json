@@ -1,0 +1,34 @@
+[
+  {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "qa",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/diag_emulator_smoke.py",
+      "--self-test"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/diag_source_gate.py"
+    ],
+    "exit": 0
+  }
+]

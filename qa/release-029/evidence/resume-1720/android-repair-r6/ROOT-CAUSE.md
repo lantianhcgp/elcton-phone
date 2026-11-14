@@ -1,0 +1,9 @@
+# Android 回归首次RED与R6最小修复
+
+输入：9d3b873精确APK，CI43583832086。diagnostics43584056185/full43584098560都是API33真实云端模拟器，不代表真机。
+
+1. 诊断RED：DiagnosticsUiTest.passiveRuntimePersistsAndShowsCompleteSyntheticError在203两sharedApplication引用保持后、205 diagnostic按钮找不到。原e034de2 MainActivity onCreate原82行从Application.latestFull种子probeState.diagnostic；提取业务层后MainActivity.observe直接probeState=phone.sync，丢了这个显示恢复。Devices509只在probeState.diagnostic非空显示按钮，即使原诊断journal已保存，Activity recreate后也无入口。这是真实回归，不改测试。R6只在UI观察者复制snapshot时用既有Application.latestFull补空diagnostic，不写回PhoneRuntime/engine，无第二业务链。Dialog/工具/全原Android断言不动。
+
+2. 原完整Theme UI RED：原ThemeUiTest逐字等于e034de2，createAndroidComposeRule启动；日志证明MainActivity完成CREATED/STARTED/RESUMED，无AndroidRuntime FATAL/授权弹窗异常。初始waitUntil271直接fetchSemanticsNodes在首帧未有ComposeRoots时抛No compose hierarchies而不是等15s；实际logcat有291帧卡顿、首帧duration4916ms。仅凭此不能认定新的产品crash，也不弱化waitUntil或加catch来凑绿。保留原套件，先重跑冻结测试；若再失败再以实际日志定位。本R6不改ThemeUiTest/任何现有测试。
+
+所有旧包、全部原RED、原日志/manifest/截图不删除不覆盖。当前9d3b873 APK仅是已验签产物，完整Android门仍RED，最终新包需新精确CI和新文件名，旧0.2.8和1.1.15仍不动。用户真机层持续pending。

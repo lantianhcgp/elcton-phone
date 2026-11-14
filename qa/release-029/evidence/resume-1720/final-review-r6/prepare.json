@@ -1,0 +1,11 @@
+{
+  "candidate_before_sha256": "c6d4e3c41fb98b449157cbe9bf86990c85098095e35c3065f43c89091aac9140",
+  "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+  "product_files": 37,
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_files": 123,
+  "reviewed_manifest_sha256": "ced5d6d229c8da36b5fe07dbe545b885ec13c9592bd87211b2f5ade9a32a0984",
+  "diff_sha256": "8b0fa35c2ffc41b08862a2877c05ae7b56f684340c32e2077156a0d640c5b626",
+  "diff_bytes": 488683,
+  "scope": "exact candidate identity only; independent approval pending"
+}

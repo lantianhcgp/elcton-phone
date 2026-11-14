@@ -1,0 +1,9 @@
+# 原完整UI二次RED精确根因与R7环境准备
+
+run43584098560 attempt2，source9d3b873，artifact14110740302原完整字节独立取回。原取包器按name认唯一artifact遇到重跑同名2项就拒绝；后以实际run_attempt=2和created_at/ID精确绑定，不盲选最新，也不改首失败。
+
+实际第二次logcat明确：MainActivity RESUMED后发REQUEST_PERMISSIONS到系统GrantPermissionsActivity，PAUSED/STOPPED；NoCompose在初始语义查询。这是0.2.9默认保活开启引出的通知首次授权窗，不是产品crash，也不是测试通过。第一轮因取证窄未见该窗，原No-fatal判断仅证明未crash，不能继续只归因慢帧。
+
+最小环境修正R7：仅qa/emulator_install_and_tour.py在清数据后、首次Theme am instrument前，API>=33显式pm grant通知权限，并读实际dumpsys granted=true作为环境门。后续持久化阶段不再clear且保留原权限，同步记录UI预授权环境；与既有diag_emulator_smoke.py真实permission fixture一致。所有ThemeUiTest/PaletteUiTest/DiagnosticsUiTest/McpKeepAliveTest及现有断言完全不改，不删不skip。McpKeepAliveTest.notificationsUnavailableFailClosed...仍独立验证不可通知路径；诊断有专门拒权限回归，预授权UI外观套件不声称初次授权用户路径已验。
+
+测试工作目录仅GitHub云端模拟器，本棒不操作真机。不改任何产品代码/权限机制/SDK/签名；精确新QA输入需完整清单绑定独立双轴后push。R6产品17443eb继续精确真实构建，R7如只QA+证据会走新版CI同源重建，不能用旧HEAD冒充新测试源。

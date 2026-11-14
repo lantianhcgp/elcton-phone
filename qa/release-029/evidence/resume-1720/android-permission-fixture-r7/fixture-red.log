@@ -1,0 +1,57 @@
+test_api32_does_not_attempt_runtime_notification_grant (qa.test_notification_fixture.NotificationFixtureTest.test_api32_does_not_attempt_runtime_notification_grant) ... FAIL
+test_api33_failed_readback_is_not_reported_as_permission_pass (qa.test_notification_fixture.NotificationFixtureTest.test_api33_failed_readback_is_not_reported_as_permission_pass) ... FAIL
+test_api33_grants_before_readback_and_records_exact_scope (qa.test_notification_fixture.NotificationFixtureTest.test_api33_grants_before_readback_and_records_exact_scope) ... FAIL
+test_grant_failure_is_propagated_before_instrumentation (qa.test_notification_fixture.NotificationFixtureTest.test_grant_failure_is_propagated_before_instrumentation) ... FAIL
+
+======================================================================
+FAIL: test_api32_does_not_attempt_runtime_notification_grant (qa.test_notification_fixture.NotificationFixtureTest.test_api32_does_not_attempt_runtime_notification_grant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 35, in test_api32_does_not_attempt_runtime_notification_grant
+    prepare, calls = self.fixture(32)
+                     ~~~~~~~~~~~~^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 16, in fixture
+    self.assertEqual(1, len(nodes), 'one explicit UI-only notification preparation helper')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : one explicit UI-only notification preparation helper
+
+======================================================================
+FAIL: test_api33_failed_readback_is_not_reported_as_permission_pass (qa.test_notification_fixture.NotificationFixtureTest.test_api33_failed_readback_is_not_reported_as_permission_pass)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 46, in test_api33_failed_readback_is_not_reported_as_permission_pass
+    prepare, _ = self.fixture(33, granted=False)
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 16, in fixture
+    self.assertEqual(1, len(nodes), 'one explicit UI-only notification preparation helper')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : one explicit UI-only notification preparation helper
+
+======================================================================
+FAIL: test_api33_grants_before_readback_and_records_exact_scope (qa.test_notification_fixture.NotificationFixtureTest.test_api33_grants_before_readback_and_records_exact_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 40, in test_api33_grants_before_readback_and_records_exact_scope
+    prepare, calls = self.fixture(33)
+                     ~~~~~~~~~~~~^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 16, in fixture
+    self.assertEqual(1, len(nodes), 'one explicit UI-only notification preparation helper')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : one explicit UI-only notification preparation helper
+
+======================================================================
+FAIL: test_grant_failure_is_propagated_before_instrumentation (qa.test_notification_fixture.NotificationFixtureTest.test_grant_failure_is_propagated_before_instrumentation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 52, in test_grant_failure_is_propagated_before_instrumentation
+    prepare, calls = self.fixture(33, grant_error=error)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_notification_fixture.py", line 16, in fixture
+    self.assertEqual(1, len(nodes), 'one explicit UI-only notification preparation helper')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : one explicit UI-only notification preparation helper
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.039s
+
+FAILED (failures=4)

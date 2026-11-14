@@ -1,0 +1,142 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [],
+  "summary": "Independent R7 SPEC delta review passes for the latest QA-only changes with verified R6 product coverage carried forward. Independently rehashed all 124 reviewed inputs, including the untracked added test, and all 37 product inputs; reproduced the entire 494029-byte bound cumulative diff. Product manifest and live product bytes are unchanged from R6/17443eb. All 34 Kotlin test files and their file set are unchanged. Removing exactly the new helper and its fixture-recording call yields the original harness AST exactly. The cloud UI fixture grants API >=33 notification permission, requires actual dumpsys granted=true readback, and runs before original Theme instrumentation without changing original statements/assertions. Independently executed all four new synthetic positive/negative tests successfully; archived RED4 and GREEN4 receipts were also inspected. No product, SDK, signing, old-package, or phone change is approved or performed. This review is not Android PASS or first-time permission-authorization UI acceptance.",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "actual_head": "17443ebd617272e41d87f28da57f662b12fd1561",
+  "reviewed_files": 124,
+  "product_files": 37,
+  "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_manifest_sha256": "11fd03edf08a85521d40862ebbea7fce3f169b00b970d660a95f8edc99a65ad6",
+  "diff_sha256": "bbdad569d7cccca70fe85edcdf84b3ad2544907a5567c19363c97943f5305834",
+  "diff_bytes": 494029,
+  "binding_verification": {
+    "manifest_hash_encoding": "SHA256 of sorted compact JSON, separators=(',', ':'), ensure_ascii=False, without trailing newline; not pretty-printed manifest file bytes",
+    "all_124_reviewed_file_hashes_match": true,
+    "all_37_product_file_hashes_match": true,
+    "canonical_manifest_hashes_match_prepare": true,
+    "product_manifest_exactly_equals_r6": true,
+    "all_live_product_bytes_equal_17443eb": true,
+    "complete_cumulative_diff_reproduced": true,
+    "diff_scope": "git diff --no-ext-diff e034de2f924dd6d96e31caa8e5a62e52474de718 -- <sorted tracked reviewed paths>, followed by git diff --no-ext-diff --no-index -- /dev/null qa/test_notification_fixture.py; exact byte match to final-review-r7/current.diff",
+    "bound_untracked_inputs": [
+      "qa/test_notification_fixture.py"
+    ],
+    "reviewed_paths_added_since_r6": [
+      "qa/test_notification_fixture.py"
+    ],
+    "reviewed_paths_removed_since_r6": [],
+    "reviewed_file_hashes_changed_since_r6": [
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "new_cumulative_diff_sections_since_r6": [
+      "qa/emulator_install_and_tour.py",
+      "qa/test_notification_fixture.py"
+    ],
+    "changed_existing_cumulative_diff_sections_since_r6": [
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "removed_cumulative_diff_sections_since_r6": [],
+    "all_other_cumulative_sections_unchanged": true
+  },
+  "prior_coverage": {
+    "scope": "Verified original R6 dual raw coverage and its bindings; inherited cumulative product review, not a fresh broad source audit",
+    "spec_raw_path": "qa/release-029/evidence/resume-1720/final-review-r6/spec-raw.txt",
+    "spec_raw_sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+    "standards_raw_path": "qa/release-029/evidence/resume-1720/final-review-r6/standards-raw.txt",
+    "standards_raw_sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c",
+    "both_original_raw_hashes_match_dual_closure": true,
+    "both_axes_passed_with_empty_blocking_concerns": true,
+    "both_raw_bindings_match_r6_prepare": true,
+    "r6_canonical_manifests_match_r6_prepare": true,
+    "r6_captured_diff_hash_matches_r6_prepare": true,
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "reviewed_manifest_sha256": "ced5d6d229c8da36b5fe07dbe545b885ec13c9592bd87211b2f5ade9a32a0984",
+    "diff_sha256": "8b0fa35c2ffc41b08862a2877c05ae7b56f684340c32e2077156a0d640c5b626"
+  },
+  "delta_verification": {
+    "changed_executable_existing_file": "qa/emulator_install_and_tour.py",
+    "helper_location": "qa/emulator_install_and_tour.py:29-38",
+    "call_location": "qa/emulator_install_and_tour.py:40",
+    "placement": "After the original line-27 pm clear/environment setup statement and before the original Theme instrumentation; no original statement reordered or rewritten",
+    "api_below_33": "Reads SDK and records not-required; does not attempt a runtime notification grant",
+    "api_33_and_above": "Runs pm grant com.hcbiu.elcton android.permission.POST_NOTIFICATIONS, then dumpsys package com.hcbiu.elcton; granted=true is required before recording pregranted-ui-only and proceeding",
+    "shell_failure_behavior": "Existing shell uses subprocess.run(check=True, timeout=60); a grant exception is not caught or converted to success",
+    "failed_readback_behavior": "Assertion aborts before the fixture write and subsequent instrumentation",
+    "original_ast_exact_after_removing_two_added_top_level_nodes": true,
+    "removed_nodes_for_ast_comparison": [
+      "FunctionDef prepare_ui_notifications at line 29",
+      "Expr writing notification-fixture.json and invoking prepare_ui_notifications at line 40"
+    ],
+    "scope_reasoning": "An explicit preauthorized emulator appearance/persistence fixture addresses the documented system permission window blocking Compose without modifying product permission behavior or original UI assertions. It is consistent with the existing separate diagnostic permission fixtures, and is not evidence of the first-time authorization interaction succeeding.",
+    "evidence_read": [
+      "qa/release-029/evidence/resume-1720/android-permission-fixture-r7/exact-environment-delta.json",
+      "qa/release-029/evidence/resume-1720/android-repair-r6/ROOT-CAUSE-R7.md"
+    ]
+  },
+  "test_integrity": {
+    "comparison_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+    "existing_kotlin_test_files": 34,
+    "byte_identical_files": 34,
+    "changed_files": [],
+    "added_or_missing_kotlin_test_files": [],
+    "original_harness_ast_unchanged": true,
+    "diagnostic_harness_byte_identical": true,
+    "mcp_keepalive_test_byte_identical": true,
+    "negative_permission_assertions_retained": "McpKeepAliveTest.kt retains prompt-suppression-only setup, denied canNotify/enable assertions, retained enabled choice, inactive service, stopped real listener and no-notification assertions. qa/diag_emulator_smoke.py still requires permissionDeniedFailClosed/defaultOnNoPermissionRetainsChoice/noNotificationWithoutPermission evidence.",
+    "new_test_path": "qa/test_notification_fixture.py",
+    "new_test_cases": [
+      "test_api32_does_not_attempt_runtime_notification_grant",
+      "test_api33_grants_before_readback_and_records_exact_scope",
+      "test_api33_failed_readback_is_not_reported_as_permission_pass",
+      "test_grant_failure_is_propagated_before_instrumentation"
+    ],
+    "independent_execution": {
+      "command": "python -B qa/test_notification_fixture.py",
+      "exit_code": 0,
+      "tests_run": 4,
+      "result": "OK",
+      "scope": "Synthetic shell-stub helper tests; no adb, APK installation, emulator instrumentation or phone actions"
+    },
+    "archived_red_receipt": {
+      "path": "qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-red.log",
+      "exit_path": "qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-red.exit",
+      "exit_code": 1,
+      "tests_run": 4,
+      "failures": 4,
+      "reason": "Required helper absent in original harness",
+      "independently_rerun": false
+    },
+    "archived_green_receipt": {
+      "path": "qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-green.log",
+      "exit_path": "qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-green.exit",
+      "exit_code": 0,
+      "tests_run": 4,
+      "result": "OK"
+    },
+    "original_android_tests_executed_by_this_review": false,
+    "tests_modified_to_obtain_pass": false
+  },
+  "acceptance_limits": {
+    "android_pass": false,
+    "release_acceptance": false,
+    "first_time_notification_authorization_ui_success": false,
+    "full_original_ui_status": "Documented original two RED runs remain RED evidence; this review executes only the four new synthetic fixture tests and grants no Android PASS",
+    "sdk_signing_and_product_permission_mechanism": "Unchanged product bindings; no fresh APK/signing audit or product runtime acceptance claimed",
+    "required_certificate_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "old_0_2_8_and_1_1_15": "No old-package writes; preservation remains mandatory and is not replaced by this QA delta review",
+    "phone_actions_performed": false,
+    "emulator_actions_performed": false,
+    "scope": "Latest R7 QA delta plus bound prior R6 product coverage only; NOT Android PASS"
+  },
+  "files_created_or_modified_by_this_review": [
+    "qa/release-029/evidence/resume-1720/final-review-r7/spec-raw.txt"
+  ],
+  "issues_encountered": []
+}

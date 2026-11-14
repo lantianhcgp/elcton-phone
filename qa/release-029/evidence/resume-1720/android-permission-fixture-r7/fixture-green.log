@@ -1,0 +1,9 @@
+test_api32_does_not_attempt_runtime_notification_grant (qa.test_notification_fixture.NotificationFixtureTest.test_api32_does_not_attempt_runtime_notification_grant) ... ok
+test_api33_failed_readback_is_not_reported_as_permission_pass (qa.test_notification_fixture.NotificationFixtureTest.test_api33_failed_readback_is_not_reported_as_permission_pass) ... ok
+test_api33_grants_before_readback_and_records_exact_scope (qa.test_notification_fixture.NotificationFixtureTest.test_api33_grants_before_readback_and_records_exact_scope) ... ok
+test_grant_failure_is_propagated_before_instrumentation (qa.test_notification_fixture.NotificationFixtureTest.test_grant_failure_is_propagated_before_instrumentation) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.057s
+
+OK

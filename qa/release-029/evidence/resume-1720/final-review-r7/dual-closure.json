@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "axes": [
+    {
+      "axis": "spec",
+      "raw_sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+      "passed": true
+    },
+    {
+      "axis": "standards",
+      "raw_sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7",
+      "passed": true
+    }
+  ],
+  "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_manifest_sha256": "11fd03edf08a85521d40862ebbea7fce3f169b00b970d660a95f8edc99a65ad6",
+  "diff_sha256": "bbdad569d7cccca70fe85edcdf84b3ad2544907a5567c19363c97943f5305834",
+  "scope": "exact existing independent R7 raw binding; not Android PASS"
+}

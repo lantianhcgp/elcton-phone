@@ -1,0 +1,115 @@
+{
+  "axis": "standards",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [
+    "Optional hardening: replace the readback assert with an explicit exception if optimized Python execution is ever supported. The reviewed CI invokes ordinary python3, not python -O, so its current check is active.",
+    "Optional regression coverage: add a source-order test binding the fixture invocation after pm clear and before the first instrumentation call; that ordering is correct in the reviewed source."
+  ],
+  "summary": "Independent R7 standards delta review passes. Rehashed all 124 reviewed files and all 37 product files, reproduced the complete 494029-byte cumulative reviewed-scope diff including the untracked new test, and verified both original R6 raw receipts against their closure and manifest/diff bindings. Product sources are exactly R6 HEAD; no product, SDK, signing, diagnostic harness or existing Kotlin-test drift. The only R7 source additions are explicit cloud UI notification preparation and four synthetic tests, plus the attributed RESUME note. Existing harness statements remain AST-identical after removing the helper and its environment-record call. The helper runs after data clearing and before initial instrumentation, grants only POST_NOTIFICATIONS on API >=33, reads back the exact permission granted=true token and propagates shell/readback failure before writing a successful fixture record. API32 issues no grant/readback command. No existing assertion is removed or weakened. UI preauthorization explicitly excludes first-authorization interaction coverage. This carries forward verified R6 cumulative coverage; it is not a fresh full-product audit or Android PASS.",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "current_head": "17443ebd617272e41d87f28da57f662b12fd1561",
+  "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_manifest_sha256": "11fd03edf08a85521d40862ebbea7fce3f169b00b970d660a95f8edc99a65ad6",
+  "diff_sha256": "bbdad569d7cccca70fe85edcdf84b3ad2544907a5567c19363c97943f5305834",
+  "reviewed_files": 124,
+  "product_files": 37,
+  "diff_bytes": 494029,
+  "binding_verification": {
+    "manifest_hash_encoding": "SHA256 of sorted compact JSON, separators=(',', ':'), ensure_ascii=False, without trailing newline; not pretty-printed file bytes",
+    "all_live_reviewed_and_product_hashes_match": true,
+    "prepare_bindings_exact": true,
+    "complete_cumulative_diff_reproduced": true,
+    "diff_command_scope": "git diff --no-ext-diff e034de2f924dd6d96e31caa8e5a62e52474de718 -- <sorted tracked reviewed-manifest paths>, followed by git diff --no-index -- /dev/null qa/test_notification_fixture.py",
+    "r6_full_diff_reproduced_from_current_head": true,
+    "candidate_before_after_and_r6_after_equal": true,
+    "product_exact_r6_head": true,
+    "r6_common_reviewed_files": 123,
+    "r6_changed_common_files": [
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "added_reviewed_files": [
+      "qa/test_notification_fixture.py"
+    ],
+    "removed_reviewed_files": [],
+    "cumulative_diff_sections": 64,
+    "r6_common_sections": 62,
+    "r6_common_sections_unchanged": 61,
+    "changed_common_sections": [
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "added_sections": [
+      "qa/emulator_install_and_tour.py",
+      "qa/test_notification_fixture.py"
+    ],
+    "removed_sections": []
+  },
+  "prior_coverage": {
+    "scope": "Verified R6 standards/spec original receipts and exact cumulative source bindings; carried forward unchanged coverage, not newly executed Android acceptance",
+    "standards_raw_path": "qa/release-029/evidence/resume-1720/final-review-r6/standards-raw.txt",
+    "standards_raw_sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c",
+    "spec_raw_path": "qa/release-029/evidence/resume-1720/final-review-r6/spec-raw.txt",
+    "spec_raw_sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+    "both_passed_and_closure_raw_hashes_match": true,
+    "both_manifest_and_diff_bindings_match": true,
+    "r6_product_manifest_identical": true
+  },
+  "fixture_verification": {
+    "source": "qa/emulator_install_and_tour.py:27-40",
+    "scope_explicit": "pregranted-ui-only; appearance/persistence fixture, not first user authorization",
+    "permission": "android.permission.POST_NOTIFICATIONS",
+    "package": "com.hcbiu.elcton",
+    "api32_no_runtime_grant": true,
+    "api33_grant_then_dumpsys_readback": true,
+    "shell_subprocess_check_true_timeout_seconds": 60,
+    "shell_failure_propagated": true,
+    "failed_readback_rejected_before_success_record": true,
+    "existing_statement_ast_exact_unchanged": true,
+    "archived_original_matches_r6_head": true,
+    "extra_independent_negative_readbacks_rejected": [
+      "empty output",
+      "permission name without grant state",
+      "POST_NOTIFICATIONS granted=false",
+      "unrelated permission granted=true"
+    ]
+  },
+  "test_integrity": {
+    "comparison_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+    "existing_kotlin_test_files": 34,
+    "byte_identical_files": 34,
+    "changed_or_missing_existing_kotlin_tests": [],
+    "diagnostic_harness_and_instrumentation_permission_negative_tests_unchanged": true,
+    "independently_executed_new_synthetic_tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "recorded_fixture_red_exit": 1,
+    "recorded_fixture_green_exit": 0,
+    "android_instrumentation_executed_by_this_review": false
+  },
+  "acceptance_limits": {
+    "android_pass_granted": false,
+    "physical_pass_granted": false,
+    "first_authorization_interaction_tested": false,
+    "product_crash_or_root_cause_logs_independently_reaudited": false,
+    "platform_sdk_signing_or_device_actions_performed": false
+  },
+  "files_created_or_modified_by_this_review": [
+    "qa/release-029/evidence/resume-1720/final-review-r7/standards-raw.txt"
+  ],
+  "issues_encountered": [
+    "An initial repository-wide reconstruction had a broader scope than the reviewed manifest; retrying with all manifest paths and the untracked test reproduced the saved cumulative diff exactly.",
+    "The supplied manifest identities use canonical compact JSON hashing, not the pretty-printed manifest file bytes; canonical regeneration matched all supplied bindings."
+  ],
+  "review_scope": "QA-only independent R7 delta standards review with verified inherited R6 coverage",
+  "android_status": "pending",
+  "physical_status": "pending",
+  "final_identity_check": {
+    "reviewed_files_rehashed": 124,
+    "mismatched_paths": [],
+    "manifest_and_diff_bindings_match": true
+  }
+}

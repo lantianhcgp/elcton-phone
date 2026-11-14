@@ -1,0 +1,6 @@
+{
+  "existing_statement_AST_exact_unchanged": true,
+  "added_scope": "one cloud-only permission helper + pre-UI call + new fail-closed unit tests",
+  "existing_kotlin_test_files_unchanged": 34,
+  "product_source_unchanged_from_17443eb": true
+}

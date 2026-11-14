@@ -11,4 +11,5 @@
 - R3双轴原始回执分别保存，产品候选与后续QA迁移清单不可混用；R4须独立审阅完整最新输入，产品37文件SHA若无漂移须逐项证明。
 - 首次真实Android CI 43582496281在compileDebugKotlin拒绝MainActivity权限回调签名Array<out String>，父类要求Array<String>；完整原失败日志/before已保留。仅去override参数out方差，回调内容、权限处理、全部测试、SDK/签名不动。R5完整重新绑定、独立双轴增量核验，必须以新SHA真实Android CI过为准。
 - R5实际build43583832086绿、Gradle153/153、APK真实版本签名正确；Android诊断43584056185在recreate后找不到diagnostic入口：UI抽取漏了原e034de2 onCreate恢复持久化latestFull到probeState.diagnostic那句。R6仅在观察者copy补空diagnostic，engine不动/原所有测试不改。原完整UI43584098560同首帧NoCompose失败，无fatal，原套件保持逐字相同，独立以实际日志调查并原样重跑，不能猜产品crash。R6/root及首RED全部保留。
+- R6修正17443eb已真实build43585732274绿。原UI同SHA重跑attempt2明确被API33系统通知授权窗挡住；R7只补cloud QA清数据后通知预授权及实际granted读回，与既有diagnostic fixture一致。新增4例夹具正负测RED→GREEN，原34个Kotlin测试和全部断言逐字不变；仅UI外观套件预授权，不宣称初次授权交互已验。旧首RED/attempt1/attempt2原件保留，R7须独立新QA绑定、全回归与新同源精确APK。
 

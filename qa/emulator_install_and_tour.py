@@ -25,6 +25,19 @@ active_overlays=shell('cmd overlay list')
 assert '[x] '+overlay in active_overlays,'Navigation overlay not enabled: '+active_overlays
 (out/'environment.json').write_text(json.dumps({'navigation_mode':navigation_mode,'overlay':overlay,'sdk':shell('getprop ro.build.version.sdk').strip(),'overlays':active_overlays},indent=2))
 shell('pm clear com.hcbiu.elcton');shell('svc power stayon true');shell('settings put system screen_off_timeout 2147483647');shell('input keyevent KEYCODE_WAKEUP');shell('wm dismiss-keyguard')
+
+def prepare_ui_notifications():
+    # Appearance/persistence fixtures must not be blocked by the new default-on
+    # API33 permission dialog. Permission-denied behavior has separate diagnostics tests.
+    sdk = int(shell('getprop ro.build.version.sdk').strip())
+    if sdk < 33:
+        return {'sdk': sdk, 'notification_fixture': 'not-required'}
+    shell('pm grant com.hcbiu.elcton android.permission.POST_NOTIFICATIONS')
+    permissions = shell('dumpsys package com.hcbiu.elcton')
+    assert 'android.permission.POST_NOTIFICATIONS: granted=true' in permissions, 'Notification permission grant did not read back'
+    return {'sdk': sdk, 'notification_fixture': 'pregranted-ui-only', 'granted': True}
+
+(out/'notification-fixture.json').write_text(json.dumps(prepare_ui_notifications(), indent=2)+'\n')
 def harvest_theme():
     archive=subprocess.run(['adb','shell'],input=b'run-as com.hcbiu.elcton tar -cf - -C files qa-theme-evidence\n',capture_output=True)
     if archive.returncode or not archive.stdout:

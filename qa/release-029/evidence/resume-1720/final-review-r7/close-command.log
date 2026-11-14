@@ -1,0 +1,3 @@
+usage: close_review_commit.py [-h] --dir DIR --spec SPEC --standards STANDARDS
+                              --message MESSAGE
+close_review_commit.py: error: the following arguments are required: --dir, --spec, --standards

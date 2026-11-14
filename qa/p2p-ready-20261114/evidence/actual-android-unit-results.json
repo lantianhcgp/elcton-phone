@@ -1,0 +1,18 @@
+{
+  "run_id": 43568230547,
+  "source_sha": "2097f32ab9ef573e060ef42d076799c9c274e38b",
+  "suites": 22,
+  "counts": {
+    "tests": 89,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "candidate_manifest": {
+    "passed": true,
+    "package": "com.hcbiu.elcton",
+    "versionCode": 10,
+    "versionName": "0.2.8",
+    "scope": "Binary APK manifest only; generated BuildConfig is tested separately by Android unit variant"
+  }
+}

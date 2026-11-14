@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "package": "com.hcbiu.elcton",
+  "versionCode": 10,
+  "versionName": "0.2.8",
+  "scope": "Binary APK manifest only; generated BuildConfig is tested separately by Android unit variant"
+}

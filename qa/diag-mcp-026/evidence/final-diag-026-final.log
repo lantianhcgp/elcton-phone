@@ -1,0 +1,8 @@
+test_actual_signer_gate (__main__.VerifierTests.test_actual_signer_gate) ... ok
+test_blank_and_missing_target_rejected (__main__.VerifierTests.test_blank_and_missing_target_rejected) ... ok
+test_literal_identity (__main__.VerifierTests.test_literal_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

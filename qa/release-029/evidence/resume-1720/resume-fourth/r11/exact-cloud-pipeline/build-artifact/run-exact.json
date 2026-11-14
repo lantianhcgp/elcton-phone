@@ -1,0 +1,135 @@
+{
+  "conclusion": "success",
+  "databaseId": 43600711386,
+  "event": "push",
+  "headBranch": "release/0.2.9-20261114",
+  "headSha": "84a6c406099348f75b436a8e9467c34487766859",
+  "jobs": [
+    {
+      "completedAt": "2026-11-14T13:39:41Z",
+      "conclusion": "success",
+      "databaseId": 132464635699,
+      "name": "build",
+      "startedAt": "2026-11-14T13:37:40Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-14T13:37:45Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-14T13:37:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:37:54Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-11-14T13:37:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:37:54Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v4",
+          "number": 3,
+          "startedAt": "2026-11-14T13:37:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:38:13Z",
+          "conclusion": "success",
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "number": 4,
+          "startedAt": "2026-11-14T13:37:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:38:20Z",
+          "conclusion": "success",
+          "name": "Ensure Android build prerequisites",
+          "number": 5,
+          "startedAt": "2026-11-14T13:38:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:21Z",
+          "conclusion": "success",
+          "name": "Unit tests and actual APK",
+          "number": 6,
+          "startedAt": "2026-11-14T13:38:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:31Z",
+          "conclusion": "success",
+          "name": "Real Kotlin diagnostic HTTP selftest",
+          "number": 7,
+          "startedAt": "2026-11-14T13:39:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:33Z",
+          "conclusion": "success",
+          "name": "Diagnostic HTTP logs (including failures)",
+          "number": 8,
+          "startedAt": "2026-11-14T13:39:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:34Z",
+          "conclusion": "success",
+          "name": "Stable production signing and verification",
+          "number": 9,
+          "startedAt": "2026-11-14T13:39:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:37Z",
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 10,
+          "startedAt": "2026-11-14T13:39:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:37Z",
+          "conclusion": "success",
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "number": 18,
+          "startedAt": "2026-11-14T13:39:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:37Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-java@v4",
+          "number": 19,
+          "startedAt": "2026-11-14T13:39:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:37Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 20,
+          "startedAt": "2026-11-14T13:39:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T13:39:37Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 21,
+          "startedAt": "2026-11-14T13:39:37Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43600711386/job/132464635699"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43600711386",
+  "workflowName": "android-probe"
+}

@@ -1,0 +1,40 @@
+{
+  "background": {
+    "passed": true,
+    "scope": "ordinary emulator process; screen-on Home; finite 5s/3 probes; NOT Doze/sticky/phone proof",
+    "pid": "4658",
+    "observations": [
+      {
+        "attempt": 1,
+        "elapsedSeconds": 1.5377357919999213,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      },
+      {
+        "attempt": 2,
+        "elapsedSeconds": 2.7832281499999,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      },
+      {
+        "attempt": 3,
+        "elapsedSeconds": 5.190338603999976,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      }
+    ],
+    "stopPath": "actual-notification-action",
+    "offPortClosed": true,
+    "offNotificationRemoved": true,
+    "businessAndTokenAndErrorsUnchanged": true,
+    "observationCount": 3,
+    "defaultOn": true,
+    "stopDisablesChoice": true,
+    "stopInactive": true,
+    "stopAcknowledged": true
+  },
+  "scope": "Finite 5 seconds / 3 ordinary emulator probes, NOT 10-minute, Doze, MIUI, watch or physical acceptance"
+}

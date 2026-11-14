@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "at": "2026-11-14T22:15:25.053022+08:00",
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "run": 43600975926,
+  "attempt": 1,
+  "artifact_id": 14115534555,
+  "original_fetched_files": 936,
+  "complete_map_files": 937,
+  "scene_counts": {
+    "full-theme-original": {
+      "screenshots": 23,
+      "passed": true
+    },
+    "full-palette-original": {
+      "screenshots": 74,
+      "passed": true
+    },
+    "full-tour-original-static-block": {
+      "shots": 28,
+      "hierarchies": 28,
+      "states": 28,
+      "keyboard_pixel_checks": 1,
+      "original_block_lines": [
+        224,
+        244
+      ]
+    },
+    "full-system-bars-original": {
+      "scenes": 20,
+      "passed": true
+    }
+  },
+  "environment": {
+    "navigation_mode": "three-button",
+    "overlay": "com.android.internal.systemui.navbar.threebutton",
+    "sdk": "33"
+  },
+  "exact_source_report_passed": true,
+  "original_criteria_unchanged": {
+    "passed": true,
+    "identical_code_objects": [
+      "clients",
+      "diagnostics",
+      "background",
+      "full",
+      "tour",
+      "check",
+      "write"
+    ],
+    "original_full_json_compare_unchanged": true
+  },
+  "first_failed_verifier_and_link_continuation_not_rewritten": true,
+  "receipt_sha256": "35ffbc2323d2dd32d7694eb30e52e0d65d63060cb59ecd2f37aeb5ec4484a8e4",
+  "physical_status": "pending owner"
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_continuation.py",
+    "--source",
+    "84a6c406099348f75b436a8e9467c34487766859",
+    "--run",
+    "43600975926",
+    "--suite",
+    "full",
+    "--incoming",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification-continuation"
+  ],
+  "started_at": "2026-11-14T22:03:55.305364+08:00",
+  "ended_at": "2026-11-14T22:04:35.469102+08:00",
+  "exit_code": 1,
+  "log_sha256": "57398d10034846817c41710d5871de6034c07f4daf8e02c6e6eb507efa2b3b93"
+}

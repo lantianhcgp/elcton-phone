@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "scope": "All current git tracked/untracked-not-ignored actual ordinary files, archive entries and literal symlink payloads; original exact known/pattern checks unchanged; never follow probe symlinks or print values",
+  "files": 9462,
+  "bytes": 2427236536,
+  "archives_scanned": 38,
+  "hits": [],
+  "probe_symlinks": [
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/link-parent",
+      "payload_bytes": 168,
+      "sha256": "c4afaea77da17a4125a8f305230d5e70c1dbf85665cf67e07040c3f2f2daadf2"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-dir/output/emulator-crashdata/nested",
+      "payload_bytes": 163,
+      "sha256": "8d9bf2cdeea859cfb2134db4b5bcb75e6a8617a0ce81a93eda7036db59729073"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-leaf/output/emulator-crashdata/emu-crash-regular.db",
+      "payload_bytes": 172,
+      "sha256": "c902aef6459253dc9dd54d906f429db26ae61ad297c41f941240c4738aa61dc5"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-root/output",
+      "payload_bytes": 164,
+      "sha256": "62e9b30acaae151cd325c6c26e022a67d1d4ad7ec6d452a0ed87928d541ae0b7"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-swap-index/output",
+      "payload_bytes": 170,
+      "sha256": "d399e8f0e6b4c3833481939a2325c873db0de7b0b6291e630eb14b11e5a8d8c3"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-source-dir/allowed/nested",
+      "payload_bytes": 163,
+      "sha256": "82629e24ed65aef4a62fdffb30e85dbf6e69715afe03acb06a629b9aa7f67726"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-source-leaf/allowed/emu-crash-link.db",
+      "payload_bytes": 172,
+      "sha256": "7b6f6bcc85ccd24319675b0d9804698a92b4d049b37a47608baa3328087404e9"
+    },
+    {
+      "path": "qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-source-root/allowed",
+      "payload_bytes": 164,
+      "sha256": "7f07a4a28fe266c6231abc4cde3049e08a2d94e6cb253f55a071213050e26a1e"
+    }
+  ],
+  "file_manifest_sha256": "a2d293d283d2ed35bcc537004784e14d2d9f7fddb5c566d42c0b00a5f5d11867"
+}

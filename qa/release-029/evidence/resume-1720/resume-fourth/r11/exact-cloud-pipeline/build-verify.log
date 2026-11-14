@@ -1,0 +1,1 @@
+{"passed": true, "source_sha": "84a6c406099348f75b436a8e9467c34487766859", "build_run": "43600711386", "gradle_tests": 153, "gradle_suites": 30, "main_sha256": "664e8eae402f8390b8fcf63d0818d5a96c07b1222d06230f3f7b0927908b5065", "main_bytes": 8237316, "signer": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94", "version": "0.2.9/code11"}

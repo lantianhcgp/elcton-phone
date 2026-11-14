@@ -1,0 +1,7 @@
+{
+  "raw_files": 937,
+  "artifact_files": 930,
+  "snapshot_artifact": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification/raw/artifact",
+  "metadata": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact",
+  "scope": "Exact all-byte logical snapshot; no symlinks/hardlinks/copy omissions; original files never modified"
+}

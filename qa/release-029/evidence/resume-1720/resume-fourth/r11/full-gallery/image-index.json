@@ -1,0 +1,1140 @@
+{
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "run_id": "43600975926",
+  "original_sha_manifest_checked": true,
+  "original_file_count": 936,
+  "groups": {
+    "product": [
+      {
+        "name": "01-today-empty.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/01-today-empty.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "17e6bff6857b2edb7e339cb8f24fd02d1ffb868af856f18db299efcecfa91b9d"
+      },
+      {
+        "name": "02-week-empty.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/02-week-empty.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "63a57262dc0908e4b01f2c0b09a64e3d5fdd61f6f88c9a4c95afc07b0b401345"
+      },
+      {
+        "name": "03-editor-empty.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/03-editor-empty.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "43f689a2f9d8ec0884785efa7ebd19f7448a96f43737374fea47abe194b629da"
+      },
+      {
+        "name": "04-editor-invalid.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/04-editor-invalid.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "541febe565f8d3e575bad4c5bb4bc7c52442b5b45478ca8384eb23145358aa18"
+      },
+      {
+        "name": "05-week-course.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/05-week-course.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b1ab2e71f5cb09a2f0af35e4f23280252f33c55c2cc60fead4d0c73219627b03"
+      },
+      {
+        "name": "06-editor-filled.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/06-editor-filled.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "e6d4868d413a43de7723205593e7e3efa2434cbb357a452c3f7a40173753edeb"
+      },
+      {
+        "name": "07-week-edited.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/07-week-edited.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "48a21c0e2f85d473eecc0f9d3cfee680d26852008a9254bce2370be3a50a720d"
+      },
+      {
+        "name": "08-settings.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/08-settings.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "31b7dcd179b8e8dc06475bd352aa2a2f373ab732f9591a90d836a564e58762fb"
+      },
+      {
+        "name": "09-settings-invalid.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/09-settings-invalid.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "12d430311ee07c30ec00d4b74f2b20be8896ccc3aff0bf24c433d09f3f7fb26a"
+      },
+      {
+        "name": "10-import.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/10-import.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d4166582c6dde7bd6e4b382cba8ad8ab60a5e599d662ce5b45d2c8397b3a85b7"
+      },
+      {
+        "name": "11-import-preview.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/11-import-preview.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "a9f8db8bb7db19ed4206b8b6c0e845a30e159e725831dbb1662fa7cf978b1722"
+      },
+      {
+        "name": "12-export-preview.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/12-export-preview.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "c1c5e0f022a53988e6ec5b9378fc08872b810616f9b0b15a840c4517635efec4"
+      },
+      {
+        "name": "13-device.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/13-device.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "09b5fc7349a37d4bcb8e7dfafa6219aff8477f3a39f169235a01d4d764607b04"
+      },
+      {
+        "name": "14-device-unavailable.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/14-device-unavailable.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "9c431144758ba7cdcfac52c7c572d1f6ce6ddb2d81d59aa1f0c9a83e909e6784"
+      },
+      {
+        "name": "15-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/15-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "68c9bb70c5e1e08f1cee5573d04d566030b56e824beaa9df6ca0838225a82591"
+      },
+      {
+        "name": "16-delete-confirm.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/16-delete-confirm.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "080fb0038b7efa67ddd0ad6c46fa14e6bfa3f51798cc989b1e5430824e446960"
+      },
+      {
+        "name": "17-course-deleted.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/17-course-deleted.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "bad4a4a178a1951008976e15fb04c4b43677d236c55f39fe5c7e4e9a5dc81d9b"
+      },
+      {
+        "name": "19-restore-confirm.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/19-restore-confirm.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d1eae809155a8aba017d5e2d6b48a9d0f4719de87881a46fdefe073357066824"
+      },
+      {
+        "name": "20-restored-course.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/20-restored-course.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d9ea3fb8034dffbb6726181d2117b92043b5364d8f75ffccde16edd3428c4f84"
+      },
+      {
+        "name": "21-confirmed-empty-import.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/21-confirmed-empty-import.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "bad4a4a178a1951008976e15fb04c4b43677d236c55f39fe5c7e4e9a5dc81d9b"
+      },
+      {
+        "name": "22-return-today.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/22-return-today.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "19fdb2a8a4dfa727f4476a208296ceb624dbdff337e46bdf19c31444ac3e20e4"
+      },
+      {
+        "name": "23-file-export-picker.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/23-file-export-picker.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "dd386352dfe702a2ba50498fdf072b20505edfe55a57f65f65fa8baa34b95450"
+      },
+      {
+        "name": "24-file-exported.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/24-file-exported.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "42f0c3c38474d3b17b054ab19ad8af77a2658efa13f66520426e9aad4586c711"
+      },
+      {
+        "name": "25-file-import-picker.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/25-file-import-picker.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "16c6f8115b4538426b6ff314ae737f09f9902b98c081411e71eb0edfb4c7231a"
+      },
+      {
+        "name": "26-file-import-preview.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/26-file-import-preview.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "a4358348f4225e6813f62161011e3d9c07cef8ca7d6426c9a259cfd05113a7c4"
+      },
+      {
+        "name": "27-file-imported-course.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/27-file-imported-course.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d0cbfb5931aa3d8428d25626355912da719d99b6c9297144ba1d9b264b0846db"
+      },
+      {
+        "name": "28-restarted-file-import.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/28-restarted-file-import.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d0cbfb5931aa3d8428d25626355912da719d99b6c9297144ba1d9b264b0846db"
+      },
+      {
+        "name": "29-keyboard-visible.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/product/29-keyboard-visible.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "7e1c416f34b41282b412224f6b25bbbcd30671b821153594bd171ad27e1ea121"
+      }
+    ],
+    "theme-product": [
+      {
+        "name": "r2-cold-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-cold-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "079fc5592c149e9c95cffa56410ede8dbd8329a79686ea8e1ca8aafedfd950d4"
+      },
+      {
+        "name": "r2-cold-light-under-dark-system.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-cold-light-under-dark-system.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "43fe9692989077398c31fbe26bfedd71e03cb6fd59d8d210e839299ef54b85ac"
+      },
+      {
+        "name": "r2-cold-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-cold-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "2b39b5908e0dbb51c91e2ae1aa3ce0b70fda819bc966db5e4947341c1362c8af"
+      },
+      {
+        "name": "r2-dark-date-error-ime.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-date-error-ime.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "8e4cac41dba5cfa06dc737a5ba76a87398d96046999b5f4fd9aed2a4162234d0"
+      },
+      {
+        "name": "r2-dark-devices.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-devices.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "ab6f34d726b9c9b994a0aacd0da614606fe6b12eceffcbcf21daa66a99d01208"
+      },
+      {
+        "name": "r2-dark-editor.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-editor.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d38c8c6c4c569457fbe0211af425bd0d7938cf777da8e564646a6b74e02276e5"
+      },
+      {
+        "name": "r2-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "7193705c9cf2e05d084dae9fad6f21e9bbbe1b2c2eded519274d9bc069762f0e"
+      },
+      {
+        "name": "r2-dark-settings.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-settings.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "7193705c9cf2e05d084dae9fad6f21e9bbbe1b2c2eded519274d9bc069762f0e"
+      },
+      {
+        "name": "r2-dark-today.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-today.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b1eadfe495f9497f93f5341f058518fc560bcf47ccc2dd7f5e3eddb92d8dae5e"
+      },
+      {
+        "name": "r2-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "c61c50e89021cbe2d15f72e97f96d56903be780bc726a3084de3d6f24a3dbee0"
+      },
+      {
+        "name": "r2-explicit-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-explicit-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "43fe9692989077398c31fbe26bfedd71e03cb6fd59d8d210e839299ef54b85ac"
+      },
+      {
+        "name": "r2-explicit-light-under-dark-system.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-explicit-light-under-dark-system.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "43fe9692989077398c31fbe26bfedd71e03cb6fd59d8d210e839299ef54b85ac"
+      },
+      {
+        "name": "r2-legacy-dark-selected.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-legacy-dark-selected.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "cde3edc84bb91f226cc16ab6e9067b56c5ff438b65832d52dc36c05df9eb78c1"
+      },
+      {
+        "name": "r2-light-date-error-ime.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-date-error-ime.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "9a14e68b33c4673cae43d2e2930e62b49987240e5589dc6d456f9acecec2f86d"
+      },
+      {
+        "name": "r2-light-devices.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-devices.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "c54b367193be737783556cde0ced485235cfeff90c11eba52f5a5a17c55088dc"
+      },
+      {
+        "name": "r2-light-editor.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-editor.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "be29d553666b20a12da1f3f4949306e1d7e5c71569a06f9bbe7052307bc16036"
+      },
+      {
+        "name": "r2-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b6f88aa81ea7ab59380befd67e27d5552d829809643b08c9616ba21ec52e10d5"
+      },
+      {
+        "name": "r2-light-settings.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-settings.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b6f88aa81ea7ab59380befd67e27d5552d829809643b08c9616ba21ec52e10d5"
+      },
+      {
+        "name": "r2-light-today.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-today.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "ecfa9acb728e04e12c5e32525e30b1ec5b71b82c139767a0d72386db15893227"
+      },
+      {
+        "name": "r2-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "f151dc65e2ffae64aa72f29ee3aec5a6fdd591491d5adf14f277a821e2903d4a"
+      },
+      {
+        "name": "r2-system-dark-today.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-system-dark-today.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "7dcb246e9c43f143fba3eb16d7ac259ddd8de9b9cb69934f3ab18eaa1d63b001"
+      },
+      {
+        "name": "r2-system-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-system-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "e4fedee1146a0f5c0596c5e9ffe83850013940b1b6570cbcc9f9628e50a72fe3"
+      },
+      {
+        "name": "r2-system-live-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/theme-product/r2-system-live-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "fcd97d1c951332784f06a7a3001dcc25b615f3ad4ed1f0219ed4c52a555fadce"
+      }
+    ],
+    "palette-product": [
+      {
+        "name": "r3-blue-dark-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-dark-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "2af1a9382659665f42f9544b5f7f6a7061393b840e0616ccccdbf8e4c5854ae2"
+      },
+      {
+        "name": "r3-blue-dark-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-dark-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "745523f00d880c5bb11e11393d823169dc2ee2f215b14e55fc4e9500eda036ff"
+      },
+      {
+        "name": "r3-blue-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "7b3cfe1dcdc357afe945959fd921ee107416dc4f84352db90f71cebb8af8b035"
+      },
+      {
+        "name": "r3-blue-dark-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-dark-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "a715c0ebb78f8ce7b408e77a1987f2829fd2485279f30de7c3bef7c860fafcd9"
+      },
+      {
+        "name": "r3-blue-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b8c24d498f6eedf0465c3874f371e55c8c43afd8553db454eb77927e9b85a225"
+      },
+      {
+        "name": "r3-blue-light-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-light-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b7b1ee55da8001c32e9e9f28e7e41dee8aa890ad2c1f614b986019a78bc56727"
+      },
+      {
+        "name": "r3-blue-light-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-light-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "37f4e6e67b33846d2838c9f0310d550bcf7c594b4c94a882e0cb540b34246d9d"
+      },
+      {
+        "name": "r3-blue-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d5c43dda2b2867cd3d060de7259a12dfe44e220776480e53a7d000e748052dc1"
+      },
+      {
+        "name": "r3-blue-light-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-light-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "dbc7920c5ff7ffe414cf4a82035eec720a843333b89b4d97ae95b7544e7b141e"
+      },
+      {
+        "name": "r3-blue-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "abff43c9ff2c463042b479dfc7a90df87cb87c0a496098bacbd60b445735eecd"
+      },
+      {
+        "name": "r3-blue-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "60fae2fbdd5e2182fd21e9b6ff8fad031cf6e1eab8946d9ef50f5ccc7b67ced5"
+      },
+      {
+        "name": "r3-blue-system-light.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-blue-system-light.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "9be46af2f94228ef28ae5ac3f59541906d15d126015822e9cda0ca08ce2512ea"
+      },
+      {
+        "name": "r3-green-dark-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-dark-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "549ee26b78357594bdfa3726b6dcd0bd5d5fce666e04e2ebf5e355a0cea246d0"
+      },
+      {
+        "name": "r3-green-dark-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-dark-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "15196ecf8cb167da8a1b1ac73d96c01a99a5d11bceb02a1e03debbb2eedeb8d6"
+      },
+      {
+        "name": "r3-green-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "81fb1b31f6b7d99b559f4be9491713bdd1ae5e5ebf1af94d9b0da8b7765d7e0d"
+      },
+      {
+        "name": "r3-green-dark-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-dark-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "5953788fce5125d8f4159a44cf32d6b03b09a6cd7f709c868ed48130d0f141c0"
+      },
+      {
+        "name": "r3-green-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "17c6d5a23d2a5a605bc398ced4c9dfa6984055c13dc21c1f8bcbaf2ded18d15b"
+      },
+      {
+        "name": "r3-green-light-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-light-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "1d1c3557aa0f2bbdcfca025208fb82772033b77d481b5005cc740af789c7ad32"
+      },
+      {
+        "name": "r3-green-light-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-light-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b15b2e646313a9731320950c9c7cf5f75daaed6b69ddbb92b88bf055fc84bf8c"
+      },
+      {
+        "name": "r3-green-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "0bd9f43614d2309dfa89bb3da0d641b10fcde9347101e5c375b2d0e34078c128"
+      },
+      {
+        "name": "r3-green-light-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-light-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "1d3cd53dfba856b13672c8a41c891fa1c755ac3ad514abf53371db63074c7ba1"
+      },
+      {
+        "name": "r3-green-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "83c134c2f94e5d17fa1d92fab7a7aa80943b9adf0993474e1563dab80290b4ff"
+      },
+      {
+        "name": "r3-green-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "5ada2e375ee4c54c34e1a99eac550aea0674a4581ba6d75a2976908219cb3005"
+      },
+      {
+        "name": "r3-green-system-light.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-green-system-light.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "f0ed620d1d124a8580926fcb133c1e49f080c9a4f5de63137d12c9e53bd26e1d"
+      },
+      {
+        "name": "r3-orange-dark-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-dark-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "a64b91791dd85e86c449c13f797593c74a8a9910a35167596708c4b2b94dfa32"
+      },
+      {
+        "name": "r3-orange-dark-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-dark-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "c1adc109cf69f7693d614a2bae2a5194271c574d31db0d6931dd5658aac35239"
+      },
+      {
+        "name": "r3-orange-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "8b2433656bb923cb9048ef18cbed248f9f0171ed0d28cc037bd84ac20619b25f"
+      },
+      {
+        "name": "r3-orange-dark-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-dark-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "8eb8326a35e1b9a7231bbc7061c39adf345dc56c6543e83686a1b3ed11f289b9"
+      },
+      {
+        "name": "r3-orange-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "7b19b41eac76f8d0b4e5e642a0b598171e12e1ad6044831508af717d33d056d2"
+      },
+      {
+        "name": "r3-orange-light-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-light-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "5b03e65452974b5bc74f02f074dec48780f2188e89dc226554803190784b522d"
+      },
+      {
+        "name": "r3-orange-light-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-light-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "ead9508aed1b9b8e3eb2330b674924abf57fe39fab19cb427de516e78d47ba39"
+      },
+      {
+        "name": "r3-orange-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "cfded0f618c15e4a7534e6e3944e5cf2c19ecbf8283fe8699bab55342084d90f"
+      },
+      {
+        "name": "r3-orange-light-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-light-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "8eea405ee5f7426cd925074a5def0c31c8dcaf073e1a368a2127eb589c512d7b"
+      },
+      {
+        "name": "r3-orange-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "fa50e700a4fc500e04ff6a55f7bb32a96e50ae41b93ab238011439a64a501ffa"
+      },
+      {
+        "name": "r3-orange-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "6ad411023d692e9588027f887a4e6791d095a6ae77b94d852220126c01cd3230"
+      },
+      {
+        "name": "r3-orange-system-light.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-orange-system-light.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "1b8e73011d06eae6135e197ff324b3ab56f86aea802b7e347ceac70a5fb24e1e"
+      },
+      {
+        "name": "r3-pink-dark-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-dark-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "27a05d243d765ee08af3301dda44053f3525e2bcd3f0833d6d11ca1a85169340"
+      },
+      {
+        "name": "r3-pink-dark-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-dark-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "2ef559940c9bf6870dcc4dde776af5ba9bc7501fb7de3f9bf5070d69c1cea065"
+      },
+      {
+        "name": "r3-pink-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "37521355f9a44189c18e9d78c5047ba5ffd8c06889cecb67212bc89a1e0284e8"
+      },
+      {
+        "name": "r3-pink-dark-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-dark-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "36719b70b705e98ab33416f59733c3a30989eab684d2fddea78d310eee243a2a"
+      },
+      {
+        "name": "r3-pink-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "13143af5adfea41f291e83cd176b59d8523dffe0bfa1dedc0b91381522a55fba"
+      },
+      {
+        "name": "r3-pink-light-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-light-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b88d53146e5c9c767364007390eee0593f0d967070a42891ca48235d5b27b3c7"
+      },
+      {
+        "name": "r3-pink-light-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-light-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "a6a497158cc5a7ac58d0fdc89bc687c747dab384e7d69df4fd6c8b131f877ae4"
+      },
+      {
+        "name": "r3-pink-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "6b24d496f26b2b510990f7c1703c23c045e4dbc79242def300d3b94f79c62380"
+      },
+      {
+        "name": "r3-pink-light-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-light-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "eb01c67f504cb4630687d2f29559c7dd41e272dec5d536f0ab5f0f8a4174df4d"
+      },
+      {
+        "name": "r3-pink-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "4cca51c56977504013dee2d4206029fbd44dacf6dd8c058250ae394b0070ca6b"
+      },
+      {
+        "name": "r3-pink-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "cd3374fa3ccbdfaa5f413a8e555437184643fea99392de22dbb304a950451414"
+      },
+      {
+        "name": "r3-pink-system-light.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-pink-system-light.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "e6084f4e16c7383b374fe6e98e7f275be6f15c5b0f7d9ee925325770b14276a2"
+      },
+      {
+        "name": "r3-purple-dark-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-dark-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "63a25fc0b246c4d38ff71b4ad8f4e187879fca48709d16b30169cedf143a7c48"
+      },
+      {
+        "name": "r3-purple-dark-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-dark-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "481eed05886600658d2fc5496cd8affbe6161fa4fbeffc5c68a7e44bb7aabcca"
+      },
+      {
+        "name": "r3-purple-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "6e61e0b019701fbbafe1b19fee5c47cd231af46d83a9912c2251215db5118f01"
+      },
+      {
+        "name": "r3-purple-dark-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-dark-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "95de4a6a8c58e05eb80275d678fc85ee928c18b5091d603a5f3fe09f42462fa7"
+      },
+      {
+        "name": "r3-purple-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "51646d9aae2bcd4b2ffe58f4c566304a0b2c2441884776db0d9979ebb52d3b8b"
+      },
+      {
+        "name": "r3-purple-light-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-light-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "9a1f0a9292e6b14296edc7bc8bc9e4a5aa92388a2252f2e5285b96883dc421f7"
+      },
+      {
+        "name": "r3-purple-light-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-light-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "97f44ecc1651a48ede028c2bed38445fbd2419a8efa2b39b8761b3d44ec0ff9c"
+      },
+      {
+        "name": "r3-purple-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "428bc28db4fe15effff88fbbf00fdaf2614d9ae2b8769f6e2f8944b47157adb1"
+      },
+      {
+        "name": "r3-purple-light-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-light-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "6cbcbb3218313469820b1cdab835ca844efd07efcc19321df6fa015292510d01"
+      },
+      {
+        "name": "r3-purple-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "e50a857c6f50e3b937fdf4d6771a8950116abac057d20b6a6c8d90e83e98eb90"
+      },
+      {
+        "name": "r3-purple-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "b5a06d115537ccc8c7ea84e1d17b1812484571bc4b58a449a4e7d333817cd474"
+      },
+      {
+        "name": "r3-purple-system-light.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-purple-system-light.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "2ba92fb71f85972476843cad3ec61bc4704c9374504ff799e9d0e8bfedb56018"
+      },
+      {
+        "name": "r3-restored-purple-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-restored-purple-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "d828c45b23fa439c032f8b593ad18e08130a417f45f5cbfb372fdd9e3174a934"
+      },
+      {
+        "name": "r3-system-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-system-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "2095f55fb007474822eb1aa304afad2e86d088d867bc30eb2c4bcbaf6ac90dba"
+      },
+      {
+        "name": "r3-teal-dark-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-dark-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "677108f8c81df5af46a4511982b09a6890d8e9590f9420128bccce9c7bbdd868"
+      },
+      {
+        "name": "r3-teal-dark-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-dark-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "366dbdeb73bcff8672c8ac4079e23996765c9c226338c3809e1da66b3102dd1c"
+      },
+      {
+        "name": "r3-teal-dark-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-dark-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "3f9cdad68a710b5248f6b0b3593e810a92c72396f6df923014512af2b16b330a"
+      },
+      {
+        "name": "r3-teal-dark-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-dark-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "1f21baac7717a271a5a5429643ac42564496c3f3405da5c3f5036eca05b75a56"
+      },
+      {
+        "name": "r3-teal-dark-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-dark-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "4c8b7b0b899a50cf7c295c96f6a08327caf9b6c361b48eadfd0603d9289ead68"
+      },
+      {
+        "name": "r3-teal-light-cold.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-light-cold.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "8b1088a8721f6eb0bdae34c23bcb3cd1ba506b768f4724e50c74ea574030385f"
+      },
+      {
+        "name": "r3-teal-light-editor-bottom.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-light-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "2200e8c0db39286758ac13e845477e6191074a8ab6f7bbe2e7dc26bc4f571e48"
+      },
+      {
+        "name": "r3-teal-light-options.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-light-options.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "12399556310a5df19407d66a647f69492fa7f1df502801739574b8070a612044"
+      },
+      {
+        "name": "r3-teal-light-semester.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-light-semester.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "6e9349d5724c44fb1bf0fc4a8953f7d568f6c20e389c19ca2a3ad23b8c6e21ab"
+      },
+      {
+        "name": "r3-teal-light-week.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-light-week.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "4a7abafa51b6d4a4bc80c96151c16098f42c9c25cbc660bb8cbc938cc8cae7dd"
+      },
+      {
+        "name": "r3-teal-system-dark.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-system-dark.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "33cf9aa5ea8fda959869a8d7100c4e6d739a5c1b63df72bafb73e7b61a94a41a"
+      },
+      {
+        "name": "r3-teal-system-light.png",
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact/palette-product/r3-teal-system-light.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "sha256": "369b16072cb3e6d0bc58f327f109e24c18ce414e12bde501c14ee64b766c4be8"
+      }
+    ]
+  },
+  "scope": "Derived visual contact sheets and exact original image index; no source edits/new acceptance"
+}

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "identical_code_objects": [
+    "clients",
+    "diagnostics",
+    "background",
+    "full",
+    "tour",
+    "check",
+    "write"
+  ],
+  "original_full_json_compare_unchanged": true
+}

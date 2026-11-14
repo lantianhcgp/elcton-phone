@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "same_original_comparator": true,
+  "all_rows_exact": 6702,
+  "wire_sha256": "80b0493e3bda2155d9b19193dec25a939ef05c72634f209739b27a41b5694c2b",
+  "wire_bytes": 329873920,
+  "original_comparator_sha256": "315cc72c750a31064c28d6ed9ebdcd54054313412218a9035901b44d8199f6bd",
+  "adapter_sha256": "e65b353dbecb8d9eac1fe271bbcfa3298c222e1aa57ec15b866607e02a459ecd",
+  "scope": "Same existing actual remote archive, no new network call/extraction/link follows"
+}

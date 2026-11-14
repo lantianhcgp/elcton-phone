@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/ci_exact_wait.py",
+    "--repo",
+    "lantianhcgp/elcton-phone",
+    "--sha",
+    "84a6c406099348f75b436a8e9467c34487766859",
+    "--workflow",
+    "ui-smoke.yml",
+    "--run",
+    "43600960069",
+    "--out",
+    "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-wait",
+    "--seconds",
+    "2400"
+  ],
+  "started_at": "2026-11-14T21:40:54.885718+08:00",
+  "ended_at": "2026-11-14T21:47:02.328602+08:00",
+  "exit_code": 0,
+  "raw_sha256": "6e89bbe4e13169bf05fb0db9e3b24f8711bf1518761940f662fccb139771a4ec"
+}

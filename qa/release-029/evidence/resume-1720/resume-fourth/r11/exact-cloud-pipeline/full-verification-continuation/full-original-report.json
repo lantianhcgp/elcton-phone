@@ -1,0 +1,5847 @@
+{
+  "passed": true,
+  "scope": "product UI/real APK in Android emulator; no physical paired watch",
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "shots": [
+    {
+      "name": "01-today-empty.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 43.664442354681064,
+      "stddev": 47.93572133583854
+    },
+    {
+      "name": "02-week-empty.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 30.10642795138889,
+      "stddev": 34.97758907466466
+    },
+    {
+      "name": "03-editor-empty.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 34.11655703446502,
+      "stddev": 38.59461951340216
+    },
+    {
+      "name": "04-editor-invalid.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 34.14418467078189,
+      "stddev": 38.68204428892244
+    },
+    {
+      "name": "05-week-course.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 31.81876880787037,
+      "stddev": 34.91713165374659
+    },
+    {
+      "name": "06-editor-filled.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 34.51843235596708,
+      "stddev": 39.709336601029214
+    },
+    {
+      "name": "07-week-edited.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 31.84066277649177,
+      "stddev": 34.98106627230479
+    },
+    {
+      "name": "08-settings.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 47.56995884773662,
+      "stddev": 45.64033527943524
+    },
+    {
+      "name": "09-settings-invalid.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 134.5316189236111,
+      "stddev": 105.87731366013789
+    },
+    {
+      "name": "10-import.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 29.846801376028804,
+      "stddev": 36.02461420694576
+    },
+    {
+      "name": "11-import-preview.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 30.55119068287037,
+      "stddev": 37.44387477757429
+    },
+    {
+      "name": "12-export-preview.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 36.35672228652263,
+      "stddev": 42.0765011099945
+    },
+    {
+      "name": "13-device.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 57.74667920524691,
+      "stddev": 60.58532652082118
+    },
+    {
+      "name": "14-device-unavailable.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 59.2080172968107,
+      "stddev": 60.890444427804454
+    },
+    {
+      "name": "15-editor-bottom.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 33.390227944958845,
+      "stddev": 39.782397401663964
+    },
+    {
+      "name": "16-delete-confirm.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 25.188063271604936,
+      "stddev": 36.46837769141269
+    },
+    {
+      "name": "17-course-deleted.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 32.078190907921815,
+      "stddev": 35.59183648606569
+    },
+    {
+      "name": "19-restore-confirm.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 25.247581340020574,
+      "stddev": 34.66795574974543
+    },
+    {
+      "name": "20-restored-course.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 31.679073431069963,
+      "stddev": 34.59313878544932
+    },
+    {
+      "name": "21-confirmed-empty-import.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 32.078190907921815,
+      "stddev": 35.59183648606569
+    },
+    {
+      "name": "22-return-today.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 45.63620531121399,
+      "stddev": 47.83939058694005
+    },
+    {
+      "name": "23-file-export-picker.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 251.04576356738684,
+      "stddev": 25.06504938721479
+    },
+    {
+      "name": "24-file-exported.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 38.4689096257716,
+      "stddev": 38.850687001820006
+    },
+    {
+      "name": "25-file-import-picker.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 252.3229486561214,
+      "stddev": 20.332210204748275
+    },
+    {
+      "name": "26-file-import-preview.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 27.31023308899177,
+      "stddev": 37.190325944905595
+    },
+    {
+      "name": "27-file-imported-course.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 31.82969023276749,
+      "stddev": 34.95241862794361
+    },
+    {
+      "name": "28-restarted-file-import.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 31.82969023276749,
+      "stddev": 34.95241862794361
+    },
+    {
+      "name": "29-keyboard-visible.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "mean": 126.95950183256173,
+      "stddev": 110.58264866925474
+    }
+  ],
+  "hierarchies": [
+    {
+      "name": "01-today-empty.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "02-week-empty.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "03-editor-empty.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "04-editor-invalid.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "05-week-course.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "06-editor-filled.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "07-week-edited.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "08-settings.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "09-settings-invalid.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.google.android.inputmethod.latin",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "10-import.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "11-import-preview.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "12-export-preview.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "13-device.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "14-device-unavailable.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "15-editor-bottom.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "16-delete-confirm.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "17-course-deleted.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "19-restore-confirm.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "20-restored-course.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "21-confirmed-empty-import.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "22-return-today.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "23-file-export-picker.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.google.android.documentsui"
+      ]
+    },
+    {
+      "name": "24-file-exported.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "25-file-import-picker.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.google.android.documentsui"
+      ]
+    },
+    {
+      "name": "26-file-import-preview.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "27-file-imported-course.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "28-restarted-file-import.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.hcbiu.elcton"
+      ]
+    },
+    {
+      "name": "29-keyboard-visible.xml",
+      "packages": [
+        "com.android.systemui",
+        "com.google.android.inputmethod.latin",
+        "com.hcbiu.elcton"
+      ]
+    }
+  ],
+  "keyboard_pixel_checks": [
+    {
+      "file": "29-keyboard-visible.png",
+      "navigation": [
+        838,
+        1047
+      ],
+      "keyboard_bright_fraction": 0.9483471074380165,
+      "passed": true
+    }
+  ],
+  "system_bar_pixels": {
+    "passed": true,
+    "scenes": 20,
+    "scope": "Full-screen emulator screenshots; keyboard/SAF system chrome is outside app ownership",
+    "results": [
+      {
+        "name": "01-today-empty.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 622,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "02-week-empty.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "03-editor-empty.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "04-editor-invalid.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "05-week-course.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "06-editor-filled.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "07-week-edited.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "08-settings.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "09-settings-invalid.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": true,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1038,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              960,
+              158,
+              1005
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "13-device.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "14-device-unavailable.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "15-editor-bottom.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "17-course-deleted.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "20-restored-course.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "21-confirmed-empty-import.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "22-return-today.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 622,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "24-file-exported.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "27-file-imported-course.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "28-restarted-file-import.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": false,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1784,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "system_navigation": {
+            "row": 1910,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              1706,
+              158,
+              1751
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/back",
+            "bounds": [
+              124,
+              1794,
+              331,
+              1920
+            ],
+            "visible_pixels": 1051,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/recent_apps",
+            "bounds": [
+              747,
+              1794,
+              955,
+              1920
+            ],
+            "visible_pixels": 1509,
+            "passed": true
+          },
+          {
+            "component": "com.android.systemui:id/home_button",
+            "bounds": [
+              435,
+              1794,
+              645,
+              1920
+            ],
+            "visible_pixels": 1593,
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "29-keyboard-visible.png",
+        "size": [
+          1080,
+          1920
+        ],
+        "expected_rgb": [
+          12,
+          15,
+          21
+        ],
+        "ime_visible": true,
+        "bands": {
+          "status_bar": {
+            "row": 10,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "page": {
+            "row": 640,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          },
+          "app_navigation": {
+            "row": 1038,
+            "rgb": [
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ],
+              [
+                12,
+                15,
+                21
+              ]
+            ],
+            "matches_page_background": true
+          }
+        },
+        "capture_readiness": [
+          {
+            "component": "app_navigation_label",
+            "bounds": [
+              96,
+              960,
+              158,
+              1005
+            ],
+            "visible_pixels": 641,
+            "passed": true
+          }
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "theme_ui": {
+    "passed": true,
+    "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+    "navigation_mode": "three-button",
+    "screenshots": 23,
+    "phase_process_ids": {
+      "initial": 3730,
+      "cold-dark": 5712,
+      "cold-system-dark": 6172,
+      "cold-light-under-dark-system": 6993
+    },
+    "errors": [],
+    "scenes": [
+      {
+        "name": "r2-light-today",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 533,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "d441db9f-e7f3-4809-b7f9-2b2a028bc8da",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "30bf1cca-33f4-493c-b17c-c297875ee334",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-light-editor",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "8e517647-b859-451c-beb4-6c106acc6e63",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-light-devices",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "7fd8c3b8-ec10-4c50-8105-31143c05fe4d",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-light-settings",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "afc4790a-e836-4138-bcae-baf4ae755659",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "f667bec9-0c8e-4f31-b6d4-06f8c849902a",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-light-date-error-ime",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "6a83775c-a707-425e-8b03-962d58f18abd",
+          "ime_bounds": [
+            0,
+            1048,
+            1080,
+            1794
+          ],
+          "raw_ime_bounds": [
+            0,
+            1025,
+            1080,
+            1920
+          ],
+          "keyboard_bright_fraction": 0.9418449197860963,
+          "keyboard_ink_pixels": 1593,
+          "date_error_bounds": [
+            182,
+            584,
+            937,
+            629
+          ],
+          "error_ink_pixels": 3270
+        }
+      },
+      {
+        "name": "r2-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "af26dc9f-6ff9-4194-b9b1-7c3f8fb651a4",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-dark-today",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 622,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "4d5dd5d5-3162-49a0-a3b6-2efff3ff8e22",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "325b0755-97ce-421d-a038-07aa9c6b0508",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-dark-editor",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "f4e2ec86-2d90-4b3e-838a-47e0bc8260eb",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-dark-devices",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "fccc12ab-2b5d-4818-a280-f0bb822a0650",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-dark-settings",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "aa0c0f5f-8972-4b96-a178-b2652d9599dd",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-dark-date-error-ime",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 3730,
+          "capture_id": "c16858d2-4275-4986-9340-97c834b82e4e",
+          "ime_bounds": [
+            0,
+            1048,
+            1080,
+            1794
+          ],
+          "raw_ime_bounds": [
+            0,
+            1025,
+            1080,
+            1920
+          ],
+          "keyboard_bright_fraction": 0.942087992221682,
+          "keyboard_ink_pixels": 1589,
+          "date_error_bounds": [
+            182,
+            584,
+            937,
+            629
+          ],
+          "error_ink_pixels": 4159
+        }
+      },
+      {
+        "name": "r2-cold-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": false,
+          "pid": 5712,
+          "capture_id": "7d27846e-1267-4a08-9882-a0b54d81a9d2",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-system-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "SYSTEM",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 5712,
+          "capture_id": "4ff18763-3a2b-4a11-9e18-d120ecba1a5c",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-cold-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "SYSTEM",
+          "expected_dark": true,
+          "system_dark": true,
+          "pid": 6172,
+          "capture_id": "291a875b-4a8a-49f6-b0c8-0f41f909bdc2",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-system-dark-today",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 622,
+          "theme": "SYSTEM",
+          "expected_dark": true,
+          "system_dark": true,
+          "pid": 6172,
+          "capture_id": "952984c4-71f2-466d-8a04-f2d189d252e8",
+          "system_navigation_ink": 1080
+        }
+      },
+      {
+        "name": "r2-system-live-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "SYSTEM",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 6172,
+          "capture_id": "3aeef8dd-3fdf-4456-99d8-2dfe8936792d",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-explicit-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": false,
+          "pid": 6172,
+          "capture_id": "fe40304b-f800-4442-a039-4248afc99a5f",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-explicit-light-under-dark-system",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": true,
+          "pid": 6172,
+          "capture_id": "c63e15f7-bd69-4b4a-bfac-c30fc9710310",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-cold-light-under-dark-system",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 575,
+          "theme": "LIGHT",
+          "expected_dark": false,
+          "system_dark": true,
+          "pid": 6993,
+          "capture_id": "50ca5963-b95f-4a03-af91-e240689c49ab",
+          "system_navigation_ink": 1078
+        }
+      },
+      {
+        "name": "r2-legacy-dark-selected",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "label_ink": 641,
+          "theme": "DARK",
+          "expected_dark": true,
+          "system_dark": true,
+          "pid": 6993,
+          "capture_id": "10e146a1-b2e0-4087-96d8-78c83f273519",
+          "system_navigation_ink": 1080
+        }
+      }
+    ],
+    "scope": "Actual emulator APK; independent PNG/XML/state checks; no physical paired watch"
+  },
+  "palette_ui": {
+    "passed": true,
+    "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+    "navigation_mode": "three-button",
+    "screenshots": 74,
+    "phase_process_ids": {
+      "warm": 7424,
+      "cold-purple-light": 8544,
+      "cold-purple-dark": 8687,
+      "cold-blue-light": 8813,
+      "cold-blue-dark": 8938,
+      "cold-green-light": 9057,
+      "cold-green-dark": 9176,
+      "cold-teal-light": 9297,
+      "cold-teal-dark": 9418,
+      "cold-orange-light": 9537,
+      "cold-orange-dark": 9662,
+      "cold-pink-light": 9782,
+      "cold-pink-dark": 9905,
+      "system": 10032,
+      "cold-system": 10359
+    },
+    "scenes": [
+      {
+        "name": "r3-purple-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "522b5258-07c2-45d6-ae99-e1d31d23b698",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-purple-light-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "77e8ed55-7538-45f4-a51c-db8f6fc7fce6",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            239,
+            228,
+            255
+          ]
+        }
+      },
+      {
+        "name": "r3-purple-light-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "560be0e7-b3d4-4bfa-80c8-a4c3dca4b288",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-purple-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "4cf49679-f903-40b2-b77c-dc25a98e3a1a",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-purple-light-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 8544,
+          "scene": "options",
+          "phase": "cold-purple-light",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "749f382d-f841-4db0-bbe7-906d90d6b2da",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-purple-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "566cd8ca-c4c2-4b77-861e-5493da890e51",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-purple-dark-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "edb06a3c-21da-43d6-b227-18649d8c9d96",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            67,
+            48,
+            116
+          ]
+        }
+      },
+      {
+        "name": "r3-purple-dark-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "becc8e34-315b-48f9-bd08-4c6ce6ab180a",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-purple-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "bcea5098-8d18-4f5a-9cd1-8347650feaad",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-purple-dark-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 8687,
+          "scene": "options",
+          "phase": "cold-purple-dark",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "465053cd-af50-4c58-83e3-ae5dc46b7cbe",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-blue-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "34bcb6f4-617e-410a-985d-e4b3e389680c",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-blue-light-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "30f8ed25-443a-4d14-a721-bcea5f5c5ffc",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            222,
+            232,
+            255
+          ]
+        }
+      },
+      {
+        "name": "r3-blue-light-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "3d336f3b-6d89-4e59-b24d-5d780e964ea0",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-blue-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "c250816e-9efa-45e9-8a41-6c5915cfdcf7",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-blue-light-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 8813,
+          "scene": "options",
+          "phase": "cold-blue-light",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "9b3ffa6c-8207-430c-ae1f-ecf3a431b27b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-blue-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "30b13119-1d2e-41c4-ba81-639955634d8a",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-blue-dark-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "6583aaf3-23fd-4574-8c74-eb12c0ee78b5",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            31,
+            59,
+            96
+          ]
+        }
+      },
+      {
+        "name": "r3-blue-dark-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "82c9523c-dec7-40b2-956b-8b1bd11bad5c",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-blue-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "369ceec1-d72b-49bf-9a1b-3936c8625789",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-blue-dark-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 8938,
+          "scene": "options",
+          "phase": "cold-blue-dark",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "0661cecd-f0f2-4007-878d-e1e0faeb7c17",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-green-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "ef734dca-95a7-4352-a40e-5d052d617554",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-green-light-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "13209fbb-703c-40b0-82a5-187558cea776",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            205,
+            243,
+            192
+          ]
+        }
+      },
+      {
+        "name": "r3-green-light-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "3c193ce0-12f1-4087-9ead-3433dd810267",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-green-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "601c79b4-2138-4b3f-a935-969b4803bf3e",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-green-light-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 9057,
+          "scene": "options",
+          "phase": "cold-green-light",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "bbe4f812-4201-464a-94a5-d1302c686341",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-green-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "3a19bbeb-daa1-4d30-9293-22a270c1732b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-green-dark-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "6b41790c-2e3f-4a4b-8690-0edecd72248e",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            34,
+            66,
+            29
+          ]
+        }
+      },
+      {
+        "name": "r3-green-dark-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "9a07966f-ef05-4621-87c8-c8ac995d9f6b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-green-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "f01ee6ac-85a3-41c2-87aa-d1402f07553e",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-green-dark-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 9176,
+          "scene": "options",
+          "phase": "cold-green-dark",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "684ecd79-882b-4561-9554-628d52439a43",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-teal-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "760f01ed-d9db-46d2-956c-8709721f2345",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-teal-light-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "6ab59f5f-7fb6-48e0-8dfb-11bdb5840776",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            178,
+            244,
+            238
+          ]
+        }
+      },
+      {
+        "name": "r3-teal-light-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "95d4e788-8f25-401c-8143-2d10b1fb71aa",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-teal-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "17f17214-476a-4619-8e05-54dbcb1a1c7c",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-teal-light-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 9297,
+          "scene": "options",
+          "phase": "cold-teal-light",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "068055b6-d0e3-47c1-aec7-40607a4be682",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-teal-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "d8c7a634-ddab-48a2-acc8-1f968f51e64b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-teal-dark-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "941d4883-626a-4274-8e80-58d79a5bdab5",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            3,
+            66,
+            63
+          ]
+        }
+      },
+      {
+        "name": "r3-teal-dark-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "48bf0d03-4727-4c0d-a20f-d078498f2571",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-teal-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "359beba1-93c6-4084-912f-40b759ed8c2b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-teal-dark-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 9418,
+          "scene": "options",
+          "phase": "cold-teal-dark",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "f5e0adff-c912-4175-9aa1-e52c057a2c28",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-orange-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "8073c0a0-e85c-47ea-b63c-204362b309ba",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-orange-light-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "97b14684-fde6-4674-aea2-5cd83d51e08b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            255,
+            226,
+            211
+          ]
+        }
+      },
+      {
+        "name": "r3-orange-light-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "ed001dd3-a3bd-42ca-aebc-1b6f102f8e33",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-orange-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "b6af5848-e63c-4e3b-a652-cbbea1affe82",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-orange-light-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 9537,
+          "scene": "options",
+          "phase": "cold-orange-light",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "b43c3ec2-90c5-437f-8bd9-53f5283abc81",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-orange-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "e67bba66-0ad3-496b-81f1-2568e22f2887",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-orange-dark-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "4de66c9b-6b72-4884-a33f-720bf886a3ee",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            91,
+            47,
+            15
+          ]
+        }
+      },
+      {
+        "name": "r3-orange-dark-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "9dbe920f-e724-4663-9db7-83c8b7b88443",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-orange-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "c594bf1b-3643-49ff-883b-f1db215e3005",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-orange-dark-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 9662,
+          "scene": "options",
+          "phase": "cold-orange-dark",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "00618e73-e4e5-4996-9e47-0f789c821591",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-pink-light-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "2c146fdf-6601-49c4-a8ee-bbafdccd2fa3",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-pink-light-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "dcaad671-d5ab-4fdc-bf08-1ef717eaa2b2",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            255,
+            224,
+            232
+          ]
+        }
+      },
+      {
+        "name": "r3-pink-light-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "7d6c1341-a921-48f3-b212-a3cbb9195872",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-pink-light-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "64541b26-af0d-4404-981d-9ea115cd3cba",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-pink-light-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "LIGHT",
+          "dark": false,
+          "pid": 9782,
+          "scene": "options",
+          "phase": "cold-pink-light",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "a0ae2a9e-ab72-4287-a394-669ceb37443a",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-pink-dark-options",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "options",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "5a5b8ed9-bb0a-4930-8181-bb31a7ec5d40",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-pink-dark-semester",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "semester",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "8288fe62-a641-4020-8300-a37e29aff8b5",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "nested_field_sample": [
+            90,
+            43,
+            61
+          ]
+        }
+      },
+      {
+        "name": "r3-pink-dark-editor-bottom",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "editor-bottom",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "447f118e-cfd4-4193-ad3a-8dd6381c794b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "business_colors": 8,
+          "selected_course_color": 0
+        }
+      },
+      {
+        "name": "r3-pink-dark-week",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 7424,
+          "scene": "week",
+          "phase": "warm",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "eb20ed6a-1a83-4c3c-83b3-d0966fce0a04",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "course_time_block_index": 0
+        }
+      },
+      {
+        "name": "r3-pink-dark-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 9905,
+          "scene": "options",
+          "phase": "cold-pink-dark",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "6ec9d82e-0303-47d5-8710-fc718ec814d7",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-purple-system-light",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "SYSTEM",
+          "dark": false,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "eb02fe81-4435-474f-86c0-94efa2aa71d1",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-purple-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "7b5e4ff7-fdf8-475b-978f-019ad699736c",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-blue-system-light",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "SYSTEM",
+          "dark": false,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "a5c51d7c-3428-494b-9e6f-231fb97d3b72",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-blue-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "BLUE",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "41d447f7-cf3c-40da-8051-56881015f46f",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-green-system-light",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "SYSTEM",
+          "dark": false,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "202f2a0d-57de-458b-a86b-8b254f3d0531",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-green-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "GREEN",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "5909233b-762c-4592-86d4-fc8ccc37197c",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-teal-system-light",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "SYSTEM",
+          "dark": false,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "d2bd3808-cc14-47a4-acc7-4392eb3f4d7a",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-teal-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "TEAL",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "5a28a8cc-6ae1-4737-9370-f48cb20eefda",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-orange-system-light",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "SYSTEM",
+          "dark": false,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "2da569ff-ac06-43b4-aad0-7b28a8fb17de",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-orange-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "ORANGE",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "8977aaeb-0c4d-4908-b8d9-5ac5ec15635c",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-pink-system-light",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "SYSTEM",
+          "dark": false,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "664f164c-ab32-42f2-8a94-50760abf9be3",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-pink-system-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10032,
+          "scene": "options",
+          "phase": "system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "ca39ca8c-4c6d-467a-9640-ff248c8bf1e0",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-system-cold",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PINK",
+          "theme": "SYSTEM",
+          "dark": true,
+          "pid": 10359,
+          "scene": "options",
+          "phase": "cold-system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "8a3ee40f-52dd-4ffc-babd-b09427469c38",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      },
+      {
+        "name": "r3-restored-purple-dark",
+        "passed": true,
+        "errors": [],
+        "metrics": {
+          "palette": "PURPLE",
+          "theme": "DARK",
+          "dark": true,
+          "pid": 10359,
+          "scene": "options",
+          "phase": "cold-system",
+          "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+          "captureId": "3c5aca23-dea5-4ee3-855f-e2ffeff95b6b",
+          "navigationMode": "three-button",
+          "businessHashes": {
+            "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+            "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+            "timetable.json.bak": "ABSENT",
+            "timetable-last-good.json.bak": "ABSENT"
+          },
+          "palette_options": 6
+        }
+      }
+    ],
+    "errors": [],
+    "scope": "Actual emulator signed APK, independent pixels + cold processes; not physical/watch acceptance"
+  },
+  "instrumentation": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ProductUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.ProductUiTest:\nINSTRUMENTATION_STATUS: test=inspectAllProductScreensAndCriticalEditsInOneSession\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ProductUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectAllProductScreensAndCriticalEditsInOneSession\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 36.179\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n"
+}

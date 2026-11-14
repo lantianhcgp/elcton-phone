@@ -1,0 +1,21 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_snapshot_map.py",
+    "--source",
+    "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "--run",
+    "43590599162",
+    "--suite",
+    "diagnostics",
+    "--incoming",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/diag-44df9d0-evidence",
+    "--snapshot-artifact",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifier-parent-selfcheck/old-diag/raw/artifact",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/diag-map-selfcheck"
+  ],
+  "exit_code": 0,
+  "raw_sha256": "63a8813a36ce59167e9dab95ed52db9608fb4704a6446a79763cfd23e793e605"
+}

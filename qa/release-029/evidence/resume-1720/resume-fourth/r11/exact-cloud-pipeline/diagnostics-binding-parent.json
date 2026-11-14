@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "apk_hashes_equal_exact_build": {
+    "main": "664e8eae402f8390b8fcf63d0818d5a96c07b1222d06230f3f7b0927908b5065",
+    "tests": "eb54c78b6f7d447af129d569665b98dd1e61b0fb810820f862fd7b7963a5462d"
+  },
+  "api": "33",
+  "navigation": "three-button",
+  "actual_original_files": 334,
+  "original_inventory_hashes_unchanged": true,
+  "independent_checks": 10,
+  "pngs": {
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-artifact/artifact/diag-product/diagnostics-head.png": {
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "22d89d2e9f92604784da3d23296cb454d4ec1d972c34b9de2980df251e49174e"
+    },
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-artifact/artifact/diag-product/diagnostics-tail.png": {
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "d6461856ca9d8b03ce3c8edf6f0fc83a027ea7a0a7d382518c5e02a1f8b945a2"
+    },
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-artifact/artifact/diag-product/mcp-keepalive-on.png": {
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "3993f029e636e59fdf1257f62c46a8d3af2cdb98ea5e86c618993c49746d2baa"
+    },
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-artifact/artifact/diag-product/settings-version.png": {
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "c30504e840eca749823fa776e4d6f94a2f1431fe4e4e26f7c0ab6997247211b9"
+    }
+  }
+}

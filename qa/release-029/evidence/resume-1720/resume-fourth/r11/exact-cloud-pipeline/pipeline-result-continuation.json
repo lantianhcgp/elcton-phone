@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "build_run": "43600711386",
+  "cloud_results": [
+    {
+      "suite": "diagnostics",
+      "run": "43600960069",
+      "passed": true,
+      "wait_exit": 0,
+      "verify_exit": 0,
+      "receipt": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-verification/receipt.json",
+      "receipt_sha256": "e154a4f925de199dd85d5d8f54060aca79ebb55339caed5086541bbfd46b25e7",
+      "real_execution": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-verify.execution.json",
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43600960069"
+    },
+    {
+      "suite": "full",
+      "run": "43600975926",
+      "passed": true,
+      "wait_exit": 0,
+      "verify_exit": 0,
+      "receipt": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification-snapshot-map/receipt.json",
+      "receipt_sha256": "35ffbc2323d2dd32d7694eb30e52e0d65d63060cb59ecd2f37aeb5ec4484a8e4",
+      "real_execution": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-map.execution.json",
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43600975926"
+    }
+  ],
+  "first_pipeline_execution": "original failure exit1 retained; missing full receipt not rewritten",
+  "physical_device_status": "pending owner validation; no device actions",
+  "scope": "Actual exact build and both successful fresh cloud runs plus all ORIGINAL independent artifact gates and full-byte before/after snapshot-map checks"
+}

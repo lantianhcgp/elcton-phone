@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "versionName": "0.2.9",
+  "versionCode": 11,
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "created_at": "2026-11-14T22:19:27.928003+08:00",
+  "build_run": "43600711386",
+  "apk": {
+    "path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.9-code11-84a6c40-全绿合并版-signed.apk",
+    "bytes": 8237316,
+    "sha256": "664e8eae402f8390b8fcf63d0818d5a96c07b1222d06230f3f7b0927908b5065",
+    "certificate_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "v2": true
+  },
+  "cloud": {
+    "diagnostics": {
+      "run": "43600960069",
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43600960069",
+      "attempt": 1,
+      "receipt_sha256": "e154a4f925de199dd85d5d8f54060aca79ebb55339caed5086541bbfd46b25e7"
+    },
+    "full": {
+      "run": "43600975926",
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43600975926",
+      "attempt": 1,
+      "receipt_sha256": "35ffbc2323d2dd32d7694eb30e52e0d65d63060cb59ecd2f37aeb5ec4484a8e4"
+    }
+  },
+  "review": {
+    "reviewed_files": 130,
+    "product_files": 37,
+    "closure_sha256": "55f0363e57c2297249ac42e383103edb8ba9ede2eb9d200210e025218410843b"
+  },
+  "gates": {
+    "Gradle": 153,
+    "JVM": 152,
+    "Python": 133,
+    "Python_skips": 0,
+    "HTTP_host_assertions": 3784,
+    "Runtime": 1,
+    "MCP_tools": 15
+  },
+  "old_deliveries_unchanged": [
+    {
+      "path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.8-code10-2097f32-p2p-signed.apk",
+      "bytes": 8183987,
+      "sha256": "d5778fd80f1bd3758d0c9f2cead660af49aaf6912e2638dc16616bec808bc633"
+    },
+    {
+      "path": "/storage/emulated/0/haps/elcton-20261114-P2P准备回执-1.1.15-73c7823.hap",
+      "bytes": 835972,
+      "sha256": "8865474d76d278f6d61050f4cebca1c1a70b0f5f391f653523d9c9018c91bac0"
+    },
+    {
+      "path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.9-code11-9e300f9-合并版-signed.apk",
+      "bytes": 8237316,
+      "sha256": "15aafee2af9509bc61f3780f74cef712fc47dfdedcb487cdd34e7d59d9a1d8b7"
+    }
+  ],
+  "physical_acceptance": {
+    "pure_MCP_import_sync_readback": "pending, owner",
+    "background_10min_health_error_tail": "pending, owner"
+  },
+  "scope": "Exact build+both fresh cloud suites+APK only; final evidence commit/external all-byte readback must still close; NO physical/watch/WE PASS"
+}

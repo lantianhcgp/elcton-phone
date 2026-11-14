@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_exact_build.py",
+    "--incoming",
+    "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/build-artifact",
+    "--run",
+    "43600711386",
+    "--sha",
+    "84a6c406099348f75b436a8e9467c34487766859",
+    "--out",
+    "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/build-verification"
+  ],
+  "started_at": "2026-11-14T21:40:30.105355+08:00",
+  "ended_at": "2026-11-14T21:40:31.836592+08:00",
+  "exit_code": 0,
+  "raw_sha256": "ca2179af913c24ae8056ebdc785f85d9bba1d3981b63166efd3315cf8e41125b"
+}

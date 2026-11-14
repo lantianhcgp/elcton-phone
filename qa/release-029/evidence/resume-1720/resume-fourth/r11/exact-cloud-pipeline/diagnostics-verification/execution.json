@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py",
+    "--source",
+    "84a6c406099348f75b436a8e9467c34487766859",
+    "--run",
+    "43600960069",
+    "--suite",
+    "diagnostics",
+    "--incoming",
+    "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-artifact",
+    "--out",
+    "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-verification"
+  ],
+  "source": "84a6c406099348f75b436a8e9467c34487766859",
+  "run": "43600960069",
+  "suite": "diagnostics",
+  "incoming": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-artifact",
+  "out": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/diagnostics-verification",
+  "python": "3.13.15 (main, Aug 23 2026, 18:55:06) [Clang 21.1.8 ]",
+  "tool_sha256": "1093d106014452ced8eb484034013b1cf9e480c21b2151965aff7649918f64e6",
+  "scope": "HOST OFFLINE ONLY: zero adb/API/CI/device actions"
+}

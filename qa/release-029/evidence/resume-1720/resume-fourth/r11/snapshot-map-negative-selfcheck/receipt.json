@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "all_mapped_keys": 937,
+  "missing_rejected": true,
+  "one_byte_rejected": true,
+  "hash_mutation_rejected": true,
+  "scope": "In-memory negative logical inventory control; all real snapshot bytes checked by original execution"
+}

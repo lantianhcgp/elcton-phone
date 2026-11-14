@@ -1,0 +1,1789 @@
+{
+  "passed": true,
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "navigation_mode": "three-button",
+  "screenshots": 74,
+  "phase_process_ids": {
+    "warm": 7424,
+    "cold-purple-light": 8544,
+    "cold-purple-dark": 8687,
+    "cold-blue-light": 8813,
+    "cold-blue-dark": 8938,
+    "cold-green-light": 9057,
+    "cold-green-dark": 9176,
+    "cold-teal-light": 9297,
+    "cold-teal-dark": 9418,
+    "cold-orange-light": 9537,
+    "cold-orange-dark": 9662,
+    "cold-pink-light": 9782,
+    "cold-pink-dark": 9905,
+    "system": 10032,
+    "cold-system": 10359
+  },
+  "scenes": [
+    {
+      "name": "r3-purple-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "522b5258-07c2-45d6-ae99-e1d31d23b698",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-purple-light-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "77e8ed55-7538-45f4-a51c-db8f6fc7fce6",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          239,
+          228,
+          255
+        ]
+      }
+    },
+    {
+      "name": "r3-purple-light-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "560be0e7-b3d4-4bfa-80c8-a4c3dca4b288",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-purple-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "4cf49679-f903-40b2-b77c-dc25a98e3a1a",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-purple-light-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 8544,
+        "scene": "options",
+        "phase": "cold-purple-light",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "749f382d-f841-4db0-bbe7-906d90d6b2da",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-purple-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "566cd8ca-c4c2-4b77-861e-5493da890e51",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-purple-dark-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "edb06a3c-21da-43d6-b227-18649d8c9d96",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          67,
+          48,
+          116
+        ]
+      }
+    },
+    {
+      "name": "r3-purple-dark-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "becc8e34-315b-48f9-bd08-4c6ce6ab180a",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-purple-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "bcea5098-8d18-4f5a-9cd1-8347650feaad",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-purple-dark-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 8687,
+        "scene": "options",
+        "phase": "cold-purple-dark",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "465053cd-af50-4c58-83e3-ae5dc46b7cbe",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-blue-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "34bcb6f4-617e-410a-985d-e4b3e389680c",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-blue-light-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "30f8ed25-443a-4d14-a721-bcea5f5c5ffc",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          222,
+          232,
+          255
+        ]
+      }
+    },
+    {
+      "name": "r3-blue-light-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "3d336f3b-6d89-4e59-b24d-5d780e964ea0",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-blue-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "c250816e-9efa-45e9-8a41-6c5915cfdcf7",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-blue-light-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 8813,
+        "scene": "options",
+        "phase": "cold-blue-light",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "9b3ffa6c-8207-430c-ae1f-ecf3a431b27b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-blue-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "30b13119-1d2e-41c4-ba81-639955634d8a",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-blue-dark-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "6583aaf3-23fd-4574-8c74-eb12c0ee78b5",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          31,
+          59,
+          96
+        ]
+      }
+    },
+    {
+      "name": "r3-blue-dark-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "82c9523c-dec7-40b2-956b-8b1bd11bad5c",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-blue-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "369ceec1-d72b-49bf-9a1b-3936c8625789",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-blue-dark-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 8938,
+        "scene": "options",
+        "phase": "cold-blue-dark",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "0661cecd-f0f2-4007-878d-e1e0faeb7c17",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-green-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "ef734dca-95a7-4352-a40e-5d052d617554",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-green-light-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "13209fbb-703c-40b0-82a5-187558cea776",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          205,
+          243,
+          192
+        ]
+      }
+    },
+    {
+      "name": "r3-green-light-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "3c193ce0-12f1-4087-9ead-3433dd810267",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-green-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "601c79b4-2138-4b3f-a935-969b4803bf3e",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-green-light-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 9057,
+        "scene": "options",
+        "phase": "cold-green-light",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "bbe4f812-4201-464a-94a5-d1302c686341",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-green-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "3a19bbeb-daa1-4d30-9293-22a270c1732b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-green-dark-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "6b41790c-2e3f-4a4b-8690-0edecd72248e",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          34,
+          66,
+          29
+        ]
+      }
+    },
+    {
+      "name": "r3-green-dark-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "9a07966f-ef05-4621-87c8-c8ac995d9f6b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-green-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "f01ee6ac-85a3-41c2-87aa-d1402f07553e",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-green-dark-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 9176,
+        "scene": "options",
+        "phase": "cold-green-dark",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "684ecd79-882b-4561-9554-628d52439a43",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-teal-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "760f01ed-d9db-46d2-956c-8709721f2345",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-teal-light-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "6ab59f5f-7fb6-48e0-8dfb-11bdb5840776",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          178,
+          244,
+          238
+        ]
+      }
+    },
+    {
+      "name": "r3-teal-light-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "95d4e788-8f25-401c-8143-2d10b1fb71aa",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-teal-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "17f17214-476a-4619-8e05-54dbcb1a1c7c",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-teal-light-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 9297,
+        "scene": "options",
+        "phase": "cold-teal-light",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "068055b6-d0e3-47c1-aec7-40607a4be682",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-teal-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "d8c7a634-ddab-48a2-acc8-1f968f51e64b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-teal-dark-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "941d4883-626a-4274-8e80-58d79a5bdab5",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          3,
+          66,
+          63
+        ]
+      }
+    },
+    {
+      "name": "r3-teal-dark-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "48bf0d03-4727-4c0d-a20f-d078498f2571",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-teal-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "359beba1-93c6-4084-912f-40b759ed8c2b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-teal-dark-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 9418,
+        "scene": "options",
+        "phase": "cold-teal-dark",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "f5e0adff-c912-4175-9aa1-e52c057a2c28",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-orange-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "8073c0a0-e85c-47ea-b63c-204362b309ba",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-orange-light-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "97b14684-fde6-4674-aea2-5cd83d51e08b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          255,
+          226,
+          211
+        ]
+      }
+    },
+    {
+      "name": "r3-orange-light-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "ed001dd3-a3bd-42ca-aebc-1b6f102f8e33",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-orange-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "b6af5848-e63c-4e3b-a652-cbbea1affe82",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-orange-light-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 9537,
+        "scene": "options",
+        "phase": "cold-orange-light",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "b43c3ec2-90c5-437f-8bd9-53f5283abc81",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-orange-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "e67bba66-0ad3-496b-81f1-2568e22f2887",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-orange-dark-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "4de66c9b-6b72-4884-a33f-720bf886a3ee",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          91,
+          47,
+          15
+        ]
+      }
+    },
+    {
+      "name": "r3-orange-dark-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "9dbe920f-e724-4663-9db7-83c8b7b88443",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-orange-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "c594bf1b-3643-49ff-883b-f1db215e3005",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-orange-dark-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 9662,
+        "scene": "options",
+        "phase": "cold-orange-dark",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "00618e73-e4e5-4996-9e47-0f789c821591",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-pink-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "2c146fdf-6601-49c4-a8ee-bbafdccd2fa3",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-pink-light-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "dcaad671-d5ab-4fdc-bf08-1ef717eaa2b2",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          255,
+          224,
+          232
+        ]
+      }
+    },
+    {
+      "name": "r3-pink-light-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "7d6c1341-a921-48f3-b212-a3cbb9195872",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-pink-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "64541b26-af0d-4404-981d-9ea115cd3cba",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-pink-light-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "LIGHT",
+        "dark": false,
+        "pid": 9782,
+        "scene": "options",
+        "phase": "cold-pink-light",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "a0ae2a9e-ab72-4287-a394-669ceb37443a",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-pink-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "options",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "5a5b8ed9-bb0a-4930-8181-bb31a7ec5d40",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-pink-dark-semester",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "semester",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "8288fe62-a641-4020-8300-a37e29aff8b5",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "nested_field_sample": [
+          90,
+          43,
+          61
+        ]
+      }
+    },
+    {
+      "name": "r3-pink-dark-editor-bottom",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "editor-bottom",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "447f118e-cfd4-4193-ad3a-8dd6381c794b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "business_colors": 8,
+        "selected_course_color": 0
+      }
+    },
+    {
+      "name": "r3-pink-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 7424,
+        "scene": "week",
+        "phase": "warm",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "eb20ed6a-1a83-4c3c-83b3-d0966fce0a04",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "course_time_block_index": 0
+      }
+    },
+    {
+      "name": "r3-pink-dark-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 9905,
+        "scene": "options",
+        "phase": "cold-pink-dark",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "6ec9d82e-0303-47d5-8710-fc718ec814d7",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-purple-system-light",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "SYSTEM",
+        "dark": false,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "eb02fe81-4435-474f-86c0-94efa2aa71d1",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-purple-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "7b5e4ff7-fdf8-475b-978f-019ad699736c",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-blue-system-light",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "SYSTEM",
+        "dark": false,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "a5c51d7c-3428-494b-9e6f-231fb97d3b72",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-blue-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "BLUE",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "41d447f7-cf3c-40da-8051-56881015f46f",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-green-system-light",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "SYSTEM",
+        "dark": false,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "202f2a0d-57de-458b-a86b-8b254f3d0531",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-green-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "GREEN",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "5909233b-762c-4592-86d4-fc8ccc37197c",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-teal-system-light",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "SYSTEM",
+        "dark": false,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "d2bd3808-cc14-47a4-acc7-4392eb3f4d7a",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-teal-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "TEAL",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "5a28a8cc-6ae1-4737-9370-f48cb20eefda",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-orange-system-light",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "SYSTEM",
+        "dark": false,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "2da569ff-ac06-43b4-aad0-7b28a8fb17de",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-orange-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "ORANGE",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "8977aaeb-0c4d-4908-b8d9-5ac5ec15635c",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-pink-system-light",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "SYSTEM",
+        "dark": false,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "664f164c-ab32-42f2-8a94-50760abf9be3",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-pink-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10032,
+        "scene": "options",
+        "phase": "system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "ca39ca8c-4c6d-467a-9640-ff248c8bf1e0",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-system-cold",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PINK",
+        "theme": "SYSTEM",
+        "dark": true,
+        "pid": 10359,
+        "scene": "options",
+        "phase": "cold-system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "8a3ee40f-52dd-4ffc-babd-b09427469c38",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    },
+    {
+      "name": "r3-restored-purple-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "palette": "PURPLE",
+        "theme": "DARK",
+        "dark": true,
+        "pid": 10359,
+        "scene": "options",
+        "phase": "cold-system",
+        "qaRun": "da6b9bdc-1014-44cc-98c9-6c0970763e88",
+        "captureId": "3c5aca23-dea5-4ee3-855f-e2ffeff95b6b",
+        "navigationMode": "three-button",
+        "businessHashes": {
+          "timetable.json": "55d3f2ce6e4cb88fa60c145ff156729f7791746d501993beb8dac174fe3a597d",
+          "timetable-last-good.json": "0fbfc025b1a37258c7886d28a7bbb56ed5fdceb86b2e851ecda440efa680feb3",
+          "timetable.json.bak": "ABSENT",
+          "timetable-last-good.json.bak": "ABSENT"
+        },
+        "palette_options": 6
+      }
+    }
+  ],
+  "errors": [],
+  "scope": "Actual emulator signed APK, independent pixels + cold processes; not physical/watch acceptance"
+}

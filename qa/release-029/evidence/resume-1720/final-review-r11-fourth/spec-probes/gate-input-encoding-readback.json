@@ -1,0 +1,17 @@
+{
+  "scope": "Post-seal targeted reader-schema clarification only; no gates/probes/candidate rerun and no raw rewrite",
+  "runner": "qa/release-029/evidence/resume-1720/resume-fourth/run_latest_gates_r11.py",
+  "actual_source_lines": {
+    "27-28": "def digest(path): return hashlib.sha256(path.read_bytes()).hexdigest()",
+    "87": "inputs_manifest_sha256: digest(OUT / 'inputs-before.json')"
+  },
+  "actual_hash_encoding": "Exact saved inputs-before.json bytes; NOT compact JSON and NOT json.dumps(inputs,sort_keys=True)",
+  "exact_saved_bytes_sha256": "640d0ff3ce6c3666ca0d8185560f247c7272779adb456cebd7e224baa08ada58",
+  "independently_measured_compact_sha256": "422b40e95a5c17e860eef5ed6b9c98a42be1535cb83666f80b0a368116242637",
+  "first_finalize_reader_failure_preserved": "finalize-reader-failure.json",
+  "reader_line20_correction": "assert sha((gate/'inputs-before.json').read_bytes())==complete['inputs_manifest_sha256']",
+  "corrected_finalize_actual_exit_code": 0,
+  "raw_sealed_readback_sha256": "b82234d795ae54dbba8809bcb78f2eb50368d7c71d56fbb72738102b30c14b5a",
+  "raw_verdict_contract_readback_verified": true,
+  "main_focus_and_130_identity_full_diff_coverage_completed_before_finalization": true
+}

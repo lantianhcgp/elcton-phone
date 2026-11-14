@@ -70,3 +70,25 @@
 - 676旧full原件父逐项SHA通过；cold-pink-dark测试OK后harvest失败、ADB RC1/console5554拒连已证，OOM/GPU根因未证实。合法解=新云runner同原配置全跑，不改原断言/产品。两最新云端尚未跑；HEAD仍44df9d0，真机两项仍pending归发起方。
 - 新通用云artifact校验器已由父对旧diag绿、旧full红及3mutations独立实跑自证；它不是最新云端PASS。精确build原44df9d0的153/153与fc08/v2也由新校验器实跑自证，仍不替代最新build。
 - 三件保护旧包最新核验=resume-fourth/r11/protected-deliveries-exact.json，SHA原样；没有真机ADB/MCP/前台操作。
+
+## 第四轮 R11代码门真实闭合，精确云端执行中
+- 新独立SPEC/STANDARDS均passed=true且三finding数组空；raw SHA spec=b82234d795ae54dbba8809bcb78f2eb50368d7c71d56fbb72738102b30c14b5a、standards=666d673d5d76645341862b184dd8def3d9469835ab6e0ec252b2c16260f63386；父seal_dual実封130/37，closure55f0363e57c2297249ac42e383103edb8ba9ede2eb9d200210e025218410843b。旧R9/R10false全件不改。
+- 最新精确提交84a6c406099348f75b436a8e9467c34487766859已push，外部branch读回同SHA；receipt=resume-fourth/r11/push-exact/receipt.json。候选130每file staged和commit字节SHA都同审查。
+- 主链真实后台已启动=resume-fourth/r11/exact-cloud-pipeline（build→精确artifact/153XML/fc08+v2→顺序注册两云端→并行等待/原件取回/独立重验），notify_on_complete；目前尚无云端绿回执，禁止交全绿包/报告。
+- 全部远端源/证据逐字readback也已后台=resume-fourth/r11/remote-source-readback，包含8原反例symlink的Git字面payload、不follow不extract；tarball只存hermes/tmp仓外。最终尾部证据仍须再push+完整读回。
+- 原0.2.8/HAP/9e300f9候选三件原样，真机两项pending归发起方。
+
+## 精确84a6c40构建/验签实绿，两云端已注册（仍未全绿交付）
+- build43600711386 completed/success，actual artifact ID/attempt=1与source全绑定；Gradle原XML153/153零skip/30suites。
+- 主APK0.2.9/code11/8237316B；SHA664e8eae402f8390b8fcf63d0818d5a96c07b1222d06230f3f7b0927908b5065；主/测试固定fc08…ad94、v2与CRC实际都绿。完整回执=resume-fourth/r11/exact-cloud-pipeline/build-verification/receipt.json。
+- 两最新同源云端顺序注册再并行等待：diagnostics43600960069、full43600975926；source84a6c406099348f75b436a8e9467c34487766859/build43600711386/API33/three-button，所有输入显式。当前仍in_progress，不把注册/旧diag绿色当PASS。
+- 最新两云绿且artifact独立重验后才执行prepare_final_delivery.py，不覆盖9e300f9/0.2.8/HAP；然后所有尾部证据+报告精确push→完整external字节readback闭合。
+- 最新diagnostics43600960069已真实success/attempt1；artifact14116800485+334原件逐SHA核过，10独立checks全部true，主/测试APK SHA等精确build、API33/三键/source84a6c40。4真实原PNG及3放大组件已亲读，版本0.2.9、开启开关、SYNTHETIC-BEGIN/CAUSE/END全部显示，未冒称全48行同时视觉可见。DIAG-VISUAL-REVIEW.md已留。
+- source84a6c40远端ALL6702Git文件/644729991B+8 literal evidence link都逐字相同；readback receipt=resume-fourth/r11/remote-source-readback/all-files-readback.json。当前full43600975926仍in_progress/尚未绿；不开最终报告、不覆盖候选。
+
+## 第四轮最终云端/包已完成；尾证push/readback待闭合
+- 新同源diagnostics43600960069与full43600975926均真实success/attempt1；full936原件/937完整逻辑snapshot映射SHA前后核过，10checks全绿，原28主场景/23主题/74配色/20systembar判据全部真绿。full首local-copy退出、os.link缺失/linkat权限失败全部原件和false回执保留；未把失败改绿。snapshot-map续件原criteria code objects完全同一，只证据输送变化，前后所有实际bytes原样。
+- 完整成功续件=pipeline-result-continuation.json；原pipeline退出1不改。全图库28+23+74原件已成full-gallery，尚未逐图人工视觉扫完，不声称看过全部图；已有自动原像素/状态门完整通过。
+- 新候选已独占落盘并实际SHA/bytes核过：/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.9-code11-84a6c40-全绿合并版-signed.apk，8237316B，SHA664e8eae402f8390b8fcf63d0818d5a96c07b1222d06230f3f7b0927908b5065；版本0.2.9/code11、fc08…ad94/v2/CRC。旧3包SHA全部未变、未碰真机。
+- 真实报告=resume-fourth/r11/final-delivery/FINAL-REPORT.md与actual-delivery.json，必须随尾证push然后exact external全部字节读回；此刻尾证尚未闭合，不称最终完成。所有大于80MiB原ZIP/partial snapshot须无损分块远端保存（本地原件不动），map逐部SHA+重拼全SHA核过后才能push，禁止删证据/改判据。
+- 真机两项一律pending归发起方；旧full已证ADB/console失效，OOM/GPU等机制仍未证实。

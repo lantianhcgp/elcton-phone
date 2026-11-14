@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "scope": "Lossless partition of oversized original GitHub blobs; original local file untouched; parts concatenate exact bytes",
+  "rows": [
+    {
+      "original": "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact/artifact-original.zip",
+      "bytes": 214397210,
+      "sha256": "4ae0c6ffbc84a9f3ccd9f8ba7fe857fe3a8a35f94537e6d936bb8efb26e78399",
+      "parts": [
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0000.part",
+          "bytes": 33554432,
+          "sha256": "e0f9ba99603da77b7fd3038d1f5308bd1420a44881ac0d96628101cc1da0b39a"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0001.part",
+          "bytes": 33554432,
+          "sha256": "77bced3f0bc02d86b4c38fca6d69df1ef386742a6cd52fce59214f9f9f2d8e85"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0002.part",
+          "bytes": 33554432,
+          "sha256": "f71b3ca7e8e523e02328b421b60aaa7c8126895eb240aaacd6804dbf4873b73f"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0003.part",
+          "bytes": 33554432,
+          "sha256": "acc802c6fa749bd87acd115d3ba8058e26138fa2f800775a4c27c7e73a05141b"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0004.part",
+          "bytes": 33554432,
+          "sha256": "339a86cbee16025aedd6bb63cea2b7e3dda457a3a8868de54d0cdcf156b603b5"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0005.part",
+          "bytes": 33554432,
+          "sha256": "4211691daffc9243cec0e77df0ae115f229ec437f1c3a3d4b857e2d16da49727"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/9b29eb7214e5f120-0006.part",
+          "bytes": 13070618,
+          "sha256": "c70fbfb0cff76dfa99b980c6815b68c3b16265afef5249828039ea2d9c3785a3"
+        }
+      ],
+      "local_original_preserved": true
+    },
+    {
+      "original": "qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification/raw/artifact-original.zip",
+      "bytes": 194191360,
+      "sha256": "6e063ca7e7ac8c099256340658dc5785b40e4e44ccfedf2d8ea5fd0585690461",
+      "parts": [
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/75462bc0b643e2e7-0000.part",
+          "bytes": 33554432,
+          "sha256": "e0f9ba99603da77b7fd3038d1f5308bd1420a44881ac0d96628101cc1da0b39a"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/75462bc0b643e2e7-0001.part",
+          "bytes": 33554432,
+          "sha256": "77bced3f0bc02d86b4c38fca6d69df1ef386742a6cd52fce59214f9f9f2d8e85"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/75462bc0b643e2e7-0002.part",
+          "bytes": 33554432,
+          "sha256": "f71b3ca7e8e523e02328b421b60aaa7c8126895eb240aaacd6804dbf4873b73f"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/75462bc0b643e2e7-0003.part",
+          "bytes": 33554432,
+          "sha256": "acc802c6fa749bd87acd115d3ba8058e26138fa2f800775a4c27c7e73a05141b"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/75462bc0b643e2e7-0004.part",
+          "bytes": 33554432,
+          "sha256": "339a86cbee16025aedd6bb63cea2b7e3dda457a3a8868de54d0cdcf156b603b5"
+        },
+        {
+          "path": "qa/release-029/evidence/resume-1720/resume-fourth/r11/lossless-large-originals/75462bc0b643e2e7-0005.part",
+          "bytes": 26419200,
+          "sha256": "621b6d710504cfaceac40fb20464c9ce78e0741cab73c2fd91f0981870831c1a"
+        }
+      ],
+      "local_original_preserved": true
+    }
+  ]
+}

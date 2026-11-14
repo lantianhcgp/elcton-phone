@@ -1,0 +1,36 @@
+input-snapshot-all-bytes
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_continuation.py", line 51, in snapshot
+    os.link(path, target, follow_symlinks=False)
+    ^^^^^^^
+AttributeError: module 'os' has no attribute 'link'. Did you mean: 'unlink'?
+
+exact-run-success
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_continuation.py", line 88, in <lambda>
+    gate.check('exact-run-success', lambda:M.check_run(M.read_json(args.out / 'raw/run.json'),args.source,args.run))
+                                                       ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 41, in read_json
+    return json.loads(Path(path).read_bytes(), object_pairs_hook=unique,
+                      ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/pathlib/_abc.py", line 625, in read_bytes
+    with self.open(mode='rb') as f:
+         ~~~~~~~~~^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification-continuation/raw/run.json'
+
+snapshot-inputs-unchanged-after-original-gates
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_continuation.py", line 92, in final_snapshot_check
+    M.compare(inventory(args.out / 'raw'),gate.before,'ALL snapshot files after original predicates')
+                                          ^^^^^^^^^^^
+AttributeError: 'ContinuationGate' object has no attribute 'before'
+

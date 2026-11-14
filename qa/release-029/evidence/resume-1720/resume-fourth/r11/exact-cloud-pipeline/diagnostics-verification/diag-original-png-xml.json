@@ -1,0 +1,228 @@
+{
+  "instrumentationReceipt": {
+    "passed": true,
+    "sourceSha": "84a6c406099348f75b436a8e9467c34487766859",
+    "qaRun": "e31e096b-825a-4bba-bd7d-a21be81f4e58",
+    "scope": "real Android emulator; SYNTHETIC errors; no paired watch or WearEngine actions",
+    "captures": [
+      {
+        "name": "settings-version",
+        "attempt": 1,
+        "pixelReady": true,
+        "targetText": "0.2.9 · 测试构建",
+        "targetBounds": [
+          138,
+          1521,
+          359,
+          1566
+        ],
+        "extra": {},
+        "screenWidth": 1080,
+        "screenHeight": 1920,
+        "fullPixels": {
+          "samples": 230400,
+          "mean": 243.476508969142,
+          "stddev": 30.053883650011915,
+          "minimum": 32.333333333333336,
+          "maximum": 253.66666666666666,
+          "step": 3
+        },
+        "targetPixels": {
+          "samples": 9945,
+          "mean": 210.43877995641014,
+          "stddev": 49.5082221572623,
+          "minimum": 115.66666666666667,
+          "maximum": 240.33333333333334,
+          "step": 1
+        },
+        "pngSha256": "c30504e840eca749823fa776e4d6f94a2f1431fe4e4e26f7c0ab6997247211b9"
+      },
+      {
+        "name": "diagnostics-head",
+        "attempt": 1,
+        "pixelReady": true,
+        "targetText": "SYNTHETIC-BEGIN",
+        "targetBounds": [
+          183,
+          701,
+          848,
+          751
+        ],
+        "extra": {
+          "scroll": 0,
+          "scrollMax": 4449
+        },
+        "screenWidth": 1080,
+        "screenHeight": 1920,
+        "fullPixels": {
+          "samples": 230400,
+          "mean": 164.57089409695377,
+          "stddev": 69.98992795105426,
+          "minimum": 13,
+          "maximum": 255,
+          "step": 3
+        },
+        "targetPixels": {
+          "samples": 33250,
+          "mean": 221.73333333324737,
+          "stddev": 42.6999437900916,
+          "minimum": 99,
+          "maximum": 238.33333333333334,
+          "step": 1
+        },
+        "pngSha256": "22d89d2e9f92604784da3d23296cb454d4ec1d972c34b9de2980df251e49174e"
+      },
+      {
+        "name": "diagnostics-tail",
+        "attempt": 1,
+        "pixelReady": true,
+        "targetText": "SYNTHETIC-END",
+        "targetBounds": [
+          183,
+          1252,
+          430,
+          1299
+        ],
+        "extra": {
+          "scroll": 4449,
+          "scrollMax": 4449
+        },
+        "screenWidth": 1080,
+        "screenHeight": 1920,
+        "fullPixels": {
+          "samples": 230400,
+          "mean": 164.58827690945304,
+          "stddev": 69.99004793446228,
+          "minimum": 13,
+          "maximum": 255,
+          "step": 3
+        },
+        "targetPixels": {
+          "samples": 11609,
+          "mean": 218.86237689149786,
+          "stddev": 46.0973603001203,
+          "minimum": 99,
+          "maximum": 238.33333333333334,
+          "step": 1
+        },
+        "pngSha256": "d6461856ca9d8b03ce3c8edf6f0fc83a027ea7a0a7d382518c5e02a1f8b945a2"
+      }
+    ],
+    "packageVersion": "0.2.9",
+    "packageCode": 11,
+    "passiveMcp": {
+      "host": "127.0.0.1",
+      "port": 8766,
+      "running": true,
+      "readOnly": true,
+      "startupError": null
+    },
+    "tokenBytes": 64,
+    "tokenMode": "0600",
+    "token": "REDACTED",
+    "syntheticFullSha256": "c405a4d0e6bb4c7a0d7cabb36b4b0ccc9748b0705e0193dcb50132db840b5638",
+    "syntheticChars": 3293,
+    "causeCount": 2,
+    "activityRecreated": true,
+    "fullTextUntruncated": true,
+    "closeVisibleAndWorks": true,
+    "androidNioHttpRead": true,
+    "httpTools": [
+      "error_tail",
+      "diag_read",
+      "version_info",
+      "fs_read",
+      "sync_connect",
+      "sync_disconnect",
+      "start_import",
+      "start_publish",
+      "abort",
+      "courses_read",
+      "courses_write",
+      "pickup_import",
+      "devices_list",
+      "pairing_state",
+      "sync_state"
+    ],
+    "originalDiagnosticSchemas": true,
+    "sharedPhoneActivityRecreated": true,
+    "businessFilesUnchanged": true
+  },
+  "independentPngChecks": [
+    {
+      "name": "settings-version",
+      "bounds": [
+        138,
+        1521,
+        359,
+        1566
+      ],
+      "fullPixels": {
+        "samples": 230400,
+        "mean": 243.4765089699074,
+        "stddev": 30.053883641501926,
+        "minimum": 32.333333333333336,
+        "maximum": 253.66666666666666,
+        "step": 3
+      },
+      "targetPixels": {
+        "samples": 9945,
+        "mean": 210.43877995642703,
+        "stddev": 49.50822215720548,
+        "minimum": 115.66666666666667,
+        "maximum": 240.33333333333334,
+        "step": 1
+      }
+    },
+    {
+      "name": "diagnostics-head",
+      "bounds": [
+        183,
+        701,
+        848,
+        751
+      ],
+      "fullPixels": {
+        "samples": 230400,
+        "mean": 164.5708940972222,
+        "stddev": 69.98992795064329,
+        "minimum": 13.0,
+        "maximum": 255.0,
+        "step": 3
+      },
+      "targetPixels": {
+        "samples": 33250,
+        "mean": 221.73333333333335,
+        "stddev": 42.69994378996103,
+        "minimum": 99.0,
+        "maximum": 238.33333333333334,
+        "step": 1
+      }
+    },
+    {
+      "name": "diagnostics-tail",
+      "bounds": [
+        183,
+        1252,
+        430,
+        1299
+      ],
+      "fullPixels": {
+        "samples": 230400,
+        "mean": 164.58827690972223,
+        "stddev": 69.99004793405037,
+        "minimum": 13.0,
+        "maximum": 255.0,
+        "step": 3
+      },
+      "targetPixels": {
+        "samples": 11609,
+        "mean": 218.86237689149223,
+        "stddev": 46.0973603000624,
+        "minimum": 99.0,
+        "maximum": 238.33333333333334,
+        "step": 1
+      }
+    }
+  ]
+}

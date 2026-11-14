@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_continuation.py",
+    "--source",
+    "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "--run",
+    "43590599162",
+    "--suite",
+    "diagnostics",
+    "--incoming",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/diag-44df9d0-evidence",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/diag-snapshot-continuation-selfcheck"
+  ],
+  "exit_code": 1,
+  "raw_sha256": "dde2f01b1ce993be0f436dd54594604d1d2dbdb6f97cb485133a33dd3d1ed803"
+}

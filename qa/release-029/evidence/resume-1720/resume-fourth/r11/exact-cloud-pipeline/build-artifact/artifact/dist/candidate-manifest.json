@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "package": "com.hcbiu.elcton",
+  "versionCode": 11,
+  "versionName": "0.2.9",
+  "scope": "Actual binary APK manifest only; not device/WE acceptance"
+}

@@ -1,0 +1,52 @@
+2026-11-14T13:45:15.260Z · qa.synthetic.instrumentation
+exception: java.lang.IllegalStateException [errorCode=860026]: SYNTHETIC-BEGIN
+SYNTHETIC line 1: full diagnostic text, no real device result.
+SYNTHETIC line 2: full diagnostic text, no real device result.
+SYNTHETIC line 3: full diagnostic text, no real device result.
+SYNTHETIC line 4: full diagnostic text, no real device result.
+SYNTHETIC line 5: full diagnostic text, no real device result.
+SYNTHETIC line 6: full diagnostic text, no real device result.
+SYNTHETIC line 7: full diagnostic text, no real device result.
+SYNTHETIC line 8: full diagnostic text, no real device result.
+SYNTHETIC line 9: full diagnostic text, no real device result.
+SYNTHETIC line 10: full diagnostic text, no real device result.
+SYNTHETIC line 11: full diagnostic text, no real device result.
+SYNTHETIC line 12: full diagnostic text, no real device result.
+SYNTHETIC line 13: full diagnostic text, no real device result.
+SYNTHETIC line 14: full diagnostic text, no real device result.
+SYNTHETIC line 15: full diagnostic text, no real device result.
+SYNTHETIC line 16: full diagnostic text, no real device result.
+SYNTHETIC line 17: full diagnostic text, no real device result.
+SYNTHETIC line 18: full diagnostic text, no real device result.
+SYNTHETIC line 19: full diagnostic text, no real device result.
+SYNTHETIC line 20: full diagnostic text, no real device result.
+SYNTHETIC line 21: full diagnostic text, no real device result.
+SYNTHETIC line 22: full diagnostic text, no real device result.
+SYNTHETIC line 23: full diagnostic text, no real device result.
+SYNTHETIC line 24: full diagnostic text, no real device result.
+SYNTHETIC line 25: full diagnostic text, no real device result.
+SYNTHETIC line 26: full diagnostic text, no real device result.
+SYNTHETIC line 27: full diagnostic text, no real device result.
+SYNTHETIC line 28: full diagnostic text, no real device result.
+SYNTHETIC line 29: full diagnostic text, no real device result.
+SYNTHETIC line 30: full diagnostic text, no real device result.
+SYNTHETIC line 31: full diagnostic text, no real device result.
+SYNTHETIC line 32: full diagnostic text, no real device result.
+SYNTHETIC line 33: full diagnostic text, no real device result.
+SYNTHETIC line 34: full diagnostic text, no real device result.
+SYNTHETIC line 35: full diagnostic text, no real device result.
+SYNTHETIC line 36: full diagnostic text, no real device result.
+SYNTHETIC line 37: full diagnostic text, no real device result.
+SYNTHETIC line 38: full diagnostic text, no real device result.
+SYNTHETIC line 39: full diagnostic text, no real device result.
+SYNTHETIC line 40: full diagnostic text, no real device result.
+SYNTHETIC line 41: full diagnostic text, no real device result.
+SYNTHETIC line 42: full diagnostic text, no real device result.
+SYNTHETIC line 43: full diagnostic text, no real device result.
+SYNTHETIC line 44: full diagnostic text, no real device result.
+SYNTHETIC line 45: full diagnostic text, no real device result.
+SYNTHETIC line 46: full diagnostic text, no real device result.
+SYNTHETIC line 47: full diagnostic text, no real device result.
+SYNTHETIC line 48: full diagnostic text, no real device result.
+caused by: java.lang.IllegalArgumentException [errorCode=860026]: SYNTHETIC-CAUSE
+SYNTHETIC-END

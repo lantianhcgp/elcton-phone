@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "qa/release-029/evidence/resume-1720/resume-fourth/verify_cloud_snapshot_map.py",
+    "--source",
+    "84a6c406099348f75b436a8e9467c34487766859",
+    "--run",
+    "43600975926",
+    "--suite",
+    "full",
+    "--incoming",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact",
+    "--snapshot-artifact",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification/raw/artifact",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification-snapshot-map"
+  ],
+  "source": "84a6c406099348f75b436a8e9467c34487766859",
+  "run": "43600975926",
+  "suite": "full",
+  "incoming": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact",
+  "snapshot_artifact": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification/raw/artifact",
+  "original_tool_sha256": "1093d106014452ced8eb484034013b1cf9e480c21b2151965aff7649918f64e6",
+  "snapshot_tool_sha256": "3cd44b787e7804c322a87ced1c6eae67a580680bc66c137290e4307d37641ad3",
+  "scope": "HOST ONLY, exact byte sources; no ADB/CI/network/device"
+}

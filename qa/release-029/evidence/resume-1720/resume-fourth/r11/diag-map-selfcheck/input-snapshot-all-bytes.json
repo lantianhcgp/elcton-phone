@@ -1,0 +1,7 @@
+{
+  "raw_files": 332,
+  "artifact_files": 327,
+  "snapshot_artifact": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifier-parent-selfcheck/old-diag/raw/artifact",
+  "metadata": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/diag-44df9d0-evidence",
+  "scope": "Exact all-byte logical snapshot; no symlinks/hardlinks/copy omissions; original files never modified"
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "unchanged_code_objects": [
+    "clients",
+    "diagnostics",
+    "background",
+    "full",
+    "tour",
+    "check",
+    "write"
+  ],
+  "original_compare_unchanged": true,
+  "scope": "Only snapshot() overridden; criteria/flags/thresholds/full JSON comparison unchanged"
+}

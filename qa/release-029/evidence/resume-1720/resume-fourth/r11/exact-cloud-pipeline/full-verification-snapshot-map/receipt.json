@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "source_sha": "84a6c406099348f75b436a8e9467c34487766859",
+  "run_id": "43600975926",
+  "suite": "full",
+  "checks": [
+    {
+      "name": "input-snapshot-all-bytes",
+      "passed": true
+    },
+    {
+      "name": "exact-run-success",
+      "passed": true
+    },
+    {
+      "name": "local-client-raw-logs",
+      "passed": true
+    },
+    {
+      "name": "full-report-identity",
+      "passed": true
+    },
+    {
+      "name": "full-theme-original",
+      "passed": true
+    },
+    {
+      "name": "full-palette-original",
+      "passed": true
+    },
+    {
+      "name": "full-tour-original-static-block",
+      "passed": true
+    },
+    {
+      "name": "full-system-bars-original",
+      "passed": true
+    },
+    {
+      "name": "full-complete",
+      "passed": true
+    },
+    {
+      "name": "snapshot-inputs-unchanged-after-original-gates",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "details": {
+    "input-snapshot-all-bytes": {
+      "raw_files": 937,
+      "artifact_files": 930,
+      "snapshot_artifact": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-verification/raw/artifact",
+      "metadata": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/exact-cloud-pipeline/full-artifact",
+      "scope": "Exact all-byte logical snapshot; no symlinks/hardlinks/copy omissions; original files never modified"
+    },
+    "local-client-raw-logs": {
+      "local_host": {
+        "ok": true,
+        "mode": "actual-kotlin-host",
+        "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+        "assertions": 3784,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "supported",
+          "excluded_checks": []
+        },
+        "all_raw_checks_passed": true,
+        "token": "REDACTED"
+      },
+      "real_client_tests": [
+        "content_length_post_survives_eof_closing_relay",
+        "direct_controls_with_and_without_write_eof_use_real_server",
+        "url_mode_really_runs_curl_and_urllib",
+        "url_mode_reports_unsupported_write_eof_without_dropping_other_checks"
+      ],
+      "scope": "Existing local JVM raw logs, not Android/physical proof"
+    },
+    "full-theme-original": {
+      "screenshots": 23,
+      "passed": true
+    },
+    "full-palette-original": {
+      "screenshots": 74,
+      "passed": true
+    },
+    "full-tour-original-static-block": {
+      "shots": 28,
+      "hierarchies": 28,
+      "states": 28,
+      "keyboard_pixel_checks": 1,
+      "original_block_lines": [
+        224,
+        244
+      ]
+    },
+    "full-system-bars-original": {
+      "scenes": 20,
+      "passed": true
+    },
+    "snapshot-inputs-unchanged-after-original-gates": {
+      "files": 937,
+      "same_exact_bytes_before_and_after": true
+    }
+  },
+  "scope": "All ORIGINAL criteria/full JSON on exact complete logical byte snapshot; old failed copy/link adapter raws remain false and immutable",
+  "external_binding": "Parent verifies API/current attempt/build/suite/API/navigation/APK separately"
+}

@@ -1,0 +1,411 @@
+{
+  "passed": false,
+  "source_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "run_id": "43590599162",
+  "suite": "diagnostics",
+  "checks": [
+    {
+      "name": "input-snapshot-all-bytes",
+      "passed": false
+    },
+    {
+      "name": "exact-run-success",
+      "passed": false
+    },
+    {
+      "name": "local-client-raw-logs",
+      "passed": true
+    },
+    {
+      "name": "diag-report-identity",
+      "passed": true
+    },
+    {
+      "name": "diag-original-png-xml",
+      "passed": true
+    },
+    {
+      "name": "diag-original-keepalive",
+      "passed": true
+    },
+    {
+      "name": "diag-shared-and-instrumentation-wire",
+      "passed": true
+    },
+    {
+      "name": "diag-http-and-signer-wire",
+      "passed": true
+    },
+    {
+      "name": "diag-background-notification-stop",
+      "passed": true
+    },
+    {
+      "name": "diagnostics-complete",
+      "passed": true
+    },
+    {
+      "name": "snapshot-inputs-unchanged-after-original-gates",
+      "passed": false
+    }
+  ],
+  "errors": [
+    "input-snapshot-all-bytes: AttributeError: module 'os' has no attribute 'link'",
+    "exact-run-success: FileNotFoundError: [Errno 2] No such file or directory: '/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/diag-snapshot-continuation-selfcheck/raw/run.json'",
+    "snapshot-inputs-unchanged-after-original-gates: AttributeError: 'ContinuationGate' object has no attribute 'before'"
+  ],
+  "details": {
+    "local-client-raw-logs": {
+      "local_host": {
+        "ok": true,
+        "mode": "actual-kotlin-host",
+        "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+        "assertions": 3784,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "supported",
+          "excluded_checks": []
+        },
+        "all_raw_checks_passed": true,
+        "token": "REDACTED"
+      },
+      "real_client_tests": [
+        "content_length_post_survives_eof_closing_relay",
+        "direct_controls_with_and_without_write_eof_use_real_server",
+        "url_mode_really_runs_curl_and_urllib",
+        "url_mode_reports_unsupported_write_eof_without_dropping_other_checks"
+      ],
+      "scope": "Existing local JVM raw logs, not Android/physical proof"
+    },
+    "diag-original-png-xml": {
+      "instrumentationReceipt": {
+        "passed": true,
+        "sourceSha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+        "qaRun": "4f902720-673f-4f78-a1e1-7d9cb608696e",
+        "scope": "real Android emulator; SYNTHETIC errors; no paired watch or WearEngine actions",
+        "captures": [
+          {
+            "name": "settings-version",
+            "attempt": 1,
+            "pixelReady": true,
+            "targetText": "0.2.9 · 测试构建",
+            "targetBounds": [
+              138,
+              1521,
+              359,
+              1566
+            ],
+            "extra": {},
+            "screenWidth": 1080,
+            "screenHeight": 1920,
+            "fullPixels": {
+              "samples": 230400,
+              "mean": 243.42426649229068,
+              "stddev": 30.153052465881647,
+              "minimum": 32.333333333333336,
+              "maximum": 253.66666666666666,
+              "step": 3
+            },
+            "targetPixels": {
+              "samples": 9945,
+              "mean": 210.43877995641014,
+              "stddev": 49.5082221572623,
+              "minimum": 115.66666666666667,
+              "maximum": 240.33333333333334,
+              "step": 1
+            },
+            "pngSha256": "00e4517f9337f37b9314ad26c218d60d77d968edbbf9b3b94f02fe5aa310c839"
+          },
+          {
+            "name": "diagnostics-head",
+            "attempt": 1,
+            "pixelReady": true,
+            "targetText": "SYNTHETIC-BEGIN",
+            "targetBounds": [
+              183,
+              701,
+              848,
+              751
+            ],
+            "extra": {
+              "scroll": 0,
+              "scrollMax": 4449
+            },
+            "screenWidth": 1080,
+            "screenHeight": 1920,
+            "fullPixels": {
+              "samples": 230400,
+              "mean": 164.58394386547278,
+              "stddev": 69.99299921019573,
+              "minimum": 13,
+              "maximum": 255,
+              "step": 3
+            },
+            "targetPixels": {
+              "samples": 33250,
+              "mean": 221.73333333324737,
+              "stddev": 42.6999437900916,
+              "minimum": 99,
+              "maximum": 238.33333333333334,
+              "step": 1
+            },
+            "pngSha256": "c5638b717b5e2764a28bd72bbd50322c511978300a27edca4d7137e899c8645e"
+          },
+          {
+            "name": "diagnostics-tail",
+            "attempt": 1,
+            "pixelReady": true,
+            "targetText": "SYNTHETIC-END",
+            "targetBounds": [
+              183,
+              1252,
+              430,
+              1299
+            ],
+            "extra": {
+              "scroll": 4449,
+              "scrollMax": 4449
+            },
+            "screenWidth": 1080,
+            "screenHeight": 1920,
+            "fullPixels": {
+              "samples": 230400,
+              "mean": 164.60033275436083,
+              "stddev": 69.99103843336484,
+              "minimum": 13,
+              "maximum": 255,
+              "step": 3
+            },
+            "targetPixels": {
+              "samples": 11609,
+              "mean": 218.86237689149786,
+              "stddev": 46.0973603001203,
+              "minimum": 99,
+              "maximum": 238.33333333333334,
+              "step": 1
+            },
+            "pngSha256": "4f0bcded76f39269b407aa68e2b84604376b1496e0348e4effc89be132c41c63"
+          }
+        ],
+        "packageVersion": "0.2.9",
+        "packageCode": 11,
+        "passiveMcp": {
+          "host": "127.0.0.1",
+          "port": 8766,
+          "running": true,
+          "readOnly": true,
+          "startupError": null
+        },
+        "tokenBytes": 64,
+        "tokenMode": "0600",
+        "token": "REDACTED",
+        "syntheticFullSha256": "620a991bf67ae8ef35a982f56c94baf9534f72c756b7a7b25659a8ac9b1289b4",
+        "syntheticChars": 3293,
+        "causeCount": 2,
+        "activityRecreated": true,
+        "fullTextUntruncated": true,
+        "closeVisibleAndWorks": true,
+        "androidNioHttpRead": true,
+        "httpTools": [
+          "error_tail",
+          "diag_read",
+          "version_info",
+          "fs_read",
+          "sync_connect",
+          "sync_disconnect",
+          "start_import",
+          "start_publish",
+          "abort",
+          "courses_read",
+          "courses_write",
+          "pickup_import",
+          "devices_list",
+          "pairing_state",
+          "sync_state"
+        ],
+        "originalDiagnosticSchemas": true,
+        "sharedPhoneActivityRecreated": true,
+        "businessFilesUnchanged": true
+      },
+      "independentPngChecks": [
+        {
+          "name": "settings-version",
+          "bounds": [
+            138,
+            1521,
+            359,
+            1566
+          ],
+          "fullPixels": {
+            "samples": 230400,
+            "mean": 243.42426649305557,
+            "stddev": 30.15305245740798,
+            "minimum": 32.333333333333336,
+            "maximum": 253.66666666666666,
+            "step": 3
+          },
+          "targetPixels": {
+            "samples": 9945,
+            "mean": 210.43877995642703,
+            "stddev": 49.50822215720548,
+            "minimum": 115.66666666666667,
+            "maximum": 240.33333333333334,
+            "step": 1
+          }
+        },
+        {
+          "name": "diagnostics-head",
+          "bounds": [
+            183,
+            701,
+            848,
+            751
+          ],
+          "fullPixels": {
+            "samples": 230400,
+            "mean": 164.58394386574074,
+            "stddev": 69.99299920978603,
+            "minimum": 13.0,
+            "maximum": 255.0,
+            "step": 3
+          },
+          "targetPixels": {
+            "samples": 33250,
+            "mean": 221.73333333333335,
+            "stddev": 42.69994378996103,
+            "minimum": 99.0,
+            "maximum": 238.33333333333334,
+            "step": 1
+          }
+        },
+        {
+          "name": "diagnostics-tail",
+          "bounds": [
+            183,
+            1252,
+            430,
+            1299
+          ],
+          "fullPixels": {
+            "samples": 230400,
+            "mean": 164.60033275462962,
+            "stddev": 69.99103843295387,
+            "minimum": 13.0,
+            "maximum": 255.0,
+            "step": 3
+          },
+          "targetPixels": {
+            "samples": 11609,
+            "mean": 218.86237689149223,
+            "stddev": 46.0973603000624,
+            "minimum": 99.0,
+            "maximum": 238.33333333333334,
+            "step": 1
+          }
+        }
+      ]
+    },
+    "diag-original-keepalive": {
+      "passed": true,
+      "sourceSha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+      "qaRun": "4f902720-673f-4f78-a1e1-7d9cb608696e",
+      "scope": "real Android emulator; no WE calls or real phone installation",
+      "defaultOn": true,
+      "permissionDeniedFailClosed": true,
+      "defaultOnNoPermissionRetainsChoice": true,
+      "noNotificationWithoutPermission": true,
+      "bindFailureUiOnAndHintRetained": true,
+      "startingNotActive": true,
+      "onNotification": true,
+      "backgroundHttp": true,
+      "offPortClosed": true,
+      "offNotificationRemoved": true,
+      "businessAndTokenAndErrorsUnchanged": true,
+      "stopDisablesChoice": true,
+      "stopInactive": true,
+      "backgroundChannelDeniedEventStops": true,
+      "activeChannelDeniedStopsAndUiOn": true
+    },
+    "diag-shared-and-instrumentation-wire": {
+      "passed": true,
+      "sourceSha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+      "qaRun": "4f902720-673f-4f78-a1e1-7d9cb608696e",
+      "scope": "emulator-only local MCP courses fixture; real WearEngine/phone pending",
+      "sharedPhoneActivityRecreated": true,
+      "pureMcpCoursesWriteRead": true,
+      "previewDoesNotWrite": true,
+      "confirmedWritePersisted": true,
+      "protectedDataUnchanged": true,
+      "fixtureFilesRestored": true
+    },
+    "diag-http-and-signer-wire": {
+      "external_android": {
+        "ok": true,
+        "mode": "read-only-app",
+        "scope": "external URL; caller must identify host vs Android",
+        "assertions": 3659,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "unsupported",
+          "reason": "EmptyHttpResponse",
+          "excluded_checks": [
+            "Truncated body rejected (requires client write EOF)"
+          ],
+          "required_validation": "direct production-host raw socket and Android direct Socket"
+        },
+        "all_raw_checks_passed": false,
+        "token": "REDACTED"
+      },
+      "android_socket_assertions": 133,
+      "scope": "Saved Android direct Socket instrumentation + URL clients; parent verifies APK bytes/remote inputs"
+    },
+    "diag-background-notification-stop": {
+      "background": {
+        "passed": true,
+        "scope": "ordinary emulator process; screen-on Home; finite 5s/3 probes; NOT Doze/sticky/phone proof",
+        "pid": "4944",
+        "observations": [
+          {
+            "attempt": 1,
+            "elapsedSeconds": 0.8923396930000536,
+            "foreground": true,
+            "ordinaryProcess": true,
+            "urllibVersionAndError": true
+          },
+          {
+            "attempt": 2,
+            "elapsedSeconds": 2.623965412000018,
+            "foreground": true,
+            "ordinaryProcess": true,
+            "urllibVersionAndError": true
+          },
+          {
+            "attempt": 3,
+            "elapsedSeconds": 5.145726337000042,
+            "foreground": true,
+            "ordinaryProcess": true,
+            "urllibVersionAndError": true
+          }
+        ],
+        "stopPath": "actual-notification-action",
+        "offPortClosed": true,
+        "offNotificationRemoved": true,
+        "businessAndTokenAndErrorsUnchanged": true,
+        "observationCount": 3,
+        "defaultOn": true,
+        "stopDisablesChoice": true,
+        "stopInactive": true,
+        "stopAcknowledged": true
+      },
+      "scope": "Finite 5 seconds / 3 ordinary emulator probes, NOT 10-minute, Doze, MIUI, watch or physical acceptance"
+    }
+  },
+  "scope": "All ORIGINAL artifact predicates on all-byte SHA-verified snapshot; first failed copy remains untouched; no product/criteria change",
+  "external_binding": "Parent verifies exact actual API/attempt/build inputs/APK binding"
+}

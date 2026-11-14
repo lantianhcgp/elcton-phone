@@ -1,7 +1,7 @@
 name: android-probe
 on:
   push:
-    branches: [master]
+    branches: [master, fix/p2p-ready-receipt-20261114]
   workflow_dispatch:
 permissions:
   contents: read

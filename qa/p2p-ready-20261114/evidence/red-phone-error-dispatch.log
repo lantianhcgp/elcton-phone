@@ -1,0 +1,44 @@
+Failed to load native library:jansi-2.4.0-8c1b60f31ab936fc-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-8c1b60f31ab936fc-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-8c1b60f31ab936fc-libjansi.so in namespace (default)
+
+JUnit version 4.13.2
+................E......................................E.E.................................
+Time: 5.839
+There were 3 failures:
+1) malformedAndAmbiguousFramingIsRejected(com.hcbiu.elcton.DiagnosticMcpServerTest)
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:318)
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1099)
+	at java.base/java.io.InputStream.read(InputStream.java:220)
+	at kotlin.io.ByteStreamsKt.copyTo(IOStreams.kt:125)
+	at kotlin.io.ByteStreamsKt.copyTo$default(IOStreams.kt:118)
+	at kotlin.io.ByteStreamsKt.readBytes(IOStreams.kt:151)
+	at com.hcbiu.elcton.DiagnosticMcpServerTest.exchange(DiagnosticMcpServerTest.kt:41)
+	at com.hcbiu.elcton.DiagnosticMcpServerTest.raw(DiagnosticMcpServerTest.kt:53)
+	at com.hcbiu.elcton.DiagnosticMcpServerTest.raw$default(DiagnosticMcpServerTest.kt:53)
+	at com.hcbiu.elcton.DiagnosticMcpServerTest.malformedAndAmbiguousFramingIsRejected$lambda$0(DiagnosticMcpServerTest.kt:198)
+	at com.hcbiu.elcton.DiagnosticMcpServerTest.withServer(DiagnosticMcpServerTest.kt:33)
+	at com.hcbiu.elcton.DiagnosticMcpServerTest.malformedAndAmbiguousFramingIsRejected(DiagnosticMcpServerTest.kt:195)
+2) staleOrActiveTransferErrorDoesNotAbortPreparation(com.hcbiu.elcton.P2pReadyErrorTest)
+java.lang.AssertionError: Waiting-for-READY has no error dispatch
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.P2pReadyErrorTest.failure(P2pReadyErrorTest.kt:11)
+	at com.hcbiu.elcton.P2pReadyErrorTest.failure$default(P2pReadyErrorTest.kt:9)
+	at com.hcbiu.elcton.P2pReadyErrorTest.staleOrActiveTransferErrorDoesNotAbortPreparation(P2pReadyErrorTest.kt:20)
+3) matchingHandshakeErrorReachesUserWithFinitePeerCode(com.hcbiu.elcton.P2pReadyErrorTest)
+java.lang.AssertionError: Waiting-for-READY has no error dispatch
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.P2pReadyErrorTest.failure(P2pReadyErrorTest.kt:11)
+	at com.hcbiu.elcton.P2pReadyErrorTest.failure$default(P2pReadyErrorTest.kt:9)
+	at com.hcbiu.elcton.P2pReadyErrorTest.matchingHandshakeErrorReachesUserWithFinitePeerCode(P2pReadyErrorTest.kt:15)
+
+FAILURES!!!
+Tests run: 88,  Failures: 3
+
+

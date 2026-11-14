@@ -4,6 +4,11 @@ import org.json.JSONObject
 
 /** Reject coercions at the SDK boundary before any packet may advance state. */
 object PacketIngress {
+    /** Only an uncorrelated preparation reply may terminate the pending READY handshake. */
+    fun preparationError(message:JSONObject,awaitingReady:Boolean,activeTransfer:Boolean):String? {
+        if(!awaitingReady || activeTransfer || message.optString("type")!="ERROR" || message.optString("transferId").isNotEmpty())return null
+        return "手表准备失败（${message.optString("code")}）。还没有发送课表；请查看表端同步页的具体错误。"
+    }
     fun watch(raw:String):JSONObject? {
         if(raw.isEmpty() || raw.length>1024 || raw.any{it.code !in 32..126}) return null
         return try {

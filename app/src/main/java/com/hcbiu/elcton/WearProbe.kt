@@ -141,11 +141,12 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
     private fun hello(){
         if(device==null){fail("请先连接设备。");return}
         send("{"+Wire.header("HELLO","")+"}")
-        deadline(5000){if(++handshakeAttempts<=3)hello()else fail("未收到手表准备回执。请进入手表同步页并点开始接收；还没有发送课表。")}
+        deadline(5000){if(++handshakeAttempts<=3)hello()else fail("未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。")}
     }
     private fun onMessage(raw:String){
         val m=PacketIngress.watch(raw)?:return
         val type=m.optString("type")
+        PacketIngress.preparationError(m,awaitingReady,session!=null||exporting!=null)?.let { fail(it);return }
         val export=exporting
         if(export!=null){
             if(m.optString("transferId")!=export.id)return

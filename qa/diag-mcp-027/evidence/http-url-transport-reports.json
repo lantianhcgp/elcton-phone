@@ -1,0 +1,50 @@
+{
+  "actual_results": [
+    {
+      "scope": "local-JVM-production-direct-SYNTHETIC-callbacks-NOT-Android",
+      "exit": 0,
+      "report": {
+        "ok": true,
+        "mode": "read-only-app",
+        "scope": "external URL; caller must identify host vs Android",
+        "assertions": 3649,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "supported",
+          "excluded_checks": []
+        },
+        "all_raw_checks_passed": true,
+        "token": "REDACTED"
+      }
+    },
+    {
+      "scope": "local-JVM-production-through-SYNTHETIC-EOF-closing-relay-NOT-adb-NOT-Android",
+      "exit": 0,
+      "report": {
+        "ok": true,
+        "mode": "read-only-app",
+        "scope": "external URL; caller must identify host vs Android",
+        "assertions": 3637,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "unsupported",
+          "reason": "EmptyHttpResponse",
+          "excluded_checks": [
+            "Truncated body rejected (requires client write EOF)"
+          ],
+          "required_validation": "direct production-host raw socket and Android direct Socket"
+        },
+        "all_raw_checks_passed": false,
+        "token": "REDACTED"
+      }
+    }
+  ],
+  "host_stop_verified": true,
+  "android_verified": false
+}

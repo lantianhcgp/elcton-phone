@@ -17,13 +17,13 @@ class DiagnosticsIntegrationTest {
         assertTrue(File(root(), "app/src/main/AndroidManifest.xml").readText().contains("android:usesCleartextTraffic=\"false\""))
     }
 
-    @Test fun versionCapsuleUsesActualBuildConfigAndCodeEight() {
+    @Test fun versionCapsuleUsesActualBuildConfigAndCodeNine() {
         val main = source("MainActivity.kt")
         val gradle = File(root(), "app/build.gradle.kts").readText(Charsets.UTF_8)
         assertTrue("Version capsule must use the installed build version", main.contains("BuildConfig.VERSION_NAME"))
         assertFalse(main.contains("0.2.4 · 测试构建"))
-        assertTrue(gradle.contains("versionCode = 8"))
-        assertTrue(gradle.contains("versionName = \"0.2.6\""))
+        assertTrue(gradle.contains("versionCode = 9"))
+        assertTrue(gradle.contains("versionName = \"0.2.7\""))
         assertTrue(gradle.contains("buildConfig = true"))
     }
 
@@ -44,15 +44,21 @@ class DiagnosticsIntegrationTest {
         assertTrue(probe.contains("return UserFacingError.explain(message.orEmpty())"))
     }
 
-    @Test fun fullDiagnosisIsScrollableAndOnlyApplicationStartsPassiveMcp() {
+    @Test fun fullDiagnosisIsScrollableAndKeepaliveIsExplicitlyOptIn() {
         val main = source("MainActivity.kt")
         assertTrue(main.contains("testTag(\"diagnostics-scroll\")"))
         assertTrue(main.contains("testTag(\"diagnostics-details\")"))
         assertTrue(main.contains("heightIn(max=300.dp)"))
         val manifest = File(root(), "app/src/main/AndroidManifest.xml").readText(Charsets.UTF_8)
         assertTrue(manifest.contains("android:name=\".ElctonApplication\""))
-        assertFalse(manifest.contains("<service"))
-        assertFalse(manifest.contains("FOREGROUND_SERVICE"))
+        assertTrue(manifest.contains("android:name=\".McpKeepAliveService\" android:exported=\"false\""))
+        assertTrue(manifest.contains("android:foregroundServiceType=\"specialUse\""))
+        assertFalse(manifest.contains("WAKE_LOCK"))
+        assertFalse(manifest.contains("<receiver"))
         assertTrue(source("ElctonApplication.kt").contains("diagnostics.start()"))
+        assertFalse(source("ElctonApplication.kt").contains("startForegroundService("))
+        assertTrue(source("McpKeepAlive.kt").contains("getBoolean(ENABLED, false)"))
+        assertTrue(main.contains("McpKeepAliveSettings()"))
+        assertTrue(main.contains("McpKeepAlive.resumeChoice(this)"))
     }
 }

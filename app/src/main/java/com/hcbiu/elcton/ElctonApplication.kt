@@ -3,7 +3,7 @@ package com.hcbiu.elcton
 import android.app.Application
 import android.util.Log
 
-/** Passive process-local MCP only: no Activity launches, polling, alarms, or foreground service. */
+/** Default passive MCP; foreground sessions start only after explicit user opt-in. */
 class ElctonApplication : Application() {
     lateinit var diagnostics: DiagnosticRuntime
         private set

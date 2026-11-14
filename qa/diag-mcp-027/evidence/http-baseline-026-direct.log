@@ -1,0 +1,5 @@
+Scope: production Kotlin 0.2.6 on local JVM with real Android API33 org.json; SYNTHETIC host callbacks; NOT Android runtime/device.
+Command: /data/data/com.termux/files/home/hermes-env-3.13/bin/python -B qa/mcp_http_selftest.py --classpath /data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/final-host-026/host-tests.jar:/data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/android-json-api33.jar
+{"ok": true, "mode": "actual-kotlin-host", "assertions": 1164, "token": "REDACTED"}
+
+Exit: 0

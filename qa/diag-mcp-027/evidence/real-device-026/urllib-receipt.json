@@ -1,0 +1,7 @@
+{
+  "time": "2026-11-14T10:24:15.857311+08:00",
+  "installedVersion": "0.2.6/code8",
+  "transport": "Termux direct loopback, no adb, current resumed activity",
+  "token": "rish run-as, private 0600 file, value not published",
+  "failure": "URLError: <urlopen error timed out>"
+}

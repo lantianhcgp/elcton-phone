@@ -447,6 +447,7 @@ class MainActivity : ComponentActivity() {
                     modifier=Modifier.testTag("version-capsule"))
                 Text("Wear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=M3x.OnSurfaceVariant)
             }
+            McpKeepAliveSettings()
             Spacer(Modifier.height(32.dp))
         }
     }
@@ -512,6 +513,7 @@ class MainActivity : ComponentActivity() {
         }
     }
     private fun dayLabel(day:Int)=listOf("周一","周二","周三","周四","周五","周六","周日")[day-1]
+    override fun onResume(){super.onResume();McpKeepAlive.resumeChoice(this)}
     override fun onStop(){if(::probe.isInitialized)probe.onBackground();super.onStop()}
     override fun onDestroy(){if(::probe.isInitialized)probe.close();super.onDestroy()}
 }

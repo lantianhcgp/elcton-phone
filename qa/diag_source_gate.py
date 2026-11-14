@@ -17,6 +17,9 @@ APPROVED = json.loads((ROOT / 'qa/diag-mcp-026/approved-observation-delta.json')
 assert APPROVED['baseline'] == BASE
 assert set(APPROVED['patches']) == {ACTIVITY, PROBE}
 ACTIVITY_INITIALIZER = APPROVED['patches'][ACTIVITY][0]['after']
+KEEPALIVE = json.loads((ROOT / 'qa/diag-mcp-027/approved-keepalive-delta.json').read_text())
+assert KEEPALIVE['baseline'] == 'cd2a3e062b97d778c79b76b544071b1077534af7'
+assert set(KEEPALIVE['patches']) == {ACTIVITY}
 
 
 def baseline(path):
@@ -24,6 +27,12 @@ def baseline(path):
 
 
 def reverse_exact(text, path):
+    if path == ACTIVITY:
+        for change in reversed(KEEPALIVE['patches'][ACTIVITY]):
+            expected = change['after']
+            if not expected or text.count(expected) != 1:
+                raise ValueError('Missing or ambiguous authorized keepalive delta: ' + path)
+            text = text.replace(expected, change['before'], 1)
     for change in reversed(APPROVED['patches'][path]):
         expected = change['after']
         if not expected or text.count(expected) != 1:

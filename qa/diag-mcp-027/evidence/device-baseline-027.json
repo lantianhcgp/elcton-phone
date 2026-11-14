@@ -1,0 +1,31 @@
+{
+  "dumpsys activity activities": {
+    "exit": 0,
+    "marked": true,
+    "evidence": [
+      "ResumedActivity: ActivityRecord{61fba81 u0 com.hcbiu.elcton/.MainActivity} t17263}",
+      "mCurrentFocus=Window{d891164 u0 NotificationShade}",
+      "mFocusedApp=ActivityRecord{61fba81 u0 com.hcbiu.elcton/.MainActivity} t17263}"
+    ]
+  },
+  "dumpsys window": {
+    "exit": 0,
+    "marked": false,
+    "evidence": [
+      "mCurrentFocus=Window{d891164 u0 NotificationShade}",
+      "mFocusedApp=ActivityRecord{61fba81 u0 com.hcbiu.elcton/.MainActivity} t17263}"
+    ]
+  },
+  "dumpsys deviceidle whitelist": {
+    "exit": 0,
+    "marked": true,
+    "evidence": []
+  },
+  "ss -ltn": {
+    "exit": 0,
+    "marked": true,
+    "evidence": [
+      "LISTEN      0      0       [::ffff:127.0.0.1]:8766                     *:*"
+    ]
+  }
+}

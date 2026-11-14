@@ -1,0 +1,28 @@
+{
+  "add": {
+    "shellExit": 0,
+    "rishExit": 0,
+    "output": "Added: com.hcbiu.elcton\n"
+  },
+  "after": {
+    "shellExit": 0,
+    "rishExit": 0,
+    "output": "user,com.hcbiu.elcton,10838"
+  },
+  "health": {
+    "shellExit": 28,
+    "rishExit": 0,
+    "output": "*   Trying 127.0.0.1:8766...\n* After 2999ms connect time, move on!\n* connect to 127.0.0.1 port 8766 failed: Connection timed out\n* Connection timeout after 3001 ms\n* Closing connection 0\ncurl: (28) Connection timeout after 3001 ms\n"
+  },
+  "restore": {
+    "shellExit": 0,
+    "rishExit": 0,
+    "output": "Removed: com.hcbiu.elcton\n"
+  },
+  "restoredRead": {
+    "shellExit": 0,
+    "rishExit": 0,
+    "output": ""
+  },
+  "restoredAbsent": true
+}

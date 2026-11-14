@@ -1,0 +1,14 @@
+JUnit version 4.13.2
+.HOST-TEST LOG W/ElctonMcp: MCP startup failed: IllegalStateException
+E
+Time: 0.248
+There was 1 failure:
+1) stopDuringCapturedRunningWritePersistsStoppedState(com.hcbiu.elcton.DiagnosticRuntimeRevisionTest)
+java.lang.AssertionError: real loopback listener must start
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.DiagnosticRuntimeRevisionTest.stopDuringCapturedRunningWritePersistsStoppedState(DiagnosticRuntimeRevisionTest.kt:37)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+

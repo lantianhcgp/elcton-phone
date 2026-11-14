@@ -62,6 +62,16 @@ class DiagnosticSourceGateTest(unittest.TestCase):
         for mutation in [source.replace('.testTag("version-capsule")', '', 1), source + '\n' + gate.ACTIVITY_INITIALIZER]:
             self.assertTrue(gate.scope_errors(mutation, self.source(PROBE)))
 
+    def test_keepalive_setting_and_resume_seams_are_exact_and_required(self):
+        gate = self.module()
+        source = self.source(ACTIVITY)
+        for patch in gate.KEEPALIVE['patches'][ACTIVITY]:
+            self.assertEqual(1, source.count(patch['after']))
+            for mutation in (source.replace(patch['after'], '', 1), source + patch['after']):
+                self.assertTrue(gate.scope_errors(mutation, self.source(PROBE)))
+        mutation = source.replace('McpKeepAlive.resumeChoice(this)', 'McpKeepAlive.enable(this)', 1)
+        self.assertTrue(gate.scope_errors(mutation, self.source(PROBE)))
+
     def test_lost_full_message_persistence_is_rejected(self):
         gate = self.module()
         source = self.source(PROBE).replace('diagnostics?.record(record)', 'diagnostics?.read()', 1)

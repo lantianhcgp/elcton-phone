@@ -1,0 +1,78 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "notmissing": true,
+  "review_round": "NOTIFY-SPEC-R3",
+  "review_timestamp": "2026-11-14T11:03:35.744843+08:00",
+  "review_started_at": "2026-11-14T11:02:22+08:00",
+  "root": "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027",
+  "scope": "仅复查已 SPECPASS 后 QUALITY-R1 P2 的通知后台撤权修复；完整读取最新 McpKeepAlive.kt 与 McpKeepAliveTest.kt，先 SPEC，不代替独立 QUALITY 或 Android CI 验收。",
+  "security_concerns": [],
+  "logical_errors": [],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "blocking": false,
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt:119-163",
+      "message": "后续 Android CI 编译并在约定 AOSP 模拟器执行真实系统设置撤权路径，确认动态系统事件投递及后台端口关闭；本次仅静态 SPEC 通过，不声称此测试已运行。"
+    }
+  ],
+  "summary": "SPEC PASS：受审最新源在已授权 default-off 通知诊断服务范围内修复 P2。服务存活时动态订阅 app/channel/group 阻止状态事件，重新读取自身通知能力，撤权后关闭用户选择、真实监听端口、active 与通知并停服务；测试通过真实系统频道设置开关撤权，在不恢复 MainActivity 的情况下先断言完整关闭，随后才返主界面核 UI OFF。未发现受审两文件实质规格缺口或越界；Android 构建与运行验收留给后续 CI。",
+  "files_hashes": {
+    "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt": "9d42dad06082b7b730e7f8bd25355c8e569793494b4deb8953cb0d99c58b043a",
+    "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt": "5a9e629ac48fc56e56123a43c5b31ab16a80aecdaa96f67544af1f7fdd7ddc09"
+  },
+  "source_fingerprint": {
+    "algorithm": "SHA-256",
+    "format": "UTF-8；按相对路径字典序排列；每条为 <file_sha256>、两个空格、<path>、LF；包含末尾 LF",
+    "manifest": "5a9e629ac48fc56e56123a43c5b31ab16a80aecdaa96f67544af1f7fdd7ddc09  app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt\n9d42dad06082b7b730e7f8bd25355c8e569793494b4deb8953cb0d99c58b043a  app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt\n",
+    "sha256": "081fcfd991925094bca9d63834e77dd7c9f80ff483d4f20616ec01110c9552c9",
+    "computed_with": "terminal: sha256sum 两个实际源文件；terminal Python hashlib 对确定性 manifest 计算 SHA-256"
+  },
+  "facts": [
+    {
+      "requirement": "默认关闭、显式授权，事件不得变成 opt-in",
+      "paths": ["app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:36-55", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:74-81", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:87-95", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:109-116"],
+      "finding": "enabled 的缺省值 false；enable 先检通知能力并保存显式选择；resumeChoice 仅恢复已有选择；STOP 或无选择/无通知能力直接关闭并 START_NOT_STICKY；通知事件无 enable、无重启。"
+    },
+    {
+      "requirement": "P2：Activity 保持后台时实际频道撤权也必须关闭",
+      "paths": ["app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:39-46", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:64-72", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:86-106", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:117-125"],
+      "finding": "动态 receiver 订阅 app/channel/group 三类系统阻止状态事件；API >=33 使用 RECEIVER_NOT_EXPORTED，较早支持版本使用动态两参注册；回调不信任 extras，只重新检查自身权限、全局通知、频道 importance 与组阻止状态；不可通知时 disable 并 stopSelf。disable 同步清选择并关监听、清 active、取消通知；注册与频道创建在 try 内，创建后再次检查通知能力，异常路径也关闭。"
+    },
+    {
+      "requirement": "只在已启动服务生命周期内观察，不增加后台唤醒机制",
+      "paths": ["app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:97-106", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:117-119", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:151-160"],
+      "finding": "私有注册标志避免重复注册；仅 onStartCommand 动态注册，onDestroy 对已注册 receiver 解除注册并关闭资源。受审源无 boot/闹钟/wakelock/产品轮询或新增权限请求；无新增 manifest receiver 的既有范围结论来自父代理范围门禁，并非本复查另读 manifest 得出。测试中的期限轮询仅用于等待断言，不是产品后台轮询。"
+    },
+    {
+      "requirement": "回归测试不能由主动 resume 或 synthetic broadcast 掩盖反例",
+      "paths": ["app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt:112-118", "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt:119-153", "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt:159-163"],
+      "finding": "先在真实 UI 开启并 Home，确认真实 HTTP 存活；启动 Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS，UiDevice 点击系统 switch，并读回频道 IMPORTANCE_NONE 后 Home；随后仅后台读取 enabled/active/runtime.running、实际 socket 是否拒连、活动通知，全部关闭才记录 P2 成功。MainActivity 只在这些断言之后恢复并核开关 OFF；该段无手动 resumeChoice、应用侧频道 mutation 或合成广播。"
+    },
+    {
+      "requirement": "用户授权范围不外延为无条件保活承诺",
+      "paths": ["qa/diag-mcp-027/approved-keepalive-delta.json:9", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:23", "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:126-148", "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt:43-68"],
+      "finding": "授权目标是 default-off 的用户自选诊断通知服务及此前选择的恢复，不将原 default-passive 监听端口单独存在误判为默认 FGS。服务先通知前台化后启动监听，失败关闭；测试检查缺省无 active/通知及通知权限拒绝时不启动。本结论不承诺 Doze/MIUI 必保活，不扩大 WE 操作或权限范围。"
+    }
+  ],
+  "verification": {
+    "complete_source_reads": true,
+    "source_line_counts": {
+      "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt": 162,
+      "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt": 171
+    },
+    "scope_source_gate": {
+      "modules": ["qa.test_mcp027_scope", "qa.test_mcp027_source12"],
+      "exit_code": 0,
+      "provenance": "父代理委派上下文明确报告真实执行 exit 0；本子代理未重复运行，不将其冒充本次执行。"
+    },
+    "android_build_executed": false,
+    "android_instrumentation_executed": false,
+    "runtime_acceptance": "后续 CI；未构建或运行不是本次静态 SPEC 的 missing requirement。",
+    "quality_review": "未执行；保持 SPEC 先行。",
+    "network_or_device_actions": false,
+    "git_push": false,
+    "product_or_test_source_modified": false
+  }
+}

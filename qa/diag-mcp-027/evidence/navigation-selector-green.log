@@ -1,0 +1,14 @@
+test_current_receipt_and_pre33_branch (__main__.KeepAliveGateTests.test_current_receipt_and_pre33_branch) ... ok
+test_every_hard_assertion_rejects_missing_false_and_non_boolean (__main__.KeepAliveGateTests.test_every_hard_assertion_rejects_missing_false_and_non_boolean) ... ok
+test_exact_one_test_result_gate (__main__.KeepAliveGateTests.test_exact_one_test_result_gate) ... ok
+test_navigation_selector_uses_actual_026_bottom_bar_not_duplicate_header (__main__.KeepAliveGateTests.test_navigation_selector_uses_actual_026_bottom_bar_not_duplicate_header) ... ok
+test_notification_denial_runs_after_ordinary_background_measurement (__main__.KeepAliveGateTests.test_notification_denial_runs_after_ordinary_background_measurement) ... ok
+test_receipt_validator_is_available (__main__.KeepAliveGateTests.test_receipt_validator_is_available) ... ok
+test_wrong_run_or_source_and_non_object_fail (__main__.KeepAliveGateTests.test_wrong_run_or_source_and_non_object_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.008s
+
+OK
+
+Exit: 0

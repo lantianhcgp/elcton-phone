@@ -1,0 +1,4 @@
+Parent independent verification of current source production JVM, not Android.
+{"ok": true, "mode": "actual-kotlin-host", "scope": "local JVM; synthetic callbacks; NOT Android runtime", "assertions": 3784, "clients": ["urllib", "curl"], "write_eof_transport": {"status": "supported", "excluded_checks": []}, "all_raw_checks_passed": true, "token": "REDACTED"}
+
+Exit: 0

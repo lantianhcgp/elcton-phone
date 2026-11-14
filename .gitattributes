@@ -1,0 +1,5 @@
+# Preserve original captured evidence bytes, including HTTP CRLF and raw log EOF.
+# Product source/test whitespace gates remain unchanged.
+qa/diag-mcp-027/evidence/**/*.log -text whitespace=-blank-at-eof
+qa/diag-mcp-027/evidence/*.log -text whitespace=-blank-at-eof
+qa/diag-mcp-027/evidence/real-device-026/*.http -text whitespace=cr-at-eol

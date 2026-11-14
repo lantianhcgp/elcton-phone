@@ -11,8 +11,8 @@ android {
         applicationId = "com.hcbiu.elcton"
         minSdk = 26
         targetSdk = 34
-        versionCode = 8
-        versionName = "0.2.6"
+        versionCode = 9
+        versionName = "0.2.7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true; buildConfig = true }

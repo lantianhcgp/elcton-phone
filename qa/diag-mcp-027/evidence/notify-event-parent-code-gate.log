@@ -1,0 +1,17 @@
+test_private_local_service_and_no_new_power_behaviour (qa.test_mcp027_scope.Mcp027ScopeTests.test_private_local_service_and_no_new_power_behaviour) ... ok
+test_version_027_code9 (qa.test_mcp027_scope.Mcp027ScopeTests.test_version_027_code9) ... ok
+test_we_and_signing_and_themes_remain_exact (qa.test_mcp027_scope.Mcp027ScopeTests.test_we_and_signing_and_themes_remain_exact) ... ok
+test_business_callback_mutation_is_rejected_not_filtered (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_business_callback_mutation_is_rejected_not_filtered) ... ok
+test_exact_authorized_observation_reverses_to_version_025_baseline (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_exact_authorized_observation_reverses_to_version_025_baseline) ... ok
+test_keepalive_setting_and_resume_seams_are_exact_and_required (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_keepalive_setting_and_resume_seams_are_exact_and_required) ... ok
+test_lost_full_message_persistence_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_lost_full_message_persistence_is_rejected) ... ok
+test_missing_or_duplicated_authorized_diagnostic_seam_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_missing_or_duplicated_authorized_diagnostic_seam_is_rejected) ... ok
+test_sdk_authorization_branch_mutation_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_sdk_authorization_branch_mutation_is_rejected) ... ok
+test_swapping_scan_and_cancel_callbacks_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_swapping_scan_and_cancel_callbacks_is_rejected) ... ok
+test_transport_send_success_code_mutation_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_transport_send_success_code_mutation_is_rejected) ... ok
+test_unrequested_activity_lifecycle_side_effect_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_unrequested_activity_lifecycle_side_effect_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.266s
+
+OK

@@ -1,0 +1,5 @@
+Scope: real production 0.2.6 Kotlin baseline jar on local JVM with genuine Android API33 org.json; synthetic callbacks/transport fixture, NOT Android or adb run.
+Command: /data/data/com.termux/files/home/hermes-env-3.13/bin/python -B qa/mcp_http_selftest.py --classpath /data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/final-host-026/host-tests.jar:/data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/android-json-api33.jar
+{"ok": true, "mode": "actual-kotlin-host", "scope": "local JVM; synthetic callbacks; NOT Android runtime", "assertions": 3555, "clients": ["urllib", "curl"], "write_eof_transport": {"status": "supported", "excluded_checks": []}, "all_raw_checks_passed": true, "token": "REDACTED"}
+
+Exit: 0

@@ -1,0 +1,4 @@
+{
+  "privateTokenMode": "0o600",
+  "privateTokenBytes": 64
+}

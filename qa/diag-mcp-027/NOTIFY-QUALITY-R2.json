@@ -1,0 +1,38 @@
+{
+  "axis": "standards",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "severity": "P2",
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt:39-64,107-127",
+      "message": "通知后台停止能关闭真实端口，但 startListener/stopListener 不推进 revision，可能使公开 fs_read 可读的 diagnostics/state.json 永久保留 mcp.running=true，直到下一次诊断观察。persistLater 的合并协议只识别 revision，遗漏监听状态变化。",
+      "counterexample": "已开启服务并 Home。文件线程已在第115行通过 read().toString() 捕获 running=true，但尚未完成 replaceDiagnosticFile；此时真实 Settings 关闭频道，receiver 调用 disable→stopListener，server.stop 将真实 running 清为 false。第63行 persistLater 因 writing=true 直接返回；onDestroy 的重复停止也可在同一写入期间被合并丢弃。文件线程随后写回旧 running=true，第117行和第126行发现 revision 没变，因此没有补写。此时真实 socket 已关闭、diag_read 为 false，但 diagnostics/state.json 仍为 true；这不是系统事件投递失败，也不是假设需要热重启或无限保活。",
+      "evidence": "stopListener 第61-64行仅停止 server 并 persistLater；startListener 第39-58行同样未增加 revision。只有 observe/record 第70/79行增加 revision。写入第108行通过 writing 合并请求，第114-117/126行仅按 revision 决定继续或重排。该反例为源码可达线程交错，不冒充已执行 Android 运行测试。",
+      "verification": "后续以受控写入屏障暂停于捕获旧状态后、落盘前，触发真实通知撤权并完成停止，再放开写入；断言最终 state.json 的 mcp.running=false。修复应让监听状态变化参与同一一致的脏版本/重排协议，不改变 token、公开工具或监听地址。"
+    }
+  ],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "blocking": false,
+      "path": "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:87-125,151-160",
+      "message": "旧 QUALITY-R1 的后台频道撤权端口仍开的 P2，在本次静态复查中已由动态系统事件重核并关闭路径覆盖。API33 RECEIVER_NOT_EXPORTED 并不排斥 system UID；委派给定的 AOSP14 maybeNotifyChannelOwner/sendBroadcastAsUser/setPackage 来源及本地 NOTIFICATION-BROADCAST-SOURCE.json 的对应片段支持该发送路径，不应以 NOT_EXPORTED 单独判为无法接收。未做网络或设备验证。"
+    },
+    {
+      "blocking": false,
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt:119-163",
+      "message": "实际系统 Settings 开关点击、读回 IMPORTANCE_NONE、Home 后先断言 enabled/active/runtime.running/实际端口/通知全部关闭，再返 MainActivity 核 UI OFF；没有手动 resumeChoice 或合成广播掩盖旧反例。真实编译及系统事件投递仍由后续 CI 验收，本次未运行 Android instrumentation，不将未构建当代码 missing。父代理正在修复的 QA 导航 selector 不在本次产品结论中当作新增缺陷。"
+    }
+  ],
+  "summary": "独立 QUALITY 未通过：完整读取 McpKeepAlive.kt(162行)、McpKeepAliveSettings.kt(108行)、DiagnosticRuntime.kt(130行)、McpKeepAliveTest.kt(171行)，先核 NOTIFY-SPEC-R3 passed=true 及两个指定 SHA 一致。通知后台关闭主路径、动态注册/注销、异常 fail-closed、默认不注册不自动 opt-in、不可变显式 PendingIntent 和 token 私有保存未发现明确安全问题；但共享 Runtime 的监听停止未推进持久化合并版本，存在上述具体后台撤权交错导致公开 state.json 仍报告端口运行的 P2。DiagnosticMcpServer/DiagnosticTools/McpToken 当前文件与 HEAD SHA 各自相同，确认 127.0.0.1:8766、Bearer 鉴权及 error_tail/diag_read/version_info/fs_read 四只读工具边界未改变；token 不在 fs_read 白名单，日志只输出 redacted。除本报告外没有修改产品、测试或 QA；没有 build、push、设备、浏览器、网络、AGC 操作。结论为静态源码复查，不声称运行验收通过。",
+  "files_hashes": {
+    "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt": "9d42dad06082b7b730e7f8bd25355c8e569793494b4deb8953cb0d99c58b043a",
+    "app/src/main/java/com/hcbiu/elcton/McpKeepAliveSettings.kt": "a9a09df2bd60c2b9a7f712f5f7985cd207f4cd713ae00da46b7f8f76b52a22b3",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "3abbfc9fca806448976bea04f3a3319831b75ce5e815a308d85d720327a46ae8",
+    "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt": "5a9e629ac48fc56e56123a43c5b31ab16a80aecdaa96f67544af1f7fdd7ddc09",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt": "a775682a55fedeeb788cfe9665f06698ab35b4cb50e7c66db251fae13c267e73",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt": "5caabafa222e3627f67585b37cf94219e0134e757d26ff85a00bee9f06e570bb",
+    "app/src/main/java/com/hcbiu/elcton/McpToken.kt": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601"
+  }
+}

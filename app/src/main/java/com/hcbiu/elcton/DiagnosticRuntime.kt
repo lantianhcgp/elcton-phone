@@ -8,7 +8,10 @@ import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 
 /** Owns diagnostics only. It never obtains a Wear Engine client or changes its lifecycle. */
-class DiagnosticRuntime(private val filesDir: File) {
+class DiagnosticRuntime(
+    private val filesDir: File,
+    private val stateWriter: (File, String) -> Unit = ::replaceDiagnosticFile
+) {
     private val lock = Any()
     private var snapshot = JSONObject().put("status", "尚未连接手表").put("phase", "idle")
         .put("timestampMs", System.currentTimeMillis()).put("ready", false).put("busy", false).put("deviceCount", 0)
@@ -20,20 +23,48 @@ class DiagnosticRuntime(private val filesDir: File) {
     private val writer = Executors.newSingleThreadExecutor { task -> Thread(task, "elcton-diagnostic-file").apply { isDaemon = true } }
     private val writing = AtomicBoolean(false)
 
+    private val listenerLock = Any()
+    private var initialized = false
+
     fun start() {
-        try { journal = ErrorJournal(File(filesDir, "diagnostics/wear-errors.jsonl")) }
-        catch (error: Exception) { startupError = "journal: " + error.javaClass.simpleName }
-        journal?.tail(1)?.let { if (it.length() > 0) lastError = it.getJSONObject(0) }
-        try {
-            val token = McpToken.loadOrCreate(File(filesDir, "mcp/token"))
-            val tools = DiagnosticTools(filesDir, { limit -> errorTail(limit) }, { read() }, { versionInfo() })
-            server = DiagnosticMcpServer(token, tools, 8766)
-            val port = server!!.start()
-            Log.i("ElctonMcp", "MCP listening on 127.0.0.1:$port; token=<redacted>; read-only")
-        } catch (error: Exception) {
-            startupError = "mcp: " + error.javaClass.simpleName
-            Log.w("ElctonMcp", "MCP startup failed: " + error.javaClass.simpleName)
+        synchronized(listenerLock) {
+            if (!initialized) {
+                initialized = true
+                try { journal = ErrorJournal(File(filesDir, "diagnostics/wear-errors.jsonl")) }
+                catch (error: Exception) { startupError = "journal: " + error.javaClass.simpleName }
+                journal?.tail(1)?.let { if (it.length() > 0) lastError = it.getJSONObject(0) }
+            }
         }
+        startListener()
+    }
+
+    /** The Application and user-enabled FGS share this one idempotent loopback listener. */
+    fun startListener(): Boolean {
+        val started = synchronized(listenerLock) {
+            try {
+                if (server == null) {
+                    val token = McpToken.loadOrCreate(File(filesDir, "mcp/token"))
+                    val tools = DiagnosticTools(filesDir, { limit -> errorTail(limit) }, { read() }, { versionInfo() })
+                    server = DiagnosticMcpServer(token, tools, 8766)
+                }
+                val port = server!!.start()
+                if (startupError.startsWith("mcp: ")) startupError = ""
+                Log.i("ElctonMcp", "MCP listening on 127.0.0.1:$port; token=<redacted>; read-only")
+                true
+            } catch (error: Exception) {
+                startupError = "mcp: " + error.javaClass.simpleName
+                Log.w("ElctonMcp", "MCP startup failed: " + error.javaClass.simpleName)
+                false
+            }
+        }
+        synchronized(lock) { revision++ }
+        persistLater()
+        return started
+    }
+
+    fun stopListener() {
+        synchronized(listenerLock) { server?.stop() }
+        synchronized(lock) { revision++ }
         persistLater()
     }
 
@@ -86,7 +117,7 @@ class DiagnosticRuntime(private val filesDir: File) {
             try {
                 while (true) {
                     val version = synchronized(lock) { revision }
-                    replaceDiagnosticFile(File(filesDir, "diagnostics/state.json"), read().toString())
+                    stateWriter(File(filesDir, "diagnostics/state.json"), read().toString())
                     persisted = version
                     if (synchronized(lock) { revision } == version) break
                 }

@@ -1,0 +1,19 @@
+{
+  "restored": true,
+  "actions": [
+    {
+      "step": "remove-own-forward-18766",
+      "exit": 0,
+      "output": ""
+    },
+    {
+      "step": "restore-original-adb-wifi-enabled",
+      "exit": 0,
+      "restored": true,
+      "readBack": "",
+      "stderr": "0",
+      "actualCombinedReadBack": "0"
+    }
+  ],
+  "parserCorrection": "rish emitted settings readback on stderr, original failed parser receipt preserved"
+}

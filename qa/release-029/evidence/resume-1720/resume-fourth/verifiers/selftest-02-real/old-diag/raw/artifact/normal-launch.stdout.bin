@@ -1,0 +1,7 @@
+Starting: Intent { cmp=com.hcbiu.elcton/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.hcbiu.elcton/.MainActivity
+TotalTime: 2375
+WaitTime: 2415
+Complete

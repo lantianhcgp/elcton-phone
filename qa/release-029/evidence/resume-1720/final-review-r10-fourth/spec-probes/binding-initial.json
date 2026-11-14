@@ -1,0 +1,1014 @@
+{
+  "checked_at": "2026-11-14T20:59:19.633945+08:00",
+  "passed": true,
+  "mismatches": [],
+  "actual_head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "reviewed_files": 128,
+  "product_files": 37,
+  "reviewed_manifest_sha256": "a7981889ef03ecc15a99f0ca745e69e9f27e1fab8bd0af7ebd7476ed23e58f81",
+  "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "diff_bytes": 533891,
+  "diff_sha256": "1e0b25c34289899baa580ca2d035c655c93d713a14719aec10443af0afe45f44",
+  "prepare_raw_sha256": "e5589dccaf0c4f9ae9e7eeb0872b62e4df9fcd53375c98b0bb26d77829d4be86",
+  "canonical_encoding": "sort_keys=True,separators=(comma,colon),ensure_ascii=False,UTF-8,no newline",
+  "manifested_untracked_append": [
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "complete_live_diff_rebuilt_equal": true,
+  "candidates": {
+    "candidate-before.json": {
+      "bytes": 128182,
+      "sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042"
+    },
+    "candidate-after.json": {
+      "bytes": 128182,
+      "sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042"
+    }
+  },
+  "candidate_checks": {
+    "guarded_source_sha256": {
+      "count": 19,
+      "mismatches": []
+    },
+    "immutable_source_sha256": {
+      "count": 16,
+      "mismatches": []
+    },
+    "lineage_sha256": {
+      "count": 4,
+      "mismatches": []
+    }
+  },
+  "candidate_full_patch_checks": [
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "matched_full_before_after_git": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "matched_full_before_after_git": true
+    }
+  ],
+  "all_live_files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 703,
+      "expected_sha256": "ccf1f51d7204a205a582f2834ebf1be801a3c29666367c3daef4b17293353a86",
+      "actual_sha256": "ccf1f51d7204a205a582f2834ebf1be801a3c29666367c3daef4b17293353a86",
+      "matched": true
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "bytes": 3853,
+      "expected_sha256": "ae61e37478852ca2263912eb0f28792aed6b4aab93bec0632a281177b9f12487",
+      "actual_sha256": "ae61e37478852ca2263912eb0f28792aed6b4aab93bec0632a281177b9f12487",
+      "matched": true
+    },
+    {
+      "path": ".github/workflows/ui-smoke.yml",
+      "bytes": 4355,
+      "expected_sha256": "9f7c80dff5db343a240ee90728cd97ac025da87930ad2233037a4834ae57d095",
+      "actual_sha256": "9f7c80dff5db343a240ee90728cd97ac025da87930ad2233037a4834ae57d095",
+      "matched": true
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 185,
+      "expected_sha256": "88ecf27584e5bb8f5b35b65fefb762be9673db2c85ee1e2800e789288a94cca1",
+      "actual_sha256": "88ecf27584e5bb8f5b35b65fefb762be9673db2c85ee1e2800e789288a94cca1",
+      "matched": true
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 2637,
+      "expected_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "actual_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "matched": true
+    },
+    {
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt",
+      "bytes": 25913,
+      "expected_sha256": "c0b50dc722f549766b343f8bc546af006a48f03d07e4793e0df46d7e456ee18d",
+      "actual_sha256": "c0b50dc722f549766b343f8bc546af006a48f03d07e4793e0df46d7e456ee18d",
+      "matched": true
+    },
+    {
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+      "bytes": 13261,
+      "expected_sha256": "38d0918efff151be064e7377e451588d3e56f7fd0b872c6ac871dd4640fddcfc",
+      "actual_sha256": "38d0918efff151be064e7377e451588d3e56f7fd0b872c6ac871dd4640fddcfc",
+      "matched": true
+    },
+    {
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt",
+      "bytes": 23804,
+      "expected_sha256": "b48d2c6ea3b465ba130e9e5fb2fbddcc5d6199a9ae1e6824c4d0848be3053ed1",
+      "actual_sha256": "b48d2c6ea3b465ba130e9e5fb2fbddcc5d6199a9ae1e6824c4d0848be3053ed1",
+      "matched": true
+    },
+    {
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/ProductUiTest.kt",
+      "bytes": 14996,
+      "expected_sha256": "69bdc8a56275dbac91d750ec23e49acc7d05b2313cd4ad29057f7ecefd711c4d",
+      "actual_sha256": "69bdc8a56275dbac91d750ec23e49acc7d05b2313cd4ad29057f7ecefd711c4d",
+      "matched": true
+    },
+    {
+      "path": "app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt",
+      "bytes": 18098,
+      "expected_sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10",
+      "actual_sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "bytes": 1563,
+      "expected_sha256": "ab8b60e2abfee7d9b14ff75fa09cbe813e16238db5f05aa64d1f716ca5e9252e",
+      "actual_sha256": "ab8b60e2abfee7d9b14ff75fa09cbe813e16238db5f05aa64d1f716ca5e9252e",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DevicePolicy.kt",
+      "bytes": 307,
+      "expected_sha256": "173f65f984981e1a41d4e03318da85572f61c3afcc66f96ed302eb510a329c83",
+      "actual_sha256": "173f65f984981e1a41d4e03318da85572f61c3afcc66f96ed302eb510a329c83",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt",
+      "bytes": 17501,
+      "expected_sha256": "609994ffef2c39adefeeacf1ec71cba24492efe9e5447c991dadd95be4ca64aa",
+      "actual_sha256": "609994ffef2c39adefeeacf1ec71cba24492efe9e5447c991dadd95be4ca64aa",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "bytes": 6566,
+      "expected_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+      "actual_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt",
+      "bytes": 5230,
+      "expected_sha256": "160cc7e9df1554b2b767fceb39b128d0ef461ae8035d5bb79bbf617f22f689f7",
+      "actual_sha256": "160cc7e9df1554b2b767fceb39b128d0ef461ae8035d5bb79bbf617f22f689f7",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/ElctonApplication.kt",
+      "bytes": 991,
+      "expected_sha256": "5d4756fa613d2cf27b7771d6a0d5a566867ae29dfe68afd281705726ff8bfec0",
+      "actual_sha256": "5d4756fa613d2cf27b7771d6a0d5a566867ae29dfe68afd281705726ff8bfec0",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt",
+      "bytes": 2390,
+      "expected_sha256": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+      "actual_sha256": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/ExportSession.kt",
+      "bytes": 1307,
+      "expected_sha256": "707d0ee89e042c57c65642558460fd68730a0069ca33c6b1723cefa6638ecbb5",
+      "actual_sha256": "707d0ee89e042c57c65642558460fd68730a0069ca33c6b1723cefa6638ecbb5",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt",
+      "bytes": 10625,
+      "expected_sha256": "1060db94bb9ca430f8e7c1e89804b944e42cc888fc3dc35983c9db105f41280e",
+      "actual_sha256": "1060db94bb9ca430f8e7c1e89804b944e42cc888fc3dc35983c9db105f41280e",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/M3xTheme.kt",
+      "bytes": 25418,
+      "expected_sha256": "6d3c421250359ce471e44a325a54262fc5a21e4afbacfbab198c76ad1bd3e608",
+      "actual_sha256": "6d3c421250359ce471e44a325a54262fc5a21e4afbacfbab198c76ad1bd3e608",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "bytes": 43019,
+      "expected_sha256": "a12fc52736c9a9dc6d87afa6e836994b18a0fce42785b44829166f5de1d5d458",
+      "actual_sha256": "a12fc52736c9a9dc6d87afa6e836994b18a0fce42785b44829166f5de1d5d458",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt",
+      "bytes": 1985,
+      "expected_sha256": "9fd2d977319af86748600f8de4e2ee05044fe8d7e999e74d68e3f737ef221cd1",
+      "actual_sha256": "9fd2d977319af86748600f8de4e2ee05044fe8d7e999e74d68e3f737ef221cd1",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt",
+      "bytes": 12684,
+      "expected_sha256": "a911d381e3ab1f5ac7d596ae9b010c196539ed8f27f5e6d154da8fb2695d8aae",
+      "actual_sha256": "a911d381e3ab1f5ac7d596ae9b010c196539ed8f27f5e6d154da8fb2695d8aae",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/McpKeepAlivePolicy.kt",
+      "bytes": 442,
+      "expected_sha256": "2d4ecac52ccbd7f3938bbf059d941445c619d19964340df741baee3fd56e7135",
+      "actual_sha256": "2d4ecac52ccbd7f3938bbf059d941445c619d19964340df741baee3fd56e7135",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/McpKeepAliveSettings.kt",
+      "bytes": 5917,
+      "expected_sha256": "765f5077b9433d2cd2f915d6714d2e2521cb4581a5a2ff3dd0dda6e3a35d5e12",
+      "actual_sha256": "765f5077b9433d2cd2f915d6714d2e2521cb4581a5a2ff3dd0dda6e3a35d5e12",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/McpToken.kt",
+      "bytes": 2804,
+      "expected_sha256": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+      "actual_sha256": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/McpToolProvider.kt",
+      "bytes": 1540,
+      "expected_sha256": "00957be37b3848d1d9aca3c6c056da53852e69b28d8452a43704ecf1096aca5f",
+      "actual_sha256": "00957be37b3848d1d9aca3c6c056da53852e69b28d8452a43704ecf1096aca5f",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/OperationDeadline.kt",
+      "bytes": 357,
+      "expected_sha256": "48e84ece758488ead30a54bbc44972f92bd1e59660b5f869c08a389065deb31a",
+      "actual_sha256": "48e84ece758488ead30a54bbc44972f92bd1e59660b5f869c08a389065deb31a",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PacketIngress.kt",
+      "bytes": 2481,
+      "expected_sha256": "3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb",
+      "actual_sha256": "3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PhoneActions.kt",
+      "bytes": 3681,
+      "expected_sha256": "048da107c58a76958c8de5f896681e177822710c62e90bed2ebbc71a46a132a6",
+      "actual_sha256": "048da107c58a76958c8de5f896681e177822710c62e90bed2ebbc71a46a132a6",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PhoneMcpTools.kt",
+      "bytes": 5392,
+      "expected_sha256": "e9c8ea471058e771e396967c421f56966de8009245adad17b218ae12396b909b",
+      "actual_sha256": "e9c8ea471058e771e396967c421f56966de8009245adad17b218ae12396b909b",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PhoneRuntime.kt",
+      "bytes": 5926,
+      "expected_sha256": "33d925acbcde98edc0858a0707ae6e29b52d0e3e4a5ea698ddec7aba734143ba",
+      "actual_sha256": "33d925acbcde98edc0858a0707ae6e29b52d0e3e4a5ea698ddec7aba734143ba",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PhoneSchedule.kt",
+      "bytes": 2985,
+      "expected_sha256": "862d48996b4a9ed7be84a4513fbc29ffd9a7a68cb038dfee89e30d6c48c5d040",
+      "actual_sha256": "862d48996b4a9ed7be84a4513fbc29ffd9a7a68cb038dfee89e30d6c48c5d040",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PhoneSnapshot.kt",
+      "bytes": 4943,
+      "expected_sha256": "dceeb0b41a52d6a3eecad765443820ffe03ce10d460bf0cad3efbeb79975c9bf",
+      "actual_sha256": "dceeb0b41a52d6a3eecad765443820ffe03ce10d460bf0cad3efbeb79975c9bf",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PickupClient.kt",
+      "bytes": 3306,
+      "expected_sha256": "66a1193e854a0381882f7ecf9380ba46afb5a58d7cc3fdaadee820d9a843cd0d",
+      "actual_sha256": "66a1193e854a0381882f7ecf9380ba46afb5a58d7cc3fdaadee820d9a843cd0d",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/ScheduleBook.kt",
+      "bytes": 4668,
+      "expected_sha256": "4a8f14ef02fbeef7283a14f206b06495c188d60618e08fd261a12a3b74dabd81",
+      "actual_sha256": "4a8f14ef02fbeef7283a14f206b06495c188d60618e08fd261a12a3b74dabd81",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/ScheduleStore.kt",
+      "bytes": 2147,
+      "expected_sha256": "2d7a225500360e179eef052c2395ab0a4d3acb4ad2aea88e703e6024d5c367c5",
+      "actual_sha256": "2d7a225500360e179eef052c2395ab0a4d3acb4ad2aea88e703e6024d5c367c5",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/SendAttempts.kt",
+      "bytes": 277,
+      "expected_sha256": "5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529",
+      "actual_sha256": "5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "bytes": 19525,
+      "expected_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+      "actual_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/TransferSession.kt",
+      "bytes": 2352,
+      "expected_sha256": "3bd542a39f188ca754dd31304268d3bf3e267ed739f5751f52511e7ba07f55bc",
+      "actual_sha256": "3bd542a39f188ca754dd31304268d3bf3e267ed739f5751f52511e7ba07f55bc",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/UserFacingError.kt",
+      "bytes": 2096,
+      "expected_sha256": "1bfaea8e5c76ce63c9bab92ec4ae06d331f3585ab0ac52e0b2d0a0afdaf6676b",
+      "actual_sha256": "1bfaea8e5c76ce63c9bab92ec4ae06d331f3585ab0ac52e0b2d0a0afdaf6676b",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt",
+      "bytes": 4890,
+      "expected_sha256": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+      "actual_sha256": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "bytes": 12305,
+      "expected_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+      "actual_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/Wire.kt",
+      "bytes": 2277,
+      "expected_sha256": "4d36667a311696cf98891455365af9a9bab09df4171d1e434b14056cdd1bc584",
+      "actual_sha256": "4d36667a311696cf98891455365af9a9bab09df4171d1e434b14056cdd1bc584",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/res/values/themes.xml",
+      "bytes": 938,
+      "expected_sha256": "231c907463700d761862dd59a4574e70479a067e1d74e572b8482182fdeb8ab4",
+      "actual_sha256": "231c907463700d761862dd59a4574e70479a067e1d74e572b8482182fdeb8ab4",
+      "matched": true
+    },
+    {
+      "path": "app/src/main/res/xml/network_security_config.xml",
+      "bytes": 467,
+      "expected_sha256": "02ad9ce2141cde98e21733fa04f64db3e1d335597a7b9ad793b1b8978e3faa23",
+      "actual_sha256": "02ad9ce2141cde98e21733fa04f64db3e1d335597a7b9ad793b1b8978e3faa23",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt",
+      "bytes": 957,
+      "expected_sha256": "69192343f911dd236c4e460520fe179688efdea729c839e57fc59331a16a0d56",
+      "actual_sha256": "69192343f911dd236c4e460520fe179688efdea729c839e57fc59331a16a0d56",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt",
+      "bytes": 432,
+      "expected_sha256": "4e881e94c691d51e82b3c8add895998e2a05398230f7a16c4ca01057f2d1c5d7",
+      "actual_sha256": "4e881e94c691d51e82b3c8add895998e2a05398230f7a16c4ca01057f2d1c5d7",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt",
+      "bytes": 16086,
+      "expected_sha256": "684519f459a6f48a48fcc984e5bda91d113a6ecbd3975d23df86310042da1a32",
+      "actual_sha256": "684519f459a6f48a48fcc984e5bda91d113a6ecbd3975d23df86310042da1a32",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt",
+      "bytes": 7829,
+      "expected_sha256": "390b71d90ab6e339f07b742f6e29d3745dd6fd767f02329a3bfaac0ad412f1db",
+      "actual_sha256": "390b71d90ab6e339f07b742f6e29d3745dd6fd767f02329a3bfaac0ad412f1db",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt",
+      "bytes": 4045,
+      "expected_sha256": "2572fb52a68c962dbfdb48f80fc201598f09101182c5cbe81be6e74671ede4c0",
+      "actual_sha256": "2572fb52a68c962dbfdb48f80fc201598f09101182c5cbe81be6e74671ede4c0",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt",
+      "bytes": 2637,
+      "expected_sha256": "d8b05686ccad9858e2d9fd4849de26b71924a5504ca929d15b60fdfe67a27976",
+      "actual_sha256": "d8b05686ccad9858e2d9fd4849de26b71924a5504ca929d15b60fdfe67a27976",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt",
+      "bytes": 2725,
+      "expected_sha256": "4b136d5cade089d8a76811ded5cb654e91d943058f9ab9122ceeb8d483a51943",
+      "actual_sha256": "4b136d5cade089d8a76811ded5cb654e91d943058f9ab9122ceeb8d483a51943",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt",
+      "bytes": 13532,
+      "expected_sha256": "558da9cd16c2dce0b8d80b5a837d94f168692e5cd805fe1ac7918f7e4c320725",
+      "actual_sha256": "558da9cd16c2dce0b8d80b5a837d94f168692e5cd805fe1ac7918f7e4c320725",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt",
+      "bytes": 1768,
+      "expected_sha256": "9d7db896910c08d8676b39254ec998dd9b47faf2a7bee7913b026ce8e5b13674",
+      "actual_sha256": "9d7db896910c08d8676b39254ec998dd9b47faf2a7bee7913b026ce8e5b13674",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt",
+      "bytes": 1008,
+      "expected_sha256": "6e25d49d50813ad1af1d487028c275bcd9ea5bd211fc66078f3d30ebc09dd3e2",
+      "actual_sha256": "6e25d49d50813ad1af1d487028c275bcd9ea5bd211fc66078f3d30ebc09dd3e2",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt",
+      "bytes": 2665,
+      "expected_sha256": "e4b53b7f2ab6baa7fddfaeeb8da39e726dfaafc3afbee6e024f109a7fefa0a75",
+      "actual_sha256": "e4b53b7f2ab6baa7fddfaeeb8da39e726dfaafc3afbee6e024f109a7fefa0a75",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/McpKeepAlivePolicyTest.kt",
+      "bytes": 3627,
+      "expected_sha256": "883289974b6a0fa87da5623a1340fa3e9ce2698be69d3d2698ac002f6c2aa440",
+      "actual_sha256": "883289974b6a0fa87da5623a1340fa3e9ce2698be69d3d2698ac002f6c2aa440",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt",
+      "bytes": 2821,
+      "expected_sha256": "950e6f24e7468570e3508482f59a36dd1bbaf612a2c0736ade01e4091386da3f",
+      "actual_sha256": "950e6f24e7468570e3508482f59a36dd1bbaf612a2c0736ade01e4091386da3f",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/P2pReadyErrorTest.kt",
+      "bytes": 1326,
+      "expected_sha256": "6401aca5358b53bc84c6a3c326bda06047624652359cfd8d7d478827d2b7150a",
+      "actual_sha256": "6401aca5358b53bc84c6a3c326bda06047624652359cfd8d7d478827d2b7150a",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/P2pReadyIngressTest.kt",
+      "bytes": 832,
+      "expected_sha256": "d4d6a51f56762eaed1b6a89a476e2c69359e1267fc6830d1a4f80976d9cf43f2",
+      "actual_sha256": "d4d6a51f56762eaed1b6a89a476e2c69359e1267fc6830d1a4f80976d9cf43f2",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt",
+      "bytes": 8559,
+      "expected_sha256": "4dd3304bfe44d163dd4bb43420e749421985a802c0361e8da67a90677d7f37bd",
+      "actual_sha256": "4dd3304bfe44d163dd4bb43420e749421985a802c0361e8da67a90677d7f37bd",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/PhoneMcpCompositionTest.kt",
+      "bytes": 1719,
+      "expected_sha256": "932238ff9c455f7afa23e437eafda83cb046ec0c659b37b9e0dd6836cca3b4b1",
+      "actual_sha256": "932238ff9c455f7afa23e437eafda83cb046ec0c659b37b9e0dd6836cca3b4b1",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/PhoneMcpToolsTest.kt",
+      "bytes": 4540,
+      "expected_sha256": "967d79781d0742d2cf65ac41263b73c45c9c9c20a29c54cb1b5d9fa09a81c982",
+      "actual_sha256": "967d79781d0742d2cf65ac41263b73c45c9c9c20a29c54cb1b5d9fa09a81c982",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/PhoneScheduleTest.kt",
+      "bytes": 3049,
+      "expected_sha256": "d6a1ce209a7304b655e3b1054bacce3d7e4efe1c34db8b199ab69d488fdec1a4",
+      "actual_sha256": "d6a1ce209a7304b655e3b1054bacce3d7e4efe1c34db8b199ab69d488fdec1a4",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt",
+      "bytes": 957,
+      "expected_sha256": "1d98ec806368c163c3d9048025753f1ae1f9914a633f81328e0e23b3a4460b29",
+      "actual_sha256": "1d98ec806368c163c3d9048025753f1ae1f9914a633f81328e0e23b3a4460b29",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/PickupClientTest.kt",
+      "bytes": 4718,
+      "expected_sha256": "9e034b2df04142c5fcb864c42752cd0d72f815970cb40440fc7fe7da72c4385b",
+      "actual_sha256": "9e034b2df04142c5fcb864c42752cd0d72f815970cb40440fc7fe7da72c4385b",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt",
+      "bytes": 3640,
+      "expected_sha256": "4a8b97f4ae3fcb5a085fd13fd48947b86ffe6148d06a4111d84a31e226d1f8aa",
+      "actual_sha256": "4a8b97f4ae3fcb5a085fd13fd48947b86ffe6148d06a4111d84a31e226d1f8aa",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt",
+      "bytes": 2434,
+      "expected_sha256": "7ee5e55e8b9dc91eaa0fedb43d5c2c697a3560d08c3491a9d0e7f6c439aed7a4",
+      "actual_sha256": "7ee5e55e8b9dc91eaa0fedb43d5c2c697a3560d08c3491a9d0e7f6c439aed7a4",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt",
+      "bytes": 3066,
+      "expected_sha256": "50b4bd60f9f5d977a1020033392157645a253e191be44b6329c52616a49e23cb",
+      "actual_sha256": "50b4bd60f9f5d977a1020033392157645a253e191be44b6329c52616a49e23cb",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/SyncEngineTest.kt",
+      "bytes": 18665,
+      "expected_sha256": "6ba2ebe09c298d1f722d667562e05bfeb2b4935ed761c26dfc8decb775a06f33",
+      "actual_sha256": "6ba2ebe09c298d1f722d667562e05bfeb2b4935ed761c26dfc8decb775a06f33",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt",
+      "bytes": 1505,
+      "expected_sha256": "2ec7b4bf587a67d4f00bdecf5961321a6e555907d8a9b36e54b3d6f9b6423f15",
+      "actual_sha256": "2ec7b4bf587a67d4f00bdecf5961321a6e555907d8a9b36e54b3d6f9b6423f15",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt",
+      "bytes": 573,
+      "expected_sha256": "07f957bc7f300343fc2b553dfece47f23009edcd42b0e9e5b2a7f49280c5a1f4",
+      "actual_sha256": "07f957bc7f300343fc2b553dfece47f23009edcd42b0e9e5b2a7f49280c5a1f4",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt",
+      "bytes": 4935,
+      "expected_sha256": "043b4b6522287da7e3a3ed5d08e889680a55de8fcee1c18faaa96ac0007df29d",
+      "actual_sha256": "043b4b6522287da7e3a3ed5d08e889680a55de8fcee1c18faaa96ac0007df29d",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/java/com/hcbiu/elcton/WireTest.kt",
+      "bytes": 623,
+      "expected_sha256": "88190984b864656508436d1b37441c0edcef1ddbf8275e69c8f3852979b5a759",
+      "actual_sha256": "88190984b864656508436d1b37441c0edcef1ddbf8275e69c8f3852979b5a759",
+      "matched": true
+    },
+    {
+      "path": "app/src/test/resources/watch-development-cert.pem",
+      "bytes": 1021,
+      "expected_sha256": "79e2bef95de58cb394da0b776f33d23e8bc5ef5a073cc2657d60fbe8fced1918",
+      "actual_sha256": "79e2bef95de58cb394da0b776f33d23e8bc5ef5a073cc2657d60fbe8fced1918",
+      "matched": true
+    },
+    {
+      "path": "build.gradle.kts",
+      "bytes": 142,
+      "expected_sha256": "48f7c9d13c50fa379dce0a2b7c028bcffe60d428eada35b12cfb8af28b31c962",
+      "actual_sha256": "48f7c9d13c50fa379dce0a2b7c028bcffe60d428eada35b12cfb8af28b31c962",
+      "matched": true
+    },
+    {
+      "path": "gradle.properties",
+      "bytes": 124,
+      "expected_sha256": "4fbb21f5058d16d44714a12e466263bec68615f82bf0b5fd5e4daeef00996bea",
+      "actual_sha256": "4fbb21f5058d16d44714a12e466263bec68615f82bf0b5fd5e4daeef00996bea",
+      "matched": true
+    },
+    {
+      "path": "qa/McpHost.kt",
+      "bytes": 2786,
+      "expected_sha256": "de38a0cf35ca195036b321aa4b8ee29922d7eb9baa3c5b1a2913121aec9c5879",
+      "actual_sha256": "de38a0cf35ca195036b321aa4b8ee29922d7eb9baa3c5b1a2913121aec9c5879",
+      "matched": true
+    },
+    {
+      "path": "qa/P2pCandidateBuildTest.kt",
+      "bytes": 645,
+      "expected_sha256": "3d03974cf7ff5c1728d2978415950dc9cc42987409025a3c9227fe256a9420e9",
+      "actual_sha256": "3d03974cf7ff5c1728d2978415950dc9cc42987409025a3c9227fe256a9420e9",
+      "matched": true
+    },
+    {
+      "path": "qa/PhoneMcpHost.kt",
+      "bytes": 1309,
+      "expected_sha256": "800595b75fd696fd51557a5b5021542ae1e99a6196e2d3319230480a041b4fb8",
+      "actual_sha256": "800595b75fd696fd51557a5b5021542ae1e99a6196e2d3319230480a041b4fb8",
+      "matched": true
+    },
+    {
+      "path": "qa/ProtocolHost.kt",
+      "bytes": 2467,
+      "expected_sha256": "e1368cdeb773e1bfb2d2d94038b9a4510532cb741e9af6087ec531666ef73ba7",
+      "actual_sha256": "e1368cdeb773e1bfb2d2d94038b9a4510532cb741e9af6087ec531666ef73ba7",
+      "matched": true
+    },
+    {
+      "path": "qa/cloud_emulator_observer.py",
+      "bytes": 11594,
+      "expected_sha256": "ed83e7f8812f732151dc71ff90b0f6711a88bd1730f7146443046da3dc2d86e1",
+      "actual_sha256": "ed83e7f8812f732151dc71ff90b0f6711a88bd1730f7146443046da3dc2d86e1",
+      "matched": true
+    },
+    {
+      "path": "qa/diag_emulator_smoke.py",
+      "bytes": 41068,
+      "expected_sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e",
+      "actual_sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e",
+      "matched": true
+    },
+    {
+      "path": "qa/diag_source_gate.py",
+      "bytes": 9046,
+      "expected_sha256": "6278a451605275825e1556d3302e2b22dfeb7ed2918c1c5ff0e25491e365b9ff",
+      "actual_sha256": "6278a451605275825e1556d3302e2b22dfeb7ed2918c1c5ff0e25491e365b9ff",
+      "matched": true
+    },
+    {
+      "path": "qa/emulator_install_and_tour.py",
+      "bytes": 18473,
+      "expected_sha256": "693706e964aa25a6f4f04cbf1a9eb46da0c6c8c7e79368dec9e3aaf0899f87df",
+      "actual_sha256": "693706e964aa25a6f4f04cbf1a9eb46da0c6c8c7e79368dec9e3aaf0899f87df",
+      "matched": true
+    },
+    {
+      "path": "qa/emulator_tour.py",
+      "bytes": 3287,
+      "expected_sha256": "fbe98f363f3d67a2720e80fcca88eeea52d127fc7f99fb050f91c2b28191e001",
+      "actual_sha256": "fbe98f363f3d67a2720e80fcca88eeea52d127fc7f99fb050f91c2b28191e001",
+      "matched": true
+    },
+    {
+      "path": "qa/mcp_http_selftest.py",
+      "bytes": 35381,
+      "expected_sha256": "dc44fefc3b145b80a41cf5ff272e1d32e7116aa648e60ac4a7ebadb085c3187a",
+      "actual_sha256": "dc44fefc3b145b80a41cf5ff272e1d32e7116aa648e60ac4a7ebadb085c3187a",
+      "matched": true
+    },
+    {
+      "path": "qa/p2p-ready-20261114/verify_apk_candidate.py",
+      "bytes": 886,
+      "expected_sha256": "d206437d95173b9d7d5dc2a8b27e6f655fd5da12f3f5990a5d1d042981396c0e",
+      "actual_sha256": "d206437d95173b9d7d5dc2a8b27e6f655fd5da12f3f5990a5d1d042981396c0e",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "bytes": 7596,
+      "expected_sha256": "5ebe5d42bf29c36ddb325e3b31c35950a2200f5aa8256f8e35b2c5b8407749c1",
+      "actual_sha256": "5ebe5d42bf29c36ddb325e3b31c35950a2200f5aa8256f8e35b2c5b8407749c1",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/RESUME-CHANGES.md",
+      "bytes": 6231,
+      "expected_sha256": "17a06929933cd2f34dc91856289f39017cd2261f2f05d37201f5ec7c8755c787",
+      "actual_sha256": "17a06929933cd2f34dc91856289f39017cd2261f2f05d37201f5ec7c8755c787",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/SPEC.md",
+      "bytes": 2762,
+      "expected_sha256": "e8f2f1bec4420ae99714b8aa22910540a7b649725aa4e8349a551c0daae8888b",
+      "actual_sha256": "e8f2f1bec4420ae99714b8aa22910540a7b649725aa4e8349a551c0daae8888b",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/TEST-ATTRIBUTION.md",
+      "bytes": 4239,
+      "expected_sha256": "813d86e826a965db64ec1345f134bd2267398b169fc17a66b309bba29c74f97c",
+      "actual_sha256": "813d86e826a965db64ec1345f134bd2267398b169fc17a66b309bba29c74f97c",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/approved-release-delta.json",
+      "bytes": 128182,
+      "expected_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+      "actual_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/prepare_candidate.py",
+      "bytes": 5006,
+      "expected_sha256": "9401f130790d63a728a629ba5ed1d34ecd0b74185f7137f6087f65d16f3e4093",
+      "actual_sha256": "9401f130790d63a728a629ba5ed1d34ecd0b74185f7137f6087f65d16f3e4093",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/termux_tools_list.py",
+      "bytes": 5429,
+      "expected_sha256": "9440dce3282274bdec8ab40703f0f1322df2ecdf942041541b9a238b97d1827e",
+      "actual_sha256": "9440dce3282274bdec8ab40703f0f1322df2ecdf942041541b9a238b97d1827e",
+      "matched": true
+    },
+    {
+      "path": "qa/release-029/verify_apk.py",
+      "bytes": 934,
+      "expected_sha256": "f9b96d77b5a044611068e8756bc59924f077b4556ddb73a7155467dc09dc08eb",
+      "actual_sha256": "f9b96d77b5a044611068e8756bc59924f077b4556ddb73a7155467dc09dc08eb",
+      "matched": true
+    },
+    {
+      "path": "qa/run_host_tests.py",
+      "bytes": 1979,
+      "expected_sha256": "20e93248f56746a45560b16eeac0779ff063b8be28dc06e87c199db289e31bc0",
+      "actual_sha256": "20e93248f56746a45560b16eeac0779ff063b8be28dc06e87c199db289e31bc0",
+      "matched": true
+    },
+    {
+      "path": "qa/run_runtime_revision_host_tests.py",
+      "bytes": 2800,
+      "expected_sha256": "927f06bc11783de86054cb302ad06b765839998a711735b6f0dbb8bb2448d3eb",
+      "actual_sha256": "927f06bc11783de86054cb302ad06b765839998a711735b6f0dbb8bb2448d3eb",
+      "matched": true
+    },
+    {
+      "path": "qa/runtime_revision_host/DiagnosticRuntimeRevisionTest.kt.in",
+      "bytes": 4893,
+      "expected_sha256": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+      "actual_sha256": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+      "matched": true
+    },
+    {
+      "path": "qa/runtime_revision_host/HostBuildConfig.kt.in",
+      "bytes": 294,
+      "expected_sha256": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+      "actual_sha256": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+      "matched": true
+    },
+    {
+      "path": "qa/runtime_revision_host/HostLog.kt.in",
+      "bytes": 344,
+      "expected_sha256": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+      "actual_sha256": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+      "matched": true
+    },
+    {
+      "path": "qa/termux_mcp.py",
+      "bytes": 4156,
+      "expected_sha256": "520a41f5a89a2fd4ee5fa16a0348d1d52f73556b45a40ceb3785f284bb713997",
+      "actual_sha256": "520a41f5a89a2fd4ee5fa16a0348d1d52f73556b45a40ceb3785f284bb713997",
+      "matched": true
+    },
+    {
+      "path": "qa/test_capture_readiness.py",
+      "bytes": 1967,
+      "expected_sha256": "6ae100e1d59415c41ca1d8b756d13e0c4469ece98a3f675a257704d36db3f551",
+      "actual_sha256": "6ae100e1d59415c41ca1d8b756d13e0c4469ece98a3f675a257704d36db3f551",
+      "matched": true
+    },
+    {
+      "path": "qa/test_cloud_observer.py",
+      "bytes": 7963,
+      "expected_sha256": "eab122b814529411e327d2126482d58b0413bae19968b6b123f4388ecc946758",
+      "actual_sha256": "eab122b814529411e327d2126482d58b0413bae19968b6b123f4388ecc946758",
+      "matched": true
+    },
+    {
+      "path": "qa/test_cloud_observer_isolation.py",
+      "bytes": 8651,
+      "expected_sha256": "ae9f1eb7966d4d80f2848aa8681603428722dac633878777e773e03314c7e99b",
+      "actual_sha256": "ae9f1eb7966d4d80f2848aa8681603428722dac633878777e773e03314c7e99b",
+      "matched": true
+    },
+    {
+      "path": "qa/test_diag_source_gate.py",
+      "bytes": 5096,
+      "expected_sha256": "5bacc49053d492cf03a8fd405aca57dae30740df77b5bb30e539181664d25a00",
+      "actual_sha256": "5bacc49053d492cf03a8fd405aca57dae30740df77b5bb30e539181664d25a00",
+      "matched": true
+    },
+    {
+      "path": "qa/test_diag_workflow_env.py",
+      "bytes": 1777,
+      "expected_sha256": "a012c64f3b86be15b065b52def667b0c9320ea6cd5d80a029ef1f50197190d41",
+      "actual_sha256": "a012c64f3b86be15b065b52def667b0c9320ea6cd5d80a029ef1f50197190d41",
+      "matched": true
+    },
+    {
+      "path": "qa/test_final_report_gate.py",
+      "bytes": 1045,
+      "expected_sha256": "0d8e45219fd1efe32e772f0ab218dd4c2c177109ddf420f5a5239d66e01b53b3",
+      "actual_sha256": "0d8e45219fd1efe32e772f0ab218dd4c2c177109ddf420f5a5239d66e01b53b3",
+      "matched": true
+    },
+    {
+      "path": "qa/test_keepalive_gate.py",
+      "bytes": 7855,
+      "expected_sha256": "7b612f908a8c09ed48a1da25b4227d6a944d507d9d390be47ebcf070e0d039e1",
+      "actual_sha256": "7b612f908a8c09ed48a1da25b4227d6a944d507d9d390be47ebcf070e0d039e1",
+      "matched": true
+    },
+    {
+      "path": "qa/test_keepalive_return_fixture.py",
+      "bytes": 2792,
+      "expected_sha256": "fcafa9fc4436b8a36ec94bfcba1d5946d516de3eb4b7ecda3bd66eae1173b193",
+      "actual_sha256": "fcafa9fc4436b8a36ec94bfcba1d5946d516de3eb4b7ecda3bd66eae1173b193",
+      "matched": true
+    },
+    {
+      "path": "qa/test_mcp027_scope.py",
+      "bytes": 4095,
+      "expected_sha256": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+      "actual_sha256": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+      "matched": true
+    },
+    {
+      "path": "qa/test_mcp029_http_listing.py",
+      "bytes": 2072,
+      "expected_sha256": "f9214871477b3022cfcd8503d9e8650b96701d0a05a4da96579f5be759c589da",
+      "actual_sha256": "f9214871477b3022cfcd8503d9e8650b96701d0a05a4da96579f5be759c589da",
+      "matched": true
+    },
+    {
+      "path": "qa/test_mcp_clients.py",
+      "bytes": 9984,
+      "expected_sha256": "719eba472002f0c183d0500a96c7aa075f7a519e5b088449f3577a888eda49b4",
+      "actual_sha256": "719eba472002f0c183d0500a96c7aa075f7a519e5b088449f3577a888eda49b4",
+      "matched": true
+    },
+    {
+      "path": "qa/test_mcp_http_selftest.py",
+      "bytes": 2626,
+      "expected_sha256": "169836aa46e9fc1cb2694a315fde4b8ea508e6d57fbffc7d9aff359d798ffd57",
+      "actual_sha256": "169836aa46e9fc1cb2694a315fde4b8ea508e6d57fbffc7d9aff359d798ffd57",
+      "matched": true
+    },
+    {
+      "path": "qa/test_notification_fixture.py",
+      "bytes": 2865,
+      "expected_sha256": "532939076e873d89bade06cb3163b722fe18a64c31e7b37fce9f726fff482ab1",
+      "actual_sha256": "532939076e873d89bade06cb3163b722fe18a64c31e7b37fce9f726fff482ab1",
+      "matched": true
+    },
+    {
+      "path": "qa/test_p2p_ready_source_gate.py",
+      "bytes": 2324,
+      "expected_sha256": "6f090a897f55e5d1906f5d3f7d6c7c0e63513bade049e07108609de4bc60b268",
+      "actual_sha256": "6f090a897f55e5d1906f5d3f7d6c7c0e63513bade049e07108609de4bc60b268",
+      "matched": true
+    },
+    {
+      "path": "qa/test_palette_evidence.py",
+      "bytes": 44728,
+      "expected_sha256": "d5768e3b9e1f1dec5ca1c26d4decf648900023cd3c4465236c543e141864bcec",
+      "actual_sha256": "d5768e3b9e1f1dec5ca1c26d4decf648900023cd3c4465236c543e141864bcec",
+      "matched": true
+    },
+    {
+      "path": "qa/test_palette_source.py",
+      "bytes": 8771,
+      "expected_sha256": "aafe9f0e80e86f28480d0c234d69f342f5bcf84eeef9aa00e50e3df79e0c5c89",
+      "actual_sha256": "aafe9f0e80e86f28480d0c234d69f342f5bcf84eeef9aa00e50e3df79e0c5c89",
+      "matched": true
+    },
+    {
+      "path": "qa/test_termux_mcp.py",
+      "bytes": 2081,
+      "expected_sha256": "f7be6d58274c3bd7ee726122c0e0485362027335adbfe0151309772c71e69c89",
+      "actual_sha256": "f7be6d58274c3bd7ee726122c0e0485362027335adbfe0151309772c71e69c89",
+      "matched": true
+    },
+    {
+      "path": "qa/test_theme_evidence.py",
+      "bytes": 4586,
+      "expected_sha256": "e0c295f2593a694eae2c1ea21d7ea24e2dc1a651ada5d5f8a90e4a5e48782a3a",
+      "actual_sha256": "e0c295f2593a694eae2c1ea21d7ea24e2dc1a651ada5d5f8a90e4a5e48782a3a",
+      "matched": true
+    },
+    {
+      "path": "qa/test_theme_source.py",
+      "bytes": 3422,
+      "expected_sha256": "d6a4c3a7ce233b10346780b38e286e2f2ac71b03f53b259fa48b6d978992cbbe",
+      "actual_sha256": "d6a4c3a7ce233b10346780b38e286e2f2ac71b03f53b259fa48b6d978992cbbe",
+      "matched": true
+    },
+    {
+      "path": "qa/ui_only_gate.py",
+      "bytes": 16225,
+      "expected_sha256": "9208b0a061f2a96eb9264cf0c7dc38a5972d0a433834246abbc6727ea608476e",
+      "actual_sha256": "9208b0a061f2a96eb9264cf0c7dc38a5972d0a433834246abbc6727ea608476e",
+      "matched": true
+    },
+    {
+      "path": "qa/verify_palette_evidence.py",
+      "bytes": 24789,
+      "expected_sha256": "d15583aa319c533b29f62636becc2ae1c4e053dc5e81d5b0f43d4e5f22c45e08",
+      "actual_sha256": "d15583aa319c533b29f62636becc2ae1c4e053dc5e81d5b0f43d4e5f22c45e08",
+      "matched": true
+    },
+    {
+      "path": "qa/verify_system_bars.py",
+      "bytes": 6000,
+      "expected_sha256": "c4e0c0a8be07b224def60a40b9118e65515036de738cf415c729932f2d5d632e",
+      "actual_sha256": "c4e0c0a8be07b224def60a40b9118e65515036de738cf415c729932f2d5d632e",
+      "matched": true
+    },
+    {
+      "path": "qa/verify_theme_evidence.py",
+      "bytes": 11989,
+      "expected_sha256": "580679df7a8428ddd7d84f531b3e2d72c9f03c5a51344e7c7cff13cbab337514",
+      "actual_sha256": "580679df7a8428ddd7d84f531b3e2d72c9f03c5a51344e7c7cff13cbab337514",
+      "matched": true
+    },
+    {
+      "path": "qa/wait_x.py",
+      "bytes": 251,
+      "expected_sha256": "5390e804a429dfe513e62eda986fc3271480fc2e92e573fafb715d7d35a3309f",
+      "actual_sha256": "5390e804a429dfe513e62eda986fc3271480fc2e92e573fafb715d7d35a3309f",
+      "matched": true
+    },
+    {
+      "path": "settings.gradle.kts",
+      "bytes": 330,
+      "expected_sha256": "2bb8f4fa17b8b8710efe30351a55749e7a3f3166ba14b2485652f7b719416dc0",
+      "actual_sha256": "2bb8f4fa17b8b8710efe30351a55749e7a3f3166ba14b2485652f7b719416dc0",
+      "matched": true
+    }
+  ],
+  "r8_changed": [
+    ".github/workflows/ui-smoke.yml",
+    "qa/emulator_install_and_tour.py",
+    "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+    "qa/release-029/RESUME-CHANGES.md"
+  ],
+  "r8_added": [
+    "qa/cloud_emulator_observer.py",
+    "qa/test_cloud_observer.py",
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "r8_removed": [],
+  "r8_unchanged_count": 121,
+  "r8_all_37_product_HEAD_match": true,
+  "old_app_test_files": 35,
+  "old_app_test_drift": [],
+  "HEAD_app_test_drift": [],
+  "cumulative_sections": {
+    "r8": 65,
+    "r10": 68,
+    "unchanged": 61,
+    "changed": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "added": [
+      "qa/cloud_emulator_observer.py",
+      "qa/test_cloud_observer.py",
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "removed": []
+  },
+  "preservation": {
+    "harvest_full_reverse_equal": true,
+    "harvest_original_git_equal": true,
+    "workflow_single_replacement": true,
+    "workflow_full_reverse_equal": true
+  },
+  "r8_chain": {
+    "spec": {
+      "raw_sha256": "7e975f14343fa3be42d1828f986ea5f0240136cc178cb46b243f74044faa15ed",
+      "passed": true,
+      "zero_blockers": true,
+      "manifest_matches": true,
+      "diff_matches": true
+    },
+    "standards": {
+      "raw_sha256": "cabae561fffd0896a85c5e5fbfba6e373f11b9f647dc7e727ed773fee58c0298",
+      "passed": true,
+      "zero_blockers": true,
+      "manifest_matches": true,
+      "diff_matches": true
+    },
+    "dual_closure_sha256": "b5a98ae824ec23b9f28e1826ca95f979b600c5925cfdb795c4fe1ef87af68f65",
+    "reviewed_manifest_sha256": "9cd0cd5a3e9deb6b2180eec9e3f5f8bcb51319c018061b53b707c203c1160ab3",
+    "diff_sha256": "fee7b0f1a0b13025ed59ade8ff85606a78b5f5a0a96ea94a4b7a548dc9790c81"
+  },
+  "r9_original_raw_sha256": {
+    "spec": "7a8864c81c6fb7755a6d33e30b870fbd11a254f9c6c03af90f15fed3d2f6d380",
+    "standards": "3c28026a015ffa0055580efb14ad78b4aa19a150dc4286428bc26a61cc0e7eea"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "scope": "current R9 full host regressions; NOT Android/physical",
+  "jvm_tests": 152,
+  "python_tests": 115,
+  "python_skipped": 0,
+  "http_assertions": 3784,
+  "runtime_tests": 1,
+  "tools_count": 15,
+  "http_tools_status": 200,
+  "logs": {
+    "host-final-r9/junit.log": {
+      "sha256": "61eac1f3538da8c2944c481482bfb9c8c874b39ddc7e32fb23b85e7af4ef0246",
+      "bytes": 203
+    },
+    "resume-third/r9/python-continuation/raw.log": {
+      "sha256": "a661ebea29e774240d67025d7eab88f9199f07451df01ab597fd85c967084a19",
+      "bytes": 24412
+    },
+    "resume-third/r9/http/raw.log": {
+      "sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+      "bytes": 281
+    },
+    "resume-third/r9/runtime/junit.log": {
+      "sha256": "5efaee0a667d108ba5fdc6e710cbe3ed2bc89a726f27beadeb7487a698355b51",
+      "bytes": 473
+    },
+    "resume-third/r9/termux/receipt.json": {
+      "sha256": "33a81d94224f690b14e6f40404e86fb6987b547c7ea018650f24e1401ce42813",
+      "bytes": 2758
+    },
+    "resume-third/r9/observer-GREEN.log": {
+      "sha256": "c6378c5826f8ef1d214d87d44ebfc533171253876785240d4efbaec8e444bc4c",
+      "bytes": 4568
+    },
+    "resume-third/r9/isolated-helper-GREEN.log": {
+      "sha256": "ef9439d54d7cac4f55175df1d1cee7e2df67be6ebed8e027f535bd8eeec9724b",
+      "bytes": 4568
+    }
+  }
+}

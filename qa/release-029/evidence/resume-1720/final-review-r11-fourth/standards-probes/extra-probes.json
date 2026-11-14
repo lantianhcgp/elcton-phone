@@ -1,0 +1,62 @@
+[
+  {
+    "case": "source_absent_index_open_TOCTOU",
+    "passed": true,
+    "outside_writes": 0,
+    "index_and_budget_pinned": true,
+    "index_mode": "0o600"
+  },
+  {
+    "case": "source_absent_existing_index_symlink",
+    "passed": true,
+    "external_bytes_unchanged": true,
+    "rejected": true
+  },
+  {
+    "case": "post_stat_source_nlink2",
+    "passed": true,
+    "rejected": true,
+    "scope": "synthetic fstat only; not native hardlink race"
+  },
+  {
+    "case": "production_index32768_nested_empty",
+    "passed": true,
+    "index_bytes": 32662,
+    "copied": 27,
+    "budget": {
+      "scanned_entries": 36,
+      "copied_files": 27,
+      "content_bytes": 0,
+      "max_depth": 8,
+      "stopped_reason": "index-limit",
+      "limits": {
+        "scan": 256,
+        "copy": 64,
+        "depth": 8,
+        "index_bytes": 32768,
+        "file_bytes": 33554432,
+        "total_bytes": 67108864
+      }
+    }
+  },
+  {
+    "case": "lazy_source_stat256",
+    "passed": true,
+    "actual_source_lstats": 256,
+    "budget": {
+      "scanned_entries": 256,
+      "copied_files": 0,
+      "content_bytes": 0,
+      "max_depth": 0,
+      "stopped_reason": "scan-limit",
+      "limits": {
+        "scan": 256,
+        "copy": 64,
+        "depth": 8,
+        "index_bytes": 32768,
+        "file_bytes": 33554432,
+        "total_bytes": 67108864
+      }
+    }
+  }
+]

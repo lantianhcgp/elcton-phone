@@ -1,0 +1,10 @@
+test_directory_depth_bound_prevents_unbounded_fd_recursion (spec_original_3.CrashBudgetTests.test_directory_depth_bound_prevents_unbounded_fd_recursion) ... ok
+test_empty_crashes_cannot_create_unbounded_files_or_index (spec_original_3.CrashBudgetTests.test_empty_crashes_cannot_create_unbounded_files_or_index) ... ok
+test_index_size_limit_precedes_new_copy (spec_original_3.CrashBudgetTests.test_index_size_limit_precedes_new_copy) ... ok
+test_scan_budget_uses_lazy_directory_iterator_not_listdir (spec_original_3.CrashBudgetTests.test_scan_budget_uses_lazy_directory_iterator_not_listdir) ... ok
+test_total_payload_limit_stops_before_additional_file (spec_original_3.CrashBudgetTests.test_total_payload_limit_stops_before_additional_file) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.087s
+
+OK

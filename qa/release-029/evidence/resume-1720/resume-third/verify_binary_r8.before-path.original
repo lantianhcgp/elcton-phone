@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+"""Inspect real exact-build binaries. Does not install/click or supply cloud PASS."""
+import hashlib
+import json
+from pathlib import Path
+import re
+import subprocess
+import zipfile
+
+D = Path(__file__).resolve().parent.parent
+SOURCE = '44df9d0fd36aecaa22613e9aa73c5c7d4ed94416'
+BUILD = '43590339873'
+CERT = 'fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94'
+ROOT = D / 'download-44df9d0' / 'artifact'
+OUT = D / 'download-44df9d0' / 'actual-binary-verification-continuation'
+OUT.mkdir(exist_ok=False)
+assert (ROOT / 'dist/source-sha.txt').read_text().strip() == SOURCE
+run = json.loads((D / 'download-44df9d0/run.json').read_bytes())
+assert str(run['databaseId']) == BUILD and run['headSha'] == SOURCE
+assert run['status'] == 'completed' and run['conclusion'] == 'success'
+
+
+def invoke(command, name):
+    result = subprocess.run(command, capture_output=True, text=True, timeout=70)
+    (OUT / (name + '.txt')).write_text(result.stdout + result.stderr)
+    (OUT / (name + '.exit')).write_text(str(result.returncode) + '\n')
+    result.check_returncode()
+    return result.stdout
+
+
+rows = []
+for name, package in [('elcton-phone-probe.apk', 'com.hcbiu.elcton'),
+                      ('elcton-ui-tests.apk', 'com.hcbiu.elcton.test')]:
+    apk = ROOT / 'dist' / name
+    badging = invoke(['aapt2', 'dump', 'badging', str(apk)], name + '.manifest')
+    match = re.search(r"package: name='([^']+)' versionCode='([^']*)' versionName='([^']*)'", badging)
+    assert match and match[1] == package
+    if package == 'com.hcbiu.elcton':
+        assert match.groups() == (package, '11', '0.2.9')
+    else:
+        # AGP's instrumentation APK has no versionCode/Name. This is not the release APK.
+        # Preserve original empty fields, and bind actual runner/target, artifact, and signer.
+        assert match.groups() == (package, '', '')
+        tree = invoke(['aapt2', 'dump', 'xmltree', str(apk), '--file', 'AndroidManifest.xml'], name + '.xmltree')
+        assert 'E: instrumentation ' in tree
+        assert 'androidx.test.runner.AndroidJUnitRunner' in tree
+        assert re.search(r'android:targetPackage[^\n]*="com\.hcbiu\.elcton"', tree)
+    signer = invoke(['java', '-Xmx256m', '-jar', str(Path.home() / 'rb_build/bt/android-14/lib/apksigner.jar'),
+                     'verify', '--verbose', '--print-certs', str(apk)], name + '.signer')
+    cert = re.search(r'certificate SHA-256 digest: ([0-9a-fA-F]+)', signer)
+    assert cert and cert[1].lower() == CERT
+    assert 'Number of signers: 1' in signer
+    assert 'Verified using v2 scheme (APK Signature Scheme v2): true' in signer
+    with zipfile.ZipFile(apk) as archive:
+        assert archive.testzip() is None
+    rows.append({'name': name, 'package': package, 'versionCode': match[2], 'versionName': match[3],
+                 'bytes': apk.stat().st_size, 'sha256': hashlib.sha256(apk.read_bytes()).hexdigest(),
+                 'signer_sha256': CERT, 'v2': True, 'zip_crc': True})
+
+receipt = {'passed': True, 'source_sha': SOURCE, 'build_run': BUILD,
+           'scope': 'actual main/test APK signature/manifest/CRC/hash; no device actions; NOT cloud PASS',
+           'test_apk_version_fields': 'actually empty in AGP artifact; NOT 0.2.9/code11',
+           'earlier_observer_failure': 'actual-binary-verification wrongly expected release versions in test APK; original retained',
+           'rows': rows}
+(OUT / 'receipt.json').open('x').write(json.dumps(receipt, indent=2) + '\n')
+print(json.dumps(receipt))

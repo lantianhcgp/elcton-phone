@@ -1,0 +1,12 @@
+{
+  "qa/emulator_install_and_tour.py": {
+    "sha256": "aa5c11cd5dc465753d5307a7b67010923aebe3e5254f46e3d78fd7d3c88def39",
+    "bytes": 18168,
+    "path": "qa/release-029/evidence/resume-1720/resume-third/r9/emulator_install_and_tour.py.first-observer.original"
+  },
+  "qa/test_cloud_observer.py": {
+    "sha256": "7ffed53bf2f649effb412f5c539c0e96c75cc8955fec0739384e13d3110ad1af",
+    "bytes": 7694,
+    "path": "qa/release-029/evidence/resume-1720/resume-third/r9/test_cloud_observer.py.first-observer.original"
+  }
+}

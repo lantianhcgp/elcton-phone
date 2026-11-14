@@ -1,0 +1,10 @@
+{
+  "scope": "exact output root replacement at index-open boundary via in-memory Path.open wrapper; implementation unchanged; synthetic local dirs only",
+  "pinned_copy_retained_under_original": true,
+  "new_output_root_is_symlink": true,
+  "index_created_outside_pinned_output": true,
+  "index_bytes": 134,
+  "index_sha256": "95a0303cc29e6cd86e34846a7402594c0cb40b92cb1efd312b8bc0b270bb6a7a",
+  "index_records": 1,
+  "actual_adb_or_kernel_calls": 0
+}

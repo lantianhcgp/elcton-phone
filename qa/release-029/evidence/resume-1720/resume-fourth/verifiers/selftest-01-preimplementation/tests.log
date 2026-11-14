@@ -1,0 +1,35 @@
+test_01_real_diag_green (__main__.CloudTests.test_01_real_diag_green) ... FAIL
+test_02_real_full_red_preserved (__main__.CloudTests.test_02_real_full_red_preserved) ... FAIL
+test_03_minimal_negatives (__main__.CloudTests.test_03_minimal_negatives) ... FAIL
+
+======================================================================
+FAIL: test_01_real_diag_green (__main__.CloudTests.test_01_real_diag_green)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/test_verify_cloud.py", line 37, in test_01_real_diag_green
+    self.assertTrue((HERE / 'verify_cloud.py').is_file(), 'Missing independent verifier implementation')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing independent verifier implementation
+
+======================================================================
+FAIL: test_02_real_full_red_preserved (__main__.CloudTests.test_02_real_full_red_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/test_verify_cloud.py", line 43, in test_02_real_full_red_preserved
+    self.assertTrue((HERE / 'verify_cloud.py').is_file(), 'Missing independent verifier implementation')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing independent verifier implementation
+
+======================================================================
+FAIL: test_03_minimal_negatives (__main__.CloudTests.test_03_minimal_negatives)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/test_verify_cloud.py", line 53, in test_03_minimal_negatives
+    self.assertTrue((HERE / 'verify_cloud.py').is_file(), 'Missing independent verifier implementation')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing independent verifier implementation
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+FAILED (failures=3)

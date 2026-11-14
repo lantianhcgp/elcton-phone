@@ -1,0 +1,25 @@
+{
+  "local_host": {
+    "ok": true,
+    "mode": "actual-kotlin-host",
+    "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+    "assertions": 3784,
+    "clients": [
+      "urllib",
+      "curl"
+    ],
+    "write_eof_transport": {
+      "status": "supported",
+      "excluded_checks": []
+    },
+    "all_raw_checks_passed": true,
+    "token": "REDACTED"
+  },
+  "real_client_tests": [
+    "content_length_post_survives_eof_closing_relay",
+    "direct_controls_with_and_without_write_eof_use_real_server",
+    "url_mode_really_runs_curl_and_urllib",
+    "url_mode_reports_unsupported_write_eof_without_dropping_other_checks"
+  ],
+  "scope": "Existing local JVM raw logs, not Android/physical proof"
+}

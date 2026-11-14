@@ -1,0 +1,52 @@
+test_index_leaf_symlink_rejected_without_external_write (__main__.CrashContainment.test_index_leaf_symlink_rejected_without_external_write) ... ok
+test_index_written_only_through_pinned_output_fd (__main__.CrashContainment.test_index_written_only_through_pinned_output_fd) ... FAIL
+test_output_ancestor_symlink_rejected (__main__.CrashContainment.test_output_ancestor_symlink_rejected) ... FAIL
+test_regular_copy_index_and_payload_remain_exact (__main__.CrashContainment.test_regular_copy_index_and_payload_remain_exact) ... ok
+test_source_ancestor_symlink_rejected (__main__.CrashContainment.test_source_ancestor_symlink_rejected) ... FAIL
+
+======================================================================
+FAIL: test_index_written_only_through_pinned_output_fd (__main__.CrashContainment.test_index_written_only_through_pinned_output_fd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py", line 93, in test_index_written_only_through_pinned_output_fd
+    self.assertEqual(list(outside.iterdir()), [], 'Observer index escaped to replaced lexical output')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [PosixPath('/data/data/com.termux/files/us[44 chars]on')] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+PosixPath('/data/data/com.termux/files/usr/tmp/tmp6zjtjbbp/outside/crashdata-index.json')
+
+- [PosixPath('/data/data/com.termux/files/usr/tmp/tmp6zjtjbbp/outside/crashdata-index.json')]
++ [] : Observer index escaped to replaced lexical output
+
+======================================================================
+FAIL: test_output_ancestor_symlink_rejected (__main__.CrashContainment.test_output_ancestor_symlink_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py", line 50, in test_output_ancestor_symlink_rejected
+    self.assertEqual(list((outside / 'output').iterdir()), [], 'Observer wrote through output ancestor symlink')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [PosixPath('/data/data/com.termux/files/us[147 chars]on')] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+PosixPath('/data/data/com.termux/files/usr/tmp/tmp3spqd6b7/outside/output/emulator-crashdata')
+
++ []
+- [PosixPath('/data/data/com.termux/files/usr/tmp/tmp3spqd6b7/outside/output/emulator-crashdata'),
+-  PosixPath('/data/data/com.termux/files/usr/tmp/tmp3spqd6b7/outside/output/crashdata-index.json')] : Observer wrote through output ancestor symlink
+
+======================================================================
+FAIL: test_source_ancestor_symlink_rejected (__main__.CrashContainment.test_source_ancestor_symlink_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py", line 64, in test_source_ancestor_symlink_rejected
+    self.assertFalse((output / 'emulator-crashdata/emu-crash-normal.db').exists(), 'Observer read through source ancestor symlink')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : Observer read through source ancestor symlink
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.020s
+
+FAILED (failures=3)

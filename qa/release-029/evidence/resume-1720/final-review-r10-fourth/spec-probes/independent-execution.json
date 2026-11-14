@@ -1,0 +1,219 @@
+{
+  "started_at": "2026-11-14T21:00:33.710265+08:00",
+  "actual_adb_calls": 0,
+  "failures": [
+    {
+      "probe": "crash_boundary",
+      "type": "AttributeError",
+      "message": "module 'os' has no attribute 'link'",
+      "traceback": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/run_probes.py\", line 129, in record\n    try:results[name]=fn()\n                      ~~^^\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/run_probes.py\", line 140, in <lambda>\n    record('crash_boundary',lambda:[crash_probe(m) for m in ('normal','source-leaf','source-dir','source-root','source-hardlink','output-root','output-dir','output-leaf','unapproved-log')])\n                                    ~~~~~~~~~~~^^^\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/run_probes.py\", line 110, in crash_probe\n    elif mode=='source-hardlink':os.link(secret,root/'emu-crash-hardlink.db')\n                                 ^^^^^^^\nAttributeError: module 'os' has no attribute 'link'. Did you mean: 'unlink'?\n"
+    }
+  ],
+  "observer15": {
+    "discovered": 15,
+    "tests_run": 15,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "passed": true
+  },
+  "wire_io": [
+    {
+      "exit": 0,
+      "fault": "open",
+      "baseline_equal": true,
+      "result": {
+        "returned": true,
+        "proof_bytes": "696e646570656e64656e74207375636365737366756c2063726173682d66726565207061796c6f6164",
+        "error_text": null
+      }
+    },
+    {
+      "exit": 0,
+      "fault": "close",
+      "baseline_equal": true,
+      "result": {
+        "returned": true,
+        "proof_bytes": "696e646570656e64656e74207375636365737366756c2063726173682d66726565207061796c6f6164",
+        "error_text": null
+      }
+    },
+    {
+      "exit": 0,
+      "fault": "directory",
+      "baseline_equal": true,
+      "result": {
+        "returned": true,
+        "proof_bytes": "696e646570656e64656e74207375636365737366756c2063726173682d66726565207061796c6f6164",
+        "error_text": null
+      }
+    },
+    {
+      "exit": 1,
+      "fault": "open",
+      "baseline_equal": true,
+      "result": {
+        "returned": false,
+        "proof_bytes": null,
+        "error_text": "original tar failure"
+      }
+    },
+    {
+      "exit": 1,
+      "fault": "close",
+      "baseline_equal": true,
+      "result": {
+        "returned": false,
+        "proof_bytes": null,
+        "error_text": "original tar failure"
+      }
+    },
+    {
+      "exit": 1,
+      "fault": "directory",
+      "baseline_equal": true,
+      "result": {
+        "returned": false,
+        "proof_bytes": null,
+        "error_text": "original tar failure"
+      }
+    }
+  ],
+  "child_io": [
+    {
+      "mode": "receipt",
+      "requested_exit": 0,
+      "signal": null,
+      "native_returncode": 0,
+      "elapsed_seconds": 0.2280047917738557,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "receipt",
+      "requested_exit": 7,
+      "signal": null,
+      "native_returncode": 7,
+      "elapsed_seconds": 0.2391338017769158,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "receipt-close",
+      "requested_exit": 0,
+      "signal": null,
+      "native_returncode": 0,
+      "elapsed_seconds": 0.22241828124970198,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "receipt-close",
+      "requested_exit": 7,
+      "signal": null,
+      "native_returncode": 7,
+      "elapsed_seconds": 0.2414301042445004,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "thread",
+      "requested_exit": 0,
+      "signal": null,
+      "native_returncode": 0,
+      "elapsed_seconds": 0.22379562491551042,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "thread",
+      "requested_exit": 7,
+      "signal": null,
+      "native_returncode": 7,
+      "elapsed_seconds": 0.22567026084288955,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "directory",
+      "requested_exit": 0,
+      "signal": null,
+      "native_returncode": 0,
+      "elapsed_seconds": 0.22349083283916116,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "directory",
+      "requested_exit": 7,
+      "signal": null,
+      "native_returncode": 7,
+      "elapsed_seconds": 0.22597260400652885,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    }
+  ],
+  "native_signals": [
+    {
+      "mode": "native",
+      "requested_exit": 0,
+      "signal": 15,
+      "native_returncode": -15,
+      "elapsed_seconds": 0.19479151023551822,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "native",
+      "requested_exit": 0,
+      "signal": 13,
+      "native_returncode": -13,
+      "elapsed_seconds": 0.1838493230752647,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    {
+      "mode": "native",
+      "requested_exit": 0,
+      "signal": 9,
+      "native_returncode": -9,
+      "elapsed_seconds": 0.20966770919039845,
+      "marker": "X",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    }
+  ],
+  "cloud_guard": {
+    "nonCI_zero_adb": true,
+    "mock_cases": [
+      {
+        "accepted": true,
+        "expected": true
+      },
+      {
+        "accepted": false,
+        "expected": false
+      },
+      {
+        "accepted": false,
+        "expected": false
+      },
+      {
+        "accepted": false,
+        "expected": false
+      }
+    ]
+  },
+  "passed": false,
+  "finished_at": "2026-11-14T21:00:38.332446+08:00"
+}

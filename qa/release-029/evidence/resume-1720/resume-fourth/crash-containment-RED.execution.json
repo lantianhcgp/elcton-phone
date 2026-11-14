@@ -1,0 +1,6 @@
+{
+  "returncode": 1,
+  "script_sha256": "dded3e12036f4b24996e17961c231fa0fa4c06c4131b310a617edd4039d1c5b3",
+  "observer_sha256": "ed83e7f8812f732151dc71ff90b0f6711a88bd1730f7146443046da3dc2d86e1",
+  "scope": "real local filesystem tests, no ADB/physical actions"
+}

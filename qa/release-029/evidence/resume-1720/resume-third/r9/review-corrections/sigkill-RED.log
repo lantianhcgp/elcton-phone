@@ -1,0 +1,16 @@
+test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) ... 
+  test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) (signal=<Signals.SIGKILL: 9>) ... FAIL
+
+======================================================================
+FAIL: test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) (signal=<Signals.SIGKILL: 9>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 155, in test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals
+    self.assertEqual(direct, -sig)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != -9
+
+----------------------------------------------------------------------
+Ran 1 test in 0.601s
+
+FAILED (failures=1)

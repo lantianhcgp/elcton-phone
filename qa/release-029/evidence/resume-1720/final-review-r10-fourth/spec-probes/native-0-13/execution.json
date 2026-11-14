@@ -1,0 +1,10 @@
+{
+  "mode": "native",
+  "requested_exit": 0,
+  "signal": 13,
+  "native_returncode": -13,
+  "elapsed_seconds": 0.1838493230752647,
+  "marker": "X",
+  "stdout_bytes": 0,
+  "stderr_bytes": 0
+}

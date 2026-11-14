@@ -1,0 +1,1 @@
+{"passed": true, "source_mutation_rejected": true, "passed_false_rejected": true, "keepalive_false_rejected": true, "one_pixel_complete_compare_rejected": true, "one_pixel_original_thresholds_passed": true, "pixel": [138, 1521], "before_rgb": [240, 234, 247], "after_rgb": [241, 234, 247], "scope": "in-memory/temp host fixtures, not universal 1px threshold rejection"}

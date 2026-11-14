@@ -1,0 +1,148 @@
+{
+  "conclusion": "",
+  "databaseId": 43590641863,
+  "headSha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "jobs": [
+    {
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "databaseId": 132434411208,
+      "name": "ui",
+      "startedAt": "2026-11-14T11:34:13Z",
+      "status": "in_progress",
+      "steps": [
+        {
+          "completedAt": "2026-11-14T11:34:17Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-14T11:34:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:34:19Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-11-14T11:34:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:34:19Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-11-14T11:34:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:34:19Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-java@v4",
+          "number": 4,
+          "startedAt": "2026-11-14T11:34:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:34:34Z",
+          "conclusion": "success",
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "number": 5,
+          "startedAt": "2026-11-14T11:34:19Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:34:36Z",
+          "conclusion": "success",
+          "name": "Download the exact signed APK",
+          "number": 6,
+          "startedAt": "2026-11-14T11:34:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:34:50Z",
+          "conclusion": "success",
+          "name": "Display dependencies",
+          "number": 7,
+          "startedAt": "2026-11-14T11:34:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:36:11Z",
+          "conclusion": "success",
+          "name": "Local production-JVM HTTP and real-client regression (not Android evidence)",
+          "number": 8,
+          "startedAt": "2026-11-14T11:34:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:36:11Z",
+          "conclusion": "success",
+          "name": "Enable KVM",
+          "number": 9,
+          "startedAt": "2026-11-14T11:36:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-14T11:36:12Z",
+          "conclusion": "success",
+          "name": "Start and verify X display",
+          "number": 10,
+          "startedAt": "2026-11-14T11:36:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Exercise real APK without a paired device",
+          "number": 11,
+          "startedAt": "2026-11-14T11:36:12Z",
+          "status": "in_progress"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 12,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "number": 21,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run actions/setup-java@v4",
+          "number": 22,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 23,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        },
+        {
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "name": "Post Run actions/checkout@v4",
+          "number": 24,
+          "startedAt": "0001-01-01T00:00:00Z",
+          "status": "pending"
+        }
+      ],
+      "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43590641863/job/132434411208"
+    }
+  ],
+  "status": "in_progress",
+  "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43590641863"
+}

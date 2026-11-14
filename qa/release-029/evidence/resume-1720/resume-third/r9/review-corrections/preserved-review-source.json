@@ -1,0 +1,17 @@
+{
+  "qa/cloud_emulator_observer.py": {
+    "bytes": 6607,
+    "sha256": "5d5a9abbd6445924f731607d05a06610e89b68db02c361fee3309c09c5952aaf",
+    "copy": "qa/release-029/evidence/resume-1720/resume-third/r9/review-corrections/cloud_emulator_observer.py.reviewed-before.original"
+  },
+  "qa/test_cloud_observer.py": {
+    "bytes": 8076,
+    "sha256": "d5832ab5030c101752b93875395d675664c7ad2dac82261c5d72285b0fb36fe2",
+    "copy": "qa/release-029/evidence/resume-1720/resume-third/r9/review-corrections/test_cloud_observer.py.reviewed-before.original"
+  },
+  "qa/emulator_install_and_tour.py": {
+    "bytes": 18197,
+    "sha256": "cadab216cdeab5a31b06a2121ecb753a38549818b85a3954c1d9425a652ba409",
+    "copy": "qa/release-029/evidence/resume-1720/resume-third/r9/review-corrections/emulator_install_and_tour.py.reviewed-before.original"
+  }
+}

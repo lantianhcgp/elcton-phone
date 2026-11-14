@@ -1,0 +1,10 @@
+{
+  "mode": "receipt-close",
+  "requested_exit": 0,
+  "signal": null,
+  "native_returncode": 0,
+  "elapsed_seconds": 0.22241828124970198,
+  "marker": "X",
+  "stdout_bytes": 0,
+  "stderr_bytes": 0
+}

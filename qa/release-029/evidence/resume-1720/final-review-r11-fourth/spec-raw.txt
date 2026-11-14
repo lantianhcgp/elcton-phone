@@ -1,0 +1,452 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "severity": "nonblocking",
+      "finding": "观测及finalizer仍是best-effort；1秒daemon join不保证内核采集/receipt完整。缺件只可unknown/pending，不能用child exit0、旧diagnostics绿或HOST绿替代新full及真机验收。"
+    }
+  ],
+  "summary": "R11 SPEC=true：R10真实祖先symlink与index TOCTOU拒绝项已在原未改安全5例和当前安全5例中闭合；5资源帽例及15原observer隔离例全绿，原25候选例零skip，另原安全5例/两索引分支通过。独立核130/130、37/37与549989B完整累计diff逐字节一致，R10仅observer改动+两新增测试，54旧测试与全部产品同bytes。经原R8双raw/closure及R3-R7产品字节链继承有界业务覆盖，不伪称全产品逐行重审。原R10两false/首RED全部不改；新CI/两云端/真机10min仍pending，本结论不是Android或交付PASS。",
+  "reviewed_manifest_sha256": "856a6c8f94f63a47ec8fdf0192015d01ccc59d138c14bbcafd5cd58279d74534",
+  "diff_sha256": "0173d7ecf6e7bc92cfe2d359e0cb6f8630e5641cb68a9b6ea0079e06648ddd14",
+  "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "bindings": {
+    "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "product_files": 37,
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "reviewed_files": 130,
+    "reviewed_manifest_sha256": "856a6c8f94f63a47ec8fdf0192015d01ccc59d138c14bbcafd5cd58279d74534",
+    "diff_sha256": "0173d7ecf6e7bc92cfe2d359e0cb6f8630e5641cb68a9b6ea0079e06648ddd14",
+    "diff_bytes": 549989,
+    "scope": "exact candidate identity only; independent approval pending",
+    "actual_head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+    "canonical_encoding": "sha256(json.dumps(map,sort_keys=True,separators=(comma,colon),ensure_ascii=False).encode UTF-8), no newline; compact != pretty file SHA",
+    "prepare_file_sha256": "2058311775e0d88010da3bf140d8d40179f663b29e4ee2d992d2fcb409fed3f4",
+    "snapshot_file_hashes": {
+      "prepare.json": {
+        "bytes": 622,
+        "sha256": "2058311775e0d88010da3bf140d8d40179f663b29e4ee2d992d2fcb409fed3f4"
+      },
+      "candidate-before.json": {
+        "bytes": 128182,
+        "sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042"
+      },
+      "candidate-after.json": {
+        "bytes": 128182,
+        "sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042"
+      },
+      "reviewed-manifest.json": {
+        "bytes": 15040,
+        "sha256": "0925e7c4f3169f3e99b7a9404e344adc83220eb0273d7b8c382652bc83d7f218"
+      },
+      "product-manifest.json": {
+        "bytes": 4574,
+        "sha256": "1213816239b27625299e016df0be176dad8971db2d45713217bcd28ec358cae6"
+      },
+      "current.diff": {
+        "bytes": 549989,
+        "sha256": "0173d7ecf6e7bc92cfe2d359e0cb6f8630e5641cb68a9b6ea0079e06648ddd14"
+      }
+    },
+    "candidate_full_before_after_git_checks": true,
+    "candidate_guards_verified": {
+      "guarded_source_sha256": 19,
+      "immutable_source_sha256": 16,
+      "lineage_sha256": 4
+    },
+    "inventory_independently_regenerated_exact": true,
+    "all_130_live_hashes_match": true,
+    "all_37_live_hashes_match": true,
+    "complete_live_diff_rebuilt_bytes_equal": true,
+    "manifested_untracked_append": [
+      "qa/test_cloud_observer_crash_containment.py",
+      "qa/test_cloud_observer_crash_limits.py",
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "complete_diff_command": "git diff --no-ext-diff e034de2f924dd6d96e31caa8e5a62e52474de718 -- <all 130 sorted reviewed paths>; append each manifested untracked git diff --no-ext-diff --no-index -- /dev/null path in git ls-files order",
+    "freeze_rechecked_immediately_before_exclusive_write": true,
+    "final_binding_evidence_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r11-fourth/spec-probes/binding-immediate-before-raw.json",
+    "final_binding_evidence_sha256": "e50ae2ec8594da7a564a87045c026781c27fcb002b66ae55c0d25762c789fa7b"
+  },
+  "coverage": {
+    "mode": "R8原raw完整覆盖链继承 + 完整R8以来九个QA新改section语义审 + 全130输入身份绑定；不是130文件/37产品全逐行重新审。",
+    "requirements_read": [
+      "qa/release-029/SPEC.md全文",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md全文",
+      "qa/release-029/RESUME-CHANGES.md全文",
+      "qa/release-029/evidence/resume-1720/resume-fourth/r11/PLAN.md全文"
+    ],
+    "fully_read_changed_and_new": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/cloud_emulator_observer.py",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md",
+      "qa/test_cloud_observer.py",
+      "qa/test_cloud_observer_crash_containment.py",
+      "qa/test_cloud_observer_crash_limits.py",
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "full_changed_sections": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r11-fourth/spec-probes/changed-since-r8.diff",
+      "bytes": 65262,
+      "sha256": "68aedcea6ea00d1a804b9cd1dee2c03812feacf2800d8445a42eb5313e249a38"
+    },
+    "r8_original_axes": {
+      "spec": {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r8/spec-raw.txt",
+        "sha256": "7e975f14343fa3be42d1828f986ea5f0240136cc178cb46b243f74044faa15ed",
+        "passed": true,
+        "summary": "R8 SPEC夹具差分审查通过，继承经核验的R7产品覆盖链；不是重新逐行全审125文件，也不是AndroidPASS。独立全量身份核验125/125与37/37，重建完整499323字节累计diff。仅两处返回命令补MAIN/LAUNCHER，整文件逆恢复与旧断言/deadline/文件检查不变；4例真实本地运行通过。原两云端失败保留，新同源APK及两云端完整通过仍待验收。"
+      },
+      "standards": {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r8/standards-raw.txt",
+        "sha256": "cabae561fffd0896a85c5e5fbfba6e373f11b9f647dc7e727ed773fee58c0298",
+        "passed": true,
+        "summary": "R8 STANDARDS passes the complete latest QA delta with byte-verified inherited coverage. Rehashed all 125 reviewed and 37 product inputs and reproduced the full 499323-byte cumulative diff. All 37 product files equal R7 and HEAD9e300f9; only two cloud return command literals add MAIN/LAUNCHER, two attribution documents change and one four-case fixture is added. Whole-file reversal equals the archived and git-pinned original. Independently ran all four fixture cases successfully and twelve in-memory negative probes rejected missing/wrong/duplicate intent identity, force/relaunch flags and unrelated assertion/deadline/file-identity edits. AOSP API33/34 task-reuse source supports the correction under the retained task; no real R8 Android reuse or full acceptance is claimed. Original diagnostics/full RED remains preserved; this is NOT Android PASS."
+      }
+    },
+    "r8_dual_closure_sha256": "b5a98ae824ec23b9f28e1826ca95f979b600c5925cfdb795c4fe1ef87af68f65",
+    "r3_r7_product_raw_binding_chain": [
+      {
+        "round": 3,
+        "product_git_commit": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+        "product_files": 37,
+        "all_product_git_blobs_match": true,
+        "raws": {
+          "spec": {
+            "sha256": "e46e56c166c3385cba5b811d5478f844a90b6e79bc771bbe4e9d20366a21b1f4",
+            "passed": false,
+            "closure_hash_verified": false
+          },
+          "standards": {
+            "sha256": "47f7b55bdf259129f3eb0daa8dd2634048813cddff6ccd9051503e9377730f8e",
+            "passed": true,
+            "closure_hash_verified": false
+          }
+        }
+      },
+      {
+        "round": 4,
+        "product_git_commit": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+        "product_files": 37,
+        "all_product_git_blobs_match": true,
+        "raws": {
+          "spec": {
+            "sha256": "56b938fcd092a746b985c4a0fca198dc2f592f185a7798bfa34c3c79d651f680",
+            "passed": true,
+            "closure_hash_verified": true
+          },
+          "standards": {
+            "sha256": "bf08d02dcf5f29b638dcb52c988f90e70af54add2b6d8d7dd9112c17615a8c58",
+            "passed": true,
+            "closure_hash_verified": true
+          }
+        }
+      },
+      {
+        "round": 5,
+        "product_git_commit": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+        "product_files": 37,
+        "all_product_git_blobs_match": true,
+        "raws": {
+          "spec": {
+            "sha256": "61b0f64e9e02573ca80cf82276a077733a5a47afdfc4bf071dd3c2ee88176ac4",
+            "passed": true,
+            "closure_hash_verified": true
+          },
+          "standards": {
+            "sha256": "fbafa1c16a0659be3b15a41cdfe2ce3d67548f1a64aa78bfcaf6088aa0895cf9",
+            "passed": true,
+            "closure_hash_verified": true
+          }
+        }
+      },
+      {
+        "round": 6,
+        "product_git_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+        "product_files": 37,
+        "all_product_git_blobs_match": true,
+        "raws": {
+          "spec": {
+            "sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+            "passed": true,
+            "closure_hash_verified": true
+          },
+          "standards": {
+            "sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c",
+            "passed": true,
+            "closure_hash_verified": true
+          }
+        }
+      },
+      {
+        "round": 7,
+        "product_git_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+        "product_files": 37,
+        "all_product_git_blobs_match": true,
+        "raws": {
+          "spec": {
+            "sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+            "passed": true,
+            "closure_hash_verified": true
+          },
+          "standards": {
+            "sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7",
+            "passed": true,
+            "closure_hash_verified": true
+          }
+        }
+      }
+    ],
+    "inherited_semantic_limit": "R3原有界共享PhoneRuntime/15工具确认、revision/epoch/陈旧回调、STOP/拒绝、原4诊断、课表/取件/协议；R3 SPEC原false保留，R4闭合QA两项，R5/R6产品精确小修，R7/R8 QA修。不得把hash检查等同本轮全产品逐行审。",
+    "r8_unchanged_entries": 121,
+    "r8_changed_entries": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "r8_added_entries": [
+      "qa/cloud_emulator_observer.py",
+      "qa/test_cloud_observer.py",
+      "qa/test_cloud_observer_crash_containment.py",
+      "qa/test_cloud_observer_crash_limits.py",
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "r8_removed_entries": [],
+    "all_37_product_manifest_full_bytes_equal_r8": true,
+    "all_37_product_bytes_equal_HEAD": true,
+    "r10_delta_changed": [
+      "qa/cloud_emulator_observer.py"
+    ],
+    "r10_delta_added": [
+      "qa/test_cloud_observer_crash_containment.py",
+      "qa/test_cloud_observer_crash_limits.py"
+    ],
+    "old_test_files_byte_identical": 54,
+    "harvest_whole_file_inverse_exact": true,
+    "workflow_single_wrapper_inverse_exact": true,
+    "security_original_methods_and_assertions_ast_identical": true
+  },
+  "r10_findings_closed": [
+    {
+      "ids": [
+        "R10-SPEC-SEC-01",
+        "R10-STANDARDS-S1"
+      ],
+      "status": "closed_in_precise_tested_scope",
+      "source": "qa/cloud_emulator_observer.py:102-126,129-136,149-156,232-239",
+      "evidence": "逐组件O_PATH/O_DIRECTORY/O_NOFOLLOW可信根打开source/output；原5未改测试真实实跑通过，包含source/output祖先symlink、output固定fd后rename+symlink、index叶symlink、正常exact payload。所有index包括source-absent和budget经pinned output fd O_CREAT|O_EXCL|O_NOFOLLOW 0600；另source-absent同race及既有index不覆盖实跑通过。"
+    },
+    {
+      "ids": [
+        "R10-STANDARDS-L1"
+      ],
+      "status": "closed_in_precise_tested_scope",
+      "source": "qa/cloud_emulator_observer.py:21-26,158-229",
+      "evidence": "scan256/copy64/depth8/index32768B/file32MiB/total64MiB；lazy scandir，budget跨递归聚合，any overflow返回True向外传播停止；索引预留在源read和复制之前。5资源真实文件例：257empty、257ignored+poison listdir、20层深度、缩帽500 index、缩帽12 total全部绿。64MiB/32MiB为静态常量及有界读取核验，未冒称新写64MiB压力文件。"
+    },
+    {
+      "ids": [
+        "R10-STANDARDS-N1"
+      ],
+      "status": "addressed_static",
+      "evidence": "叶prestat及fstat均nlink==1，同时REG/dev/ino校验；未声称native hardlink竞态动态复现。"
+    }
+  ],
+  "execution": {
+    "focused_evidence_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r11-fourth/spec-probes/focused-execution.json",
+    "focused_evidence_sha256": "0e6fa81ab07309e54c7bf304d6a1270779a3e51c9b230c9634124eed70a43077",
+    "original_tests": [
+      {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer.py",
+        "source_sha256": "eab122b814529411e327d2126482d58b0413bae19968b6b123f4388ecc946758",
+        "count": 7,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "passed": true,
+        "seconds": 0.1913226037286222,
+        "log_sha256": "d9712edf320a0e463be20c389ec87011424e415447a0d42fecc2f844d5e2dbfe",
+        "failed_ids": []
+      },
+      {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py",
+        "source_sha256": "ae9f1eb7966d4d80f2848aa8681603428722dac633878777e773e03314c7e99b",
+        "count": 8,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "passed": true,
+        "seconds": 1.8481276552192867,
+        "log_sha256": "af7264dccee12796595dc59ce9b6c77b4ae0bfa0158a909c809b694f97c88d4a",
+        "failed_ids": []
+      },
+      {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_containment.py",
+        "source_sha256": "a7cb8959cf3d567e9429860697f8cb74a115c09b22bdb938b65cdd35b48767eb",
+        "count": 5,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "passed": true,
+        "seconds": 0.021138334181159735,
+        "log_sha256": "3d69255a864dee52d935b8c4223ca7e67150f07dc84d4a404ba20a1dde26ab1f",
+        "failed_ids": []
+      },
+      {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py",
+        "source_sha256": "32ecab5ba21a0658345143d7f844ad24dc4783c1bb073239d0196529809bce6e",
+        "count": 5,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "passed": true,
+        "seconds": 0.08714932296425104,
+        "log_sha256": "86f9ee145ba25d8fd993d94dc68b9677565d33b0475a5c22538e41ecb2bc7e4f",
+        "failed_ids": []
+      },
+      {
+        "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py",
+        "source_sha256": "dded3e12036f4b24996e17961c231fa0fa4c06c4131b310a617edd4039d1c5b3",
+        "count": 5,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "passed": true,
+        "seconds": 0.014990051742643118,
+        "log_sha256": "c9b42e0160ae77af694bc79817af7743e90146198e9ffef8cc7277cb8105605e",
+        "failed_ids": []
+      }
+    ],
+    "extra_indices": {
+      "source_absent_index_race_reached": true,
+      "outside_writes": 0,
+      "index_written_to_pinned_fd": true,
+      "index_mode": "0600",
+      "budget": {
+        "scanned_entries": 0,
+        "copied_files": 0,
+        "content_bytes": 0,
+        "max_depth": 0,
+        "stopped_reason": "source-absent",
+        "limits": {
+          "scan": 256,
+          "copy": 64,
+          "depth": 8,
+          "index_bytes": 32768,
+          "file_bytes": 33554432,
+          "total_bytes": 67108864
+        }
+      },
+      "existing_index_exclusive_rejected_without_overwrite": true
+    },
+    "parent_complete_current_host": {
+      "passed": true,
+      "checked_at": "2026-11-14T21:20:11.445528+08:00",
+      "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+      "host_tests": 152,
+      "python_tests": 133,
+      "python_skipped": 0,
+      "http_report": {
+        "ok": true,
+        "mode": "actual-kotlin-host",
+        "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+        "assertions": 3784,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "supported",
+          "excluded_checks": []
+        },
+        "all_raw_checks_passed": true,
+        "token": "REDACTED"
+      },
+      "runtime_tests": 1,
+      "termux": {
+        "count": 15,
+        "http_status": 200,
+        "listener_closed": true
+      },
+      "inputs_unchanged": true,
+      "inputs_manifest_sha256": "640d0ff3ce6c3666ca0d8185560f247c7272779adb456cebd7e224baa08ada58",
+      "scope": "complete current HOST gates only; NOT Android CI/cloud/physical WE acceptance"
+    },
+    "parent_gate_log_sha256": {
+      "host": "bf4365da5aa9529fad6b7713e495a9e8e977d9eab8b28f5321c45bf55a0e8c2b",
+      "python": "c5deaf02a771a33c72f62763bf3806c4aff8aad4ab5e8c5544a260b85e4b0138",
+      "http": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+      "runtime": "9641eafdd5041f6975dbde12a062329e7eda308a748c60a038d729f552525103",
+      "termux": "4379cfc2d089a5be12388235827018332faa83e7ebf8cc4b60b53d386c69485f"
+    },
+    "gate_inputs_live_verified": 152,
+    "parent_gate_totals_independently_parsed": true
+  },
+  "failure_preservation": {
+    "r10_original_false_raws": {
+      "spec": {
+        "sha256": "a5cfd160720bcfec766ca18d4d25b3b13e125bbb96db0377643f7cee1c1e0d56",
+        "passed": false
+      },
+      "standards": {
+        "sha256": "f72834ba7227658b4b4fc90c96c49d7e4eed451a644717679699bca14c3c096a",
+        "passed": false
+      }
+    },
+    "before_manifest_originals_verified": true,
+    "first_security_red": {
+      "returncode": 1,
+      "script_sha256": "dded3e12036f4b24996e17961c231fa0fa4c06c4131b310a617edd4039d1c5b3",
+      "observer_sha256": "ed83e7f8812f732151dc71ff90b0f6711a88bd1730f7146443046da3dc2d86e1",
+      "scope": "real local filesystem tests, no ADB/physical actions",
+      "stderr_sha256": "dc2284fb9b17526a7b7cf009a29dc61d8eade23a494b8a768d98a63459d440d1",
+      "actual_tests": 5,
+      "actual_failures": 3
+    },
+    "limits_first_red": {
+      "exit_code": 1,
+      "log": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/r11/limits-first-RED.log",
+      "sha256": "afdb2ba462d0e440a7918a412fd2f135e3b0b7cadbe0963c2fdbab55d12f2839",
+      "test_sha256": "32ecab5ba21a0658345143d7f844ad24dc4783c1bb073239d0196529809bce6e"
+    },
+    "focused_after_real_PermissionError_and_import_error_retained": true,
+    "focused_opath_all_five_original_receipts_and_log_hashes_verified": true
+  },
+  "acceptance_limits": {
+    "code_spec_gate_only": true,
+    "android_pass": false,
+    "release_acceptance": false,
+    "fresh_exact_build_and_both_cloud_suites": "pending",
+    "physical_MCP_Bluetooth_MIUI_ten_minutes": "pending",
+    "original_full_43590641863": "RED retained; old diagnostics GREEN cannot replace it",
+    "version": "0.2.9/code11 product bytes unchanged",
+    "certificate_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94; no signing/build/package changes or new signing verification in this axis",
+    "push_allowed_by_this_axis_alone": false
+  },
+  "issues_encountered": [
+    "独占本轴绑定reader两次历史JSON位置KeyError，未触产品/候选；按R8原SPEC顶层及STANDARDS bindings真实schema修本轴reader，原失败另存，随后完整绑定exit0。历史R4首JSON+原尾注全raw SHA保持，未改原raw。",
+    "首security RED回执文件实际名crash-containment-RED.execution.json；首次猜名读取缺失，已找到并核真实回执/原stderr，未凭缺失判旧RED不存在。"
+  ],
+  "files_created_or_modified_by_this_review": [
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r11-fourth/spec-raw.txt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r11-fourth/spec-probes/**"
+  ],
+  "forbidden_actions_performed": {
+    "implementation_or_original_tests_or_config_or_progress_modified": false,
+    "commit": false,
+    "push": false,
+    "CI": false,
+    "ADB": false,
+    "phone_or_watch_actions": false
+  },
+  "completed_at": "2026-11-14T13:32:26.042471+00:00"
+}

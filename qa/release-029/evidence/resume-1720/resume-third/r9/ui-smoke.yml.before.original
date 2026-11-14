@@ -1,0 +1,107 @@
+name: android-ui-smoke
+on:
+  workflow_dispatch:
+    inputs:
+      build_run:
+        description: Successful android-probe build run
+        required: true
+        type: string
+      build_sha:
+        description: Exact source SHA of the signed APK (optional for QA-only workflow repairs)
+        required: false
+        type: string
+      api_level:
+        description: Android API level for this API30+ instrumentation suite (phone is API33)
+        required: true
+        type: choice
+        options: ['33', '30', '34']
+        default: '33'
+      navigation_mode:
+        description: System navigation used in the screenshot checks
+        required: true
+        type: choice
+        options: [three-button, gestural]
+        default: three-button
+      qa_suite:
+        description: Diagnostic MCP acceptance or original full UI tour
+        required: true
+        type: choice
+        options: [diagnostics, full]
+        default: diagnostics
+permissions:
+  contents: read
+  actions: read
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.build_sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Download the exact signed APK
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.build_run }}
+          path: incoming
+      - name: Display dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb x11-utils libpulse0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libgl1 libopengl0 libglu1-mesa libxcb-cursor0
+          python3 -m pip install Pillow==11.2.1
+          python3 -B qa/test_capture_readiness.py
+          python3 -B qa/test_final_report_gate.py
+          python3 -B qa/diag_emulator_smoke.py --self-test
+          python3 -B qa/test_keepalive_gate.py
+      - name: Local production-JVM HTTP and real-client regression (not Android evidence)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p qa-evidence
+          timeout 600s gradle :app:writeDiagnosticHostClasspath --no-daemon --stacktrace 2>&1 | tee qa-evidence/client-gradle-classpath.log
+          CLASSPATH="$(< app/build/diagnostics-http/classpath.txt)"
+          test -n "$CLASSPATH"
+          timeout 120s python3 -B qa/mcp_http_selftest.py --classpath "$CLASSPATH" 2>&1 | tee qa-evidence/client-jvm-selftest.log
+          timeout 180s python3 -B qa/test_mcp_clients.py --classpath "$CLASSPATH" 2>&1 | tee qa-evidence/client-jvm-regression.log
+      - name: Enable KVM
+        run: |
+          printf 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"\n' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Start and verify X display
+        run: |
+          Xvfb :99 -screen 0 1280x1600x24 > "$RUNNER_TEMP/xvfb.log" 2>&1 &
+          python3 qa/wait_x.py
+      - name: Exercise real APK without a paired device
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          DISPLAY: ':99'
+          QA_NAVIGATION_MODE: ${{ inputs.navigation_mode }}
+          QA_SUITE: ${{ inputs.qa_suite }}
+        with:
+          api-level: ${{ inputs.api_level }}
+          target: google_apis
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          ram-size: 2048M
+          heap-size: 512M
+          emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics
+          script: if [ "$QA_SUITE" = diagnostics ]; then python3 -B qa/diag_emulator_smoke.py; else python3 qa/emulator_install_and_tour.py; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-ui-${{ github.sha }}
+          path: qa-evidence/
+          if-no-files-found: warn

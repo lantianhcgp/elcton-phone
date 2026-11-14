@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""Cloud-only best-effort observation; original child runs once and keeps its exit.
+
+Observer I/O never decides Android acceptance, retries the child, or modifies a device.
+"""
+import argparse
+import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import signal
+import stat
+import subprocess
+import sys
+import threading
+import time
+
+OBSERVER_JOIN_SECONDS = 1.0
+CRASH_FILE_LIMIT = 32 * 1024 * 1024
+CRASH_TOTAL_LIMIT = 64 * 1024 * 1024
+
+
+def verify_cloud_emulator():
+    if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('CI') != 'true':
+        raise RuntimeError('This observer runs only on a GitHub cloud runner')
+    result = subprocess.run(['adb', 'devices'], capture_output=True, text=True, check=True, timeout=20)
+    connected = [line.split() for line in result.stdout.splitlines()[1:] if line.strip()]
+    if len(connected) != 1 or len(connected[0]) != 2:
+        raise RuntimeError('Expected exactly one verified emulator')
+    serial, state = connected[0]
+    if re.fullmatch(r'emulator-[0-9]+', serial) is None or state != 'device':
+        raise RuntimeError('Physical or unready device is forbidden')
+    return serial
+
+
+def proc_snapshot():
+    result = {'time': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              'monotonic': time.monotonic(), 'emulator_processes': []}
+    result['meminfo'] = Path('/proc/meminfo').read_text()
+    for entry in Path('/proc').iterdir():
+        if not entry.name.isdecimal():
+            continue
+        try:
+            comm = (entry / 'comm').read_text().strip()
+            cmdline = (entry / 'cmdline').read_bytes().split(b'\0')
+            executable = os.path.basename(cmdline[0].decode(errors='replace')) if cmdline else ''
+            if comm.startswith(('qemu-system', 'emulator')) or executable.startswith(('qemu-system', 'emulator')):
+                result['emulator_processes'].append({'pid': int(entry.name), 'comm': comm,
+                                                     'status': (entry / 'status').read_text(),
+                                                     'oom_score': (entry / 'oom_score').read_text().strip()})
+        except (OSError, ValueError, IndexError):
+            continue
+    for name in ('memory.current', 'memory.max', 'memory.events', 'memory.peak'):
+        file = Path('/sys/fs/cgroup') / name
+        if file.is_file():
+            result[name] = file.read_text()
+    result['console_ports'] = []
+    for name in ('/proc/net/tcp', '/proc/net/tcp6'):
+        for row in Path(name).read_text().splitlines()[1:]:
+            parts = row.split()
+            if len(parts) > 3 and parts[1].split(':')[-1] in ('15B2', '15B3'):
+                result['console_ports'].append({'local_address': parts[1], 'state': parts[3]})
+    return result
+
+
+def capture_kernel(output):
+    result = subprocess.run(['sudo', '-n', 'dmesg', '-T'], capture_output=True, timeout=20)
+    with (output / 'kernel-final.stdout.bin').open('xb') as file:
+        file.write(result.stdout)
+    with (output / 'kernel-final.stderr.bin').open('xb') as file:
+        file.write(result.stderr)
+    with (output / 'kernel-final.exit').open('x') as file:
+        file.write(str(result.returncode) + '\n')
+
+
+def open_directories(root_fd, parts):
+    """Open only real directories below a pinned directory handle, never symlinks."""
+    current = os.dup(root_fd)
+    try:
+        for name in parts:
+            if name in ('', '.', '..') or '/' in name:
+                raise ValueError('Invalid relative crash-data component')
+            try:
+                os.mkdir(name, mode=0o700, dir_fd=current)
+            except FileExistsError:
+                pass
+            following = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=current)
+            os.close(current)
+            current = following
+        return current
+    except Exception:
+        os.close(current)
+        raise
+
+
+def capture_crashdata(output):
+    """Read bounded explicit emulator crash files with source/output dirfd containment."""
+    copied = []
+    total = 0
+    root = Path('/tmp/android-runner')
+    if not root.exists():
+        with (output / 'crashdata-index.json').open('x') as file:
+            json.dump(copied, file)
+        return
+    # No lexical-only containment checks; every ancestor/leaf is pinned and NOFOLLOW.
+    source_fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    output_fd = None
+    destination_fd = None
+    try:
+        output_fd = os.open(output, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        destination_fd = open_directories(output_fd, ['emulator-crashdata'])
+        def walk(directory_fd, prefix=()):
+            nonlocal total
+            for name in os.listdir(directory_fd):
+                if name in ('.', '..') or '/' in name:
+                    continue
+                info = os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+                if stat.S_ISLNK(info.st_mode):
+                    continue
+                if stat.S_ISDIR(info.st_mode):
+                    following = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory_fd)
+                    try:
+                        walk(following, prefix + (name,))
+                    finally:
+                        os.close(following)
+                    continue
+                allowed = name.startswith('emu-crash-') or name.endswith('.dmp')
+                if not stat.S_ISREG(info.st_mode) or not allowed or info.st_nlink != 1:
+                    continue
+                relative = prefix + (name,)
+                if info.st_size > CRASH_FILE_LIMIT or total + info.st_size > CRASH_TOTAL_LIMIT:
+                    copied.append({'path': '/'.join(relative), 'status': 'too-large-not-copied', 'bytes': info.st_size})
+                    continue
+                fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory_fd)
+                try:
+                    current = os.fstat(fd)
+                    if not stat.S_ISREG(current.st_mode) or (current.st_dev, current.st_ino) != (info.st_dev, info.st_ino):
+                        raise OSError('Crash-data source changed during safe open')
+                    with os.fdopen(fd, 'rb', closefd=False) as src:
+                        raw = src.read(CRASH_FILE_LIMIT + 1)
+                    if len(raw) > CRASH_FILE_LIMIT or total + len(raw) > CRASH_TOTAL_LIMIT:
+                        raise OSError('Crash-data exceeded bound while reading')
+                    parent_fd = open_directories(destination_fd, prefix)
+                    try:
+                        target_fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                                            0o600, dir_fd=parent_fd)
+                        with os.fdopen(target_fd, 'wb') as dest:
+                            dest.write(raw)
+                    finally:
+                        os.close(parent_fd)
+                    total += len(raw)
+                    copied.append({'path': '/'.join(relative), 'bytes': len(raw),
+                                   'sha256': hashlib.sha256(raw).hexdigest()})
+                finally:
+                    os.close(fd)
+        walk(source_fd)
+        with (output / 'crashdata-index.json').open('x') as file:
+            json.dump(copied, file, indent=2)
+            file.write('\n')
+    finally:
+        if destination_fd is not None:
+            os.close(destination_fd)
+        if output_fd is not None:
+            os.close(output_fd)
+        os.close(source_fd)
+
+
+def run_child(command, output, interval=1.0):
+    output = Path(output)
+    stop = threading.Event()
+    errors = []
+    enabled = True
+    try:
+        output.mkdir(parents=True, exist_ok=False)
+    except Exception as error:
+        enabled = False
+        errors.append({'capture': 'directory', 'type': type(error).__name__})
+
+    def sample():
+        try:
+            with (output / 'samples.jsonl').open('x') as file:
+                while not stop.is_set():
+                    try:
+                        row = proc_snapshot()
+                    except Exception as error:
+                        row = {'observation_error': type(error).__name__}
+                    if stop.is_set():
+                        break
+                    file.write(json.dumps(row) + '\n')
+                    file.flush()
+                    stop.wait(interval)
+        except Exception as error:
+            errors.append({'capture': 'sampler', 'type': type(error).__name__})
+
+    sampler = None
+    if enabled:
+        try:
+            # A stuck diagnostic cannot prevent interpreter exit. Normal runs join cleanly.
+            sampler = threading.Thread(target=sample, name='cloud-emulator-evidence', daemon=True)
+            sampler.start()
+        except Exception as error:
+            sampler = None
+            errors.append({'capture': 'sampler-start', 'type': type(error).__name__})
+    child = None
+    try:
+        # Preserve the original full process execution even when any observer setup failed.
+        child = subprocess.Popen(command)
+        code = child.wait()
+    finally:
+        stop.set()
+        if sampler is not None:
+            try:
+                sampler.join(OBSERVER_JOIN_SECONDS)
+            except Exception as error:
+                errors.append({'capture': 'sampler-join', 'type': type(error).__name__})
+
+    def finish():
+        for capture in (capture_kernel, capture_crashdata):
+            try:
+                capture(output)
+            except Exception as error:
+                errors.append({'capture': capture.__name__, 'type': type(error).__name__})
+        receipt = {'returncode': code, 'passed': code == 0, 'pid': child.pid,
+                   'sampler_stopped': sampler is None or not sampler.is_alive(), 'observer_errors': list(errors),
+                   'scope': 'child exit only; NOT Android acceptance; observation may fail independently; no child retries/device changes'}
+        try:
+            with (output / 'child-exit.json').open('x') as file:
+                json.dump(receipt, file, indent=2)
+                file.write('\n')
+        except Exception:
+            pass  # Receipt I/O failure cannot replace the actual child's exit.
+    if enabled:
+        try:
+            finalizer = threading.Thread(target=finish, name='cloud-emulator-evidence-finalize', daemon=True)
+            finalizer.start()
+            finalizer.join(OBSERVER_JOIN_SECONDS)
+        except Exception:
+            pass
+    return code
+
+
+def exit_like_child(code):
+    if code < 0:
+        # Popen's negative native signal must remain a signal, not sys.exit(-N) modulo256.
+        number = -code
+        if number not in (signal.SIGKILL, signal.SIGSTOP):
+            signal.signal(number, signal.SIG_DFL)
+        os.kill(os.getpid(), number)
+        raise SystemExit(128 + number)  # Unreachable under normal POSIX delivery.
+    raise SystemExit(code)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('command', nargs=argparse.REMAINDER)
+    args = parser.parse_args()
+    verify_cloud_emulator()
+    command = args.command[1:] if args.command[:1] == ['--'] else args.command
+    expected = [sys.executable, 'qa/emulator_install_and_tour.py']
+    if command != expected and command != ['python3', 'qa/emulator_install_and_tour.py']:
+        raise RuntimeError('Only the exact unchanged full-suite entrypoint is permitted')
+    exit_like_child(run_child(command, Path('qa-evidence/cloud-observer')))
+
+
+if __name__ == '__main__':
+    main()

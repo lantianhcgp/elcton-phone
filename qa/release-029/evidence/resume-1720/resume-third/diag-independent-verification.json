@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "source_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "run_id": "43590599162",
+  "raw_files_verified": 331,
+  "independent_diagnostic_png_checks": 3,
+  "keepalive_original_flag_negatives_rejected": 15,
+  "normal_http_assertions": 3659,
+  "android_raw_socket_assertions": 133,
+  "normal_http_write_eof_boundary": {
+    "status": "unsupported",
+    "reason": "EmptyHttpResponse",
+    "excluded_checks": [
+      "Truncated body rejected (requires client write EOF)"
+    ],
+    "required_validation": "direct production-host raw socket and Android direct Socket"
+  },
+  "normal_http_all_raw_checks_passed": false,
+  "background": {
+    "passed": true,
+    "scope": "ordinary emulator process; screen-on Home; finite 5s/3 probes; NOT Doze/sticky/phone proof",
+    "pid": "4944",
+    "observations": [
+      {
+        "attempt": 1,
+        "elapsedSeconds": 0.8923396930000536,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      },
+      {
+        "attempt": 2,
+        "elapsedSeconds": 2.623965412000018,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      },
+      {
+        "attempt": 3,
+        "elapsedSeconds": 5.145726337000042,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      }
+    ],
+    "stopPath": "actual-notification-action",
+    "offPortClosed": true,
+    "offNotificationRemoved": true,
+    "businessAndTokenAndErrorsUnchanged": true,
+    "observationCount": 3,
+    "defaultOn": true,
+    "stopDisablesChoice": true,
+    "stopInactive": true,
+    "stopAcknowledged": true
+  },
+  "scope": "Independent original validators on exact CI PNG/XML/reports/binary identity; NOT 10-minute MIUI/physical/watch proof",
+  "physical_acceptance": "pending-originator"
+}

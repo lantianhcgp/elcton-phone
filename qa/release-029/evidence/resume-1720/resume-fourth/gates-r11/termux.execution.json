@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "qa/release-029/termux_tools_list.py",
+    "--classpath",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/host/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/termux"
+  ],
+  "exit_code": 0,
+  "seconds": 0.5275120828300714,
+  "log_sha256": "4379cfc2d089a5be12388235827018332faa83e7ebf8cc4b60b53d386c69485f"
+}

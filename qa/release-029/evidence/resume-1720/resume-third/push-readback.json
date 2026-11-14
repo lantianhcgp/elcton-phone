@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "remote_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "reviewed_files": 125,
+  "dual_closure_sha256": "b5a98ae824ec23b9f28e1826ca95f979b600c5925cfdb795c4fe1ef87af68f65",
+  "scope": "source push/readback only; Android acceptance remains pending"
+}

@@ -1,0 +1,30 @@
+{
+  ".github/workflows/ui-smoke.yml": {
+    "before": true,
+    "bytes": 4355
+  },
+  "qa/cloud_emulator_observer.py": {
+    "before": false,
+    "bytes": 11594
+  },
+  "qa/emulator_install_and_tour.py": {
+    "before": true,
+    "bytes": 18473
+  },
+  "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md": {
+    "before": true,
+    "bytes": 7596
+  },
+  "qa/release-029/RESUME-CHANGES.md": {
+    "before": true,
+    "bytes": 6231
+  },
+  "qa/test_cloud_observer.py": {
+    "before": false,
+    "bytes": 7963
+  },
+  "qa/test_cloud_observer_isolation.py": {
+    "before": false,
+    "bytes": 8651
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "qa/release-029/evidence/resume-1720/resume-fourth/test_remote_readback_exact.py"
+  ],
+  "exit_code": 0,
+  "raw_sha256": "d497b5c29c1948ede8433d60832b61a9dbfa896d44a08baaae6ba165670f2473",
+  "implementation_sha256": "315cc72c750a31064c28d6ed9ebdcd54054313412218a9035901b44d8199f6bd"
+}

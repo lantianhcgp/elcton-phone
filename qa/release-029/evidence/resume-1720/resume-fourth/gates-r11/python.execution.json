@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "qa",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "seconds": 38.72648384002969,
+  "log_sha256": "c5deaf02a771a33c72f62763bf3806c4aff8aad4ab5e8c5544a260b85e4b0138"
+}

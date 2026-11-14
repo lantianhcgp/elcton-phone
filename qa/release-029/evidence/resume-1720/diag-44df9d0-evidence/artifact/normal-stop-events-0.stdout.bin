@@ -1,0 +1,6 @@
+--------- beginning of main
+11-14 11:38:19.185  3741  3741 I ElctonMcp: MCP listening on 127.0.0.1:8766; token=<redacted>; read-only
+11-14 11:38:32.405  4599  4599 I ElctonMcp: MCP listening on 127.0.0.1:8766; token=<redacted>; read-only
+11-14 11:38:38.241  4944  4944 I ElctonMcp: MCP listening on 127.0.0.1:8766; token=<redacted>; read-only
+11-14 11:39:10.456  4944  4944 I ElctonMcp: MCP notification STOP delivered
+11-14 11:39:10.619  4944  4944 I ElctonMcp: MCP stop handled; active=false; choiceSaved=true

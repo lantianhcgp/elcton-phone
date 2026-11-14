@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "old_test_source_files_unchanged": 52,
+  "full_harvest_byte_reversal": true,
+  "new_observation_bytes": 939,
+  "raw_false_verdicts_preserved": [
+    {
+      "axis": "spec",
+      "sha256": "7a8864c81c6fb7755a6d33e30b870fbd11a254f9c6c03af90f15fed3d2f6d380"
+    },
+    {
+      "axis": "standards",
+      "sha256": "3c28026a015ffa0055580efb14ad78b4aa19a150dc4286428bc26a61cc0e7eea"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "source_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "build_run": "43590339873",
+  "scope": "actual main/test APK signature/manifest/CRC/hash; no device actions; NOT cloud PASS",
+  "test_apk_version_fields": "actually empty in AGP artifact; NOT 0.2.9/code11",
+  "earlier_observer_failure": "actual-binary-verification wrongly expected release versions in test APK; original retained",
+  "rows": [
+    {
+      "name": "elcton-phone-probe.apk",
+      "package": "com.hcbiu.elcton",
+      "versionCode": "11",
+      "versionName": "0.2.9",
+      "bytes": 8237316,
+      "sha256": "5358a42bbc5aaa84fcb517a69d56f4cf69f63e609122cba85978786dfda405d3",
+      "signer_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+      "v2": true,
+      "zip_crc": true
+    },
+    {
+      "name": "elcton-ui-tests.apk",
+      "package": "com.hcbiu.elcton.test",
+      "versionCode": "",
+      "versionName": "",
+      "bytes": 1182151,
+      "sha256": "9d4e2a7b18713a9a2c2e12fad23168e6f8f7c782e1e66e08d882567218c97971",
+      "signer_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+      "v2": true,
+      "zip_crc": true
+    }
+  ]
+}

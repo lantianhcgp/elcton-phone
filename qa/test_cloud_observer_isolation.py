@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""Synthetic exact isolation counterexamples from R9 independent review."""
+import importlib.util
+import io
+import json
+import os
+from pathlib import Path
+import signal
+import subprocess
+import sys
+import tarfile
+import tempfile
+import threading
+import time
+import unittest
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+from qa.test_cloud_observer import harvest_scope
+
+
+def observer():
+    spec = importlib.util.spec_from_file_location('observer_isolation', ROOT / 'qa/cloud_emulator_observer.py')
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class IsolationTests(unittest.TestCase):
+    def test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            scope = harvest_scope(directory, 'fixture-run')
+            raw = b'payload-not-a-real-secret'
+            archive = io.BytesIO()
+            with tarfile.open(fileobj=archive, mode='w') as tar:
+                entry = tarfile.TarInfo('qa-palette-evidence/fixture-run/payload.bin')
+                entry.size = len(raw)
+                tar.addfile(entry, io.BytesIO(raw))
+            transport = subprocess.CompletedProcess(['adb', 'shell'], 0, archive.getvalue(), b'')
+            original = Path.open
+            def failing(path, *args, **kwargs):
+                if 'palette-harvest-wire' in path.parts:
+                    raise OSError('synthetic observer-only disk failure')
+                return original(path, *args, **kwargs)
+            with patch.object(subprocess, 'run', return_value=transport), patch.object(Path, 'open', failing):
+                self.assertTrue(scope['harvest_palettes']())
+            self.assertEqual((scope['palette_target'] / 'payload.bin').read_bytes(), raw)
+
+    def test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            scope = harvest_scope(directory, 'fixture-run')
+            transport = subprocess.CompletedProcess(['adb', 'shell'], 1, b'', b'real tar error')
+            original = Path.open
+            def failing(path, *args, **kwargs):
+                if 'palette-harvest-wire' in path.parts:
+                    raise OSError('synthetic observer-only disk failure')
+                return original(path, *args, **kwargs)
+            with patch.object(subprocess, 'run', return_value=transport), patch.object(Path, 'open', failing):
+                self.assertFalse(scope['harvest_palettes']())
+            self.assertEqual((Path(directory) / 'palette-harvest-error.txt').read_text(), 'real tar error')
+
+    def test_receipt_disk_error_does_not_mask_actual_child_exit(self):
+        module = observer()
+        with tempfile.TemporaryDirectory() as directory:
+            original = Path.open
+            def failing(path, *args, **kwargs):
+                if path.name == 'child-exit.json':
+                    raise OSError('synthetic final receipt write error')
+                return original(path, *args, **kwargs)
+            with patch.object(module, 'capture_kernel'), patch.object(module, 'capture_crashdata'), patch.object(Path, 'open', failing):
+                self.assertEqual(module.run_child([sys.executable, '-c', 'raise SystemExit(7)'], Path(directory) / 'output', interval=0.01), 7)
+
+    def test_sampler_inflight_does_not_block_completed_child(self):
+        module = observer()
+        release = threading.Event()
+        entered = threading.Event()
+        returned = threading.Event()
+        result = []
+        with tempfile.TemporaryDirectory() as directory:
+            def blocking_snapshot():
+                entered.set()
+                release.wait(5)
+                return {'synthetic': True}
+            def runner():
+                try:
+                    result.append(module.run_child([sys.executable, '-c', 'raise SystemExit(7)'], Path(directory) / 'output', interval=0.01))
+                finally:
+                    returned.set()
+            with patch.object(module, 'proc_snapshot', blocking_snapshot), patch.object(module, 'capture_kernel'), patch.object(module, 'capture_crashdata'):
+                thread = threading.Thread(target=runner)
+                thread.start()
+                self.assertTrue(entered.wait(1))
+                try:
+                    self.assertTrue(returned.wait(2.5), 'Observer blocked actual completed child exit')
+                finally:
+                    release.set()
+                    thread.join(3)
+            self.assertEqual(result, [7])
+
+    def test_crashdata_symlink_outside_root_is_not_copied(self):
+        module = observer()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / 'root'
+            root.mkdir()
+            output = Path(directory) / 'output'
+            output.mkdir()
+            outside = Path(directory) / 'outside'
+            outside.write_bytes(b'synthetic private outside bytes, not a real secret')
+            (root / 'emu-crash-sample.db').symlink_to(outside)
+            original = module.Path
+            def path_redirect(value):
+                return root if str(value) == '/tmp/android-runner' else original(value)
+            with patch.object(module, 'Path', path_redirect):
+                module.capture_crashdata(output)
+            self.assertFalse((output / 'emulator-crashdata/emu-crash-sample.db').exists(), 'Outside symlink data entered upload tree')
+            self.assertEqual(json.loads((output / 'crashdata-index.json').read_text()), [])
+
+    def test_sampler_start_error_never_prevents_original_child(self):
+        module = observer()
+        with tempfile.TemporaryDirectory() as directory:
+            marker = Path(directory) / 'actual-child'
+            child = [sys.executable, '-c', 'from pathlib import Path;import sys;Path(sys.argv[1]).write_text("ran");sys.exit(7)', str(marker)]
+            with patch.object(module.threading.Thread, 'start', side_effect=RuntimeError('synthetic sampler start error')):
+                self.assertEqual(module.run_child(child, Path(directory) / 'output', interval=0.01), 7)
+            self.assertEqual(marker.read_text(), 'ran')
+
+    def test_observer_directory_failure_never_prevents_original_child(self):
+        module = observer()
+        with tempfile.TemporaryDirectory() as directory:
+            marker = Path(directory) / 'actual-child'
+            output = Path(directory) / 'observe'
+            original = Path.mkdir
+            def fail(path, *args, **kwargs):
+                if path == output:
+                    raise OSError('synthetic observer directory failure')
+                return original(path, *args, **kwargs)
+            child = [sys.executable, '-c', 'from pathlib import Path;import sys;Path(sys.argv[1]).write_text("ran");sys.exit(7)', str(marker)]
+            with patch.object(module, 'capture_kernel'), patch.object(module, 'capture_crashdata'), patch.object(Path, 'mkdir', fail):
+                self.assertEqual(module.run_child(child, output, interval=0.01), 7)
+            self.assertEqual(marker.read_text(), 'ran')
+
+    def test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals(self):
+        module_path = str(ROOT / 'qa/cloud_emulator_observer.py')
+        for sig in (signal.SIGTERM, signal.SIGPIPE, signal.SIGKILL):
+            with self.subTest(signal=sig), tempfile.TemporaryDirectory() as directory:
+                child = [sys.executable, '-c', 'import os,signal,sys;sig=int(sys.argv[1]);signal.signal(sig,signal.SIG_DFL) if sig not in (signal.SIGKILL,signal.SIGSTOP) else None;os.kill(os.getpid(),sig)', str(sig)]
+                direct = subprocess.run(child, capture_output=True).returncode
+                script = ('import importlib.util,sys;from pathlib import Path;'
+                          's=importlib.util.spec_from_file_location("o",sys.argv[1]);o=importlib.util.module_from_spec(s);s.loader.exec_module(o);'
+                          'o.capture_kernel=lambda p:None;o.capture_crashdata=lambda p:None;'
+                          'code=o.run_child(sys.argv[3:],Path(sys.argv[2]),interval=0.01);o.exit_like_child(code)')
+                wrapped = subprocess.run([sys.executable, '-c', script, module_path, str(Path(directory) / 'observe'), *child], capture_output=True)
+                self.assertEqual(wrapped.returncode, direct, 'Wrapper converted a real child signal to unrelated exit status')
+                self.assertEqual(direct, -sig)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

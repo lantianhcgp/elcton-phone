@@ -1,0 +1,698 @@
+{
+  "axis": "standards",
+  "passed": false,
+  "security_concerns": [
+    {
+      "id": "R10-STANDARDS-S1",
+      "severity": "blocking",
+      "location": "qa/cloud_emulator_observer.py:102-113,159-160; ANDROID-HARNESS-ATTRIBUTION.md:42",
+      "finding": "安全源/输出祖先边界仍未闭合。os.open(root/output,O_DIRECTORY|O_NOFOLLOW)仅拒绝最后一个路径组件的symlink；root/output祖先由内核跟随。源/输出内部walk使用dirfd并不追溯验证初始handle。独立合成source-ancestor和output-ancestor均实际复制成功；index落盘前output root换成symlink还将index实际写到pinned root之外。every ancestor/leaf NOFOLLOW的文档陈述不成立。",
+      "evidence": {
+        "probe_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/focused-probes.json",
+        "source_ancestor": {
+          "case": "source-ancestor-link",
+          "error": null,
+          "copied": true,
+          "bytes": 59,
+          "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+          "source_root_has_link": true,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": false,
+          "synthetic_limit": null
+        },
+        "output_ancestor": {
+          "case": "output-ancestor-link",
+          "error": null,
+          "copied": true,
+          "bytes": 29,
+          "sha256": "4675a940ed7c5f6ddcc583ee1deb5c954d7d67893c2bc19c48cf67b922d236b2",
+          "source_root_has_link": false,
+          "output_root_has_link": true,
+          "index_written": true,
+          "boundary_passed": false,
+          "synthetic_limit": null
+        },
+        "index_root_replacement_race": {
+          "scope": "exact output root replacement at index-open boundary via in-memory Path.open wrapper; implementation unchanged; synthetic local dirs only",
+          "pinned_copy_retained_under_original": true,
+          "new_output_root_is_symlink": true,
+          "index_created_outside_pinned_output": true,
+          "index_bytes": 134,
+          "index_sha256": "95a0303cc29e6cd86e34846a7402594c0cb40b92cb1efd312b8bc0b270bb6a7a",
+          "index_records": 1,
+          "actual_adb_or_kernel_calls": 0
+        },
+        "no_actual_tmp_or_secret_modified": true
+      },
+      "required_change": "从可信锚逐组件以dirfd+NOFOLLOW打开源与输出root所有祖先，再复用已验证handle；crashdata-index写盘同样用pinned output fd且拒existing/symlink。保留这些原失败与旧raw，另候选新审。"
+    }
+  ],
+  "logic_errors": [
+    {
+      "id": "R10-STANDARDS-L1",
+      "severity": "blocking",
+      "location": "qa/cloud_emulator_observer.py:114-158",
+      "finding": "crash遍历只有每文件32MiB/累计64MiB内容限制，未限定entry数、depth、listdir结果、copied index总量。任意多个0B .dmp均增加文件/inode/index且total保持0；过总byte帽的条目也继续append而非截停。1s daemon join确实限制主退出等待，但不构成诊断遍历/内存/FD/index的资源帽。",
+      "evidence": {
+        "fixture_files": 257,
+        "copied_entries": 257,
+        "total_content_bytes": 0,
+        "index_bytes": 33046,
+        "no_static_entry_count_depth_or_index_cap": true,
+        "limits": {
+          "file_bytes": 33554432,
+          "total_bytes": 67108864
+        },
+        "synthetic_only": true
+      },
+      "required_change": "显式且fail-closed限制扫描/复制条目数、遍历深度及index大小，超过总预算停止遍历/后续复制；保持旧child一次执行、原断言与产品不动。"
+    }
+  ],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "id": "R10-STANDARDS-N1",
+      "location": "qa/cloud_emulator_observer.py:136-142",
+      "finding": "fstat已校验REG/dev/ino但未重新核current.st_nlink；pre-stat后的link-count竞态尚未实测。应把nlink=1再核纳入handle验证。此项作为范围清楚的静态建议，不冒称native race已复现。"
+    },
+    {
+      "id": "R10-STANDARDS-N2",
+      "location": "qa/cloud_emulator_observer.py:219-240",
+      "finding": "finalizer有界join可在kernel20s采集前结束，receipt可能缺失/半写；如实是best-effort而非保证全观测。不能拿缺失观测宣称full根因已证或云端通过。"
+    }
+  ],
+  "summary": "R10 STANDARDS=false：128/128、37/37及533891B整累计diff双核无漂移；全读R8以来四改三新及完整变化diff。15新observer例真实全绿，harvest异常隔离/child一次exit0/7/native TERM-PIPE-KILL/daemon有界退出反例闭合，但安全祖先source/output symlink仍实际复制；crash entries/depth/index无资源帽（257个0B文件全部入index）。保留所有原false/RED；仅代码规范/需求门，旧full43590641863仍RED，新云端与真机MCP/10min pending。",
+  "reviewed_manifest_sha256": "a7981889ef03ecc15a99f0ca745e69e9f27e1fab8bd0af7ebd7476ed23e58f81",
+  "diff_sha256": "1e0b25c34289899baa580ca2d035c655c93d713a14719aec10443af0afe45f44",
+  "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "bindings": {
+    "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+    "reviewed_files": 128,
+    "product_files": 37,
+    "reviewed_manifest_sha256": "a7981889ef03ecc15a99f0ca745e69e9f27e1fab8bd0af7ebd7476ed23e58f81",
+    "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "diff_sha256": "1e0b25c34289899baa580ca2d035c655c93d713a14719aec10443af0afe45f44",
+    "diff_bytes": 533891,
+    "complete_diff_equal": true,
+    "untracked_appended": [
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "live_mismatches": [],
+    "product_mismatches": [],
+    "prepare_raw_sha256": "e5589dccaf0c4f9ae9e7eeb0872b62e4df9fcd53375c98b0bb26d77829d4be86",
+    "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_live_equal": true,
+    "r8_changed": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "r8_added": [
+      "qa/cloud_emulator_observer.py",
+      "qa/test_cloud_observer.py",
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "r8_removed": [],
+    "r8_unchanged": 121,
+    "product_exact_r8": true,
+    "all_r8_inputs_match_head": true,
+    "product_exact_head": true,
+    "app_test_resource_inputs_exact_head": 35,
+    "cumulative_sections": {
+      "r8": 65,
+      "current": 68,
+      "unchanged": 61,
+      "changed": [
+        "diff --git a/.github/workflows/ui-smoke.yml b/.github/workflows/ui-smoke.yml",
+        "diff --git a/qa/emulator_install_and_tour.py b/qa/emulator_install_and_tour.py",
+        "diff --git a/qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md b/qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+        "diff --git a/qa/release-029/RESUME-CHANGES.md b/qa/release-029/RESUME-CHANGES.md"
+      ],
+      "added": [
+        "diff --git a/qa/cloud_emulator_observer.py b/qa/cloud_emulator_observer.py",
+        "diff --git a/qa/test_cloud_observer.py b/qa/test_cloud_observer.py",
+        "diff --git a/qa/test_cloud_observer_isolation.py b/qa/test_cloud_observer_isolation.py"
+      ]
+    },
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "current_head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "hash_encoding": "manifests sorted compact JSON sort_keys=True,separators comma/colon,ensure_ascii=False UTF8 no newline; raw/candidate/diff exact bytes",
+    "scope_regenerated_exact": true,
+    "candidate_guards": {
+      "guarded_source_sha256": true,
+      "immutable_source_sha256": true,
+      "lineage_sha256": true
+    },
+    "freeze_rechecked_immediately_before_exclusive_write": true
+  },
+  "coverage": {
+    "mode": "本轮全128身份核验；完整R8以来语义增量+原R8完整覆盖链继承，不冒称全128逐行新审。",
+    "full_read_changed": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "full_read_added": [
+      "qa/cloud_emulator_observer.py",
+      "qa/test_cloud_observer.py",
+      "qa/test_cloud_observer_isolation.py"
+    ],
+    "r8_unchanged_inputs": 121,
+    "r8_removed": [],
+    "cumulative_diff": {
+      "r8": 65,
+      "current": 68,
+      "unchanged": 61,
+      "changed": [
+        "diff --git a/.github/workflows/ui-smoke.yml b/.github/workflows/ui-smoke.yml",
+        "diff --git a/qa/emulator_install_and_tour.py b/qa/emulator_install_and_tour.py",
+        "diff --git a/qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md b/qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+        "diff --git a/qa/release-029/RESUME-CHANGES.md b/qa/release-029/RESUME-CHANGES.md"
+      ],
+      "added": [
+        "diff --git a/qa/cloud_emulator_observer.py b/qa/cloud_emulator_observer.py",
+        "diff --git a/qa/test_cloud_observer.py b/qa/test_cloud_observer.py",
+        "diff --git a/qa/test_cloud_observer_isolation.py b/qa/test_cloud_observer_isolation.py"
+      ]
+    },
+    "all_37_product_exact_r8_and_HEAD": true,
+    "all_35_existing_app_test_resource_inputs_exact_HEAD": true,
+    "requirements_fully_read": [
+      "qa/release-029/SPEC.md",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "standards_sources": [
+      "mattpocock-code-review 12 smells",
+      "fail-closed-review-loops",
+      "zero-behavior-instrumentation"
+    ],
+    "contributing_or_standards_found": false,
+    "smell_baseline": "全部12项按小范围核；不把兼容旧AST self-contained inline强制抽helper制造新旧harness差异。硬门是源边界/异常隔离/native exit/资源上限。",
+    "exact_structure": {
+      "harvest_reverse_whole_file_equal_archive": true,
+      "workflow_reverse_whole_file_equal_archive": true,
+      "workflow_substitutions": 1
+    },
+    "r8_chain": {
+      "spec": {
+        "sha_match": true,
+        "passed": true
+      },
+      "standards": {
+        "sha_match": true,
+        "passed": true
+      }
+    },
+    "r8_standards_raw_sha256": "cabae561fffd0896a85c5e5fbfba6e373f11b9f647dc7e727ed773fee58c0298",
+    "r8_spec_raw_sha256": "7e975f14343fa3be42d1828f986ea5f0240136cc178cb46b243f74044faa15ed",
+    "r8_dual_closure_sha256": "b5a98ae824ec23b9f28e1826ca95f979b600c5925cfdb795c4fe1ef87af68f65",
+    "inheritance_limit": "仅继承原R8已记载R7→R4/bounded R3业务覆盖，原R3 SPEC false不回写，本轮不扩大历史逐条重审。",
+    "r9_standards_raw_sha256": "3c28026a015ffa0055580efb14ad78b4aa19a150dc4286428bc26a61cc0e7eea",
+    "r9_spec_raw_sha256": "7a8864c81c6fb7755a6d33e30b870fbd11a254f9c6c03af90f15fed3d2f6d380",
+    "r9_counterexample_resolution": [
+      {
+        "r9_ids": [
+          "R9-STANDARDS-L1",
+          "R9-SPEC-01"
+        ],
+        "status": "closed_for_tested_faults",
+        "proof": "完整diagnostic-only try/with；成功/失败tar在wire open/mkdir fault后原extract/error/return保留；全文件逆恢复与原件相同。"
+      },
+      {
+        "r9_ids": [
+          "R9-STANDARDS-L2",
+          "R9-SPEC-02"
+        ],
+        "status": "closed_for_tested_faults",
+        "proof": "receipt/directory/thread fail，真实exit0/7 child仍一次X执行、原返回不变；15例零skip。"
+      },
+      {
+        "r9_ids": [
+          "R9-STANDARDS-L3",
+          "R9-SPEC-03"
+        ],
+        "status": "closed_for_tested_signals",
+        "proof": [
+          {
+            "signal": 15,
+            "direct": -15,
+            "wrapped": -15,
+            "passed": true
+          },
+          {
+            "signal": 13,
+            "direct": -13,
+            "wrapped": -13,
+            "passed": true
+          },
+          {
+            "signal": 9,
+            "direct": -9,
+            "wrapped": -9,
+            "passed": true
+          }
+        ]
+      },
+      {
+        "r9_ids": [
+          "R9-STANDARDS-L4"
+        ],
+        "status": "child_exit_wait_closed_but_resource_budget_incomplete",
+        "proof": {
+          "entered": true,
+          "returncode": 7,
+          "seconds": 1.0680896867997944,
+          "daemon": true,
+          "receipt_sampler_stopped": false,
+          "all_released_threads_stopped": true,
+          "passed": true
+        }
+      },
+      {
+        "r9_ids": [
+          "R9-STANDARDS-S1"
+        ],
+        "status": "leaf/root_links_and_preexisting_nlink_closed_but_ancestor_boundary_NOT_closed",
+        "proof": "真实source/output root末组件、内部目录、leaf link拒绝；源nlink2用合成stat拒绝，output existing leaf O_EXCL拒绝；祖先link仍复制。"
+      }
+    ]
+  },
+  "independent_execution": {
+    "observer15": {
+      "command": "unittest exact qa.test_cloud_observer + qa.test_cloud_observer_isolation in standards-probes/run_probes.py",
+      "actual_footer": "Ran 15 tests in 2.026s; OK",
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f69d839f2b45f3f4533d6346835a918bd7763ca41184b75864f8651ba2ba0999"
+    },
+    "controls": {
+      "fault_controls": [
+        {
+          "fault": "receipt",
+          "child_exit": 0,
+          "returned": 0,
+          "once": "X",
+          "passed": true
+        },
+        {
+          "fault": "receipt",
+          "child_exit": 7,
+          "returned": 7,
+          "once": "X",
+          "passed": true
+        },
+        {
+          "fault": "directory",
+          "child_exit": 0,
+          "returned": 0,
+          "once": "X",
+          "passed": true
+        },
+        {
+          "fault": "directory",
+          "child_exit": 7,
+          "returned": 7,
+          "once": "X",
+          "passed": true
+        },
+        {
+          "fault": "thread",
+          "child_exit": 0,
+          "returned": 0,
+          "once": "X",
+          "passed": true
+        },
+        {
+          "fault": "thread",
+          "child_exit": 7,
+          "returned": 7,
+          "once": "X",
+          "passed": true
+        }
+      ],
+      "wire_controls": [
+        {
+          "success_tar": false,
+          "fault": "open",
+          "return": false,
+          "mandatory_original_io": true,
+          "passed": true
+        },
+        {
+          "success_tar": false,
+          "fault": "mkdir",
+          "return": false,
+          "mandatory_original_io": true,
+          "passed": true
+        },
+        {
+          "success_tar": true,
+          "fault": "open",
+          "return": true,
+          "mandatory_original_io": true,
+          "passed": true
+        },
+        {
+          "success_tar": true,
+          "fault": "mkdir",
+          "return": true,
+          "mandatory_original_io": true,
+          "passed": true
+        }
+      ],
+      "zero_size_resource_probe": {
+        "fixture_files": 257,
+        "copied_entries": 257,
+        "total_content_bytes": 0,
+        "index_bytes": 33046,
+        "no_static_entry_count_depth_or_index_cap": true,
+        "limits": {
+          "file_bytes": 33554432,
+          "total_bytes": 67108864
+        },
+        "synthetic_only": true
+      },
+      "native_signals": [
+        {
+          "signal": 15,
+          "direct": -15,
+          "wrapped": -15,
+          "passed": true
+        },
+        {
+          "signal": 13,
+          "direct": -13,
+          "wrapped": -13,
+          "passed": true
+        },
+        {
+          "signal": 9,
+          "direct": -9,
+          "wrapped": -9,
+          "passed": true
+        }
+      ],
+      "actual_adb_or_kernel_calls": 0
+    },
+    "focused_probes": {
+      "crash_boundaries": [
+        {
+          "case": "normal",
+          "error": null,
+          "copied": true,
+          "bytes": 29,
+          "sha256": "4675a940ed7c5f6ddcc583ee1deb5c954d7d67893c2bc19c48cf67b922d236b2",
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "source-root-link",
+          "error": "NotADirectoryError: [Errno 20] Not a directory: '/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/focused-scratch/tmp2jd28bz5/linked-root'",
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": true,
+          "output_root_has_link": false,
+          "index_written": false,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "source-ancestor-link",
+          "error": null,
+          "copied": true,
+          "bytes": 59,
+          "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+          "source_root_has_link": true,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": false,
+          "synthetic_limit": null
+        },
+        {
+          "case": "source-directory-link",
+          "error": null,
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "source-leaf-link",
+          "error": null,
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "source-hardlink-synthetic-nlink",
+          "error": null,
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": true,
+          "synthetic_limit": "nlink injection only; native hardlink creation denied"
+        },
+        {
+          "case": "output-root-link",
+          "error": "NotADirectoryError: [Errno 20] Not a directory: '/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/focused-scratch/tmp2w5wzduq/output'",
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": false,
+          "output_root_has_link": true,
+          "index_written": false,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "output-ancestor-link",
+          "error": null,
+          "copied": true,
+          "bytes": 29,
+          "sha256": "4675a940ed7c5f6ddcc583ee1deb5c954d7d67893c2bc19c48cf67b922d236b2",
+          "source_root_has_link": false,
+          "output_root_has_link": true,
+          "index_written": true,
+          "boundary_passed": false,
+          "synthetic_limit": null
+        },
+        {
+          "case": "output-directory-link",
+          "error": "NotADirectoryError: [Errno 20] Not a directory: 'emulator-crashdata'",
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": false,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "output-leaf-link",
+          "error": "FileExistsError: [Errno 17] File exists: 'emu-crash-test.db'",
+          "copied": false,
+          "bytes": 59,
+          "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": false,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        },
+        {
+          "case": "output-hardlink-existing-leaf",
+          "error": "FileExistsError: [Errno 17] File exists: 'emu-crash-test.db'",
+          "copied": false,
+          "bytes": 59,
+          "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": false,
+          "boundary_passed": true,
+          "synthetic_limit": "nlink injection only; native hardlink creation denied"
+        },
+        {
+          "case": "unapproved-log",
+          "error": null,
+          "copied": false,
+          "bytes": 0,
+          "sha256": null,
+          "source_root_has_link": false,
+          "output_root_has_link": false,
+          "index_written": true,
+          "boundary_passed": true,
+          "synthetic_limit": null
+        }
+      ],
+      "structure": {
+        "harvest_reverse_whole_file_equal_archive": true,
+        "workflow_reverse_whole_file_equal_archive": true,
+        "workflow_substitutions": 1
+      },
+      "blocked_sampler": {
+        "entered": true,
+        "returncode": 7,
+        "seconds": 1.0680896867997944,
+        "daemon": true,
+        "receipt_sampler_stopped": false,
+        "all_released_threads_stopped": true,
+        "passed": true
+      },
+      "security_static": {
+        "root_open_NOFOLLOW_only_final_component": true,
+        "fstat_nlink_rechecked": false,
+        "traversal_entry_or_depth_count_cap": false,
+        "index_write_uses_unpinned_output_path": true
+      },
+      "actual_adb_or_kernel_calls": 0,
+      "scope": "HOST only, all fixtures beneath standards-probes; no real secrets or device interactions"
+    },
+    "actual_ADB_kernel_calls": 0,
+    "native_hardlink_limit": "本机os.link absent；libc link真实errno13拒绝。首/续failure原件保留。source hardlink为显式synthetic stat nlink2，output为existing leaf O_EXCL分支；不声称真实硬链接已创建。",
+    "scope": "纯HOST/真实OS子进程/内存故障注入，fixture在standards-probes独占目录；无实际adb、设备、应用runtime、push或dispatch。"
+  },
+  "parent_gate_evidence_verified": {
+    "scope": "只读核原父HOST complete/log/execution，不是本轴重跑重套件",
+    "complete_sha256": "25ac2f1fe0a61997a32c1112e60fb17e980248c355dd3b21af12e05521a6ed22",
+    "complete": {
+      "passed": true,
+      "checked_at": "2026-11-14T20:51:27.631389+08:00",
+      "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+      "host_tests": 152,
+      "python_tests": 123,
+      "python_skipped": 0,
+      "http_report": {
+        "ok": true,
+        "mode": "actual-kotlin-host",
+        "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+        "assertions": 3784,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "supported",
+          "excluded_checks": []
+        },
+        "all_raw_checks_passed": true,
+        "token": "REDACTED"
+      },
+      "runtime_tests": 1,
+      "termux": {
+        "count": 15,
+        "http_status": 200,
+        "listener_closed": true
+      },
+      "inputs_unchanged": true,
+      "inputs_manifest_sha256": "13b7f4dfe8ee15723694fbc92954d3398174d30f964a006a7410a015a7bd3e92",
+      "scope": "complete current HOST gates only; NOT Android CI/cloud/physical WE acceptance"
+    },
+    "executions": {
+      "host": {
+        "exit_code": 0,
+        "log_sha256": "5c6cfef94dae867add6ea4906600f9035e6e3779dce4c9dcbcf45cee779881d9",
+        "execution_sha256": "d2761f7aae50e1182c23dbd413f15d5eeb9f0e9e2ebcd404bdf4ae00376e1727"
+      },
+      "python": {
+        "exit_code": 0,
+        "log_sha256": "c3246fc313708cce095caf6ac7e147e9412b22ed1b872b7ff7ca733ec39f564c",
+        "execution_sha256": "700a1b2cf8fc481f60439339a7e08e11553f2795b92b4b1f9128fbdc2bae768b"
+      },
+      "http": {
+        "exit_code": 0,
+        "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+        "execution_sha256": "8dfbc7b86fef4f8ff37dacf4197c5013bfd6aff78e851d1d451913e9dc4a06dd"
+      },
+      "runtime": {
+        "exit_code": 0,
+        "log_sha256": "62c1b1c7ec377e2242ee79c7e1714cb5c274ab48da795b9d47b9f4242b4b757f",
+        "execution_sha256": "37c91212819162d35048f6bdb9198ccbf6aaa7ddeef1a2c1893200d73dd41a5c"
+      },
+      "termux": {
+        "exit_code": 0,
+        "log_sha256": "ef63fe830f5095d703b0d6fbb3aa415c9e5a831f98dfd79070aacc017540e79c",
+        "execution_sha256": "5bdba1e807700565fbdb0bbd8e95addaec5bf4e0b580c6cf39f88f5d861d3c41"
+      }
+    },
+    "all_current_input_hashes_match": true
+  },
+  "acceptance_limits": {
+    "standards_pass": false,
+    "new_cloud_pending": true,
+    "full43590641863_remains_RED": true,
+    "old_diagnostics_does_not_replace_latest": true,
+    "physical_MCP_Bluetooth_MIUI_10min": "pending归发起方",
+    "not_full_cloud_green": true,
+    "no_product_test_config_git_CI_device_mutation": true
+  },
+  "issues_encountered": [
+    {
+      "command": "python3 -B qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/run_probes.py",
+      "exit_code": 1,
+      "kind": "review_fixture_failure_NOT_product",
+      "error": "AttributeError: module 'os' has no attribute 'link' at line 80",
+      "script_preserved": true,
+      "observer15_raw_preserved": true,
+      "continuation": "new filename and namespace only; use libc.link for same native hardlink probe"
+    },
+    {
+      "command": "python3 -B qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/run_probes_continuation.py",
+      "exit_code": 1,
+      "kind": "review_fixture_failure_NOT_product",
+      "error": "PermissionError: [Errno 13] libc link failed at line 84; native hardlink creation is denied by host",
+      "script_preserved": true,
+      "observer15_continuation_raw_preserved": true,
+      "continuation": "new focused evidence; hardlink branch tested by explicit synthetic nlink metadata, never reported as native hardlink creation"
+    }
+  ],
+  "files_created_or_modified_by_this_review": [
+    "final-review-r10-fourth/standards-raw.txt",
+    "final-review-r10-fourth/standards-probes/ exclusively"
+  ],
+  "evidence_sha256": {
+    "initial-binding.json": "dd3fc4b04f54632ee1fbaf2bdfde7333ca80f314a2bf977567b1cbb972f02d96",
+    "check_binding.py": "c9a455fdd0ea7f73ab2588d148eafa287288fbbc1d2ab1152a05fc86839fc3d5",
+    "initial-changed-sections.diff": "8b8c90920f5d5f39c7ac443c832ed5a4d647676bcd911dee4ce4ad1c213eb105",
+    "run_probes.py": "048623a01d1e574b7c82fe188afb1fc54f2fa53a9ec96dbe5c0e9c71d8a2db39",
+    "observer15.raw.log": "f69d839f2b45f3f4533d6346835a918bd7763ca41184b75864f8651ba2ba0999",
+    "first-probe-failure.json": "057fae554a3fe5dac2c217cc536c7bd495fe1d7884410b52918a849b90f491d1",
+    "run_probes_continuation.py": "08279cd1ff09d06272691c2cd6151ad36011444875d813487e3816994497a4a8",
+    "observer15-continuation.raw.log": "1d47fdbc0d1c7439d9ec869c60b29c48cd4828fd1167b3bacfe51a78a6cd238b",
+    "focused_probes.py": "52e05f4bb9bd7ac30b8edf34361d06b0ebe90cb694c7166158d4d07f52b4014f",
+    "second-probe-failure.json": "30c2610eddab1a8a8bd262cd28e91bd5a9f7c3fd2cb1aad6cec369ed891ad347",
+    "focused-probes.json": "68db593b29ed9fab58d9530840bfe0a1b957ce2e94f1159f51b567e2b323dc46",
+    "inventory-and-chain.json": "166c4a5c94e97d041cd627d683bda525771699fb822035f7519ccd04c2e42be7",
+    "controls.py": "c16bc7f13752f8be275390654e67100261e2d29b5fb6f243afa15191cbda2709",
+    "controls.json": "0b8f1d55f5859743abf0a572758d03ce6925f7b550fbaa1e85c51f7dbd190cb2",
+    "write_receipt.py": "37612da2759ee42fd62a764f1d1a4d895cd0fba58dd61459275d45176e9b6cfc",
+    "index_race.py": "c99352f1385b30dd26b5ac216a5251fc24cb9b2dc424e002185c543bfeb43e61",
+    "index-race.json": "ac150045866978bf81e77ddf4e1b2ea7ff553e21af2c6b311e85abb29e85da40",
+    "final-binding.json": "dd3fc4b04f54632ee1fbaf2bdfde7333ca80f314a2bf977567b1cbb972f02d96",
+    "final-changed-sections.diff": "8b8c90920f5d5f39c7ac443c832ed5a4d647676bcd911dee4ce4ad1c213eb105"
+  }
+}

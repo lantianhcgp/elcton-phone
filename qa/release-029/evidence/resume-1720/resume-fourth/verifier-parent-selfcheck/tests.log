@@ -1,0 +1,8 @@
+test_01_real_diag_green (__main__.CloudTests.test_01_real_diag_green) ... ok
+test_02_real_full_red_preserved (__main__.CloudTests.test_02_real_full_red_preserved) ... ok
+test_03_minimal_negatives (__main__.CloudTests.test_03_minimal_negatives) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 27.390s
+
+OK

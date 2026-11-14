@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "qa/run_runtime_revision_host_tests.py",
+    "--deps",
+    "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r10/runtime-r10-fourth"
+  ],
+  "exit_code": 0,
+  "seconds": 19.46139858616516,
+  "log_sha256": "62c1b1c7ec377e2242ee79c7e1714cb5c274ab48da795b9d47b9f4242b4b757f"
+}

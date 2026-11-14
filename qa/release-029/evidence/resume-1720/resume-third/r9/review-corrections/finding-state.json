@@ -1,0 +1,12 @@
+{
+  "status": "blocked-on-R9-independent-findings",
+  "checked_at": "2026-11-14T20:15:51.277455+08:00",
+  "findings_seen_in_live_evidence": [
+    "inline diagnostic write failure changes successful harvest to error",
+    "final observer receipt write error masks original child7",
+    "SIGTERM/-15 wrapper sys.exit differs from shell143",
+    "unbounded sampler.join can delay child result indefinitely"
+  ],
+  "source_edits_since_frozen": false,
+  "next": "retain both raw false verdicts, add failing isolation tests, fix observer only, then regenerate full current gates and dual review"
+}

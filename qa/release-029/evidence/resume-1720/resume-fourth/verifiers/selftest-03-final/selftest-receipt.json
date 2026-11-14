@@ -1,0 +1,30 @@
+{
+  "real_exercises": [
+    {
+      "name": "old-diag",
+      "exit_code": 0,
+      "passed": true,
+      "checks": 10,
+      "errors": 0,
+      "receipt": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-03-final/old-diag/receipt.json",
+      "sha256": "ebb8853252ce69e0ee5daacd034b8b94cd01f1cdd959cfb8c5956281b757c044"
+    },
+    {
+      "name": "old-full-red",
+      "exit_code": 1,
+      "passed": false,
+      "checks": 9,
+      "errors": 6,
+      "receipt": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-03-final/old-full-red/receipt.json",
+      "sha256": "1f34a4c67dba9b86a5cb7bf5cde82c1f571263431181cfdef1b5a0cb15ed6dc3"
+    }
+  ],
+  "hashes": {
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py": "1093d106014452ced8eb484034013b1cf9e480c21b2151965aff7649918f64e6",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/test_verify_cloud.py": "0edb640a929099392d10e47ce56b6934f8f47204981110ee673d28550e448c61",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-03-final/tests.log": "4e3e60dc0d387e260f6f901c28c74f4b23b14631b34f6a617c70284b24c8b154",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-03-final/negative-receipt.json": "e88bcbcd0f92ac4cda2345cd5cb4dfff002a401b77ce0f4a59b556f74a5ad47a"
+  },
+  "original_criteria_unchanged": true,
+  "first_red_preserved": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-01-preimplementation/tests.log"
+}

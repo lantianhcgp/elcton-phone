@@ -1,0 +1,42 @@
+[
+  {
+    "path": "qa/test_cloud_observer.py",
+    "source_sha256": "eab122b814529411e327d2126482d58b0413bae19968b6b123f4388ecc946758",
+    "exit_code": 0,
+    "tests": 7,
+    "log_sha256": "7bf4e62212cb8eae1b66119d1ee976620787424248da5cbf5e61b4a0f0eeaff2",
+    "footer": "_not_relabelled_green) ... ok\ntest_failed_harvest_preserves_exit_and_binary_output_without_changing_false (__main__.ObserverTests.test_failed_harvest_preserves_exit_and_binary_output_without_changing_false) ... ok\ntest_not_ci_aborts_before_any_adb_call (__main__.ObserverTests.test_not_ci_aborts_before_any_adb_call) ... ok\ntest_successful_harvest_keeps_original_tar_bytes_and_extracts_exact_file (__main__.ObserverTests.test_successful_harvest_keeps_original_tar_bytes_and_extracts_exact_file) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.219s\n\nOK\n"
+  },
+  {
+    "path": "qa/test_cloud_observer_isolation.py",
+    "source_sha256": "ae9f1eb7966d4d80f2848aa8681603428722dac633878777e773e03314c7e99b",
+    "exit_code": 1,
+    "tests": null,
+    "log_sha256": "f5ec37ed68f13dd6843162a6114385ad2645c3813e3067e0900bbe03f7282bad",
+    "footer": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py\", line 19, in <module>\n    from qa.test_cloud_observer import harvest_scope\nModuleNotFoundError: No module named 'qa'\n"
+  },
+  {
+    "path": "qa/test_cloud_observer_crash_containment.py",
+    "source_sha256": "a7cb8959cf3d567e9429860697f8cb74a115c09b22bdb938b65cdd35b48767eb",
+    "exit_code": 1,
+    "tests": 5,
+    "log_sha256": "9a36108ee356391a9d7c6b9ba8c0e8a20da14aa0f58aeffe962ab1b9af4dcb1a",
+    "footer": "e/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_containment.py\", line 92, in test_index_written_only_through_pinned_output_fd\n    self.assertEqual(swapped, [True], 'Real output dirfd race was not reached')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [] != [True]\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\nTrue\n\n- []\n+ [True] : Real output dirfd race was not reached\n\n----------------------------------------------------------------------\nRan 5 tests in 0.043s\n\nFAILED (failures=1, errors=1)\n"
+  },
+  {
+    "path": "qa/test_cloud_observer_crash_limits.py",
+    "source_sha256": "32ecab5ba21a0658345143d7f844ad24dc4783c1bb073239d0196529809bce6e",
+    "exit_code": 1,
+    "tests": 5,
+    "log_sha256": "b254a4a6de97b1b5d69da3683ddf88e10366741dfc9189c5eebdf0b039b25204",
+    "footer": "~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py\", line 144, in capture_crashdata\n    output_fd = open_existing_directory(output)\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py\", line 110, in open_existing_directory\n    current = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)\nPermissionError: [Errno 13] Permission denied: '/'\n\n----------------------------------------------------------------------\nRan 5 tests in 0.080s\n\nFAILED (errors=5)\n"
+  },
+  {
+    "path": "qa/release-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py",
+    "source_sha256": "dded3e12036f4b24996e17961c231fa0fa4c06c4131b310a617edd4039d1c5b3",
+    "exit_code": 1,
+    "tests": 5,
+    "log_sha256": "3395439a7d57b9e040ac740787e592ab69462c1292924476ab96436a6dbf030d",
+    "footer": "lease-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py\", line 92, in test_index_written_only_through_pinned_output_fd\n    self.assertEqual(swapped, [True], 'Real output dirfd race was not reached')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [] != [True]\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\nTrue\n\n- []\n+ [True] : Real output dirfd race was not reached\n\n----------------------------------------------------------------------\nRan 5 tests in 0.042s\n\nFAILED (failures=1, errors=1)\n"
+  }
+]

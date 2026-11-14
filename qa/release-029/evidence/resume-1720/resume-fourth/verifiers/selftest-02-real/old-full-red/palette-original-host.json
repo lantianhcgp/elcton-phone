@@ -1,0 +1,151 @@
+{
+  "passed": false,
+  "qa_run": "2f63ab6d-8c83-4772-91cd-d57bff423a42",
+  "source_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "navigation_mode": "three-button",
+  "phases": {
+    "warm": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 53.586\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-purple-light": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 5.014\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-purple-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.789\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-blue-light": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.418\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-blue-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.965\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-green-light": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.428\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-green-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.608\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-teal-light": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 5.031\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-teal-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.661\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-orange-light": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.646\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-orange-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.648\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-pink-light": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.514\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-pink-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.062\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    }
+  }
+}

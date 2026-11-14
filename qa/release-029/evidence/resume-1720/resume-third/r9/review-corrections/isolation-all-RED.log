@@ -1,0 +1,129 @@
+test_crashdata_symlink_outside_root_is_not_copied (qa.test_cloud_observer_isolation.IsolationTests.test_crashdata_symlink_outside_root_is_not_copied) ... /data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py:86: ResourceWarning: unclosed file <_io.TextIOWrapper name='/data/data/com.termux/files/usr/tmp/tmpvzyf6qfb/output/crashdata-index.json' mode='x' encoding='utf-8'>
+  (output / 'crashdata-index.json').open('x').write(json.dumps(copied, indent=2) + '\n')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest (qa.test_cloud_observer_isolation.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest) ... ERROR
+test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest (qa.test_cloud_observer_isolation.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest) ... ERROR
+test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) ... 
+  test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) (signal=<Signals.SIGTERM: 15>) ... FAIL
+  test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) (signal=<Signals.SIGPIPE: 13>) ... FAIL
+test_observer_directory_failure_never_prevents_original_child (qa.test_cloud_observer_isolation.IsolationTests.test_observer_directory_failure_never_prevents_original_child) ... ERROR
+test_receipt_disk_error_does_not_mask_actual_child_exit (qa.test_cloud_observer_isolation.IsolationTests.test_receipt_disk_error_does_not_mask_actual_child_exit) ... ERROR
+test_sampler_inflight_does_not_block_completed_child (qa.test_cloud_observer_isolation.IsolationTests.test_sampler_inflight_does_not_block_completed_child) ... /data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py:131: ResourceWarning: unclosed file <_io.TextIOWrapper name='/data/data/com.termux/files/usr/tmp/tmp6g5h19ev/output/child-exit.json' mode='x' encoding='utf-8'>
+  (output / 'child-exit.json').open('x').write(json.dumps(receipt, indent=2) + '\n')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FAIL
+test_sampler_start_error_never_prevents_original_child (qa.test_cloud_observer_isolation.IsolationTests.test_sampler_start_error_never_prevents_original_child) ... ERROR
+
+======================================================================
+ERROR: test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest (qa.test_cloud_observer_isolation.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 60, in test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest
+    self.assertFalse(scope['harvest_palettes']())
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "real-harvest-helpers", line 109, in harvest_palettes
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 57, in failing
+    raise OSError('synthetic observer-only disk failure')
+OSError: synthetic observer-only disk failure
+
+======================================================================
+ERROR: test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest (qa.test_cloud_observer_isolation.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 47, in test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest
+    self.assertTrue(scope['harvest_palettes']())
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "real-harvest-helpers", line 109, in harvest_palettes
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 44, in failing
+    raise OSError('synthetic observer-only disk failure')
+OSError: synthetic observer-only disk failure
+
+======================================================================
+ERROR: test_observer_directory_failure_never_prevents_original_child (qa.test_cloud_observer_isolation.IsolationTests.test_observer_directory_failure_never_prevents_original_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 140, in test_observer_directory_failure_never_prevents_original_child
+    self.assertEqual(module.run_child(child, output, interval=0.01), 7)
+                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 91, in run_child
+    output.mkdir(parents=True, exist_ok=False)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 136, in fail
+    raise OSError('synthetic observer directory failure')
+OSError: synthetic observer directory failure
+
+======================================================================
+ERROR: test_receipt_disk_error_does_not_mask_actual_child_exit (qa.test_cloud_observer_isolation.IsolationTests.test_receipt_disk_error_does_not_mask_actual_child_exit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 72, in test_receipt_disk_error_does_not_mask_actual_child_exit
+    self.assertEqual(module.run_child([sys.executable, '-c', 'raise SystemExit(7)'], Path(directory) / 'output', interval=0.01), 7)
+                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 131, in run_child
+    (output / 'child-exit.json').open('x').write(json.dumps(receipt, indent=2) + '\n')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 69, in failing
+    raise OSError('synthetic final receipt write error')
+OSError: synthetic final receipt write error
+
+======================================================================
+ERROR: test_sampler_start_error_never_prevents_original_child (qa.test_cloud_observer_isolation.IsolationTests.test_sampler_start_error_never_prevents_original_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 125, in test_sampler_start_error_never_prevents_original_child
+    self.assertEqual(module.run_child(child, Path(directory) / 'output', interval=0.01), 7)
+                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 112, in run_child
+    thread.start()
+    ~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/unittest/mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/unittest/mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/unittest/mock.py", line 1234, in _execute_mock_call
+    raise effect
+RuntimeError: synthetic sampler start error
+
+======================================================================
+FAIL: test_crashdata_symlink_outside_root_is_not_copied (qa.test_cloud_observer_isolation.IsolationTests.test_crashdata_symlink_outside_root_is_not_copied)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 116, in test_crashdata_symlink_outside_root_is_not_copied
+    self.assertFalse((output / 'emulator-crashdata/capture.log').exists(), 'Outside symlink data entered upload tree')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : Outside symlink data entered upload tree
+
+======================================================================
+FAIL: test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) (signal=<Signals.SIGTERM: 15>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 154, in test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals
+    self.assertEqual(wrapped.returncode, direct, 'Wrapper converted a real child signal to unrelated exit status')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != -15 : Wrapper converted a real child signal to unrelated exit status
+
+======================================================================
+FAIL: test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) (signal=<Signals.SIGPIPE: 13>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 154, in test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals
+    self.assertEqual(wrapped.returncode, direct, 'Wrapper converted a real child signal to unrelated exit status')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != -13 : Wrapper converted a real child signal to unrelated exit status
+
+======================================================================
+FAIL: test_sampler_inflight_does_not_block_completed_child (qa.test_cloud_observer_isolation.IsolationTests.test_sampler_inflight_does_not_block_completed_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py", line 95, in test_sampler_inflight_does_not_block_completed_child
+    self.assertTrue(returned.wait(2.5), 'Observer blocked actual completed child exit')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Observer blocked actual completed child exit
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.073s
+
+FAILED (failures=4, errors=5)

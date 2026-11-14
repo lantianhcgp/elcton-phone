@@ -1,0 +1,21 @@
+{
+  "scope_regenerated_exact": true,
+  "regenerated_count": 128,
+  "product_regenerated_exact": true,
+  "r8_chain": {
+    "spec": {
+      "sha_match": true,
+      "passed": true
+    },
+    "standards": {
+      "sha_match": true,
+      "passed": true
+    }
+  },
+  "candidate_guards": {
+    "guarded_source_sha256": true,
+    "immutable_source_sha256": true,
+    "lineage_sha256": true
+  },
+  "diff_check_exit": 0
+}

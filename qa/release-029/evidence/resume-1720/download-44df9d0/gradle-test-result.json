@@ -1,0 +1,314 @@
+{
+  "passed": true,
+  "source_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "build_run": "43590339873",
+  "totals": {
+    "tests": 153,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": 30,
+  "rows": [
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.AdapterScopeTest.xml",
+      "sha256": "30d0068ed86e34d46650f967b32bd9793e1830ce86f6d68d1f6dda249c1a97a1",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DevicePolicyTest.xml",
+      "sha256": "917a792fa7c61dccf0d45bff1309d31de9195bbef4b624c31bfa5d5e9507fb92",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticMcpServerTest.xml",
+      "sha256": "8c1890b527dca5ca2a052f5d84661a946d997b226e4eb6e5b7ad09eb0a39a673",
+      "counts": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticToolsTest.xml",
+      "sha256": "0c69ae55b37432be29f6877186bcb9408e455e03b3c9d9458162ccb071a6a053",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticsIntegrationTest.xml",
+      "sha256": "990aac380083934ad7b50b7159300d1860b68ae26e935088ecc52ea3763821db",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalBoundaryTest.xml",
+      "sha256": "3fd377d47f03b3caf02d27e4d58f169d6d1ca31603c147a8410e21e8d45f34d5",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalTest.xml",
+      "sha256": "000065d0df49cf381edb90801d67a6c3099bf326559efc2f0fd1376bfe78f8ea",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordTest.xml",
+      "sha256": "ae5cdf3f7cc895c8647696dc016188742c87a7d5614e438783d7c236bd73862b",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordBoundaryTest.xml",
+      "sha256": "0b677614e7443cded2322302763163dd104f86f76404847c501dcfa175b2fae2",
+      "counts": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ExportSessionTest.xml",
+      "sha256": "2a226de08633df70cbec73b86da8cdcd1706121a546f24fe76c2dbe26eff29b5",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.MainThreadActionsTest.xml",
+      "sha256": "147532a4a9244c3df83d9ec0cd7d98356629f58321ed0f652832e247111819f3",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpKeepAlivePolicyTest.xml",
+      "sha256": "fcb7b81a063a258b18fe94062ab058eef239339bae7eafccc1a8a20e39442a50",
+      "counts": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpTokenTest.xml",
+      "sha256": "19d65e48a574ffa84a703a40636dde00a2dfe467402f05a75bd733ad496de1db",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pCandidateBuildTest.xml",
+      "sha256": "6fd2353d414f40c88e49bf85aecc3903614bea1ca45502a9acc4b5e24186f4c8",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyErrorTest.xml",
+      "sha256": "cb788e62c0ace55daa446ebb4e1b851e145a58134f72b2c06b160bc1d384b856",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyIngressTest.xml",
+      "sha256": "bb0c3cb8eba0532191e5f53e70e8774435d197feedd632e7f1c23fba82c263a1",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneActionsTest.xml",
+      "sha256": "5e3cf1a1fa62f5bac0c4382ce6187d037628e0c1affe8c4ce0aa0a0507abc858",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpCompositionTest.xml",
+      "sha256": "e53224cc69830dc133848faad1d279096db25f05db7e279c2fc15db207f36932",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneScheduleTest.xml",
+      "sha256": "6a0601454765ab3b6ae782fe0bbb9e1729ed7201517e940e906fec8f75f90398",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneSnapshotTest.xml",
+      "sha256": "3c501d3196825382f7f7e6cd57be3e665a5a27dd0722aff9dd31512666a8f75e",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpToolsTest.xml",
+      "sha256": "1e51fe9c937fba1361ec9584f2c44a257941fbdfd5960c25752def02993ced6b",
+      "counts": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ProtocolIngressAuditTest.xml",
+      "sha256": "998c73bf6aae3aaef60aa472dcb13aa14d70e09494c82f952e24c436b6511084",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ScheduleBookTest.xml",
+      "sha256": "bedc88307f46f4d612c74eb0bbd5fe395eb5a86c43aa7d644906bc9e1d05bd6f",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PickupClientTest.xml",
+      "sha256": "50737ddf5473b014b238ad53ad3cebc8ac9ed06f21dcf49f032f90185ff18152",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SnapshotPrivacyAuditTest.xml",
+      "sha256": "9dd34c012bbb5a45b24aef6df17bb830cefa8aa3483f02d87b682c12193b23b0",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SyncEngineTest.xml",
+      "sha256": "bf69676117d9f97987f0e7e1bd0943dc0cf64ab5350bf409cff15c4915b0c8cd",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.TransferSessionTest.xml",
+      "sha256": "1c10f960d0fe5dc3683d340d66ee5ea47566db90e0e22a43c09f684f47072cbb",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.UserFacingErrorTest.xml",
+      "sha256": "1c2dbf39a7b1914eede36236a18497122b2191ca5a5b363df8b5ff3fd98b4cc4",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WearEngineConfigTest.xml",
+      "sha256": "c531714834b4451bb1a862e4d85ff3cbaa63ad602a98a086d3868a867d3d48b9",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WireTest.xml",
+      "sha256": "997177b8b81e597d7c940e1a953b3624f1c6ba7290e6d9767da4618b3da1caa9",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ]
+}

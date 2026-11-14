@@ -1,0 +1,1 @@
+First reviewer-only historical pin assumption failed: R8 candidate was uncommitted on 9e300f9; McpKeepAliveTest.kt candidate bytes belong to later HEAD44df9d0. No candidate or evidence changed. Continuation verifies R8 exact inputs and entire cumulative diff using HEAD44df9d0. Original verify_identity.py retained.

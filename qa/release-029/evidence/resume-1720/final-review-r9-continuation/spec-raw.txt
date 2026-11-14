@@ -1,0 +1,338 @@
+{
+  "axis": "spec",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "R9-SPEC-01",
+      "severity": "blocking",
+      "path": "qa/emulator_install_and_tour.py",
+      "lines": [
+        104,
+        113
+      ],
+      "requirement": "用户要求QA-only观察、不改变原harvest执行/判断语义；ANDROID-HARNESS-ATTRIBUTION.md:38称去观测后原helper精确等同。",
+      "finding": "新增inline观测的mkdir/import/JSON/open/write未隔离异常。原tar合法返回后，仅诊断路径写盘OSError就跳过原解包/return；execute_palette_phase:152-156再把此观测失败记为collected=false、full失败。去观察后AST相同不证明带观测异常的执行等价。",
+      "counterexample": "同一合法tar、同一未改原解包写入路径，仅对palette-harvest-wire的Path.open注入OSError，在内存执行原R8与当前helper。",
+      "actual": {
+        "R8": {
+          "returned": true,
+          "file_exists": true
+        },
+        "R9": {
+          "exception": "OSError",
+          "message": "independent diagnostic-only write failure",
+          "file_exists": false
+        }
+      },
+      "required_resolution": "将整个新增观测构造与写盘隔离于原tar判断/解包/return，记录观测缺失而不改变原harvest语义；不松旧断言。"
+    },
+    {
+      "id": "R9-SPEC-02",
+      "severity": "blocking",
+      "path": "qa/cloud_emulator_observer.py",
+      "lines": [
+        128,
+        145
+      ],
+      "requirement": "用户要求实际child exit原样、只运行一次；源码:132声明观察失败不会遮蔽child return code。",
+      "finding": "最终child-exit.json的构造/open/write不在错误保护内。真实child已exit7，最终回执写盘OSError使return code不可达，外层Python真实exit1而非7。kernel/crashdata的已有catch不保护最终回执。",
+      "counterexample": "真实OS child只写一次X后exit7，仅最终child-exit.json的Path.open注入OSError；真实包装进程执行当前run_child+SystemExit。",
+      "actual": {
+        "child_exit_requested": 7,
+        "wrapper_exit": 1,
+        "once_marker": "X",
+        "exception": "OSError: R9 reviewer injected receipt write failure"
+      },
+      "raw_failure_tail": "  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py\", line 131, in run_child\n    (output / 'child-exit.json').open('x').write(json.dumps(receipt, indent=2) + '\\n')\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^\n  File \"<string>\", line 3, in failed\n    if self.name==\"child-exit.json\":raise OSError(\"R9 reviewer injected receipt write failure\")\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: R9 reviewer injected receipt write failure\n",
+      "required_resolution": "最终诊断回执失败须隔离、实际child退出仍原样；增加exit7及exit0+回执写盘失败的真实反例，不retry/kill子进程。"
+    },
+    {
+      "id": "R9-SPEC-03",
+      "severity": "blocking",
+      "path": "qa/cloud_emulator_observer.py",
+      "lines": [
+        117,
+        145
+      ],
+      "requirement": "用户要求退出码原语义而非只保存child负returncode。",
+      "finding": "Popen.wait信号返回为负值；直接SystemExit(负值)变成普通退出状态，未保持原native信号/外层退出语义。真实SIGTERM child=-15，包装exit241；JSON记录-15不能使action观察到等价退出。",
+      "counterexample": "真实OS child对自己发SIGTERM，分别直接执行与通过当前run_child+SystemExit的真实Python包装执行；仅mock末尾kernel/crash采集，child/wait/采样/退出路径真实。",
+      "actual": {
+        "direct_returncode": -15,
+        "recorded_child_returncode": -15,
+        "observed_wrapper_returncode": 241,
+        "native_semantics_equal": false
+      },
+      "required_resolution": "明确并验证native与外层shell信号传播/退出映射，不能把负数直接SystemExit当作原样；保留不kill/retry/config改变限制，新信号反例及新冻结重审。"
+    }
+  ],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "path": "qa/cloud_emulator_observer.py:70,86,131; qa/emulator_install_and_tour.py:109-113",
+      "finding": "独立新7例及原harvest测试产生真实ResourceWarning: unclosed file；诊断文件应显式close/context manager，不依赖CPython立即析构。非独立阻塞，不掩盖上述3项。"
+    }
+  ],
+  "summary": "R9 SPEC不通过，3项真实逻辑阻塞。127/127、37/37真实SHA、prepare compact hashes、完整518052B累计diff最终fresh精确绑定；完整R8→R9新/改文件语义审及原产品链按原raw/指纹核。旧断言、execute_palette_phase、精确源/配置未弱化，新7真实通过，但诊断写盘可改变harvest、最终回执可遮蔽exit7、信号退出不等价。父原115零skip/其他HOST门禁已核；本review入口errors2和缺CP导致111/skip1不算全绿。full43590641863仍RED，R9 full/两云端/交付未绿。",
+  "reviewed_manifest_sha256": "42611d8998810311f49e01e5208235172bb74ee6a29f9dfdaf41c3de6b7a314d",
+  "diff_sha256": "0984f690f65e203dee81edeee382b3a4f2c1564454dfc4b3744203a1f3120732",
+  "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "bindings": {
+    "actual_head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+    "reviewed_files": 127,
+    "product_files": 37,
+    "diff_bytes": 518052,
+    "prepare_raw_sha256": "70da5b6193799fad5fdef338a3a4c671208d3ba25168ad59660ed7338629be00",
+    "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "canonical_encoding": "manifests SHA256(sorted compact JSON,separators comma/colon,ensure_ascii=False,UTF-8,no trailing newline); candidate/diff/prepare raw exact bytes",
+    "all_127_live_SHA_match": true,
+    "all_37_live_SHA_match": true,
+    "inventory_independently_regenerated_exact": true,
+    "complete_live_diff_rebuilt_equal": true,
+    "manifested_untracked_append": [],
+    "candidate_before_after_live_exact": true,
+    "final_fresh_mismatches": [],
+    "freeze_rechecked_immediately_before_exclusive_write": true
+  },
+  "coverage": {
+    "mode": "全部输入身份绑定+完整R8→R9语义增量+已记录原产品覆盖链严格继承；不冒称本轮127全文件逐行重审。",
+    "requirements_read": [
+      "qa/release-029/SPEC.md全文：7共享实例、9原4诊断/15工具确认、11默认开/STOP、13旧测试不删不skip、17精确签名/交付、19真机pending",
+      "用户最新要求：full失败先取证、不松断言、原RED全留、不覆盖旧0.2.8/1.1.15/9e300f9候选、不碰真机/表端；QA改动后完整回归+新双轴绑定+新精确CI+两云端绿才交付和push读回",
+      "ANDROID-HARNESS-ATTRIBUTION.md/RESUME-CHANGES.md全文、CONTINUATION-R9.md、新ROOT-CAUSE-FULL-R8.md"
+    ],
+    "r8_to_r9": {
+      "unchanged_reviewed": 121,
+      "changed": [
+        ".github/workflows/ui-smoke.yml",
+        "qa/emulator_install_and_tour.py",
+        "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+        "qa/release-029/RESUME-CHANGES.md"
+      ],
+      "added": [
+        "qa/cloud_emulator_observer.py",
+        "qa/test_cloud_observer.py"
+      ],
+      "removed": [],
+      "r8_diff_sections": 65,
+      "r9_diff_sections": 67,
+      "unchanged_sections": 61,
+      "changed_sections": 4,
+      "added_sections": 2,
+      "all_37_product_bytes_exact_R8_HEAD": true,
+      "all_125_R8_inputs_exact_R8_HEAD_git_blobs": true,
+      "all_35_app_test_resource_inputs_exact_HEAD": true
+    },
+    "preserved_structure": {
+      "entire_harvest_source_reverse_equal_before_original": true,
+      "nine_inline_AST_statements_only": true,
+      "all_other_function_AST_equal": true,
+      "execute_palette_phase_exact": true,
+      "entire_workflow_reverse_equal_original": true,
+      "single_full_wrapper_replacement": true,
+      "SDK_GPU_window_RAM_heap_exact": true,
+      "APK_source_equals_checkout_HEAD_constraint_exact": true,
+      "candidate_guarded19_immutable16_lineage4_live_SHA_exact": true,
+      "immutable16_also_exact_original_pinned_git": true,
+      "MainActivity_WearProbe_complete_before_after_text_SHA_and_before_git_exact": true,
+      "limit": "AST/字节逆复成立但不能覆盖观测异常的执行语义，三项实际反例未闭合。"
+    },
+    "r8_chain": {
+      "spec_raw_sha256": "7e975f14343fa3be42d1828f986ea5f0240136cc178cb46b243f74044faa15ed",
+      "standards_raw_sha256": "cabae561fffd0896a85c5e5fbfba6e373f11b9f647dc7e727ed773fee58c0298",
+      "both_full_raw_SHA_exact_original_dual_closure": true,
+      "both_zero_blockers_and_binding_exact_prepare": true,
+      "r8_reviewed_manifest_sha256": "9cd0cd5a3e9deb6b2180eec9e3f5f8bcb51319c018061b53b707c203c1160ab3",
+      "r8_diff_sha256": "fee7b0f1a0b13025ed59ade8ff85606a78b5f5a0a96ea94a4b7a548dc9790c81",
+      "r4_r7_full_referenced_raw_SHA_compact_manifests_diff_SHA_verdict_contract_rechecked": true,
+      "semantic_limit": "按R8原raw已记录的R3有界业务覆盖与R4两QA闭合链继承；R3原SPEC false不回改，不重复全历史逐行审。",
+      "references": [
+        {
+          "round": 4,
+          "spec_raw_sha256": "56b938fcd092a746b985c4a0fca198dc2f592f185a7798bfa34c3c79d651f680",
+          "standards_raw_sha256": "bf08d02dcf5f29b638dcb52c988f90e70af54add2b6d8d7dd9112c17615a8c58"
+        },
+        {
+          "round": 5,
+          "spec_raw_sha256": "61b0f64e9e02573ca80cf82276a077733a5a47afdfc4bf071dd3c2ee88176ac4",
+          "standards_raw_sha256": "fbafa1c16a0659be3b15a41cdfe2ce3d67548f1a64aa78bfcaf6088aa0895cf9"
+        },
+        {
+          "round": 6,
+          "spec_raw_sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+          "standards_raw_sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c"
+        },
+        {
+          "round": 7,
+          "spec_raw_sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+          "standards_raw_sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7"
+        }
+      ]
+    }
+  },
+  "independent_execution": {
+    "new7": {
+      "command": "python -B -m unittest -v qa.test_cloud_observer",
+      "exit": 0,
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "footer": "Ran 7 tests in 0.202s\n\nOK"
+    },
+    "existing_palette33": {
+      "all_33_methods_passed_in_first_partial_run": true,
+      "one_pixel_palette_course_all_four_offsets_rejected": true,
+      "old_timeout_exception_identity_and_partial_wire_checks_passed": true,
+      "old_harvest_exact_argv_stdin_timeout_UUID_tar_checks_passed": true
+    },
+    "false_archive_phase": [
+      {
+        "archive_exit": 0,
+        "instrumentation": "OK (1 test)",
+        "rejected": true,
+        "report_passed": false,
+        "harvested": false
+      },
+      {
+        "archive_exit": 1,
+        "instrumentation": "OK (1 test)",
+        "rejected": true,
+        "report_passed": false,
+        "harvested": false
+      }
+    ],
+    "guard_probes": {
+      "non_CI_zero_ADB": true,
+      "mock_physical_rejected": true,
+      "mock_two_emulators_rejected": true,
+      "mock_offline_rejected": true,
+      "mock_single_ready_emulator_accepted": true,
+      "actual_ADB_calls": 0
+    },
+    "correct_original_script_followups": [
+      {
+        "command": "python -B qa/test_capture_readiness.py",
+        "tests": 2,
+        "footer": "Ran 2 tests in 0.052s\n\nOK"
+      },
+      {
+        "command": "python -B qa/test_keepalive_gate.py",
+        "tests": 10,
+        "footer": "Ran 10 tests in 0.009s\n\nOK"
+      }
+    ],
+    "limits": "合成/OS child/本地逻辑证据不是Android/云端通过。"
+  },
+  "reviewer_failures_preserved": [
+    {
+      "type": "runner_entrypoint_error_NOT_product_finding",
+      "command": "python -B -m unittest -v qa.test_palette_evidence qa.test_capture_readiness qa.test_final_report_gate qa.test_diag_source_gate qa.test_keepalive_gate qa.test_keepalive_return_fixture qa.test_notification_fixture qa.test_p2p_ready_source_gate",
+      "exit": 1,
+      "tests_run": 57,
+      "errors": 2,
+      "reason": "两个旧模块使用顶层import；-m qa.xxx入口未把qa目录加入顶层搜索路径，非源码语法/产品回归。正确原脚本随后2/10通过。",
+      "raw_failure_records": "======================================================================\nERROR: test_capture_readiness (unittest.loader._FailedTest.test_capture_readiness)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_capture_readiness\nTraceback (most recent call last):\n  File \"/data/data/com.termux/files/usr/lib/python3.13/unittest/loader.py\", line 141, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_capture_readiness.py\", line 8, in <module>\n    from verify_system_bars import inspect\nModuleNotFoundError: No module named 'verify_system_bars'\n\n======================================================================\nERROR: test_keepalive_gate (unittest.loader._FailedTest.test_keepalive_gate)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_keepalive_gate\nTraceback (most recent call last):\n  File \"/data/data/com.termux/files/usr/lib/python3.13/unittest/loader.py\", line 141, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_gate.py\", line 5, in <module>\n    import diag_emulator_smoke as gate\nModuleNotFoundError: No module named 'diag_emulator_smoke'\n\n\n----------------------------------------------------------------------\nRan 57 tests in 15.660s\n\nFAILED (errors=2)"
+    },
+    {
+      "type": "missing_real_classpath_NOT_product_finding",
+      "exit": 1,
+      "discovered": 115,
+      "tests_run": 111,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "reason": "MCP_HTTP_TEST_CLASSPATH未设置，test_mcp_clients.py:115-118 setUpClass SkipTest导致四个真实客户端方法未执行；此次不算115全绿。",
+      "raw_tool_output": "DISCOVERED 115\n..........................................s.....................................................................\n----------------------------------------------------------------------\nRan 111 tests in 8.810s\n\nOK (skipped=1)\nREAL_TOTAL 111 FAILURES 0 ERRORS 0 SKIPPED 1",
+      "correct_classpath_supplied_later": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/host-final-r9/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar",
+      "not_rerun": "依最新用户要求不再探索/重复全套；准确核父已保存115零skip原日志。"
+    },
+    {
+      "type": "review_receipt_writer_failure_NOT_product_finding",
+      "first_write_attempt_exit": 1,
+      "reason": "首终端Python构造receipt字面量误用了JSON true/false，NameError在open之前；未创建/覆盖spec-raw.txt。当前独占续写采用json.loads真实验证。",
+      "raw_error_tail": "NameError: name 'true' is not defined. Did you mean: 'True'?",
+      "full_original_tool_outputs_preserved_in_session": true
+    }
+  ],
+  "parent_gate_evidence_verified": {
+    "scope": "逐项核已存父原SHA/bytes/实际footer/已有exit，不称本review重跑JVM/HTTP/Runtime/Termux。",
+    "local_gates_path": "qa/release-029/evidence/resume-1720/resume-third/r9/local-gates.json",
+    "jvm": {
+      "tests": 152,
+      "footer": "OK (152 tests)",
+      "log_sha256": "61eac1f3538da8c2944c481482bfb9c8c874b39ddc7e32fb23b85e7af4ef0246"
+    },
+    "python": {
+      "tests": 115,
+      "skipped": 0,
+      "exit": 0,
+      "bytes": 24412,
+      "footer": "Ran 115 tests in 37.915s\n\nOK",
+      "log_sha256": "a661ebea29e774240d67025d7eab88f9199f07451df01ab597fd85c967084a19"
+    },
+    "http": {
+      "assertions": 3784,
+      "exit": 0,
+      "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+    },
+    "runtime": {
+      "tests": 1,
+      "exit": 0,
+      "log_sha256": "5efaee0a667d108ba5fdc6e710cbe3ed2bc89a726f27beadeb7487a698355b51"
+    },
+    "termux": {
+      "tools": 15,
+      "HTTP_status": 200,
+      "listener_closed": true,
+      "host_exit": 0,
+      "receipt_sha256": "33a81d94224f690b14e6f40404e86fb6987b547c7ea018650f24e1401ce42813"
+    },
+    "prepush_audit_original": {
+      "files": 3229,
+      "hits": [],
+      "not_rescanned_by_review": true
+    }
+  },
+  "preservation": {
+    "full_run": "43590641863",
+    "full_inventory_entries": 676,
+    "full_inventory_all_SHA_bytes_exact": true,
+    "full_inventory_sha256": "3ad60b475a65a4e3f8bd56b4739c6e571f0ebb31e0eb1290ab847b0a5438bf80",
+    "root_cause_full_r8_sha256": "c0c34916374eff9072bec13b1adc11b31a1289c6bcfc20244e14d69dd8b748ac",
+    "actual_full_report": {
+      "passed": false,
+      "stage": "palette-cold-pink-dark",
+      "timed_out": false,
+      "harvested": false,
+      "instrumentation": "OK (1 test)"
+    },
+    "observer_RED_sha256": "b5706e98d30fa6cecd7cfd7b07b837514d7a018456e88aed71b024672d81695a",
+    "observer_GREEN_sha256": "c6378c5826f8ef1d214d87d44ebfc533171253876785240d4efbaec8e444bc4c",
+    "isolated_helper_RED_sha256": "d14409365725d82258922c4187639610aca22561bc13e9ae5da45403440cbab8",
+    "isolated_helper_GREEN_sha256": "ef9439d54d7cac4f55175df1d1cee7e2df67be6ebed8e027f535bd8eeec9724b",
+    "first_observer_copies_exact_manifest": true,
+    "five_before_copies_exact_SHA_bytes_and_HEAD_git": true,
+    "original_first_python_exit": 1,
+    "original_continuation_python_exit": 0,
+    "all_historical_originals_untouched": true
+  },
+  "acceptance_limits": {
+    "R9_SPEC_pass": false,
+    "R8_full_remains_RED": true,
+    "R9_full_cloud_not_run_by_review": true,
+    "R9_full_pass": false,
+    "release_delivery_complete": false,
+    "both_new_exact_source_cloud_suites_still_required": true,
+    "physical_MCP_Bluetooth_MIUI_ten_minutes": "pending",
+    "no_implementation_test_config_product_git_CI_changes": true,
+    "no_push_or_ADB_or_device_actions": true,
+    "old_0_2_8_1_1_15_9e300f9_packages_not_written": true
+  },
+  "files_created_or_modified_by_this_review": [
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r9-continuation/spec-raw.txt"
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "axis": "standards",
+  "passed": false,
+  "security_concerns": [
+    {
+      "id": "R9-STANDARDS-S1",
+      "severity": "blocking",
+      "location": "qa/cloud_emulator_observer.py:75-85; .github/workflows/ui-smoke.yml:102-106",
+      "finding": "crashdata复制没有解析路径/符号链接边界检查，能把配置的/tmp/android-runner之外文件复制进自动上传artifact。source.is_file()和source.open()跟随文件符号链接，relative_to(root)仅验证词法路径，不限制实际读取目标。",
+      "evidence": {
+        "synthetic_only": true,
+        "probe": "临时android-runner/capture.log是指向同级outside-private-fixture.txt的符号链接；仅在内存替换模块Path固定根映射，调用真实capture_crashdata，不修改代码、不读取真凭据。",
+        "source_resolves_outside_configured_root": true,
+        "outside_bytes_copied_to_upload_evidence": true,
+        "copied_bytes": 55,
+        "copied_sha256": "896f12e4e333061244be03513c88df4ff87e01fedb05ea4fb1a9ee0bc3e20929",
+        "index_path": "capture.log",
+        "no_real_secret_read": true
+      },
+      "required_change": "只读取经过验证、实际仍在允许根内且不是符号链接的明确crash输入；源与输出边界/TOCTOU需fail-closed，不能把未知日志或根外文件收入上传目录。保留本raw和原失败，修复后用合成逃逸反例及最新全回归/全新指纹重新审查。"
+    }
+  ],
+  "logic_errors": [
+    {
+      "id": "R9-STANDARDS-L1",
+      "severity": "blocking",
+      "location": "qa/emulator_install_and_tour.py:104-116,119-127; execute_palette_phase:151-164",
+      "finding": "新增inline raw-wire目录/UUID/写盘没有诊断隔离。任一观测写入异常都在原return判据和tar提取之前传播：原失败归档的stderr保存被跳过；合法成功tar也未提取而在execute_palette_phase中被改判collected=False，导致新观测本身把原full变RED。AST移除九语句等价不证明带探针的异常路径零行为。",
+      "evidence": {
+        "fault": "只在内存patch Path.open，对palette-harvest-wire/*.bin抛OSError(review-injected-wire-disk-error)，mock原subprocess.CompletedProcess，执行真实harvest函数AST。",
+        "failed_archive": {
+          "baseline_expected_return": false,
+          "actual_exception": "OSError: review-injected-wire-disk-error",
+          "original_error_file_preserved": false
+        },
+        "valid_success_tar": {
+          "baseline_expected_return": true,
+          "actual_exception": "OSError: review-injected-wire-disk-error",
+          "valid_tar_file_extracted": false
+        }
+      },
+      "required_change": "整个观测构造与I/O放独立诊断-only异常边界；失败不得跳任何原判据、原stderr保存、tar读取/提取/return。旧函数/测试不改，加入成功/失败/空/timeout及观测写失败反例。"
+    },
+    {
+      "id": "R9-STANDARDS-L2",
+      "severity": "blocking",
+      "location": "qa/cloud_emulator_observer.py:90-112,118-133",
+      "finding": "observer failures never mask/change actual child return code的承诺不成立：最终child-exit.json的open/write/close没有隔离，真实child退出7后receipt写失败会从run_child抛OSError，入口最终变为观察器exit1而不是原7。thread.start也在child启动/try-finally外，采样线程创建失败会阻止原full启动。",
+      "evidence": {
+        "receipt_failure": {
+          "actual_child_code": 7,
+          "actual_run_child": "raised OSError: review-injected-receipt-disk-error",
+          "receipt_exists": false,
+          "sampler_threads_left": 0
+        },
+        "sampler_start_failure": {
+          "actual_run_child": "raised RuntimeError: review-thread-start-denied",
+          "child_executed": false
+        },
+        "normal_caught_capture_and_snapshot_failure_control": {
+          "returned": 7,
+          "observer_errors_count": 2,
+          "sampler_stopped": true,
+          "samples_observation_error": "OSError"
+        }
+      },
+      "required_change": "采样初始化、收尾、receipt写盘/关闭都必须诊断隔离；保留先验child执行及确切退出结果，观测失败独立报告、不重试child、不把原7变1。保证Popen/wait本身的失败与observer失败分开。"
+    },
+    {
+      "id": "R9-STANDARDS-L3",
+      "severity": "blocking",
+      "location": "qa/cloud_emulator_observer.py:117,128,133,145",
+      "finding": "POSIX信号退出语义未保留。Popen.wait()返回负信号数，SystemExit负数被OS折成8-bit退出码，不是原进程被信号终止/原shell状态。保存receipt.returncode负数不修复外层工作流实际退出码。",
+      "evidence": {
+        "SIGTERM": {
+          "direct_native_returncode": -15,
+          "direct_shell_equivalent_status": 143,
+          "wrapper_native_returncode": 241,
+          "wrapper_shell_equivalent_status": 241,
+          "receipt_child_returncode": -15
+        },
+        "SIGPIPE_with_explicit_SIG_DFL": {
+          "direct_native_returncode": -13,
+          "direct_shell_equivalent_status": 141,
+          "wrapper_shell_equivalent_status": 243,
+          "receipt_child_returncode": -13
+        }
+      },
+      "required_change": "明确并实测原工作流shell状态与native wait/signal契约，负信号不能直接SystemExit；保留child真实信号与退出语义，不在observer中把signal失败变成无关正整数。"
+    },
+    {
+      "id": "R9-STANDARDS-L4",
+      "severity": "blocking",
+      "location": "qa/cloud_emulator_observer.py:96-120; capture_crashdata:77-85",
+      "finding": "sampler是非daemon且thread.join()无期限，stop仅在下一轮循环/stop.wait生效，不能中断已阻塞的/proc读取或samples.jsonl写/flush。child已经结束仍可能无限等观察线程，工作流只会在外层20分钟timeout终止而无法返回原child状态。不是采样间隔1秒就意味着退出最多1秒。",
+      "evidence": {
+        "fixture": "真实sample线程的proc_snapshot在可释放Event上等待，原child为python pass；child完成后150ms run_child仍未返回，释放Event后才返回0。仅内存fault injection。",
+        "blocked_after_child_completed": true,
+        "returned_after_release": 0,
+        "all_fixture_and_sampler_threads_cleaned": true,
+        "static_unbounded_join": true
+      },
+      "required_change": "采用真实可收束且有界的观察生命周期与I/O，不以无限join牺牲原child退出；须同时证明挂起观察不会改变child状态且不遗留资源。不能仅加join timeout却让非daemon线程继续阻止进程退出。"
+    }
+  ],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "id": "R9-STANDARDS-N1",
+      "severity": "nonblocking",
+      "location": "qa/cloud_emulator_observer.py:70,86,131; qa/emulator_install_and_tour.py:109,110,113",
+      "finding": "多处open(...).write(...)没有显式with/close。独立7例虽然OK，但真实输出含child-exit.json及每期三份wire文件的ResourceWarning: unclosed file。当前CPython临时对象析构会关文件，不能把这个警告夸大为已证明持久FD泄漏；仍建议显式管理文件生命周期和close失败，并按L1/L2保证关闭异常不污染child/harvest。"
+    }
+  ],
+  "summary": "R9 STANDARDS=false：127输入/37产品及518052B完整diff独立精确核验通过，原产品/既有测试与判据未改；新7例实跑OK并不构成approval。实证1个安全阻塞和4个逻辑阻塞：crashdata符号链接根外复制；inline观测I/O阻断原harvest；receipt/采样启动错误改变原child执行/退出；SIGTERM原shell143变241（SIGPIPE141变243）；无期限sampler join。仅本raw落盘，不改任何产品/测试/配置，不push/CI/adb。观测不是full修复，R8完整full继续RED，新全回归+新指纹独立审查+精确CI和两云端绿前不可交付。",
+  "reviewed_manifest_sha256": "42611d8998810311f49e01e5208235172bb74ee6a29f9dfdaf41c3de6b7a314d",
+  "diff_sha256": "0984f690f65e203dee81edeee382b3a4f2c1564454dfc4b3744203a1f3120732",
+  "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_files": 127,
+  "product_files": 37,
+  "diff_bytes": 518052,
+  "bindings": {
+    "current_head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+    "prepare_raw_sha256": "70da5b6193799fad5fdef338a3a4c671208d3ba25168ad59660ed7338629be00",
+    "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "reviewed_manifest_sha256": "42611d8998810311f49e01e5208235172bb74ee6a29f9dfdaf41c3de6b7a314d",
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "diff_sha256": "0984f690f65e203dee81edeee382b3a4f2c1564454dfc4b3744203a1f3120732",
+    "diff_bytes": 518052,
+    "hash_encoding": "Manifests: sorted compact JSON, separators comma/colon, ensure_ascii=False, UTF-8, no newline. Candidate/diff/raw: exact bytes.",
+    "manifest_inventory_independently_regenerated": true,
+    "all_127_hashes_match": true,
+    "all_37_hashes_match": true,
+    "candidate_guarded_immutable_lineage_and_git_before_texts_verified": true,
+    "complete_live_diff_reproduced": true,
+    "manifested_untracked_append": [],
+    "final_live_mismatches": [],
+    "git_diff_check_exit": 0
+  },
+  "coverage": {
+    "mode": "完整R9修改/新文件语义审查+独立全127/37身份核验+严格R8原raw覆盖继承；不是本轮全产品逐行重新审查。",
+    "standards_sources": [
+      "mattpocock-code-review smell baseline",
+      "fail-closed-review-loops",
+      "zero-behavior-instrumentation",
+      "qa/release-029/SPEC.md",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "contributing_or_standards_file_found": false,
+    "r8_common_inputs": 125,
+    "r8_unchanged_inputs": 121,
+    "changed_inputs": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "added_inputs": [
+      "qa/cloud_emulator_observer.py",
+      "qa/test_cloud_observer.py"
+    ],
+    "removed_inputs": [],
+    "fully_read_new_files": {
+      "qa/cloud_emulator_observer.py": 149,
+      "qa/test_cloud_observer.py": 140
+    },
+    "fully_read_changed_files": [
+      ".github/workflows/ui-smoke.yml",
+      "qa/emulator_install_and_tour.py",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "additional_complete_documents_read": [
+      "qa/release-029/evidence/resume-1720/CONTINUATION-R8.md",
+      "qa/release-029/evidence/resume-1720/CONTINUATION-R9.md",
+      "qa/release-029/evidence/resume-1720/resume-third/ROOT-CAUSE-FULL-R8.md",
+      "qa/release-029/evidence/resume-1720/resume-third/r9/DESIGN.md"
+    ],
+    "r8_cumulative_diff_sections": 65,
+    "r9_cumulative_diff_sections": 67,
+    "sections_exactly_unchanged": 61,
+    "current_HEAD_manifested_diff_bytes": 22219,
+    "current_HEAD_manifested_diff_sha256": "1c80805949dc0994abb4cbafa074da3972117f0f5f46af4d6d75cd1a1329aded",
+    "products_unchanged_from_R8_and_HEAD": 37,
+    "old_manifested_Kotlin_test_files_unchanged_from_HEAD": 34,
+    "Kotlin_count_note": "34是app/src/test及app/src/androidTest中manifested .kt文件实数，不是测试方法数；不猜写35。",
+    "all_existing_Python_tests_unchanged": true,
+    "harvest_inline_block_removal_whole_file_bytes_equal_git_and_archive": true,
+    "all_original_function_AST_and_execute_palette_phase_equal": true,
+    "workflow_reverse_single_full_wrapper_substitution_whole_file_bytes_equal": true,
+    "five_before_originals_sha_bytes_and_git_verified": true,
+    "smell_baseline": "按全部12项baseline核R9小范围改动；硬问题是生命周期/异常隔离/退出/源边界，不把explicit self-contained inline为兼容旧孤立AST测试的少量重复强行抽helper破坏旧测试。"
+  },
+  "prior_coverage": {
+    "r8_standards_raw_sha256": "cabae561fffd0896a85c5e5fbfba6e373f11b9f647dc7e727ed773fee58c0298",
+    "r8_spec_raw_sha256": "7e975f14343fa3be42d1828f986ea5f0240136cc178cb46b243f74044faa15ed",
+    "r8_dual_closure_sha256": "b5a98ae824ec23b9f28e1826ca95f979b600c5925cfdb795c4fe1ef87af68f65",
+    "r8_manifest_canonical_sha256": "9cd0cd5a3e9deb6b2180eec9e3f5f8bcb51319c018061b53b707c203c1160ab3",
+    "r8_diff_sha256": "fee7b0f1a0b13025ed59ade8ff85606a78b5f5a0a96ea94a4b7a548dc9790c81",
+    "r8_diff_bytes": 499323,
+    "both_original_raws_completely_read_and_verified_against_closure": true,
+    "r8_all_125_file_hashes_match_current_HEAD_git_blobs": true,
+    "product_manifest_identical": true,
+    "inheritance_limit": "只继承R8原raw明确记载的R7至R4/bounded R3覆盖范围；未重新遍历大历史，不将R3 SPEC false改绿，不把R8绿当R9绿。"
+  },
+  "independent_execution": {
+    "command": "python3 -B qa/test_cloud_observer.py",
+    "exit_code": 0,
+    "tests_run": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "actual_result": "Ran 7 tests in 0.204s; OK",
+    "resource_warnings_observed": true,
+    "scope": "仅HOST合成/原AST函数及真实OS Python child，不是Android/物理设备验收。",
+    "nonzero_once_control": {
+      "child_exit": 7,
+      "marker": "X",
+      "executions": 1,
+      "sampler_stopped": true
+    },
+    "normal_success_control": {
+      "child_exit": 0,
+      "sampler_stopped": true
+    },
+    "closed_stdout_pipe": {
+      "direct_child_exit": 1,
+      "wrapped_exit": 1
+    },
+    "closed_stderr_pipe": {
+      "direct_child_exit": 1,
+      "wrapped_exit": 1
+    },
+    "cloud_guard_synthetic": {
+      "one_emulator_5554_accepted": true,
+      "physical_serial_rejected": true,
+      "two_emulators_rejected": true,
+      "offline_rejected": true,
+      "empty_devices_rejected": true,
+      "not_CI_rejects_before_adb": true
+    },
+    "probe_constraints": "所有fault injection及cloud列表均内存替换；临时目录由TemporaryDirectory清理；未实际调用adb/sudo/dmesg/CI，未读真token，未执行物理设备动作。"
+  },
+  "archived_gate_evidence": {
+    "source": "只读现存本轮原件；这些全回归并非本轴重跑，不改任何旧结果。",
+    "python": {
+      "tests": 115,
+      "result": "Ran 115 tests in 37.915s; OK",
+      "raw_sha256": "a661ebea29e774240d67025d7eab88f9199f07451df01ab597fd85c967084a19"
+    },
+    "jvm": {
+      "tests": 152,
+      "result": "OK (152 tests)",
+      "raw_sha256": "61eac1f3538da8c2944c481482bfb9c8c874b39ddc7e32fb23b85e7af4ef0246"
+    },
+    "http": {
+      "checks": 3784,
+      "all_raw_checks_passed": true,
+      "write_eof_transport": "supported",
+      "raw_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+    },
+    "runtime": {
+      "raw_sha256": "5efaee0a667d108ba5fdc6e710cbe3ed2bc89a726f27beadeb7487a698355b51"
+    },
+    "termux": {
+      "count": 15,
+      "http_status": 200,
+      "listener_closed_after_test": true,
+      "host_exit_code": 0,
+      "no_action_execution": true
+    },
+    "prepush": {
+      "files": 3229,
+      "hits": [],
+      "scope_limit": "现存静态归档审计无hits不证明未来crashdata动态复制/符号链接无泄漏。"
+    },
+    "observer_RED": {
+      "tests": 7,
+      "failures": 7,
+      "exit": 1,
+      "raw_sha256": "b5706e98d30fa6cecd7cfd7b07b837514d7a018456e88aed71b024672d81695a"
+    },
+    "observer_GREEN": {
+      "tests": 7,
+      "exit": 0,
+      "raw_sha256": "c6378c5826f8ef1d214d87d44ebfc533171253876785240d4efbaec8e444bc4c"
+    },
+    "isolated_helper_RED": {
+      "tests": 7,
+      "errors": 3,
+      "exit": 1,
+      "raw_sha256": "d14409365725d82258922c4187639610aca22561bc13e9ae5da45403440cbab8"
+    },
+    "isolated_helper_GREEN": {
+      "tests": 7,
+      "exit": 0,
+      "raw_sha256": "ef9439d54d7cac4f55175df1d1cee7e2df67be6ebed8e027f535bd8eeec9724b"
+    }
+  },
+  "acceptance_limits": {
+    "R9_standards_approval": false,
+    "android_or_full_pass": false,
+    "physical_pass": false,
+    "release_delivery_complete": false,
+    "observer_is_full_fix": false,
+    "R8_full": "43590641863原RED继续保留：cold-pink-dark instrumentation OK1后harvest=false、ADB/console失效。676完整原件不是full通过；本轴不再重复全artifact读取。",
+    "required_next": "原raw保持不可变；仅修观测隔离/退出/资源/源边界后完整回归、全新冻结指纹与独立双轴、精确CI及两云端绿，不改旧测试凑绿。真机pure-MCP及10分钟仍pending。"
+  },
+  "files_created_or_modified_by_this_review": [
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r9-continuation/standards-raw.txt"
+  ],
+  "no_product_test_config_git_CI_device_mutation": true,
+  "issues_encountered": [
+    "7例OK同时出现ResourceWarning；以实际负例而非7例绿判定观察语义。",
+    "父续送确认disk/receipt、signal及无限join反例并要求false原raw；随后明确要求包括真实合成symlink逃逸。本raw按当前仍冻结127立即收尾，不继续扩大调查。"
+  ]
+}

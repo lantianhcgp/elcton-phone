@@ -1,0 +1,10 @@
+test_index_leaf_symlink_rejected_without_external_write (spec_original_4.CrashContainment.test_index_leaf_symlink_rejected_without_external_write) ... ok
+test_index_written_only_through_pinned_output_fd (spec_original_4.CrashContainment.test_index_written_only_through_pinned_output_fd) ... ok
+test_output_ancestor_symlink_rejected (spec_original_4.CrashContainment.test_output_ancestor_symlink_rejected) ... ok
+test_regular_copy_index_and_payload_remain_exact (spec_original_4.CrashContainment.test_regular_copy_index_and_payload_remain_exact) ... ok
+test_source_ancestor_symlink_rejected (spec_original_4.CrashContainment.test_source_ancestor_symlink_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.015s
+
+OK

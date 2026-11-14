@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "checked_at": "2026-11-14T20:51:27.631389+08:00",
+  "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "host_tests": 152,
+  "python_tests": 123,
+  "python_skipped": 0,
+  "http_report": {
+    "ok": true,
+    "mode": "actual-kotlin-host",
+    "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+    "assertions": 3784,
+    "clients": [
+      "urllib",
+      "curl"
+    ],
+    "write_eof_transport": {
+      "status": "supported",
+      "excluded_checks": []
+    },
+    "all_raw_checks_passed": true,
+    "token": "REDACTED"
+  },
+  "runtime_tests": 1,
+  "termux": {
+    "count": 15,
+    "http_status": 200,
+    "listener_closed": true
+  },
+  "inputs_unchanged": true,
+  "inputs_manifest_sha256": "13b7f4dfe8ee15723694fbc92954d3398174d30f964a006a7410a015a7bd3e92",
+  "scope": "complete current HOST gates only; NOT Android CI/cloud/physical WE acceptance"
+}

@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checked_at": "2026-11-14T20:49:12.620211+08:00",
+  "rows": [
+    {
+      "path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.8-code10-2097f32-p2p-signed.apk",
+      "bytes": 8183987,
+      "sha256": "d5778fd80f1bd3758d0c9f2cead660af49aaf6912e2638dc16616bec808bc633"
+    },
+    {
+      "path": "/storage/emulated/0/haps/elcton-20261114-P2P准备回执-1.1.15-73c7823.hap",
+      "bytes": 835972,
+      "sha256": "8865474d76d278f6d61050f4cebca1c1a70b0f5f391f653523d9c9018c91bac0"
+    },
+    {
+      "path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.9-code11-9e300f9-合并版-signed.apk",
+      "bytes": 8237316,
+      "sha256": "15aafee2af9509bc61f3780f74cef712fc47dfdedcb487cdd34e7d59d9a1d8b7"
+    }
+  ],
+  "physical_device_actions": false
+}

@@ -1,0 +1,45 @@
+{
+  "total_count": 2,
+  "artifacts": [
+    {
+      "id": 14111768328,
+      "node_id": "MDg6QXJ0aWZhY3QxNDExMTc2ODMyOA==",
+      "name": "android-probe-44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+      "size_in_bytes": 9051290,
+      "url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/artifacts/14111768328",
+      "archive_download_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/artifacts/14111768328/zip",
+      "expired": false,
+      "digest": "sha256:50f403d294a8c0f2c64686c3cd6fe5a29a6fb0125797207109478b7429864562",
+      "created_at": "2026-11-14T11:32:24Z",
+      "updated_at": "2026-11-14T11:32:24Z",
+      "expires_at": "2027-02-12T11:30:30Z",
+      "workflow_run": {
+        "id": 43590339873,
+        "repository_id": 1440698948,
+        "head_repository_id": 1440698948,
+        "head_branch": "release/0.2.9-20261114",
+        "head_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416"
+      }
+    },
+    {
+      "id": 14111388764,
+      "node_id": "MDg6QXJ0aWZhY3QxNDExMTM4ODc2NA==",
+      "name": "diagnostics-http-44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+      "size_in_bytes": 30648,
+      "url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/artifacts/14111388764",
+      "archive_download_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/artifacts/14111388764/zip",
+      "expired": false,
+      "digest": "sha256:1896b6ee233db24fc37cd0677b3ccbdbef7f92c437a882b210ddbe1d2f13444d",
+      "created_at": "2026-11-14T11:32:21Z",
+      "updated_at": "2026-11-14T11:32:21Z",
+      "expires_at": "2027-02-12T11:30:30Z",
+      "workflow_run": {
+        "id": 43590339873,
+        "repository_id": 1440698948,
+        "head_repository_id": 1440698948,
+        "head_branch": "release/0.2.9-20261114",
+        "head_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416"
+      }
+    }
+  ]
+}

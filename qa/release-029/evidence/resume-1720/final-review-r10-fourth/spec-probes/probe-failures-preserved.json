@@ -1,0 +1,42 @@
+{
+  "initial_probe_wrapper_exit": 1,
+  "initial_failure": [
+    {
+      "probe": "crash_boundary",
+      "type": "AttributeError",
+      "message": "module 'os' has no attribute 'link'",
+      "traceback": "Traceback (most recent call last):\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/run_probes.py\", line 129, in record\n    try:results[name]=fn()\n                      ~~^^\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/run_probes.py\", line 140, in <lambda>\n    record('crash_boundary',lambda:[crash_probe(m) for m in ('normal','source-leaf','source-dir','source-root','source-hardlink','output-root','output-dir','output-leaf','unapproved-log')])\n                                    ~~~~~~~~~~~^^^\n  File \"/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/run_probes.py\", line 110, in crash_probe\n    elif mode=='source-hardlink':os.link(secret,root/'emu-crash-hardlink.db')\n                                 ^^^^^^^\nAttributeError: module 'os' has no attribute 'link'. Did you mean: 'unlink'?\n"
+    }
+  ],
+  "continuation_first_exit": 1,
+  "continuation_first_failure": "AssertionError: libc link failed",
+  "continuation_recovery_exit": 0,
+  "continuation_security_RED": [
+    {
+      "case": "output-ancestor-symlink",
+      "copy_through_symlink": true,
+      "actual_resolved_output": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/outside/output",
+      "lexical_output": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/link-parent/output",
+      "no_actual_secret": true
+    },
+    {
+      "case": "output-replaced-after-dirfd-open",
+      "outside_index_written": true,
+      "pinned_copy_exists": true,
+      "no_actual_secret": true
+    }
+  ],
+  "hardlink_not_run": [
+    {
+      "probe": "hardlink",
+      "first_failure": "os.link missing",
+      "second_failure": "libc link returned nonzero",
+      "retry_rc": -1,
+      "retry_errno": 13,
+      "source_exists": true,
+      "destination_exists": false,
+      "not_claimed_exercised": true
+    }
+  ],
+  "old_failure_not_overwritten": true
+}

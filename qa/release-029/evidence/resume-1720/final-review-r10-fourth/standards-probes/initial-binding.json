@@ -1,0 +1,53 @@
+{
+  "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "reviewed_files": 128,
+  "product_files": 37,
+  "reviewed_manifest_sha256": "a7981889ef03ecc15a99f0ca745e69e9f27e1fab8bd0af7ebd7476ed23e58f81",
+  "product_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "diff_sha256": "1e0b25c34289899baa580ca2d035c655c93d713a14719aec10443af0afe45f44",
+  "diff_bytes": 533891,
+  "complete_diff_equal": true,
+  "untracked_appended": [
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "live_mismatches": [],
+  "product_mismatches": [],
+  "prepare_raw_sha256": "e5589dccaf0c4f9ae9e7eeb0872b62e4df9fcd53375c98b0bb26d77829d4be86",
+  "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+  "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+  "candidate_live_equal": true,
+  "r8_changed": [
+    ".github/workflows/ui-smoke.yml",
+    "qa/emulator_install_and_tour.py",
+    "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+    "qa/release-029/RESUME-CHANGES.md"
+  ],
+  "r8_added": [
+    "qa/cloud_emulator_observer.py",
+    "qa/test_cloud_observer.py",
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "r8_removed": [],
+  "r8_unchanged": 121,
+  "product_exact_r8": true,
+  "all_r8_inputs_match_head": true,
+  "product_exact_head": true,
+  "app_test_resource_inputs_exact_head": 35,
+  "cumulative_sections": {
+    "r8": 65,
+    "current": 68,
+    "unchanged": 61,
+    "changed": [
+      "diff --git a/.github/workflows/ui-smoke.yml b/.github/workflows/ui-smoke.yml",
+      "diff --git a/qa/emulator_install_and_tour.py b/qa/emulator_install_and_tour.py",
+      "diff --git a/qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md b/qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "diff --git a/qa/release-029/RESUME-CHANGES.md b/qa/release-029/RESUME-CHANGES.md"
+    ],
+    "added": [
+      "diff --git a/qa/cloud_emulator_observer.py b/qa/cloud_emulator_observer.py",
+      "diff --git a/qa/test_cloud_observer.py b/qa/test_cloud_observer.py",
+      "diff --git a/qa/test_cloud_observer_isolation.py b/qa/test_cloud_observer_isolation.py"
+    ]
+  }
+}

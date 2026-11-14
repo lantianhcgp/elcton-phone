@@ -1,0 +1,109 @@
+{
+  "fault_controls": [
+    {
+      "fault": "receipt",
+      "child_exit": 0,
+      "returned": 0,
+      "once": "X",
+      "passed": true
+    },
+    {
+      "fault": "receipt",
+      "child_exit": 7,
+      "returned": 7,
+      "once": "X",
+      "passed": true
+    },
+    {
+      "fault": "directory",
+      "child_exit": 0,
+      "returned": 0,
+      "once": "X",
+      "passed": true
+    },
+    {
+      "fault": "directory",
+      "child_exit": 7,
+      "returned": 7,
+      "once": "X",
+      "passed": true
+    },
+    {
+      "fault": "thread",
+      "child_exit": 0,
+      "returned": 0,
+      "once": "X",
+      "passed": true
+    },
+    {
+      "fault": "thread",
+      "child_exit": 7,
+      "returned": 7,
+      "once": "X",
+      "passed": true
+    }
+  ],
+  "wire_controls": [
+    {
+      "success_tar": false,
+      "fault": "open",
+      "return": false,
+      "mandatory_original_io": true,
+      "passed": true
+    },
+    {
+      "success_tar": false,
+      "fault": "mkdir",
+      "return": false,
+      "mandatory_original_io": true,
+      "passed": true
+    },
+    {
+      "success_tar": true,
+      "fault": "open",
+      "return": true,
+      "mandatory_original_io": true,
+      "passed": true
+    },
+    {
+      "success_tar": true,
+      "fault": "mkdir",
+      "return": true,
+      "mandatory_original_io": true,
+      "passed": true
+    }
+  ],
+  "zero_size_resource_probe": {
+    "fixture_files": 257,
+    "copied_entries": 257,
+    "total_content_bytes": 0,
+    "index_bytes": 33046,
+    "no_static_entry_count_depth_or_index_cap": true,
+    "limits": {
+      "file_bytes": 33554432,
+      "total_bytes": 67108864
+    },
+    "synthetic_only": true
+  },
+  "native_signals": [
+    {
+      "signal": 15,
+      "direct": -15,
+      "wrapped": -15,
+      "passed": true
+    },
+    {
+      "signal": 13,
+      "direct": -13,
+      "wrapped": -13,
+      "passed": true
+    },
+    {
+      "signal": 9,
+      "direct": -9,
+      "wrapped": -9,
+      "passed": true
+    }
+  ],
+  "actual_adb_or_kernel_calls": 0
+}

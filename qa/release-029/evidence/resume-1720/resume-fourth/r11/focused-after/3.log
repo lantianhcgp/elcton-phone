@@ -1,0 +1,85 @@
+test_directory_depth_bound_prevents_unbounded_fd_recursion (__main__.CrashBudgetTests.test_directory_depth_bound_prevents_unbounded_fd_recursion) ... ERROR
+test_empty_crashes_cannot_create_unbounded_files_or_index (__main__.CrashBudgetTests.test_empty_crashes_cannot_create_unbounded_files_or_index) ... ERROR
+test_index_size_limit_precedes_new_copy (__main__.CrashBudgetTests.test_index_size_limit_precedes_new_copy) ... ERROR
+test_scan_budget_uses_lazy_directory_iterator_not_listdir (__main__.CrashBudgetTests.test_scan_budget_uses_lazy_directory_iterator_not_listdir) ... ERROR
+test_total_payload_limit_stops_before_additional_file (__main__.CrashBudgetTests.test_total_payload_limit_stops_before_additional_file) ... ERROR
+
+======================================================================
+ERROR: test_directory_depth_bound_prevents_unbounded_fd_recursion (__main__.CrashBudgetTests.test_directory_depth_bound_prevents_unbounded_fd_recursion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 75, in test_directory_depth_bound_prevents_unbounded_fd_recursion
+    module = self.capture(source, output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 38, in capture
+    module.capture_crashdata(output)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 144, in capture_crashdata
+    output_fd = open_existing_directory(output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 110, in open_existing_directory
+    current = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+PermissionError: [Errno 13] Permission denied: '/'
+
+======================================================================
+ERROR: test_empty_crashes_cannot_create_unbounded_files_or_index (__main__.CrashBudgetTests.test_empty_crashes_cannot_create_unbounded_files_or_index)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 46, in test_empty_crashes_cannot_create_unbounded_files_or_index
+    module = self.capture(source, output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 38, in capture
+    module.capture_crashdata(output)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 144, in capture_crashdata
+    output_fd = open_existing_directory(output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 110, in open_existing_directory
+    current = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+PermissionError: [Errno 13] Permission denied: '/'
+
+======================================================================
+ERROR: test_index_size_limit_precedes_new_copy (__main__.CrashBudgetTests.test_index_size_limit_precedes_new_copy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 86, in test_index_size_limit_precedes_new_copy
+    module = self.capture(source, output, configure=lambda m: setattr(m, 'CRASH_INDEX_LIMIT', 500))
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 38, in capture
+    module.capture_crashdata(output)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 144, in capture_crashdata
+    output_fd = open_existing_directory(output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 110, in open_existing_directory
+    current = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+PermissionError: [Errno 13] Permission denied: '/'
+
+======================================================================
+ERROR: test_scan_budget_uses_lazy_directory_iterator_not_listdir (__main__.CrashBudgetTests.test_scan_budget_uses_lazy_directory_iterator_not_listdir)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 61, in test_scan_budget_uses_lazy_directory_iterator_not_listdir
+    module = self.capture(source, output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 38, in capture
+    module.capture_crashdata(output)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 144, in capture_crashdata
+    output_fd = open_existing_directory(output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 110, in open_existing_directory
+    current = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+PermissionError: [Errno 13] Permission denied: '/'
+
+======================================================================
+ERROR: test_total_payload_limit_stops_before_additional_file (__main__.CrashBudgetTests.test_total_payload_limit_stops_before_additional_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 100, in test_total_payload_limit_stops_before_additional_file
+    module = self.capture(source, output, configure=lambda m: setattr(m, 'CRASH_TOTAL_LIMIT', 12))
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py", line 38, in capture
+    module.capture_crashdata(output)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 144, in capture_crashdata
+    output_fd = open_existing_directory(output)
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/cloud_emulator_observer.py", line 110, in open_existing_directory
+    current = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+PermissionError: [Errno 13] Permission denied: '/'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.080s
+
+FAILED (errors=5)

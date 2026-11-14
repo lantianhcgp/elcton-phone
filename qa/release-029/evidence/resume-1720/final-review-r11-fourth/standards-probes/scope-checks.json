@@ -1,0 +1,8 @@
+{
+  "security_probe_ast_identical_except_ROOT": true,
+  "harvest_inverse_whole_file_equal": true,
+  "workflow_inverse_whole_file_equal": true,
+  "original_test_files_exact": 52,
+  "extra_probe_count": 5,
+  "real_adb_or_kernel_calls": 0
+}

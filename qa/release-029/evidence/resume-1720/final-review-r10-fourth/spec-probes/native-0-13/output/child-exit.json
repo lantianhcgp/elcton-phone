@@ -1,0 +1,8 @@
+{
+  "returncode": -13,
+  "passed": false,
+  "pid": 22754,
+  "sampler_stopped": true,
+  "observer_errors": [],
+  "scope": "child exit only; NOT Android acceptance; observation may fail independently; no child retries/device changes"
+}

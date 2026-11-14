@@ -1,0 +1,13 @@
+test_crashdata_symlink_outside_root_is_not_copied (__main__.IsolationTests.test_crashdata_symlink_outside_root_is_not_copied) ... ok
+test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest (__main__.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest) ... ok
+test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest (__main__.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest) ... ok
+test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (__main__.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) ... ok
+test_observer_directory_failure_never_prevents_original_child (__main__.IsolationTests.test_observer_directory_failure_never_prevents_original_child) ... ok
+test_receipt_disk_error_does_not_mask_actual_child_exit (__main__.IsolationTests.test_receipt_disk_error_does_not_mask_actual_child_exit) ... ok
+test_sampler_inflight_does_not_block_completed_child (__main__.IsolationTests.test_sampler_inflight_does_not_block_completed_child) ... ok
+test_sampler_start_error_never_prevents_original_child (__main__.IsolationTests.test_sampler_start_error_never_prevents_original_child) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.862s
+
+OK

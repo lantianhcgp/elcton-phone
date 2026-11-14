@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "original_test_results": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer.py",
+      "source_sha256": "eab122b814529411e327d2126482d58b0413bae19968b6b123f4388ecc946758",
+      "count": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "passed": true,
+      "seconds": 0.1913226037286222,
+      "log_sha256": "d9712edf320a0e463be20c389ec87011424e415447a0d42fecc2f844d5e2dbfe",
+      "failed_ids": []
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_isolation.py",
+      "source_sha256": "ae9f1eb7966d4d80f2848aa8681603428722dac633878777e773e03314c7e99b",
+      "count": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "passed": true,
+      "seconds": 1.8481276552192867,
+      "log_sha256": "af7264dccee12796595dc59ce9b6c77b4ae0bfa0158a909c809b694f97c88d4a",
+      "failed_ids": []
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_containment.py",
+      "source_sha256": "a7cb8959cf3d567e9429860697f8cb74a115c09b22bdb938b65cdd35b48767eb",
+      "count": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "passed": true,
+      "seconds": 0.021138334181159735,
+      "log_sha256": "3d69255a864dee52d935b8c4223ca7e67150f07dc84d4a404ba20a1dde26ab1f",
+      "failed_ids": []
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_limits.py",
+      "source_sha256": "32ecab5ba21a0658345143d7f844ad24dc4783c1bb073239d0196529809bce6e",
+      "count": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "passed": true,
+      "seconds": 0.08714932296425104,
+      "log_sha256": "86f9ee145ba25d8fd993d94dc68b9677565d33b0475a5c22538e41ecb2bc7e4f",
+      "failed_ids": []
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/test_crash_observer_containment.py",
+      "source_sha256": "dded3e12036f4b24996e17961c231fa0fa4c06c4131b310a617edd4039d1c5b3",
+      "count": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "passed": true,
+      "seconds": 0.014990051742643118,
+      "log_sha256": "c9b42e0160ae77af694bc79817af7743e90146198e9ffef8cc7277cb8105605e",
+      "failed_ids": []
+    }
+  ],
+  "original_security_methods_ast_identical": true,
+  "harvest_whole_file_inverse_exact": true,
+  "workflow_single_wrapper_inverse_exact": true,
+  "extra_local_fake_filesystem": {
+    "source_absent_index_race_reached": true,
+    "outside_writes": 0,
+    "index_written_to_pinned_fd": true,
+    "index_mode": "0600",
+    "budget": {
+      "scanned_entries": 0,
+      "copied_files": 0,
+      "content_bytes": 0,
+      "max_depth": 0,
+      "stopped_reason": "source-absent",
+      "limits": {
+        "scan": 256,
+        "copy": 64,
+        "depth": 8,
+        "index_bytes": 32768,
+        "file_bytes": 33554432,
+        "total_bytes": 67108864
+      }
+    },
+    "existing_index_exclusive_rejected_without_overwrite": true
+  },
+  "scope": "local fixture filesystem / actual child OS processes only; no ADB/CI/device; 30 original cases zero skip plus two index branch probes"
+}

@@ -1,0 +1,10 @@
+{
+  "mode": "directory",
+  "requested_exit": 7,
+  "signal": null,
+  "native_returncode": 7,
+  "elapsed_seconds": 0.22597260400652885,
+  "marker": "X",
+  "stdout_bytes": 0,
+  "stderr_bytes": 0
+}

@@ -1,0 +1,1 @@
+Reviewer-only seal attempt failed on assumed compact encoding of gates inputs-before.json. Candidate130/37/full diff identity and25 focused probes already verified within main timebox. Original seal script retained; continuation verifies declared gates SHA against exact saved input file bytes, not an unapproved alternative candidate hash. No implementation/evidence modified.

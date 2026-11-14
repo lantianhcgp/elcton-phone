@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "products_unchanged": 37,
+  "old_app_test_files_unchanged": 35,
+  "harvest_full_byte_reverse_equal": true,
+  "workflow_single_wrapper_reverse_equal": true,
+  "source_diff_check_exit": 0
+}

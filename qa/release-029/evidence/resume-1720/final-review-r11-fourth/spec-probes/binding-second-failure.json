@@ -1,0 +1,1 @@
+{"exit_code":1,"source":"bind_inputs.py","stage":"R8 SPEC raw binding shape lookup","error":"KeyError in nested bindings: R8 SPEC bindings have reviewed/product subobjects while canonical hashes are top-level; R8 standards hashes nested. Both exact raw schemas are now handled explicitly, preserving all source/raw bytes.","product_or_candidate_blocker":false}

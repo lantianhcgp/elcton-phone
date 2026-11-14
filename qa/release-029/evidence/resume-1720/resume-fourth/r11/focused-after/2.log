@@ -1,0 +1,41 @@
+test_index_leaf_symlink_rejected_without_external_write (__main__.CrashContainment.test_index_leaf_symlink_rejected_without_external_write) ... ok
+test_index_written_only_through_pinned_output_fd (__main__.CrashContainment.test_index_written_only_through_pinned_output_fd) ... FAIL
+test_output_ancestor_symlink_rejected (__main__.CrashContainment.test_output_ancestor_symlink_rejected) ... ok
+test_regular_copy_index_and_payload_remain_exact (__main__.CrashContainment.test_regular_copy_index_and_payload_remain_exact) ... ERROR
+test_source_ancestor_symlink_rejected (__main__.CrashContainment.test_source_ancestor_symlink_rejected) ... ok
+
+======================================================================
+ERROR: test_regular_copy_index_and_payload_remain_exact (__main__.CrashContainment.test_regular_copy_index_and_payload_remain_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_containment.py", line 106, in test_regular_copy_index_and_payload_remain_exact
+    self.assertEqual((output / 'emulator-crashdata/emu-crash-normal.db').read_bytes(), b'normal crash fixture')
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/pathlib/_abc.py", line 625, in read_bytes
+    with self.open(mode='rb') as f:
+         ~~~~~~~~~^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/data/data/com.termux/files/usr/tmp/tmpodwtdekm/output/emulator-crashdata/emu-crash-normal.db'
+
+======================================================================
+FAIL: test_index_written_only_through_pinned_output_fd (__main__.CrashContainment.test_index_written_only_through_pinned_output_fd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_cloud_observer_crash_containment.py", line 92, in test_index_written_only_through_pinned_output_fd
+    self.assertEqual(swapped, [True], 'Real output dirfd race was not reached')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [True]
+
+Second list contains 1 additional elements.
+First extra element 0:
+True
+
+- []
++ [True] : Real output dirfd race was not reached
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.043s
+
+FAILED (failures=1, errors=1)

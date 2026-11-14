@@ -1,0 +1,170 @@
+{
+  "crash_boundaries": [
+    {
+      "case": "normal",
+      "error": null,
+      "copied": true,
+      "bytes": 29,
+      "sha256": "4675a940ed7c5f6ddcc583ee1deb5c954d7d67893c2bc19c48cf67b922d236b2",
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": true,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "source-root-link",
+      "error": "NotADirectoryError: [Errno 20] Not a directory: '/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/focused-scratch/tmp2jd28bz5/linked-root'",
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": true,
+      "output_root_has_link": false,
+      "index_written": false,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "source-ancestor-link",
+      "error": null,
+      "copied": true,
+      "bytes": 59,
+      "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+      "source_root_has_link": true,
+      "output_root_has_link": false,
+      "index_written": true,
+      "boundary_passed": false,
+      "synthetic_limit": null
+    },
+    {
+      "case": "source-directory-link",
+      "error": null,
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": true,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "source-leaf-link",
+      "error": null,
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": true,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "source-hardlink-synthetic-nlink",
+      "error": null,
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": true,
+      "boundary_passed": true,
+      "synthetic_limit": "nlink injection only; native hardlink creation denied"
+    },
+    {
+      "case": "output-root-link",
+      "error": "NotADirectoryError: [Errno 20] Not a directory: '/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/focused-scratch/tmp2w5wzduq/output'",
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": false,
+      "output_root_has_link": true,
+      "index_written": false,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "output-ancestor-link",
+      "error": null,
+      "copied": true,
+      "bytes": 29,
+      "sha256": "4675a940ed7c5f6ddcc583ee1deb5c954d7d67893c2bc19c48cf67b922d236b2",
+      "source_root_has_link": false,
+      "output_root_has_link": true,
+      "index_written": true,
+      "boundary_passed": false,
+      "synthetic_limit": null
+    },
+    {
+      "case": "output-directory-link",
+      "error": "NotADirectoryError: [Errno 20] Not a directory: 'emulator-crashdata'",
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": false,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "output-leaf-link",
+      "error": "FileExistsError: [Errno 17] File exists: 'emu-crash-test.db'",
+      "copied": false,
+      "bytes": 59,
+      "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": false,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    },
+    {
+      "case": "output-hardlink-existing-leaf",
+      "error": "FileExistsError: [Errno 17] File exists: 'emu-crash-test.db'",
+      "copied": false,
+      "bytes": 59,
+      "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": false,
+      "boundary_passed": true,
+      "synthetic_limit": "nlink injection only; native hardlink creation denied"
+    },
+    {
+      "case": "unapproved-log",
+      "error": null,
+      "copied": false,
+      "bytes": 0,
+      "sha256": null,
+      "source_root_has_link": false,
+      "output_root_has_link": false,
+      "index_written": true,
+      "boundary_passed": true,
+      "synthetic_limit": null
+    }
+  ],
+  "structure": {
+    "harvest_reverse_whole_file_equal_archive": true,
+    "workflow_reverse_whole_file_equal_archive": true,
+    "workflow_substitutions": 1
+  },
+  "blocked_sampler": {
+    "entered": true,
+    "returncode": 7,
+    "seconds": 1.0680896867997944,
+    "daemon": true,
+    "receipt_sampler_stopped": false,
+    "all_released_threads_stopped": true,
+    "passed": true
+  },
+  "security_static": {
+    "root_open_NOFOLLOW_only_final_component": true,
+    "fstat_nlink_rechecked": false,
+    "traversal_entry_or_depth_count_cap": false,
+    "index_write_uses_unpinned_output_path": true
+  },
+  "actual_adb_or_kernel_calls": 0,
+  "scope": "HOST only, all fixtures beneath standards-probes; no real secrets or device interactions"
+}

@@ -1,0 +1,20 @@
+test_all_existing_harvest_decisions_and_execution_function_unchanged (qa.test_cloud_observer.ObserverTests.test_all_existing_harvest_decisions_and_execution_function_unchanged) ... ok
+test_child_nonzero_is_forwarded_and_never_retried (qa.test_cloud_observer.ObserverTests.test_child_nonzero_is_forwarded_and_never_retried) ... ok
+test_child_success_is_not_android_acceptance_and_no_thread_left (qa.test_cloud_observer.ObserverTests.test_child_success_is_not_android_acceptance_and_no_thread_left) ... ok
+test_empty_success_is_still_false_and_not_relabelled_green (qa.test_cloud_observer.ObserverTests.test_empty_success_is_still_false_and_not_relabelled_green) ... ok
+test_failed_harvest_preserves_exit_and_binary_output_without_changing_false (qa.test_cloud_observer.ObserverTests.test_failed_harvest_preserves_exit_and_binary_output_without_changing_false) ... ok
+test_not_ci_aborts_before_any_adb_call (qa.test_cloud_observer.ObserverTests.test_not_ci_aborts_before_any_adb_call) ... ok
+test_successful_harvest_keeps_original_tar_bytes_and_extracts_exact_file (qa.test_cloud_observer.ObserverTests.test_successful_harvest_keeps_original_tar_bytes_and_extracts_exact_file) ... ok
+test_crashdata_symlink_outside_root_is_not_copied (qa.test_cloud_observer_isolation.IsolationTests.test_crashdata_symlink_outside_root_is_not_copied) ... ok
+test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest (qa.test_cloud_observer_isolation.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_failed_harvest) ... ok
+test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest (qa.test_cloud_observer_isolation.IsolationTests.test_diagnostic_wire_write_failure_does_not_change_original_successful_harvest) ... ok
+test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals (qa.test_cloud_observer_isolation.IsolationTests.test_exact_child_sigterm_and_sigpipe_propagate_as_real_signals) ... ok
+test_observer_directory_failure_never_prevents_original_child (qa.test_cloud_observer_isolation.IsolationTests.test_observer_directory_failure_never_prevents_original_child) ... ok
+test_receipt_disk_error_does_not_mask_actual_child_exit (qa.test_cloud_observer_isolation.IsolationTests.test_receipt_disk_error_does_not_mask_actual_child_exit) ... ok
+test_sampler_inflight_does_not_block_completed_child (qa.test_cloud_observer_isolation.IsolationTests.test_sampler_inflight_does_not_block_completed_child) ... ok
+test_sampler_start_error_never_prevents_original_child (qa.test_cloud_observer_isolation.IsolationTests.test_sampler_start_error_never_prevents_original_child) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.026s
+
+OK

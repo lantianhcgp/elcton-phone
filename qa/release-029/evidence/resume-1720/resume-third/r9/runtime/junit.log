@@ -1,0 +1,11 @@
+JUnit version 4.13.2
+.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:37265; token=<redacted>; read-only
+real_socket_health=200; captured_running=true; writing=true
+stopListener_returned; live_running=false; real_socket_refused=true
+released_old_write; writer_quiescent=true; final_file_running=false
+retained_real_runtime_files=/data/data/com.termux/files/home/elcton-phone-release-029-20261114/.diag-build/runtime-generated/runtime-files
+
+Time: 0.165
+
+OK (1 test)
+

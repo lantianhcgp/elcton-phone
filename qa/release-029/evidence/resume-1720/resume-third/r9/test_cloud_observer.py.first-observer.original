@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+"""Synthetic observer tests; not Android lifecycle, GPU, or cloud success proof."""
+import ast
+import importlib.util
+import io
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tarfile
+import tempfile
+import unittest
+import uuid
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+HOLD = ROOT / 'qa/release-029/evidence/resume-1720/resume-third/r9'
+
+
+def harvest_scope(out, run):
+    tree = ast.parse((ROOT / 'qa/emulator_install_and_tour.py').read_text())
+    names = {'harvest_palettes', 'preserve_palette_harvest_wire'}
+    functions: list[ast.stmt] = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names]
+    assert {f.name for f in functions if isinstance(f, ast.FunctionDef)} == names, 'Missing exact harvest wire observer helper'
+    scope = {'Path': Path, 'subprocess': subprocess, 'json': json, 'uuid': uuid,
+             'io': io, 'tarfile': tarfile, 'out': Path(out), 'palette_run': run,
+             'palette_target': Path(out) / 'palette-product'}
+    scope['palette_target'].mkdir()
+    exec(compile(ast.Module(body=functions, type_ignores=[]), 'real-harvest-helpers', 'exec'), scope)
+    return scope
+
+
+class ObserverTests(unittest.TestCase):
+    def test_failed_harvest_preserves_exit_and_binary_output_without_changing_false(self):
+        with tempfile.TemporaryDirectory() as directory:
+            scope = harvest_scope(directory, 'fixture-run')
+            result = subprocess.CompletedProcess(['adb', 'shell'], 1, b'partial\x00\xff', b'err\xff')
+            with patch.object(subprocess, 'run', return_value=result):
+                self.assertFalse(scope['harvest_palettes']())
+            records = list((Path(directory) / 'palette-harvest-wire').glob('*.json'))
+            self.assertEqual(len(records), 1)
+            record = json.loads(records[0].read_bytes())
+            self.assertEqual(record['returncode'], 1)
+            self.assertEqual(records[0].with_suffix('.stdout.bin').read_bytes(), result.stdout)
+            self.assertEqual(records[0].with_suffix('.stderr.bin').read_bytes(), result.stderr)
+            self.assertEqual((Path(directory) / 'palette-harvest-error.txt').read_text(), 'err�')
+
+    def test_successful_harvest_keeps_original_tar_bytes_and_extracts_exact_file(self):
+        with tempfile.TemporaryDirectory() as directory:
+            scope = harvest_scope(directory, 'fixture-run')
+            stream = io.BytesIO()
+            raw = b'proof\x00\xff'
+            with tarfile.open(fileobj=stream, mode='w') as archive:
+                item = tarfile.TarInfo('qa-palette-evidence/fixture-run/fixture.bin')
+                item.size = len(raw)
+                archive.addfile(item, io.BytesIO(raw))
+            result = subprocess.CompletedProcess(['adb', 'shell'], 0, stream.getvalue(), b'')
+            with patch.object(subprocess, 'run', return_value=result):
+                self.assertTrue(scope['harvest_palettes']())
+            self.assertEqual((scope['palette_target'] / 'fixture.bin').read_bytes(), raw)
+            records = list((Path(directory) / 'palette-harvest-wire').glob('*.json'))
+            self.assertEqual(len(records), 1)
+            self.assertEqual(records[0].with_suffix('.stdout.bin').read_bytes(), result.stdout)
+            self.assertEqual(json.loads(records[0].read_bytes())['returncode'], 0)
+
+    def test_empty_success_is_still_false_and_not_relabelled_green(self):
+        with tempfile.TemporaryDirectory() as directory:
+            scope = harvest_scope(directory, 'fixture-run')
+            with patch.object(subprocess, 'run', return_value=subprocess.CompletedProcess(['adb', 'shell'], 0, b'', b'')):
+                self.assertFalse(scope['harvest_palettes']())
+            records = list((Path(directory) / 'palette-harvest-wire').glob('*.json'))
+            self.assertEqual(len(records), 1)
+            self.assertEqual(json.loads(records[0].read_bytes())['stdout_bytes'], 0)
+
+    def test_all_existing_harvest_decisions_and_execution_function_unchanged(self):
+        before = ast.parse((HOLD / 'emulator_install_and_tour.py.before.original').read_text())
+        after = ast.parse((ROOT / 'qa/emulator_install_and_tour.py').read_text())
+        old = {n.name: n for n in before.body if isinstance(n, ast.FunctionDef)}
+        new = {n.name: n for n in after.body if isinstance(n, ast.FunctionDef)}
+        current = new['harvest_palettes']
+        calls = [n for n in current.body if isinstance(n, ast.Expr) and isinstance(n.value, ast.Call)
+                 and isinstance(n.value.func, ast.Name) and n.value.func.id == 'preserve_palette_harvest_wire']
+        self.assertEqual(len(calls), 1, 'One additive observation only')
+        current.body.remove(calls[0])
+        self.assertEqual(ast.dump(old['harvest_palettes']), ast.dump(current))
+        self.assertEqual(ast.dump(old['execute_palette_phase']), ast.dump(new['execute_palette_phase']))
+        # Existing theme, installation, identity, pixel/tour logic remains exact too.
+        for name in old.keys() - {'harvest_palettes'}:
+            self.assertEqual(ast.dump(old[name]), ast.dump(new[name]), name)
+
+    def load_observer(self):
+        path = ROOT / 'qa/cloud_emulator_observer.py'
+        self.assertTrue(path.is_file(), 'Cloud process/kernel observer absent')
+        spec = importlib.util.spec_from_file_location('cloud_observer_tests', path)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+
+    def test_child_nonzero_is_forwarded_and_never_retried(self):
+        module = self.load_observer()
+        with tempfile.TemporaryDirectory() as directory:
+            marker = Path(directory) / 'count.txt'
+            command = [sys.executable, '-c', 'from pathlib import Path;import sys;p=Path(sys.argv[1]);p.write_text(p.read_text()+"X" if p.exists() else "X");sys.exit(7)', str(marker)]
+            with patch.object(module, 'capture_kernel', return_value=None), patch.object(module, 'capture_crashdata', return_value=None):
+                self.assertEqual(module.run_child(command, Path(directory) / 'observe', interval=0.02), 7)
+            self.assertEqual(marker.read_text(), 'X')
+            receipt = json.loads((Path(directory) / 'observe/child-exit.json').read_bytes())
+            self.assertEqual(receipt['returncode'], 7)
+            self.assertFalse(receipt['passed'])
+            self.assertTrue(receipt['sampler_stopped'])
+
+    def test_child_success_is_not_android_acceptance_and_no_thread_left(self):
+        module = self.load_observer()
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'observe'
+            with patch.object(module, 'capture_kernel', return_value=None), patch.object(module, 'capture_crashdata', return_value=None):
+                self.assertEqual(module.run_child([sys.executable, '-c', 'pass'], output, interval=0.02), 0)
+            receipt = json.loads((output / 'child-exit.json').read_bytes())
+            self.assertEqual(receipt['returncode'], 0)
+            self.assertIn('NOT Android acceptance', receipt['scope'])
+            self.assertTrue(receipt['sampler_stopped'])
+            self.assertTrue((output / 'samples.jsonl').is_file())
+
+    def test_not_ci_aborts_before_any_adb_call(self):
+        module = self.load_observer()
+        with patch.dict('os.environ', {}, clear=True), patch.object(module.subprocess, 'run') as run:
+            with self.assertRaises(RuntimeError):
+                module.verify_cloud_emulator()
+            run.assert_not_called()
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

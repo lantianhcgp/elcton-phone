@@ -1,0 +1,1 @@
+{"exit_code":1,"stage":"finalize.py gate inputs digest encoding","error":"reader asserted compact SHA for parent inputs_manifest_sha256 before confirming parent's encoding; 152 live gate input file hashes already independently checked exact. No candidate/product/raw modified.","product_or_candidate_blocker":false}

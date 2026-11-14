@@ -1,0 +1,186 @@
+{
+  "run-exact.json": {
+    "bytes": 4298,
+    "sha256": "d234f680819a5e554b3886f069510537ee684dbc4612010bb297cf76865c3b02"
+  },
+  "artifacts.json": {
+    "bytes": 1871,
+    "sha256": "b23c8abf3eda40d2be2b85a40d09a033e6a2a2ef723ada4e298ea4178d8c49be"
+  },
+  "download.stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "download.stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "download.exit": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "artifact/dist/candidate-manifest.json": {
+    "bytes": 173,
+    "sha256": "b2512d56b0f9fe8c0f64be306f5df4c349d54a2a4aff33ef5d386cda4bf7f8cb"
+  },
+  "artifact/dist/elcton-phone-probe.apk.idsig": {
+    "bytes": 71634,
+    "sha256": "98498411ad07bc12725c125eb4511c3c483accd8b47b4d451036bfd0da4cfad7"
+  },
+  "artifact/dist/apk-signature.txt": {
+    "bytes": 317,
+    "sha256": "3da5e6cb2e3927d027b58301ae562decd540530e17a48ae9e208ac4bac4305d5"
+  },
+  "artifact/dist/elcton-phone-probe.apk": {
+    "bytes": 8237316,
+    "sha256": "5358a42bbc5aaa84fcb517a69d56f4cf69f63e609122cba85978786dfda405d3"
+  },
+  "artifact/dist/elcton-ui-tests.apk.idsig": {
+    "bytes": 18386,
+    "sha256": "a2ba534446c14e2c39a8d44605652f7762f2f07f27dea72d309dc02d0f6c1db2"
+  },
+  "artifact/dist/elcton-ui-tests.apk": {
+    "bytes": 1182151,
+    "sha256": "9d4e2a7b18713a9a2c2e12fad23168e6f8f7c782e1e66e08d882567218c97971"
+  },
+  "artifact/dist/source-sha.txt": {
+    "bytes": 41,
+    "sha256": "05b6d7d8d1af0ba982312ce44fec4569591fb1c64018fe326d8e11947c094786"
+  },
+  "artifact/dist/test-signature.txt": {
+    "bytes": 317,
+    "sha256": "3da5e6cb2e3927d027b58301ae562decd540530e17a48ae9e208ac4bac4305d5"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.AdapterScopeTest.xml": {
+    "bytes": 598,
+    "sha256": "30d0068ed86e34d46650f967b32bd9793e1830ce86f6d68d1f6dda249c1a97a1"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DevicePolicyTest.xml": {
+    "bytes": 448,
+    "sha256": "917a792fa7c61dccf0d45bff1309d31de9195bbef4b624c31bfa5d5e9507fb92"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticMcpServerTest.xml": {
+    "bytes": 2247,
+    "sha256": "8c1890b527dca5ca2a052f5d84661a946d997b226e4eb6e5b7ad09eb0a39a673"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticToolsTest.xml": {
+    "bytes": 1115,
+    "sha256": "0c69ae55b37432be29f6877186bcb9408e455e03b3c9d9458162ccb071a6a053"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticsIntegrationTest.xml": {
+    "bytes": 914,
+    "sha256": "990aac380083934ad7b50b7159300d1860b68ae26e935088ecc52ea3763821db"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalBoundaryTest.xml": {
+    "bytes": 619,
+    "sha256": "3fd377d47f03b3caf02d27e4d58f169d6d1ca31603c147a8410e21e8d45f34d5"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalTest.xml": {
+    "bytes": 604,
+    "sha256": "000065d0df49cf381edb90801d67a6c3099bf326559efc2f0fd1376bfe78f8ea"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordTest.xml": {
+    "bytes": 461,
+    "sha256": "ae5cdf3f7cc895c8647696dc016188742c87a7d5614e438783d7c236bd73862b"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordBoundaryTest.xml": {
+    "bytes": 2462,
+    "sha256": "0b677614e7443cded2322302763163dd104f86f76404847c501dcfa175b2fae2"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ExportSessionTest.xml": {
+    "bytes": 582,
+    "sha256": "2a226de08633df70cbec73b86da8cdcd1706121a546f24fe76c2dbe26eff29b5"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.MainThreadActionsTest.xml": {
+    "bytes": 1014,
+    "sha256": "147532a4a9244c3df83d9ec0cd7d98356629f58321ed0f652832e247111819f3"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpKeepAlivePolicyTest.xml": {
+    "bytes": 1663,
+    "sha256": "fcb7b81a063a258b18fe94062ab058eef239339bae7eafccc1a8a20e39442a50"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpTokenTest.xml": {
+    "bytes": 773,
+    "sha256": "19d65e48a574ffa84a703a40636dde00a2dfe467402f05a75bd733ad496de1db"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pCandidateBuildTest.xml": {
+    "bytes": 459,
+    "sha256": "6fd2353d414f40c88e49bf85aecc3903614bea1ca45502a9acc4b5e24186f4c8"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyErrorTest.xml": {
+    "bytes": 582,
+    "sha256": "cb788e62c0ace55daa446ebb4e1b851e145a58134f72b2c06b160bc1d384b856"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyIngressTest.xml": {
+    "bytes": 602,
+    "sha256": "bb0c3cb8eba0532191e5f53e70e8774435d197feedd632e7f1c23fba82c263a1"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneActionsTest.xml": {
+    "bytes": 1813,
+    "sha256": "5e3cf1a1fa62f5bac0c4382ce6187d037628e0c1affe8c4ce0aa0a0507abc858"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpCompositionTest.xml": {
+    "bytes": 616,
+    "sha256": "e53224cc69830dc133848faad1d279096db25f05db7e279c2fc15db207f36932"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneScheduleTest.xml": {
+    "bytes": 1069,
+    "sha256": "6a0601454765ab3b6ae782fe0bbb9e1729ed7201517e940e906fec8f75f90398"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneSnapshotTest.xml": {
+    "bytes": 568,
+    "sha256": "3c501d3196825382f7f7e6cd57be3e665a5a27dd0722aff9dd31512666a8f75e"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpToolsTest.xml": {
+    "bytes": 1984,
+    "sha256": "1e51fe9c937fba1361ec9584f2c44a257941fbdfd5960c25752def02993ced6b"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ProtocolIngressAuditTest.xml": {
+    "bytes": 1158,
+    "sha256": "998c73bf6aae3aaef60aa472dcb13aa14d70e09494c82f952e24c436b6511084"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ScheduleBookTest.xml": {
+    "bytes": 1077,
+    "sha256": "bedc88307f46f4d612c74eb0bbd5fe395eb5a86c43aa7d644906bc9e1d05bd6f"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PickupClientTest.xml": {
+    "bytes": 1438,
+    "sha256": "50737ddf5473b014b238ad53ad3cebc8ac9ed06f21dcf49f032f90185ff18152"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SnapshotPrivacyAuditTest.xml": {
+    "bytes": 1054,
+    "sha256": "9dd34c012bbb5a45b24aef6df17bb830cefa8aa3483f02d87b682c12193b23b0"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SyncEngineTest.xml": {
+    "bytes": 1323,
+    "sha256": "bf69676117d9f97987f0e7e1bd0943dc0cf64ab5350bf409cff15c4915b0c8cd"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.TransferSessionTest.xml": {
+    "bytes": 574,
+    "sha256": "1c10f960d0fe5dc3683d340d66ee5ea47566db90e0e22a43c09f684f47072cbb"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.UserFacingErrorTest.xml": {
+    "bytes": 572,
+    "sha256": "1c2dbf39a7b1914eede36236a18497122b2191ca5a5b363df8b5ff3fd98b4cc4"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WearEngineConfigTest.xml": {
+    "bytes": 1083,
+    "sha256": "c531714834b4451bb1a862e4d85ff3cbaa63ad602a98a086d3868a867d3d48b9"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WireTest.xml": {
+    "bytes": 537,
+    "sha256": "997177b8b81e597d7c940e1a953b3624f1c6ba7290e6d9767da4618b3da1caa9"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/binary/output.bin": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/binary/output.bin.idx": {
+    "bytes": 1,
+    "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "artifact/app/build/test-results/testDebugUnitTest/binary/results.bin": {
+    "bytes": 20052,
+    "sha256": "3a209b8c28af03dbc91f54df52dcb918852b462f6170565a438d73382f27d1bd"
+  }
+}

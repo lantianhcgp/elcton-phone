@@ -1,0 +1,10 @@
+{
+  "mode": "thread",
+  "requested_exit": 0,
+  "signal": null,
+  "native_returncode": 0,
+  "elapsed_seconds": 0.22379562491551042,
+  "marker": "X",
+  "stdout_bytes": 0,
+  "stderr_bytes": 0
+}

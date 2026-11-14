@@ -101,6 +101,22 @@ def harvest_palettes():
         (out/'palette-harvest-timeout-stdout.bin').write_bytes(error.stdout or b'')
         (out/'palette-harvest-timeout-stderr.bin').write_bytes(error.stderr or b'')
         raise
+    # Diagnostic-only block. Failure must not skip any original harvest decision.
+    try:
+        import json as wire_json
+        import uuid as wire_uuid
+        wire_target=out/'palette-harvest-wire';wire_target.mkdir(exist_ok=True)
+        wire_stem=wire_target/str(wire_uuid.uuid4())
+        with wire_stem.with_suffix('.stdout.bin').open('xb') as wire_file:
+            wire_file.write(archive.stdout)
+        with wire_stem.with_suffix('.stderr.bin').open('xb') as wire_file:
+            wire_file.write(archive.stderr)
+        wire_record={'qa_run':palette_run,'returncode':archive.returncode,
+            'stdout_bytes':len(archive.stdout),'stderr_bytes':len(archive.stderr)}
+        with wire_stem.with_suffix('.json').open('x') as wire_file:
+            wire_file.write(wire_json.dumps(wire_record,indent=2)+'\n')
+    except Exception:
+        pass  # Observer failure only; original error/parse/return below remain mandatory.
     if archive.returncode or not archive.stdout:
         (out/'palette-harvest-error.txt').write_text(archive.stderr.decode(errors='replace'))
         return False

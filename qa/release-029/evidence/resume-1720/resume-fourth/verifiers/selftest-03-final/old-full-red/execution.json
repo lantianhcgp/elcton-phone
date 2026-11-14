@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py",
+    "--source",
+    "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "--run",
+    "43590641863",
+    "--suite",
+    "full",
+    "--incoming",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/full-44df9d0-evidence",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-03-final/old-full-red"
+  ],
+  "source": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "run": "43590641863",
+  "suite": "full",
+  "incoming": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/full-44df9d0-evidence",
+  "out": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/selftest-03-final/old-full-red",
+  "python": "3.13.15 (main, Aug 23 2026, 18:55:06) [Clang 21.1.8 ]",
+  "tool_sha256": "1093d106014452ced8eb484034013b1cf9e480c21b2151965aff7649918f64e6",
+  "scope": "HOST OFFLINE ONLY: zero adb/API/CI/device actions"
+}

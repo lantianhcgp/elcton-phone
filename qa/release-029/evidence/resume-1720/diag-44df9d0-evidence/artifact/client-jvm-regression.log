@@ -1,0 +1,10 @@
+Scope: local JVM production Kotlin + real org.json; SYNTHETIC host callbacks/relay; NOT Android or adb verification
+test_content_length_post_survives_eof_closing_relay (__main__.McpRealClientTest.test_content_length_post_survives_eof_closing_relay) ... ok
+test_direct_controls_with_and_without_write_eof_use_real_server (__main__.McpRealClientTest.test_direct_controls_with_and_without_write_eof_use_real_server) ... ok
+test_url_mode_really_runs_curl_and_urllib (__main__.McpRealClientTest.test_url_mode_really_runs_curl_and_urllib) ... ok
+test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks (__main__.McpRealClientTest.test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 19.759s
+
+OK

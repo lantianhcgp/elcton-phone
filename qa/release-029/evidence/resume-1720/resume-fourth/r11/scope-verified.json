@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "old_test_files_exact": 54,
+  "products_exact": 37,
+  "harvest_inverse_bytes_exact_after_removing_exact_added_try_and_comment": true,
+  "security_probe_assertions_ast_identical": true,
+  "current_gate_inputs_exact": 152,
+  "current_full_host": {
+    "passed": true,
+    "checked_at": "2026-11-14T21:20:11.445528+08:00",
+    "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "host_tests": 152,
+    "python_tests": 133,
+    "python_skipped": 0,
+    "http_report": {
+      "ok": true,
+      "mode": "actual-kotlin-host",
+      "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+      "assertions": 3784,
+      "clients": [
+        "urllib",
+        "curl"
+      ],
+      "write_eof_transport": {
+        "status": "supported",
+        "excluded_checks": []
+      },
+      "all_raw_checks_passed": true,
+      "token": "REDACTED"
+    },
+    "runtime_tests": 1,
+    "termux": {
+      "count": 15,
+      "http_status": 200,
+      "listener_closed": true
+    },
+    "inputs_unchanged": true,
+    "inputs_manifest_sha256": "640d0ff3ce6c3666ca0d8185560f247c7272779adb456cebd7e224baa08ada58",
+    "scope": "complete current HOST gates only; NOT Android CI/cloud/physical WE acceptance"
+  },
+  "note": "Two preceding scope locator checks RED retained; only observer locator fixed, source unchanged."
+}

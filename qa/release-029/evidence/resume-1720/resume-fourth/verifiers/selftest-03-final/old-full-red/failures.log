@@ -1,0 +1,75 @@
+exact-run-success
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 357, in <lambda>
+    gate.check('exact-run-success',lambda:check_run(read_json(args.out/'raw/run.json'),args.source,args.run))
+                                          ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 70, in check_run
+    require(run.get('status') == 'completed' and run.get('conclusion') == 'success',
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'run.json is not completed/success')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 31, in require
+    raise AssertionError(label)
+AssertionError: run.json is not completed/success
+
+full-report-identity
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 279, in <lambda>
+    self.check('full-report-identity', lambda: check_host(host,self.args.source))
+                                               ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 75, in check_host
+    require(host.get('passed') is True, 'Artifact report passed is not true')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 31, in require
+    raise AssertionError(label)
+AssertionError: Artifact report passed is not true
+
+full-theme-original
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 293, in product
+    compare(actual,host[label+'_ui'],label+' embedded report ALL JSON')
+                   ~~~~^^^^^^^^^^^^^
+KeyError: 'theme_ui'
+
+full-palette-original
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 291, in product
+    require(saved_host['passed'] is True,'Original '+label+' host RED')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 31, in require
+    raise AssertionError(label)
+AssertionError: Original palette host RED
+
+full-tour-original-static-block
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 297, in <lambda>
+    self.check('full-tour-original-static-block',lambda:self.tour(host))
+                                                        ~~~~~~~~~^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 327, in tour
+    require(len(names)==28 and {p.stem for p in (self.art/'product').rglob('*.png')}==names,'Original 28 exact tour scene names missing/extra')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 31, in require
+    raise AssertionError(label)
+AssertionError: Original 28 exact tour scene names missing/extra
+
+full-system-bars-original
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 92, in check
+    result = fn()
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 301, in system_bars
+    require(not missing,'Missing original app-owned system-bar scenes: '+str(missing))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py", line 31, in require
+    raise AssertionError(label)
+AssertionError: Missing original app-owned system-bar scenes: ['01-today-empty', '02-week-empty', '03-editor-empty', '04-editor-invalid', '05-week-course', '06-editor-filled', '07-week-edited', '08-settings', '09-settings-invalid', '13-device', '14-device-unavailable', '15-editor-bottom', '17-course-deleted', '20-restored-course', '21-confirmed-empty-import', '22-return-today', '24-file-exported', '27-file-imported-course', '28-restarted-file-import', '29-keyboard-visible']
+

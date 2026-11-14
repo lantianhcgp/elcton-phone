@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+"""Cloud-only process evidence around the unchanged full UI child.
+
+No child retry, kill, pass fabrication, device settings, or physical device access.
+"""
+import argparse
+import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import threading
+import time
+
+
+def verify_cloud_emulator():
+    if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('CI') != 'true':
+        raise RuntimeError('This observer runs only on a GitHub cloud runner')
+    result = subprocess.run(['adb', 'devices'], capture_output=True, text=True, check=True, timeout=20)
+    connected = [line.split() for line in result.stdout.splitlines()[1:] if line.strip()]
+    if len(connected) != 1 or len(connected[0]) != 2:
+        raise RuntimeError('Expected exactly one verified emulator')
+    serial, state = connected[0]
+    if re.fullmatch(r'emulator-[0-9]+', serial) is None or state != 'device':
+        raise RuntimeError('Physical or unready device is forbidden')
+    return serial
+
+
+def proc_snapshot():
+    result = {'time': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              'monotonic': time.monotonic(), 'emulator_processes': []}
+    result['meminfo'] = Path('/proc/meminfo').read_text()
+    for entry in Path('/proc').iterdir():
+        if not entry.name.isdecimal():
+            continue
+        try:
+            comm = (entry / 'comm').read_text().strip()
+            cmdline = (entry / 'cmdline').read_bytes().split(b'\0')
+            executable = os.path.basename(cmdline[0].decode(errors='replace')) if cmdline else ''
+            if comm.startswith(('qemu-system', 'emulator')) or executable.startswith(('qemu-system', 'emulator')):
+                # Only emulator identity/status, no generic command/environment dumps.
+                result['emulator_processes'].append({'pid': int(entry.name), 'comm': comm,
+                                                     'status': (entry / 'status').read_text(),
+                                                     'oom_score': (entry / 'oom_score').read_text().strip()})
+        except (OSError, ValueError, IndexError):
+            continue
+    for name in ('memory.current', 'memory.max', 'memory.events', 'memory.peak'):
+        file = Path('/sys/fs/cgroup') / name
+        if file.is_file():
+            result[name] = file.read_text()
+    result['console_ports'] = []
+    for name in ('/proc/net/tcp', '/proc/net/tcp6'):
+        for row in Path(name).read_text().splitlines()[1:]:
+            parts = row.split()
+            if len(parts) > 3 and parts[1].split(':')[-1] in ('15B2', '15B3'):
+                result['console_ports'].append({'local_address': parts[1], 'state': parts[3]})
+    return result
+
+
+def capture_kernel(output):
+    result = subprocess.run(['sudo', '-n', 'dmesg', '-T'], capture_output=True, timeout=20)
+    with (output / 'kernel-final.stdout.bin').open('xb') as file:
+        file.write(result.stdout)
+    with (output / 'kernel-final.stderr.bin').open('xb') as file:
+        file.write(result.stderr)
+    (output / 'kernel-final.exit').open('x').write(str(result.returncode) + '\n')
+
+
+def capture_crashdata(output):
+    copied = []
+    root = Path('/tmp/android-runner')
+    if root.is_dir():
+        for source in root.rglob('*'):
+            if source.is_file() and ('crash' in source.name or source.suffix in ('.dmp', '.log')):
+                relative = source.relative_to(root)
+                target = output / 'emulator-crashdata' / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with source.open('rb') as src, target.open('xb') as dest:
+                    shutil.copyfileobj(src, dest)
+                copied.append({'path': str(relative), 'bytes': target.stat().st_size,
+                               'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
+    (output / 'crashdata-index.json').open('x').write(json.dumps(copied, indent=2) + '\n')
+
+
+def run_child(command, output, interval=1.0):
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=False)
+    stop = threading.Event()
+    errors = []
+    sampler_error = None
+
+    def sample():
+        nonlocal sampler_error
+        try:
+            with (output / 'samples.jsonl').open('x') as file:
+                while not stop.is_set():
+                    try:
+                        row = proc_snapshot()
+                    except Exception as error:
+                        row = {'observation_error': type(error).__name__, 'message': str(error)}
+                    file.write(json.dumps(row) + '\n')
+                    file.flush()
+                    stop.wait(interval)
+        except Exception as error:
+            sampler_error = type(error).__name__ + ': ' + str(error)
+
+    thread = threading.Thread(target=sample, name='cloud-emulator-evidence', daemon=False)
+    thread.start()
+    child = None
+    try:
+        # Inherit stdout/stderr: original action log and child's exit semantics stay intact.
+        child = subprocess.Popen(command)
+        code = child.wait()
+    finally:
+        stop.set()
+        thread.join()
+    for capture in (capture_kernel, capture_crashdata):
+        try:
+            capture(output)
+        except Exception as error:
+            errors.append({'capture': capture.__name__, 'type': type(error).__name__, 'message': str(error)})
+    if sampler_error is not None:
+        errors.append({'capture': 'sampler', 'type': 'ObserverError', 'message': sampler_error})
+    receipt = {'returncode': code, 'passed': code == 0, 'pid': child.pid,
+               'sampler_stopped': not thread.is_alive(), 'observer_errors': errors,
+               'scope': 'child exit only; NOT Android acceptance; no retries or device/GPU/config changes'}
+    (output / 'child-exit.json').open('x').write(json.dumps(receipt, indent=2) + '\n')
+    # Observer failures are recorded; they never mask/change the actual child return code.
+    return code
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('command', nargs=argparse.REMAINDER)
+    args = parser.parse_args()
+    verify_cloud_emulator()
+    command = args.command[1:] if args.command[:1] == ['--'] else args.command
+    expected = [sys.executable, 'qa/emulator_install_and_tour.py']
+    if command != expected and command != ['python3', 'qa/emulator_install_and_tour.py']:
+        raise RuntimeError('Only the exact unchanged full-suite entrypoint is permitted')
+    raise SystemExit(run_child(command, Path('qa-evidence/cloud-observer')))
+
+
+if __name__ == '__main__':
+    main()

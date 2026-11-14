@@ -1,0 +1,19 @@
+{
+  "run": {
+    "conclusion": "",
+    "createdAt": "2026-11-14T11:34:06Z",
+    "databaseId": 43590641863,
+    "event": "workflow_dispatch",
+    "headSha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "status": "in_progress",
+    "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43590641863"
+  },
+  "inputs": {
+    "build_run": "43590339873",
+    "build_sha": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "api_level": "33",
+    "navigation_mode": "three-button",
+    "qa_suite": "full"
+  },
+  "scope": "registered exact cloud workflow; execution not PASS"
+}

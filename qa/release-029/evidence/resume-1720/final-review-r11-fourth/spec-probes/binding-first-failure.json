@@ -1,0 +1,1 @@
+{"exit_code":1,"source":"bind_inputs.py","stage":"R8 standards raw shape lookup","error":"KeyError: reviewed_manifest_sha256; R8 standards has exact binding inside bindings, not top-level. Original raw untouched; local reader corrected explicitly.","product_or_candidate_blocker":false}

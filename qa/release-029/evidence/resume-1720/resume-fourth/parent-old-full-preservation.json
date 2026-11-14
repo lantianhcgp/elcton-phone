@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "files": 676,
+  "bytes": 32004731,
+  "aggregate_sha256": "497ce43e4376423b8e4e3a6bc430258071ce1556c35fcd48775a05ebfba9e5ea",
+  "scope": "old full original inventory bytes only; remains RED, no device actions",
+  "report_sha256": "1f282072a8bfa90bff89422089f582c0b5d6d6852f85aa6e0f4f33b23c3b08a0"
+}

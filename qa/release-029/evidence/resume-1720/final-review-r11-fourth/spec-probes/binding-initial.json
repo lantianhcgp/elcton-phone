@@ -1,0 +1,537 @@
+{
+  "prepare": {
+    "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "product_files": 37,
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "reviewed_files": 130,
+    "reviewed_manifest_sha256": "856a6c8f94f63a47ec8fdf0192015d01ccc59d138c14bbcafd5cd58279d74534",
+    "diff_sha256": "0173d7ecf6e7bc92cfe2d359e0cb6f8630e5641cb68a9b6ea0079e06648ddd14",
+    "diff_bytes": 549989,
+    "scope": "exact candidate identity only; independent approval pending"
+  },
+  "snapshot_files": {
+    "prepare.json": {
+      "bytes": 622,
+      "sha256": "2058311775e0d88010da3bf140d8d40179f663b29e4ee2d992d2fcb409fed3f4"
+    },
+    "candidate-before.json": {
+      "bytes": 128182,
+      "sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042"
+    },
+    "candidate-after.json": {
+      "bytes": 128182,
+      "sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042"
+    },
+    "reviewed-manifest.json": {
+      "bytes": 15040,
+      "sha256": "0925e7c4f3169f3e99b7a9404e344adc83220eb0273d7b8c382652bc83d7f218"
+    },
+    "product-manifest.json": {
+      "bytes": 4574,
+      "sha256": "1213816239b27625299e016df0be176dad8971db2d45713217bcd28ec358cae6"
+    },
+    "current.diff": {
+      "bytes": 549989,
+      "sha256": "0173d7ecf6e7bc92cfe2d359e0cb6f8630e5641cb68a9b6ea0079e06648ddd14"
+    }
+  },
+  "candidate_checks": {
+    "guarded_source_sha256": 19,
+    "immutable_source_sha256": 16,
+    "lineage_sha256": 4
+  },
+  "actual_head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "live_reviewed_exact": 130,
+  "live_product_exact": 37,
+  "complete_diff_bytes_equal": true,
+  "untracked_appended": [
+    "qa/test_cloud_observer_crash_containment.py",
+    "qa/test_cloud_observer_crash_limits.py",
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "r8_original_axes": {
+    "spec": {
+      "sha256": "7e975f14343fa3be42d1828f986ea5f0240136cc178cb46b243f74044faa15ed",
+      "passed": true,
+      "summary": "R8 SPEC夹具差分审查通过，继承经核验的R7产品覆盖链；不是重新逐行全审125文件，也不是AndroidPASS。独立全量身份核验125/125与37/37，重建完整499323字节累计diff。仅两处返回命令补MAIN/LAUNCHER，整文件逆恢复与旧断言/deadline/文件检查不变；4例真实本地运行通过。原两云端失败保留，新同源APK及两云端完整通过仍待验收。",
+      "coverage": {
+        "semantic_scope": "完整R8身份绑定+R8四文件差分语义审查+严格继承R7已经记录的产品覆盖范围；不将hash全检或继承表述为本轮全产品逐行复审。",
+        "r7_raw_binding": {
+          "spec_path": "qa/release-029/evidence/resume-1720/final-review-r7/spec-raw.txt",
+          "spec_raw_sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+          "standards_path": "qa/release-029/evidence/resume-1720/final-review-r7/standards-raw.txt",
+          "standards_raw_sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7",
+          "dual_closure_sha256": "bf6216bb69e709b2c021d292fdfddc93a4c2e531fc54438f9a6287845e78d9b6",
+          "both_full_raw_sha_match_closure": true,
+          "both_axes_zero_blockers_and_bindings_match_prepare": true,
+          "reviewed_manifest_sha256": "11fd03edf08a85521d40862ebbea7fce3f169b00b970d660a95f8edc99a65ad6",
+          "diff_sha256": "bbdad569d7cccca70fe85edcdf84b3ad2544907a5567c19363c97943f5305834",
+          "diff_bytes": 494029
+        },
+        "product_chain": {
+          "verified_rounds": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "all_canonical_manifests_full_diff_and_raw_bindings_verified": true,
+          "r4_to_r7_full_raw_hashes_match_original_dual_closures": true,
+          "r3_spec_remains_failed": true,
+          "r3_semantic_scope": "原有界业务审查：共享实例/15工具确认、revision/epoch/陈旧回调、保活STOP/拒绝、原4诊断、课表/取件/协议；不是全文件逐行覆盖。R4精确闭合两项QA阻塞，不将R3原false改绿。",
+          "r3_r4_product_commit": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+          "r5_product_commit": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+          "r6_product_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+          "every_round_37_products_match_its_git_blobs": true,
+          "r4_to_r5_change": "MainActivity permission override仅去out方差",
+          "r5_to_r6_change": "MainActivity observer仅恢复空diagnostic fallback",
+          "r6_to_r7_to_r8_all_37_product_bytes_identical": true
+        },
+        "r7_to_r8": {
+          "unchanged_reviewed_entries": 121,
+          "changed_existing": [
+            "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+            "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+            "qa/release-029/RESUME-CHANGES.md"
+          ],
+          "added": [
+            "qa/test_keepalive_return_fixture.py"
+          ],
+          "removed": [],
+          "cumulative_sections_r7": 64,
+          "cumulative_sections_r8": 65,
+          "unchanged_sections": 61,
+          "all_21_changed_product_sections_byte_identical": true,
+          "product_manifest_full_bytes_identical": true
+        },
+        "requirements_read": [
+          "qa/release-029/SPEC.md全文；7共享实例、11保活/停止、13旧测试不删不skip、17签名/交付、19真机pending",
+          "qa/release-029/RESUME-CHANGES.md全文（R8第15/16行）",
+          "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md全文（R8第32/34行）",
+          "qa/release-029/TEST-ATTRIBUTION.md全文"
+        ]
+      },
+      "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138"
+    },
+    "standards": {
+      "sha256": "cabae561fffd0896a85c5e5fbfba6e373f11b9f647dc7e727ed773fee58c0298",
+      "passed": true,
+      "summary": "R8 STANDARDS passes the complete latest QA delta with byte-verified inherited coverage. Rehashed all 125 reviewed and 37 product inputs and reproduced the full 499323-byte cumulative diff. All 37 product files equal R7 and HEAD9e300f9; only two cloud return command literals add MAIN/LAUNCHER, two attribution documents change and one four-case fixture is added. Whole-file reversal equals the archived and git-pinned original. Independently ran all four fixture cases successfully and twelve in-memory negative probes rejected missing/wrong/duplicate intent identity, force/relaunch flags and unrelated assertion/deadline/file-identity edits. AOSP API33/34 task-reuse source supports the correction under the retained task; no real R8 Android reuse or full acceptance is claimed. Original diagnostics/full RED remains preserved; this is NOT Android PASS.",
+      "coverage": {
+        "mode": "Complete R8 changed/new-file semantic review plus exact inherited cumulative coverage; NOT a fresh line-by-line audit of all product/source/test files.",
+        "standards_sources": [
+          "mattpocock-code-review smell baseline",
+          "fail-closed-review-loops",
+          "qa/release-029/SPEC.md",
+          "qa/release-029/RESUME-CHANGES.md",
+          "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md"
+        ],
+        "contributing_or_standards_files_found": false,
+        "r7_common_reviewed_files": 124,
+        "r7_unchanged_reviewed_files": 121,
+        "changed_files": [
+          "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+          "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+          "qa/release-029/RESUME-CHANGES.md"
+        ],
+        "added_files": [
+          "qa/test_keepalive_return_fixture.py"
+        ],
+        "removed_files": [],
+        "cumulative_diff_sections": 65,
+        "r7_diff_sections": 64,
+        "r7_sections_exactly_unchanged": 61,
+        "changed_sections": 3,
+        "added_sections": 1,
+        "removed_sections": 0,
+        "r7_complete_historical_diff_reproduced": true,
+        "r7_diff_order_note": "R7 originally appended the untracked notification fixture last. All git-pinned sections are byte-identical; reassembled in the original saved order reproduces all 494029 bytes and SHA. Direct sorted-commit concatenation first failed only because of this ordering; no source or evidence was repaired.",
+        "product_files_exact_r7_and_current_head": 37,
+        "original_kotlin_test_files": 34,
+        "unchanged_kotlin_test_files": 33,
+        "only_changed_kotlin_file": "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+        "candidate_complete_before_after_immutable_guarded_lineage_verified": true,
+        "new_semantic_review": "Read the entire 193-line keepalive test, 67-line new fixture, both complete changed attribution documents, their full current deltas, original lifecycle evidence and both root-cause reports. No assertion, test method/count, deadline, file boundary or background denial logic changes after reversal."
+      },
+      "source_manifest_sha256": null
+    }
+  },
+  "r8_closure_sha256": "b5a98ae824ec23b9f28e1826ca95f979b600c5925cfdb795c4fe1ef87af68f65",
+  "r3_r7_chain": [
+    {
+      "round": 3,
+      "product_git_commit": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+      "product_files": 37,
+      "all_product_git_blobs_match": true,
+      "raws": {
+        "spec": {
+          "sha256": "e46e56c166c3385cba5b811d5478f844a90b6e79bc771bbe4e9d20366a21b1f4",
+          "passed": false,
+          "closure_hash_verified": false
+        },
+        "standards": {
+          "sha256": "47f7b55bdf259129f3eb0daa8dd2634048813cddff6ccd9051503e9377730f8e",
+          "passed": true,
+          "closure_hash_verified": false
+        }
+      }
+    },
+    {
+      "round": 4,
+      "product_git_commit": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+      "product_files": 37,
+      "all_product_git_blobs_match": true,
+      "raws": {
+        "spec": {
+          "sha256": "56b938fcd092a746b985c4a0fca198dc2f592f185a7798bfa34c3c79d651f680",
+          "passed": true,
+          "closure_hash_verified": true
+        },
+        "standards": {
+          "sha256": "bf08d02dcf5f29b638dcb52c988f90e70af54add2b6d8d7dd9112c17615a8c58",
+          "passed": true,
+          "closure_hash_verified": true
+        }
+      }
+    },
+    {
+      "round": 5,
+      "product_git_commit": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+      "product_files": 37,
+      "all_product_git_blobs_match": true,
+      "raws": {
+        "spec": {
+          "sha256": "61b0f64e9e02573ca80cf82276a077733a5a47afdfc4bf071dd3c2ee88176ac4",
+          "passed": true,
+          "closure_hash_verified": true
+        },
+        "standards": {
+          "sha256": "fbafa1c16a0659be3b15a41cdfe2ce3d67548f1a64aa78bfcaf6088aa0895cf9",
+          "passed": true,
+          "closure_hash_verified": true
+        }
+      }
+    },
+    {
+      "round": 6,
+      "product_git_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+      "product_files": 37,
+      "all_product_git_blobs_match": true,
+      "raws": {
+        "spec": {
+          "sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+          "passed": true,
+          "closure_hash_verified": true
+        },
+        "standards": {
+          "sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c",
+          "passed": true,
+          "closure_hash_verified": true
+        }
+      }
+    },
+    {
+      "round": 7,
+      "product_git_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+      "product_files": 37,
+      "all_product_git_blobs_match": true,
+      "raws": {
+        "spec": {
+          "sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+          "passed": true,
+          "closure_hash_verified": true
+        },
+        "standards": {
+          "sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7",
+          "passed": true,
+          "closure_hash_verified": true
+        }
+      }
+    }
+  ],
+  "all_37_product_full_manifest_bytes_equal_r8": true,
+  "r8_unchanged_entries": 121,
+  "r8_changed_entries": [
+    ".github/workflows/ui-smoke.yml",
+    "qa/emulator_install_and_tour.py",
+    "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+    "qa/release-029/RESUME-CHANGES.md"
+  ],
+  "r8_added_entries": [
+    "qa/cloud_emulator_observer.py",
+    "qa/test_cloud_observer.py",
+    "qa/test_cloud_observer_crash_containment.py",
+    "qa/test_cloud_observer_crash_limits.py",
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "r8_removed_entries": [],
+  "changed_cumulative_sections": [
+    ".github/workflows/ui-smoke.yml",
+    "qa/cloud_emulator_observer.py",
+    "qa/emulator_install_and_tour.py",
+    "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+    "qa/release-029/RESUME-CHANGES.md",
+    "qa/test_cloud_observer.py",
+    "qa/test_cloud_observer_crash_containment.py",
+    "qa/test_cloud_observer_crash_limits.py",
+    "qa/test_cloud_observer_isolation.py"
+  ],
+  "changed_sections_file_sha256": "68aedcea6ea00d1a804b9cd1dee2c03812feacf2800d8445a42eb5313e249a38",
+  "r10_delta_changed": [
+    "qa/cloud_emulator_observer.py"
+  ],
+  "r10_delta_added": [
+    "qa/test_cloud_observer_crash_containment.py",
+    "qa/test_cloud_observer_crash_limits.py"
+  ],
+  "r10_old_test_files_exact": 54,
+  "r10_original_false_raws": {
+    "spec": {
+      "sha256": "a5cfd160720bcfec766ca18d4d25b3b13e125bbb96db0377643f7cee1c1e0d56",
+      "passed": false,
+      "security_concerns": [
+        {
+          "id": "R10-SPEC-SEC-01",
+          "severity": "blocking",
+          "path": "qa/cloud_emulator_observer.py",
+          "lines": [
+            108,
+            112,
+            159,
+            160
+          ],
+          "requirement": "R9-STANDARDS-S1要求源与输出边界/TOCTOU fail-closed；ANDROID-HARNESS-ATTRIBUTION.md:42承诺every ancestor/leaf pinned+NOFOLLOW且RESUME-CHANGES.md:18仅修观测安全边界。",
+          "finding": "源和复制目标的dirfd/叶NOFOLLOW确实修复直接源符号链接，但输出边界仍不完整：os.open(output,O_DIRECTORY|O_NOFOLLOW)只拒绝最后一个路径组件的符号链接，祖先仍跟随；最终crashdata-index.json又用词法Path.open，而不是固定output_fd。真实隔离反例中输出祖先链接穿透，及输出目录在固定fd后被换成链接后，索引写入允许词法输出之外。不能称every ancestor/leaf或输出TOCTOU已修。",
+          "counterexamples": [
+            {
+              "case": "output-ancestor-symlink",
+              "copy_through_symlink": true,
+              "actual_resolved_output": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/outside/output",
+              "lexical_output": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/link-parent/output",
+              "no_actual_secret": true
+            },
+            {
+              "case": "output-replaced-after-dirfd-open",
+              "outside_index_written": true,
+              "pinned_copy_exists": true,
+              "no_actual_secret": true
+            }
+          ],
+          "evidence_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/continuation-execution.json",
+          "evidence_sha256": "54b05c8cee8d6e61d3b527e712c7b6c37d74499d1a90c00adf1c716dad2ffbce",
+          "required_resolution": "从可信根逐组件NOFOLLOW取得输出目录，所有新增输出包括index使用同一固定dirfd及O_EXCL|O_NOFOLLOW；保持诊断失败隔离、不改child或原harvest/断言。保留本RED并在新精确候选上复验两反例。",
+          "limits": "仅合成目录和fixture，无真实凭据/设备读取；实证是输出越界/TOCTOU，未冒称已经泄漏真实secret。"
+        }
+      ],
+      "logic_errors": []
+    },
+    "standards": {
+      "sha256": "f72834ba7227658b4b4fc90c96c49d7e4eed451a644717679699bca14c3c096a",
+      "passed": false,
+      "security_concerns": [
+        {
+          "id": "R10-STANDARDS-S1",
+          "severity": "blocking",
+          "location": "qa/cloud_emulator_observer.py:102-113,159-160; ANDROID-HARNESS-ATTRIBUTION.md:42",
+          "finding": "安全源/输出祖先边界仍未闭合。os.open(root/output,O_DIRECTORY|O_NOFOLLOW)仅拒绝最后一个路径组件的symlink；root/output祖先由内核跟随。源/输出内部walk使用dirfd并不追溯验证初始handle。独立合成source-ancestor和output-ancestor均实际复制成功；index落盘前output root换成symlink还将index实际写到pinned root之外。every ancestor/leaf NOFOLLOW的文档陈述不成立。",
+          "evidence": {
+            "probe_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/standards-probes/focused-probes.json",
+            "source_ancestor": {
+              "case": "source-ancestor-link",
+              "error": null,
+              "copied": true,
+              "bytes": 59,
+              "sha256": "3c36e917e91e27ab1261e8a8134e38b23baad37d83f53c187582d1f305dd072c",
+              "source_root_has_link": true,
+              "output_root_has_link": false,
+              "index_written": true,
+              "boundary_passed": false,
+              "synthetic_limit": null
+            },
+            "output_ancestor": {
+              "case": "output-ancestor-link",
+              "error": null,
+              "copied": true,
+              "bytes": 29,
+              "sha256": "4675a940ed7c5f6ddcc583ee1deb5c954d7d67893c2bc19c48cf67b922d236b2",
+              "source_root_has_link": false,
+              "output_root_has_link": true,
+              "index_written": true,
+              "boundary_passed": false,
+              "synthetic_limit": null
+            },
+            "index_root_replacement_race": {
+              "scope": "exact output root replacement at index-open boundary via in-memory Path.open wrapper; implementation unchanged; synthetic local dirs only",
+              "pinned_copy_retained_under_original": true,
+              "new_output_root_is_symlink": true,
+              "index_created_outside_pinned_output": true,
+              "index_bytes": 134,
+              "index_sha256": "95a0303cc29e6cd86e34846a7402594c0cb40b92cb1efd312b8bc0b270bb6a7a",
+              "index_records": 1,
+              "actual_adb_or_kernel_calls": 0
+            },
+            "no_actual_tmp_or_secret_modified": true
+          },
+          "required_change": "从可信锚逐组件以dirfd+NOFOLLOW打开源与输出root所有祖先，再复用已验证handle；crashdata-index写盘同样用pinned output fd且拒existing/symlink。保留这些原失败与旧raw，另候选新审。"
+        }
+      ],
+      "logic_errors": [
+        {
+          "id": "R10-STANDARDS-L1",
+          "severity": "blocking",
+          "location": "qa/cloud_emulator_observer.py:114-158",
+          "finding": "crash遍历只有每文件32MiB/累计64MiB内容限制，未限定entry数、depth、listdir结果、copied index总量。任意多个0B .dmp均增加文件/inode/index且total保持0；过总byte帽的条目也继续append而非截停。1s daemon join确实限制主退出等待，但不构成诊断遍历/内存/FD/index的资源帽。",
+          "evidence": {
+            "fixture_files": 257,
+            "copied_entries": 257,
+            "total_content_bytes": 0,
+            "index_bytes": 33046,
+            "no_static_entry_count_depth_or_index_cap": true,
+            "limits": {
+              "file_bytes": 33554432,
+              "total_bytes": 67108864
+            },
+            "synthetic_only": true
+          },
+          "required_change": "显式且fail-closed限制扫描/复制条目数、遍历深度及index大小，超过总预算停止遍历/后续复制；保持旧child一次执行、原断言与产品不动。"
+        }
+      ]
+    }
+  },
+  "before_originals_verified": true,
+  "gates_complete": {
+    "passed": true,
+    "checked_at": "2026-11-14T21:20:11.445528+08:00",
+    "head": "44df9d0fd36aecaa22613e9aa73c5c7d4ed94416",
+    "host_tests": 152,
+    "python_tests": 133,
+    "python_skipped": 0,
+    "http_report": {
+      "ok": true,
+      "mode": "actual-kotlin-host",
+      "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+      "assertions": 3784,
+      "clients": [
+        "urllib",
+        "curl"
+      ],
+      "write_eof_transport": {
+        "status": "supported",
+        "excluded_checks": []
+      },
+      "all_raw_checks_passed": true,
+      "token": "REDACTED"
+    },
+    "runtime_tests": 1,
+    "termux": {
+      "count": 15,
+      "http_status": 200,
+      "listener_closed": true
+    },
+    "inputs_unchanged": true,
+    "inputs_manifest_sha256": "640d0ff3ce6c3666ca0d8185560f247c7272779adb456cebd7e224baa08ada58",
+    "scope": "complete current HOST gates only; NOT Android CI/cloud/physical WE acceptance"
+  },
+  "gate_inputs_verified": 152,
+  "gate_logs": {
+    "host": {
+      "execution": {
+        "command": [
+          "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+          "-B",
+          "qa/run_host_tests.py",
+          "--deps",
+          "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test",
+          "--out",
+          "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/host"
+        ],
+        "exit_code": 0,
+        "seconds": 49.472203054931015,
+        "log_sha256": "bf4365da5aa9529fad6b7713e495a9e8e977d9eab8b28f5321c45bf55a0e8c2b"
+      },
+      "log_sha256": "bf4365da5aa9529fad6b7713e495a9e8e977d9eab8b28f5321c45bf55a0e8c2b",
+      "log_bytes": 784,
+      "tail": "Failed to load native library:jansi-2.4.0-ca880133cb545830-libjansi.so. osinfo: Linux/arm64\njava.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-ca880133cb545830-libjansi.so: dlopen failed: library \"libc.so.6\" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-ca880133cb545830-libjansi.so in namespace (default)\napp/src/main/java/com/hcbiu/elcton/PickupClient.kt:19:19: warning: 'constructor(p0: String!): URL' is deprecated. Deprecated in Java.\n        val url = URL(endpoint + \"?action=get&pickup=\" + pickup)\n                  ^^^\n\nJUnit version 4.13.2\n........................................................................................................................................................\nTime: 5.518\n\nOK (152 tests)\n\n\n"
+    },
+    "python": {
+      "execution": {
+        "command": [
+          "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "qa",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "seconds": 38.72648384002969,
+        "log_sha256": "c5deaf02a771a33c72f62763bf3806c4aff8aad4ab5e8c5544a260b85e4b0138"
+      },
+      "log_sha256": "c5deaf02a771a33c72f62763bf3806c4aff8aad4ab5e8c5544a260b85e4b0138",
+      "log_bytes": 23177,
+      "tail": "test_keyboard_shadow_above_inset_is_ignored_but_raw_evidence_is_retained (test_theme_evidence.ThemeEvidenceTest.test_keyboard_shadow_above_inset_is_ignored_but_raw_evidence_is_retained) ... ok\ntest_png_xml_different_capture_hash_fails (test_theme_evidence.ThemeEvidenceTest.test_png_xml_different_capture_hash_fails) ... ok\ntest_state_true_without_actual_keyboard_pixels_fails (test_theme_evidence.ThemeEvidenceTest.test_state_true_without_actual_keyboard_pixels_fails) ... ok\ntest_visible_keyboard_error_and_bound_png_xml_are_accepted (test_theme_evidence.ThemeEvidenceTest.test_visible_keyboard_error_and_bound_png_xml_are_accepted) ... ok\ntest_capture_uses_same_xml_without_stale_accessibility_handles (test_theme_source.ThemeSourceTest.test_capture_uses_same_xml_without_stale_accessibility_handles) ... ok\ntest_light_palette_is_present_without_deleting_dark_palette (test_theme_source.ThemeSourceTest.test_light_palette_is_present_without_deleting_dark_palette) ... ok\ntest_settings_exposes_three_accessible_options_after_semester (test_theme_source.ThemeSourceTest.test_settings_exposes_three_accessible_options_after_semester) ... ok\ntest_theme_pref_gate_rejects_business_namespaces_and_effects (test_theme_source.ThemeSourceTest.test_theme_pref_gate_rejects_business_namespaces_and_effects) ... ok\ntest_three_modes_are_available_with_light_default_and_isolated_persistence (test_theme_source.ThemeSourceTest.test_three_modes_are_available_with_light_default_and_isolated_persistence) ... ok\n\n----------------------------------------------------------------------\nRan 133 tests in 38.219s\n\nOK\n"
+    },
+    "http": {
+      "execution": {
+        "command": [
+          "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+          "-B",
+          "qa/mcp_http_selftest.py",
+          "--classpath",
+          "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/host/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+        ],
+        "exit_code": 0,
+        "seconds": 5.324442759156227,
+        "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+      },
+      "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+      "log_bytes": 281,
+      "tail": "{\"ok\": true, \"mode\": \"actual-kotlin-host\", \"scope\": \"local JVM; synthetic callbacks; NOT Android runtime\", \"assertions\": 3784, \"clients\": [\"urllib\", \"curl\"], \"write_eof_transport\": {\"status\": \"supported\", \"excluded_checks\": []}, \"all_raw_checks_passed\": true, \"token\": \"REDACTED\"}\n"
+    },
+    "runtime": {
+      "execution": {
+        "command": [
+          "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+          "-B",
+          "qa/run_runtime_revision_host_tests.py",
+          "--deps",
+          "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test",
+          "--out",
+          "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/runtime-r11-fourth"
+        ],
+        "exit_code": 0,
+        "seconds": 19.149649471975863,
+        "log_sha256": "9641eafdd5041f6975dbde12a062329e7eda308a748c60a038d729f552525103"
+      },
+      "log_sha256": "9641eafdd5041f6975dbde12a062329e7eda308a748c60a038d729f552525103",
+      "log_bytes": 925,
+      "tail": "HOST ONLY: real DiagnosticRuntime, Socket and state file; test-only Log/BuildConfig\nFailed to load native library:jansi-2.4.0-87f6162f151d792-libjansi.so. osinfo: Linux/arm64\njava.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-87f6162f151d792-libjansi.so: dlopen failed: library \"libc.so.6\" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-87f6162f151d792-libjansi.so in namespace (default)\n\nJUnit version 4.13.2\n.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:39227; token=<redacted>; read-only\nreal_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=false\nretained_real_runtime_files=/data/data/com.termux/files/home/elcton-phone-release-029-20261114/.diag-build/runtime-r11-fourth-generated/runtime-files\n\nTime: 0.201\n\nOK (1 test)\n\n\n"
+    },
+    "termux": {
+      "execution": {
+        "command": [
+          "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+          "-B",
+          "qa/release-029/termux_tools_list.py",
+          "--classpath",
+          "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/host/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar",
+          "--out",
+          "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/gates-r11/termux"
+        ],
+        "exit_code": 0,
+        "seconds": 0.5275120828300714,
+        "log_sha256": "4379cfc2d089a5be12388235827018332faa83e7ebf8cc4b60b53d386c69485f"
+      },
+      "log_sha256": "4379cfc2d089a5be12388235827018332faa83e7ebf8cc4b60b53d386c69485f",
+      "log_bytes": 2180,
+      "tail": "y\"}, {\"name\": \"sync_connect\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"sync_disconnect\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"start_import\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"start_publish\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"abort\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"courses_read\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"courses_write\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"pickup_import\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"devices_list\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"pairing_state\", \"listed\": true, \"schema\": true, \"group\": \"new\"}, {\"name\": \"sync_state\", \"listed\": true, \"schema\": true, \"group\": \"new\"}], \"request\": {\"method\": \"tools/list\", \"id\": \"termux-direct-029\", \"auth\": \"private token in stdin; NOT SAVED\"}, \"action_execution\": \"NOT RUN; Android runtime absent; host has explicit fail-closed provider\", \"source_sha256\": {\"app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt\": \"609994ffef2c39adefeeacf1ec71cba24492efe9e5447c991dadd95be4ca64aa\", \"app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt\": \"160cc7e9df1554b2b767fceb39b128d0ef461ae8035d5bb79bbf617f22f689f7\", \"app/src/main/java/com/hcbiu/elcton/McpToolProvider.kt\": \"00957be37b3848d1d9aca3c6c056da53852e69b28d8452a43704ecf1096aca5f\", \"app/src/main/java/com/hcbiu/elcton/PhoneMcpTools.kt\": \"e9c8ea471058e771e396967c421f56966de8009245adad17b218ae12396b909b\"}, \"listener_closed_after_test\": true, \"host_exit_code\": 0}\n"
+    }
+  }
+}

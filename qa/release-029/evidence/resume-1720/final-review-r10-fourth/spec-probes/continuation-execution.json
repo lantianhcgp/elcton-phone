@@ -1,0 +1,78 @@
+{
+  "crash": [
+    {
+      "mode": "normal",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "source-leaf",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "source-dir",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "source-root",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "output-root",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "output-dir",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "output-leaf",
+      "verified_prior_real_execution": true
+    },
+    {
+      "mode": "unapproved-log",
+      "verified_prior_real_execution": true
+    }
+  ],
+  "daemon": [
+    {
+      "target": "sample",
+      "native_exit": 7,
+      "seconds": 1.1475310418754816,
+      "bounded_process_exit": true
+    },
+    {
+      "target": "finalizer",
+      "native_exit": 7,
+      "seconds": 1.1417305720970035,
+      "bounded_process_exit": true
+    }
+  ],
+  "security_counterexamples": [
+    {
+      "case": "output-ancestor-symlink",
+      "copy_through_symlink": true,
+      "actual_resolved_output": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/outside/output",
+      "lexical_output": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/final-review-r10-fourth/spec-probes/crash-output-ancestor/link-parent/output",
+      "no_actual_secret": true
+    },
+    {
+      "case": "output-replaced-after-dirfd-open",
+      "outside_index_written": true,
+      "pinned_copy_exists": true,
+      "no_actual_secret": true
+    }
+  ],
+  "actual_adb_calls": 0,
+  "issues": [
+    {
+      "probe": "hardlink",
+      "first_failure": "os.link missing",
+      "second_failure": "libc link returned nonzero",
+      "retry_rc": -1,
+      "retry_errno": 13,
+      "source_exists": true,
+      "destination_exists": false,
+      "not_claimed_exercised": true
+    }
+  ]
+}

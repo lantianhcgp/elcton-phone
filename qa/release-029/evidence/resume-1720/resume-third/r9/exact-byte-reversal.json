@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "reviewed_files_unchanged": 127,
+  "old_test_files_exact": 35,
+  "harvest_inline_block_reversal_bytes": true,
+  "old_harvest_source_sha256": "2a1abba82859efab80b98e66f12cdb94d9742a6cbf934a7850a8cb3d34f00ced",
+  "new_harvest_source_sha256": "cadab216cdeab5a31b06a2121ecb753a38549818b85a3954c1d9425a652ba409"
+}

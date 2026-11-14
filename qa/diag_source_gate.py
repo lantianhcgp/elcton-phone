@@ -17,6 +17,9 @@ APPROVED = json.loads((ROOT / 'qa/diag-mcp-026/approved-observation-delta.json')
 assert APPROVED['baseline'] == BASE
 assert set(APPROVED['patches']) == {ACTIVITY, PROBE}
 ACTIVITY_INITIALIZER = APPROVED['patches'][ACTIVITY][0]['after']
+READY = json.loads((ROOT / 'qa/p2p-ready-20261114/approved-ready-delta.json').read_text())
+assert READY['baseline'] == 'cd2a3e062b97d778c79b76b544071b1077534af7'
+assert set(READY['patches']) == {PROBE}
 
 
 def baseline(path):
@@ -24,6 +27,12 @@ def baseline(path):
 
 
 def reverse_exact(text, path):
+    if path == PROBE:
+        for change in reversed(READY['patches'][PROBE]):
+            expected = change['after']
+            if not expected or text.count(expected) != 1:
+                raise ValueError('Missing or ambiguous authorized READY delta: ' + path)
+            text = text.replace(expected, change['before'], 1)
     for change in reversed(APPROVED['patches'][path]):
         expected = change['after']
         if not expected or text.count(expected) != 1:

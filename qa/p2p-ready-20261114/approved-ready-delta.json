@@ -1,0 +1,16 @@
+{
+  "baseline": "cd2a3e062b97d778c79b76b544071b1077534af7",
+  "scope": "Only the authorized preparation ERROR dispatch and non-blaming READY timeout wording. No transport/auth/transaction mutation.",
+  "patches": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": [
+      {
+        "before": "        val type=m.optString(\"type\")\n        val export=exporting",
+        "after": "        val type=m.optString(\"type\")\n        PacketIngress.preparationError(m,awaitingReady,session!=null||exporting!=null)?.let { fail(it);return }\n        val export=exporting"
+      },
+      {
+        "before": "未收到手表准备回执。请进入手表同步页并点开始接收；还没有发送课表。",
+        "after": "未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。"
+      }
+    ]
+  }
+}

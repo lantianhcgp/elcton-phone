@@ -1,0 +1,26 @@
+test_missing_or_duplicated_ready_dispatch_is_not_filtered (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_missing_or_duplicated_ready_dispatch_is_not_filtered) ... ok
+test_only_reviewed_ready_delta_reverses_to_pinned_original (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_only_reviewed_ready_delta_reverses_to_pinned_original) ... FAIL
+test_timeout_words_are_finite_and_not_a_version_test_comment (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_timeout_words_are_finite_and_not_a_version_test_comment) ... ok
+test_unapproved_transport_and_permission_edits_still_fail (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_unapproved_transport_and_permission_edits_still_fail) ... ok
+
+======================================================================
+FAIL: test_only_reviewed_ready_delta_reverses_to_pinned_original (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_only_reviewed_ready_delta_reverses_to_pinned_original)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/we-ready-receipt-20261114-phone/qa/test_p2p_ready_source_gate.py", line 12, in test_only_reviewed_ready_delta_reverses_to_pinned_original
+    self.assertEqual([],gate.scope_errors(activity,probe))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['Unapproved non-diagnostic source mutatio[47 chars].kt']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'Unapproved non-diagnostic source mutation: app/src/main/java/com/hcbiu/elcton/WearProbe.kt'
+
+- []
++ ['Unapproved non-diagnostic source mutation: '
++  'app/src/main/java/com/hcbiu/elcton/WearProbe.kt']
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.168s
+
+FAILED (failures=1)

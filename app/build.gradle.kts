@@ -11,8 +11,12 @@ android {
         applicationId = "com.hcbiu.elcton"
         minSdk = 26
         targetSdk = 34
-        versionCode = 10
-        versionName = "0.2.8"
+        // Frozen 0.2.6 default profile remains buildable; candidate is explicit, never inferred.
+        versionCode = 8
+        versionName = "0.2.6"
+        val p2pCandidate = providers.gradleProperty("elctonP2pCandidate").orNull == "true"
+        if (p2pCandidate) { versionCode = 10; versionName = "0.2.8" }
+        buildConfigField("boolean", "P2P_READY_CANDIDATE", p2pCandidate.toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true; buildConfig = true }

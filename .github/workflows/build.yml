@@ -21,13 +21,13 @@ jobs:
       - name: Ensure Android build prerequisites
         run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-34" "build-tools;34.0.0"'
       - name: Unit tests and actual APK
-        run: gradle testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --stacktrace
+        run: gradle -PelctonP2pCandidate=true testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --stacktrace
       - name: Real Kotlin diagnostic HTTP selftest
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p app/build/diagnostics-http
-          timeout 600s gradle :app:writeDiagnosticHostClasspath --no-daemon --stacktrace 2>&1 | tee app/build/diagnostics-http/gradle-classpath.log
+          timeout 600s gradle -PelctonP2pCandidate=true :app:writeDiagnosticHostClasspath --no-daemon --stacktrace 2>&1 | tee app/build/diagnostics-http/gradle-classpath.log
           CLASSPATH="$(< app/build/diagnostics-http/classpath.txt)"
           test -n "$CLASSPATH"
           timeout 120s python3 -B qa/mcp_http_selftest.py --classpath "$CLASSPATH" 2>&1 | tee app/build/diagnostics-http/http-selftest.log
@@ -61,6 +61,7 @@ jobs:
           "$BT/apksigner" verify --print-certs dist/elcton-phone-probe.apk > dist/apk-signature.txt
           "$BT/apksigner" verify --print-certs dist/elcton-ui-tests.apk > dist/test-signature.txt
           python3 -c 'import os,re,pathlib; s=pathlib.Path("dist/apk-signature.txt").read_text(); m=re.search(r"certificate SHA-256 digest: ([0-9a-fA-F]+)",s); assert m and m.group(1).lower()==os.environ["EXPECTED_SIGN_SHA256"].lower(), "Signing identity mismatch"'
+          python3 qa/p2p-ready-20261114/verify_apk_candidate.py dist/elcton-phone-probe.apk dist/candidate-manifest.json
           rm "$RUNNER_TEMP/elcton.jks"
           printf '%s\n' "$GITHUB_SHA" > dist/source-sha.txt
       - uses: actions/upload-artifact@v4

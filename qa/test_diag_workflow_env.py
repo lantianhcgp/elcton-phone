@@ -13,6 +13,15 @@ class DiagnosticWorkflowEnvironmentTest(unittest.TestCase):
         self.assertIn('Pillow==11.2.1', s)
         self.assertIn('ram-size: 2048M', s)
         self.assertIn('-gpu swiftshader_indirect', s)
+    def test_action_script_lines_are_standalone_shell_programs(self):
+        import subprocess
+        s = (Path(__file__).resolve().parents[1] / '.github/workflows/ui-smoke.yml').read_text()
+        tail = s.split('          script:', 1)[1].split('      - uses:', 1)[0]
+        commands = [line.strip() for line in tail.splitlines() if line.strip() not in ('', '|')]
+        self.assertTrue(commands)
+        for command in commands:
+            run = subprocess.run(['sh', '-n', '-c', command], capture_output=True, text=True)
+            self.assertEqual(run.returncode, 0, 'Action runs each line separately: ' + command)
     def test_exact_apk_checkout_may_be_pinned_for_qa_only_environment_fix(self):
         s = (Path(__file__).resolve().parents[1] / '.github/workflows/ui-smoke.yml').read_text()
         self.assertIn('build_sha:', s)

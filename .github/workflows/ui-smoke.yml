@@ -79,12 +79,7 @@ jobs:
           ram-size: 2048M
           heap-size: 512M
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics
-          script: |
-            if [ "$QA_SUITE" = diagnostics ]; then
-              python3 -B qa/diag_emulator_smoke.py
-            else
-              python3 qa/emulator_install_and_tour.py
-            fi
+          script: if [ "$QA_SUITE" = diagnostics ]; then python3 -B qa/diag_emulator_smoke.py; else python3 qa/emulator_install_and_tour.py; fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

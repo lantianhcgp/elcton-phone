@@ -131,7 +131,7 @@ class McpKeepAliveTest {
                 .put("stopDisablesChoice", true).put("stopInactive", true)
             // Use the actual system channel UI while the Activity stays backgrounded.
             // App-side channel mutation or an explicit resumeChoice would mask this defect.
-            device.executeShellCommand("am start -n com.hcbiu.elcton/.MainActivity")
+            device.executeShellCommand("am start -n com.hcbiu.elcton/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER")
             assertTrue(device.wait(Until.hasObject(By.pkg("com.hcbiu.elcton")), 10000))
             ui.onNodeWithTag("mcp-keepalive-switch").performScrollTo().assertIsOff().performClick()
             ui.waitUntil(10000) { McpKeepAlive.active && runtime.read().getJSONObject("mcp").getBoolean("running") }
@@ -178,7 +178,7 @@ class McpKeepAliveTest {
                 device.takeScreenshot(File(directory, "mcp-channel-denied-failure.png"))
                 throw error
             }
-            device.executeShellCommand("am start -n com.hcbiu.elcton/.MainActivity")
+            device.executeShellCommand("am start -n com.hcbiu.elcton/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER")
             assertTrue(device.wait(Until.hasObject(By.pkg("com.hcbiu.elcton")), 10000))
             ui.onNodeWithTag("mcp-keepalive-switch").assertIsOn()
             assertEquals(before, files())

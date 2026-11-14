@@ -28,3 +28,7 @@ git diff --check -- app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.
 ```
 
 Cloud-only full Android reproduction after matching signed APK/test/source artifacts are placed in incoming and the workflow provisions its sole verified emulator: `python3 -B qa/diag_emulator_smoke.py`. The original local/phone refusal guard is unchanged.
+
+## R8 same-Activity return fixture correction
+
+Run43586767169 at source9e300f9 failed at McpKeepAliveTest.kt:136. Its original logcat lines49700-49710 proves the component-only return constructed another Activity with an intent not matching ActivityScenario's original MAIN+LAUNCHER, resetting its per-instance navigation to today. Only the two emulator `am start` return commands at134/181 receive MAIN+LAUNCHER. No product/manifest/launchMode changes; every existing assertion, deadline, count, file identity, and background system-channel rejection path stays byte-identical. Full original test bytes are preserved as `evidence/resume-1720/resume-third/McpKeepAliveTest.kt.before.original`; the new four-case `qa/test_keepalive_return_fixture.py` proves exact whole-file reversal and rejects missing intent identity. Original RED2/4 and subsequent GREEN4/4 are kept. This is synthetic fixture verification only, not an Android PASS; fresh matched main/test APK execution is required.

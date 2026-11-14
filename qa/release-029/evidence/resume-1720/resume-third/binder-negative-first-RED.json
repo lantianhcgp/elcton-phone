@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "actual_error": "RuntimeError: unexpected write then AssertionError",
+  "root": "synthetic guard mocked every Path.open including rb; no parser/product defect",
+  "original_receipts_modified": false
+}

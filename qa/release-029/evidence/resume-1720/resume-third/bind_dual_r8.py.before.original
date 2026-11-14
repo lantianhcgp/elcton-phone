@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Verify current R8 raw independent verdicts and seal binding; not Android PASS."""
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+
+D = Path(__file__).resolve().parent
+R = D.parents[4]
+REV = D.parent / 'final-review-r8'
+
+
+def h(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def canon(value):
+    return h(json.dumps(dict(sorted(value.items())), sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+
+
+prepare = json.loads((REV / 'prepare.json').read_bytes())
+manifest = json.loads((REV / 'reviewed-manifest.json').read_bytes())
+product = json.loads((REV / 'product-manifest.json').read_bytes())
+for mapping in (manifest, product):
+    for name, expected in mapping.items():
+        if h((R / name).read_bytes()) != expected:
+            raise RuntimeError('Current reviewed source drift: ' + name)
+if len(manifest) != prepare['reviewed_files'] or len(product) != prepare['product_files']:
+    raise RuntimeError('Declared reviewed/product totals are not exact')
+if canon(manifest) != prepare['reviewed_manifest_sha256'] or canon(product) != prepare['product_manifest_sha256']:
+    raise RuntimeError('Manifest fingerprint drift')
+diff = (REV / 'current.diff').read_bytes()
+if h(diff) != prepare['diff_sha256'] or len(diff) != prepare['diff_bytes']:
+    raise RuntimeError('Frozen complete diff drift')
+axes = []
+for axis in ('spec', 'standards'):
+    path = REV / (axis + '-raw.txt')
+    raw = path.read_bytes()
+    report = json.loads(raw)
+    blockers = [report[k] for k in ('security_concerns', 'logic_errors', 'missing_requirements')]
+    if report.get('axis') != axis or report.get('passed') is not True or any(blockers):
+        raise RuntimeError('Independent ' + axis + ' is not valid PASS')
+    for key in ('reviewed_manifest_sha256', 'diff_sha256'):
+        if report.get(key) != prepare[key]:
+            raise RuntimeError(axis + ' exact binding mismatch: ' + key)
+    ph = report.get('product_manifest_sha256', report.get('source_manifest_sha256'))
+    if ph != prepare['product_manifest_sha256']:
+        raise RuntimeError(axis + ' product binding mismatch')
+    axes.append({'axis': axis, 'raw_sha256': h(raw), 'passed': True})
+head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=R, text=True).strip()
+receipt = {'passed': True, 'head_at_review': head, 'reviewed_files': len(manifest), 'product_files': len(product), 'axes': axes, 'bindings': prepare, 'scope': 'Full current input binding plus cumulative independent coverage; not Android acceptance'}
+(REV / 'dual-closure.json').open('x').write(json.dumps(receipt, indent=2) + '\n')
+print(json.dumps({'passed': True, 'reviewed_files': len(manifest), 'product_files': len(product), 'axes': axes}), flush=True)

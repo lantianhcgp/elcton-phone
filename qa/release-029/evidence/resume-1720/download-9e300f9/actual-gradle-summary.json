@@ -1,0 +1,283 @@
+{
+  "passed": true,
+  "source_sha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+  "actual_gradle_xml": {
+    "tests": 153,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.AdapterScopeTest.xml",
+      "name": "com.hcbiu.elcton.AdapterScopeTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "fdf146d5c98d06099bac57e06d27b1875c545608b0dbf2635d3e6b4c6220e28c"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DevicePolicyTest.xml",
+      "name": "com.hcbiu.elcton.DevicePolicyTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "3dfc944bd63c0f0850fecbea3bb50aaf54ed4d7f6bff35efd64e1b73ab0302d2"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticMcpServerTest.xml",
+      "name": "com.hcbiu.elcton.DiagnosticMcpServerTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "b640bb6235de835b4cd0e999339dae21551c550595ae4b764c5aca9a70085fea"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticToolsTest.xml",
+      "name": "com.hcbiu.elcton.DiagnosticToolsTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "909cd6ef2857df400f0a95f74f4f96bb40a8e335fff38e73ede85cfdbf261cdd"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticsIntegrationTest.xml",
+      "name": "com.hcbiu.elcton.DiagnosticsIntegrationTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "e06a10c3dbe8a7a13bbdc676bd2053dff6690cec2badcc9547cd067855671b3f"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalBoundaryTest.xml",
+      "name": "com.hcbiu.elcton.ErrorJournalBoundaryTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "b137f816a5328337de35f7abbe56e42ce508059686d2b871a42b4858f4ca168b"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalTest.xml",
+      "name": "com.hcbiu.elcton.ErrorJournalTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "a268d15d5a6bacc4197e1a40aa9c8a95c90f17ea43b3388f325d334babd2d343"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordBoundaryTest.xml",
+      "name": "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "d86df1798dc412e6cab9c455939619db016f5276a2dbbd85edf2ba9f9657b4a2"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordTest.xml",
+      "name": "com.hcbiu.elcton.ErrorRecordTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "c1b3c2e0cfcd84f4c0de1e71682d361df42d7d12117e210458cf406bccf0a3e7"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ExportSessionTest.xml",
+      "name": "com.hcbiu.elcton.ExportSessionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "71053876c838ee1bea1a0ffc6030bcaece031dea59efec76db9bc3eb7262ad07"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.MainThreadActionsTest.xml",
+      "name": "com.hcbiu.elcton.MainThreadActionsTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "d94824c988204de65d6201d341dbf6f9242ec594ac514a7abb43215bc866c599"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpKeepAlivePolicyTest.xml",
+      "name": "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "5a2552dfe8723737071cda4622bcb75ad9d9de08b465d32161cd9fa99ef437fc"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpTokenTest.xml",
+      "name": "com.hcbiu.elcton.McpTokenTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "53d50be18b320d755d246e3f88d1ec07362c2b67db14ef7dfa0a7dd29f8dc375"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pCandidateBuildTest.xml",
+      "name": "com.hcbiu.elcton.P2pCandidateBuildTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "899333cfe8e60f8beb7964adb8a2fb1eb079e92721d6b2519fce6a266a9ac599"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyErrorTest.xml",
+      "name": "com.hcbiu.elcton.P2pReadyErrorTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "036fa4a4d3973168257be0e191ff4a4d90155511f2a27c42d20402cc3483aacb"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyIngressTest.xml",
+      "name": "com.hcbiu.elcton.P2pReadyIngressTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "ef20dbe86d8eab2095af6778ce9f6224b6fb482f70c1e5d06fe58554fee0081f"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneActionsTest.xml",
+      "name": "com.hcbiu.elcton.PhoneActionsTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "b6c2cbce4d0921b7f32767e34e7b9b9b6f59a4444adda84d8e552b2103abf6f0"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpCompositionTest.xml",
+      "name": "com.hcbiu.elcton.PhoneMcpCompositionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "76803958c846e15530365034879737d3637411e0d5f925da73b870b1cf9f21a3"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpToolsTest.xml",
+      "name": "com.hcbiu.elcton.PhoneMcpToolsTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "a4ead33c3d6c6a672332c655c9ae22732c9050caa7c292ec5aaef9c0e53777b4"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneScheduleTest.xml",
+      "name": "com.hcbiu.elcton.PhoneScheduleTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "525359d454d7149dd7968a694c3bbc6113f8d8451722919d40a7cc2e31134118"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneSnapshotTest.xml",
+      "name": "com.hcbiu.elcton.PhoneSnapshotTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "322197305282f45fc6320acdde93ecfb25559509a56e950744954fba64e8abf0"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PickupClientTest.xml",
+      "name": "com.hcbiu.elcton.PickupClientTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "7f83cee35057a0bcd1d4c4694ba9736e13beb63ac9ce5886ac2b8744f138f5cb"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ProtocolIngressAuditTest.xml",
+      "name": "com.hcbiu.elcton.ProtocolIngressAuditTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "806bde4ed89b8ca9df73810135c612b971b6d28347dec6d997ad495b131cd7e5"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ScheduleBookTest.xml",
+      "name": "com.hcbiu.elcton.ScheduleBookTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "9094d1848db476e2046cffdfd1380b7cfc26732386353d67e9476147cf98912b"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SnapshotPrivacyAuditTest.xml",
+      "name": "com.hcbiu.elcton.SnapshotPrivacyAuditTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "306403a0ccaf2c5653b7980f81d4dde033454631c3b95aa0b4772084348790b1"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SyncEngineTest.xml",
+      "name": "com.hcbiu.elcton.SyncEngineTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "841889241844ae67a41f399980fd85563fcafa28ad4fe6a7c7c65837af78bc38"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.TransferSessionTest.xml",
+      "name": "com.hcbiu.elcton.TransferSessionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "791094831971237570d01bac601ca1faf4f49a44e22e74ba2e9ebd0661487b26"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.UserFacingErrorTest.xml",
+      "name": "com.hcbiu.elcton.UserFacingErrorTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "6e96362de85320d1d1aa435529d47a24667e946ff54df383ebf8318969e8b5cc"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WearEngineConfigTest.xml",
+      "name": "com.hcbiu.elcton.WearEngineConfigTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "20fed3821c814b99474b3d3da3bd628b711373fbd4d6d0ffafa1ddcbddfc10f7"
+    },
+    {
+      "path": "artifact/app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WireTest.xml",
+      "name": "com.hcbiu.elcton.WireTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "9fe6451cfd775bdc993e9ebe9749d505bb2f35d171c964dc13c8c943a9c608bf"
+    }
+  ],
+  "scope": "real precise CI JVM tests, not Android instrumentation"
+}

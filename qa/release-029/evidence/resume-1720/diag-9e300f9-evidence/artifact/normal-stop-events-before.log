@@ -1,0 +1,4 @@
+--------- beginning of main
+11-14 10:50:57.643  2711  2711 I ElctonMcp: MCP listening on 127.0.0.1:8766; token=<redacted>; read-only
+11-14 10:51:14.110  3922  3922 I ElctonMcp: MCP listening on 127.0.0.1:8766; token=<redacted>; read-only
+11-14 10:51:21.072  4101  4101 I ElctonMcp: MCP listening on 127.0.0.1:8766; token=<redacted>; read-only

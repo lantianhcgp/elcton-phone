@@ -1,0 +1,180 @@
+{
+  "axis": "standards",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [],
+  "summary": "R8 STANDARDS passes the complete latest QA delta with byte-verified inherited coverage. Rehashed all 125 reviewed and 37 product inputs and reproduced the full 499323-byte cumulative diff. All 37 product files equal R7 and HEAD9e300f9; only two cloud return command literals add MAIN/LAUNCHER, two attribution documents change and one four-case fixture is added. Whole-file reversal equals the archived and git-pinned original. Independently ran all four fixture cases successfully and twelve in-memory negative probes rejected missing/wrong/duplicate intent identity, force/relaunch flags and unrelated assertion/deadline/file-identity edits. AOSP API33/34 task-reuse source supports the correction under the retained task; no real R8 Android reuse or full acceptance is claimed. Original diagnostics/full RED remains preserved; this is NOT Android PASS.",
+  "bindings": {
+    "current_head": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+    "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+    "reviewed_files": 125,
+    "product_files": 37,
+    "reviewed_manifest_sha256": "9cd0cd5a3e9deb6b2180eec9e3f5f8bcb51319c018061b53b707c203c1160ab3",
+    "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+    "diff_sha256": "fee7b0f1a0b13025ed59ade8ff85606a78b5f5a0a96ea94a4b7a548dc9790c81",
+    "diff_bytes": 499323,
+    "candidate_before_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "candidate_after_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "prepare_raw_sha256": "895e0768600444f445f01768f3a2dfcbc52d66680b11d445e5bac7d7c0b55183",
+    "hash_encoding": "Manifests: SHA256(sorted compact JSON, separators=(comma,colon), ensure_ascii=False, UTF-8, no trailing newline). Candidate/diff/raw: exact bytes.",
+    "final_live_file_mismatches": [],
+    "complete_live_diff_equal": true,
+    "manifest_scope_independently_regenerated": true,
+    "diff_includes_staged_new_fixture": true,
+    "git_diff_check_exit": 0
+  },
+  "coverage": {
+    "mode": "Complete R8 changed/new-file semantic review plus exact inherited cumulative coverage; NOT a fresh line-by-line audit of all product/source/test files.",
+    "standards_sources": [
+      "mattpocock-code-review smell baseline",
+      "fail-closed-review-loops",
+      "qa/release-029/SPEC.md",
+      "qa/release-029/RESUME-CHANGES.md",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md"
+    ],
+    "contributing_or_standards_files_found": false,
+    "r7_common_reviewed_files": 124,
+    "r7_unchanged_reviewed_files": 121,
+    "changed_files": [
+      "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+      "qa/release-029/RESUME-CHANGES.md"
+    ],
+    "added_files": [
+      "qa/test_keepalive_return_fixture.py"
+    ],
+    "removed_files": [],
+    "cumulative_diff_sections": 65,
+    "r7_diff_sections": 64,
+    "r7_sections_exactly_unchanged": 61,
+    "changed_sections": 3,
+    "added_sections": 1,
+    "removed_sections": 0,
+    "r7_complete_historical_diff_reproduced": true,
+    "r7_diff_order_note": "R7 originally appended the untracked notification fixture last. All git-pinned sections are byte-identical; reassembled in the original saved order reproduces all 494029 bytes and SHA. Direct sorted-commit concatenation first failed only because of this ordering; no source or evidence was repaired.",
+    "product_files_exact_r7_and_current_head": 37,
+    "original_kotlin_test_files": 34,
+    "unchanged_kotlin_test_files": 33,
+    "only_changed_kotlin_file": "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+    "candidate_complete_before_after_immutable_guarded_lineage_verified": true,
+    "new_semantic_review": "Read the entire 193-line keepalive test, 67-line new fixture, both complete changed attribution documents, their full current deltas, original lifecycle evidence and both root-cause reports. No assertion, test method/count, deadline, file boundary or background denial logic changes after reversal."
+  },
+  "prior_coverage": {
+    "verified_receipt_chain": "R7 -> R6 -> R5 -> R4 original raws, closures, canonical manifests and exact captured diff hashes. R3 standards coverage is inherited as the bounded coverage recorded by R4, not repeated or relabelled exhaustive. R3 SPEC was false; its two QA blockers were explicitly closed by R4, not retroactively marked green.",
+    "r7_standards_raw_sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7",
+    "r7_spec_raw_sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+    "r6_standards_raw_sha256": "fba292bbe099212273e76038561cdc286831a0f563d9f63232c98755ed909e2c",
+    "r6_spec_raw_sha256": "c01d9c5db2e072828a1e3a2aa3f15a25b4185c50e4123879f7bdef0faf203403",
+    "r5_standards_raw_sha256": "fbafa1c16a0659be3b15a41cdfe2ce3d67548f1a64aa78bfcaf6088aa0895cf9",
+    "r5_spec_raw_sha256": "61b0f64e9e02573ca80cf82276a077733a5a47afdfc4bf071dd3c2ee88176ac4",
+    "r4_standards_raw_sha256": "bf08d02dcf5f29b638dcb52c988f90e70af54add2b6d8d7dd9112c17615a8c58",
+    "r4_spec_raw_sha256": "56b938fcd092a746b985c4a0fca198dc2f592f185a7798bfa34c3c79d651f680",
+    "r7_all_124_source_hashes_match_9e300f9_git_blobs": true,
+    "all_r4_r7_verdict_contracts_and_closure_hashes_verified": true,
+    "historical_raw_suffixes_preserved": true
+  },
+  "fixture_verification": {
+    "original_path": "qa/release-029/evidence/resume-1720/resume-third/McpKeepAliveTest.kt.before.original",
+    "original_sha256": "506d005298009287145c598fcc5f9bc41ef5e4269f75fe4ca0b1601788b0cacd",
+    "original_bytes": 13129,
+    "current_sha256": "38d0918efff151be064e7377e451588d3e56f7fd0b872c6ac871dd4640fddcfc",
+    "current_bytes": 13261,
+    "whole_file_reverse_equal_git_and_archive": true,
+    "only_two_command_literal_changes": true,
+    "command": "am start -n com.hcbiu.elcton/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER",
+    "changed_lines": [
+      134,
+      181
+    ],
+    "independent_execution": {
+      "command": "python -B qa/test_keepalive_return_fixture.py",
+      "exit_code": 0,
+      "tests_run": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "actual_result": "Ran 4 tests in 0.002s; OK",
+      "fixture_sha256": "fcafa9fc4436b8a36ec94bfcba1d5946d516de3eb4b7ecda3bd66eae1173b193"
+    },
+    "independent_negative_probes": {
+      "cases": 12,
+      "all_rejected": true,
+      "in_memory_only": true,
+      "names": [
+        "component-only",
+        "MAIN missing",
+        "LAUNCHER missing",
+        "duplicate MAIN",
+        "duplicate LAUNCHER",
+        "wrong action",
+        "wrong category",
+        "force-stop flag",
+        "clear-task flag",
+        "other assertion changed",
+        "deadline changed",
+        "file identity check changed"
+      ]
+    },
+    "archived_red": {
+      "tests_run": 4,
+      "failures": 2,
+      "exit_code": 1,
+      "log_sha256": "e8bcf9f286ac1a03834f74ec9164d4ecc7537f5eb0c55b17c6f756b848df2fe4"
+    },
+    "archived_green": {
+      "tests_run": 4,
+      "exit_code": 0,
+      "log_sha256": "2c42f4b3ed88bc6ee1904cb2187693c5852fa5b9d13cb518ac0808ae29089ab9"
+    }
+  },
+  "activity_return_reasoning": {
+    "manifest_launch_mode": "unchanged default standard, exported MAIN+LAUNCHER root",
+    "aosp_api33": "ActivityManagerShellCommand.java:547 adds NEW_TASK; ActivityStarter.java:2697-2719 can find the existing task; :2313-2335 creates a new root instance for a different filter, but not for the same retained filter. Task.java:1110-1117 delegates to Intent.filterEquals; Intent.java:11046-11061 compares action, component, categories and other filter fields, not flags.",
+    "aosp_api34": "Same differing-filter branch verified at ActivityStarter.java:2490-2495.",
+    "primary_api33_source": "https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-13.0.0_r1/services/core/java/com/android/server/wm/ActivityStarter.java?format=TEXT",
+    "primary_api33_sha256": "81a7a1bbdad5759b2d37356d5641a5ab4a91a79b33ca302a85551e89dad23413",
+    "primary_api34_source": "https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-14.0.0_r1/services/core/java/com/android/server/wm/ActivityStarter.java?format=TEXT",
+    "primary_api34_sha256": "d6a13ea6833d8bcdad85354ea1ea9bafb487679ed9fed1988cb8311575ac366e",
+    "original_logcat_lines_verified": "47741 initial MAIN/LAUNCHER; 49682 component-only; 49700-49710 new MainActivity@85b1dd rejected by ActivityScenario versus original @53068ab. All 19 extract records equal original logcat lines.",
+    "runtime_limit": "Matching filter permits task/Activity reuse when the same task and process remain. Synthetic token equality cannot prove new-run Activity object identity, navigation retention or the later channel-denial lifecycle. Those remain fresh matched-APK Android requirements."
+  },
+  "evidence_preservation": {
+    "full_run": "43586804691",
+    "full_inventory_files": 620,
+    "full_inventory_sha256": "9c42e413d3be804408669017406f4d4da5ba9f1d5a95af6cc441f404e2a2319b",
+    "diagnostics_run": "43586767169",
+    "diagnostics_inventory_files": 319,
+    "diagnostics_inventory_sha256": "c553d7cb038cc822ebed5415e45625580a66f14fcab3c85d98c60f4192d9bea0",
+    "all_inventory_bytes_and_sha_match": true,
+    "protected_snapshot_files": 71,
+    "protected_mismatches": [],
+    "original_test_bound_in_protected_snapshot": true,
+    "historical_screenshot_scope": "Visually inspected the genuine line118 settings screenshot and verified XML switch checked=true/visible=true; no permission window. No post-line136 screenshot exists or was fabricated.",
+    "full_root_cause": "Original cold-teal-dark instrumentation OK(1), host exit0 and report harvested=false. Subsequent ADB shell failure and console5554 refused are independently visible. Specific external failure cause is unknown; no product/GPU/OOM conclusion or nine-OK full-suite green.",
+    "full_root_cause_report_sha256": "a8f0a702e29491f2feb5719b6a500d64a35105dc588352241868c4a88940a136",
+    "keepalive_root_cause_report_sha256": "fead797681617011a7417c3d49d180f61cc0db9edea806d66f533dd7f6eb7f80"
+  },
+  "unresolved_acceptance_requirements": [
+    "Fresh source-matched main/test APK Android run must establish actual same-Activity/settings reuse and complete diagnostics/channel-denial chain.",
+    "Original full suite remains RED: rerun every phase and require the complete palette/product evidence harvest and verifiers; the external emulator-session failure cause is not known.",
+    "Android build/signing/delivery and physical pure-MCP/ten-minute background acceptance are not established by this standards review."
+  ],
+  "acceptance_limits": {
+    "android_pass": false,
+    "physical_pass": false,
+    "release_delivery_complete": false,
+    "android_instrumentation_executed_by_this_review": false,
+    "device_or_sdk_signing_actions_performed": false,
+    "product_tests_rerun_by_this_review": false,
+    "scope": "STANDARDS source/fixture review, not Android PASS"
+  },
+  "issues_encountered": [
+    "Jina document fetch returned HTTP401 and a guessed AndroidX version-tag URL returned404; first-party AOSP API33/API34 source and actual archived logcat supplied the relevant proof. No further online search after user steering.",
+    "Direct R7 commit-diff concatenation initially differed because the formerly untracked test changed section order; exact original-order byte reassembly passed without changing evidence."
+  ],
+  "files_created_or_modified_by_this_review": [
+    "qa/release-029/evidence/resume-1720/final-review-r8/standards-raw.txt"
+  ]
+}

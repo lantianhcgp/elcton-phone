@@ -1,0 +1,9 @@
+test_all_existing_assertions_and_other_fixture_bytes_are_unchanged (__main__.KeepAliveReturnFixtureTest.test_all_existing_assertions_and_other_fixture_bytes_are_unchanged) ... ok
+test_component_only_action_missing_and_category_missing_are_rejected (__main__.KeepAliveReturnFixtureTest.test_component_only_action_missing_and_category_missing_are_rejected) ... ok
+test_first_return_before_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_first_return_before_channel_denial_reuses_launched_activity) ... ok
+test_second_return_after_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_second_return_after_channel_denial_reuses_launched_activity) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK

@@ -1,0 +1,8 @@
+{
+  "command": "python -B qa/release-029/evidence/resume-1720/resume-third/bind_dual_r8.py",
+  "exit_code": 1,
+  "actual_error": "RuntimeError: standards exact binding mismatch: reviewed_manifest_sha256",
+  "root": "standards raw stores exact fingerprints under bindings; raw verdict and fingerprint values match; parser shape failure only",
+  "old_parser_sha256": "41afd26e8a86309bf45e18dea77ee952993f051b8f86ff94dae68b007b19271f",
+  "raw_verdicts_modified": false
+}

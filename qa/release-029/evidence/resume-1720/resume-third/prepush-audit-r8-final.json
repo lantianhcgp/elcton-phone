@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "All git tracked/untracked-not-ignored current inputs plus archive contents; exact known local secrets and credential patterns; never secret values",
+  "files": 2085,
+  "bytes": 240801958,
+  "archives_scanned": 26,
+  "hits": [],
+  "file_manifest_sha256": "a83499fbe451dc9a7f1d030e32498e23020733aec0cd36a6eab8f3ebc4dbc10a"
+}

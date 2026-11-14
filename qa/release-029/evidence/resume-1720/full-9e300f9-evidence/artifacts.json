@@ -1,0 +1,25 @@
+{
+  "total_count": 1,
+  "artifacts": [
+    {
+      "id": 14111000940,
+      "node_id": "MDg6QXJ0aWZhY3QxNDExMTAwMDk0MA==",
+      "name": "android-ui-9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+      "size_in_bytes": 17370566,
+      "url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/artifacts/14111000940",
+      "archive_download_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/artifacts/14111000940/zip",
+      "expired": false,
+      "digest": "sha256:d319aa946c165a805ed2175d1fb636319a012f4d73a61cc28d849eed8673491c",
+      "created_at": "2026-11-14T10:54:06Z",
+      "updated_at": "2026-11-14T10:54:06Z",
+      "expires_at": "2027-02-12T10:45:50Z",
+      "workflow_run": {
+        "id": 43586804691,
+        "repository_id": 1440698948,
+        "head_repository_id": 1440698948,
+        "head_branch": "release/0.2.9-20261114",
+        "head_sha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93"
+      }
+    }
+  ]
+}

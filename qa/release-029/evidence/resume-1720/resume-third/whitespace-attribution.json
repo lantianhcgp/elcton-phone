@@ -1,0 +1,8 @@
+{
+  "source_check_exit": 0,
+  "evidence_whitespace_not_modified": true,
+  "original_output_bytes": 4999183,
+  "original_output_sha256": "cfc27aa19df37f6f02f354aec49adb9ccad939241e6bd0074308e48ffaa14958",
+  "gzip_sha256": "dee961b28568062c3b9fae0da376f41a8bc648a995daa90ccc9ebc489751ce52",
+  "scope": "Raw log/XML output whitespace is original evidence, not source defect; no rewrite of original artifact or original failed output"
+}

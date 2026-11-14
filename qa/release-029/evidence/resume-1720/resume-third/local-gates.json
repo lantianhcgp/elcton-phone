@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "scope": "local host only; NOT Android/physical",
+  "jvm_tests": 152,
+  "python_tests": 108,
+  "python_skipped": 0,
+  "http_assertions": 3784,
+  "runtime_tests": 1,
+  "tools_count": 15,
+  "http_tools_status": 200,
+  "product_files_unchanged_from_9e300f9": 37,
+  "logs": {
+    "host-final-r8/compile.log": {
+      "bytes": 579,
+      "sha256": "a65db46ebf88adbadb38fd24b29bc8e8ac10fafd32ab651cc1e7a020eef3771c"
+    },
+    "host-final-r8/junit.log": {
+      "bytes": 203,
+      "sha256": "9fc953d8dd0debffd9f379aadc8d6d2a0f14737615f528d0d883499217dced2c"
+    },
+    "resume-third/python-r8/raw.log": {
+      "bytes": 18985,
+      "sha256": "f0639d17279018940dab8155388096b921f257a4d242f1e1191718cca178cbee"
+    },
+    "resume-third/http-r8/raw.log": {
+      "bytes": 281,
+      "sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+    },
+    "resume-third/runtime-r8/junit.log": {
+      "bytes": 476,
+      "sha256": "2f8f31b48a711b711dbf989281afc2be275dec73638a2881cc30b2b4ea8f35f0"
+    },
+    "resume-third/termux-r8/receipt.json": {
+      "bytes": 2758,
+      "sha256": "3d009d7297e29230d9ce0cb02b810b75bc348e828ed50eba67bdfee26a09f87c"
+    }
+  }
+}

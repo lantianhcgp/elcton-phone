@@ -1,0 +1,184 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [],
+  "summary": "R8 SPEC夹具差分审查通过，继承经核验的R7产品覆盖链；不是重新逐行全审125文件，也不是AndroidPASS。独立全量身份核验125/125与37/37，重建完整499323字节累计diff。仅两处返回命令补MAIN/LAUNCHER，整文件逆恢复与旧断言/deadline/文件检查不变；4例真实本地运行通过。原两云端失败保留，新同源APK及两云端完整通过仍待验收。",
+  "head_pin": "e034de2f924dd6d96e31caa8e5a62e52474de718",
+  "actual_head": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+  "reviewed_files": 125,
+  "product_files": 37,
+  "source_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "product_manifest_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+  "reviewed_manifest_sha256": "9cd0cd5a3e9deb6b2180eec9e3f5f8bcb51319c018061b53b707c203c1160ab3",
+  "diff_sha256": "fee7b0f1a0b13025ed59ade8ff85606a78b5f5a0a96ea94a4b7a548dc9790c81",
+  "diff_bytes": 499323,
+  "bindings": {
+    "canonical_encoding": "sha256(json.dumps(sorted maps,sort_keys=True,separators=(comma,colon),ensure_ascii=False).encode UTF-8), without trailing newline; not pretty-file SHA",
+    "prepare_file_sha256": "895e0768600444f445f01768f3a2dfcbc52d66680b11d445e5bac7d7c0b55183",
+    "reviewed": {
+      "entries": 125,
+      "canonical_sha256": "9cd0cd5a3e9deb6b2180eec9e3f5f8bcb51319c018061b53b707c203c1160ab3",
+      "all_file_hashes_match": true,
+      "mismatched_paths": [],
+      "matches_prepare": true
+    },
+    "product": {
+      "entries": 37,
+      "canonical_sha256": "72a773083cecfef06f9fdf43f423f38b8948c0108e2e3235bf078056b3651138",
+      "all_file_hashes_match": true,
+      "mismatched_paths": [],
+      "matches_prepare": true
+    },
+    "manifest_inventory_independently_regenerated_exact": true,
+    "complete_diff": {
+      "actual_bytes": 499323,
+      "actual_sha256": "fee7b0f1a0b13025ed59ade8ff85606a78b5f5a0a96ea94a4b7a548dc9790c81",
+      "all_original_bytes_reconstructed_equal": true,
+      "command": "git diff --no-ext-diff e034de2f924dd6d96e31caa8e5a62e52474de718 -- <all 125 sorted manifest paths>; append only any manifested untracked no-index diff",
+      "manifested_untracked_append": [],
+      "new_fixture_is_staged_and_included": true
+    },
+    "candidate_before_after_live_exact": true,
+    "candidate_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "final_post_test_mismatches": []
+  },
+  "coverage": {
+    "semantic_scope": "完整R8身份绑定+R8四文件差分语义审查+严格继承R7已经记录的产品覆盖范围；不将hash全检或继承表述为本轮全产品逐行复审。",
+    "r7_raw_binding": {
+      "spec_path": "qa/release-029/evidence/resume-1720/final-review-r7/spec-raw.txt",
+      "spec_raw_sha256": "17b57540945e28d832fe0dfc34d18dfa1ccdba691027adc39c20c80481a46e31",
+      "standards_path": "qa/release-029/evidence/resume-1720/final-review-r7/standards-raw.txt",
+      "standards_raw_sha256": "77701b50abb8f47d54cbf14afa643945f8458a1e85b04c2db0be1ba5844951e7",
+      "dual_closure_sha256": "bf6216bb69e709b2c021d292fdfddc93a4c2e531fc54438f9a6287845e78d9b6",
+      "both_full_raw_sha_match_closure": true,
+      "both_axes_zero_blockers_and_bindings_match_prepare": true,
+      "reviewed_manifest_sha256": "11fd03edf08a85521d40862ebbea7fce3f169b00b970d660a95f8edc99a65ad6",
+      "diff_sha256": "bbdad569d7cccca70fe85edcdf84b3ad2544907a5567c19363c97943f5305834",
+      "diff_bytes": 494029
+    },
+    "product_chain": {
+      "verified_rounds": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_canonical_manifests_full_diff_and_raw_bindings_verified": true,
+      "r4_to_r7_full_raw_hashes_match_original_dual_closures": true,
+      "r3_spec_remains_failed": true,
+      "r3_semantic_scope": "原有界业务审查：共享实例/15工具确认、revision/epoch/陈旧回调、保活STOP/拒绝、原4诊断、课表/取件/协议；不是全文件逐行覆盖。R4精确闭合两项QA阻塞，不将R3原false改绿。",
+      "r3_r4_product_commit": "b9ce4787b7f286cadfc6632d772a1bb5b57ce337",
+      "r5_product_commit": "9d3b87308c2428e8a89a0c1dd506052dc13da341",
+      "r6_product_commit": "17443ebd617272e41d87f28da57f662b12fd1561",
+      "every_round_37_products_match_its_git_blobs": true,
+      "r4_to_r5_change": "MainActivity permission override仅去out方差",
+      "r5_to_r6_change": "MainActivity observer仅恢复空diagnostic fallback",
+      "r6_to_r7_to_r8_all_37_product_bytes_identical": true
+    },
+    "r7_to_r8": {
+      "unchanged_reviewed_entries": 121,
+      "changed_existing": [
+        "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+        "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md",
+        "qa/release-029/RESUME-CHANGES.md"
+      ],
+      "added": [
+        "qa/test_keepalive_return_fixture.py"
+      ],
+      "removed": [],
+      "cumulative_sections_r7": 64,
+      "cumulative_sections_r8": 65,
+      "unchanged_sections": 61,
+      "all_21_changed_product_sections_byte_identical": true,
+      "product_manifest_full_bytes_identical": true
+    },
+    "requirements_read": [
+      "qa/release-029/SPEC.md全文；7共享实例、11保活/停止、13旧测试不删不skip、17签名/交付、19真机pending",
+      "qa/release-029/RESUME-CHANGES.md全文（R8第15/16行）",
+      "qa/release-029/ANDROID-HARNESS-ATTRIBUTION.md全文（R8第32/34行）",
+      "qa/release-029/TEST-ATTRIBUTION.md全文"
+    ]
+  },
+  "fixture_verification": {
+    "before_path": "qa/release-029/evidence/resume-1720/resume-third/McpKeepAliveTest.kt.before.original",
+    "before_bytes": 13129,
+    "before_sha256": "506d005298009287145c598fcc5f9bc41ef5e4269f75fe4ca0b1601788b0cacd",
+    "before_equals_R7_and_HEAD_git_original": true,
+    "current_bytes": 13261,
+    "current_sha256": "38d0918efff151be064e7377e451588d3e56f7fd0b872c6ac871dd4640fddcfc",
+    "only_changed_lines": [
+      134,
+      181
+    ],
+    "exact_whole_file_reverse": true,
+    "all_old_assertions_deadlines_file_checks_and_other_bytes_identical": true,
+    "existing_kotlin_test_files": 34,
+    "byte_identical_kotlin_files": 33,
+    "sole_changed_test": "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt",
+    "test_files_added_or_removed": [],
+    "launch_command": "am start -n com.hcbiu.elcton/.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER",
+    "no_force_stop_recreate_clear_task_launchMode_or_product_changes": true,
+    "independent_green": {
+      "command": "python3 -B qa/test_keepalive_return_fixture.py",
+      "exit_code": 0,
+      "tests_run": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "raw_output": "test_all_existing_assertions_and_other_fixture_bytes_are_unchanged (__main__.KeepAliveReturnFixtureTest.test_all_existing_assertions_and_other_fixture_bytes_are_unchanged) ... ok\ntest_component_only_action_missing_and_category_missing_are_rejected (__main__.KeepAliveReturnFixtureTest.test_component_only_action_missing_and_category_missing_are_rejected) ... ok\ntest_first_return_before_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_first_return_before_channel_denial_reuses_launched_activity) ... ok\ntest_second_return_after_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_second_return_after_channel_denial_reuses_launched_activity) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+      "raw_output_sha256": "2c42f4b3ed88bc6ee1904cb2187693c5852fa5b9d13cb518ac0808ae29089ab9"
+    },
+    "independent_red_replay": {
+      "scope": "同一未改4方法，只在内存把TEST路径绑定原before；不改当前源码/断言",
+      "tests_run": 4,
+      "failures": 2,
+      "errors": 0,
+      "skips": 0,
+      "failed_methods": [
+        "test_first_return_before_channel_denial_reuses_launched_activity",
+        "test_second_return_after_channel_denial_reuses_launched_activity"
+      ]
+    },
+    "archived_red_log_sha256": "e8bcf9f286ac1a03834f74ec9164d4ecc7537f5eb0c55b17c6f756b848df2fe4",
+    "archived_green_log_sha256": "2c42f4b3ed88bc6ee1904cb2187693c5852fa5b9d13cb518ac0808ae29089ab9"
+  },
+  "failure_evidence": {
+    "diagnostics": {
+      "run": "43586767169",
+      "inventory_entries_verified": 319,
+      "inventory_sha256": "c553d7cb038cc822ebed5415e45625580a66f14fcab3c85d98c60f4192d9bea0",
+      "mismatches": [],
+      "logcat_sha256": "5a0f2be0edebaf176247398efef8a2de64cb293d7c5d7469a2094600ba9ab273",
+      "proof": "原logcat49682 component-only返回；49700-49710新Activity@85b1dd、MAIN/LAUNCHER identity不匹配；50269原line136失败。原截图/XML是line118返回前，不冒充line136后现场；原keepalive-report.passed=false。"
+    },
+    "full": {
+      "run": "43586804691",
+      "inventory_entries_verified": 620,
+      "inventory_sha256": "9c42e413d3be804408669017406f4d4da5ba9f1d5a95af6cc441f404e2a2319b",
+      "mismatches": [],
+      "root_report_path": "qa/release-029/evidence/resume-1720/resume-third/ROOT-CAUSE-FULL.md",
+      "root_report_sha256": "a8f0a702e29491f2feb5719b6a500d64a35105dc588352241868c4a88940a136",
+      "proof": "亲读cold-teal-dark instrument OK1/exit0、report.harvested=false；随后ADB shell异常及actual.log248 console5554拒绝。未证明GPU/OOM/具体模拟器失效原因；不得据此改产品/旧full断言。九项instrument成功不等于完整palette/full通过。"
+    }
+  },
+  "acceptance_limits": {
+    "android_pass": false,
+    "release_acceptance": false,
+    "fresh_same_source_APK_and_both_cloud_suites": "pending；旧两云端失败保持RED，需同源新main/test APK和原配置完整diagnostics/full通过。",
+    "physical_bluetooth_MIUI_ten_minutes": "pending；不碰真机/表端，不用HOST/夹具替代。",
+    "required_certificate_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "old_0_2_8_APK_1_1_15_HAP_and_15aaf_candidate": "本review未写/覆盖；未声称新验签或物理验收。",
+    "device_CI_signing_workflow_staging_git_writes_performed": false,
+    "new_spec_code_blockers": []
+  },
+  "issues_encountered": [
+    "早先R4历史SPEC raw带原missed-steer非JSON尾注导致首次json.loads失败；随后只读解析首JSON、保留并核全raw原SHA匹配原closure。非产品阻塞，历史原件未改。"
+  ],
+  "files_created_or_modified_by_this_review": [
+    "qa/release-029/evidence/resume-1720/final-review-r8/spec-raw.txt"
+  ]
+}

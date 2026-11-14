@@ -1,0 +1,78 @@
+[
+  {
+    "line": 49387,
+    "text": "11-14 10:52:13.783  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@53068ab in: PAUSED"
+  },
+  {
+    "line": 49454,
+    "text": "11-14 10:52:14.119  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@53068ab in: STOPPED"
+  },
+  {
+    "line": 49682,
+    "text": "11-14 10:52:15.540   475  1406 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.hcbiu.elcton/.MainActivity} from uid 2000"
+  },
+  {
+    "line": 49700,
+    "text": "11-14 10:52:15.620  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@85b1dd in: PRE_ON_CREATE"
+  },
+  {
+    "line": 49701,
+    "text": "11-14 10:52:15.620  6311  6311 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity }, activity.getIntent()=Intent { flg=0x10400000 cmp=com.hcbiu.elcton/.MainActivity }, activity=com.hcbiu.elcton.MainActivity@85b1dd"
+  },
+  {
+    "line": 49702,
+    "text": "11-14 10:52:15.630  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@85b1dd in: CREATED"
+  },
+  {
+    "line": 49703,
+    "text": "11-14 10:52:15.630  6311  6311 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity }, activity.getIntent()=Intent { flg=0x10400000 cmp=com.hcbiu.elcton/.MainActivity }, activity=com.hcbiu.elcton.MainActivity@85b1dd"
+  },
+  {
+    "line": 49704,
+    "text": "11-14 10:52:15.631  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@85b1dd in: STARTED"
+  },
+  {
+    "line": 49705,
+    "text": "11-14 10:52:15.631  6311  6311 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity }, activity.getIntent()=Intent { flg=0x10400000 cmp=com.hcbiu.elcton/.MainActivity }, activity=com.hcbiu.elcton.MainActivity@85b1dd"
+  },
+  {
+    "line": 49709,
+    "text": "11-14 10:52:15.692  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@85b1dd in: RESUMED"
+  },
+  {
+    "line": 49710,
+    "text": "11-14 10:52:15.693  6311  6311 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity }, activity.getIntent()=Intent { flg=0x10400000 cmp=com.hcbiu.elcton/.MainActivity }, activity=com.hcbiu.elcton.MainActivity@85b1dd"
+  },
+  {
+    "line": 50049,
+    "text": "11-14 10:52:16.657   475  2128 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.hcbiu.elcton.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} from uid 10174"
+  },
+  {
+    "line": 50058,
+    "text": "11-14 10:52:16.682  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@85b1dd in: PAUSED"
+  },
+  {
+    "line": 50059,
+    "text": "11-14 10:52:16.682  6311  6311 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity }, activity.getIntent()=Intent { flg=0x10400000 cmp=com.hcbiu.elcton/.MainActivity }, activity=com.hcbiu.elcton.MainActivity@85b1dd"
+  },
+  {
+    "line": 50162,
+    "text": "11-14 10:52:17.022  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@53068ab in: DESTROYED"
+  },
+  {
+    "line": 50177,
+    "text": "11-14 10:52:17.050  6311  6311 D LifecycleMonitor: Lifecycle status change: com.hcbiu.elcton.MainActivity@85b1dd in: RESUMED"
+  },
+  {
+    "line": 50178,
+    "text": "11-14 10:52:17.051  6311  6311 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.hcbiu.elcton/.MainActivity }, activity.getIntent()=Intent { flg=0x10400000 cmp=com.hcbiu.elcton/.MainActivity }, activity=com.hcbiu.elcton.MainActivity@85b1dd"
+  },
+  {
+    "line": 50263,
+    "text": "11-14 10:52:17.284  6311  6370 E TestRunner: Reason: Expected exactly '1' node but could not find any node that satisfies: (TestTag = 'mcp-keepalive-switch')"
+  },
+  {
+    "line": 50269,
+    "text": "11-14 10:52:17.284  6311  6370 E TestRunner: \tat com.hcbiu.elcton.McpKeepAliveTest.defaultOffOptInKeepsBackgroundHttpAndOffStopsPort(McpKeepAliveTest.kt:136)"
+  }
+]

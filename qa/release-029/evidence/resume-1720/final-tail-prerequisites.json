@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "apk_source_sha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+  "latest_reviewed_inputs_unchanged": 124,
+  "delivered_apk_actual_bytes": 8237316,
+  "delivered_apk_actual_sha256": "15aafee2af9509bc61f3780f74cef712fc47dfdedcb487cdd34e7d59d9a1d8b7",
+  "old_packets_unchanged": 2,
+  "scope": "final tail prereqs, Android execution results still pending"
+}

@@ -1,0 +1,45 @@
+test_all_existing_assertions_and_other_fixture_bytes_are_unchanged (__main__.KeepAliveReturnFixtureTest.test_all_existing_assertions_and_other_fixture_bytes_are_unchanged) ... ok
+test_component_only_action_missing_and_category_missing_are_rejected (__main__.KeepAliveReturnFixtureTest.test_component_only_action_missing_and_category_missing_are_rejected) ... ok
+test_first_return_before_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_first_return_before_channel_denial_reuses_launched_activity) ... FAIL
+test_second_return_after_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_second_return_after_channel_denial_reuses_launched_activity) ... FAIL
+
+======================================================================
+FAIL: test_first_return_before_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_first_return_before_channel_denial_reuses_launched_activity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_return_fixture.py", line 44, in test_first_return_before_channel_denial_reuses_launched_activity
+    self.assert_launcher_return(commands[0])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_return_fixture.py", line 35, in assert_launcher_return
+    self.assertEqual({'-n': 'com.hcbiu.elcton/.MainActivity',
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      '-a': 'android.intent.action.MAIN',
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      '-c': 'android.intent.category.LAUNCHER'},
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     launcher_identity(command), 'return must reuse initial launcher intent')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'-n': 'com.hcbiu.elcton/.MainActivity', [72 chars]HER'} != None : return must reuse initial launcher intent
+
+======================================================================
+FAIL: test_second_return_after_channel_denial_reuses_launched_activity (__main__.KeepAliveReturnFixtureTest.test_second_return_after_channel_denial_reuses_launched_activity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_return_fixture.py", line 49, in test_second_return_after_channel_denial_reuses_launched_activity
+    self.assert_launcher_return(commands[1])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_return_fixture.py", line 35, in assert_launcher_return
+    self.assertEqual({'-n': 'com.hcbiu.elcton/.MainActivity',
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      '-a': 'android.intent.action.MAIN',
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      '-c': 'android.intent.category.LAUNCHER'},
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     launcher_identity(command), 'return must reuse initial launcher intent')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'-n': 'com.hcbiu.elcton/.MainActivity', [72 chars]HER'} != None : return must reuse initial launcher intent
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+FAILED (failures=2)

@@ -1,0 +1,26 @@
+{
+  "scope": "Synthetic raw parser mutations in memory; original raw/source untouched",
+  "cases": [
+    {
+      "case": "fingerprint",
+      "rejected": true,
+      "error": "standards exact binding mismatch: reviewed_manifest_sha256"
+    },
+    {
+      "case": "failed",
+      "rejected": true,
+      "error": "Independent standards is not valid PASS"
+    },
+    {
+      "case": "blocker",
+      "rejected": true,
+      "error": "Independent standards is not valid PASS"
+    },
+    {
+      "case": "axis",
+      "rejected": true,
+      "error": "Independent standards is not valid PASS"
+    }
+  ],
+  "passed": true
+}

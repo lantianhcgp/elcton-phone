@@ -1,0 +1,314 @@
+{
+  "passed": false,
+  "scope": "real CI Android emulator; SYNTHETIC diagnostic; no paired watch",
+  "stage": "keepalive-instrumentation",
+  "sourceSha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+  "apkSha256": {
+    "main": "15aafee2af9509bc61f3780f74cef712fc47dfdedcb487cdd34e7d59d9a1d8b7",
+    "tests": "ccfa927f8b327219e38e5b3af682ab89daae76e9f0308dc1aaa7b61dd9a49a92"
+  },
+  "certificates": {
+    "main": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+    "tests": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94"
+  },
+  "serial": "emulator-5554",
+  "navigationMode": "three-button",
+  "sdk": "33",
+  "qaRun": "53634b46-88c3-46d4-8848-fb1847eb54e4",
+  "instrumentationReceipt": {
+    "passed": true,
+    "sourceSha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+    "qaRun": "53634b46-88c3-46d4-8848-fb1847eb54e4",
+    "scope": "real Android emulator; SYNTHETIC errors; no paired watch or WearEngine actions",
+    "captures": [
+      {
+        "name": "settings-version",
+        "attempt": 1,
+        "pixelReady": true,
+        "targetText": "0.2.9 · 测试构建",
+        "targetBounds": [
+          138,
+          1521,
+          359,
+          1566
+        ],
+        "extra": {},
+        "screenWidth": 1080,
+        "screenHeight": 1920,
+        "fullPixels": {
+          "samples": 230400,
+          "mean": 243.70888599459957,
+          "stddev": 29.5700869611506,
+          "minimum": 32.333333333333336,
+          "maximum": 255,
+          "step": 3
+        },
+        "targetPixels": {
+          "samples": 9945,
+          "mean": 210.43877995641014,
+          "stddev": 49.5082221572623,
+          "minimum": 115.66666666666667,
+          "maximum": 240.33333333333334,
+          "step": 1
+        },
+        "pngSha256": "dec105e0e5c3eddcc3464a84948aeab58c0c6b07a0bc9de473f8c011a65d2fd3"
+      },
+      {
+        "name": "diagnostics-head",
+        "attempt": 1,
+        "pixelReady": true,
+        "targetText": "SYNTHETIC-BEGIN",
+        "targetBounds": [
+          183,
+          701,
+          848,
+          751
+        ],
+        "extra": {
+          "scroll": 0,
+          "scrollMax": 4449
+        },
+        "screenWidth": 1080,
+        "screenHeight": 1920,
+        "fullPixels": {
+          "samples": 230400,
+          "mean": 164.51894675898905,
+          "stddev": 69.99267522489099,
+          "minimum": 13,
+          "maximum": 255,
+          "step": 3
+        },
+        "targetPixels": {
+          "samples": 33250,
+          "mean": 221.73333333324737,
+          "stddev": 42.6999437900916,
+          "minimum": 99,
+          "maximum": 238.33333333333334,
+          "step": 1
+        },
+        "pngSha256": "a9252766fcc0c0e031d1023517a902cb16c0ad2679f7cf36d7ec79757e247ebf"
+      },
+      {
+        "name": "diagnostics-tail",
+        "attempt": 1,
+        "pixelReady": true,
+        "targetText": "SYNTHETIC-END",
+        "targetBounds": [
+          183,
+          1252,
+          430,
+          1299
+        ],
+        "extra": {
+          "scroll": 4449,
+          "scrollMax": 4449
+        },
+        "screenWidth": 1080,
+        "screenHeight": 1920,
+        "fullPixels": {
+          "samples": 230400,
+          "mean": 164.53855902750703,
+          "stddev": 69.99149500213986,
+          "minimum": 13,
+          "maximum": 255,
+          "step": 3
+        },
+        "targetPixels": {
+          "samples": 11609,
+          "mean": 218.86237689149786,
+          "stddev": 46.0973603001203,
+          "minimum": 99,
+          "maximum": 238.33333333333334,
+          "step": 1
+        },
+        "pngSha256": "0dfd7eb98fc4a64f942362b0055d1bfe88920898484c96b48e79c48731d40508"
+      }
+    ],
+    "packageVersion": "0.2.9",
+    "packageCode": 11,
+    "passiveMcp": {
+      "host": "127.0.0.1",
+      "port": 8766,
+      "running": true,
+      "readOnly": true,
+      "startupError": null
+    },
+    "tokenBytes": 64,
+    "tokenMode": "0600",
+    "token": "REDACTED",
+    "syntheticFullSha256": "6dcd6ac391b540d01db278d0e2f0aea54ffef9692e014228e9d7db1a25dab0a0",
+    "syntheticChars": 3293,
+    "causeCount": 2,
+    "activityRecreated": true,
+    "fullTextUntruncated": true,
+    "closeVisibleAndWorks": true,
+    "androidNioHttpRead": true,
+    "httpTools": [
+      "error_tail",
+      "diag_read",
+      "version_info",
+      "fs_read",
+      "sync_connect",
+      "sync_disconnect",
+      "start_import",
+      "start_publish",
+      "abort",
+      "courses_read",
+      "courses_write",
+      "pickup_import",
+      "devices_list",
+      "pairing_state",
+      "sync_state"
+    ],
+    "originalDiagnosticSchemas": true,
+    "sharedPhoneActivityRecreated": true,
+    "businessFilesUnchanged": true
+  },
+  "independentPngChecks": [
+    {
+      "name": "settings-version",
+      "bounds": [
+        138,
+        1521,
+        359,
+        1566
+      ],
+      "fullPixels": {
+        "samples": 230400,
+        "mean": 243.70888599537034,
+        "stddev": 29.570086952424788,
+        "minimum": 32.333333333333336,
+        "maximum": 255.0,
+        "step": 3
+      },
+      "targetPixels": {
+        "samples": 9945,
+        "mean": 210.43877995642703,
+        "stddev": 49.50822215720548,
+        "minimum": 115.66666666666667,
+        "maximum": 240.33333333333334,
+        "step": 1
+      }
+    },
+    {
+      "name": "diagnostics-head",
+      "bounds": [
+        183,
+        701,
+        848,
+        751
+      ],
+      "fullPixels": {
+        "samples": 230400,
+        "mean": 164.51894675925928,
+        "stddev": 69.99267522447586,
+        "minimum": 13.0,
+        "maximum": 255.0,
+        "step": 3
+      },
+      "targetPixels": {
+        "samples": 33250,
+        "mean": 221.73333333333335,
+        "stddev": 42.69994378996103,
+        "minimum": 99.0,
+        "maximum": 238.33333333333334,
+        "step": 1
+      }
+    },
+    {
+      "name": "diagnostics-tail",
+      "bounds": [
+        183,
+        1252,
+        430,
+        1299
+      ],
+      "fullPixels": {
+        "samples": 230400,
+        "mean": 164.53855902777778,
+        "stddev": 69.99149500172416,
+        "minimum": 13.0,
+        "maximum": 255.0,
+        "step": 3
+      },
+      "targetPixels": {
+        "samples": 11609,
+        "mean": 218.86237689149223,
+        "stddev": 46.0973603000624,
+        "minimum": 99.0,
+        "maximum": 238.33333333333334,
+        "step": 1
+      }
+    }
+  ],
+  "sharedPhoneInstrumentationReceipt": {
+    "passed": true,
+    "sourceSha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+    "qaRun": "53634b46-88c3-46d4-8848-fb1847eb54e4",
+    "scope": "emulator-only local MCP courses fixture; real WearEngine/phone pending",
+    "sharedPhoneActivityRecreated": true,
+    "pureMcpCoursesWriteRead": true,
+    "previewDoesNotWrite": true,
+    "confirmedWritePersisted": true,
+    "protectedDataUnchanged": true,
+    "fixtureFilesRestored": true
+  },
+  "normalHttpSelftest": {
+    "ok": true,
+    "mode": "read-only-app",
+    "scope": "external URL; caller must identify host vs Android",
+    "assertions": 3659,
+    "clients": [
+      "urllib",
+      "curl"
+    ],
+    "write_eof_transport": {
+      "status": "unsupported",
+      "reason": "EmptyHttpResponse",
+      "excluded_checks": [
+        "Truncated body rejected (requires client write EOF)"
+      ],
+      "required_validation": "direct production-host raw socket and Android direct Socket"
+    },
+    "all_raw_checks_passed": false,
+    "token": "REDACTED"
+  },
+  "normalBackgroundFgs": {
+    "passed": true,
+    "scope": "ordinary emulator process; screen-on Home; finite 5s/3 probes; NOT Doze/sticky/phone proof",
+    "pid": "4101",
+    "observations": [
+      {
+        "attempt": 1,
+        "elapsedSeconds": 1.5693856180000694,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      },
+      {
+        "attempt": 2,
+        "elapsedSeconds": 2.7593445030000794,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      },
+      {
+        "attempt": 3,
+        "elapsedSeconds": 5.372908561000031,
+        "foreground": true,
+        "ordinaryProcess": true,
+        "urllibVersionAndError": true
+      }
+    ],
+    "stopPath": "actual-notification-action",
+    "offPortClosed": true,
+    "offNotificationRemoved": true,
+    "businessAndTokenAndErrorsUnchanged": true,
+    "observationCount": 3,
+    "defaultOn": true,
+    "stopDisablesChoice": true,
+    "stopInactive": true,
+    "stopAcknowledged": true
+  },
+  "failure": "AssertionError: Real keepalive instrumentation failed; full logs/evidence retained"
+}

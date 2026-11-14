@@ -1,0 +1,33 @@
+[release/0.2.9-20261114 9e300f9] test(qa): preauthorize notification fixture without changing original UI tests
+ 33 files changed, 7558 insertions(+)
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/before.json
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/emulator_install_and_tour.py.original
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/exact-environment-delta.json
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-green.exit
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-green.log
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-red.exit
+ create mode 100644 qa/release-029/evidence/resume-1720/android-permission-fixture-r7/fixture-red.log
+ create mode 100644 qa/release-029/evidence/resume-1720/android-repair-r6/ROOT-CAUSE-R7.md
+ create mode 100644 qa/release-029/evidence/resume-1720/build-ci-17443eb/completed.json
+ create mode 100644 qa/release-029/evidence/resume-1720/build-ci-17443eb/latest.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r6/commit.exit
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r6/commit.log
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r6/push-readback.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r6/push.exit
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r6/push.log
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r6/staged-source-check.log
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/candidate-after.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/candidate-before.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/close-command.exit
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/close-command.log
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/current.diff
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/dual-closure.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/prepare.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/product-manifest.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/reviewed-manifest.json
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/spec-raw.txt
+ create mode 100644 qa/release-029/evidence/resume-1720/final-review-r7/standards-raw.txt
+ create mode 100644 qa/release-029/evidence/resume-1720/r7-local/python.exit
+ create mode 100644 qa/release-029/evidence/resume-1720/r7-local/python.log
+ create mode 100644 qa/release-029/evidence/resume-1720/r7-local/source-check.log
+ create mode 100644 qa/test_notification_fixture.py

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "files": 620,
+  "inventory_sha256": "9c42e413d3be804408669017406f4d4da5ba9f1d5a95af6cc441f404e2a2319b",
+  "full_suite": "failure",
+  "real_failure": "harvest after passed instrument"
+}

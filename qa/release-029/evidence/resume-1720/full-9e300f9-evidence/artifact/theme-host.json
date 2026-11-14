@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "source_sha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+  "navigation_mode": "three-button",
+  "phases": {
+    "initial": {
+      "passed": true,
+      "exit_code": 0,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.ThemeUiTest:\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 30.314\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.ThemeUiTest:\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 7.299\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-system-dark": {
+      "passed": true,
+      "exit_code": 0,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.ThemeUiTest:\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 16.597\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    },
+    "cold-light-under-dark-system": {
+      "passed": true,
+      "exit_code": 0,
+      "force_stop": {
+        "target_pid_after": "",
+        "test_pid_after": ""
+      },
+      "stdout": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.ThemeUiTest:\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.ThemeUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectThemeAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 6.931\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+      "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n"
+    }
+  }
+}

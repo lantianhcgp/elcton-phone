@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "stage": "palette-cold-teal-dark",
+  "source_sha": "9e300f9f7c56bddb2151e63d6a160c5bc645db93",
+  "instrumentation": "INSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=\ncom.hcbiu.elcton.PaletteUiTest:\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 1\nINSTRUMENTATION_STATUS: class=com.hcbiu.elcton.PaletteUiTest\nINSTRUMENTATION_STATUS: current=1\nINSTRUMENTATION_STATUS: id=AndroidJUnitRunner\nINSTRUMENTATION_STATUS: numtests=1\nINSTRUMENTATION_STATUS: stream=.\nINSTRUMENTATION_STATUS: test=inspectPaletteAndPersistencePhase\nINSTRUMENTATION_STATUS_CODE: 0\nINSTRUMENTATION_RESULT: stream=\n\nTime: 4.913\n\nOK (1 test)\n\n\nINSTRUMENTATION_CODE: -1\n",
+  "stderr": "s_glBindAttribLocation: bind attrib 0 name position\ns_glBindAttribLocation: bind attrib 1 name color\ns_glBindAttribLocation: bind attrib 2 name localCoord\n",
+  "timed_out": false,
+  "harvested": false
+}

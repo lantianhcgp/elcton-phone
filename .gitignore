@@ -14,3 +14,4 @@ signing.properties
 .ai-memory/*/
 .cache/
 .diag-build/
+**/__pycache__/

@@ -1,0 +1,74 @@
+JUnit version 4.13.2
+..E.E.E.E.E..E.E..E.E.E.E..
+Time: 0.208
+There were 11 failures:
+1) messageGetterFailureStillPreservesCodeAndNestedCause(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.IllegalArgumentException: SYNTHETIC message unavailable
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest$messageGetterFailureStillPreservesCodeAndNestedCause$original$1.getMessage(ErrorRecordBoundaryTest.kt:84)
+	at com.hcbiu.elcton.WearErrorRecord$Companion.capture(WearErrorRecord.kt:53)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.messageGetterFailureStillPreservesCodeAndNestedCause(ErrorRecordBoundaryTest.kt:86)
+2) codeSupplierFailureIsReportedWithoutStoppingTheCauseChain(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+org.json.JSONException: JSONObject["diagnosticFailures"] not found.
+	at org.json.JSONObject.get(JSONObject.java:596)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:789)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.assertReadFailure(ErrorRecordBoundaryTest.kt:253)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.codeSupplierFailureIsReportedWithoutStoppingTheCauseChain(ErrorRecordBoundaryTest.kt:112)
+3) causeGetterFailurePreservesFullOriginalMessageAndReportsReadFailure(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.IllegalStateException: SYNTHETIC cause unavailable
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest$causeGetterFailurePreservesFullOriginalMessageAndReportsReadFailure$original$1.getCause(ErrorRecordBoundaryTest.kt:50)
+	at com.hcbiu.elcton.WearErrorRecord$Companion.capture(WearErrorRecord.kt:54)
+	at com.hcbiu.elcton.WearErrorRecord$Companion.capture$default(WearErrorRecord.kt:46)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.causeGetterFailurePreservesFullOriginalMessageAndReportsReadFailure(ErrorRecordBoundaryTest.kt:52)
+4) causeGetterFailureCannotReplaceTheOriginalBusinessFailureExit(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.AssertionError: diagnostics must not replace the original business throwable
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.causeGetterFailureCannotReplaceTheOriginalBusinessFailureExit(ErrorRecordBoundaryTest.kt:155)
+5) nestedCauseGetterFailureRetainsTheWholeCapturedPrefix(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.UnsupportedOperationException: SYNTHETIC nested cause unavailable
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest$nestedCauseGetterFailureRetainsTheWholeCapturedPrefix$nested$1.getCause(ErrorRecordBoundaryTest.kt:66)
+	at com.hcbiu.elcton.WearErrorRecord$Companion.capture(WearErrorRecord.kt:54)
+	at com.hcbiu.elcton.WearErrorRecord$Companion.capture$default(WearErrorRecord.kt:46)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.nestedCauseGetterFailureRetainsTheWholeCapturedPrefix(ErrorRecordBoundaryTest.kt:69)
+6) ordinaryDeepCauseChainIsNotTruncatedOrMarkedAsAReadFailure(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+org.json.JSONException: JSONObject["diagnosticFailures"] not found.
+	at org.json.JSONObject.get(JSONObject.java:596)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:789)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.ordinaryDeepCauseChainIsNotTruncatedOrMarkedAsAReadFailure(ErrorRecordBoundaryTest.kt:186)
+7) diagnosticFailureMetadataNeverReadsTheFailingThrowablePayload(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.AssertionError: diagnostic throwable must not escape capture
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.diagnosticFailureMetadataNeverReadsTheFailingThrowablePayload(ErrorRecordBoundaryTest.kt:131)
+8) identityCycleDetectionNeverInvokesThrowableEqualityOrHashCode(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+org.json.JSONException: JSONObject["diagnosticFailures"] not found.
+	at org.json.JSONObject.get(JSONObject.java:596)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:789)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.identityCycleDetectionNeverInvokesThrowableEqualityOrHashCode(ErrorRecordBoundaryTest.kt:169)
+9) providedMessageStillIsolatesCodeAndCauseFailures(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.AssertionError: captureWithMessage must preserve the one existing business message read
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.captureProvided(ErrorRecordBoundaryTest.kt:247)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.providedMessageStillIsolatesCodeAndCauseFailures(ErrorRecordBoundaryTest.kt:231)
+10) providedPrimaryMessageIsNeverReadAgainWhileNestedMessagesAreCapturedOnce(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.AssertionError: captureWithMessage must preserve the one existing business message read
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.captureProvided(ErrorRecordBoundaryTest.kt:247)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.captureProvided$default(ErrorRecordBoundaryTest.kt:241)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.providedPrimaryMessageIsNeverReadAgainWhileNestedMessagesAreCapturedOnce(ErrorRecordBoundaryTest.kt:202)
+11) providedNullMessageDoesNotFallBackToTheThrowableGetter(com.hcbiu.elcton.ErrorRecordBoundaryTest)
+java.lang.AssertionError: captureWithMessage must preserve the one existing business message read
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.captureProvided(ErrorRecordBoundaryTest.kt:247)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.captureProvided$default(ErrorRecordBoundaryTest.kt:241)
+	at com.hcbiu.elcton.ErrorRecordBoundaryTest.providedNullMessageDoesNotFallBackToTheThrowableGetter(ErrorRecordBoundaryTest.kt:219)
+
+FAILURES!!!
+Tests run: 16,  Failures: 11
+

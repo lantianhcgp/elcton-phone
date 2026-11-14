@@ -87,7 +87,12 @@ class PaletteSourceTest(unittest.TestCase):
         from qa.ui_only_gate import activity_checks
         import subprocess
         base = subprocess.check_output(['git', 'show', '519f0d5450f77ce4ba757a644b2144607b0a5c06:app/src/main/java/com/hcbiu/elcton/MainActivity.kt'], cwd=ROOT, text=True)
-        self.assertEqual([], activity_checks(base, activity))
+        # Preserve the original UI-only invariants after reversing only the
+        # reviewed diagnostic delta. The diagnostic gate independently rejects
+        # every extra callback/lifecycle/SDK edit, including negative controls.
+        from qa.diag_source_gate import without_activity_diagnostics, scope_errors, PROBE
+        self.assertEqual([], scope_errors(activity, (ROOT / PROBE).read_text()))
+        self.assertEqual([], activity_checks(base, without_activity_diagnostics(activity)))
 
     def test_palette_capture_refreshes_cache_and_rejects_stale_scene_after_dismissing_ime(self):
         source=(ROOT/'app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt').read_text()

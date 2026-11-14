@@ -1,0 +1,14 @@
+JUnit version 4.13.2
+...E
+Time: 0.072
+There was 1 failure:
+1) sdkErrorOutletRecordsFullMessageCodeAndExactFailurePhase(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.sdkErrorOutletRecordsFullMessageCodeAndExactFailurePhase(DiagnosticsIntegrationTest.kt:34)
+
+FAILURES!!!
+Tests run: 3,  Failures: 1
+

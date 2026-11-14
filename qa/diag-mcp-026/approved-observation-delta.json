@@ -1,0 +1,57 @@
+{
+  "baseline": "18cd94ea1689c7e3d59a26afd4121cd2a665b4d7",
+  "patches": {
+    "app/src/main/java/com/hcbiu/elcton/MainActivity.kt": [
+      {
+        "before": "",
+        "after": "        probeState=probeState.copy(diagnostic=(application as? ElctonApplication)?.diagnostics?.latestFull().orEmpty())\n"
+      },
+      {
+        "before": "        if(diagnostics)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={diagnostics=false},title={Text(\"连接诊断\")},text={SelectionContainer{Text(probeState.diagnostic.ifEmpty{\"暂无错误记录\"},style=MaterialTheme.typography.bodySmall,fontFamily=FontFamily.Monospace)}},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={diagnostics=false}){Text(\"关闭\")}})\n",
+        "after": "        if(diagnostics)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,\n            onDismissRequest={diagnostics=false},title={Text(\"连接诊断\")},\n            text={SelectionContainer {\n                Box(Modifier.fillMaxWidth().heightIn(max=300.dp).testTag(\"diagnostics-scroll\")\n                    .verticalScroll(rememberScrollState())) {\n                    Text(probeState.diagnostic.ifEmpty{(application as? ElctonApplication)?.diagnostics?.latestFull().orEmpty().ifEmpty{\"暂无错误记录\"}},\n                        style=MaterialTheme.typography.bodySmall,fontFamily=FontFamily.Monospace,\n                        modifier=Modifier.testTag(\"diagnostics-details\"))\n                }\n            }},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),\n                onClick={diagnostics=false}){Text(\"关闭\")}})\n"
+      },
+      {
+        "before": "                ExpressivePill(\"0.2.4 · 测试构建\",color=M3x.SurfaceHigh,contentColor=M3x.Ink)\n",
+        "after": "                ExpressivePill(\"${BuildConfig.VERSION_NAME} · 测试构建\",color=M3x.SurfaceHigh,contentColor=M3x.Ink,\n                    modifier=Modifier.testTag(\"version-capsule\"))\n"
+      }
+    ],
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": [
+      {
+        "before": "",
+        "after": "import com.huawei.wearengine.WearEngineException\n"
+      },
+      {
+        "before": "    private var state=State()\n",
+        "after": "    private val diagnostics=(activity.application as? ElctonApplication)?.diagnostics\n    private var state=State(diagnostic=diagnostics?.latestFull().orEmpty())\n"
+      },
+      {
+        "before": "    private fun publish(s:State){state=s;update(s)}\n",
+        "after": "    private fun publish(s:State){state=s;update(s)\n        try{diagnostics?.observe(s.status,s.detail,s.ready,s.busy,s.devices.size)}catch(_:Exception){}\n    }\n"
+      },
+      {
+        "before": "    private fun describe(e:Exception):String {\n        val raw=UserFacingError.diagnostic(e)\n        state=state.copy(diagnostic=raw)\n        android.util.Log.w(\"ElctonWear\",raw)\n        return UserFacingError.explain(e.message.orEmpty())\n    }\n",
+        "after": "    private fun describe(e:Exception,phase:String):String {\n        // Keep the original primary message read singular; observability cannot gate fail().\n        val message=e.message\n        try {\n            val record=WearErrorRecord.captureWithMessage(e,phase,System.currentTimeMillis(),message) { cause ->\n                (cause as? WearEngineException)?.errorCode\n            }\n            val raw=record.full\n            state=state.copy(diagnostic=raw)\n            android.util.Log.w(\"ElctonWear\",raw)\n            try{diagnostics?.record(record)}catch(_:Exception){}\n        }catch(observationError:Exception){\n            android.util.Log.w(\"ElctonWear\",\"Diagnostic capture failed: \"+observationError.javaClass.simpleName)\n        }\n        return UserFacingError.explain(message.orEmpty())\n    }\n"
+      },
+      {
+        "before": "                    },Permission.DEVICE_MANAGER).addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}\n",
+        "after": "                    },Permission.DEVICE_MANAGER).addOnFailureListener{e->main{if(gen==generation)fail(describe(e,\"requestPermission\"))}}\n"
+      },
+      {
+        "before": "            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}\n        }catch(e:Exception){fail(describe(e))}\n",
+        "after": "            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,\"checkPermission\"))}}\n        }catch(e:Exception){fail(describe(e,\"checkPermission\"))}\n"
+      },
+      {
+        "before": "        }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}}catch(e:Exception){fail(describe(e))}\n",
+        "after": "        }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,\"getCommonDevice\"))}}}catch(e:Exception){fail(describe(e,\"getCommonDevice\"))}\n"
+      },
+      {
+        "before": "                }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}\n            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}\n        }catch(e:Exception){fail(describe(e))}\n",
+        "after": "                }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,\"registerReceiver\"))}}\n            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,\"isAppInstalled\"))}}\n        }catch(e:Exception){fail(describe(e,\"connect\"))}\n"
+      },
+      {
+        "before": "        }).addOnFailureListener{e->main{if(reportFailure&&accepts())fail(describe(e))}}\n        }catch(e:Exception){if(reportFailure&&accepts())fail(describe(e))}\n",
+        "after": "        }).addOnFailureListener{e->main{if(reportFailure&&accepts())fail(describe(e,\"p2p.send\"))}}\n        }catch(e:Exception){if(reportFailure&&accepts())fail(describe(e,\"p2p.send\"))}\n"
+      }
+    ]
+  }
+}

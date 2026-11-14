@@ -22,6 +22,24 @@ jobs:
         run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-34" "build-tools;34.0.0"'
       - name: Unit tests and actual APK
         run: gradle testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --stacktrace
+      - name: Real Kotlin diagnostic HTTP selftest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p app/build/diagnostics-http
+          timeout 600s gradle :app:writeDiagnosticHostClasspath --no-daemon --stacktrace 2>&1 | tee app/build/diagnostics-http/gradle-classpath.log
+          CLASSPATH="$(< app/build/diagnostics-http/classpath.txt)"
+          test -n "$CLASSPATH"
+          timeout 120s python3 -B qa/mcp_http_selftest.py --classpath "$CLASSPATH" 2>&1 | tee app/build/diagnostics-http/http-selftest.log
+      - name: Diagnostic HTTP logs (including failures)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: diagnostics-http-${{ github.sha }}
+          path: |
+            app/build/diagnostics-http/
+            app/build/test-results/testDebugUnitTest/
+          if-no-files-found: warn
       - name: Stable production signing and verification
         env:
           ELCTON_KEYSTORE_B64: ${{ secrets.ELCTON_KEYSTORE_B64 }}

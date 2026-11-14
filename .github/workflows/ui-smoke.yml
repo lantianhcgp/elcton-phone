@@ -18,6 +18,12 @@ on:
         type: choice
         options: [three-button, gestural]
         default: three-button
+      qa_suite:
+        description: Diagnostic MCP acceptance or original full UI tour
+        required: true
+        type: choice
+        options: [diagnostics, full]
+        default: diagnostics
 permissions:
   contents: read
   actions: read
@@ -54,6 +60,7 @@ jobs:
         env:
           DISPLAY: ':99'
           QA_NAVIGATION_MODE: ${{ inputs.navigation_mode }}
+          QA_SUITE: ${{ inputs.qa_suite }}
         with:
           api-level: ${{ inputs.api_level }}
           target: google_apis
@@ -63,7 +70,12 @@ jobs:
           ram-size: 2048M
           heap-size: 512M
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none -no-metrics
-          script: python3 qa/emulator_install_and_tour.py
+          script: |
+            if [ "$QA_SUITE" = diagnostics ]; then
+              python3 -B qa/diag_emulator_smoke.py
+            else
+              python3 qa/emulator_install_and_tour.py
+            fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:

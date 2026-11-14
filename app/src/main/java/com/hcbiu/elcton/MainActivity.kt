@@ -79,6 +79,7 @@ class MainActivity : ComponentActivity() {
         store=ScheduleStore(this)
         runCatching { store.load() }.onSuccess { book=it }.onFailure { loadError="手机课表读取失败；原文件未重置。可在设置恢复备份。" }
         displayWeek=book.weekAt(LocalDate.now())
+        probeState=probeState.copy(diagnostic=(application as? ElctonApplication)?.diagnostics?.latestFull().orEmpty())
         probe=WearProbe(this,{ probeState=it }) { raw,revision -> prepareImport(raw,revision) }
         setContent {
             M3xTheme {
@@ -158,7 +159,17 @@ class MainActivity : ComponentActivity() {
             dismissButton={TextButton(onClick={pendingPublish=false}){Text("取消")}})
         if(confirmClear)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={confirmClear=false},title={Text("清空手机课表？")},text={Text("清空只影响手机，保留上一版本备份；不会自动清空手表。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={confirmClear=false;save(book.copy(courses=emptyList(),revision=book.revision+1))}){Text("清空")}},dismissButton={TextButton(onClick={confirmClear=false}){Text("取消")}})
         if(confirmRestore)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={confirmRestore=false},title={Text("恢复上一版本？")},text={Text("恢复手机本地备份，不会自动同步。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={confirmRestore=false;runCatching{store.restore()}.onSuccess{book=it;loadError=null;notice="已恢复上一版本"}.onFailure{notice="恢复失败：${UserFacingError.validation(it.message)}"}}){Text("恢复")}},dismissButton={TextButton(onClick={confirmRestore=false}){Text("取消")}})
-        if(diagnostics)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={diagnostics=false},title={Text("连接诊断")},text={SelectionContainer{Text(probeState.diagnostic.ifEmpty{"暂无错误记录"},style=MaterialTheme.typography.bodySmall,fontFamily=FontFamily.Monospace)}},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={diagnostics=false}){Text("关闭")}})
+        if(diagnostics)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,
+            onDismissRequest={diagnostics=false},title={Text("连接诊断")},
+            text={SelectionContainer {
+                Box(Modifier.fillMaxWidth().heightIn(max=300.dp).testTag("diagnostics-scroll")
+                    .verticalScroll(rememberScrollState())) {
+                    Text(probeState.diagnostic.ifEmpty{(application as? ElctonApplication)?.diagnostics?.latestFull().orEmpty().ifEmpty{"暂无错误记录"}},
+                        style=MaterialTheme.typography.bodySmall,fontFamily=FontFamily.Monospace,
+                        modifier=Modifier.testTag("diagnostics-details"))
+                }
+            }},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),
+                onClick={diagnostics=false}){Text("关闭")}})
     }
     @Composable private fun TabGlyph(index:Int,selected:Boolean) {
         val color=if(selected)M3x.OnPrimaryContainer else M3x.OnSurfaceVariant
@@ -432,7 +443,8 @@ class MainActivity : ComponentActivity() {
                 SectionHeading("隐私与兼容性")
                 Text("课表保存在两端应用本地；同步不使用自建云服务。设备能力、签名和运动健康授权决定是否可通信，不把 FIT3 作为型号白名单。",
                     style=MaterialTheme.typography.bodySmall,color=M3x.OnSurfaceVariant)
-                ExpressivePill("0.2.4 · 测试构建",color=M3x.SurfaceHigh,contentColor=M3x.Ink)
+                ExpressivePill("${BuildConfig.VERSION_NAME} · 测试构建",color=M3x.SurfaceHigh,contentColor=M3x.Ink,
+                    modifier=Modifier.testTag("version-capsule"))
                 Text("Wear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=M3x.OnSurfaceVariant)
             }
             Spacer(Modifier.height(32.dp))

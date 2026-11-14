@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import com.huawei.wearengine.HiWear
+import com.huawei.wearengine.WearEngineException
 import com.huawei.wearengine.auth.AuthCallback
 import com.huawei.wearengine.auth.Permission
 import com.huawei.wearengine.device.Device
@@ -23,7 +24,8 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
     private val handler=Handler(Looper.getMainLooper())
     private val p2p by lazy {HiWear.getP2pClient(activity)}
     private val baselines=activity.getSharedPreferences("device-baselines",Context.MODE_PRIVATE)
-    private var state=State()
+    private val diagnostics=(activity.application as? ElctonApplication)?.diagnostics
+    private var state=State(diagnostic=diagnostics?.latestFull().orEmpty())
     private var receiver:Receiver?=null
     private var device:Device?=null
     private var generation=0
@@ -48,7 +50,9 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
     private val watchPackage="watchapp.nexus.0zzip"
     // Lite identity: bundleName + '_' + Base64(SEC1 uncompressed certificate EC point), not a cert hash/SPKI.
     private val watchFingerprint="watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM="
-    private fun publish(s:State){state=s;update(s)}
+    private fun publish(s:State){state=s;update(s)
+        try{diagnostics?.observe(s.status,s.detail,s.ready,s.busy,s.devices.size)}catch(_:Exception){}
+    }
     private fun main(block:()->Unit):Unit {handler.post{if(!closed&&!activity.isFinishing)block()}}
     private fun cancelTimer(){timer?.let(handler::removeCallbacks);timer=null}
     private fun deadline(ms:Long,block:()->Unit){cancelTimer();val gen=generation;val r=Runnable{if(!closed&&gen==generation)block()};timer=r;handler.postDelayed(r,ms)}
@@ -56,11 +60,21 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
         generation++;sendAttempts.invalidate();cancelTimer();finishTotal();session=null;exporting=null;awaitingPermission=false;awaitingReady=false;unregister()
         publish(state.copy(status="操作未完成",detail=message.take(200),ready=false,busy=false))
     }
-    private fun describe(e:Exception):String {
-        val raw=UserFacingError.diagnostic(e)
-        state=state.copy(diagnostic=raw)
-        android.util.Log.w("ElctonWear",raw)
-        return UserFacingError.explain(e.message.orEmpty())
+    private fun describe(e:Exception,phase:String):String {
+        // Keep the original primary message read singular; observability cannot gate fail().
+        val message=e.message
+        try {
+            val record=WearErrorRecord.captureWithMessage(e,phase,System.currentTimeMillis(),message) { cause ->
+                (cause as? WearEngineException)?.errorCode
+            }
+            val raw=record.full
+            state=state.copy(diagnostic=raw)
+            android.util.Log.w("ElctonWear",raw)
+            try{diagnostics?.record(record)}catch(_:Exception){}
+        }catch(observationError:Exception){
+            android.util.Log.w("ElctonWear","Diagnostic capture failed: "+observationError.javaClass.simpleName)
+        }
+        return UserFacingError.explain(message.orEmpty())
     }
     fun authorizeAndScan(){
         if(state.busy)return
@@ -79,10 +93,10 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
                                 if(permissions.any{it.name==Permission.DEVICE_MANAGER.name})scan(gen) else fail("设备权限未获准，没有传输课表。")}
                         }
                         override fun onCancel()=main{if(gen==generation)fail("已取消授权，没有查询或传输课表。")}
-                    },Permission.DEVICE_MANAGER).addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}
+                    },Permission.DEVICE_MANAGER).addOnFailureListener{e->main{if(gen==generation)fail(describe(e,"requestPermission"))}}
                 }
-            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}
-        }catch(e:Exception){fail(describe(e))}
+            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,"checkPermission"))}}
+        }catch(e:Exception){fail(describe(e,"checkPermission"))}
     }
     private fun scan(gen:Int){
         publish(state.copy(status="查询配对设备",busy=true))
@@ -92,7 +106,7 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
             cancelTimer();val list=found.orEmpty()
             publish(state.copy(status=if(list.isEmpty())"未找到可用设备" else "选择要同步的手表",
                 detail=if(list.isEmpty())"确认运动健康已配对且设备支持应用间通信。" else "设备按实际通信能力判断，不限定 FIT3 型号。",devices=list,busy=false))
-        }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}}catch(e:Exception){fail(describe(e))}
+        }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,"getCommonDevice"))}}}catch(e:Exception){fail(describe(e,"getCommonDevice"))}
     }
     fun connect(selected:Device){
         if(state.busy)return
@@ -120,9 +134,9 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
                     publish(state.copy(status="等待手表准备",detail="可在手表进入：周视图 → 同步 → 开始接收。手机正在尝试检测对端。"))
                     // Foreground receive page only; automatic peer wake is not yet verified.
                     hello()
-                }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}
-            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e))}}
-        }catch(e:Exception){fail(describe(e))}
+                }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,"registerReceiver"))}}
+            }}.addOnFailureListener{e->main{if(gen==generation)fail(describe(e,"isAppInstalled"))}}
+        }catch(e:Exception){fail(describe(e,"connect"))}
     }
     private fun hello(){
         if(device==null){fail("请先连接设备。");return}
@@ -222,8 +236,8 @@ class WearProbe(private val activity: Activity, private val update: (State) -> U
                 if(code!=207){if(reportFailure)fail("Wear Engine 发送失败（$code），没有成功保存证据。")}else session?.transportSucceeded()
             }
             override fun onSendProgress(progress:Long){}
-        }).addOnFailureListener{e->main{if(reportFailure&&accepts())fail(describe(e))}}
-        }catch(e:Exception){if(reportFailure&&accepts())fail(describe(e))}
+        }).addOnFailureListener{e->main{if(reportFailure&&accepts())fail(describe(e,"p2p.send"))}}
+        }catch(e:Exception){if(reportFailure&&accepts())fail(describe(e,"p2p.send"))}
     }
     fun cancel(){
         val id=session?.transferId?:exporting?.id

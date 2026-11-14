@@ -1,0 +1,7 @@
+{
+  "sourceSha": "f20ed653b3d2118938a9d3f12135841d2fd15e14",
+  "base": "18cd94ea1689c7e3d59a26afd4121cd2a665b4d7",
+  "stableSignBlockBytesIdentical": true,
+  "signBlockSha256": "30c4524200a36ac0621463e2c3ce9ebdda42cea2c6b0198b5944bb808d258650",
+  "expectedCertificateSha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94"
+}

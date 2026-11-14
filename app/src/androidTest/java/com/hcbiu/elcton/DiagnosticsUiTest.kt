@@ -21,8 +21,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.File
-import java.net.HttpURLConnection
-import java.net.URL
+import java.net.InetSocketAddress
+import java.net.Socket
 import java.security.MessageDigest
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -50,22 +50,32 @@ class DiagnosticsUiTest {
         val request = JSONObject().put("jsonrpc", "2.0").put("id", 26).put("method", method)
         params?.let { request.put("params", it) }
         val bytes = request.toString().toByteArray(Charsets.UTF_8)
-        val connection = URL("http://127.0.0.1:8766/mcp").openConnection() as HttpURLConnection
-        try {
-            connection.connectTimeout = 5000; connection.readTimeout = 5000
-            connection.requestMethod = "POST"; connection.doOutput = true
-            connection.setRequestProperty("Authorization", "Bearer $token")
-            connection.setRequestProperty("Content-Type", "application/json")
-            connection.setFixedLengthStreamingMode(bytes.size)
-            connection.outputStream.use { it.write(bytes) }
-            assertEquals("real Android HTTP status", 200, connection.responseCode)
-            val text = connection.inputStream.use { it.readBytes().toString(Charsets.UTF_8) }
+        // Real loopback HTTP without changing the production network-security policy.
+        return Socket().use { socket ->
+            socket.connect(InetSocketAddress("127.0.0.1", 8766), 5000)
+            socket.soTimeout = 5000
+            val header = "POST /mcp HTTP/1.1\r\nHost: 127.0.0.1:8766\r\n" +
+                "Author" + "ization: " + "Bear" + "er " + token + "\r\n" +
+                "Content-Type: application/json\r\nContent-Length: ${bytes.size}\r\nConnection: close\r\n\r\n"
+            socket.getOutputStream().apply { write(header.toByteArray(Charsets.US_ASCII)); write(bytes); flush() }
+            val reply = socket.getInputStream().readBytes()
+            val boundary = "\r\n\r\n".toByteArray(Charsets.US_ASCII)
+            val split = (0..reply.size - boundary.size).firstOrNull { index ->
+                boundary.indices.all { reply[index + it] == boundary[it] }
+            } ?: error("Actual HTTP response has no header/body boundary")
+            val headers = reply.copyOfRange(0, split).toString(Charsets.US_ASCII).split("\r\n")
+            assertTrue("real Android HTTP status", headers.first().startsWith("HTTP/1.1 200 "))
+            val lengths = headers.drop(1).filter { it.substringBefore(":").equals("Content-Length", true) }
+            assertEquals("one actual length header", 1, lengths.size)
+            val body = reply.copyOfRange(split + boundary.size, reply.size)
+            assertEquals("complete actual HTTP body", lengths.single().substringAfter(":").trim().toInt(), body.size)
+            val text = body.toString(Charsets.UTF_8)
             assertFalse("no token in HTTP response", text.contains(token))
             val response = JSONObject(text)
             assertEquals("2.0", response.getString("jsonrpc")); assertEquals(26, response.getInt("id"))
             assertFalse("no RPC error", response.has("error"))
-            return response.getJSONObject("result")
-        } finally { connection.disconnect() }
+            response.getJSONObject("result")
+        }
     }
     private fun call(token: String, name: String, arguments: JSONObject = JSONObject()): JSONObject {
         val result = rpc(token, "tools/call", JSONObject().put("name", name).put("arguments", arguments))

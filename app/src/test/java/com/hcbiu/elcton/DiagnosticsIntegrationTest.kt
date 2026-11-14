@@ -10,6 +10,13 @@ class DiagnosticsIntegrationTest {
         .first { File(it, "app/src/main/AndroidManifest.xml").isFile }
     private fun source(name: String) = File(root(), "app/src/main/java/com/hcbiu/elcton/$name").readText(Charsets.UTF_8)
 
+    @Test fun diagnosticHttpUsesRawSocketWithoutRelaxingProductionCleartextPolicy() {
+        val test = File(root(), "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt").readText()
+        assertFalse("target34 HttpURLConnection blocks declared cleartext=false", test.contains("HttpURLConnection"))
+        assertTrue(test.contains("Socket().use"))
+        assertTrue(File(root(), "app/src/main/AndroidManifest.xml").readText().contains("android:usesCleartextTraffic=\"false\""))
+    }
+
     @Test fun versionCapsuleUsesActualBuildConfigAndCodeEight() {
         val main = source("MainActivity.kt")
         val gradle = File(root(), "app/build.gradle.kts").readText(Charsets.UTF_8)

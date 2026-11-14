@@ -1,0 +1,14 @@
+JUnit version 4.13.2
+.E...
+Time: 0.071
+There was 1 failure:
+1) diagnosticHttpUsesRawSocketWithoutRelaxingProductionCleartextPolicy(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError: target34 HttpURLConnection blocks declared cleartext=false
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.diagnosticHttpUsesRawSocketWithoutRelaxingProductionCleartextPolicy(DiagnosticsIntegrationTest.kt:15)
+
+FAILURES!!!
+Tests run: 4,  Failures: 1
+

@@ -1,0 +1,13 @@
+JUnit version 4.13.2
+.E.........
+Time: 0.056
+There was 1 failure:
+1) retainedIntentionIsNotShownAsAnOffSwitchDuringStartOrPermissionFailure(com.hcbiu.elcton.McpKeepAlivePolicyTest)
+java.lang.AssertionError: switch must represent saved intent, not service liveness
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.McpKeepAlivePolicyTest.retainedIntentionIsNotShownAsAnOffSwitchDuringStartOrPermissionFailure(McpKeepAlivePolicyTest.kt:43)
+
+FAILURES!!!
+Tests run: 10,  Failures: 1
+

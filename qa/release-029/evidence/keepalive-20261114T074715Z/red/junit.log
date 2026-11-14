@@ -1,0 +1,30 @@
+JUnit version 4.13.2
+..E...E.E.E.
+Time: 0.014
+There were 4 failures:
+1) stopFenceVetoesLateStartEvenIfSavingFalseFailed(com.hcbiu.elcton.McpKeepAlivePolicyTest)
+java.lang.AssertionError: Failing to persist STOP must not let this process restart its listener
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.hcbiu.elcton.McpKeepAlivePolicyTest.stopFenceVetoesLateStartEvenIfSavingFalseFailed(McpKeepAlivePolicyTest.kt:42)
+2) missingPreferenceDefaultsToEnabled(com.hcbiu.elcton.McpKeepAlivePolicyTest)
+java.lang.AssertionError: A new user has not explicitly opted out
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.McpKeepAlivePolicyTest.missingPreferenceDefaultsToEnabled(McpKeepAlivePolicyTest.kt:10)
+3) defaultChoiceCanStartWhenNotificationsAreAvailable(com.hcbiu.elcton.McpKeepAlivePolicyTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.McpKeepAlivePolicyTest.defaultChoiceCanStartWhenNotificationsAreAvailable(McpKeepAlivePolicyTest.kt:22)
+4) notificationDenialBlocksStartWithoutChangingDefaultChoice(com.hcbiu.elcton.McpKeepAlivePolicyTest)
+java.lang.AssertionError: Unavailable notifications are not user opt-out
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.McpKeepAlivePolicyTest.notificationDenialBlocksStartWithoutChangingDefaultChoice(McpKeepAlivePolicyTest.kt:27)
+
+FAILURES!!!
+Tests run: 8,  Failures: 4
+

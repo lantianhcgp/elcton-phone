@@ -1,0 +1,74 @@
+{
+  "axis": "spec",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "R2-BIND-CHOICE",
+      "severity": "blocking",
+      "file": "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt",
+      "lines": "197-199；78-88；111-117",
+      "description": "端口绑定失败仍被解释为用户关闭保活。",
+      "counterexample": "已保存 keep_running=true、通知可用，但 runtime.startListener() 返回 false 时，第198行调用 disable；disable 将偏好同步保存为 false。之后 resumeChoice 因 enabled=false 不再恢复。",
+      "requirement": "依据最新用户指示：绑定失败应 fail-closed 停止监听和服务，但保留开启偏好；采用 suspendSession，并明确提示偏好已保留。",
+      "evidence": "终态只读检查确认该分支仍为 disable。此处是源码反例，不冒称本审查执行了 Android 端口占用测试。"
+    }
+  ],
+  "missing_requirements": [],
+  "suggestions": [
+    {
+      "id": "WITHDRAW-M1",
+      "description": "撤销第一轮 spec M1：原始简报没有 replace:true 契约。现有 start_publish 的 confirm/force 与 UI 覆盖选择保持同义，不应凭空要求新增字段。历史失败回执保留原样。"
+    },
+    {
+      "id": "REBIND-AFTER-FIX",
+      "description": "父级修改绑定失败 hunk 后，本回执的源码绑定立即失效；须刷新完整产品清单并重新核哈希，不能沿用本次 verdict。"
+    }
+  ],
+  "summary": "当前源码因绑定失败错误持久化关闭偏好而不通过。已核读真实 RED 和150项 JVM GREEN 回执，并复核关键修复源码；Android 编译和真机验收不作为产品 missing。未修改文件、安装依赖、操作手机或访问网络。按最新限时指示立即收敛。",
+  "source_manifest_sha256": "f1eb16fcb16f1b726798512c2013e5b933bfa3a296956f95f64791187d8eb988",
+  "coverage": {
+    "manifest": {
+      "entries": 37,
+      "includes": "app/src/main 全部当前文件及 app/build.gradle.kts",
+      "current_files_match_manifest": true,
+      "unlisted_files": [],
+      "missing_files": [],
+      "hash_method": "实际文件 SHA-256 映射，按键排序、紧凑 JSON 序列化后再 SHA-256",
+      "final_binding": "终态重哈希时绑定失败分支尚未修改"
+    },
+    "baseline": "origin/fix/p2p-ready-receipt-20261114 = e034de2f924dd6d96e31caa8e5a62e52474de718",
+    "r1_fixes": [
+      "MainActivity 的 android.os.Build import 已确认存在。",
+      "MainThreadActions.kt:17、22-46 与 PhoneRuntime.kt:35-39、72-74：epoch 撤销、超时/中断放弃、异常安全和执行前偏好检查已核。",
+      "PhoneActions.kt:18-28：导入起始 revision 绑定；编辑后收到旧导入仅保留预览。",
+      "注册替换反例已核读 SyncEngineTest.kt:220-234 和全量 GREEN 回执；早期 SyncEngine/WearProbe 全文输出部分在压缩中丢失，收敛阶段未再次完成其逐行重读。"
+    ],
+    "tests": {
+      "red": {
+        "path": "qa/release-029/evidence/review-r1-effective-red/junit.log",
+        "tests_run": 23,
+        "failures": 6,
+        "sha256": "5d94b455882325296e976c42af449863a24780237b02d078177b0dfd25e4a970"
+      },
+      "green": {
+        "path": "qa/release-029/evidence/review-r1-full-green/junit.log",
+        "tests_run": 150,
+        "result": "OK (150 tests)",
+        "sha256": "750354f936cbad5ad2ea25fe13f2bc092343a6a6985821fc05ac6f9aa1319169"
+      },
+      "scope": "核读已有真实 JVM 回执，未新跑测试；不证明 Android、蓝牙或 MIUI 后台保活。原始失败和编译日志均未改写。"
+    },
+    "compatibility": "原四工具除接口声明适配外源码一致；组合测试断言总15工具、原四 schema 和行为保持一致。",
+    "original_tests": {
+      "manifest_entries_verified": 75,
+      "relocations": 73,
+      "hash_or_size_errors": []
+    },
+    "limitation": "清单完整性已全量验证；部分早期全文及差异输出被上下文压缩，因此不宣称完成可审计的37文件逐行全覆盖复审。该审查覆盖限制不是产品需求缺失。"
+  }
+}
+
+[steer did not land — the subagent finished before it could be delivered: 产品最后唯一变更已落：McpKeepAlive.kt bindfailure197行和catch208行从disable(this,..)改suspendSession(this,..)保开偏好+真关闭端口/通知。151测试将跑。请read此两个hunk更新hash重新核manifest只该文件差，并settleJSON现在，不用重看37file不扩范围。若findings皆空可给当前最终source manifest compact hash(parent下面用v3)，说明授权两hunk已审、其余bytes原manifest相同。]
+
+[NOTE: subagent modified files the parent previously read — re-read before editing: /data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt, /data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/diag_emulator_smoke.py, /data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_gate.py]

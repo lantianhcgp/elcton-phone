@@ -1,0 +1,12 @@
+{
+  "scope": "exact registered test/version source mismatch, not generated Android BuildConfig execution",
+  "current_release": [
+    11,
+    "0.2.9"
+  ],
+  "old_current_test": [
+    10,
+    "0.2.8"
+  ],
+  "passed": false
+}

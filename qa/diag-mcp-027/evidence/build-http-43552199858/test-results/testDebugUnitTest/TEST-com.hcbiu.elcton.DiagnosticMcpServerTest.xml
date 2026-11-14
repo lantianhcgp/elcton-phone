@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hcbiu.elcton.DiagnosticMcpServerTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-14T03:34:21" hostname="runnervmccnms" time="2.311">
+  <properties/>
+  <testcase name="partialBodiesTimeoutAndStopClosesActiveSocketsThenRestarts" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="2.088"/>
+  <testcase name="initializeAndToolCallsUseActualCallbacksAndJsonText" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.027"/>
+  <testcase name="nestedIdsDoNotTurnNotificationsIntoCallsOrReadFiles" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.013"/>
+  <testcase name="rejectsEmptyOrWhitespaceTokens" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.001"/>
+  <testcase name="notificationsAreAuthenticated202WithEmptyBody" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.012"/>
+  <testcase name="bindsOnlyIpv4LoopbackAndBoundedPoolRejectsOverload" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.01"/>
+  <testcase name="healthIsAnonymousMinimalAndOnlyExactPathsAreAccepted" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.013"/>
+  <testcase name="numericIdsAreEchoedAsExactJsonTokensOverProductionHttp" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.017"/>
+  <testcase name="everyMcpMethodAndNotificationRequiresStrictBearerAuthentication" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.04"/>
+  <testcase name="numericIdsStayExactOnEveryRpcErrorAndEscapedTopLevelKeys" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.01"/>
+  <testcase name="rejectsNonScalarIdsAndEscapedDuplicateIdKeys" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.009"/>
+  <testcase name="authenticatedRequestsPreserveStringNumberAndNullIds" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.01"/>
+  <testcase name="malformedAndAmbiguousFramingIsRejected" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.03"/>
+  <testcase name="jsonRpcErrorsHaveCorrectCodesAndNeverEchoRequests" classname="com.hcbiu.elcton.DiagnosticMcpServerTest" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

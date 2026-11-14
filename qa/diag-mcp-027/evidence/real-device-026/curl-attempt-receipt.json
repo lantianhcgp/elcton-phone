@@ -1,0 +1,9 @@
+{
+  "attempt": "actual Termux curl direct loopback, NO adb",
+  "installedVersion": "0.2.6/code8 (0.2.7 not installed)",
+  "exitCode": 28,
+  "receivedBytes": 0,
+  "error": "curl: (28) Connection timed out after 4002 milliseconds",
+  "success": false,
+  "requestCapture": "configuration used for actual attempt, authorization redacted; TCP timeout means no HTTP exchange occurred"
+}

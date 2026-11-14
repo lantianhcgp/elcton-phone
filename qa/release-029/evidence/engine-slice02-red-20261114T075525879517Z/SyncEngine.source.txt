@@ -1,0 +1,85 @@
+package com.hcbiu.elcton
+
+/** Device facts copied from the SDK, never inferred from model names. */
+data class SyncDevice(
+    val id: String,
+    val name: String = "",
+    val model: String = "",
+    val connected: Boolean = false,
+    val p2pCapability: Int = 0
+)
+
+interface SyncTransport {
+    fun checkPermission(success: (Boolean) -> Unit, failure: (String) -> Unit)
+    fun requestPermission(success: (Boolean) -> Unit, failure: (String) -> Unit): Boolean
+    fun scan(success: (List<SyncDevice>) -> Unit, failure: (String) -> Unit)
+    fun installed(device: SyncDevice, success: (Boolean) -> Unit, failure: (String) -> Unit)
+    fun register(device: SyncDevice, message: (String) -> Unit, success: () -> Unit, failure: (String) -> Unit)
+    fun unregister()
+    fun send(device: SyncDevice, text: String, result: (Int) -> Unit, failure: (String) -> Unit)
+}
+
+fun interface SyncCancellation { fun cancel() }
+
+interface SyncScheduler {
+    fun post(block: () -> Unit)
+    fun after(ms: Long, block: () -> Unit): SyncCancellation
+    fun now(): Long
+    fun wallTime(): Long
+}
+
+interface SyncBaselines {
+    fun lastSuccess(deviceId: String): Long
+    fun save(deviceId: String, datasetId: String, digest: String, revision: Long, at: Long)
+}
+
+/** One application-owned protocol state. Calls are serialized by the owning runtime. */
+class SyncEngine(
+    private val transport: SyncTransport,
+    private val scheduler: SyncScheduler,
+    private val baselines: SyncBaselines,
+    private val update: (State) -> Unit,
+    private val importCandidate: (String, Long) -> Unit
+) {
+    data class State(
+        val status: String = "尚未连接手表",
+        val detail: String = "通过华为运动健康配对后，查询可用设备。",
+        val devices: List<SyncDevice> = emptyList(),
+        val selected: String = "",
+        val ready: Boolean = false,
+        val busy: Boolean = false,
+        val digest: String = "",
+        val dirty: Boolean = false,
+        val revision: Long = 0,
+        val maxBytes: Int = 8192,
+        val datasetId: String = "",
+        val hasData: Boolean = false,
+        val diagnostic: String = "",
+        val lastSuccessAt: Long = 0,
+        val permissionGranted: Boolean? = null
+    )
+
+    var state = State()
+        private set
+    private var generation = 0
+    private var closed = false
+
+    private fun publish(next: State) { state = next; update(next) }
+
+    fun authorizeAndScan(interactive: Boolean = false): Boolean {
+        if (closed || state.busy) return false
+        transport.unregister()
+        val gen = ++generation
+        publish(state.copy(status = "检查设备授权", busy = true, ready = false, diagnostic = ""))
+        transport.checkPermission({ granted -> scheduler.post {
+            if (closed || gen != generation) return@post
+            if (!granted && !interactive) publish(state.copy(
+                status = "需要设备授权", detail = "需要用户在可见页面确认设备授权，后台不会弹出授权窗口。",
+                permissionGranted = false, busy = false, ready = false
+            ))
+        } }, { message -> scheduler.post {
+            if (!closed && gen == generation) publish(state.copy(status = "操作未完成", detail = message.take(200), busy = false, ready = false))
+        } })
+        return true
+    }
+}

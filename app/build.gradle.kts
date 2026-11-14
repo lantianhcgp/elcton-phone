@@ -11,12 +11,10 @@ android {
         applicationId = "com.hcbiu.elcton"
         minSdk = 26
         targetSdk = 34
-        // Frozen 0.2.6 default profile remains buildable; candidate is explicit, never inferred.
-        versionCode = 8
-        versionName = "0.2.6"
-        val p2pCandidate = providers.gradleProperty("elctonP2pCandidate").orNull == "true"
-        if (p2pCandidate) { versionCode = 10; versionName = "0.2.8" }
-        buildConfigField("boolean", "P2P_READY_CANDIDATE", p2pCandidate.toString())
+        versionCode = 11
+        versionName = "0.2.9"
+        // READY receipts are production behavior in the merged release, never a parallel lane.
+        buildConfigField("boolean", "P2P_READY_CANDIDATE", "true")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true; buildConfig = true }

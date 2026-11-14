@@ -1,0 +1,17 @@
+[
+  {
+    "old": "qa/diag-mcp-027/evidence/runtime-revision-20261114T031536Z-red/runtime-tests.jar",
+    "new": ".diag-build/runtime-revision-archived-jars-20261114T032020Z/runtime-revision-20261114T031536Z-red-runtime-tests.jar",
+    "sha256": "3218b92d1cfd380b48282ccdd1a4382dfe866586d55c390c588ad455e0681704"
+  },
+  {
+    "old": "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/runtime-tests.jar",
+    "new": ".diag-build/runtime-revision-archived-jars-20261114T032020Z/runtime-revision-20261114T031906Z-green-runtime-tests.jar",
+    "sha256": "b9726c381e5e1f85002d49796e202e53d7550707bb855b5f64f0d85599af6385"
+  },
+  {
+    "old": "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/runtime-tests.jar",
+    "new": ".diag-build/runtime-revision-archived-jars-20261114T032020Z/runtime-revision-20261114T031906Z-red-runtime-tests.jar",
+    "sha256": "0c56ac51724b864083de02b2a7e1246f950a5f286a8d9647e10eb5b34fe294cc"
+  }
+]

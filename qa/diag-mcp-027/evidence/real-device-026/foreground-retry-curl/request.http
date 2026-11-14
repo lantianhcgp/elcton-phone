@@ -1,0 +1,8 @@
+POST /mcp HTTP/1.1
+Host: 127.0.0.1:8766
+Authorization: [REDACTED]
+Content-Type: application/json
+Connection: close
+Content-Length: 130
+
+{"jsonrpc":"2.0","id":"termux-real-foreground-027","method":"tools/call","params":{"name":"error_tail","arguments":{"limit":128}}}

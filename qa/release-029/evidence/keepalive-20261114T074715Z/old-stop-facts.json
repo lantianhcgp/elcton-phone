@@ -1,0 +1,39 @@
+{
+  "sourceSha": "762e46dc5c7d172191e3b0a1b50027c05b524082",
+  "run": "43552523971",
+  "sdk": "33",
+  "stage": "ordinary-background-fgs",
+  "passed": false,
+  "failure": "AssertionError: Actual listener still responds after explicit user stop (timeouts/errors aren't closure)",
+  "stopResponseBytes": 130,
+  "stopResponseSha256": "432744751801c3e3b0a0bf1de5f2c0d2f8885919a256917a3ba3dd927f4ad18b",
+  "rawHeaders": "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 11\r\nConnection: close\r\nCache-Control: no-store\r\n\r\n",
+  "matchedStopNodes": [
+    {
+      "index": "0",
+      "text": "停止",
+      "resource-id": "android:id/action0",
+      "class": "android.widget.Button",
+      "package": "com.android.systemui",
+      "content-desc": "停止",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[147,978][283,1104]"
+    }
+  ],
+  "missingCompletionFields": {
+    "stopPath": true,
+    "offPortClosed": true,
+    "offNotificationRemoved": true
+  },
+  "tapLogBytes": 0,
+  "oldEvidenceUnchanged": true
+}

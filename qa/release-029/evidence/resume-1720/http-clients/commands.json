@@ -1,0 +1,37 @@
+[
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/test_mcp_clients.py",
+      "--classpath",
+      "qa/release-029/evidence/resume-1720/host-final-152/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+    ],
+    "exit": 1,
+    "log_sha256": "ba544d7667e23016622ec9f23cb5e844079210a3ce76f81390fcd465df989357"
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/mcp_http_selftest.py",
+      "--classpath",
+      "qa/release-029/evidence/resume-1720/host-final-152/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+    ],
+    "exit": 0,
+    "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/release-029/termux_tools_list.py",
+      "--classpath",
+      "qa/release-029/evidence/resume-1720/host-final-152/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar",
+      "--out",
+      "qa/release-029/evidence/resume-1720/http-clients/termux-tools-list"
+    ],
+    "exit": 0,
+    "log_sha256": "726bcf6283525c5125d70a47b53f82161ea6644ca09b012d068931ceff4fbad4"
+  }
+]

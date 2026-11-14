@@ -160,9 +160,11 @@ class DiagnosticsUiTest {
         try {
             ui.waitUntil(15000) { ui.onAllNodesWithTag("nav-settings").fetchSemanticsNodes().isNotEmpty() }
             @Suppress("DEPRECATION") val installed = instrumentation.targetContext.packageManager.getPackageInfo("com.hcbiu.elcton", 0)
-            assertEquals("0.2.6", installed.versionName); assertEquals(8L, installed.longVersionCode)
+            assertEquals("0.2.9", installed.versionName); assertEquals(11L, installed.longVersionCode)
             assertEquals(installed.versionName, BuildConfig.VERSION_NAME); assertEquals(installed.longVersionCode, BuildConfig.VERSION_CODE.toLong())
-            val runtime = (ui.activity.application as ElctonApplication).diagnostics
+            val app = ui.activity.application as ElctonApplication
+            val runtime = app.diagnostics
+            val sharedPhone = app.phone
             ui.waitUntil(10000) { runtime.read().getJSONObject("mcp").getBoolean("running") }
             val mcp = runtime.read().getJSONObject("mcp")
             assertEquals("127.0.0.1", mcp.getString("host")); assertEquals(8766, mcp.getInt("port")); assertTrue(mcp.getBoolean("readOnly"))
@@ -198,6 +200,7 @@ class DiagnosticsUiTest {
             ui.activityRule.scenario.recreate()
             ui.waitUntil(15000) { ui.onAllNodesWithTag("nav-devices").fetchSemanticsNodes().isNotEmpty() }
             assertSame("Application runtime survives Activity recreate", runtime, (ui.activity.application as ElctonApplication).diagnostics)
+            assertSame("Application sharedPhone survives Activity recreate", sharedPhone, (ui.activity.application as ElctonApplication).phone)
             ui.onNodeWithTag("nav-devices").performClick()
             ui.onNodeWithTag("diagnostics").performScrollTo().assertIsDisplayed().performClick()
             ui.onNodeWithText("连接诊断").assertIsDisplayed(); ui.onNodeWithText("关闭").assertIsDisplayed()
@@ -222,9 +225,44 @@ class DiagnosticsUiTest {
             ui.onNodeWithTag("diagnostics-scroll", useUnmergedTree = true).assertDoesNotExist()
 
             val listed = rpc(token, "tools/list").getJSONArray("tools")
-            assertEquals(setOf("error_tail", "diag_read", "version_info", "fs_read"), (0 until listed.length()).map { listed.getJSONObject(it).getString("name") }.toSet())
+            val expectedNames = setOf("error_tail", "diag_read", "version_info", "fs_read", "sync_connect", "sync_disconnect",
+                "start_import", "start_publish", "abort", "courses_read", "courses_write", "pickup_import", "devices_list", "pairing_state", "sync_state")
+            assertEquals("no duplicate/missing/additional tools", 15, listed.length())
+            assertEquals(expectedNames, (0 until listed.length()).map { listed.getJSONObject(it).getString("name") }.toSet())
+            // Assert the ORIGINAL four schemas/annotations verbatim, not merely their presence.
+            for (i in 0 until listed.length()) {
+                val tool = listed.getJSONObject(i)
+                val name = tool.getString("name")
+                if (name !in setOf("error_tail", "diag_read", "version_info", "fs_read")) continue
+                val schema = tool.getJSONObject("inputSchema")
+                assertEquals("object", schema.getString("type")); assertFalse(schema.getBoolean("additionalProperties"))
+                val properties = schema.getJSONObject("properties")
+                val required = schema.getJSONArray("required")
+                assertEquals(if (name == "fs_read") listOf("path") else emptyList<String>(),
+                    (0 until required.length()).map { required.getString(it) })
+                val annotation = tool.getJSONObject("annotations")
+                assertTrue(annotation.getBoolean("readOnlyHint")); assertFalse(annotation.getBoolean("destructiveHint")); assertFalse(annotation.getBoolean("openWorldHint"))
+                when (name) {
+                    "error_tail" -> {
+                        assertEquals(setOf("limit"), properties.keys().asSequence().toSet())
+                        val limit = properties.getJSONObject("limit")
+                        assertEquals(setOf("type", "minimum", "maximum", "default"), limit.keys().asSequence().toSet())
+                        assertEquals("integer", limit.getString("type")); assertEquals(1, limit.getInt("minimum"))
+                        assertEquals(128, limit.getInt("maximum")); assertEquals(20, limit.getInt("default"))
+                    }
+                    "fs_read" -> {
+                        assertEquals(setOf("path"), properties.keys().asSequence().toSet())
+                        val path = properties.getJSONObject("path")
+                        assertEquals(setOf("type", "enum"), path.keys().asSequence().toSet()); assertEquals("string", path.getString("type"))
+                        val allowed = path.getJSONArray("enum")
+                        assertEquals(2, allowed.length())
+                        assertEquals(setOf("diagnostics/state.json", "diagnostics/wear-errors.jsonl"), (0 until allowed.length()).map { allowed.getString(it) }.toSet())
+                    }
+                    else -> assertEquals(0, properties.length())
+                }
+            }
             val version = call(token, "version_info")
-            assertEquals("0.2.6", version.getString("versionName")); assertEquals(8, version.getInt("versionCode"))
+            assertEquals("0.2.9", version.getString("versionName")); assertEquals(11, version.getInt("versionCode"))
             assertEquals("com.hcbiu.elcton", version.getString("packageName"))
             assertEquals(full, call(token, "diag_read").getJSONObject("latestError").getString("full"))
             assertEquals(full, call(token, "error_tail", JSONObject().put("limit", 1)).getJSONArray("errors").getJSONObject(0).getString("full"))
@@ -236,11 +274,64 @@ class DiagnosticsUiTest {
             assertEquals("diagnostics/UI/HTTP must not modify timetable", before, businessFiles())
             report.put("syntheticFullSha256", hash(File(directory, "synthetic-expected.txt"))).put("syntheticChars", full.length)
                 .put("causeCount", 2).put("activityRecreated", true).put("fullTextUntruncated", true).put("closeVisibleAndWorks", true)
-                .put("androidNioHttpRead", true).put("httpTools", JSONArray(listOf("error_tail", "diag_read", "version_info", "fs_read")))
+                .put("androidNioHttpRead", true).put("httpTools", JSONArray(expectedNames.toList()))
+                .put("originalDiagnosticSchemas", true).put("sharedPhoneActivityRecreated", true)
                 .put("businessFilesUnchanged", true).put("passed", true)
         } catch (error: Throwable) {
             report.put("failure", error.javaClass.name + ": " + error.message)
             throw error
         } finally { reportFile.writeText(report.toString(), Charsets.UTF_8) }
     }
+    @Test fun sharedPhoneSurvivesRecreationAndPureMcpCourseFixtureRoundTrips() {
+        val args = InstrumentationRegistry.getArguments()
+        check(args.getString("diag_emulator") == "true") { "Only safe CI emulator fixtures may write courses" }
+        val source = args.getString("diag_source_sha") ?: error("Missing exact checkout SHA")
+        check(source.matches(Regex("[0-9a-f]{40}")))
+        val report = JSONObject().put("passed", false).put("sourceSha", source).put("qaRun", args.getString("diag_run"))
+            .put("scope", "emulator-only local MCP courses fixture; real WearEngine/phone pending")
+        val output = File(directory, "shared-phone-report.json")
+        val paths = listOf("timetable.json", "timetable-last-good.json", "timetable.json.bak", "timetable-last-good.json.bak")
+        val originalFiles = paths.associateWith { File(root, it).let { f -> if (f.exists()) f.readBytes() else null } }
+        val protected = listOf("mcp/token", "diagnostics/wear-errors.jsonl").associateWith { hash(File(root, it)) }
+        try {
+            ui.waitUntil(15000) { (ui.activity.application as ElctonApplication).diagnostics.read().getJSONObject("mcp").getBoolean("running") }
+            val sharedPhone = (ui.activity.application as ElctonApplication).phone
+            ui.activityRule.scenario.recreate()
+            ui.waitUntil(15000) { ui.onAllNodesWithTag("nav-settings").fetchSemanticsNodes().isNotEmpty() }
+            assertSame(sharedPhone, (ui.activity.application as ElctonApplication).phone)
+            val token = File(root, "mcp/token").readText(Charsets.US_ASCII)
+            val before = call(token, "courses_read")
+            assertTrue(before.isNull("load_error"))
+            val fixture = Course("qa-emulator-029", "SYNTHETIC MCP course", "emulator", "SYNTHETIC", 1, 1, 2, "08:00", "09:40", "all", 0)
+            val document = JSONObject(before.getJSONObject("document").toString()).put("courses", JSONArray().put(fixture.json()))
+            val revision = before.getLong("revision")
+            val preview = call(token, "courses_write", JSONObject().put("document", document).put("confirm", false).put("expected_revision", revision))
+            assertTrue(preview.getBoolean("accepted")); assertEquals("preview", preview.getString("state"))
+            assertEquals(revision, preview.getLong("revision")); assertFalse(preview.isNull("pending_import"))
+            for ((path, bytes) in originalFiles) assertEquals(bytes?.toList(), File(root, path).let { if (it.exists()) it.readBytes().toList() else null })
+            val saved = call(token, "courses_write", JSONObject().put("document", document).put("confirm", true).put("expected_revision", revision))
+            assertTrue(saved.getBoolean("accepted")); assertEquals("saved", saved.getString("state")); assertTrue(saved.isNull("pending_import"))
+            val actual = call(token, "courses_read")
+            assertTrue(actual.getLong("revision") > revision)
+            assertEquals(before.getString("dataset_id"), actual.getString("dataset_id"))
+            assertEquals(1, actual.getJSONObject("document").getJSONArray("courses").length())
+            assertEquals(fixture, Course.decode(actual.getJSONObject("document").getJSONArray("courses").getJSONObject(0)))
+            ui.runOnUiThread { assertEquals(listOf(fixture), sharedPhone.schedule.state.book.courses) }
+            assertEquals(listOf(fixture), ScheduleBook.decode(File(root, "timetable.json").readText()).courses)
+            for ((path, digest) in protected) assertEquals(digest, hash(File(root, path)))
+            report.put("sharedPhoneActivityRecreated", true).put("pureMcpCoursesWriteRead", true)
+                .put("previewDoesNotWrite", true).put("confirmedWritePersisted", true).put("protectedDataUnchanged", true)
+        } finally {
+            // Restore every preexisting byte (including ABSENT backups) before cold-process checks.
+            for ((path, bytes) in originalFiles) {
+                val file = File(root, path)
+                if (bytes == null) { if (file.exists()) check(file.delete()) } else file.writeBytes(bytes)
+                assertEquals(bytes?.toList(), file.let { if (it.exists()) it.readBytes().toList() else null })
+            }
+            report.put("fixtureFilesRestored", true)
+            report.put("passed", report.optBoolean("pureMcpCoursesWriteRead", false) && report.optBoolean("protectedDataUnchanged", false))
+            output.writeText(report.toString())
+        }
+    }
+
 }

@@ -6,8 +6,9 @@ import argparse, pathlib, subprocess, sys, os
 p=argparse.ArgumentParser();p.add_argument('--deps',required=True);p.add_argument('--out');p.add_argument('--classes',nargs='*');a=p.parse_args()
 root=pathlib.Path(__file__).resolve().parents[1];deps=pathlib.Path(a.deps);out=pathlib.Path(a.out or deps/'host-run');out.mkdir(parents=True,exist_ok=True)
 source=root/'app/src/main/java/com/hcbiu/elcton';test=root/'app/src/test/java/com/hcbiu/elcton'
-names=['Wire','PhoneSnapshot','ScheduleBook','TransferSession','ExportSession','DevicePolicy','UserFacingError','PacketIngress','SendAttempts','OperationDeadline','WearErrorRecord','ErrorJournal','McpToken','DiagnosticTools','DiagnosticMcpServer']
+names=['Wire','PhoneSnapshot','ScheduleBook','TransferSession','ExportSession','DevicePolicy','UserFacingError','PacketIngress','SendAttempts','OperationDeadline','WearErrorRecord','ErrorJournal','McpToken','McpToolProvider','DiagnosticTools','DiagnosticMcpServer','PhoneSchedule','PhoneActions','PhoneMcpTools','PickupClient','SyncEngine','McpKeepAlivePolicy','MainThreadActions']
 files=[source/(n+'.kt') for n in names if (source/(n+'.kt')).exists()]+sorted(test.glob('*Test.kt'))
+if (root/'qa/PhoneMcpHost.kt').is_file(): files.append(root/'qa/PhoneMcpHost.kt')
 if (root/'qa/McpHost.kt').is_file(): files.append(root/'qa/McpHost.kt')
 cp=os.pathsep.join(str(deps/(n+'.jar')) for n in ['json','junit','hamcrest']);jar=out/'host-tests.jar'
 cmd=['kotlinc',*[str(f) for f in files],'-classpath',cp,'-include-runtime','-d',str(jar)]

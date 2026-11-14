@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.hcbiu.elcton.DiagnosticToolsTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-14T03:34:23" hostname="runnervmccnms" time="0.058">
+  <properties/>
+  <testcase name="callbacksReturnActualObjectsAndTailDefaultAndBounds" classname="com.hcbiu.elcton.DiagnosticToolsTest" time="0.002"/>
+  <testcase name="wrongTypesUnknownKeysAndInvalidLimitsAreRejectedBeforeCallbacks" classname="com.hcbiu.elcton.DiagnosticToolsTest" time="0.003"/>
+  <testcase name="fsReadOnlyExactWhitelistAndStrictUtf8WithBoundedReads" classname="com.hcbiu.elcton.DiagnosticToolsTest" time="0.049"/>
+  <testcase name="schemasDescribeExactlyFourReadOnlyTools" classname="com.hcbiu.elcton.DiagnosticToolsTest" time="0.001"/>
+  <testcase name="fsRejectsSymbolicFilesAndSymbolicParentEscape" classname="com.hcbiu.elcton.DiagnosticToolsTest" time="0.001"/>
+  <testcase name="unknownToolAndProviderFailuresAreSanitized" classname="com.hcbiu.elcton.DiagnosticToolsTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <!-- Public read-only pickup API documents HTTP and has no valid HTTPS certificate.
+         Local bearer MCP remains 127.0.0.1 and never forwards its credential here. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">kebiao.qingyun3.com</domain>
+    </domain-config>
+</network-security-config>

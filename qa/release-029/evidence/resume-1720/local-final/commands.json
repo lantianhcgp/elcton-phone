@@ -1,0 +1,37 @@
+[
+  {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "qa",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit": 0,
+    "log_sha256": "c3848643b8ec6ddde12338f049e40cbf0feca1247b983cfd153701ae44a71e28"
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/diag_source_gate.py"
+    ],
+    "exit": 0,
+    "log_sha256": "44e4d5e5ebffc2c94b91947e428ae9c18546695359b57ef183eb339aea55eee7"
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/diag_emulator_smoke.py",
+      "--self-test"
+    ],
+    "exit": 0,
+    "log_sha256": "3df31be280bb9ed2eacd2be3a6191d4a7db2a10fd2b00625023efbb3a1fd65aa"
+  }
+]

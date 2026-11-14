@@ -1,0 +1,30 @@
+Scope: local JVM production Kotlin + real org.json; SYNTHETIC host callbacks/relay; NOT Android or adb verification
+test_content_length_post_survives_eof_closing_relay (__main__.McpRealClientTest.test_content_length_post_survives_eof_closing_relay) ... ok
+test_direct_controls_with_and_without_write_eof_use_real_server (__main__.McpRealClientTest.test_direct_controls_with_and_without_write_eof_use_real_server) ... ok
+test_url_mode_really_runs_curl_and_urllib (__main__.McpRealClientTest.test_url_mode_really_runs_curl_and_urllib) ... FAIL
+test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks (__main__.McpRealClientTest.test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks) ... FAIL
+
+======================================================================
+FAIL: test_url_mode_really_runs_curl_and_urllib (__main__.McpRealClientTest.test_url_mode_really_runs_curl_and_urllib)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_mcp_clients.py", line 204, in test_url_mode_really_runs_curl_and_urllib
+    self.assertEqual(0, result.returncode, 'Real read-only URL selftest failed: ' + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : Real read-only URL selftest failed: {"ok": false, "failure": "urllib exact host four / release fifteen tools", "token": "REDACTED"}
+
+
+======================================================================
+FAIL: test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks (__main__.McpRealClientTest.test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_mcp_clients.py", line 188, in test_url_mode_reports_unsupported_write_eof_without_dropping_other_checks
+    self.assertEqual(0, result.returncode, 'SYNTHETIC forwarding regression failed: ' + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : SYNTHETIC forwarding regression failed: {"ok": false, "failure": "urllib exact host four / release fifteen tools", "token": "REDACTED"}
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.385s
+
+FAILED (failures=2)

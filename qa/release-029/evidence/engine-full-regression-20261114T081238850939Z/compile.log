@@ -1,0 +1,101 @@
+Failed to load native library:jansi-2.4.0-661e04346d26d1e7-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-661e04346d26d1e7-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-661e04346d26d1e7-libjansi.so in namespace (default)
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:40:98: error: unresolved reference 'receiveImport'.
+        val sync: SyncEngine=SyncEngine(transport,scheduler,baselines,{}, {doc,revision->actions.receiveImport(doc,revision)})
+                                                                                                 ^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:41:22: error: unresolved reference 'PhoneActions'.
+        val actions: PhoneActions=PhoneActions(sync,schedule)
+                     ^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:41:35: error: unresolved reference 'PhoneActions'.
+        val actions: PhoneActions=PhoneActions(sync,schedule)
+                                  ^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:43:59: error: unresolved reference 'connect'.
+            assertTrue(actions.scan());assertTrue(actions.connect(peer.id))
+                                                          ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:55:47: error: unresolved reference 'connect'.
+        val h=Harness();assertFalse(h.actions.connect(peer.id));assertTrue(h.sent.isEmpty())
+                                              ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:56:83: error: unresolved reference 'connect'.
+        assertTrue(h.actions.scan());assertEquals(1,h.scans);assertTrue(h.actions.connect(peer.id))
+                                                                                  ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:58:31: error: unresolved reference 'connect'.
+        assertFalse(h.actions.connect("unknown"))
+                              ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:61:45: error: unresolved reference 'disconnect'.
+        val h=Harness();h.ready();h.actions.disconnect()
+                                            ^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:63:31: error: unresolved reference 'publish'.
+        assertFalse(h.actions.publish(true));assertTrue(h.unregisters>0)
+                              ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:66:47: error: unresolved reference 'startImport'.
+        val h=Harness();assertFalse(h.actions.startImport());h.ready();assertTrue(h.actions.startImport())
+                                              ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:66:93: error: unresolved reference 'startImport'.
+        val h=Harness();assertFalse(h.actions.startImport());h.ready();assertTrue(h.actions.startImport())
+                                                                                            ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:72:56: error: unresolved reference 'startImport'.
+        val h=Harness();h.ready();assertTrue(h.actions.startImport(true));h.finishExport()
+                                                       ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:76:74: error: unresolved reference 'publish'.
+        val h=Harness();h.ready(true,"other",true);assertFalse(h.actions.publish(false));assertFalse(h.actions.publish(true))
+                                                                         ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:76:112: error: unresolved reference 'publish'.
+        val h=Harness();h.ready(true,"other",true);assertFalse(h.actions.publish(false));assertFalse(h.actions.publish(true))
+                                                                                                               ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:78:30: error: unresolved reference 'publish'.
+        assertTrue(h.actions.publish(true,true));assertEquals("BEGIN",h.sent.last().getString("type"));assertTrue(h.sync.state.busy)
+                             ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:79:31: error: unresolved reference 'publish'.
+        assertFalse(h.actions.publish(true,true));assertEquals(0,h.saves)
+                              ^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:82:56: error: unresolved reference 'importDocument'.
+        val h=Harness();h.ready();assertTrue(h.actions.importDocument(raw));assertNotNull(h.schedule.state.pendingImport)
+                                                       ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:83:30: error: unresolved reference 'startImport'.
+        assertTrue(h.actions.startImport(true));val old=h.receiver!!;h.actions.abort()
+                             ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:83:80: error: unresolved reference 'abort'.
+        assertTrue(h.actions.startImport(true));val old=h.receiver!!;h.actions.abort()
+                                                                               ^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:89:81: error: unresolved reference 'coursesJson'.
+        val h=Harness();assertEquals(h.schedule.state.book.wireJson(),h.actions.coursesJson().getJSONObject("document").toString())
+                                                                                ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:90:30: error: unresolved reference 'importDocument'.
+        assertTrue(h.actions.importDocument(raw));assertTrue(h.actions.stateJson().getBoolean("import_pending"));assertEquals(0,h.saves)
+                             ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:90:72: error: unresolved reference 'stateJson'.
+        assertTrue(h.actions.importDocument(raw));assertTrue(h.actions.stateJson().getBoolean("import_pending"));assertEquals(0,h.saves)
+                                                                       ^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:93:47: error: unresolved reference 'importDocument'.
+        val h=Harness();assertFalse(h.actions.importDocument("{}",true));assertEquals(0,h.saves)
+                                              ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:94:30: error: unresolved reference 'importDocument'.
+        assertTrue(h.actions.importDocument(raw,false));assertEquals(0,h.saves)
+                             ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:95:30: error: unresolved reference 'importDocument'.
+        assertTrue(h.actions.importDocument(raw,true));assertEquals(1,h.saves);assertEquals(1L,h.schedule.state.book.revision)
+                             ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:96:40: error: unresolved reference 'startImport'.
+        h.ready();assertTrue(h.actions.startImport());assertFalse(h.actions.importDocument(raw,true));assertEquals(1,h.saves)
+                                       ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:96:77: error: unresolved reference 'importDocument'.
+        h.ready();assertTrue(h.actions.startImport());assertFalse(h.actions.importDocument(raw,true));assertEquals(1,h.saves)
+                                                                            ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:100:78: error: unresolved reference 'importDocument'.
+        val pickup=PickupClient.parseResponse(response);assertTrue(h.actions.importDocument(pickup,true));assertEquals(1,h.saves)
+                                                                             ^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:103:50: error: unresolved reference 'devicesJson'.
+        val h=Harness();assertEquals(0,h.actions.devicesJson().getJSONArray("devices").length());assertFalse(h.actions.devicesJson().getBoolean("observed"))
+                                                 ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:103:120: error: unresolved reference 'devicesJson'.
+        val h=Harness();assertEquals(0,h.actions.devicesJson().getJSONArray("devices").length());assertFalse(h.actions.devicesJson().getBoolean("observed"))
+                                                                                                                       ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:104:59: error: unresolved reference 'devicesJson'.
+        assertTrue(h.actions.scan());val listed=h.actions.devicesJson();assertEquals(1,listed.getJSONArray("devices").length())
+                                                          ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:106:30: error: unresolved reference 'stateJson'.
+        assertTrue(h.actions.stateJson().getBoolean("permission_granted"));assertFalse(h.actions.stateJson().getBoolean("ready"))
+                             ^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:106:98: error: unresolved reference 'stateJson'.
+        assertTrue(h.actions.stateJson().getBoolean("permission_granted"));assertFalse(h.actions.stateJson().getBoolean("ready"))
+                                                                                                 ^^^^^^^^^

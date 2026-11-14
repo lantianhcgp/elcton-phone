@@ -1,0 +1,10 @@
+POST /mcp HTTP/1.1
+Host: 127.0.0.1:8766
+User-Agent: curl
+Accept: */*
+Authorization: Bearer [REDACTED]
+Content-Type: application/json
+Connection: close
+Content-Length: 124
+
+{"jsonrpc":"2.0","id":"termux-curl-real-026","method":"tools/call","params":{"name":"error_tail","arguments":{"limit":128}}}

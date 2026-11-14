@@ -1,5 +1,9 @@
 # elcton-phone 0.2.6 / code8：部分交付，外部 MCP 验收未通过
 
+## 0.2.7 外部通路后续
+
+延续分支 feat/diag-mcp-027 的真实结果和保留的未验边界见 [0.2.7 DELIVERY](../diag-mcp-027/DELIVERY.md) 与 [Termux 私有 token 调用指南](../diag-mcp-027/TERMUX.md)。以下0.2.6原报告/失败证据/APK身份完整保留，不能把后续实现视为本版全链成功。
+
 ## 当前结论
 
 已产出稳定签名 APK 并真机覆盖安装成功；完整错误对话框与版本胶囊的真实 Android 模拟器仪器断言通过。但外部 Python HTTP 自测在真实 Android 上返回 `HTTP framing`，真机后台进程又被 MIUI 冻结，外部 MCP 全链尚未通过。不得将本报告解读为「全部验收完成」或「Wear Engine 授权问题修好」。

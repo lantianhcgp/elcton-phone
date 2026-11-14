@@ -3,13 +3,17 @@ package qa
 import com.hcbiu.elcton.DiagnosticMcpServer
 import com.hcbiu.elcton.DiagnosticTools
 import com.hcbiu.elcton.McpToken
+import com.hcbiu.elcton.CombinedMcpTools
+import com.hcbiu.elcton.PhoneMcpTools
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
 /** Host-only fixture. Production server and tools are exercised without Android or WearEngine. */
 fun main(args: Array<String>) {
-    require(args.size == 1) { "Expected temporary fixture directory" }
+    require(args.size == 1 || (args.size == 2 && args[1] == "--release-tools")) {
+        "Expected temporary fixture directory and optional --release-tools"
+    }
     val root = File(args[0])
     require(root.isDirectory && root.listFiles().orEmpty().isEmpty()) { "Fixture must be a new empty directory" }
     val errors = listOf(
@@ -25,7 +29,12 @@ fun main(args: Array<String>) {
         { limit -> JSONArray(errors.takeLast(limit)) },
         { if (File(root, "fail.diag").exists()) throw IllegalStateException("private-secret /private/path"); JSONObject(state.toString()) },
         { JSONObject().put("versionName", "host-fixture").put("source", "synthetic-host-fixture") })
-    val server = DiagnosticMcpServer(token, tools, 0)
+    // Legacy no-flag host remains exactly four tools. Release clients exercise the
+    // real combined list/validation; no Android action is fabricated in a JVM.
+    val selected = if (args.size == 2) CombinedMcpTools(tools, PhoneMcpTools { _, _ ->
+        JSONObject().put("error", "android_runtime_not_started_in_host")
+    }) else tools
+    val server = DiagnosticMcpServer(token, selected, 0)
     val hook = Thread({ server.stop() }, "diag-mcp-host-shutdown")
     Runtime.getRuntime().addShutdownHook(hook)
     try {

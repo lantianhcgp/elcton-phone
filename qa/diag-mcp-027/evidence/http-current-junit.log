@@ -1,0 +1,10 @@
+Scope: production Kotlin server and existing DiagnosticMcpServerTest (unmodified) on local JVM, real Android org.json; NOT Android device/runtime.
+Command: java -Xmx256m -cp /data/data/com.termux/files/home/elcton-phone-diag-mcp-027/.diag-build/http-027/host-tests.jar:/data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/android-json-api33.jar:/data/data/com.termux/files/home/erbian/core/lib/junit-4.13.2.jar:/data/data/com.termux/files/home/erbian/core/lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore com.hcbiu.elcton.DiagnosticMcpServerTest
+JUnit version 4.13.2
+..............
+Time: 2.713
+
+OK (14 tests)
+
+
+Exit: 0

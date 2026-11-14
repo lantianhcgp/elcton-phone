@@ -7,11 +7,11 @@ import java.util.UUID
 import java.time.LocalDate
 
 /** Small private, verified JSON store with a last-good backup. No automatic destructive reset on read error. */
-class ScheduleStore(context: Context) {
+class ScheduleStore(context: Context) : ScheduleRepository {
     private val main=AtomicFile(File(context.filesDir,"timetable.json"))
     private val backup=AtomicFile(File(context.filesDir,"timetable-last-good.json"))
     private var last: ScheduleBook?=null
-    @Synchronized fun load(): ScheduleBook {
+    @Synchronized override fun load(): ScheduleBook {
         if(main.baseFile.exists()||File(main.baseFile.path+".bak").exists()) {
             val book=ScheduleBook.decode(String(main.readFully(),Charsets.UTF_8))
             last=book; return book
@@ -25,7 +25,7 @@ class ScheduleStore(context: Context) {
         catch(e:Exception){file.failWrite(stream);throw e}
         check(String(file.readFully(),Charsets.UTF_8)==text){"保存后的校验不一致"}
     }
-    @Synchronized fun save(book: ScheduleBook) {
+    @Synchronized override fun save(book: ScheduleBook) {
         val text=book.storageJson()
         val decoded=ScheduleBook.decode(text)
         check(decoded.datasetId==book.datasetId && decoded.revision==book.revision && decoded.wireJson()==book.wireJson()) {"课表校验不一致"}
@@ -34,10 +34,10 @@ class ScheduleStore(context: Context) {
         write(main,text)
         last=book
     }
-    @Synchronized fun restore(): ScheduleBook {
+    @Synchronized override fun restore(): ScheduleBook {
         val book=ScheduleBook.decode(String(backup.readFully(),Charsets.UTF_8))
         val restored=book.copy(revision=maxOf(last?.revision?:0,book.revision)+1)
         write(main,restored.storageJson());last=restored;return restored
     }
-    fun hasBackup(): Boolean = backup.baseFile.exists() || File(backup.baseFile.path+".bak").exists()
+    override fun hasBackup(): Boolean = backup.baseFile.exists() || File(backup.baseFile.path+".bak").exists()
 }

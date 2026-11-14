@@ -1,0 +1,58 @@
+{
+  "status": "candidate_pending_independent_review",
+  "owned_files_sha256": {
+    "qa/diag_source_gate.py": "6278a451605275825e1556d3302e2b22dfeb7ed2918c1c5ff0e25491e365b9ff",
+    "qa/test_diag_source_gate.py": "5bacc49053d492cf03a8fd405aca57dae30740df77b5bb30e539181664d25a00",
+    "qa/test_p2p_ready_source_gate.py": "6f090a897f55e5d1906f5d3f7d6c7c0e63513bade049e07108609de4bc60b268",
+    "qa/test_mcp027_scope.py": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+    "qa/release-029/approved-release-delta.json": "08a469b9365be89130b77de749331a17d2659a0a18548e5f7f4693f9dde436b5"
+  },
+  "original_methods_retained": {
+    "qa/test_diag_source_gate.py": 9,
+    "qa/test_p2p_ready_source_gate.py": 4,
+    "qa/test_mcp027_scope.py": 3
+  },
+  "red_sha256": "f66a274898b01be85e98e7c51e8f2a5b754e9a4424dbd06984248a81e89a0a43",
+  "archive_verification": {
+    "relocation_map_entries_verified": 73,
+    "manifest_type": "dict",
+    "manifest_entry_count": 75
+  },
+  "commands": [
+    {
+      "command": "python -B -m unittest discover -s qa -p 'test_*.py' -v",
+      "log": "python-full-snapshot-01.log",
+      "exit_code": 0,
+      "tests": 90,
+      "skipped": 1
+    },
+    {
+      "command": "python -B -m unittest -v qa.test_diag_source_gate qa.test_p2p_ready_source_gate qa.test_mcp027_scope",
+      "log": "owned-green-01.log",
+      "exit_code": 1,
+      "tests": 16,
+      "failures": 3,
+      "note": "Filename retained; this is RED after parent added MainThreadActions, not GREEN."
+    },
+    {
+      "command": "python -B -m unittest discover -s qa -p 'test_*.py' -v",
+      "log": "python-full-after-parent-fixes-start-02.log",
+      "exit_code": 1,
+      "tests": 90,
+      "failures": 4,
+      "skipped": 1
+    }
+  ],
+  "mutations": {
+    "receipt": "mutations-01.json",
+    "count": 61,
+    "all_rejected": true,
+    "independent_of_preexisting_drift": true
+  },
+  "pending": [
+    "Parent fix-stable notification not received in 10min timebox; do not treat snapshot-01 green as final current acceptance.",
+    "Regenerate complete MainActivity/WearProbe after sources, guarded SHA map including new MainThreadActions.kt, and onResume seams from final stable product, retaining exact historical before refs.",
+    "Rerun full unittest and mutation controls on final snapshot; independent spec/standards reviewers must approve exact regenerated delta before push."
+  ],
+  "no_app_workflow_edits_or_git_stage_commit_push": true
+}

@@ -1,0 +1,28 @@
+Pure Kotlin host regression only, real Android JSON on JVM; NOT Android lifecycle.
+Failed to load native library:jansi-2.4.0-fba6af96db0db68d-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-fba6af96db0db68d-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-fba6af96db0db68d-libjansi.so in namespace (default)
+
+JUnit version 4.13.2
+.........................E.E..........................................................
+Time: 4.077
+There were 2 failures:
+1) fullDiagnosisIsScrollableAndOnlyApplicationStartsPassiveMcp(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.fullDiagnosisIsScrollableAndOnlyApplicationStartsPassiveMcp(DiagnosticsIntegrationTest.kt:54)
+2) versionCapsuleUsesActualBuildConfigAndCodeEight(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.versionCapsuleUsesActualBuildConfigAndCodeEight(DiagnosticsIntegrationTest.kt:25)
+
+FAILURES!!!
+Tests run: 84,  Failures: 2
+
+
+
+Exit: 1

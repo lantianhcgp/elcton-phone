@@ -1,0 +1,9 @@
+# Preserve original captured evidence bytes, including HTTP CRLF and raw log EOF.
+# Product source/test whitespace gates remain unchanged.
+qa/diag-mcp-027/evidence/**/*.log -text whitespace=-blank-at-eof
+qa/diag-mcp-027/evidence/*.log -text whitespace=-blank-at-eof
+qa/diag-mcp-027/evidence/real-device-026/*.http -text whitespace=cr-at-eol
+qa/diag-mcp-027/evidence/real-device-026/**/*.http -text whitespace=cr-at-eol
+# Exact raw HTTP response and upstream Gradle log; retain original bytes.
+qa/diag-mcp-027/evidence/android-43552523971-key/normal-stop-port-0.bin binary
+qa/diag-mcp-027/evidence/build-http-43552199858/diagnostics-http/gradle-classpath.log -text whitespace=-blank-at-eof,-blank-at-eol

@@ -3,18 +3,22 @@ package com.hcbiu.elcton
 import android.app.Application
 import android.util.Log
 
-/** Passive process-local MCP only: no Activity launches, polling, alarms, or foreground service. */
+/** Process-owned shared runtime. SDK clients are lazy; no Activity or pairing prompt is launched. */
 class ElctonApplication : Application() {
     lateinit var diagnostics: DiagnosticRuntime
         private set
+    private val sharedPhone = lazy { PhoneRuntime(this) }
+    val phone: PhoneRuntime get() = sharedPhone.value
+    fun cancelPhoneIfInitialized() { if (sharedPhone.isInitialized()) phone.cancelAll() }
 
     override fun onCreate() {
         super.onCreate()
         diagnostics = DiagnosticRuntime(filesDir)
+        diagnostics.attachActions(PhoneMcpTools { name, arguments -> phone.mcp(name, arguments) })
         try {
-            diagnostics.start()
+            diagnostics.start(false)
         } catch (error: Exception) {
-            // Observability initialization must never gate normal editing or Wear Engine calls.
+            // Diagnostic failure never silently resets courses or starts authorization UI.
             Log.w("ElctonMcp", "Diagnostic MCP unavailable: " + error.javaClass.simpleName)
         }
     }

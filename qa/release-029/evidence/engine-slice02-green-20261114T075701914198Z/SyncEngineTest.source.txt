@@ -1,0 +1,199 @@
+package com.hcbiu.elcton
+
+import java.lang.reflect.Proxy
+import org.junit.Assert.*
+import org.junit.Test
+
+/** Tests the application-owned public seam, without Android, Huawei SDK, or a watch. */
+class SyncEngineTest {
+    @Test fun backgroundAuthorizationWithoutPermissionNeverOpensUi() {
+        // Reflection keeps the first RED a missing-behavior assertion, not a compiler error.
+        fun required(name: String): Class<*> {
+            val type = runCatching { Class.forName("com.hcbiu.elcton.$name") }.getOrNull()
+            assertNotNull("Missing application-owned $name public behavior seam", type)
+            return type!!
+        }
+        val engineType = required("SyncEngine")
+        val transportType = required("SyncTransport")
+        val schedulerType = required("SyncScheduler")
+        val baselinesType = required("SyncBaselines")
+        val cancellationType = required("SyncCancellation")
+        var checks = 0
+        var requests = 0
+        var scans = 0
+        fun proxy(type: Class<*>, call: (String, Array<out Any?>) -> Any?): Any =
+            Proxy.newProxyInstance(type.classLoader, arrayOf(type)) { _, method, args -> call(method.name, args ?: emptyArray()) }
+        val cancellation = proxy(cancellationType) { _, _ -> Unit }
+        val transport = proxy(transportType) { name, args ->
+            when (name) {
+                "checkPermission" -> { checks++; @Suppress("UNCHECKED_CAST") (args[0] as (Boolean) -> Unit)(false); Unit }
+                "requestPermission" -> { requests++; true }
+                "scan" -> { scans++; Unit }
+                "unregister" -> Unit
+                else -> error("Unexpected transport call: $name")
+            }
+        }
+        val scheduler = proxy(schedulerType) { name, args ->
+            when (name) {
+                "post" -> { @Suppress("UNCHECKED_CAST") (args[0] as () -> Unit)(); Unit }
+                "after" -> cancellation
+                "now", "wallTime" -> 1L
+                else -> error("Unexpected scheduler call: $name")
+            }
+        }
+        val baselines = proxy(baselinesType) { _, _ -> 0L }
+        val engine = engineType.constructors.single { it.parameterCount == 5 }.newInstance(
+            transport, scheduler, baselines, { _: Any -> Unit }, { _: String, _: Long -> Unit }
+        )
+        assertEquals(true, engineType.getMethod("authorizeAndScan", Boolean::class.javaPrimitiveType).invoke(engine, false))
+        val state = engineType.getMethod("getState").invoke(engine)
+        fun value(name: String): Any? = state.javaClass.getMethod("get$name").invoke(state)
+        assertEquals(1, checks)
+        assertEquals("Background authorization must never ask the SDK to show UI", 0, requests)
+        assertEquals(0, scans)
+        assertEquals(false, value("PermissionGranted"))
+        assertEquals(false, value("Ready"))
+        assertEquals(false, value("Busy"))
+        assertTrue((value("Detail") as String).contains("授权"))
+    }
+
+    @Test fun selectedDeviceMustRegisterAndReturnValidReadyBeforeAnyPublication() {
+        val h = Harness()
+        assertTrue(h.engine.authorizeAndScan())
+        assertTrue(h.engine.state.busy)
+        assertEquals(0, h.transport.scans)
+        h.flush()
+        assertEquals(listOf(h.peer), h.engine.state.devices)
+        assertEquals(true, h.engine.state.permissionGranted)
+        assertFalse(h.engine.state.busy)
+        assertTrue(h.action("connect", h.peer.id))
+        h.flush()
+        assertEquals(h.peer.id, h.engine.state.selected)
+        assertEquals(1, h.transport.registrations.size)
+        assertEquals(listOf("HELLO"), h.transport.types())
+        assertFalse(h.engine.state.ready)
+        assertTrue(h.engine.state.busy)
+        h.ready()
+        assertTrue(h.engine.state.ready)
+        assertFalse(h.engine.state.busy)
+        assertEquals("手表已准备", h.engine.state.status)
+        assertEquals(8192, h.engine.state.maxBytes)
+        assertEquals(123L, h.engine.state.lastSuccessAt)
+        h.advance(20_000)
+        assertEquals(listOf("HELLO"), h.transport.types())
+    }
+
+    private class Clock : SyncScheduler {
+        data class Task(val due: Long, val order: Long, val block: () -> Unit, var cancelled: Boolean = false)
+        var time = 0L
+        var wall = 1_800_000_000_000L
+        private var order = 0L
+        val tasks = mutableListOf<Task>()
+        override fun post(block: () -> Unit) { tasks += Task(time, ++order, block) }
+        override fun after(ms: Long, block: () -> Unit): SyncCancellation {
+            val task = Task(time + ms, ++order, block)
+            tasks += task
+            return SyncCancellation { task.cancelled = true }
+        }
+        override fun now() = time
+        override fun wallTime() = wall + time
+        fun advance(ms: Long) {
+            val target = time + ms
+            while (true) {
+                val task = tasks.filter { !it.cancelled && it.due <= target }.minWithOrNull(compareBy({ it.due }, { it.order })) ?: break
+                tasks.remove(task)
+                time = task.due
+                task.block()
+            }
+            time = target
+        }
+    }
+
+    private class Transport : SyncTransport {
+        data class Registration(val message: (String) -> Unit, val success: () -> Unit, val failure: (String) -> Unit)
+        data class Sent(val text: String, val result: (Int) -> Unit, val failure: (String) -> Unit)
+        var permission = true
+        var permissionActivity = true
+        var autoPermission = true
+        var autoScan = true
+        var autoInstalled = true
+        var autoRegister = true
+        var checks = 0
+        var requests = 0
+        var scans = 0
+        var unregisters = 0
+        var installedCalls = 0
+        var devices = emptyList<SyncDevice>()
+        val checksPending = mutableListOf<Pair<(Boolean) -> Unit, (String) -> Unit>>()
+        val requestPending = mutableListOf<Pair<(Boolean) -> Unit, (String) -> Unit>>()
+        val scansPending = mutableListOf<Pair<(List<SyncDevice>) -> Unit, (String) -> Unit>>()
+        val installedPending = mutableListOf<Pair<(Boolean) -> Unit, (String) -> Unit>>()
+        val registrations = mutableListOf<Registration>()
+        val sent = mutableListOf<Sent>()
+        override fun checkPermission(success: (Boolean) -> Unit, failure: (String) -> Unit) {
+            checks++; checksPending += success to failure
+            if (autoPermission) success(permission)
+        }
+        override fun requestPermission(success: (Boolean) -> Unit, failure: (String) -> Unit): Boolean {
+            requests++
+            if (!permissionActivity) return false
+            requestPending += success to failure
+            return true
+        }
+        override fun scan(success: (List<SyncDevice>) -> Unit, failure: (String) -> Unit) {
+            scans++; scansPending += success to failure
+            if (autoScan) success(devices)
+        }
+        override fun installed(device: SyncDevice, success: (Boolean) -> Unit, failure: (String) -> Unit) {
+            installedCalls++; installedPending += success to failure
+            if (autoInstalled) success(true)
+        }
+        override fun register(device: SyncDevice, message: (String) -> Unit, success: () -> Unit, failure: (String) -> Unit) {
+            registrations += Registration(message, success, failure)
+            if (autoRegister) success()
+        }
+        override fun unregister() { unregisters++ }
+        override fun send(device: SyncDevice, text: String, result: (Int) -> Unit, failure: (String) -> Unit) {
+            sent += Sent(text, result, failure)
+        }
+        fun types(): List<String> = sent.map { org.json.JSONObject(it.text).getString("type") }
+    }
+
+    private class Baselines : SyncBaselines {
+        data class Saved(val deviceId: String, val datasetId: String, val digest: String, val revision: Long, val at: Long)
+        val saved = mutableListOf<Saved>()
+        override fun lastSuccess(deviceId: String) = 123L
+        override fun save(deviceId: String, datasetId: String, digest: String, revision: Long, at: Long) {
+            saved += Saved(deviceId, datasetId, digest, revision, at)
+        }
+    }
+
+    private class Harness {
+        val peer = SyncDevice("real-uuid", "Example watch", "not-a-model-allowlist", true, 0)
+        val clock = Clock()
+        val transport = Transport().apply { devices = listOf(peer) }
+        val baselines = Baselines()
+        val updates = mutableListOf<SyncEngine.State>()
+        val imports = mutableListOf<Pair<String, Long>>()
+        val engine = SyncEngine(transport, clock, baselines, { updates += it }, { text, revision -> imports += text to revision })
+        fun action(name: String, vararg args: Any): Boolean {
+            val method = engine.javaClass.methods.singleOrNull { it.name == name && it.parameterCount == args.size }
+            assertNotNull("Missing SyncEngine.$name public behavior", method)
+            val result = method!!.invoke(engine, *args)
+            return result as? Boolean ?: true
+        }
+        fun flush() = clock.advance(0)
+        fun advance(ms: Long) = clock.advance(ms)
+        fun receive(raw: String) {
+            transport.registrations.last().message(raw)
+            flush()
+        }
+        fun ready(extra: String = "") = receive(watch("READY", "", ",\"maxBytes\":8192,\"sourceRevision\":0,\"datasetId\":\"\",\"digest\":\"\",\"localDirty\":false,\"hasData\":false" + extra))
+    }
+
+    companion object {
+        private const val SNAPSHOT = "{\"schema\":\"elcton.schedule\",\"version\":1,\"settings\":{\"semesterStart\":\"2026-09-01\"},\"courses\":[]}"
+        private fun watch(type: String, id: String = "", fields: String = "") =
+            "{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"watch\",\"type\":\"$type\",\"transferId\":\"$id\"$fields}"
+    }
+}

@@ -1,0 +1,32 @@
+package com.hcbiu.elcton
+
+import org.json.JSONObject
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
+
+/** Initial direct extraction of the former PhoneRuntime dispatcher, to reproduce STOP race. */
+class MainThreadActions(
+    private val post: ((() -> Unit) -> Boolean),
+    private val isMain: () -> Boolean,
+    private val timeoutMs: Long = 3000L
+) {
+    fun invalidate() {}
+    fun invoke(action: () -> JSONObject): JSONObject {
+        if (isMain()) return action()
+        val done = CountDownLatch(1)
+        val abandoned = AtomicBoolean(false)
+        var result = JSONObject().put("error", "action_dispatch_timeout")
+        post {
+            if (!abandoned.get()) {
+                result = action()
+                done.countDown()
+            }
+        }
+        if (!done.await(timeoutMs, TimeUnit.MILLISECONDS)) {
+            abandoned.set(true)
+            return JSONObject().put("error", "action_dispatch_timeout")
+        }
+        return result
+    }
+}

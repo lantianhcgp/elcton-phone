@@ -1,0 +1,59 @@
+package com.hcbiu.elcton
+
+import java.lang.reflect.Proxy
+import org.junit.Assert.*
+import org.junit.Test
+
+/** Tests the application-owned public seam, without Android, Huawei SDK, or a watch. */
+class SyncEngineTest {
+    @Test fun backgroundAuthorizationWithoutPermissionNeverOpensUi() {
+        // Reflection keeps the first RED a missing-behavior assertion, not a compiler error.
+        fun required(name: String): Class<*> {
+            val type = runCatching { Class.forName("com.hcbiu.elcton.$name") }.getOrNull()
+            assertNotNull("Missing application-owned $name public behavior seam", type)
+            return type!!
+        }
+        val engineType = required("SyncEngine")
+        val transportType = required("SyncTransport")
+        val schedulerType = required("SyncScheduler")
+        val baselinesType = required("SyncBaselines")
+        val cancellationType = required("SyncCancellation")
+        var checks = 0
+        var requests = 0
+        var scans = 0
+        fun proxy(type: Class<*>, call: (String, Array<out Any?>) -> Any?): Any =
+            Proxy.newProxyInstance(type.classLoader, arrayOf(type)) { _, method, args -> call(method.name, args ?: emptyArray()) }
+        val cancellation = proxy(cancellationType) { _, _ -> Unit }
+        val transport = proxy(transportType) { name, args ->
+            when (name) {
+                "checkPermission" -> { checks++; @Suppress("UNCHECKED_CAST") (args[0] as (Boolean) -> Unit)(false); Unit }
+                "requestPermission" -> { requests++; true }
+                "scan" -> { scans++; Unit }
+                "unregister" -> Unit
+                else -> error("Unexpected transport call: $name")
+            }
+        }
+        val scheduler = proxy(schedulerType) { name, args ->
+            when (name) {
+                "post" -> { @Suppress("UNCHECKED_CAST") (args[0] as () -> Unit)(); Unit }
+                "after" -> cancellation
+                "now", "wallTime" -> 1L
+                else -> error("Unexpected scheduler call: $name")
+            }
+        }
+        val baselines = proxy(baselinesType) { _, _ -> 0L }
+        val engine = engineType.constructors.single { it.parameterCount == 5 }.newInstance(
+            transport, scheduler, baselines, { _: Any -> Unit }, { _: String, _: Long -> Unit }
+        )
+        assertEquals(true, engineType.getMethod("authorizeAndScan", Boolean::class.javaPrimitiveType).invoke(engine, false))
+        val state = engineType.getMethod("getState").invoke(engine)
+        fun value(name: String): Any? = state.javaClass.getMethod("get$name").invoke(state)
+        assertEquals(1, checks)
+        assertEquals("Background authorization must never ask the SDK to show UI", 0, requests)
+        assertEquals(0, scans)
+        assertEquals(false, value("PermissionGranted"))
+        assertEquals(false, value("Ready"))
+        assertEquals(false, value("Busy"))
+        assertTrue((value("Detail") as String).contains("授权"))
+    }
+}

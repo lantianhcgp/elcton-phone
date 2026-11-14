@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -42,8 +43,14 @@ import java.util.UUID
 
 /** Phone is the editor; imported watch data is a proposal, never an automatic overwrite. */
 class MainActivity : ComponentActivity() {
-    private lateinit var store: ScheduleStore
-    private lateinit var probe: WearProbe
+    private lateinit var phone: PhoneRuntime
+    private val observer: () -> Unit = {
+        book=phone.schedule.state.book
+        loadError=phone.schedule.state.loadError
+        notice=phone.schedule.state.notice
+        pendingImport=phone.schedule.state.pendingImport
+        probeState=phone.sync
+    }
     private var book by mutableStateOf(ScheduleBook.empty("initial", "2026-09-01"))
     private var tab by mutableIntStateOf(0)
     private var selectedDay by mutableIntStateOf(LocalDate.now().dayOfWeek.value)
@@ -59,7 +66,7 @@ class MainActivity : ComponentActivity() {
     private var confirmClear by mutableStateOf(false)
     private var confirmRestore by mutableStateOf(false)
     private var diagnostics by mutableStateOf(false)
-    private var probeState by mutableStateOf(WearProbe.State())
+    private var probeState by mutableStateOf(SyncEngine.State())
     private val colors = listOf(Color(0xFF8FA8FF),Color(0xFFB49BFF),Color(0xFF69C9B6),Color(0xFFE7AD77),Color(0xFFDD91B9),Color(0xFF81BCD9),Color(0xFFA7C57F),Color(0xFFB5BCCA))
 
     private val openFile = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -76,24 +83,18 @@ class MainActivity : ComponentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        store=ScheduleStore(this)
-        runCatching { store.load() }.onSuccess { book=it }.onFailure { loadError="手机课表读取失败；原文件未重置。可在设置恢复备份。" }
+        phone=(application as ElctonApplication).phone
+        phone.observe(observer)
         displayWeek=book.weekAt(LocalDate.now())
-        probeState=probeState.copy(diagnostic=(application as? ElctonApplication)?.diagnostics?.latestFull().orEmpty())
-        probe=WearProbe(this,{ probeState=it }) { raw,revision -> prepareImport(raw,revision) }
         setContent {
             M3xTheme {
                 Product()
             }
         }
     }
-    private fun save(next: ScheduleBook): Boolean = try {
-        check(loadError==null){"请先恢复无法读取的课表"}
-        store.save(next);book=next;notice="已保存在手机，尚未同步到手表";true
-    } catch(e:Exception){notice=UserFacingError.validation(e.message);false}
+    private fun save(next: ScheduleBook): Boolean = phone.save(next)
     private fun prepareImport(raw: String, remoteRevision: Long = 0) {
-        runCatching { book.importSnapshot(raw,remoteRevision) }.onSuccess { pendingImport=it;showImport=false }
-            .onFailure { notice="无法导入：${UserFacingError.validation(it.message)}" }
+        if(phone.schedule.prepareImport(raw,remoteRevision))showImport=false
     }
     @Composable private fun Product() {
         val titles=listOf("今日课程","周课表","设备同步","设置")
@@ -141,11 +142,11 @@ class MainActivity : ComponentActivity() {
         if(showImport)ImportDialog()
         if(pendingImport!=null) {
             val proposed=pendingImport!!
-            AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={pendingImport=null},title={Text("导入预览")},text={Column(verticalArrangement=Arrangement.spacedBy(12.dp)){
+            AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={phone.schedule.cancelImport()},title={Text("导入预览")},text={Column(verticalArrangement=Arrangement.spacedBy(12.dp)){
                 Text("${proposed.courses.size} 条课程 · 学期 ${proposed.semesterStart}")
                 Text("确认后替换手机的 ${book.courses.size} 条课程，并保留上一版本。不会自动发到手表。",style=MaterialTheme.typography.bodyMedium)
-            }},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={if(save(proposed))pendingImport=null},modifier=Modifier.testTag("import-confirm")){Text("确认导入")}},
-                dismissButton={TextButton(onClick={pendingImport=null},modifier=Modifier.testTag("import-cancel")){Text("取消")}})
+            }},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={phone.schedule.confirmImport()},modifier=Modifier.testTag("import-confirm")){Text("确认导入")}},
+                dismissButton={TextButton(onClick={phone.schedule.cancelImport()},modifier=Modifier.testTag("import-cancel")){Text("取消")}})
         }
         if(showExport)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={showExport=false},title={Text("导出课表")},text={Column{
             Text("${book.courses.size} 条课程 · JSON v1",style=MaterialTheme.typography.labelLarge)
@@ -155,10 +156,10 @@ class MainActivity : ComponentActivity() {
             dismissButton={Row{TextButton(onClick={(getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("课表",book.wireJson()));notice="课表已复制"}){Text("复制")};TextButton(onClick={showExport=false}){Text("关闭")}}})
         if(pendingPublish)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={pendingPublish=false},title={Text("确认替换手表课表")},
             text={Text("手表有已有数据或本地修改。此次用手机课表替换选中手表；手表会保留上一有效版本。也可取消并先从手表导入。")},
-            confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={pendingPublish=false;probe.publishSnapshot(book.wireJson(),true,book.datasetId,maxOf(1L,book.revision))}){Text("确认替换")}},
+            confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={pendingPublish=false;phone.publish(true,true)}){Text("确认替换")}},
             dismissButton={TextButton(onClick={pendingPublish=false}){Text("取消")}})
         if(confirmClear)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={confirmClear=false},title={Text("清空手机课表？")},text={Text("清空只影响手机，保留上一版本备份；不会自动清空手表。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={confirmClear=false;save(book.copy(courses=emptyList(),revision=book.revision+1))}){Text("清空")}},dismissButton={TextButton(onClick={confirmClear=false}){Text("取消")}})
-        if(confirmRestore)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={confirmRestore=false},title={Text("恢复上一版本？")},text={Text("恢复手机本地备份，不会自动同步。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={confirmRestore=false;runCatching{store.restore()}.onSuccess{book=it;loadError=null;notice="已恢复上一版本"}.onFailure{notice="恢复失败：${UserFacingError.validation(it.message)}"}}){Text("恢复")}},dismissButton={TextButton(onClick={confirmRestore=false}){Text("取消")}})
+        if(confirmRestore)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,onDismissRequest={confirmRestore=false},title={Text("恢复上一版本？")},text={Text("恢复手机本地备份，不会自动同步。")},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={confirmRestore=false;phone.schedule.restore()}){Text("恢复")}},dismissButton={TextButton(onClick={confirmRestore=false}){Text("取消")}})
         if(diagnostics)AlertDialog(shape=M3x.Panel,containerColor=M3x.Surface,titleContentColor=M3x.OnSurface,textContentColor=M3x.OnSurfaceVariant,
             onDismissRequest={diagnostics=false},title={Text("连接诊断")},
             text={SelectionContainer {
@@ -430,7 +431,7 @@ class MainActivity : ComponentActivity() {
                         shape=M3x.Field,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)){
                         Text("预览并导出课表",modifier=Modifier.weight(1f));Text("↗")
                     }
-                    if(store.hasBackup())FilledTonalButton(onClick={confirmRestore=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("restore-backup"),
+                    if(phone.schedule.hasBackup())FilledTonalButton(onClick={confirmRestore=true},modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("restore-backup"),
                         shape=M3x.Field,colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.SurfaceHigh,contentColor=M3x.OnSurface)){
                         Text("恢复上一版本",modifier=Modifier.weight(1f));Text("↗",color=M3x.Ink)
                     }
@@ -441,12 +442,13 @@ class MainActivity : ComponentActivity() {
             }
             ExpressivePanel {
                 SectionHeading("隐私与兼容性")
-                Text("课表保存在两端应用本地；同步不使用自建云服务。设备能力、签名和运动健康授权决定是否可通信，不把 FIT3 作为型号白名单。",
+                Text("课表保存在两端应用本地；手机与手表同步不使用自建云服务。取件码导入只读访问课程表站点；设备能力、签名和运动健康授权决定是否可通信，不把 FIT3 作为型号白名单。",
                     style=MaterialTheme.typography.bodySmall,color=M3x.OnSurfaceVariant)
                 ExpressivePill("${BuildConfig.VERSION_NAME} · 测试构建",color=M3x.SurfaceHigh,contentColor=M3x.Ink,
                     modifier=Modifier.testTag("version-capsule"))
                 Text("Wear Engine 真实权限与其他运行时适配以验证报告为准。",style=MaterialTheme.typography.labelSmall,color=M3x.OnSurfaceVariant)
             }
+            McpKeepAliveSettings()
             Spacer(Modifier.height(32.dp))
         }
     }
@@ -455,7 +457,7 @@ class MainActivity : ComponentActivity() {
             Text("使用 elcton.schedule v1。先检查内容，再确认导入。",style=MaterialTheme.typography.bodySmall)
             ExpressiveField(raw,{raw=it},Modifier.fillMaxWidth().heightIn(min=160.dp,max=300.dp).testTag("import-input"),label={Text("JSON 内容")})
             if(error.isNotEmpty())Text(error,color=MaterialTheme.colorScheme.error)
-        }},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={runCatching{book.importSnapshot(raw)}.onSuccess{pendingImport=it;showImport=false}.onFailure{error=UserFacingError.validation(it.message)}},modifier=Modifier.testTag("import-check")){Text("检查")}},dismissButton={TextButton(onClick={showImport=false}){Text("取消")}})
+        }},confirmButton={Button(shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand),onClick={if(phone.importDocument(raw))showImport=false else error=phone.schedule.state.notice},modifier=Modifier.testTag("import-check")){Text("检查")}},dismissButton={TextButton(onClick={showImport=false}){Text("取消")}})
     }
     @Composable private fun Devices(){
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal=20.dp),verticalArrangement=Arrangement.spacedBy(16.dp)){
@@ -471,39 +473,39 @@ class MainActivity : ComponentActivity() {
                 Text(probeState.detail,style=MaterialTheme.typography.bodyMedium)
                 if(probeState.busy)LinearProgressIndicator(Modifier.fillMaxWidth().height(9.dp),
                     color=M3x.Brand,trackColor=M3x.Track,strokeCap=androidx.compose.ui.graphics.StrokeCap.Round)
-                Button(onClick={probe.authorizeAndScan()},enabled=!probeState.busy,
+                Button(onClick={phone.scan(this@MainActivity)},enabled=!probeState.busy,
                     modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("scan-devices"),shape=M3x.Pill,
                     colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand)){
                     Text("查询配对设备")
                 }
             }
-            probeState.devices.forEach{d->FilledTonalButton(onClick={probe.connect(d)},enabled=!probeState.busy,
+            probeState.devices.forEach{d->FilledTonalButton(onClick={phone.connect(d.id)},enabled=!probeState.busy,
                 modifier=Modifier.fillMaxWidth(),shape=M3x.Panel,contentPadding=PaddingValues(20.dp),
                 colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)){
                 Column(Modifier.fillMaxWidth(),verticalArrangement=Arrangement.spacedBy(6.dp)){
                     Text(d.name.orEmpty(),style=MaterialTheme.typography.titleMedium)
-                    Text("${if(d.isConnected)"已连接" else "未连接"} · ${d.model.orEmpty()}",style=MaterialTheme.typography.labelSmall)
+                    Text("${if(d.connected)"已连接" else "未连接"} · ${d.model.orEmpty()}",style=MaterialTheme.typography.labelSmall)
                 }
             }}
             ExpressivePanel {
                 SectionHeading("手表准备")
-                Text("在手表进入周视图 → 同步 → 开始接收。手机保持前台，等对端准备就绪后再发布课表。",
+                Text("在手表进入周视图 → 同步 → 开始接收。手机默认保持运行；等对端准备就绪后再发布课表。",
                     style=MaterialTheme.typography.bodySmall,color=M3x.OnSurfaceVariant)
                 ExpressivePill("手机 ${book.courses.size} 条课程 · 修订 ${book.revision}",
                     color=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)
             }
             ExpressivePanel {
-                Button(onClick={if(probeState.dirty||probeState.hasData&&probeState.datasetId!=book.datasetId)pendingPublish=true else probe.publishSnapshot(book.wireJson(),false,book.datasetId,maxOf(1L,book.revision))},
+                Button(onClick={if(probeState.dirty||probeState.hasData&&probeState.datasetId!=book.datasetId)pendingPublish=true else phone.publish(true,false)},
                     enabled=probeState.ready&&!probeState.busy&&loadError==null,modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("publish-book"),
                     shape=M3x.Pill,colors=ButtonDefaults.buttonColors(containerColor=M3x.Brand,contentColor=M3x.OnBrand)){
                     Text("同步到选中手表")
                 }
-                FilledTonalButton(onClick={probe.requestExport()},enabled=probeState.ready&&!probeState.busy,
+                FilledTonalButton(onClick={phone.startImport()},enabled=probeState.ready&&!probeState.busy,
                     modifier=Modifier.fillMaxWidth().heightIn(min=52.dp).testTag("import-watch"),shape=M3x.Pill,
                     colors=ButtonDefaults.filledTonalButtonColors(containerColor=M3x.TertiaryContainer,contentColor=M3x.OnTertiaryContainer)){
                     Text("从手表导入")
                 }
-                TextButton(onClick={probe.cancel()},modifier=Modifier.testTag("disconnect")){Text("断开并停止同步")}
+                TextButton(onClick={phone.disconnect()},modifier=Modifier.testTag("disconnect")){Text("断开并停止同步")}
                 if(probeState.diagnostic.isNotEmpty())TextButton(onClick={diagnostics=true},modifier=Modifier.testTag("diagnostics")){Text("查看诊断记录")}
             }
             Text("当前提供 Lite Wearable 应用。圆屏、方屏按窗口适配；其他系统运行时需要对应应用包。连接和版本结果不等于全机型认证。",
@@ -512,6 +514,21 @@ class MainActivity : ComponentActivity() {
         }
     }
     private fun dayLabel(day:Int)=listOf("周一","周二","周三","周四","周五","周六","周日")[day-1]
-    override fun onStop(){if(::probe.isInitialized)probe.onBackground();super.onStop()}
-    override fun onDestroy(){if(::probe.isInitialized)probe.close();super.onDestroy()}
+    override fun onResume(){
+        super.onResume()
+        McpKeepAlive.resumeChoice(this)
+        val prefs=McpKeepAlive.preferences(this)
+        if(Build.VERSION.SDK_INT>=33 && McpKeepAlive.enabled(this) &&
+            checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED &&
+            !prefs.getBoolean("default_notification_prompted",false)) {
+            prefs.edit().putBoolean("default_notification_prompted",true).commit()
+            requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),8766)
+        }
+    }
+    override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,grantResults:IntArray){
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults)
+        if(requestCode==8766)McpKeepAlive.resumeChoice(this)
+    }
+    override fun onStop(){if(::phone.isInitialized)phone.onBackground();super.onStop()}
+    override fun onDestroy(){if(::phone.isInitialized)phone.unobserve(observer);super.onDestroy()}
 }

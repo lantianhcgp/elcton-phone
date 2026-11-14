@@ -1,0 +1,414 @@
+{
+  "mutation_count": 61,
+  "all_rejected": true,
+  "current_candidate_errors": [
+    "Unapproved main-source inventory delta: ['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"
+  ],
+  "cases": [
+    {
+      "case": "displayWeek increment",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "swapped scan/cancel callbacks",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "extra onCreate lifecycle action",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "authorization true bypass",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "207 to zero",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "207 to 206",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "missing version capsule",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "duplicated diagnostic initializer",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved source outside exact release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "KEEPALIVE missing seam 0",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "KEEPALIVE duplicated seam 0",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved source outside exact release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "KEEPALIVE missing seam 1",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "KEEPALIVE duplicated seam 1",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved source outside exact release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "resume becomes enable",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/MainActivity.kt"
+      ]
+    },
+    {
+      "case": "lost structured full-message persistence",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/WearProbe.kt"
+      ]
+    },
+    {
+      "case": "missing READY preparation dispatch",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "duplicated READY preparation dispatch",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "READY forced awaiting flag",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "watch package identity",
+      "rejected": true,
+      "new_errors": [
+        "Missing or ambiguous candidate release delta: app/src/main/java/com/hcbiu/elcton/WearProbe.kt"
+      ]
+    },
+    {
+      "case": "lost finite READY timeout words",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/ElctonApplication.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/ElctonApplication.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/McpKeepAliveSettings.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/McpKeepAliveSettings.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/McpKeepAlivePolicy.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/McpKeepAlivePolicy.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/McpToolProvider.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/McpToolProvider.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PhoneActions.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PhoneActions.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PhoneMcpTools.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PhoneMcpTools.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PhoneRuntime.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PhoneRuntime.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PhoneSchedule.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PhoneSchedule.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PickupClient.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PickupClient.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/ScheduleStore.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/ScheduleStore.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "rejected": true,
+      "new_errors": [
+        "Engine supplied twice; ambiguous mutation input"
+      ]
+    },
+    {
+      "case": "hash mutation app/build.gradle.kts",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/build.gradle.kts"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/AndroidManifest.xml",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/AndroidManifest.xml"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/res/xml/network_security_config.xml",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/res/xml/network_security_config.xml"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/DevicePolicy.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/DevicePolicy.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/ExportSession.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/ExportSession.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/ExpressiveComponents.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/M3xTheme.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/M3xTheme.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/McpToken.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/McpToken.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/OperationDeadline.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/OperationDeadline.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PacketIngress.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PacketIngress.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/PhoneSnapshot.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/PhoneSnapshot.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/ScheduleBook.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/ScheduleBook.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/SendAttempts.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/SendAttempts.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/TransferSession.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/TransferSession.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/UserFacingError.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/UserFacingError.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/java/com/hcbiu/elcton/Wire.kt",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/java/com/hcbiu/elcton/Wire.kt"
+      ]
+    },
+    {
+      "case": "hash mutation app/src/main/res/values/themes.xml",
+      "rejected": true,
+      "new_errors": [
+        "Unapproved guarded source mutation: app/src/main/res/values/themes.xml"
+      ]
+    },
+    {
+      "case": "prefix full delta app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "rejected": true
+    },
+    {
+      "case": "suffix full delta app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "rejected": true
+    },
+    {
+      "case": "duplicate full delta app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "rejected": true
+    },
+    {
+      "case": "CRLF full delta app/src/main/java/com/hcbiu/elcton/MainActivity.kt",
+      "rejected": true
+    },
+    {
+      "case": "prefix full delta app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "rejected": true
+    },
+    {
+      "case": "suffix full delta app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "rejected": true
+    },
+    {
+      "case": "duplicate full delta app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "rejected": true
+    },
+    {
+      "case": "CRLF full delta app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "rejected": true
+    }
+  ],
+  "candidate_status": "candidate_pending_independent_review",
+  "snapshot_not_final_until_parent_stable_notification": true
+}

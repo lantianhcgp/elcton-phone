@@ -1,0 +1,73 @@
+JUnit version 4.13.2
+.........................E.E.E.......................................E.E.E...E.E..E...................................................................
+Time: 4.89
+There were 9 failures:
+1) fullDiagnosisIsScrollableAndKeepaliveIsExplicitlyOptIn(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.fullDiagnosisIsScrollableAndKeepaliveIsExplicitlyOptIn(DiagnosticsIntegrationTest.kt:58)
+2) versionCapsuleUsesActualBuildConfigAndCodeNine(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.versionCapsuleUsesActualBuildConfigAndCodeNine(DiagnosticsIntegrationTest.kt:25)
+3) sdkErrorOutletRecordsFullMessageCodeAndExactFailurePhase(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.sdkErrorOutletRecordsFullMessageCodeAndExactFailurePhase(DiagnosticsIntegrationTest.kt:35)
+4) startPublishRequiresConfirmationAndConflictsRequireForce(com.hcbiu.elcton.PhoneActionsTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready(PhoneActionsTest.kt:45)
+	at com.hcbiu.elcton.PhoneActionsTest.startPublishRequiresConfirmationAndConflictsRequireForce(PhoneActionsTest.kt:76)
+5) explicitlyConfirmedWatchImportUsesTheSameRepository(com.hcbiu.elcton.PhoneActionsTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready(PhoneActionsTest.kt:45)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready$default(PhoneActionsTest.kt:42)
+	at com.hcbiu.elcton.PhoneActionsTest.explicitlyConfirmedWatchImportUsesTheSameRepository(PhoneActionsTest.kt:72)
+6) coursesWriteValidatesAndOnlyConfirmedWriteMutatesTheSharedRepository(com.hcbiu.elcton.PhoneActionsTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready(PhoneActionsTest.kt:45)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready$default(PhoneActionsTest.kt:42)
+	at com.hcbiu.elcton.PhoneActionsTest.coursesWriteValidatesAndOnlyConfirmedWriteMutatesTheSharedRepository(PhoneActionsTest.kt:96)
+7) startImportReturnsPendingAndPreviewDoesNotWriteByDefault(com.hcbiu.elcton.PhoneActionsTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready(PhoneActionsTest.kt:45)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready$default(PhoneActionsTest.kt:42)
+	at com.hcbiu.elcton.PhoneActionsTest.startImportReturnsPendingAndPreviewDoesNotWriteByDefault(PhoneActionsTest.kt:66)
+8) abortCancelsTransferAndAnyUnconfirmedPreviewWithoutWriting(com.hcbiu.elcton.PhoneActionsTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready(PhoneActionsTest.kt:45)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready$default(PhoneActionsTest.kt:42)
+	at com.hcbiu.elcton.PhoneActionsTest.abortCancelsTransferAndAnyUnconfirmedPreviewWithoutWriting(PhoneActionsTest.kt:82)
+9) syncDisconnectSharesTheEngineAndInvalidatesReady(com.hcbiu.elcton.PhoneActionsTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready(PhoneActionsTest.kt:45)
+	at com.hcbiu.elcton.PhoneActionsTest$Harness.ready$default(PhoneActionsTest.kt:42)
+	at com.hcbiu.elcton.PhoneActionsTest.syncDisconnectSharesTheEngineAndInvalidatesReady(PhoneActionsTest.kt:61)
+
+FAILURES!!!
+Tests run: 141,  Failures: 9
+

@@ -1,0 +1,15 @@
+JUnit version 4.13.2
+.E.
+Time: 0.06
+There was 1 failure:
+1) selectedDeviceMustRegisterAndReturnValidReadyBeforeAnyPublication(com.hcbiu.elcton.SyncEngineTest)
+java.lang.AssertionError: expected:<[SyncDevice(id=real-uuid, name=Example watch, model=not-a-model-allowlist, connected=true, p2pCapability=0)]> but was:<[]>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.hcbiu.elcton.SyncEngineTest.selectedDeviceMustRegisterAndReturnValidReadyBeforeAnyPublication(SyncEngineTest.kt:66)
+
+FAILURES!!!
+Tests run: 2,  Failures: 1
+

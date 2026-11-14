@@ -16,8 +16,8 @@ class DiagnosticTools(
     private val errorTail: (Int) -> JSONArray,
     private val diagRead: () -> JSONObject,
     private val versionInfo: () -> JSONObject
-) {
-    fun list(): JSONArray {
+) : McpToolProvider {
+    override fun list(): JSONArray {
         val limit = JSONObject().put("type", "integer").put("minimum", 1).put("maximum", 128).put("default", 20)
         val path = JSONObject().put("type", "string").put("enum", JSONArray(ALLOWED_FILES.toList()))
         return JSONArray()
@@ -33,7 +33,7 @@ class DiagnosticTools(
                 .put("required", JSONArray(required.toList())).put("additionalProperties", false))
             .put("annotations", JSONObject().put("readOnlyHint", true).put("destructiveHint", false).put("openWorldHint", false))
 
-    internal fun validArguments(name: String, arguments: JSONObject): Boolean {
+    override fun validArguments(name: String, arguments: JSONObject): Boolean {
         val keys = arguments.keys().asSequence().toSet()
         return when (name) {
             "error_tail" -> keys.all { it == "limit" } && (!arguments.has("limit") || validLimit(arguments.opt("limit")))
@@ -46,7 +46,7 @@ class DiagnosticTools(
     private fun validLimit(value: Any?): Boolean =
         (value is Int || value is Long || value is Short || value is Byte) && (value as Number).toLong() in 1L..128L
 
-    fun call(name: String, arguments: JSONObject): JSONObject {
+    override fun call(name: String, arguments: JSONObject): JSONObject {
         if (!validArguments(name, arguments)) return failure("invalid_arguments")
         return try {
             when (name) {

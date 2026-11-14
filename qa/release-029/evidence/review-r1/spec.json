@@ -1,0 +1,62 @@
+{
+  "axis": "spec",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "L1",
+      "severity": "P0",
+      "title": "MainActivity 新增通知权限分支存在编译阻断",
+      "references": [
+        "app/src/main/java/com/hcbiu/elcton/MainActivity.kt:3-41",
+        "app/src/main/java/com/hcbiu/elcton/MainActivity.kt:520"
+      ],
+      "finding": "使用 Build.VERSION.SDK_INT，但没有导入 android.os.Build；产品同包也没有 Build 声明。",
+      "counterexample": "对当前源码执行 Android compileDebugKotlin，应在第520行出现 Unresolved reference: Build。本审查仅确认源码缺失，未运行 Android 编译。"
+    },
+    {
+      "id": "L2",
+      "severity": "P1",
+      "title": "通知 STOP 后，已入队的 MCP 写动作仍可能执行",
+      "references": [
+        "app/src/main/java/com/hcbiu/elcton/PhoneRuntime.kt:73-85",
+        "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt:56-66",
+        "app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:104-108"
+      ],
+      "finding": "stopListener 的 shutdownNow 会中断等待主线程结果的 HTTP worker。done.await 抛 InterruptedException 时没有设置 abandoned，也没有会话代际校验；主线程上已经排队的 runAction 不会因此失效。随后 cancelAll 完成，旧动作仍可重新写课表、启动取件或连接。",
+      "counterexample": "让主线程停在 STOP 回调内、关闭监听前；并发发送合法 courses_write(document, confirm:true)，确保动作已入主线程队列且 worker 正在 await。继续 STOP：worker 被中断、同步被取消；STOP 返回后放行队列，旧 courses_write 仍保存。预期应拒绝旧会话动作且文件不变。此为静态可控时序反例，未实际执行。"
+    },
+    {
+      "id": "L3",
+      "severity": "P1",
+      "title": "异步手表导入可覆盖请求期间新保存的手机编辑",
+      "references": [
+        "app/src/main/java/com/hcbiu/elcton/PhoneActions.kt:17-25",
+        "app/src/main/java/com/hcbiu/elcton/PhoneRuntime.kt:36",
+        "app/src/main/java/com/hcbiu/elcton/PhoneSchedule.kt:42-58"
+      ],
+      "finding": "startImport 只记录 confirm，不记录请求开始时的手机 revision；UI save 不检查 sync.busy。导出完成后才准备候选并记录当前 revision，再立即确认，因此预览版本检查无法发现导入等待期间的编辑。",
+      "counterexample": "手机 revision=10；MCP start_import(confirm:true) 后延迟 EXPORT 回传；UI 保存新增课程成为 revision=11；再交付完整有效的手表快照。receiveImport 会基于 revision=11 生成候选并自动保存，新增课程被覆盖。预期应检测请求期间的版本变化，拒绝自动覆盖或重新要求确认。此为静态反例。"
+    }
+  ],
+  "missing_requirements": [
+    {
+      "id": "M1",
+      "severity": "P1",
+      "title": "简报要求的 replace:true 覆盖授权未实现",
+      "references": [
+        "app/src/main/java/com/hcbiu/elcton/PhoneMcpTools.kt:12",
+        "app/src/main/java/com/hcbiu/elcton/PhoneMcpTools.kt:29",
+        "app/src/main/java/com/hcbiu/elcton/PhoneRuntime.kt:96",
+        "app/src/main/java/com/hcbiu/elcton/PhoneActions.kt:32-37"
+      ],
+      "finding": "当前契约只有 confirm 和 force，拒绝 replace；覆盖检查实际由 force 放行，不符合本次简报明确的 replace:true。",
+      "counterexample": "连接到 dirty=true 的手表：start_publish({confirm:true,replace:true}) 被参数校验拒绝；start_publish({confirm:true,force:true}) 却可在缺少 replace:true 时进入覆盖传输。应实现要求的授权字段；若用户后来明确改为 force，需提供该授权后再撤销此项。"
+    }
+  ],
+  "suggestions": [
+    "将 STOP 入队动作失效、异步导入期间本地编辑两个时序反例加入真实业务层回归，不删除或放宽旧失败断言。",
+    "工具清单存在简报与仓库 SPEC.md:9 的历史差异；保留的任务记录注明已更正为15工具，本报告不把数量及 pairing_state 命名作为阻断项。"
+  ],
+  "summary": "规格审查未通过。已只读通读当前产品源码、逐个读取未跟踪产品文件，并对照 origin/fix/p2p-ready-receipt-20261114（e034de2）及未提交 diff。旧四个 DiagnosticTools 的实现经仅接口适配归一化后与基线相同；MCP 绑定127.0.0.1并校验Bearer，取件HTTP例外限定指定域名且不跟随重定向。最后核对时间为2026-11-14 16:37:39 CST，重点源码哈希未变；产品跟踪diff SHA256为00fd67501ead9653edb0c332ee311206f5243e6abae92334d14cc521522a4103。没有创建或修改文件，没有安装、adb、rish、提交或执行Android测试。真机10分钟及import→sync→readback仍为pending。"
+}

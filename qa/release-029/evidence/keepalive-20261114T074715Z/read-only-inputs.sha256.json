@@ -1,0 +1,10 @@
+{
+  "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt": "5a9e629ac48fc56e56123a43c5b31ab16a80aecdaa96f67544af1f7fdd7ddc09",
+  "qa/test_keepalive_gate.py": "afb0119dcc4685d3d8416d580b2d09eb6af18cf00c86a50749f7535943ea989b",
+  "qa/diag_emulator_smoke.py": "43cf03a1caa41db6fb71aee6744251f040e0b4275aa84a9b3277ff4aaef1cb78",
+  "qa/diag-mcp-027/evidence/android-43552523971-key/diag-host-report.json": "56e88046e9ef2136fee4bcebcb6cfc011feb45d318c5594519d26bb2838cf2c6",
+  "qa/diag-mcp-027/evidence/android-43552523971-key/normal-notification-on.xml": "df12826c73fbbe17c4206aed70507b87fb3320b5946421b0e9a719c783a70d7d",
+  "qa/diag-mcp-027/evidence/android-43552523971-key/normal-notification-stop-tap.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "qa/diag-mcp-027/evidence/android-43552523971-key/normal-stop-port-0.bin": "432744751801c3e3b0a0bf1de5f2c0d2f8885919a256917a3ba3dd927f4ad18b",
+  "qa/diag-mcp-027/evidence/android-43552523971-key/normal-stop-shade-collapse.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

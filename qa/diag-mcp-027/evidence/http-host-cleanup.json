@@ -1,0 +1,11 @@
+{
+  "scope": "local HTTP work only; parent changes to other files excluded",
+  "server_test_host_unchanged_vs_baseline": {
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt": true,
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt": true,
+    "qa/McpHost.kt": true
+  },
+  "original_assertion_labels_missing": [],
+  "remaining_host_pids": [],
+  "ok": true
+}

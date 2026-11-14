@@ -1,0 +1,13 @@
+JUnit version 4.13.2
+....E.....
+Time: 0.037
+There was 1 failure:
+1) nonUserStartupFailuresKeepIntendedOnButCloseTheSession(com.hcbiu.elcton.McpKeepAlivePolicyTest)
+java.lang.AssertionError: Bind failure closes resources without interpreting it as user opt-out
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.McpKeepAlivePolicyTest.nonUserStartupFailuresKeepIntendedOnButCloseTheSession(McpKeepAlivePolicyTest.kt:44)
+
+FAILURES!!!
+Tests run: 9,  Failures: 1
+

@@ -1,0 +1,6 @@
+{
+  "scope": "strict ALL changed source/test/config/docs; excludes only captured raw 0.2.9 evidence formatting",
+  "raw_evidence_all_check_exit": 2,
+  "source_test_config_check_exit": 0,
+  "raw_bytes_untouched": true
+}

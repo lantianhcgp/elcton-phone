@@ -1,0 +1,18 @@
+JUnit version 4.13.2
+.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:37361; token=<redacted>; read-only
+real_socket_health=200; captured_running=true; writing=true
+stopListener_returned; live_running=false; real_socket_refused=true
+released_old_write; writer_quiescent=true; final_file_running=true
+E
+Time: 0.258
+There was 1 failure:
+1) stopDuringCapturedRunningWritePersistsStoppedState(com.hcbiu.elcton.DiagnosticRuntimeRevisionTest)
+java.lang.AssertionError: state.json must persist running=false after stop during captured running=true write
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.hcbiu.elcton.DiagnosticRuntimeRevisionTest.stopDuringCapturedRunningWritePersistsStoppedState(DiagnosticRuntimeRevisionTest.kt:73)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+

@@ -1,0 +1,48 @@
+2026-11-13T17:02:07.891046 - THAW uid = 10838 pid = [ 3177 ]  reason : Signal caller : 1000
+Frozen processes:[2436, 3178, 11338, 15729, 26275, 26494, 26578]
+2026-11-13T16:06:11.017857 - FZ uid = 10838 pid = [ 3177 ]  reason : tobg caller : 1
+2026-11-13T23:09:31.748086 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:09:49.736825 - THAW uid = 10838 pid = [ 5954 ]  reason : Activity Front caller : 1000
+2026-11-13T23:09:54.741997 - FZ uid = 10838 pid = [ 5954 ]  reason : from system caller : 1
+2026-11-13T23:12:05.508129 - THAW uid = 10838 pid = [ 5954 ]  reason : activity start caller : 1
+2026-11-13T23:12:21.159299 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:17:26.017655 - THAW uid = 10838 pid = [ 5954 ]  reason : activity start caller : 1
+2026-11-13T23:17:54.438004 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:18:00.357306 - THAW uid = 10838 pid = [ 5954 ]  reason : Sync Binder caller : 1000
+2026-11-13T23:18:05.374854 - FZ uid = 10838 pid = [ 5954 ]  reason : from system caller : 1
+2026-11-13T23:18:19.072352 - THAW uid = 10838 pid = [ 5954 ]  reason : Activity Front caller : 1000
+2026-11-13T23:18:40.729453 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:20:08.840328 - THAW uid = 10838 pid = [ 5954 ]  reason : Activity Front caller : 1000
+2026-11-13T23:20:34.950824 - FZ uid = 10838 pid = [ 5954 ]  reason : tobg caller : 1
+2026-11-13T23:21:42.802292 - THAW uid = 10838 pid = [ 5954 ]  reason : Signal caller : 1000
+2026-11-13T23:22:18.652239 - FZ uid = 10838 pid = [ 10752 ]  reason : tobg caller : 1
+2026-11-13T23:22:35.111891 - THAW uid = 10838 pid = [ 10752 ]  reason : Activity Front caller : 1000
+2026-11-13T23:22:44.409341 - FZ uid = 10838 pid = [ 10752 ]  reason : Bright new_process caller : 1
+2026-11-13T23:25:50.960659 - THAW uid = 10838 pid = [ 10752 ]  reason : Signal caller : 1000
+2026-11-13T23:39:12.698409 - FZ uid = 10838 pid = [ 1965 ]  reason : tobg caller : 1
+2026-11-13T23:39:37.135659 - THAW uid = 10838 pid = [ 1965 ]  reason : Activity Front caller : 1000
+2026-11-14T06:59:23.461244 - FZ uid = 10838 pid = [ 25405 ]  reason : tobg caller : 1
+2026-11-14T07:02:28.522591 - THAW uid = 10838 pid = [ 25405 ]  reason : activity start caller : 1
+2026-11-14T07:03:09.653062 - FZ uid = 10838 pid = [ 25405 ]  reason : tobg caller : 1
+2026-11-14T07:14:59.645336 - THAW uid = 10838 pid = [ 25405 ]  reason : Signal caller : 1000
+2026-11-14T08:28:43.485320 - FZ uid = 10838 pid = [ 31852 ]  reason : off new process caller : 1
+2026-11-14T09:33:32.516605 - THAW uid = 10838 pid = [ 31852 ]  reason : Signal caller : 1000
+2026-11-14T09:33:37.534790 - FZ uid = 10838 pid = [ 26578 ]  reason : from system caller : 1
+2026-11-14T09:34:05.774109 - THAW uid = 10838 pid = [ 26578 ]  reason : activity start caller : 1
+2026-11-14T09:34:21.041463 - FZ uid = 10838 pid = [ 26578 ]  reason : tobg caller : 1
+2026-11-14T09:35:55.180511 - THAW uid = 10838 pid = [ 26578 ]  reason : activity start caller : 1
+2026-11-14T09:36:00.938422 - FZ uid = 10838 pid = [ 26578 ]  reason : tobg caller : 1
+2026-11-14T09:37:37.889289 - THAW uid = 10838 pid = [ 26578 ]  reason : activity start caller : 1
+2026-11-14T09:43:10.159562 - FZ uid = 10838 pid = [ 26578 ]  reason : tobg caller : 1
+2026-11-14T09:44:14.655311 - THAW uid = 10838 pid = [ 26578 ]  reason : Activity Front caller : 1000
+2026-11-14T09:44:25.558130 - FZ uid = 10838 pid = [ 26578 ]  reason : tobg caller : 1
+2026-11-14T09:54:20.127996 - THAW uid = 10838 pid = [ 26578 ]  reason : activity start caller : 1
+2026-11-14T09:54:26.466870 - FZ uid = 10838 pid = [ 26578 ]  reason : frozenMillet 25 caller : 1
+2026-11-14T09:55:16.814297 - THAW uid = 10838 pid = [ 26578 ]  reason : screen on caller : 1
+2026-11-14T09:56:00.964808 - FZ uid = 10838 pid = [ 26578 ]  reason : frozenMillet 25 caller : 1
+2026-11-14T09:56:28.199113 - THAW uid = 10838 pid = [ 26578 ]  reason : screen on caller : 1
+2026-11-14T09:56:34.998812 - FZ uid = 10838 pid = [ 26578 ]  reason : tobg caller : 1
+2026-11-14T09:57:29.469701 - THAW uid = 10838 pid = [ 26578 ]  reason : activity start caller : 1
+2026-11-14T10:02:24.569723 - FZ uid = 10838 pid = [ 26578 ]  reason : frozenMillet 25 caller : 1
+2026-11-14T10:11:47.632753 - THAW uid = 10838 pid = [ 26578 ]  reason : screen on caller : 1
+2026-11-14T10:12:03.830681 - FZ uid = 10838 pid = [ 26578 ]  reason : frozenMillet 25 caller : 1

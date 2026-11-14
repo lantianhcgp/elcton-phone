@@ -1,0 +1,6 @@
+*   Trying 127.0.0.1:8766...
+* After 2999ms connect time, move on!
+* connect to 127.0.0.1 port 8766 failed: Connection timed out
+* Connection timeout after 3001 ms
+* Closing connection 0
+curl: (28) Connection timeout after 3001 ms

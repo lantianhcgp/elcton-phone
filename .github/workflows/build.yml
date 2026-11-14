@@ -1,7 +1,7 @@
 name: android-probe
 on:
   push:
-    branches: [master, fix/p2p-ready-receipt-20261114]
+    branches: [master, fix/p2p-ready-receipt-20261114, release/0.2.9-20261114]
   workflow_dispatch:
 permissions:
   contents: read
@@ -61,7 +61,7 @@ jobs:
           "$BT/apksigner" verify --print-certs dist/elcton-phone-probe.apk > dist/apk-signature.txt
           "$BT/apksigner" verify --print-certs dist/elcton-ui-tests.apk > dist/test-signature.txt
           python3 -c 'import os,re,pathlib; s=pathlib.Path("dist/apk-signature.txt").read_text(); m=re.search(r"certificate SHA-256 digest: ([0-9a-fA-F]+)",s); assert m and m.group(1).lower()==os.environ["EXPECTED_SIGN_SHA256"].lower(), "Signing identity mismatch"'
-          python3 qa/p2p-ready-20261114/verify_apk_candidate.py dist/elcton-phone-probe.apk dist/candidate-manifest.json
+          python3 qa/release-029/verify_apk.py dist/elcton-phone-probe.apk dist/candidate-manifest.json
           rm "$RUNNER_TEMP/elcton.jks"
           printf '%s\n' "$GITHUB_SHA" > dist/source-sha.txt
       - uses: actions/upload-artifact@v4

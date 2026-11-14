@@ -1,0 +1,145 @@
+Failed to load native library:jansi-2.4.0-3227a7804917eae9-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-3227a7804917eae9-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-3227a7804917eae9-libjansi.so in namespace (default)
+error: source file or directory not found: app/src/main/java/com/hcbiu/elcton/ExportRequest.kt
+warning: classpath entry points to a non-existent location: /data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/gms-tasks.jar
+app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt:115:39: error: unresolved reference 'BUILD_TYPE'.
+        .put("buildType", BuildConfig.BUILD_TYPE).put("wearEngineSdk", "5.0.3.301")
+                                      ^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt:115:51: error: unresolved reference 'put'.
+        .put("buildType", BuildConfig.BUILD_TYPE).put("wearEngineSdk", "5.0.3.301")
+                                                  ^^^
+app/src/main/java/com/hcbiu/elcton/ElctonApplication.kt:17:35: error: unresolved reference 'PhoneMcpTools'.
+        diagnostics.attachActions(PhoneMcpTools { name, arguments -> phone.mcp(name, arguments) })
+                                  ^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/ElctonApplication.kt:17:51: error: cannot infer type for value parameter 'name'. Specify it explicitly.
+        diagnostics.attachActions(PhoneMcpTools { name, arguments -> phone.mcp(name, arguments) })
+                                                  ^^^^
+app/src/main/java/com/hcbiu/elcton/ElctonApplication.kt:17:57: error: cannot infer type for value parameter 'arguments'. Specify it explicitly.
+        diagnostics.attachActions(PhoneMcpTools { name, arguments -> phone.mcp(name, arguments) })
+                                                        ^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:19:8: error: unresolved reference 'androidx'.
+import androidx.core.content.ContextCompat
+       ^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:20:8: error: unresolved reference 'androidx'.
+import androidx.compose.runtime.getValue
+       ^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:21:8: error: unresolved reference 'androidx'.
+import androidx.compose.runtime.setValue
+       ^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:22:8: error: unresolved reference 'androidx'.
+import androidx.compose.runtime.mutableStateOf
+       ^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:36:28: error: unresolved reference 'mutableStateOf'.
+    var active: Boolean by mutableStateOf(false)
+                           ^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:38:28: error: unresolved reference 'mutableStateOf'.
+    var failure: String by mutableStateOf("")
+                           ^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:158:9: error: unresolved reference 'ContextCompat'.
+        ContextCompat.registerReceiver(this, stopReceiver, IntentFilter(McpKeepAlive.STOP), ContextCompat.RECEIVER_NOT_EXPORTED)
+        ^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:158:93: error: unresolved reference 'ContextCompat'.
+        ContextCompat.registerReceiver(this, stopReceiver, IntentFilter(McpKeepAlive.STOP), ContextCompat.RECEIVER_NOT_EXPORTED)
+                                                                                            ^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:184:72: error: unresolved reference 'MainActivity'.
+            val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+                                                                       ^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:184:92: error: cannot infer type for type parameter 'T'. Specify it explicitly.
+            val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+                                                                                           ^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:184:92: error: candidate 'val <T> KClass<T>.java: Class<T>' is inapplicable because of a receiver type mismatch.
+            val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+                                                                                           ^^^^
+app/src/main/java/com/hcbiu/elcton/McpKeepAlive.kt:195:118: error: unresolved reference 'FOREGROUND_SERVICE_TYPE_SPECIAL_USE'.
+            if (Build.VERSION.SDK_INT >= 34) startForeground(McpKeepAlive.NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:93:43: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+            HiWear.getAuthClient(context).checkPermission(Permission.DEVICE_MANAGER)
+                                          ^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:94:18: error: unresolved reference 'addOnSuccessListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+                .addOnSuccessListener { success(it == true) }
+                 ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:94:49: error: unresolved reference 'it'.
+                .addOnSuccessListener { success(it == true) }
+                                                ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:95:58: error: unresolved reference 'it'.
+                .addOnFailureListener { failure(describe(it, "checkPermission")) }
+                                                         ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:105:43: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+            HiWear.getAuthClient(visible).requestPermission(object : AuthCallback {
+                                          ^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:110:43: error: unresolved reference 'addOnFailureListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+            }, Permission.DEVICE_MANAGER).addOnFailureListener { failure(describe(it, "requestPermission")) }
+                                          ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:110:83: error: unresolved reference 'it'.
+            }, Permission.DEVICE_MANAGER).addOnFailureListener { failure(describe(it, "requestPermission")) }
+                                                                                  ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:118:45: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+            HiWear.getDeviceClient(context).commonDevice.addOnSuccessListener { found ->
+                                            ^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:118:58: error: unresolved reference 'addOnSuccessListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+            HiWear.getDeviceClient(context).commonDevice.addOnSuccessListener { found ->
+                                                         ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:118:81: error: cannot infer type for value parameter 'found'. Specify it explicitly.
+            HiWear.getDeviceClient(context).commonDevice.addOnSuccessListener { found ->
+                                                                                ^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:123:41: error: unresolved reference 'uuid' on receiver of type 'Char'.
+                        val id = device.uuid.orEmpty()
+                                        ^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:125:36: error: argument type mismatch: actual type is 'Char', but 'Device' was expected.
+                        byId[id] = device
+                                   ^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:126:60: error: unresolved reference 'name' on receiver of type 'Char'.
+                        result[id] = SyncDevice(id, device.name.orEmpty(), device.model.orEmpty(), device.isConnected, device.p2pCapability)
+                                                           ^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:126:83: error: unresolved reference 'model' on receiver of type 'Char'.
+                        result[id] = SyncDevice(id, device.name.orEmpty(), device.model.orEmpty(), device.isConnected, device.p2pCapability)
+                                                                                  ^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:126:107: error: unresolved reference 'isConnected' on receiver of type 'Char'.
+                        result[id] = SyncDevice(id, device.name.orEmpty(), device.model.orEmpty(), device.isConnected, device.p2pCapability)
+                                                                                                          ^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:126:127: error: unresolved reference 'p2pCapability' on receiver of type 'Char'.
+                        result[id] = SyncDevice(id, device.name.orEmpty(), device.model.orEmpty(), device.isConnected, device.p2pCapability)
+                                                                                                                              ^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:134:55: error: unresolved reference 'it'.
+            }.addOnFailureListener { failure(describe(it, "getCommonDevice")) }
+                                                      ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:145:17: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+            p2p.isAppInstalled(selected, watchPackage).addOnSuccessListener { success(it == true) }
+                ^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:145:56: error: unresolved reference 'addOnSuccessListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+            p2p.isAppInstalled(selected, watchPackage).addOnSuccessListener { success(it == true) }
+                                                       ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:145:87: error: unresolved reference 'it'.
+            p2p.isAppInstalled(selected, watchPackage).addOnSuccessListener { success(it == true) }
+                                                                                      ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:146:58: error: unresolved reference 'it'.
+                .addOnFailureListener { failure(describe(it, "isAppInstalled")) }
+                                                         ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:168:17: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+            p2p.registerReceiver(selected, receiver).addOnSuccessListener {
+                ^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:168:54: error: unresolved reference 'addOnSuccessListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+            p2p.registerReceiver(selected, receiver).addOnSuccessListener {
+                                                     ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:172:38: error: cannot infer type for value parameter 'error'. Specify it explicitly.
+            }.addOnFailureListener { error ->
+                                     ^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:195:19: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+        try { p2p.unregisterReceiver(receiver).addOnFailureListener { describe(it, "unregisterReceiver") } }
+                  ^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:195:48: error: unresolved reference 'addOnFailureListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+        try { p2p.unregisterReceiver(receiver).addOnFailureListener { describe(it, "unregisterReceiver") } }
+                                               ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:195:80: error: unresolved reference 'it'.
+        try { p2p.unregisterReceiver(receiver).addOnFailureListener { describe(it, "unregisterReceiver") } }
+                                                                               ^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:204:17: error: cannot access class 'com.huawei.hmf.tasks.Task'. Check your module classpath for missing or conflicting dependencies.
+            p2p.send(selected, Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(), object : SendCallback {
+                ^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:207:16: error: unresolved reference 'addOnFailureListener' on receiver of type 'com.huawei.hmf.tasks.Task'.
+            }).addOnFailureListener { failure(describe(it, "p2p.send")) }
+               ^^^^^^^^^^^^^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/WearProbe.kt:207:56: error: unresolved reference 'it'.
+            }).addOnFailureListener { failure(describe(it, "p2p.send")) }
+                                                       ^^

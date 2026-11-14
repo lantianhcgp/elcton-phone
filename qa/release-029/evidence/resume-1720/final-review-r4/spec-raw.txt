@@ -1,0 +1,48 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "summary": "r3 两项 QA 阻塞已闭合；本结论是累计 r3 审查加 r4 增量审查，不是重新逐行审完全部 123 文件，也不代表发布交付完成。",
+  "closed_blockers": [
+    "P2pCandidateBuildTest 的 READY=true 等值断言已改为 11/0.2.9；APPLICATION_ID 和 READY=false 的 8/0.2.6 断言保持不变。",
+    "客户端仅增加 --release-tools 启动输入，四个原测试及全部断言不变。McpHost 严格选择生产工具组合，动作明确失败；无标志时原四工具、数据、令牌及停止回执保持不变。"
+  ],
+  "source_manifest_sha256": "8865a4e1f20211f98fd61b2aa1f7bdfabde171f36ee0357806af4c891ad607c4",
+  "reviewed_manifest_sha256": "a77f293345a83ea5fc1390b868ca65fbfb50e03ee3ec050a67f8f01ab5efd3fa",
+  "manifest_hash_format": "排序键、紧凑分隔符、ensure_ascii=false 的 UTF-8 JSON",
+  "diff_sha256": "f399a6c0422e6320a753e68953cc801d3fed8fd940f83fb6465e0cb2a2335e01",
+  "diff_bytes": 487338,
+  "candidate_sha256": "0b56c4cd6f6c76bc24b09847e04cb8cdb945b8de8123ef4ac4d24cdb1b383a1a",
+  "coverage": {
+    "current_manifest_entries_verified": 123,
+    "manifest_mismatches": [],
+    "product_entries_verified": 37,
+    "product_unchanged_vs_r3": true,
+    "full_current_diff_reconstructed_equal": true,
+    "untracked_files_included_in_diff": 28,
+    "semantic_review": "沿用 r3 记录的业务审查范围；完整检查本轮 QA 迁移差分、归因变化、prepare_candidate 全部行为及新纳入清单的配置和运行时测试模板。",
+    "manifest_maker": "独立重建清单与现行 123 项完全一致；新增覆盖 .kt.in、根构建配置和 RESUME 文档。完整 before/git-pin、immutable、after、guard 与 lineage 绑定均通过；候选仍待独立审查且 approvals 为空。",
+    "historical_evidence": "三份迁移前件与 r3 SHA/字节数一致；原客户端两失败和版本不匹配 RED 保留；73 项历史测试归档全部 SHA/字节数通过，归因计数已修正。",
+    "final_rehash_utc": "2026-11-14T09:45:51Z"
+  },
+  "execution_evidence": {
+    "reviewer_ran_test_suites": false,
+    "evidence_root": "qa/release-029/evidence/resume-1720/",
+    "python": "r4-gates/0.log：100/100，零 skip，退出 0；四个客户端方法均通过。",
+    "jvm": "host-final-r4/junit.log：OK (152 tests)。",
+    "http": "r4-gates/1.log：3784 assertions，实际 Kotlin host，curl/urllib，all_raw_checks_passed=true，无排除检查。",
+    "runtime": "runtime-r4：1 test 通过，编译与测试退出均为 0；10 项输入哈希匹配。",
+    "gate_log_hashes_match_command_receipts": true
+  },
+  "limitations": [
+    "123/123 是完整身份校验，不是完整语义覆盖；未重读全部 r3 已审业务。",
+    "manifest-maker 只做全源码审查和只读重建，未执行其写入入口。",
+    "152 JVM 与 HTTP 日志不证明 Android GeneratedBuildConfig 已实际执行；版本阻塞闭合依据精确源码差分。",
+    "CI、签名 APK、物理蓝牙与 MIUI 后台验收仍属后续交付层，不作为本轮新增源码缺陷。"
+  ],
+  "files_created_or_modified": []
+}
+
+[steer did not land — the subagent finished before it could be delivered: Finish r4 now under3min; no additionalbroadreads. Allproduct/sourcehashesunchanged. Historical harness-migration/before/*.kt+*.py now renamed .original toavoidGradle recursive qa source duplicatecompile; bytesSHA retained and before-relocations.json mapping. No reviewed123 file or diff changes. Verifyrelocation viaexactbeforeSHA; no needr5 forevidence-onlysuffix. Please return rawJSON quickly; cannotpushwithoutgreen.]

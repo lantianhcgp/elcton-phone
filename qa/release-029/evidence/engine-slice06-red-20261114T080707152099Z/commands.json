@@ -1,0 +1,29 @@
+[
+  [
+    "kotlinc",
+    "-J-Djansi.mode=strip",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/Wire.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/PhoneSnapshot.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/TransferSession.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/ExportSession.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/DevicePolicy.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/UserFacingError.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/PacketIngress.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/SendAttempts.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/OperationDeadline.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/test/java/com/hcbiu/elcton/SyncEngineTest.kt",
+    "-classpath",
+    "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+    "-include-runtime",
+    "-d",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/.diag-build/engine-slice06-red-20261114T080707152099Z/host-tests.jar"
+  ],
+  [
+    "java",
+    "-cp",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/.diag-build/engine-slice06-red-20261114T080707152099Z/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+    "org.junit.runner.JUnitCore",
+    "com.hcbiu.elcton.SyncEngineTest"
+  ]
+]

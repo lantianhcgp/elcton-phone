@@ -1,0 +1,11 @@
+Failed to load native library:jansi-2.4.0-56d96fe0276393ef-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-56d96fe0276393ef-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-56d96fe0276393ef-libjansi.so in namespace (default)
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:41:34: error: type checking has run into a recursive problem. Easiest workaround: specify the types of your declarations explicitly.
+        val actions=PhoneActions(sync,schedule)
+                                 ^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:89:45: error: unresolved reference 'book' on receiver of type 'ScheduleRepository'.
+        val h=Harness();assertEquals(h.repo.book.wireJson(),h.actions.coursesJson().getJSONObject("document").toString())
+                                            ^^^^
+app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt:95:103: error: unresolved reference 'book' on receiver of type 'ScheduleRepository'.
+        assertTrue(h.actions.importDocument(raw,true));assertEquals(1,h.saves);assertEquals(1L,h.repo.book.revision)
+                                                                                                      ^^^^

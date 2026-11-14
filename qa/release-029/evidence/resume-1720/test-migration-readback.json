@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "historical_entries": 73,
+  "client_original_test_methods": 4,
+  "client_assertions_ast_unchanged": true,
+  "version_equality_changes_only": true,
+  "scope": "input migration and archive byte identity, not Android execution"
+}

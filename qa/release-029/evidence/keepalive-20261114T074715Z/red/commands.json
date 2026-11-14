@@ -1,0 +1,23 @@
+{
+  "compile": [
+    "kotlinc",
+    "-J-Xmx256m",
+    "-jvm-target",
+    "17",
+    "-cp",
+    "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/main/java/com/hcbiu/elcton/McpKeepAlivePolicy.kt",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/test/java/com/hcbiu/elcton/McpKeepAlivePolicyTest.kt",
+    "-include-runtime",
+    "-d",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/keepalive-20261114T074715Z/red/policy-tests.jar"
+  ],
+  "junit": [
+    "java",
+    "-Xmx128m",
+    "-cp",
+    "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/keepalive-20261114T074715Z/red/policy-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+    "org.junit.runner.JUnitCore",
+    "com.hcbiu.elcton.McpKeepAlivePolicyTest"
+  ]
+}

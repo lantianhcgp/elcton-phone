@@ -1,0 +1,22 @@
+0.2.7 authorized FGS/version changes run against 0.2.6 integration expectations before targeted test update.
+JUnit version 4.13.2
+.........................E.E..........................................................
+Time: 4.077
+There were 2 failures:
+1) fullDiagnosisIsScrollableAndOnlyApplicationStartsPassiveMcp(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.fullDiagnosisIsScrollableAndOnlyApplicationStartsPassiveMcp(DiagnosticsIntegrationTest.kt:54)
+2) versionCapsuleUsesActualBuildConfigAndCodeEight(com.hcbiu.elcton.DiagnosticsIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.hcbiu.elcton.DiagnosticsIntegrationTest.versionCapsuleUsesActualBuildConfigAndCodeEight(DiagnosticsIntegrationTest.kt:25)
+
+FAILURES!!!
+Tests run: 84,  Failures: 2
+

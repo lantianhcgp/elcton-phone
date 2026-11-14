@@ -1,0 +1,7 @@
+package android.util
+
+/** HOST TEST ONLY. Does not exercise Android logging or any Android framework. */
+object Log {
+    @JvmStatic fun i(tag: String, message: String): Int { println("HOST-TEST LOG I/$tag: $message"); return 0 }
+    @JvmStatic fun w(tag: String, message: String): Int { println("HOST-TEST LOG W/$tag: $message"); return 0 }
+}

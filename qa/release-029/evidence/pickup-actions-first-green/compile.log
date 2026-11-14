@@ -1,0 +1,8 @@
+Failed to load native library:jansi-2.4.0-7578c6611c714bca-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-7578c6611c714bca-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-7578c6611c714bca-libjansi.so in namespace (default)
+app/src/main/java/com/hcbiu/elcton/PhoneActions.kt:12:29: error: argument type mismatch: actual type is 'SyncDevice', but 'String' was expected.
+        return sync.connect(selected)
+                            ^^^^^^^^
+app/src/main/java/com/hcbiu/elcton/PhoneActions.kt:15:57: error: unresolved reference 'cancel' on receiver of type 'SyncEngine'.
+    fun disconnect() { importConfirmation = false; sync.cancel() }
+                                                        ^^^^^^

@@ -1,0 +1,10 @@
+{
+  "baseline": "cd2a3e062b97d778c79b76b544071b1077534af7",
+  "patches": {
+    "app/src/main/java/com/hcbiu/elcton/MainActivity.kt": [
+      {"before": "", "after": "            McpKeepAliveSettings()\n"},
+      {"before": "", "after": "    override fun onResume(){super.onResume();McpKeepAlive.resumeChoice(this)}\n"}
+    ]
+  },
+  "scope": "Explicitly authorized 0.2.7 default-off diagnostic keepalive UI and resume of previous user choice; no WE action changes"
+}

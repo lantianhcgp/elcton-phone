@@ -1,0 +1,367 @@
+{
+  "027/qa/test_capture_readiness.py": {
+    "relocated_to": "027/qa/test_capture_readiness.py.original",
+    "bytes": 1967,
+    "sha256": "6ae100e1d59415c41ca1d8b756d13e0c4469ece98a3f675a257704d36db3f551"
+  },
+  "027/qa/test_diag_source_gate.py": {
+    "relocated_to": "027/qa/test_diag_source_gate.py.original",
+    "bytes": 4054,
+    "sha256": "965dc12617804a3e3e35d1a18cf36ce2a459b76a7266b9d58403c477adc04e08"
+  },
+  "027/qa/test_diag_workflow_env.py": {
+    "relocated_to": "027/qa/test_diag_workflow_env.py.original",
+    "bytes": 1777,
+    "sha256": "a012c64f3b86be15b065b52def667b0c9320ea6cd5d80a029ef1f50197190d41"
+  },
+  "027/qa/test_final_report_gate.py": {
+    "relocated_to": "027/qa/test_final_report_gate.py.original",
+    "bytes": 1045,
+    "sha256": "0d8e45219fd1efe32e772f0ab218dd4c2c177109ddf420f5a5239d66e01b53b3"
+  },
+  "027/qa/test_keepalive_gate.py": {
+    "relocated_to": "027/qa/test_keepalive_gate.py.original",
+    "bytes": 5423,
+    "sha256": "afb0119dcc4685d3d8416d580b2d09eb6af18cf00c86a50749f7535943ea989b"
+  },
+  "027/qa/test_mcp027_scope.py": {
+    "relocated_to": "027/qa/test_mcp027_scope.py.original",
+    "bytes": 2687,
+    "sha256": "7423e6acd43e830deb1b5b7c5e5a6cfd8d762c33c7eb053ae64c5d48f5af3841"
+  },
+  "027/qa/test_mcp_clients.py": {
+    "relocated_to": "027/qa/test_mcp_clients.py.original",
+    "bytes": 9965,
+    "sha256": "a4dcce518e647b4c325b8eb347d45a21ae46f882fc21e609bfff2877c1a88349"
+  },
+  "027/qa/test_mcp_http_selftest.py": {
+    "relocated_to": "027/qa/test_mcp_http_selftest.py.original",
+    "bytes": 2626,
+    "sha256": "169836aa46e9fc1cb2694a315fde4b8ea508e6d57fbffc7d9aff359d798ffd57"
+  },
+  "027/qa/test_palette_evidence.py": {
+    "relocated_to": "027/qa/test_palette_evidence.py.original",
+    "bytes": 44728,
+    "sha256": "d5768e3b9e1f1dec5ca1c26d4decf648900023cd3c4465236c543e141864bcec"
+  },
+  "027/qa/test_palette_source.py": {
+    "relocated_to": "027/qa/test_palette_source.py.original",
+    "bytes": 8771,
+    "sha256": "aafe9f0e80e86f28480d0c234d69f342f5bcf84eeef9aa00e50e3df79e0c5c89"
+  },
+  "027/qa/test_termux_mcp.py": {
+    "relocated_to": "027/qa/test_termux_mcp.py.original",
+    "bytes": 2081,
+    "sha256": "f7be6d58274c3bd7ee726122c0e0485362027335adbfe0151309772c71e69c89"
+  },
+  "027/qa/test_theme_evidence.py": {
+    "relocated_to": "027/qa/test_theme_evidence.py.original",
+    "bytes": 4586,
+    "sha256": "e0c295f2593a694eae2c1ea21d7ea24e2dc1a651ada5d5f8a90e4a5e48782a3a"
+  },
+  "027/qa/test_theme_source.py": {
+    "relocated_to": "027/qa/test_theme_source.py.original",
+    "bytes": 3422,
+    "sha256": "d6a4c3a7ce233b10346780b38e286e2f2ac71b03f53b259fa48b6d978992cbbe"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt.original",
+    "bytes": 957,
+    "sha256": "69192343f911dd236c4e460520fe179688efdea729c839e57fc59331a16a0d56"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt.original",
+    "bytes": 432,
+    "sha256": "4e881e94c691d51e82b3c8add895998e2a05398230f7a16c4ca01057f2d1c5d7"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt.original",
+    "bytes": 16086,
+    "sha256": "684519f459a6f48a48fcc984e5bda91d113a6ecbd3975d23df86310042da1a32"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt.original",
+    "bytes": 7829,
+    "sha256": "390b71d90ab6e339f07b742f6e29d3745dd6fd767f02329a3bfaac0ad412f1db"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt.original",
+    "bytes": 3908,
+    "sha256": "284e9e45244444226181efe93857f630a94eb933880f0da79d1ef2cf7583fc45"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt.original",
+    "bytes": 2637,
+    "sha256": "d8b05686ccad9858e2d9fd4849de26b71924a5504ca929d15b60fdfe67a27976"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt.original",
+    "bytes": 2725,
+    "sha256": "4b136d5cade089d8a76811ded5cb654e91d943058f9ab9122ceeb8d483a51943"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt.original",
+    "bytes": 13532,
+    "sha256": "558da9cd16c2dce0b8d80b5a837d94f168692e5cd805fe1ac7918f7e4c320725"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt.original",
+    "bytes": 1768,
+    "sha256": "9d7db896910c08d8676b39254ec998dd9b47faf2a7bee7913b026ce8e5b13674"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt.original",
+    "bytes": 1008,
+    "sha256": "6e25d49d50813ad1af1d487028c275bcd9ea5bd211fc66078f3d30ebc09dd3e2"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt.original",
+    "bytes": 2821,
+    "sha256": "950e6f24e7468570e3508482f59a36dd1bbaf612a2c0736ade01e4091386da3f"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt.original",
+    "bytes": 957,
+    "sha256": "1d98ec806368c163c3d9048025753f1ae1f9914a633f81328e0e23b3a4460b29"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt.original",
+    "bytes": 3640,
+    "sha256": "4a8b97f4ae3fcb5a085fd13fd48947b86ffe6148d06a4111d84a31e226d1f8aa"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt.original",
+    "bytes": 2434,
+    "sha256": "7ee5e55e8b9dc91eaa0fedb43d5c2c697a3560d08c3491a9d0e7f6c439aed7a4"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt.original",
+    "bytes": 3066,
+    "sha256": "50b4bd60f9f5d977a1020033392157645a253e191be44b6329c52616a49e23cb"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt.original",
+    "bytes": 1505,
+    "sha256": "2ec7b4bf587a67d4f00bdecf5961321a6e555907d8a9b36e54b3d6f9b6423f15"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt.original",
+    "bytes": 573,
+    "sha256": "07f957bc7f300343fc2b553dfece47f23009edcd42b0e9e5b2a7f49280c5a1f4"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt.original",
+    "bytes": 4935,
+    "sha256": "043b4b6522287da7e3a3ed5d08e889680a55de8fcee1c18faaa96ac0007df29d"
+  },
+  "027/app/src/test/java/com/hcbiu/elcton/WireTest.kt": {
+    "relocated_to": "027/app/src/test/java/com/hcbiu/elcton/WireTest.kt.original",
+    "bytes": 623,
+    "sha256": "88190984b864656508436d1b37441c0edcef1ddbf8275e69c8f3852979b5a759"
+  },
+  "027/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": {
+    "relocated_to": "027/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt.original",
+    "bytes": 18382,
+    "sha256": "e492dec7d73f9021afc3d64087574acf1ce48f9e2a0aa053079cc4078135768e"
+  },
+  "027/app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt": {
+    "relocated_to": "027/app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt.original",
+    "bytes": 11543,
+    "sha256": "5a9e629ac48fc56e56123a43c5b31ab16a80aecdaa96f67544af1f7fdd7ddc09"
+  },
+  "027/app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt": {
+    "relocated_to": "027/app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt.original",
+    "bytes": 23804,
+    "sha256": "b48d2c6ea3b465ba130e9e5fb2fbddcc5d6199a9ae1e6824c4d0848be3053ed1"
+  },
+  "027/app/src/androidTest/java/com/hcbiu/elcton/ProductUiTest.kt": {
+    "relocated_to": "027/app/src/androidTest/java/com/hcbiu/elcton/ProductUiTest.kt.original",
+    "bytes": 14996,
+    "sha256": "69bdc8a56275dbac91d750ec23e49acc7d05b2313cd4ad29057f7ecefd711c4d"
+  },
+  "027/app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt": {
+    "relocated_to": "027/app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt.original",
+    "bytes": 18098,
+    "sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10"
+  },
+  "028/qa/P2pCandidateBuildTest.kt": {
+    "relocated_to": "028/qa/P2pCandidateBuildTest.kt.original",
+    "bytes": 645,
+    "sha256": "4e9710f7e5d482c9a3a9f38546d6dd907550f64a0b013dda70c191d2a1b9f60d"
+  },
+  "028/qa/test_capture_readiness.py": {
+    "relocated_to": "028/qa/test_capture_readiness.py.original",
+    "bytes": 1967,
+    "sha256": "6ae100e1d59415c41ca1d8b756d13e0c4469ece98a3f675a257704d36db3f551"
+  },
+  "028/qa/test_diag_source_gate.py": {
+    "relocated_to": "028/qa/test_diag_source_gate.py.original",
+    "bytes": 3438,
+    "sha256": "88da101fdbddd1c8ede890888fdb747f83ec10c5db6410d40006bf33698d00be"
+  },
+  "028/qa/test_diag_workflow_env.py": {
+    "relocated_to": "028/qa/test_diag_workflow_env.py.original",
+    "bytes": 1777,
+    "sha256": "a012c64f3b86be15b065b52def667b0c9320ea6cd5d80a029ef1f50197190d41"
+  },
+  "028/qa/test_final_report_gate.py": {
+    "relocated_to": "028/qa/test_final_report_gate.py.original",
+    "bytes": 1045,
+    "sha256": "0d8e45219fd1efe32e772f0ab218dd4c2c177109ddf420f5a5239d66e01b53b3"
+  },
+  "028/qa/test_mcp_http_selftest.py": {
+    "relocated_to": "028/qa/test_mcp_http_selftest.py.original",
+    "bytes": 2626,
+    "sha256": "169836aa46e9fc1cb2694a315fde4b8ea508e6d57fbffc7d9aff359d798ffd57"
+  },
+  "028/qa/test_p2p_ready_source_gate.py": {
+    "relocated_to": "028/qa/test_p2p_ready_source_gate.py.original",
+    "bytes": 1982,
+    "sha256": "6ee54fed7768303db802e247f2284e5f6f9ad824b9295bb72ef87f5c0b691ddb"
+  },
+  "028/qa/test_palette_evidence.py": {
+    "relocated_to": "028/qa/test_palette_evidence.py.original",
+    "bytes": 44728,
+    "sha256": "d5768e3b9e1f1dec5ca1c26d4decf648900023cd3c4465236c543e141864bcec"
+  },
+  "028/qa/test_palette_source.py": {
+    "relocated_to": "028/qa/test_palette_source.py.original",
+    "bytes": 8771,
+    "sha256": "aafe9f0e80e86f28480d0c234d69f342f5bcf84eeef9aa00e50e3df79e0c5c89"
+  },
+  "028/qa/test_theme_evidence.py": {
+    "relocated_to": "028/qa/test_theme_evidence.py.original",
+    "bytes": 4586,
+    "sha256": "e0c295f2593a694eae2c1ea21d7ea24e2dc1a651ada5d5f8a90e4a5e48782a3a"
+  },
+  "028/qa/test_theme_source.py": {
+    "relocated_to": "028/qa/test_theme_source.py.original",
+    "bytes": 3422,
+    "sha256": "d6a4c3a7ce233b10346780b38e286e2f2ac71b03f53b259fa48b6d978992cbbe"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt.original",
+    "bytes": 957,
+    "sha256": "69192343f911dd236c4e460520fe179688efdea729c839e57fc59331a16a0d56"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt.original",
+    "bytes": 432,
+    "sha256": "4e881e94c691d51e82b3c8add895998e2a05398230f7a16c4ca01057f2d1c5d7"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt.original",
+    "bytes": 16086,
+    "sha256": "684519f459a6f48a48fcc984e5bda91d113a6ecbd3975d23df86310042da1a32"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt.original",
+    "bytes": 7829,
+    "sha256": "390b71d90ab6e339f07b742f6e29d3745dd6fd767f02329a3bfaac0ad412f1db"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt.original",
+    "bytes": 3428,
+    "sha256": "12bb27ccba69878b9fbc92aa4d532624834719cb4f658599e6bd720f132d33d7"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt.original",
+    "bytes": 2637,
+    "sha256": "d8b05686ccad9858e2d9fd4849de26b71924a5504ca929d15b60fdfe67a27976"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt.original",
+    "bytes": 2725,
+    "sha256": "4b136d5cade089d8a76811ded5cb654e91d943058f9ab9122ceeb8d483a51943"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt.original",
+    "bytes": 13532,
+    "sha256": "558da9cd16c2dce0b8d80b5a837d94f168692e5cd805fe1ac7918f7e4c320725"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt.original",
+    "bytes": 1768,
+    "sha256": "9d7db896910c08d8676b39254ec998dd9b47faf2a7bee7913b026ce8e5b13674"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt.original",
+    "bytes": 1008,
+    "sha256": "6e25d49d50813ad1af1d487028c275bcd9ea5bd211fc66078f3d30ebc09dd3e2"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt.original",
+    "bytes": 2821,
+    "sha256": "950e6f24e7468570e3508482f59a36dd1bbaf612a2c0736ade01e4091386da3f"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/P2pReadyErrorTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/P2pReadyErrorTest.kt.original",
+    "bytes": 1326,
+    "sha256": "6401aca5358b53bc84c6a3c326bda06047624652359cfd8d7d478827d2b7150a"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/P2pReadyIngressTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/P2pReadyIngressTest.kt.original",
+    "bytes": 832,
+    "sha256": "d4d6a51f56762eaed1b6a89a476e2c69359e1267fc6830d1a4f80976d9cf43f2"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt.original",
+    "bytes": 957,
+    "sha256": "1d98ec806368c163c3d9048025753f1ae1f9914a633f81328e0e23b3a4460b29"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt.original",
+    "bytes": 3640,
+    "sha256": "4a8b97f4ae3fcb5a085fd13fd48947b86ffe6148d06a4111d84a31e226d1f8aa"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt.original",
+    "bytes": 2434,
+    "sha256": "7ee5e55e8b9dc91eaa0fedb43d5c2c697a3560d08c3491a9d0e7f6c439aed7a4"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt.original",
+    "bytes": 3066,
+    "sha256": "50b4bd60f9f5d977a1020033392157645a253e191be44b6329c52616a49e23cb"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt.original",
+    "bytes": 1505,
+    "sha256": "2ec7b4bf587a67d4f00bdecf5961321a6e555907d8a9b36e54b3d6f9b6423f15"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt.original",
+    "bytes": 573,
+    "sha256": "07f957bc7f300343fc2b553dfece47f23009edcd42b0e9e5b2a7f49280c5a1f4"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt.original",
+    "bytes": 4935,
+    "sha256": "043b4b6522287da7e3a3ed5d08e889680a55de8fcee1c18faaa96ac0007df29d"
+  },
+  "028/app/src/test/java/com/hcbiu/elcton/WireTest.kt": {
+    "relocated_to": "028/app/src/test/java/com/hcbiu/elcton/WireTest.kt.original",
+    "bytes": 623,
+    "sha256": "88190984b864656508436d1b37441c0edcef1ddbf8275e69c8f3852979b5a759"
+  },
+  "028/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": {
+    "relocated_to": "028/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt.original",
+    "bytes": 18382,
+    "sha256": "d6f87ca748cfcd2354e9cca7ef63244a1a5bc6a7c83140d19caeac5b7e73b519"
+  },
+  "028/app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt": {
+    "relocated_to": "028/app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt.original",
+    "bytes": 23804,
+    "sha256": "b48d2c6ea3b465ba130e9e5fb2fbddcc5d6199a9ae1e6824c4d0848be3053ed1"
+  },
+  "028/app/src/androidTest/java/com/hcbiu/elcton/ProductUiTest.kt": {
+    "relocated_to": "028/app/src/androidTest/java/com/hcbiu/elcton/ProductUiTest.kt.original",
+    "bytes": 14996,
+    "sha256": "69bdc8a56275dbac91d750ec23e49acc7d05b2313cd4ad29057f7ecefd711c4d"
+  },
+  "028/app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt": {
+    "relocated_to": "028/app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt.original",
+    "bytes": 18098,
+    "sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10"
+  }
+}

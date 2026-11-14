@@ -1,0 +1,18 @@
+{
+  "timeUtc": "2026-11-14T03:43:06.697238+00:00",
+  "shellExit": 0,
+  "readExit": 0,
+  "remoteEvidencePath": "/data/local/tmp/mcp027-passive-d77d9049.txt",
+  "rawBytesRead": 368640,
+  "partsReceived": [
+    "WINDOW",
+    "FREEZER"
+  ],
+  "endMarkerPresent": false,
+  "reportedResumedLines": [],
+  "focusLines": [],
+  "installedVersions": [],
+  "frozenLogLineCount": 18,
+  "noAppLaunchOrInstallOrUnlock": true,
+  "scope": "passive shell evidence; ActivityManager resumed alone is not HTTP readiness"
+}

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "scope": "r3semantic+freshr4QA cumulative independentdualaxis; notAndroidacceptance",
+  "source_manifest_sha256": "8865a4e1f20211f98fd61b2aa1f7bdfabde171f36ee0357806af4c891ad607c4",
+  "reviewed_manifest_sha256": "a77f293345a83ea5fc1390b868ca65fbfb50e03ee3ec050a67f8f01ab5efd3fa",
+  "diff_sha256": "f399a6c0422e6320a753e68953cc801d3fed8fd940f83fb6465e0cb2a2335e01",
+  "axes": [
+    {
+      "axis": "spec",
+      "passed": true,
+      "raw_sha256": "56b938fcd092a746b985c4a0fca198dc2f592f185a7798bfa34c3c79d651f680",
+      "raw_file": "qa/release-029/evidence/resume-1720/final-review-r4/spec-raw.txt",
+      "runtime_missed_steer_suffix_present": true,
+      "summary": "r3 两项 QA 阻塞已闭合；本结论是累计 r3 审查加 r4 增量审查，不是重新逐行审完全部 123 文件，也不代表发布交付完成。"
+    },
+    {
+      "axis": "standards",
+      "passed": true,
+      "raw_sha256": "bf08d02dcf5f29b638dcb52c988f90e70af54add2b6d8d7dd9112c17615a8c58",
+      "raw_file": "qa/release-029/evidence/resume-1720/final-review-r4/standards-raw.txt",
+      "runtime_missed_steer_suffix_present": false,
+      "summary": "No new blocking standards findings. Cumulative r3 approval plus the complete r4 delta supports closure; all live bindings match."
+    }
+  ]
+}

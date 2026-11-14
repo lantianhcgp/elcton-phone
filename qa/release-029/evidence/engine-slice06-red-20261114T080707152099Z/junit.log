@@ -1,0 +1,15 @@
+JUnit version 4.13.2
+...E...
+Time: 0.2
+There was 1 failure:
+1) interactiveAuthorizationUsesVisiblePermissionRequestAndStopsIfNoActivity(com.hcbiu.elcton.SyncEngineTest)
+java.lang.AssertionError: expected:<1> but was:<0>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.hcbiu.elcton.SyncEngineTest.interactiveAuthorizationUsesVisiblePermissionRequestAndStopsIfNoActivity(SyncEngineTest.kt:203)
+
+FAILURES!!!
+Tests run: 6,  Failures: 1
+

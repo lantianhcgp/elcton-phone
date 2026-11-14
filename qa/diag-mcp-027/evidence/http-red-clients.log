@@ -1,0 +1,52 @@
+RED: prior to HTTP client/selftest patch. Real production Kotlin baseline jar + real Android org.json on local JVM. Relay is SYNTHETIC EOF-closing fixture, NOT adb or Android result.
+Command: /data/data/com.termux/files/home/hermes-env-3.13/bin/python -B qa/test_mcp_clients.py --classpath /data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/final-host-026/host-tests.jar:/data/data/com.termux/files/home/elcton-phone-diag-mcp-026/.diag-build/android-json-api33.jar
+Scope: local JVM production Kotlin + real org.json; SYNTHETIC host callbacks/relay; NOT Android or adb verification
+test_content_length_post_survives_eof_closing_relay (__main__.McpRealClientTest.test_content_length_post_survives_eof_closing_relay) ... FAIL
+test_direct_controls_with_and_without_write_eof_use_real_server (__main__.McpRealClientTest.test_direct_controls_with_and_without_write_eof_use_real_server) ... ok
+test_url_mode_really_runs_curl_and_urllib (__main__.McpRealClientTest.test_url_mode_really_runs_curl_and_urllib) ... FAIL
+
+======================================================================
+FAIL: test_content_length_post_survives_eof_closing_relay (__main__.McpRealClientTest.test_content_length_post_survives_eof_closing_relay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/test_mcp_clients.py", line 168, in test_content_length_post_survives_eof_closing_relay
+    status, _, body = suite.request('POST', '/mcp', {'jsonrpc': '2.0', 'id': '中文🙂', 'method': 'ping'})
+                      ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/mcp_http_selftest.py", line 94, in request
+    return self.wire(start.encode('ascii') + body)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/mcp_http_selftest.py", line 71, in wire
+    self.check(b'\r\n\r\n' in raw, 'HTTP framing')
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/mcp_http_selftest.py", line 49, in check
+    require(condition, label)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/mcp_http_selftest.py", line 33, in require
+    raise CheckFailure(label)
+mcp_http_selftest.CheckFailure: HTTP framing
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/test_mcp_clients.py", line 170, in test_content_length_post_survives_eof_closing_relay
+    self.fail('Normal framed POST used write EOF and lost HTTP response in SYNTHETIC relay: ' + str(failure))
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Normal framed POST used write EOF and lost HTTP response in SYNTHETIC relay: HTTP framing
+
+======================================================================
+FAIL: test_url_mode_really_runs_curl_and_urllib (__main__.McpRealClientTest.test_url_mode_really_runs_curl_and_urllib)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/test_mcp_clients.py", line 184, in test_url_mode_really_runs_curl_and_urllib
+    self.assertEqual({'urllib', 'curl'}, set(report.get('clients', [])), 'Real client regressions must be mandatory, not merely raw Socket/health')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'curl'
+'urllib' : Real client regressions must be mandatory, not merely raw Socket/health
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.370s
+
+FAILED (failures=2)
+
+Exit: 1

@@ -17,13 +17,13 @@ class DiagnosticsIntegrationTest {
         assertTrue(File(root(), "app/src/main/AndroidManifest.xml").readText().contains("android:usesCleartextTraffic=\"false\""))
     }
 
-    @Test fun versionCapsuleUsesActualBuildConfigAndCodeEight() {
+    @Test fun versionCapsuleUsesActualBuildConfigAndCodeNine() {
         val main = source("MainActivity.kt")
         val gradle = File(root(), "app/build.gradle.kts").readText(Charsets.UTF_8)
         assertTrue("Version capsule must use the installed build version", main.contains("BuildConfig.VERSION_NAME"))
         assertFalse(main.contains("0.2.4 · 测试构建"))
-        assertTrue(gradle.contains("versionCode = 8"))
-        assertTrue(gradle.contains("versionName = \"0.2.6\""))
+        assertTrue(gradle.contains("versionCode = 11"))
+        assertTrue(gradle.contains("versionName = \"0.2.9\""))
         assertTrue(gradle.contains("buildConfig = true"))
     }
 
@@ -32,27 +32,33 @@ class DiagnosticsIntegrationTest {
         assertTrue("SDK errorCode/message must survive the describe outlet", probe.contains("WearErrorRecord.capture"))
         assertTrue(probe.contains("WearEngineException"))
         assertTrue(probe.contains(".errorCode"))
-        assertTrue(probe.contains("android.util.Log.w(\"ElctonWear\",raw)"))
-        assertTrue(probe.contains("diagnostics?.record(record)"))
+        assertTrue(probe.contains("Log.w(\"ElctonWear\", raw)"))
+        assertTrue(probe.contains("diagnostics.record(record)"))
         for (phase in listOf("checkPermission", "requestPermission", "getCommonDevice", "registerReceiver", "isAppInstalled", "p2p.send")) {
-            assertTrue("Exact SDK phase is missing: $phase", probe.contains("describe(e,\"$phase\")"))
+            assertTrue("Exact SDK phase is missing: $phase", probe.contains("describe(it, \"$phase\")") || probe.contains("describe(error, \"$phase\")"))
         }
         assertFalse(probe.contains("UserFacingError.diagnostic(e)"))
         assertTrue(probe.contains("WearErrorRecord.captureWithMessage"))
-        assertTrue(probe.contains("val message=e.message"))
-        assertTrue("Observation construction must not interrupt the original failure return", probe.contains("catch(observationError:Exception)"))
+        assertTrue(probe.contains("val message = e.message"))
+        assertTrue("Observation construction must not interrupt the original failure return", probe.contains("catch (observationError: Exception)"))
         assertTrue(probe.contains("return UserFacingError.explain(message.orEmpty())"))
     }
 
-    @Test fun fullDiagnosisIsScrollableAndOnlyApplicationStartsPassiveMcp() {
+    @Test fun fullDiagnosisIsScrollableAndKeepaliveIsExplicitlyOptIn() {
         val main = source("MainActivity.kt")
         assertTrue(main.contains("testTag(\"diagnostics-scroll\")"))
         assertTrue(main.contains("testTag(\"diagnostics-details\")"))
         assertTrue(main.contains("heightIn(max=300.dp)"))
         val manifest = File(root(), "app/src/main/AndroidManifest.xml").readText(Charsets.UTF_8)
         assertTrue(manifest.contains("android:name=\".ElctonApplication\""))
-        assertFalse(manifest.contains("<service"))
-        assertFalse(manifest.contains("FOREGROUND_SERVICE"))
-        assertTrue(source("ElctonApplication.kt").contains("diagnostics.start()"))
+        assertTrue(manifest.contains("android:name=\".McpKeepAliveService\" android:exported=\"false\""))
+        assertTrue(manifest.contains("android:foregroundServiceType=\"specialUse\""))
+        assertFalse(manifest.contains("WAKE_LOCK"))
+        assertFalse(manifest.contains("<receiver"))
+        assertTrue(source("ElctonApplication.kt").contains("diagnostics.start(false)"))
+        assertFalse(source("ElctonApplication.kt").contains("startForegroundService("))
+        assertTrue(source("McpKeepAlive.kt").contains("McpKeepAlivePolicy.enabled(savedChoice(context))") && source("McpKeepAlivePolicy.kt").contains("savedChoice ?: true"))
+        assertTrue(main.contains("McpKeepAliveSettings()"))
+        assertTrue(main.contains("McpKeepAlive.resumeChoice(this)"))
     }
 }

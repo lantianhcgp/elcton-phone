@@ -1,0 +1,5 @@
+Failed to load native library:jansi-2.4.0-d3485ac9172fcded-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-d3485ac9172fcded-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-d3485ac9172fcded-libjansi.so in namespace (default)
+app/src/main/java/com/hcbiu/elcton/PickupClient.kt:19:19: warning: 'constructor(p0: String!): URL' is deprecated. Deprecated in Java.
+        val url = URL(endpoint + "?action=get&pickup=" + pickup)
+                  ^^^

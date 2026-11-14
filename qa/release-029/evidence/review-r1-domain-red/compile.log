@@ -1,0 +1,17 @@
+Failed to load native library:jansi-2.4.0-183175d0788277cd-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-183175d0788277cd-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-183175d0788277cd-libjansi.so in namespace (default)
+app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt:16:24: error: unresolved reference 'MainThreadActions'.
+        val dispatcher=MainThreadActions({block->pending.add(block);posted.countDown();true},{false},timeout)
+                       ^^^^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt:16:43: error: cannot infer type for value parameter 'block'. Specify it explicitly.
+        val dispatcher=MainThreadActions({block->pending.add(block);posted.countDown();true},{false},timeout)
+                                          ^^^^^
+app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt:43:24: error: unresolved reference 'MainThreadActions'.
+        val dispatcher=MainThreadActions({false},{false},25)
+                       ^^^^^^^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt:44:63: error: cannot infer type for type parameter 'R'. Specify it explicitly.
+        assertEquals("action_dispatch_unavailable",dispatcher.invoke{JSONObject()}.getString("error"))
+                                                              ^^^^^^
+app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt:44:84: error: unresolved reference 'getString'.
+        assertEquals("action_dispatch_unavailable",dispatcher.invoke{JSONObject()}.getString("error"))
+                                                                                   ^^^^^^^^^

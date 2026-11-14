@@ -1,0 +1,20 @@
+JUnit version 4.13.2
+.E.E
+Time: 0.039
+There were 2 failures:
+1) everyRequestedActionAndDataToolHasARealContractBoundary(com.hcbiu.elcton.PhoneMcpToolsTest)
+java.lang.AssertionError: Missing production tool router for sync_connect,sync_disconnect,start_import,start_publish,abort,courses_read,courses_write,pickup_import,devices_list,pairing_state,sync_state
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.PhoneMcpToolsTest.everyRequestedActionAndDataToolHasARealContractBoundary(PhoneMcpToolsTest.kt:12)
+2) sharedPhoneDataLayerExistsRatherThanAnMcpOnlyStore(com.hcbiu.elcton.PhoneScheduleTest)
+java.lang.AssertionError: UI and MCP require one shared schedule layer
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.hcbiu.elcton.PhoneScheduleTest.sharedPhoneDataLayerExistsRatherThanAnMcpOnlyStore(PhoneScheduleTest.kt:8)
+
+FAILURES!!!
+Tests run: 2,  Failures: 2
+

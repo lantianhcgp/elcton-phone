@@ -1,0 +1,12 @@
+{
+  "buildRun": 43552199858,
+  "sourceSha": "762e46dc5c7d172191e3b0a1b50027c05b524082",
+  "xmlFiles": 19,
+  "totals": {
+    "tests": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "scope": "actual Android Gradle JVM unit tests, NOT device instrumentation"
+}

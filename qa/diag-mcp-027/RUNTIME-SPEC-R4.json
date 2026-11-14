@@ -1,0 +1,514 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [],
+  "summary": "SPEC 通过。当前 Runtime 相对旧归档仅两处监听动作完成后的 lock 内 revision++；默认 stateWriter 直接调用原原子落盘，原 writer 循环及 finally 补写保持。最新同模板真实 RED 最终 running=true/JUnit exit1，GREEN 最终 running=false/JUnit exit0，源码、模板、回执与保留真实文件均 SHA 绑定。无通知、业务、token、tool、地址或 WE 扩展。此为源码与现有 host 回执审核，非 Android 投递或 CI 构建验收。",
+  "review": {
+    "report_revision": "R4",
+    "reviewed_at_utc": "2026-11-14T03:25:12.935813+00:00",
+    "root": "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027",
+    "mode": "direct_source_review",
+    "jev_called": false,
+    "network_calls": false,
+    "tests_rerun_by_this_review": false,
+    "head_commit": "cd2a3e062b97d778c79b76b544071b1077534af7",
+    "runtime_sha256": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+    "old_runtime_sha256": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+    "entire_current_runtime_read": true,
+    "entire_old_runtime_read": true,
+    "old_to_current_exact_two_line_delta": true,
+    "diff_from_old": "--- qa/diag-mcp-027/evidence/runtime-revision-20261114T031536Z-red/DiagnosticRuntime.source.txt\n+++ app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt\n@@ -57,12 +57,14 @@\n                 false\n             }\n         }\n+        synchronized(lock) { revision++ }\n         persistLater()\n         return started\n     }\n \n     fun stopListener() {\n         synchronized(listenerLock) { server?.stop() }\n+        synchronized(lock) { revision++ }\n         persistLater()\n     }\n \n",
+    "working_tree_runtime_diff": "diff --git a/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt b/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt\nindex d7c428a..5319ff9 100644\n--- a/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt\n+++ b/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt\n@@ -8,7 +8,10 @@ import java.util.concurrent.Executors\n import java.util.concurrent.atomic.AtomicBoolean\n \n /** Owns diagnostics only. It never obtains a Wear Engine client or changes its lifecycle. */\n-class DiagnosticRuntime(private val filesDir: File) {\n+class DiagnosticRuntime(\n+    private val filesDir: File,\n+    private val stateWriter: (File, String) -> Unit = ::replaceDiagnosticFile\n+) {\n     private val lock = Any()\n     private var snapshot = JSONObject().put(\"status\", \"尚未连接手表\").put(\"phase\", \"idle\")\n         .put(\"timestampMs\", System.currentTimeMillis()).put(\"ready\", false).put(\"busy\", false).put(\"deviceCount\", 0)\n@@ -54,12 +57,14 @@ class DiagnosticRuntime(private val filesDir: File) {\n                 false\n             }\n         }\n+        synchronized(lock) { revision++ }\n         persistLater()\n         return started\n     }\n \n     fun stopListener() {\n         synchronized(listenerLock) { server?.stop() }\n+        synchronized(lock) { revision++ }\n         persistLater()\n     }\n \n@@ -112,7 +117,7 @@ class DiagnosticRuntime(private val filesDir: File) {\n             try {\n                 while (true) {\n                     val version = synchronized(lock) { revision }\n-                    replaceDiagnosticFile(File(filesDir, \"diagnostics/state.json\"), read().toString())\n+                    stateWriter(File(filesDir, \"diagnostics/state.json\"), read().toString())\n                     persisted = version\n                     if (synchronized(lock) { revision } == version) break\n                 }\n",
+    "primary_evidence": "runtime-revision-20261114T032020Z-{red,green}",
+    "secondary_preserved_evidence": "runtime-revision-20261114T031906Z-{red,green}",
+    "write_scope": "仅 O_EXCL 新建 RUNTIME-SPEC-R4.json，无源码修改、旧证据覆盖、push、设备或网络操作"
+  },
+  "spec_checks": [
+    {
+      "id": "listener-dirty-after-action",
+      "passed": true,
+      "location": "DiagnosticRuntime.kt:42-68",
+      "requirement": "监听动作完成后进 lock 增 dirty revision，再调用原 persistLater",
+      "evidence": "startListener 完整退出 listenerLock 后第60行 revision++；stopListener 第66行 server.stop 返回后第67行 revision++，均先标脏再调度。启动失败记录 startupError 后同样标脏。"
+    },
+    {
+      "id": "writer-coalescing-finally",
+      "passed": true,
+      "location": "DiagnosticRuntime.kt:112-133",
+      "requirement": "writing=true 时不能丢监听状态变化，保留 finally 补写一致性",
+      "evidence": "写前抓 revision，写后比较 revision；监听新 revision 使旧 running=true 写入后再写当前 false。原 writing.set(false) 后非失败版本差异补写未变，覆盖完成尾窗口；没有新增线程或轮询。真实屏障覆盖 stop 写竞争，finally 尾窗口为静态核验。"
+    },
+    {
+      "id": "default-atomic-writer",
+      "passed": true,
+      "location": "DiagnosticRuntime.kt:11-14,119-120; ErrorJournal.kt:43-51",
+      "requirement": "默认 stateWriter 调用原原子落盘",
+      "evidence": "默认参数直接 ::replaceDiagnosticFile，原调用仅替换为 stateWriter；原函数同目录临时文件、fd.sync、ATOMIC_MOVE/REPLACE_EXISTING 保持，无破坏性回退。"
+    },
+    {
+      "id": "no-scope-creep",
+      "passed": true,
+      "location": "完整 Runtime 与真实增量",
+      "requirement": "禁止新增线程/轮询/token/tool/address/WE、通知或业务变更",
+      "evidence": "旧归档到当前字节断言仅两行 revision++；完整 git Runtime diff 另仅默认 writer seam 与调用点替换。原 executor、token、工具、127.0.0.1/8766/readOnly 与 WE 隔离不变。"
+    },
+    {
+      "id": "real-red-green",
+      "passed": true,
+      "location": "runtime-revision-20261114T032020Z-{red,green}",
+      "requirement": "真实 Runtime/Socket/落盘屏障且同模板 RED/GREEN",
+      "evidence": "源码与编译输入 SHA 全匹配，同模板 SHA 相等；health200，captured runningtrue 且 writingtrue，stop 后 livefalse/真实端口拒绝连接，释放旧写后 writer quiescent。RED finaltrue/exit1，GREEN finalfalse/exit0；保留真实 state.json 与归档字节一致。"
+    },
+    {
+      "id": "host-only-boundary",
+      "passed": true,
+      "location": "qa/runtime_revision_host/*.kt.in",
+      "requirement": "host 适配与测试 ephemeral 不改变产品 Runtime，不宣称 Android 投递已验",
+      "evidence": "Log/BuildConfig 均 .in 且 HOST TEST ONLY；测试反射注入实际 port0 Socket listener，产品固定8766不变；屏障写入仍调用原 replaceDiagnosticFile。最新模板为保留真实测试目录并打印位置，RED/GREEN同模板，无 runtime 变更。"
+    }
+  ],
+  "evidence": {
+    "runtime-revision-20261114T031906Z": {
+      "red": {
+        "directory": "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red",
+        "compile_exit": 0,
+        "junit_exit": 1,
+        "runtime_source_matches": true,
+        "inputs_sha_verified": [
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt",
+            "sha256": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt",
+            "sha256": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/McpToken.kt",
+            "sha256": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt",
+            "sha256": "5caabafa222e3627f67585b37cf94219e0134e757d26ff85a00bee9f06e570bb",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt",
+            "sha256": "a775682a55fedeeb788cfe9665f06698ab35b4cb50e7c66db251fae13c267e73",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-red-generated/DiagnosticRuntime.kt",
+            "sha256": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-red-generated/DiagnosticRuntimeRevisionTest.kt",
+            "sha256": "dfdd7d4fd3ceae9db10e59052fa62146aa460dc6b67f53806a5cbdd14c85052b",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-red-generated/HostBuildConfig.kt",
+            "sha256": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-red-generated/HostLog.kt",
+            "sha256": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+            "matches": true
+          }
+        ],
+        "barrier_events": "real_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=true\n",
+        "captured_old_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626381906,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "final_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626381906,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "junit_log": "JUnit version 4.13.2\n.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:37361; token=<redacted>; read-only\nreal_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=true\nE\nTime: 0.258\nThere was 1 failure:\n1) stopDuringCapturedRunningWritePersistsStoppedState(com.hcbiu.elcton.DiagnosticRuntimeRevisionTest)\njava.lang.AssertionError: state.json must persist running=false after stop during captured running=true write\n\tat org.junit.Assert.fail(Assert.java:89)\n\tat org.junit.Assert.assertTrue(Assert.java:42)\n\tat org.junit.Assert.assertFalse(Assert.java:65)\n\tat com.hcbiu.elcton.DiagnosticRuntimeRevisionTest.stopDuringCapturedRunningWritePersistsStoppedState(DiagnosticRuntimeRevisionTest.kt:73)\n\nFAILURES!!!\nTests run: 1,  Failures: 1\n\n"
+      },
+      "green": {
+        "directory": "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green",
+        "compile_exit": 0,
+        "junit_exit": 0,
+        "runtime_source_matches": true,
+        "inputs_sha_verified": [
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt",
+            "sha256": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt",
+            "sha256": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/McpToken.kt",
+            "sha256": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt",
+            "sha256": "5caabafa222e3627f67585b37cf94219e0134e757d26ff85a00bee9f06e570bb",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt",
+            "sha256": "a775682a55fedeeb788cfe9665f06698ab35b4cb50e7c66db251fae13c267e73",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-green-generated/DiagnosticRuntime.kt",
+            "sha256": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-green-generated/DiagnosticRuntimeRevisionTest.kt",
+            "sha256": "dfdd7d4fd3ceae9db10e59052fa62146aa460dc6b67f53806a5cbdd14c85052b",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-green-generated/HostBuildConfig.kt",
+            "sha256": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T031906Z-green-generated/HostLog.kt",
+            "sha256": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+            "matches": true
+          }
+        ],
+        "barrier_events": "real_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=false\n",
+        "captured_old_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626401124,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "final_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626401124,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": false,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "junit_log": "JUnit version 4.13.2\n.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:41801; token=<redacted>; read-only\nreal_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=false\n\nTime: 0.247\n\nOK (1 test)\n\n"
+      },
+      "same_test_template_sha256": "dfdd7d4fd3ceae9db10e59052fa62146aa460dc6b67f53806a5cbdd14c85052b"
+    },
+    "runtime-revision-20261114T032020Z": {
+      "red": {
+        "directory": "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red",
+        "compile_exit": 0,
+        "junit_exit": 1,
+        "runtime_source_matches": true,
+        "inputs_sha_verified": [
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt",
+            "sha256": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt",
+            "sha256": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/McpToken.kt",
+            "sha256": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt",
+            "sha256": "5caabafa222e3627f67585b37cf94219e0134e757d26ff85a00bee9f06e570bb",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt",
+            "sha256": "a775682a55fedeeb788cfe9665f06698ab35b4cb50e7c66db251fae13c267e73",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-red-generated/DiagnosticRuntime.kt",
+            "sha256": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-red-generated/DiagnosticRuntimeRevisionTest.kt",
+            "sha256": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-red-generated/HostBuildConfig.kt",
+            "sha256": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-red-generated/HostLog.kt",
+            "sha256": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+            "matches": true
+          }
+        ],
+        "barrier_events": "real_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=true\n",
+        "captured_old_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626486452,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "final_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626486452,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "junit_log": "JUnit version 4.13.2\n.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:41449; token=<redacted>; read-only\nreal_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=true\nretained_real_runtime_files=/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/.diag-build/runtime-revision-20261114T032020Z-red-generated/runtime-files\nE\nTime: 0.267\nThere was 1 failure:\n1) stopDuringCapturedRunningWritePersistsStoppedState(com.hcbiu.elcton.DiagnosticRuntimeRevisionTest)\njava.lang.AssertionError: state.json must persist running=false after stop during captured running=true write\n\tat org.junit.Assert.fail(Assert.java:89)\n\tat org.junit.Assert.assertTrue(Assert.java:42)\n\tat org.junit.Assert.assertFalse(Assert.java:65)\n\tat com.hcbiu.elcton.DiagnosticRuntimeRevisionTest.stopDuringCapturedRunningWritePersistsStoppedState(DiagnosticRuntimeRevisionTest.kt:73)\n\nFAILURES!!!\nTests run: 1,  Failures: 1\n\n",
+        "archived_test_matches_current_template": true,
+        "retained_real_state_file": {
+          "path": ".diag-build/runtime-revision-20261114T032020Z-red-generated/runtime-files/diagnostics/state.json",
+          "matches_final_state_bytes": true
+        }
+      },
+      "green": {
+        "directory": "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green",
+        "compile_exit": 0,
+        "junit_exit": 0,
+        "runtime_source_matches": true,
+        "inputs_sha_verified": [
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt",
+            "sha256": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt",
+            "sha256": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/McpToken.kt",
+            "sha256": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt",
+            "sha256": "5caabafa222e3627f67585b37cf94219e0134e757d26ff85a00bee9f06e570bb",
+            "matches": true
+          },
+          {
+            "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt",
+            "sha256": "a775682a55fedeeb788cfe9665f06698ab35b4cb50e7c66db251fae13c267e73",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-green-generated/DiagnosticRuntime.kt",
+            "sha256": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-green-generated/DiagnosticRuntimeRevisionTest.kt",
+            "sha256": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-green-generated/HostBuildConfig.kt",
+            "sha256": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+            "matches": true
+          },
+          {
+            "path": ".diag-build/runtime-revision-20261114T032020Z-green-generated/HostLog.kt",
+            "sha256": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+            "matches": true
+          }
+        ],
+        "barrier_events": "real_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=false\n",
+        "captured_old_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626505413,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "final_state": {
+          "status": "尚未连接手表",
+          "phase": "idle",
+          "timestampMs": 1794626505413,
+          "ready": false,
+          "busy": false,
+          "deviceCount": 0,
+          "latestError": null,
+          "mcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": false,
+            "readOnly": true,
+            "startupError": null
+          }
+        },
+        "junit_log": "JUnit version 4.13.2\n.HOST-TEST LOG I/ElctonMcp: MCP listening on 127.0.0.1:40701; token=<redacted>; read-only\nreal_socket_health=200; captured_running=true; writing=true\nstopListener_returned; live_running=false; real_socket_refused=true\nreleased_old_write; writer_quiescent=true; final_file_running=false\nretained_real_runtime_files=/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/.diag-build/runtime-revision-20261114T032020Z-green-generated/runtime-files\n\nTime: 0.222\n\nOK (1 test)\n\n",
+        "archived_test_matches_current_template": true,
+        "retained_real_state_file": {
+          "path": ".diag-build/runtime-revision-20261114T032020Z-green-generated/runtime-files/diagnostics/state.json",
+          "matches_final_state_bytes": true
+        }
+      },
+      "same_test_template_sha256": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762"
+    }
+  },
+  "verification_boundaries": [
+    "本审核只读现有真实 RED/GREEN 回执并校验 SHA，未重跑写证据的测试。",
+    "stop 竞争是实际屏障结果；start 标脏/finally 尾窗口是静态审核，不声称单独动态测试已完成。",
+    "host Log/BuildConfig 不代表 Android 框架、通知投递或真机固定8766部署验收。",
+    "CI/Android 构建不在本 SPEC 轴范围，未因此制造 missing_requirements。"
+  ],
+  "files_hashes": {
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031536Z-red/DiagnosticRuntime.source.txt": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+    "app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt": "a775682a55fedeeb788cfe9665f06698ab35b4cb50e7c66db251fae13c267e73",
+    "qa/run_runtime_revision_host_tests.py": "57b4ce09fa7f9699ae4a9f03425f89c94bb865d9c2639c1339693623cfdd69af",
+    "qa/runtime_revision_host/DiagnosticRuntimeRevisionTest.kt.in": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    "qa/runtime_revision_host/HostLog.kt.in": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "qa/runtime_revision_host/HostBuildConfig.kt.in": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/DiagnosticRuntime.source.txt": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/inputs.sha256": "e39b0b76b0c144aa65b447ffdea4e470130e1375501e1952f49c31ee7e6eac79",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/compile.log": "9df7a3efe58d4247385734af81ad45f743e560b3a05c13fd9bd1480bc863b3b0",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/compile.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/junit.log": "48fc3f2e0b719a393aa7f378eb542389b093d8896d48909d653c97fa2f0b2da2",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/junit.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/barrier-events.txt": "ddb486df3b8eb973d1b401b489bcd3925c3eb0407cc863e8dce1fe8d55b59159",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/captured-old.json": "86c28f746f8a5aa54831193ae01b94ca12dfbdcd1e78ec697ef0412e6cac3f2c",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-red/final-state.json": "86c28f746f8a5aa54831193ae01b94ca12dfbdcd1e78ec697ef0412e6cac3f2c",
+    "app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+    "app/src/main/java/com/hcbiu/elcton/McpToken.kt": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt": "5caabafa222e3627f67585b37cf94219e0134e757d26ff85a00bee9f06e570bb",
+    ".diag-build/runtime-revision-20261114T031906Z-red-generated/DiagnosticRuntime.kt": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+    ".diag-build/runtime-revision-20261114T031906Z-red-generated/DiagnosticRuntimeRevisionTest.kt": "dfdd7d4fd3ceae9db10e59052fa62146aa460dc6b67f53806a5cbdd14c85052b",
+    ".diag-build/runtime-revision-20261114T031906Z-red-generated/HostBuildConfig.kt": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    ".diag-build/runtime-revision-20261114T031906Z-red-generated/HostLog.kt": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/DiagnosticRuntime.source.txt": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/inputs.sha256": "1abc553af3db533fd6968b2910f86d2f7faf028abac16add2d0c9e1f2d381068",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/compile.log": "6ee58cf8ccac726aa886fcb80f8e0377fca37c5c96ce4a4b7cdb6149550a4781",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/compile.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/junit.log": "1f2f66f4a538402143ce1f3b389019fd80b91d49178cf9ff61f0f2ed3a53943e",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/junit.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/barrier-events.txt": "c4bf750f0fa8eebe283224fd18b1544ba69b3551639a9e3546a97e602ca206b4",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/captured-old.json": "f981b748edbb7729e22a8a91b43d306ad5045ca752ab8b88988b4b040e264814",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T031906Z-green/final-state.json": "48376ef79c5270227f9cbc91dff85312fd8948d5680a643da769cbe2ed8c3052",
+    ".diag-build/runtime-revision-20261114T031906Z-green-generated/DiagnosticRuntime.kt": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+    ".diag-build/runtime-revision-20261114T031906Z-green-generated/DiagnosticRuntimeRevisionTest.kt": "dfdd7d4fd3ceae9db10e59052fa62146aa460dc6b67f53806a5cbdd14c85052b",
+    ".diag-build/runtime-revision-20261114T031906Z-green-generated/HostBuildConfig.kt": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    ".diag-build/runtime-revision-20261114T031906Z-green-generated/HostLog.kt": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/DiagnosticRuntime.source.txt": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/inputs.sha256": "37de3feecfd74f10b47237a83e5140b1d3c50485ef1c97b308f876c3787746e1",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/compile.log": "51aea56b218a2da30f05d9aaae71478c2809c73f39124455e786ca0fd674a422",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/compile.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/junit.log": "b96fdfdb7935b87582efabc4ee84cad630925bcacf7e5ce8f4246b8a5835399e",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/junit.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/barrier-events.txt": "ddb486df3b8eb973d1b401b489bcd3925c3eb0407cc863e8dce1fe8d55b59159",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/captured-old.json": "4b3e274ec10a2458d9f19f421c545f72db08b89897b6a9b28d0a3b92c3f8a9cd",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/final-state.json": "4b3e274ec10a2458d9f19f421c545f72db08b89897b6a9b28d0a3b92c3f8a9cd",
+    ".diag-build/runtime-revision-20261114T032020Z-red-generated/DiagnosticRuntime.kt": "935f82e642949729f22c1eddda7260420d117e0098946db5ad4c02c464a5b99f",
+    ".diag-build/runtime-revision-20261114T032020Z-red-generated/DiagnosticRuntimeRevisionTest.kt": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    ".diag-build/runtime-revision-20261114T032020Z-red-generated/HostBuildConfig.kt": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    ".diag-build/runtime-revision-20261114T032020Z-red-generated/HostLog.kt": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-red/DiagnosticRuntimeRevisionTest.source.txt": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    ".diag-build/runtime-revision-20261114T032020Z-red-generated/runtime-files/diagnostics/state.json": "4b3e274ec10a2458d9f19f421c545f72db08b89897b6a9b28d0a3b92c3f8a9cd",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/DiagnosticRuntime.source.txt": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/inputs.sha256": "afd5a55f367b96e2ee1e00e8d38eb657f5f60ec60bfb6843c6105e598b02c677",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/compile.log": "d0b4c5faea2a3bba5173b418e50fe03388b051c3380c84d6702396d17df39cb7",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/compile.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/junit.log": "9d3a3c9714b0ad8ba9ba7dfed26c4827969a91da88744d12a4584d40528c66a3",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/junit.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/barrier-events.txt": "c4bf750f0fa8eebe283224fd18b1544ba69b3551639a9e3546a97e602ca206b4",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/captured-old.json": "39b7c5758281ee703e3117ff04635d538b6a0c17f2e8c8d9c402cb6af5cfa633",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/final-state.json": "695e67193c789da1dd5212ffbe99369fafaa964b157556790327c60ec639df7a",
+    ".diag-build/runtime-revision-20261114T032020Z-green-generated/DiagnosticRuntime.kt": "4a0c699cabbacc0a340bd2ec4bf5c118f305ef4101d17031a7598c929b2048fc",
+    ".diag-build/runtime-revision-20261114T032020Z-green-generated/DiagnosticRuntimeRevisionTest.kt": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    ".diag-build/runtime-revision-20261114T032020Z-green-generated/HostBuildConfig.kt": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    ".diag-build/runtime-revision-20261114T032020Z-green-generated/HostLog.kt": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "qa/diag-mcp-027/evidence/runtime-revision-20261114T032020Z-green/DiagnosticRuntimeRevisionTest.source.txt": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    ".diag-build/runtime-revision-20261114T032020Z-green-generated/runtime-files/diagnostics/state.json": "695e67193c789da1dd5212ffbe99369fafaa964b157556790327c60ec639df7a"
+  }
+}

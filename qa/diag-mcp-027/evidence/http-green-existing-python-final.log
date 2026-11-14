@@ -1,0 +1,15 @@
+Scope: current production Kotlin (server/tools/token + qa.McpHost) on local JVM with genuine Android API33 org.json; callbacks and EOF-closing relay are SYNTHETIC host fixtures; NOT Android runtime, adb, or physical device.
+Command: /data/data/com.termux/files/home/hermes-env-3.13/bin/python -B -m unittest discover -s qa -p test_mcp_http_selftest.py -v
+test_complete_reply_survives_only_enotconn_at_shutdown (test_mcp_http_selftest.HttpShutdownRaceTest.test_complete_reply_survives_only_enotconn_at_shutdown) ... ok
+test_empty_reply_after_enotconn_still_fails (test_mcp_http_selftest.HttpShutdownRaceTest.test_empty_reply_after_enotconn_still_fails) ... ok
+test_invalid_utf8_and_token_echo_still_fail (test_mcp_http_selftest.HttpShutdownRaceTest.test_invalid_utf8_and_token_echo_still_fail) ... ok
+test_other_shutdown_errors_are_not_ignored (test_mcp_http_selftest.HttpShutdownRaceTest.test_other_shutdown_errors_are_not_ignored) ... ok
+test_receive_reset_after_enotconn_still_fails (test_mcp_http_selftest.HttpShutdownRaceTest.test_receive_reset_after_enotconn_still_fails) ... ok
+test_truncated_reply_after_enotconn_still_fails (test_mcp_http_selftest.HttpShutdownRaceTest.test_truncated_reply_after_enotconn_still_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.020s
+
+OK
+
+Exit: 0

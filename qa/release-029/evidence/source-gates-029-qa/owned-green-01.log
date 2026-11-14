@@ -1,0 +1,74 @@
+test_business_callback_mutation_is_rejected_not_filtered (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_business_callback_mutation_is_rejected_not_filtered) ... ok
+test_exact_authorized_observation_reverses_to_version_025_baseline (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_exact_authorized_observation_reverses_to_version_025_baseline) ... FAIL
+test_keepalive_setting_and_resume_seams_are_exact_and_required (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_keepalive_setting_and_resume_seams_are_exact_and_required) ... ok
+test_lost_full_message_persistence_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_lost_full_message_persistence_is_rejected) ... ok
+test_missing_or_duplicated_authorized_diagnostic_seam_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_missing_or_duplicated_authorized_diagnostic_seam_is_rejected) ... ok
+test_sdk_authorization_branch_mutation_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_sdk_authorization_branch_mutation_is_rejected) ... ok
+test_swapping_scan_and_cancel_callbacks_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_swapping_scan_and_cancel_callbacks_is_rejected) ... ok
+test_transport_send_success_code_mutation_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_transport_send_success_code_mutation_is_rejected) ... ok
+test_unrequested_activity_lifecycle_side_effect_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_unrequested_activity_lifecycle_side_effect_is_rejected) ... ok
+test_missing_or_duplicated_ready_dispatch_is_not_filtered (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_missing_or_duplicated_ready_dispatch_is_not_filtered) ... ok
+test_only_reviewed_ready_delta_reverses_to_pinned_original (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_only_reviewed_ready_delta_reverses_to_pinned_original) ... FAIL
+test_timeout_words_are_finite_and_not_a_version_test_comment (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_timeout_words_are_finite_and_not_a_version_test_comment) ... ok
+test_unapproved_transport_and_permission_edits_still_fail (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_unapproved_transport_and_permission_edits_still_fail) ... ok
+test_private_local_service_and_no_new_power_behaviour (qa.test_mcp027_scope.Mcp027ScopeTests.test_private_local_service_and_no_new_power_behaviour) ... ok
+test_version_027_code9 (qa.test_mcp027_scope.Mcp027ScopeTests.test_version_027_code9) ... ok
+test_we_and_signing_and_themes_remain_exact (qa.test_mcp027_scope.Mcp027ScopeTests.test_we_and_signing_and_themes_remain_exact) ... FAIL
+
+======================================================================
+FAIL: test_exact_authorized_observation_reverses_to_version_025_baseline (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_exact_authorized_observation_reverses_to_version_025_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_diag_source_gate.py", line 23, in test_exact_authorized_observation_reverses_to_version_025_baseline
+    self.assertEqual([], gate.scope_errors(self.source(ACTIVITY), self.source(PROBE)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ["Unapproved main-source inventory delta: [56 chars]t']"]
+
+Second list contains 1 additional elements.
+First extra element 0:
+"Unapproved main-source inventory delta: ['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"
+
+- []
++ ['Unapproved main-source inventory delta: '
++  "['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"]
+
+======================================================================
+FAIL: test_only_reviewed_ready_delta_reverses_to_pinned_original (qa.test_p2p_ready_source_gate.P2pReadySourceGateTest.test_only_reviewed_ready_delta_reverses_to_pinned_original)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_p2p_ready_source_gate.py", line 16, in test_only_reviewed_ready_delta_reverses_to_pinned_original
+    self.assertEqual([],gate.scope_errors(activity,probe))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ["Unapproved main-source inventory delta: [56 chars]t']"]
+
+Second list contains 1 additional elements.
+First extra element 0:
+"Unapproved main-source inventory delta: ['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"
+
+- []
++ ['Unapproved main-source inventory delta: '
++  "['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"]
+
+======================================================================
+FAIL: test_we_and_signing_and_themes_remain_exact (qa.test_mcp027_scope.Mcp027ScopeTests.test_we_and_signing_and_themes_remain_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_mcp027_scope.py", line 18, in test_we_and_signing_and_themes_remain_exact
+    self.assertEqual([], gate.scope_errors((ROOT / gate.ACTIVITY).read_text(),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                          (ROOT / gate.PROBE).read_text()))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ["Unapproved main-source inventory delta: [56 chars]t']"]
+
+Second list contains 1 additional elements.
+First extra element 0:
+"Unapproved main-source inventory delta: ['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"
+
+- []
++ ['Unapproved main-source inventory delta: '
++  "['app/src/main/java/com/hcbiu/elcton/MainThreadActions.kt']"]
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.447s
+
+FAILED (failures=3)

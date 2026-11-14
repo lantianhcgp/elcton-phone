@@ -1,0 +1,8 @@
+test_count_names_duplicates_and_extra_never_relaxed (qa.test_mcp029_http_listing.Mcp029ListingTest.test_count_names_duplicates_and_extra_never_relaxed) ... ok
+test_exact_host_four_and_release_fifteen (qa.test_mcp029_http_listing.Mcp029ListingTest.test_exact_host_four_and_release_fifteen) ... ok
+test_original_and_new_schema_annotations_still_exact (qa.test_mcp029_http_listing.Mcp029ListingTest.test_original_and_new_schema_annotations_still_exact) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.008s
+
+OK

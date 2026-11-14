@@ -1,0 +1,135 @@
+package com.hcbiu.elcton
+
+import android.util.Log
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.File
+import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicBoolean
+
+/** Owns diagnostics only. It never obtains a Wear Engine client or changes its lifecycle. */
+class DiagnosticRuntime(
+    private val filesDir: File,
+    private val stateWriter: (File, String) -> Unit = ::replaceDiagnosticFile
+) {
+    private val lock = Any()
+    private var snapshot = JSONObject().put("status", "尚未连接手表").put("phase", "idle")
+        .put("timestampMs", System.currentTimeMillis()).put("ready", false).put("busy", false).put("deviceCount", 0)
+    private var revision = 0L
+    private var lastError: JSONObject? = null
+    private var journal: ErrorJournal? = null
+    private var server: DiagnosticMcpServer? = null
+    private var startupError = ""
+    private val writer = Executors.newSingleThreadExecutor { task -> Thread(task, "elcton-diagnostic-file").apply { isDaemon = true } }
+    private val writing = AtomicBoolean(false)
+
+    private val listenerLock = Any()
+    private var initialized = false
+
+    fun start() {
+        synchronized(listenerLock) {
+            if (!initialized) {
+                initialized = true
+                try { journal = ErrorJournal(File(filesDir, "diagnostics/wear-errors.jsonl")) }
+                catch (error: Exception) { startupError = "journal: " + error.javaClass.simpleName }
+                journal?.tail(1)?.let { if (it.length() > 0) lastError = it.getJSONObject(0) }
+            }
+        }
+        startListener()
+    }
+
+    /** The Application and user-enabled FGS share this one idempotent loopback listener. */
+    fun startListener(): Boolean {
+        val started = synchronized(listenerLock) {
+            try {
+                if (server == null) {
+                    val token = McpToken.loadOrCreate(File(filesDir, "mcp/token"))
+                    val tools = DiagnosticTools(filesDir, { limit -> errorTail(limit) }, { read() }, { versionInfo() })
+                    server = DiagnosticMcpServer(token, tools, 8766)
+                }
+                val port = server!!.start()
+                if (startupError.startsWith("mcp: ")) startupError = ""
+                Log.i("ElctonMcp", "MCP listening on 127.0.0.1:$port; token=<redacted>; read-only")
+                true
+            } catch (error: Exception) {
+                startupError = "mcp: " + error.javaClass.simpleName
+                Log.w("ElctonMcp", "MCP startup failed: " + error.javaClass.simpleName)
+                false
+            }
+        }
+        synchronized(lock) { revision++ }
+        persistLater()
+        return started
+    }
+
+    fun stopListener() {
+        synchronized(listenerLock) { server?.stop() }
+        synchronized(lock) { revision++ }
+        persistLater()
+    }
+
+    fun observe(status: String, detail: String, ready: Boolean, busy: Boolean, deviceCount: Int) {
+        synchronized(lock) {
+            snapshot = JSONObject(snapshot.toString()).put("status", status).put("detail", detail)
+                .put("ready", ready).put("busy", busy).put("deviceCount", deviceCount).put("timestampMs", System.currentTimeMillis())
+            revision++
+        }
+        persistLater()
+    }
+
+    fun record(record: WearErrorRecord) {
+        synchronized(lock) {
+            lastError = record.toJson()
+            snapshot = JSONObject(snapshot.toString()).put("phase", record.phase).put("timestampMs", record.timestampMs)
+            revision++
+        }
+        // SDK failures are rare; commit the full error before returning, never truncate its message.
+        try {
+            val target = journal ?: ErrorJournal(File(filesDir, "diagnostics/wear-errors.jsonl")).also { journal = it }
+            target.append(record)
+        } catch (error: Exception) {
+            Log.w("ElctonMcp", "Cannot persist full SDK error: " + error.javaClass.simpleName)
+        }
+        persistLater()
+    }
+
+    fun latestFull(): String = synchronized(lock) { lastError?.optString("full", "").orEmpty() }
+    fun errorTail(limit: Int): JSONArray = journal?.tail(limit) ?: synchronized(lock) {
+        JSONArray().apply { lastError?.let { put(JSONObject(it.toString())) } }
+    }
+    fun read(): JSONObject = synchronized(lock) {
+        JSONObject(snapshot.toString())
+            .put("latestError", lastError?.let { JSONObject(it.toString()) } ?: JSONObject.NULL)
+            .put("mcp", JSONObject().put("host", "127.0.0.1").put("port", 8766)
+                .put("running", server?.running == true).put("readOnly", true)
+                .put("startupError", startupError.takeIf { it.isNotEmpty() } ?: JSONObject.NULL))
+    }
+    fun versionInfo(): JSONObject = JSONObject().put("packageName", BuildConfig.APPLICATION_ID)
+        .put("versionName", BuildConfig.VERSION_NAME).put("versionCode", BuildConfig.VERSION_CODE)
+        .put("buildType", BuildConfig.BUILD_TYPE).put("wearEngineSdk", "5.0.3.301")
+
+    /** Coalesces observations; no I/O or SDK read happens on the MCP or UI caller thread. */
+    private fun persistLater() {
+        if (!writing.compareAndSet(false, true)) return
+        writer.execute {
+            var persisted = -1L
+            var failed = false
+            try {
+                while (true) {
+                    val version = synchronized(lock) { revision }
+                    stateWriter(File(filesDir, "diagnostics/state.json"), read().toString())
+                    persisted = version
+                    if (synchronized(lock) { revision } == version) break
+                }
+            } catch (error: Exception) {
+                failed = true
+                Log.w("ElctonMcp", "Cannot persist diagnostic state: " + error.javaClass.simpleName)
+            } finally {
+                writing.set(false)
+                // A failed disk write is retried only after a later observation,
+                // never a self-sustaining background loop on an unavailable disk.
+                if (!failed && persisted >= 0 && synchronized(lock) { revision } != persisted) persistLater()
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "scope": "local receipt/source selftests ONLY; NO Android execution",
+  "android": "pending cloud API33/34 compile and instrumentation",
+  "realWearEngine": "pending",
+  "physicalPhone": "pending; no local adb/rish/install",
+  "runs": [
+    {
+      "command": "python -B qa/test_keepalive_gate.py",
+      "exitCode": 0,
+      "output": "test_android_method_names_and_all_receipt_fields_are_retained (__main__.KeepAliveGateTests.test_android_method_names_and_all_receipt_fields_are_retained) ... ok\ntest_current_receipt_and_pre33_branch (__main__.KeepAliveGateTests.test_current_receipt_and_pre33_branch) ... ok\ntest_every_hard_assertion_rejects_missing_false_and_non_boolean (__main__.KeepAliveGateTests.test_every_hard_assertion_rejects_missing_false_and_non_boolean) ... ok\ntest_exact_one_test_result_gate (__main__.KeepAliveGateTests.test_exact_one_test_result_gate) ... ok\ntest_navigation_selector_uses_actual_026_bottom_bar_not_duplicate_header (__main__.KeepAliveGateTests.test_navigation_selector_uses_actual_026_bottom_bar_not_duplicate_header) ... ok\ntest_notification_denial_runs_after_ordinary_background_measurement (__main__.KeepAliveGateTests.test_notification_denial_runs_after_ordinary_background_measurement) ... ok\ntest_notification_stop_ack_precedes_health_and_never_falls_back (__main__.KeepAliveGateTests.test_notification_stop_ack_precedes_health_and_never_falls_back) ... ok\ntest_prelaunch_permission_grants_and_default_on_are_not_toggled (__main__.KeepAliveGateTests.test_prelaunch_permission_grants_and_default_on_are_not_toggled) ... ok\ntest_receipt_validator_is_available (__main__.KeepAliveGateTests.test_receipt_validator_is_available) ... ok\ntest_wrong_run_or_source_and_non_object_fail (__main__.KeepAliveGateTests.test_wrong_run_or_source_and_non_object_fail) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.021s\n\nOK"
+    },
+    {
+      "command": "python -B qa/diag_emulator_smoke.py --self-test",
+      "exitCode": 0,
+      "output": "test_actual_signer_gate (__main__.VerifierTests.test_actual_signer_gate) ... ok\ntest_blank_and_missing_target_rejected (__main__.VerifierTests.test_blank_and_missing_target_rejected) ... ok\ntest_literal_identity (__main__.VerifierTests.test_literal_identity) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK"
+    },
+    {
+      "command": "git diff --check -- app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt qa/diag_emulator_smoke.py qa/test_keepalive_gate.py",
+      "exitCode": 0,
+      "output": ""
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "axis": "standards",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "suggestions": [],
+  "summary": "本轮只读审查未发现可由当前源码及已有执行证据确认的新阻断问题；R1 四项修复已核对。结论绑定当前完整产品清单，不代表 Android 构建、真机前台服务或手机—手表联调通过。未修改文件、安装软件、调用 adb/rish 或执行 git 写操作。",
+  "source_manifest_sha256": "f1eb16fcb16f1b726798512c2013e5b933bfa3a296956f95f64791187d8eb988",
+  "coverage": {
+    "scope": "已读取清单全部 37 个 app/src/main 产品文件及 app/build.gradle.kts，包含未跟踪新增文件，并检查相关差异、R1 原始回执和测试证据。",
+    "manifest": {
+      "path": "qa/release-029/evidence/review-r2/product-manifest.json",
+      "hash_format": "文件路径到当前文件 SHA-256 的映射，按键排序、紧凑 JSON、UTF-8 编码后计算 SHA-256",
+      "files_rehashed": 37,
+      "matches_manifest": true,
+      "changed_or_missing": [],
+      "unmanifested_product_files": [],
+      "verified_at": "2026-11-14T17:00:44.165658+08:00"
+    },
+    "r1_fixes": [
+      {
+        "fix": "STD-BUILD",
+        "verified": true,
+        "evidence": "MainActivity.kt:8 已导入 android.os.Build；不据此宣称完整 Android 编译通过。"
+      },
+      {
+        "fix": "STD-STOP",
+        "verified": true,
+        "evidence": "MainThreadActions.kt:16-17,23-46 捕获原子 epoch，检查失效纪元及放弃标记，处理 post 失败、超时、中断；PhoneRuntime.kt:35-39 取消时先 invalidate，72-74 执行前重新检查开启偏好。"
+      },
+      {
+        "fix": "STD-IMPORT",
+        "verified": true,
+        "evidence": "PhoneActions.kt:18-28 将自动导入确认绑定请求开始时的手机 revision；期间编辑导致 revision 改变时仅留下新预览，不自动覆盖。"
+      },
+      {
+        "fix": "STD-REGISTRATION",
+        "verified": true,
+        "evidence": "SyncEngine.kt:188-193 仅在无当前 peer、无 selected 且非 busy 时允许陈旧成功回调全局兜底清理；WearProbe.kt:168-191 按具体 registration/receiver 身份清理，避免释放替换接收器或取消新扫描。"
+      }
+    ],
+    "audited_surfaces": [
+      "MCP 固定绑定 127.0.0.1、Bearer 校验、HTTP 长度和 framing、严格 UTF-8/JSON、参数类型与范围、通知不触发工具副作用、连接池及停止清理",
+      "旧四工具兼容性及新增十一工具；旧四实现仅接口适配，规范化比较一致；start_publish 保留已有 force 覆盖合同，没有增加 replace:true 要求",
+      "应用级唯一 PhoneActions/SyncEngine、SDK application Context 复用、可见 Activity 授权、接收器身份及回调/定时器取消",
+      "私有存储、AtomicFile 课表及备份、诊断路径限制、凭据存储、禁止应用备份",
+      "固定公开取件 GET API、精确域名明文例外、禁止跟随重定向、响应大小与取消限制；无 TLS 校验绕过，MCP token 不发送到取件服务",
+      "默认开启偏好、前台通知与 STOP 生命周期、0.2.9/code 11、既有签名流程及手表身份保留"
+    ],
+    "execution_evidence": {
+      "r1_effective_red": "qa/release-029/evidence/review-r1-effective-red/junit.log:10-49 保存真实 6 个失败。",
+      "host_green": "qa/release-029/evidence/review-r1-full-green/junit.log:5 为 OK (150 tests)。本轮读取该证据，未重新运行测试。",
+      "sdk_precheck": "actual-sdk-precheck/compile.exit 为 0；命令使用真实 WearEngine 依赖，同时含编译期 Application/BuildConfig stub，不能替代完整 Android 构建。",
+      "product_diff_check_exit": 0,
+      "android_build_verified_this_review": false,
+      "physical_phone_verified": false,
+      "physical_watch_verified": false
+    }
+  }
+}
+
+[NOTE: subagent modified files the parent previously read — re-read before editing: /data/data/com.termux/files/home/elcton-phone-release-029-20261114/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt, /data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/diag_emulator_smoke.py, /data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/test_keepalive_gate.py]

@@ -1,0 +1,33 @@
+Authorized seam first: source gate rejects it before extension.
+test_business_callback_mutation_is_rejected_not_filtered (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_business_callback_mutation_is_rejected_not_filtered) ... ok
+test_exact_authorized_observation_reverses_to_version_025_baseline (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_exact_authorized_observation_reverses_to_version_025_baseline) ... FAIL
+test_lost_full_message_persistence_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_lost_full_message_persistence_is_rejected) ... ok
+test_missing_or_duplicated_authorized_diagnostic_seam_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_missing_or_duplicated_authorized_diagnostic_seam_is_rejected) ... ok
+test_sdk_authorization_branch_mutation_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_sdk_authorization_branch_mutation_is_rejected) ... ok
+test_swapping_scan_and_cancel_callbacks_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_swapping_scan_and_cancel_callbacks_is_rejected) ... ok
+test_transport_send_success_code_mutation_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_transport_send_success_code_mutation_is_rejected) ... ok
+test_unrequested_activity_lifecycle_side_effect_is_rejected (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_unrequested_activity_lifecycle_side_effect_is_rejected) ... ok
+
+======================================================================
+FAIL: test_exact_authorized_observation_reverses_to_version_025_baseline (qa.test_diag_source_gate.DiagnosticSourceGateTest.test_exact_authorized_observation_reverses_to_version_025_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diag-mcp-027/qa/test_diag_source_gate.py", line 23, in test_exact_authorized_observation_reverses_to_version_025_baseline
+    self.assertEqual([], gate.scope_errors(self.source(ACTIVITY), self.source(PROBE)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['Unapproved non-diagnostic source mutatio[50 chars].kt']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'Unapproved non-diagnostic source mutation: app/src/main/java/com/hcbiu/elcton/MainActivity.kt'
+
+- []
++ ['Unapproved non-diagnostic source mutation: '
++  'app/src/main/java/com/hcbiu/elcton/MainActivity.kt']
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.705s
+
+FAILED (failures=1)
+
+Exit: 1

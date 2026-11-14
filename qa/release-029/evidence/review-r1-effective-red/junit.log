@@ -1,0 +1,50 @@
+JUnit version 4.13.2
+........E.........E..E..E.E.Exception in thread "Thread-4" java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.tryAcquireSharedNanos(AbstractQueuedSynchronizer.java:1167)
+	at java.base/java.util.concurrent.CountDownLatch.await(CountDownLatch.java:276)
+	at com.hcbiu.elcton.MainThreadActions.invoke(MainThreadActions.kt:26)
+	at com.hcbiu.elcton.MainThreadActionsTest$Harness.start$lambda$0(MainThreadActionsTest.kt:19)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+E
+Time: 0.356
+There were 6 failures:
+1) confirmedWatchImportCannotReplaceAnEditorSaveMadeWhileWaiting(com.hcbiu.elcton.PhoneActionsTest)
+org.junit.ComparisonFailure: expected:<2026-[10]-01> but was:<2026-[09]-01>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.hcbiu.elcton.PhoneActionsTest.confirmedWatchImportCannotReplaceAnEditorSaveMadeWhileWaiting(PhoneActionsTest.kt:79)
+2) oldRegistrationSuccessCannotUnregisterAnAlreadyEstablishedReplacement(com.hcbiu.elcton.SyncEngineTest)
+java.lang.AssertionError: Old SDK success must not release current receiver expected:<4> but was:<5>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at com.hcbiu.elcton.SyncEngineTest.oldRegistrationSuccessCannotUnregisterAnAlreadyEstablishedReplacement(SyncEngineTest.kt:232)
+3) freshEpochExecutesAndExceptionsCannotStrandTheWaitingThread(com.hcbiu.elcton.MainThreadActionsTest)
+java.lang.IllegalStateException: PRIVATE_COURSE_CONTENT
+	at com.hcbiu.elcton.MainThreadActionsTest.freshEpochExecutesAndExceptionsCannotStrandTheWaitingThread$lambda$1(MainThreadActionsTest.kt:39)
+	at com.hcbiu.elcton.MainThreadActions.invoke$lambda$0(MainThreadActions.kt:22)
+	at com.hcbiu.elcton.MainThreadActionsTest$Harness.drain(MainThreadActionsTest.kt:20)
+	at com.hcbiu.elcton.MainThreadActionsTest.freshEpochExecutesAndExceptionsCannotStrandTheWaitingThread(MainThreadActionsTest.kt:39)
+4) failedPostCannotLeaveAnUnboundedWait(com.hcbiu.elcton.MainThreadActionsTest)
+org.junit.ComparisonFailure: expected:<action_dispatch_[unavailable]> but was:<action_dispatch_[timeout]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.hcbiu.elcton.MainThreadActionsTest.failedPostCannotLeaveAnUnboundedWait(MainThreadActionsTest.kt:44)
+5) stopInvalidatesQueuedWritesEvenWhenInterruptedWorkerHasNotRunCleanup(com.hcbiu.elcton.MainThreadActionsTest)
+java.lang.AssertionError: expected:<0> but was:<1>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.hcbiu.elcton.MainThreadActionsTest.stopInvalidatesQueuedWritesEvenWhenInterruptedWorkerHasNotRunCleanup(MainThreadActionsTest.kt:26)
+6) interruptedRequestCannotExecuteAfterItsSocketIsClosed(com.hcbiu.elcton.MainThreadActionsTest)
+java.lang.AssertionError: expected:<0> but was:<1>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.hcbiu.elcton.MainThreadActionsTest.interruptedRequestCannotExecuteAfterItsSocketIsClosed(MainThreadActionsTest.kt:31)
+
+FAILURES!!!
+Tests run: 23,  Failures: 6
+

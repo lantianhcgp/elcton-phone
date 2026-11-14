@@ -1,0 +1,17 @@
+{
+  "qa/McpHost.kt": {
+    "relocated_to": "before/qa/McpHost.kt.original",
+    "sha256": "763bd1ec7f6d84b04121a1f9f15db1a9c74402053bd1179bd9e71e552f3e68da",
+    "bytes": 2269
+  },
+  "qa/P2pCandidateBuildTest.kt": {
+    "relocated_to": "before/qa/P2pCandidateBuildTest.kt.original",
+    "sha256": "4e9710f7e5d482c9a3a9f38546d6dd907550f64a0b013dda70c191d2a1b9f60d",
+    "bytes": 645
+  },
+  "qa/test_mcp_clients.py": {
+    "relocated_to": "before/qa/test_mcp_clients.py.original",
+    "sha256": "a4dcce518e647b4c325b8eb347d45a21ae46f882fc21e609bfff2877c1a88349",
+    "bytes": 9965
+  }
+}

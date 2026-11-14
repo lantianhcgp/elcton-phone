@@ -21,7 +21,9 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 /** One-request-per-connection, loopback-only authenticated HTTP JSON-RPC endpoint. */
-class DiagnosticMcpServer(private val token: String, private val tools: DiagnosticTools, private val port: Int = 8766) {
+class DiagnosticMcpServer(private val token: String, private val tools: McpToolProvider, private val port: Int = 8766) {
+    // Preserve the exact historical constructor used by diagnostic consumers/tests.
+    constructor(token: String, tools: DiagnosticTools, port: Int = 8766) : this(token, tools as McpToolProvider, port)
     init {
         require(token.isNotEmpty() && token.length <= 256 && token.all { it.code in 33..126 }) { "Invalid MCP credential" }
         require(port in 0..65535) { "Invalid MCP port" }

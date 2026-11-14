@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CI-only real Android 0.2.6 diagnostics acceptance; never runs adb on a phone.
+"""CI-only real Android 0.2.9 diagnostics acceptance; never runs adb on a phone.
 
 python3 -B qa/diag_emulator_smoke.py            # GitHub emulator job only
 python3 -B qa/diag_emulator_smoke.py --self-test # local verifier tests, NO adb
@@ -24,6 +24,8 @@ import xml.etree.ElementTree as ET
 PACKAGE = "com.hcbiu.elcton"
 CERT = "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94"
 SHOTS = ("settings-version", "diagnostics-head", "diagnostics-tail")
+TOOLS = {"error_tail", "diag_read", "version_info", "fs_read", "sync_connect", "sync_disconnect", "start_import",
+         "start_publish", "abort", "courses_read", "courses_write", "pickup_import", "devices_list", "pairing_state", "sync_state"}
 
 
 def require(condition, label):
@@ -43,6 +45,40 @@ def certificate_identity(text):
     digests = re.findall(r"^Signer #\d+ certificate SHA-256 digest: ([0-9a-fA-F]{64})$", text, re.M)
     require(len(digests) == 1 and digests[0].lower() == CERT, "Actual APK signer must be fixed production certificate")
     return digests[0].lower()
+
+
+def verify_keepalive_report(report, head, run_id, sdk):
+    require(isinstance(report, dict), "Missing keepalive report object")
+    require(report.get("passed") is True and report.get("sourceSha") == head and report.get("qaRun") == run_id,
+            "Keepalive receipt is not for this exact successful run")
+    for key in ("defaultOn", "onNotification", "backgroundHttp",
+                "offPortClosed", "offNotificationRemoved", "businessAndTokenAndErrorsUnchanged",
+                "bindFailureUiOnAndHintRetained", "startingNotActive", "activeChannelDeniedStopsAndUiOn",
+                "backgroundChannelDeniedEventStops", "stopDisablesChoice", "stopInactive"):
+        require(report.get(key) is True, "Missing real keepalive assertion: " + key)
+    if sdk >= 33:
+        for key in ("permissionDeniedFailClosed", "defaultOnNoPermissionRetainsChoice", "noNotificationWithoutPermission"):
+            require(report.get(key) is True, "Notification denial must retain choice but fail closed on API33+: " + key)
+    return report
+
+
+def verify_one_test(result, label):
+    text = result.stdout.decode(errors="replace")
+    require(result.returncode == 0 and len(re.findall(r"^OK \(1 test\)\r?$", text, re.M)) == 1
+            and not re.search(r"FAILURES|INSTRUMENTATION_FAILED|INSTRUMENTATION_ABORTED", text),
+            label + " failed; full logs/evidence retained")
+
+
+def settings_navigation_node(tree):
+    # Original 026 accessibility evidence has TWO text="设置" labels: header + tab.
+    # Select the enabled focusable navigation subtree, never a title by coordinates.
+    candidates = [node for node in tree.iter('node')
+                  if node.get('package') == PACKAGE and node.get('enabled') == 'true'
+                  and node.get('focusable') == 'true'
+                  and any(child.get('package') == PACKAGE and child.get('text') == '设置'
+                          for child in node.iter('node'))]
+    require(len(candidates) == 1, 'Actual enabled settings navigation must be unambiguous')
+    return candidates[0]
 
 
 def pixel_stats(image, area, step):
@@ -95,8 +131,8 @@ class Harness:
         require(self.serial is not None, "No verified CI emulator")
         return self.run(label, ["adb", "-s", self.serial, "shell"], timeout=timeout, stdin=(command + "\n").encode(), check=check)
 
-    def harvest(self):
-        result = self.adb("diag-harvest", "exec-out", "run-as", PACKAGE, "tar", "-cf", "-", "-C", "files", "qa-diag-evidence", timeout=45)
+    def harvest(self, label="diag-harvest"):
+        result = self.adb(label, "exec-out", "run-as", PACKAGE, "tar", "-cf", "-", "-C", "files", "qa-diag-evidence", timeout=45)
         target = self.out / "diag-product"
         target.mkdir(exist_ok=True)
         with tarfile.open(fileobj=io.BytesIO(result.stdout), mode="r:") as archive:
@@ -117,8 +153,10 @@ class Harness:
         from PIL import Image
         report = json.loads((target / "report.json").read_text())
         require(report.get("passed") is True and report.get("sourceSha") == head and report.get("qaRun") == run_id, "Instrumentation receipt is not for this exact successful run")
-        require(report.get("packageVersion") == "0.2.6" and report.get("packageCode") == 8, "Installed package identity")
-        for key in ("activityRecreated", "fullTextUntruncated", "closeVisibleAndWorks", "androidNioHttpRead", "businessFilesUnchanged"):
+        require(report.get("packageVersion") == "0.2.9" and report.get("packageCode") == 11, "Installed package identity")
+        tools = report.get("httpTools")
+        require(isinstance(tools, list) and len(tools) == 15 and set(tools) == TOOLS, "Real Android exact 15-tool receipt")
+        for key in ("activityRecreated", "fullTextUntruncated", "closeVisibleAndWorks", "androidNioHttpRead", "businessFilesUnchanged", "originalDiagnosticSchemas", "sharedPhoneActivityRecreated"):
             require(report.get(key) is True, "Missing real instrumentation assertion: " + key)
         expected = (target / "synthetic-expected.txt").read_bytes()
         require(hashlib.sha256(expected).hexdigest() == report["syntheticFullSha256"], "Synthetic full diagnostic digest")
@@ -159,6 +197,182 @@ class Harness:
         require(len(text) == 4, "Incomplete business-file fingerprint")
         return sorted(text)
 
+    def ui_tree(self, label):
+        # A real accessibility dump, not an instrumentation launch or preference injection.
+        remote = "/sdcard/qa-normal-mcp-window.xml"
+        self.adb(label + "-dump", "shell", "uiautomator", "dump", remote, timeout=20)
+        raw = self.adb(label + "-xml", "exec-out", "cat", remote).stdout
+        (self.out / (label + ".xml")).write_bytes(raw)
+        return ET.fromstring(raw)
+
+    def tap_node(self, label, node):
+        bounds = re.fullmatch(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", node.get("bounds", ""))
+        if bounds is None or node.get("enabled") != "true":
+            raise AssertionError("Actual UI target is not enabled/bounded")
+        left, top, right, bottom = map(int, bounds.groups())
+        require(left < right and top < bottom, "Actual UI target has no visible bounds")
+        self.adb(label, "shell", "input", "tap", str((left + right) // 2), str((top + bottom) // 2))
+
+    def keepalive_switch(self, label):
+        tree = self.ui_tree(label + "-navigation")
+        settings = settings_navigation_node(tree)
+        if settings.get("selected") != "true":
+            self.tap_node(label + "-settings-tap", settings)
+        for attempt in range(8):
+            tree = self.ui_tree(label + "-settings-" + str(attempt))
+            nodes = [node for node in tree.iter("node") if node.get("package") == PACKAGE]
+            switches = [node for node in nodes if node.get("resource-id") in ("mcp-keepalive-switch", PACKAGE + ":id/mcp-keepalive-switch")
+                        or (node.get("class") == "android.widget.Switch" and node.get("checkable") == "true")]
+            if switches:
+                require(len(switches) == 1 and any(node.get("text") == "MCP 保持运行" for node in nodes), "Real MCP settings switch/label missing or ambiguous")
+                return switches[0]
+            scrollable = [node for node in nodes if node.get("scrollable") == "true"]
+            require(len(scrollable) == 1, "Actual settings scroll container must be unambiguous")
+            bounds = re.fullmatch(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", scrollable[0].get("bounds", ""))
+            if bounds is None:
+                raise AssertionError("Missing settings scroll bounds")
+            left, top, right, bottom = map(int, bounds.groups())
+            x = str((left + right) // 2)
+            self.adb(label + "-scroll-" + str(attempt), "shell", "input", "swipe", x, str(top + (bottom - top) * 4 // 5),
+                     x, str(top + (bottom - top) // 5), "300")
+        raise AssertionError("Real MCP settings switch did not become visible")
+
+    def normal_fingerprint(self, label):
+        values = self.business(label + "-business")
+        # Hash private data, never archive or print the token. NO preference writes.
+        result = self.adb(label + "-private-hashes", "shell", "run-as", PACKAGE, "sha256sum", "files/mcp/token", "files/diagnostics/wear-errors.jsonl")
+        lines = result.stdout.decode().splitlines()
+        require(len(lines) == 2 and all(re.fullmatch(r"[0-9a-f]{64}  files/(mcp/token|diagnostics/wear-errors.jsonl)", line) for line in lines),
+                "Complete actual token/error fingerprints required")
+        return values + sorted(lines)
+
+    def foreground_receipt(self, label, pid):
+        services = self.adb(label + "-services", "shell", "dumpsys", "activity", "services", PACKAGE).stdout.decode(errors="replace")
+        # Match only the actual app service record; some unrelated service cannot satisfy this gate.
+        records = re.split(r"(?=\* ServiceRecord\{)", services)
+        service = [record for record in records if re.search(r"\* ServiceRecord\{[^\n]*com\.hcbiu\.elcton/\.McpKeepAliveService[\s}]", record)]
+        require(len(service) == 1 and re.search(r"\bisForeground=true\b", service[0])
+                and re.search(r"\bforegroundId=8766\b", service[0]), "Actual MCP service must be foreground with its notification")
+        require(re.search(r"\bapp=ProcessRecord\{[^\n]*\b" + re.escape(pid) + r":com\.hcbiu\.elcton/", service[0]), "Foreground service must belong to the same ordinary app PID")
+        activities = self.adb(label + "-activities", "shell", "dumpsys", "activity", "activities").stdout.decode(errors="replace")
+        require(not re.search(r"(?:mResumedActivity|topResumedActivity|ResumedActivity)[^\n]*com\.hcbiu\.elcton/", activities), "App Activity still resumed after Home")
+        running = self.adb(label + "-instrumentation", "shell", "dumpsys", "activity").stdout.decode(errors="replace")
+        require("ACTIVITY MANAGER" in running and not re.search(r"ActiveInstrumentation\{", running), "Ordinary background evidence cannot run under instrumentation")
+        actual_pid = self.adb(label + "-pid", "shell", "pidof", PACKAGE).stdout.decode().strip()
+        require(actual_pid == pid, "Normal process unexpectedly restarted during bounded observation")
+
+    def background_rpc(self, suite, label, name, arguments):
+        ident = label
+        value = {"jsonrpc": "2.0", "id": ident, "method": "tools/call", "params": {"name": name, "arguments": arguments}}
+        status, headers, body = suite.urllib_request("POST", "/mcp", value)
+        # Suite independently checks lengths/UTF8/credential non-echo before evidence is written.
+        (self.out / (label + "-response.json")).write_bytes(body)
+        (self.out / (label + "-http.json")).write_text(json.dumps({"status": status, "headers": headers}) + "\n")
+        reply = json.loads(body)
+        require(status == 200 and reply.get("jsonrpc") == "2.0" and reply.get("id") == ident and "error" not in reply, "Real background urllib RPC envelope")
+        result = reply.get("result", {})
+        content = result.get("content", [])
+        require(result.get("isError") is False and len(content) == 1 and content[0].get("type") == "text", "Real background tool must succeed")
+        data = json.loads(content[0]["text"])
+        require(result.get("structuredContent") == data, "Background tool text/structured content mismatch")
+        return data
+
+    def verify_normal_background(self, suite, expected, sdk):
+        self.report["stage"] = "ordinary-background-fgs"; self.save()
+        before = self.normal_fingerprint("background-before")
+        switch = self.keepalive_switch("normal-enable")
+        require(switch.get("checked") == "true", "Normal cold-start must preserve default-on FGS choice")
+        checked = self.keepalive_switch("normal-on-readback")
+        require(checked.get("checked") == "true", "Cold-start default-on settings readback")
+        frame = self.adb("normal-keepalive-on-frame", "exec-out", "screencap", "-p").stdout
+        (self.out / "normal-keepalive-on.png").write_bytes(frame)
+        pid = self.adb("normal-background-initial-pid", "shell", "pidof", PACKAGE).stdout.decode().strip()
+        require(re.fullmatch(r"[0-9]+", pid) is not None, "Require one ordinary app PID")
+        self.adb("normal-home", "shell", "input", "keyevent", "KEYCODE_HOME")
+        observations = []
+        self.report["normalBackgroundFgs"] = {"passed": False, "scope": "ordinary emulator process; screen-on Home; finite 5s/3 probes; NOT Doze/sticky/phone proof",
+                                               "pid": pid, "observations": observations}
+        self.save()
+        started = time.monotonic()
+        for attempt, offset in enumerate((0.0, 2.5, 5.0), 1):
+            # A bounded three-sample measurement, not an unbounded keepalive/watchdog.
+            delay = started + offset - time.monotonic()
+            if delay > 0:
+                time.sleep(delay)
+            label = "normal-background-" + str(attempt)
+            self.foreground_receipt(label, pid)
+            version = self.background_rpc(suite, label + "-version", "version_info", {})
+            require(version.get("versionName") == "0.2.9" and version.get("versionCode") == 11 and version.get("packageName") == PACKAGE, "Ordinary background exact version")
+            errors = self.background_rpc(suite, label + "-errors", "error_tail", {"limit": 1})
+            require(len(errors.get("errors", [])) == 1 and errors["errors"][0]["full"] == expected, "Ordinary background persisted full error")
+            observations.append({"attempt": attempt, "elapsedSeconds": time.monotonic() - started, "foreground": True, "ordinaryProcess": True, "urllibVersionAndError": True})
+            self.save()
+        self.adb("normal-notification-shade", "shell", "cmd", "statusbar", "expand-notifications")
+        tree = self.ui_tree("normal-notification-on")
+        require(any(node.get("package") == "com.android.systemui" and node.get("text") == "MCP 保持运行" for node in tree.iter("node")), "Actual FGS notification must be visible")
+        notification = self.adb("normal-notification-frame", "exec-out", "screencap", "-p").stdout
+        (self.out / "normal-notification-on.png").write_bytes(notification)
+        # Scope the action to the smallest real notification subtree containing our title.
+        containers = [node for node in tree.iter("node") if any(child.get("text") == "MCP 保持运行" for child in node.iter("node"))
+                      and any(child.get("text") in ("停止", "STOP", "Stop") for child in node.iter("node"))]
+        container = min(containers, key=lambda node: len(list(node.iter("node")))) if containers else ET.Element("empty")
+        stop = [node for node in container.iter("node") if node.get("package") == "com.android.systemui" and node.get("text") in ("停止", "STOP", "Stop") and node.get("enabled") == "true"]
+        require(len(stop) == 1, "Actual notification STOP must be visible and unambiguous; no settings/service fallback")
+        prior_events = self.adb("normal-stop-events-before", "logcat", "-d", "-s", "ElctonMcp:I", "*:S").stdout.decode(errors="replace")
+        self.tap_node("normal-notification-stop-tap", stop[0])
+        stop_path = "actual-notification-action"
+        self.adb("normal-stop-shade-collapse", "shell", "cmd", "statusbar", "collapse")
+        # A tap is not a STOP acknowledgement. Wait for durable false and completed
+        # service cleanup before ANY post-ack HTTP probe; never count a timeout as closure.
+        acknowledged = False
+        deadline = time.monotonic() + 10
+        attempt = 0
+        while time.monotonic() < deadline:
+            prefs = self.adb("normal-stop-choice-" + str(attempt), "exec-out", "run-as", PACKAGE,
+                             "cat", "shared_prefs/mcp_session.xml").stdout
+            choice = ET.fromstring(prefs).find("boolean[@name='keep_running']")
+            events = self.adb("normal-stop-events-" + str(attempt), "logcat", "-d", "-s", "ElctonMcp:I", "*:S").stdout.decode(errors="replace")
+            services = self.adb("normal-stop-ack-services-" + str(attempt), "shell", "dumpsys", "activity", "services", PACKAGE).stdout.decode(errors="replace")
+            acknowledged = (choice is not None and choice.get("value") == "false"
+                            and events.count("MCP notification STOP delivered") > prior_events.count("MCP notification STOP delivered")
+                            and events.count("MCP stop handled; active=false; choiceSaved=true") > prior_events.count("MCP stop handled; active=false; choiceSaved=true")
+                            and "McpKeepAliveService" not in services and "isForeground=true" not in services)
+            if acknowledged:
+                break
+            attempt += 1
+            time.sleep(0.1)
+        require(acknowledged, "Actual notification STOP not completed/persisted; no HTTP probe before acknowledgement")
+        # Observe closure while still stopped; don't mistake HTTP errors or adb forward success for a closed listener.
+        import socket
+        closed = False
+        for attempt in range(3):
+            try:
+                with socket.create_connection(("127.0.0.1", 18766), timeout=1) as peer:
+                    peer.settimeout(1)
+                    peer.sendall(b"GET /health HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n")
+                    raw = peer.recv(65536)
+                (self.out / ("normal-stop-port-" + str(attempt) + ".bin")).write_bytes(raw)
+                closed = raw == b""  # adb forward accepts locally then closes when the device listener is gone.
+            except (ConnectionRefusedError, ConnectionResetError, BrokenPipeError):
+                closed = True
+                (self.out / ("normal-stop-port-" + str(attempt) + ".txt")).write_text("Actual socket refused/reset/broken pipe; no HTTP response\n")
+            require(closed, "Actual listener still responds after explicit user stop (timeouts/errors aren't closure)")
+        stopped = self.adb("normal-stop-services", "shell", "dumpsys", "activity", "services", PACKAGE).stdout.decode(errors="replace")
+        require("isForeground=true" not in stopped and "McpKeepAliveService" not in stopped, "Foreground service remains after explicit stop")
+        self.adb("normal-stop-notifications", "shell", "dumpsys", "notification", "--noredact")
+        self.adb("normal-stop-shade", "shell", "cmd", "statusbar", "expand-notifications")
+        off_tree = self.ui_tree("normal-notification-off")
+        require(not any(node.get("text") == "MCP 保持运行" for node in off_tree.iter("node")), "MCP foreground notification still visible after stop")
+        self.adb("normal-stop-final-collapse", "shell", "cmd", "statusbar", "collapse")
+        self.adb("normal-off-return", "shell", "am", "start", "-W", "-n", PACKAGE + "/.MainActivity")
+        switch = self.keepalive_switch("normal-off-readback")
+        require(switch.get("checked") == "false", "Explicit stop did not persist real UI opt-out")
+        require(self.normal_fingerprint("background-after") == before, "Background FGS/HTTP/stop mutated business, token or errors")
+        self.report["normalBackgroundFgs"].update(passed=True, stopPath=stop_path, offPortClosed=True, offNotificationRemoved=True,
+                                                 businessAndTokenAndErrorsUnchanged=True, observationCount=len(observations),
+                                                 defaultOn=True, stopDisablesChoice=True, stopInactive=True, stopAcknowledged=True)
+        self.save()
+
     def execute(self):
         # First guard is local-only. No adb, APK install or app launch may precede it.
         require(os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get("RUNNER_OS") == "Linux", "CI emulator only: refusing all local/phone adb actions")
@@ -198,15 +412,34 @@ class Harness:
         run_id = str(uuid.uuid4()); self.report["qaRun"] = run_id; self.save()
         self.live_file = (self.out / "diag-logcat-live.txt").open("wb")
         self.live = subprocess.Popen(["adb", "-s", self.serial, "logcat", "-v", "threadtime"], stdout=self.live_file, stderr=subprocess.STDOUT)
+        sdk_level = int(self.report["sdk"])
+        # Grant before the rule launches MainActivity: API33 default-on has a one-shot prompt.
+        if sdk_level >= 33:
+            self.adb("diag-permission-grant", "shell", "pm", "grant", PACKAGE, "android.permission.POST_NOTIFICATIONS")
+        self.report["stage"] = "diagnostics-instrumentation"; self.save()
         result = self.adb("diag-instrumentation", "shell", "am", "instrument", "-w", "-r", "-e", "diag_emulator", "true", "-e", "diag_source_sha", head,
-                          "-e", "diag_run", run_id, "-e", "class", PACKAGE + ".DiagnosticsUiTest", PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner", timeout=420, check=False)
+                          "-e", "diag_run", run_id, "-e", "class", PACKAGE + ".DiagnosticsUiTest#passiveRuntimePersistsAndShowsCompleteSyntheticError", PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner", timeout=420, check=False)
         target = self.harvest()
-        text = result.stdout.decode(errors="replace")
-        require(result.returncode == 0 and re.search(r"OK \(1 test\)", text) and not re.search(r"FAILURES|INSTRUMENTATION_FAILED|INSTRUMENTATION_ABORTED", text), "Real diagnostic instrumentation failed; full logs/evidence retained")
+        verify_one_test(result, "Real diagnostic instrumentation")
         self.verify_evidence(target, head, run_id)
+        self.report["stage"] = "shared-phone-local-mcp-instrumentation"; self.save()
+        shared = self.adb("shared-phone-instrumentation", "shell", "am", "instrument", "-w", "-r", "-e", "diag_emulator", "true",
+                          "-e", "diag_source_sha", head, "-e", "diag_run", run_id, "-e", "class",
+                          PACKAGE + ".DiagnosticsUiTest#sharedPhoneSurvivesRecreationAndPureMcpCourseFixtureRoundTrips",
+                          PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner", timeout=180, check=False)
+        shared_target = self.harvest("shared-phone-harvest")
+        verify_one_test(shared, "Real sharedPhone/local courses instrumentation")
+        shared_report = json.loads((shared_target / "shared-phone-report.json").read_text())
+        require(shared_report.get("passed") is True and shared_report.get("sourceSha") == head and shared_report.get("qaRun") == run_id,
+                "Shared phone receipt must match this successful real run")
+        for key in ("sharedPhoneActivityRecreated", "pureMcpCoursesWriteRead", "previewDoesNotWrite", "confirmedWritePersisted", "protectedDataUnchanged", "fixtureFilesRestored"):
+            require(shared_report.get(key) is True, "Missing real sharedPhone/course fixture assertion: " + key)
+        self.report["sharedPhoneInstrumentationReceipt"] = shared_report; self.save()
         self.report["stage"] = "normal-app-read-only-http"; self.save()
         # Instrumentation may finish its target process. Explicitly cold-start the actual app on emulator only.
         self.shell("normal-force-stop", "am force-stop " + PACKAGE)
+        if sdk_level >= 33:
+            self.adb("normal-permission-grant", "shell", "pm", "grant", PACKAGE, "android.permission.POST_NOTIFICATIONS")
         launch = self.adb("normal-launch", "shell", "am", "start", "-W", "-n", PACKAGE + "/.MainActivity", timeout=45)
         require(not re.search(r"Error:|Error type|Exception", launch.stdout.decode(errors="replace")), "Normal emulator application launch failed")
         self.adb("http-forward", "forward", "tcp:18766", "tcp:8766")
@@ -224,8 +457,12 @@ class Harness:
             time.sleep(0.2)
         require(ready, "Normal Android Application passive server health timeout")
         before = self.business("http-business-before")
-        self.run("android-http-selftest", [sys.executable, "-B", "qa/mcp_http_selftest.py", "--url", "http://127.0.0.1:18766", "--adb-token", PACKAGE,
-                   "--adb-token-path", "files/mcp/token", "--adb-serial", self.serial], timeout=120)
+        http = self.run("android-http-selftest", [sys.executable, "-B", "qa/mcp_http_selftest.py", "--url", "http://127.0.0.1:18766", "--adb-token", PACKAGE,
+                        "--adb-token-path", "files/mcp/token", "--adb-serial", self.serial], timeout=120)
+        http_report = json.loads(http.stdout)
+        require(http_report.get("ok") is True and http_report.get("mode") == "read-only-app"
+                and http_report.get("clients") == ["urllib", "curl"], "Normal app must run genuine urllib AND curl selftests")
+        self.report["normalHttpSelftest"] = http_report; self.save()
         # Prove a second actual process recovered the persisted synthetic error and both NIO files.
         sys.path.insert(0, str(Path("qa").resolve()))
         from mcp_http_selftest import Suite
@@ -234,7 +471,7 @@ class Harness:
         suite = Suite("http://127.0.0.1:18766", token_result.stdout.decode("ascii"))
         expected = (target / "synthetic-expected.txt").read_text()
         failed, version = suite.call("version_info")
-        require(not failed and version.get("versionName") == "0.2.6" and version.get("versionCode") == 8 and version.get("packageName") == PACKAGE, "Cold-process real version_info")
+        require(not failed and version.get("versionName") == "0.2.9" and version.get("versionCode") == 11 and version.get("packageName") == PACKAGE, "Cold-process real version_info")
         failed, errors = suite.call("error_tail", {"limit": 1})
         require(not failed and errors["errors"][-1]["full"] == expected, "Cold-process actual persisted error_tail")
         failed, diagnostic = suite.call("diag_read")
@@ -245,6 +482,27 @@ class Harness:
             decoded = json.loads(data["text"]) if path.endswith("state.json") else json.loads(data["text"].splitlines()[-1])
             require((decoded["latestError"]["full"] if path.endswith("state.json") else decoded["full"]) == expected, "Real persisted whitelist content " + path)
         require(self.business("http-business-after") == before, "Read-only HTTP must not mutate timetable")
+        self.verify_normal_background(suite, expected, sdk_level)
+        # Run destructive notification-denial/bind-failure instrumentation last.
+        # Revoking notification permission may kill the emulator process; a channel
+        # downgrade is not reliably reversible by recreating the same channel ID.
+        # Do not contaminate the independently measured ordinary process above.
+        self.report["stage"] = "keepalive-instrumentation"; self.save()
+        self.shell("keepalive-cold-stop", "am force-stop " + PACKAGE)
+        if sdk_level >= 33:
+            self.adb("keepalive-permission-denied", "shell", "pm", "revoke", PACKAGE, "android.permission.POST_NOTIFICATIONS")
+        keepalive = self.adb("keepalive-instrumentation", "shell", "am", "instrument", "-w", "-r", "-e", "diag_emulator", "true",
+                             "-e", "diag_source_sha", head, "-e", "diag_run", run_id, "-e", "class", PACKAGE + ".McpKeepAliveTest",
+                             PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner", timeout=180, check=False)
+        keepalive_target = self.harvest("keepalive-harvest")
+        verify_one_test(keepalive, "Real keepalive instrumentation")
+        keepalive_report = json.loads((keepalive_target / "keepalive-report.json").read_text())
+        self.report["keepaliveInstrumentationReceipt"] = verify_keepalive_report(keepalive_report, head, run_id, sdk_level)
+        for name in ("mcp-keepalive-on.png", "mcp-keepalive-on.xml"):
+            require((keepalive_target / name).is_file() and (keepalive_target / name).stat().st_size > 0, "Missing keepalive visual evidence: " + name)
+        require(any(node.get("package") == PACKAGE for node in ET.parse(keepalive_target / "mcp-keepalive-on.xml").getroot().iter("node")),
+                "Keepalive screenshot hierarchy must be actual app")
+        self.shell("keepalive-final-stop", "am force-stop " + PACKAGE)
         logs = self.adb("diag-logcat-final", "logcat", "-d", "-v", "threadtime").stdout.decode(errors="replace")
         require(not re.search(r"FATAL EXCEPTION[\s\S]{0,1500}Process: com\.hcbiu\.elcton[,\s]", logs), "App crash in actual emulator logcat")
         self.report.update(passed=True, stage="complete", normalColdProcessPersistence=True, androidNioHttpRead=True, businessFilesUnchanged=True,
@@ -257,7 +515,7 @@ class Harness:
             try:
                 self.adb("diag-final-logcat", "logcat", "-d", "-v", "threadtime", timeout=15, check=False)
                 if not self.report.get("passed"):
-                    self.harvest()
+                    self.harvest("diag-final-harvest")
             except Exception as error:
                 (self.out / "diag-final-harvest-error.txt").write_text(type(error).__name__ + ": " + str(error))
         if self.live:

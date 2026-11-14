@@ -1,0 +1,3 @@
+real_socket_health=200; captured_running=true; writing=true
+stopListener_returned; live_running=false; real_socket_refused=true
+released_old_write; writer_quiescent=true; final_file_running=true

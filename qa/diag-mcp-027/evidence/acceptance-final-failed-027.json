@@ -1,0 +1,36 @@
+{
+  "buildSourceSha": "762e46dc5c7d172191e3b0a1b50027c05b524082",
+  "buildSucceeded": true,
+  "api33Accepted": false,
+  "api34Accepted": false,
+  "phoneErrorTailAccepted": false,
+  "api33Failure": "ordinary-background-fgs: initial socket probe after notification stop received HTTP 200 headers",
+  "api34Failure": "Exercise real APK without a paired device failed; detailed cause not confirmed in this run",
+  "phoneFailure": "curl connect timeout/urllib timeout; response zero bytes",
+  "fullArtifacts": [
+    "https://github.com/lantianhcgp/elcton-phone/actions/runs/43552523971",
+    "https://github.com/lantianhcgp/elcton-phone/actions/runs/43552577848"
+  ],
+  "keyEvidence": {
+    "diag-host-report.json": {
+      "bytes": 7525,
+      "sha256": "56e88046e9ef2136fee4bcebcb6cfc011feb45d318c5594519d26bb2838cf2c6"
+    },
+    "normal-notification-on.xml": {
+      "bytes": 38083,
+      "sha256": "df12826c73fbbe17c4206aed70507b87fb3320b5946421b0e9a719c783a70d7d"
+    },
+    "normal-notification-stop-tap.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "normal-stop-shade-collapse.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "normal-stop-port-0.bin": {
+      "bytes": 130,
+      "sha256": "432744751801c3e3b0a0bf1de5f2c0d2f8885919a256917a3ba3dd927f4ad18b"
+    }
+  }
+}

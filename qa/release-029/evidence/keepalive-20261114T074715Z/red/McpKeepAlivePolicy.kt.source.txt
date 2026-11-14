@@ -1,0 +1,13 @@
+package com.hcbiu.elcton
+
+/** RED-only extraction of 0.2.7 decisions; replaced only after JUnit proves the missing behavior. */
+object McpKeepAlivePolicy {
+    fun enabled(savedChoice: Boolean?): Boolean = savedChoice ?: false
+
+    @Suppress("UNUSED_PARAMETER")
+    fun canStart(
+        savedChoice: Boolean?,
+        notificationsAvailable: Boolean,
+        stopRequested: Boolean = false
+    ): Boolean = enabled(savedChoice) && notificationsAvailable
+}

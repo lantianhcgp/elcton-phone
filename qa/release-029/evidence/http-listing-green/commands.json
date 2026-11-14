@@ -1,0 +1,23 @@
+[
+  {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "qa.test_mcp029_http_listing"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "python",
+      "-B",
+      "qa/mcp_http_selftest.py",
+      "--classpath",
+      "qa/release-029/evidence/host-prepush-151/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+    ],
+    "exit": 0
+  }
+]

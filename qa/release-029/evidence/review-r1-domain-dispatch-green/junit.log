@@ -1,0 +1,13 @@
+JUnit version 4.13.2
+................E.........
+Time: 0.383
+There was 1 failure:
+1) cancelAndCloseInvalidateCallbacksTimersAndLateReceiverRegistration(com.hcbiu.elcton.SyncEngineTest)
+java.lang.AssertionError: Late receiver success must be cleaned up
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.hcbiu.elcton.SyncEngineTest.cancelAndCloseInvalidateCallbacksTimersAndLateReceiverRegistration(SyncEngineTest.kt:191)
+
+FAILURES!!!
+Tests run: 25,  Failures: 1
+

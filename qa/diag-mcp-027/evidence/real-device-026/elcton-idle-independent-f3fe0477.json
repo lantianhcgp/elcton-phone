@@ -1,0 +1,7 @@
+{
+  "independentRestore": "",
+  "restoredAbsent": true,
+  "wakeOnlyNoUnlock": true,
+  "rishExit": 0,
+  "connectFailure": "TimeoutError: timed out"
+}

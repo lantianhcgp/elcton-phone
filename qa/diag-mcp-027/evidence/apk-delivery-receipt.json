@@ -1,0 +1,27 @@
+{
+  "conclusion": "success",
+  "databaseId": 43552199858,
+  "headSha": "762e46dc5c7d172191e3b0a1b50027c05b524082",
+  "status": "completed",
+  "url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43552199858",
+  "archivePath": ".diag-build/apk43552199858",
+  "artifactName": "android-probe-762e46dc5c7d172191e3b0a1b50027c05b524082",
+  "deliveredPath": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.7-code9-762e46dc-signed.apk",
+  "sourceSha": "762e46dc5c7d172191e3b0a1b50027c05b524082",
+  "bytes": 8200371,
+  "manifestIdentity": {
+    "versionCode": 9,
+    "versionName": "0.2.7",
+    "compileSdkVersion": 34,
+    "compileSdkVersionCodename": "14",
+    "package": "com.hcbiu.elcton",
+    "platformBuildVersionCode": 34,
+    "platformBuildVersionName": 14
+  },
+  "sha256": "e13687cf6b19ba8d1ebb0f68bdea3a0152d082843b6cbde038f185c09d198fcc",
+  "certificateSha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+  "signatureVerified": true,
+  "zipValid": true,
+  "installedOnPhone": false,
+  "phoneHttpAccepted": false
+}

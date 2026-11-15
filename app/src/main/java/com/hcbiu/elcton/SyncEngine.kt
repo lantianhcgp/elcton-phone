@@ -367,8 +367,8 @@ class SyncEngine(
 
     fun cancel() {
         if (closed) return
-        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close"else"cancel"))
-        try { trace?.bind(generation, trigger = if(closingTrace)"close"else"cancel") } catch (_: Throwable) {}
+        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close" else "cancel"))
+        try { trace?.bind(generation, trigger = if(closingTrace)"close" else "cancel") } catch (_: Throwable) {}
         val id = session?.transferId ?: exporting?.id
         if (id != null) send("{" + Wire.header("CANCEL", id) + "}", reportFailure = false)
         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal()
@@ -392,7 +392,7 @@ class SyncEngine(
         fun accepts() = gen == generation && sendAttempts.accepts(attempt)
         var sendContext:P2pTrace.Context? = null
         try {
-            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close"else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
+            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close" else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
             transport.send(device, text, { code ->
                 emitTrace("SEND_RESULT", mapOf("generation" to gen, "attemptId" to attempt, "resultCode" to code, "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
                 main(gen) {

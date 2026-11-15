@@ -1,0 +1,15 @@
+test_eleven_pinned_spaces_and_twenty_one_committed_byte_inverse (__main__.WhitespaceFollowupTest.test_eleven_pinned_spaces_and_twenty_one_committed_byte_inverse) ... FAIL
+
+======================================================================
+FAIL: test_eleven_pinned_spaces_and_twenty_one_committed_byte_inverse (__main__.WhitespaceFollowupTest.test_eleven_pinned_spaces_and_twenty_one_committed_byte_inverse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/whitespace-followup-host/test_whitespace_followup.py", line 56, in test_eleven_pinned_spaces_and_twenty_one_committed_byte_inverse
+    self.assertEqual(current, expected, name + ": exact pinned insertions only")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'pac[4152 chars] else"engine")\n                    .put("stag[6633 chars]n}\n' != b'pac[4152 chars] else "engine")\n                    .put("sta[6640 chars]n}\n' : P2pTrace.kt: exact pinned insertions only
+
+----------------------------------------------------------------------
+Ran 1 test in 0.019s
+
+FAILED (failures=1)

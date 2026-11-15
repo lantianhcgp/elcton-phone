@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "before_source": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+  "unchanged_original_gate_sha256": {
+    "qa/p2p-trace-0210/r6/ci/pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+    "qa/p2p-trace-0210/r6/ci/verify_r6.py": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+    "qa/p2p-trace-0210/r6/ci/r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+    "qa/diag_source_gate.py": "b3df0fc43ac03f918109a2e32d13ab8a46066b7df0601f0c0b9598e375a7a7b1",
+    ".github/workflows/build.yml": "ae61e37478852ca2263912eb0f28792aed6b4aab93bec0632a281177b9f12487",
+    ".github/workflows/ui-smoke.yml": "9f7c80dff5db343a240ee90728cd97ac025da87930ad2233037a4834ae57d095"
+  },
+  "scope": "Actual immutable CI/helper criteria after whitespace source correction"
+}

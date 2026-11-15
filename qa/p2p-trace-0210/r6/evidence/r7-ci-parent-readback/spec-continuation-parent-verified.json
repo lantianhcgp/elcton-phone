@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "inputs": 90,
+  "report_sha256": "17558e0101a1401c451a75a200db7a46ef1bc0da9b21e6ec4776394a02879016",
+  "raw_sha256": "0c8c41795727996c154d22f8f4ba870216cff35ca986a093ebc2c1c7f03ebfcd",
+  "manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+  "prior_q3_FAIL_preserved_sha256": "0c825c47a2eee3f8cdb13bbe8b92f11730bbc8063de3ef516a6f4663e93098d4",
+  "scope": "Actual independent SPEC source delta readback only, not CI acceptance",
+  "at": "2026-11-15 20:29:36 +0800"
+}

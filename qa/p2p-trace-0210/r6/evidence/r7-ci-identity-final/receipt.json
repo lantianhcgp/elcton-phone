@@ -1,0 +1,32 @@
+{
+  "registered": true,
+  "total_spaces": 21,
+  "rows": [
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "total_ascii_spaces": 14,
+      "q2_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "first_candidate_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "final_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+      "bytes": 10677,
+      "exact_inverse_to_Q2": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "total_ascii_spaces": 5,
+      "q2_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "first_candidate_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "final_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+      "bytes": 24342,
+      "exact_inverse_to_Q2": true
+    }
+  ],
+  "test_spaces": 2,
+  "previous_first_manifest_sha256": "0ec127fc49dcc783957ee0be23014e95f694443fc96f3af82fb5710d4f2b94b9",
+  "new_manifest_sha256": "bdf622a46c0ca0a73ca39f408163abfa1a6e314dae61f86078198c6645a6c3d0",
+  "old_first_table_unchanged": true,
+  "table_sha256": "57eaa8f0c7e66df11926f6624b08fd51dd98165c70889c0237be2a5ef9ac9275",
+  "old_test_assertions_changed": false,
+  "version_unchanged": true,
+  "scope": "Final identity-only registration, all prior attempts retained; independent source review pending"
+}

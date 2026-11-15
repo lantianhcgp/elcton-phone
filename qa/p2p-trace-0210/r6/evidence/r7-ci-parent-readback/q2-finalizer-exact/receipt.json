@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "git_source": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+  "path": "qa/p2p-trace-0210/finalize_r6_delivery.py",
+  "q2_sha256": "0abc0f8586765c355d17104181b43f661bfa6b944e7ed6c06b9fe9beb9274e77",
+  "exact_git_bytes_match_prior_review_manifest": true,
+  "q3_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+  "q2_bytes": 8572,
+  "q3_bytes": 8728,
+  "prior_review_failure_is_incomplete_reconstruction_not_product_bug": true
+}

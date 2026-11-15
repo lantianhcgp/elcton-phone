@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "fresh_compile": true,
+  "source_drift": [],
+  "JVM": 171,
+  "python": 133,
+  "skip": 0,
+  "HTTP": 3784,
+  "runtime": 4,
+  "native": 8,
+  "Huawei_type_exit": 0,
+  "review_live_inputs": 90,
+  "receipt_sha256": "5f3f2d6d5e4a8598ca03c8e7c5b31ee0d598164ffafd19d9f8d838b552a89d47",
+  "source_manifest_sha256": "8cdaca1027e8ae4f4da6505bd0a505a0b1d9364356be197653b7775c1b814911"
+}

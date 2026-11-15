@@ -1,0 +1,177 @@
+{
+  "commit": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+  "scope": "11 ASCII-space follow-up only",
+  "inserted_ascii_spaces": 11,
+  "total_spaces_vs_commit": 21,
+  "files": {
+    "P2pTrace.kt": {
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "before_snapshot": "before/P2pTrace.kt",
+      "after_snapshot": "after/P2pTrace.kt",
+      "inverse_snapshot": "inverse/P2pTrace.kt",
+      "committed_snapshot": "committed/P2pTrace.kt",
+      "inverse_committed_snapshot": "inverse-committed/P2pTrace.kt",
+      "before_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "after_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+      "committed_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "mutations": [
+        {
+          "line": 77,
+          "line_byte_offset_0based": 125,
+          "before_byte_offset_0based": 4083,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 4083
+        },
+        {
+          "line": 138,
+          "line_byte_offset_0based": 100,
+          "before_byte_offset_0based": 9000,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 9001
+        },
+        {
+          "line": 141,
+          "line_byte_offset_0based": 100,
+          "before_byte_offset_0based": 9212,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 9214
+        },
+        {
+          "line": 150,
+          "line_byte_offset_0based": 85,
+          "before_byte_offset_0based": 9824,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 9827
+        },
+        {
+          "line": 153,
+          "line_byte_offset_0based": 64,
+          "before_byte_offset_0based": 10072,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 10076
+        },
+        {
+          "line": 158,
+          "line_byte_offset_0based": 58,
+          "before_byte_offset_0based": 10367,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 10372
+        },
+        {
+          "line": 161,
+          "line_byte_offset_0based": 83,
+          "before_byte_offset_0based": 10579,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 10585
+        }
+      ],
+      "changed_lines": [
+        77,
+        138,
+        141,
+        150,
+        153,
+        158,
+        161
+      ],
+      "expected_total_spaces_vs_commit": 14
+    },
+    "SyncEngine.kt": {
+      "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "before_snapshot": "before/SyncEngine.kt",
+      "after_snapshot": "after/SyncEngine.kt",
+      "inverse_snapshot": "inverse/SyncEngine.kt",
+      "committed_snapshot": "committed/SyncEngine.kt",
+      "inverse_committed_snapshot": "inverse-committed/SyncEngine.kt",
+      "before_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "after_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+      "committed_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "mutations": [
+        {
+          "line": 370,
+          "line_byte_offset_0based": 103,
+          "before_byte_offset_0based": 21355,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 21355
+        },
+        {
+          "line": 371,
+          "line_byte_offset_0based": 76,
+          "before_byte_offset_0based": 21442,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 21443
+        }
+      ],
+      "changed_lines": [
+        370,
+        371
+      ],
+      "expected_total_spaces_vs_commit": 5
+    },
+    "P2pTraceEngineTest.kt": {
+      "path": "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+      "before_snapshot": "before/P2pTraceEngineTest.kt",
+      "after_snapshot": "after/P2pTraceEngineTest.kt",
+      "inverse_snapshot": "inverse/P2pTraceEngineTest.kt",
+      "committed_snapshot": "committed/P2pTraceEngineTest.kt",
+      "inverse_committed_snapshot": "inverse-committed/P2pTraceEngineTest.kt",
+      "before_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "after_sha256": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+      "committed_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "mutations": [
+        {
+          "line": 65,
+          "line_byte_offset_0based": 195,
+          "before_byte_offset_0based": 7026,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 7026
+        },
+        {
+          "line": 65,
+          "line_byte_offset_0based": 199,
+          "before_byte_offset_0based": 7030,
+          "insert_hex": "20",
+          "after_byte_offset_0based": 7031
+        }
+      ],
+      "changed_lines": [
+        65
+      ],
+      "expected_total_spaces_vs_commit": 2
+    }
+  },
+  "protected_historical_sha256": {
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen-before.json": "9f1e15ae621a6dadcceb4a2ca73243d1beed9be3d1090a6113211b5199eeb9fd",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/P2pTrace.kt.before.source.txt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/SyncEngine.kt.before.source.txt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/mutation.json": "c9540f4c3ee253bdf354398c37970e95d6baf8ccd2248bf6238a37a15e251d01",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/ci-failure.original.log": "ec410e9d31fb4fda9a8fb88c159ae0825c9bd16a6ab66925a61ad8659d40bcab",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/red.raw.log": "dd6338d9bba0782ed9f60964bcf930215950fb5f47b65858ac9b9677a79d231d",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/red.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/green.raw.log": "4281f1c91be47403bdf880ee4244963772bdb80050477fbabc0e283059258a2e",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/green.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/P2pTrace.kt.after.source.txt": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/P2pTrace.kt.inverse.source.txt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/SyncEngine.kt.after.source.txt": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/SyncEngine.kt.inverse.source.txt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/two-source.diff": "e8521fac3269a5d8f5736dd75c1a596d7cda7ce38ec1ec6263ce89eb6b6fe1c3",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/protected-after.json": "bf519bd43bc347df84cf365c0dff05ab8d58f9bdc8e08096ac00d7d4f33cca51",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/receipt.json": "446c5f0dfefe1938fb0400630ed1eb98e2c9bd6e14d92414ab8ceb631a4886f4",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/app/build.gradle.kts.source.txt": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/current-identity.json.source.txt": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/r6-spec-q2.json.source.txt": "c193a6ec05ee79d93d62e01f43eb78f5c2d90194f96b46a54ccacde3ffe3e646",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/r6-quality-q2.json.source.txt": "0f714f321ed96f28dd44450ea90b9a6db2dcaa3f1c6a2aafb2dcf69aad7d3c7e",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/spec-q2-raw.txt.source.txt": "d94c01466c647a93c019b47ff45739a1c1a59de753c1ec79ca3f38841b607b32",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/quality-q2-raw.txt.source.txt": "81e03917062a8fb81eae8375f918bcb3cff4f8cfce4587cc51edbd93e0daf246",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/Q2-REVIEW-SCOPE.md.source.txt": "0c1448516c800aa845bc1fa1aadbb3406da96f56ce8004d020e2a25d2cf44044",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/input-q2/reviewed-manifest.json.source.txt": "761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/input-q2/Q2-DELTA.json.source.txt": "f5bc5ecdc0c513e7001d5c4dca2a35eb1dbe26cb97e3354f5ec0821b2846ec62",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/qa/p2p-trace-0210/r6/reviews/input-q2/current-helper.diff.source.txt": "dc04053ca761403e90f3a1ff655d212f0ef607a45bcabc356ea9c533dd10261a",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/app/src/main/java/com/hcbiu/elcton/WearProbe.kt.source.txt": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt.source.txt": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+    "qa/p2p-trace-0210/r6/whitespace-host/test_whitespace_repair.py": "87652c1b67e1b1d31c2bfecbfc6ff898c6c50b10863e774b8795bdd020b37bcf",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-compiler-green/compile.raw.log": "11310e1a9aca40df1e9fe71920fa030784632f6f29a12a69cef37e01704fd4e6",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-compiler-green/compile.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-compiler-green/receipt.json": "811924bec8478159fe370e244f8838866b5483126979fa1dab304c4057b34e28"
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "axis": "quality",
+  "revision": "Q2",
+  "passed": true,
+  "input_files": 63,
+  "input_manifest_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/input-q2/reviewed-manifest.json",
+  "input_manifest_sha256": "761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c",
+  "reviewed_inputs": {
+    "app/build.gradle.kts": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": "51dff0ac27fb73c10fe470b7a0911d5592c2fcaa7fdade1cbdf18077b4c1f6e2",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": "787661d88f7161ffa5ec209a4621d59b60aeacb68fd07953ae026fd6c1b9aba4",
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": "85cac5a68fe22e07e56d18aebb709d4e92874b4ebc186fe50721bbfc9873a127",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+    "qa/P2pCandidateBuildTest.kt": "1fd25cedaed4f90ba4f8cf132b8ac5ef06382fe87eea84b20c2055f62dced31d",
+    "qa/diag_emulator_smoke.py": "0b01c00a0a853a5e436c5ae31f2e7368fde4a4317c7637d87220aee141c1fce1",
+    "qa/diag_source_gate.py": "b3df0fc43ac03f918109a2e32d13ab8a46066b7df0601f0c0b9598e375a7a7b1",
+    "qa/p2p-trace-0210/R7-AUTHORIZATION-AND-PLAN.md": "1117bb0fe8275e01b41ce4717f3720cd364983b3a0bfcfcade43aadd8d30494e",
+    "qa/p2p-trace-0210/R7-QUALITY-HELPER-REPAIR-SCOPE.md": "63fad9cf2cb010b628f9e4affe4e05ecd995204da4f2b467d97dd9a91e7a811d",
+    "qa/p2p-trace-0210/check_r6_scope.py": "9edd5eb5d81cabb8bae85cf8473e9dfa9c5b55057897896f03203a3b5d2d58b0",
+    "qa/p2p-trace-0210/close_r6_reviews.py": "a43a3e4dfa17d4461162213a8d2cb088358a4caa58d7d38e17bd149f3fb1c2a3",
+    "qa/p2p-trace-0210/commit_r6_reviewed.py": "8513bee3363c07feffb44f9a51c931f03ceb0689ce9ebe68f2f375a18a88415b",
+    "qa/p2p-trace-0210/finalize_r6_delivery.py": "0abc0f8586765c355d17104181b43f661bfa6b944e7ed6c06b9fe9beb9274e77",
+    "qa/p2p-trace-0210/generate_ci_baseline.py": "bc7a366d2cbc9fa46159db436fe584ba90ab3ec3d1cc9eba10f6d313ae1de56e",
+    "qa/p2p-trace-0210/migrate_r6_quality_identity.py": "fa1ffb2aaf6566746ebccaefd9996fc92411d2ca1b13cd0948d1d8108c4a0718",
+    "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in": "d54c61255f96b922b31a74a3b0d44b77e62912d31bef208eea1f5c0c882081a9",
+    "qa/p2p-trace-0210/prepare_r6_publish.py": "faf10639a099008d631c60950f6fe89ba381fc691338319fa79311149124541c",
+    "qa/p2p-trace-0210/prepare_r7_q2_review.py": "7b2dc6e0d3d3666a2a25a24ca1a9e4aadcafa594a68b0c31ced50c8207ea9978",
+    "qa/p2p-trace-0210/r6/FINAL-WAKEUP.json": "20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b",
+    "qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md": "7c31de4a4264c75f86e93086957df4723d78f29355dcf3b28fbca3b8353a444a",
+    "qa/p2p-trace-0210/r6/ci/added-cases.json": "62e9fe15ef80aede736a5b0916251213abda733c41a371f2bc3c34d5786858c7",
+    "qa/p2p-trace-0210/r6/ci/pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+    "qa/p2p-trace-0210/r6/ci/r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+    "qa/p2p-trace-0210/r6/ci/self_test.py": "e3bb62ad949921dd125e9b8f6cefd518fa1c77bdb72f59e4dc258ab570920df6",
+    "qa/p2p-trace-0210/r6/ci/verify_r6.py": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+    "qa/p2p-trace-0210/r6/current-identity.json": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+    "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json": "9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9",
+    "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+    "qa/p2p-trace-0210/r6/evidence/identity-migration/table.json": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+    "qa/p2p-trace-0210/r6/evidence/r7-delivery-helper-guard/green.raw.log": "fc9140325a4dfef6d1231d52978b52cb7ab4ad0df011efc53c77a94edbf9f8c5",
+    "qa/p2p-trace-0210/r6/evidence/r7-delivery-helper-guard/receipt.json": "ef78c496618c09e1a0b058cf4b32d848d22bbf5ba54128f54b6cb6f85ac2a546",
+    "qa/p2p-trace-0210/r6/evidence/r7-delivery-helper-guard/red.raw.log": "d7be7ca334f89409436e3d14cebd2bcfbe1e970193abd635a4e69b60cecd0eb4",
+    "qa/p2p-trace-0210/r6/evidence/r7-helper-repair/before-bindings.json": "f6e981e0aed198a9dcbbf26a37110eec717daeba8ea1f669bc8406677d412c33",
+    "qa/p2p-trace-0210/r6/evidence/r7-helper-repair/green.raw.log": "277b618a39ed8d091ef1da56b10b98d65c9b932058063e1129bd087e41b7085d",
+    "qa/p2p-trace-0210/r6/evidence/r7-helper-repair/receipt.json": "a2e255c14a3ceb79a548439ab515e90a0ead79fb0336760c77e7d6eef0f845b9",
+    "qa/p2p-trace-0210/r6/evidence/r7-helper-repair/recovery.json": "a27df4312f59c860fe7c746cd175033e4f1712d19fdb0b42f727de1aae3abf74",
+    "qa/p2p-trace-0210/r6/evidence/r7-helper-repair/red.raw.log": "7e32a8f875531c10c9606e6d814b6eb79a1af413832d9706e2ff793733f705f9",
+    "qa/p2p-trace-0210/r6/evidence/r7-scope-cache-check/receipt.json": "14a8786e7ed51764728e9f2fec72bda5987bc0e52e27a94582c60f088a412330",
+    "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt": "af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9",
+    "qa/p2p-trace-0210/r6/helper-repair-host/test_finalize_output_guard.py": "e6468c1faf3b5bb994418694429f34c2071f9c1e20a613c570fd66ec30109b10",
+    "qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py": "64b066c0e1a37e60d846c1acdaf0f9c1a4c202013db0dcb8cc7d4f1fabebe09d",
+    "qa/p2p-trace-0210/r6/reviews/Q2-REVIEW-SCOPE.md": "0c1448516c800aa845bc1fa1aadbb3406da96f56ce8004d020e2a25d2cf44044",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in": "6b62c0f49d1775a2a0cb4c005a01964165444637eea82445a9cfdad4c73af9b8",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py": "7c33cc10ddf03894ab6a84674eadee73c50f8e10bbfa92eaef40192e4476cc7e",
+    "qa/p2p-trace-0210/register_r6_identity.py": "5da56f3ea199a2cf3d39fb147824a3160b4577239eab85c9647e46b9e4c14bff",
+    "qa/p2p-trace-0210/rerun_r7_watch_frozen.py": "ff454bc5a90cea0b1d680b72e37f63c7b1c22b7a4ca61badeed3e82d0d83dbe5",
+    "qa/p2p-trace-0210/run_host.py": "1aa479adafc0038b40870c927ef3cad93fb14c3d759af22a1a08e88a5c9a8bc6",
+    "qa/p2p-trace-0210/run_native_host.py": "a948e0ff9719b936532cfeb0170b5bb8bf97dd7f8a9a8e6d89151e11d252e396",
+    "qa/p2p-trace-0210/run_r6_final_regressions.py": "d933845de8ad585b7387e60224ee90d7a750c1387ca4390bd2173048866fa67c",
+    "qa/p2p-trace-0210/run_runtime_fault_host.py": "f3cba84f77eb526e14b80d4fcd30f69151c29aaef4ad26545a85cb3580de0533",
+    "qa/p2p-trace-0210/verify_r7_cached_scope.py": "c3a66ade549a7af21e4474f29ba75c51538fe8c6b3ec662dbe314acdb72527b0",
+    "qa/release-029/verify_apk.py": "c005b01419683235c3c21c8ea1345e8dd7fe7bad910a7c0850497c479c712e18",
+    "qa/test_mcp027_scope.py": "7915281eb830e010c4890f3a5cf15f54a69d4d407ed45bfd17fba1aeeee0157f"
+  },
+  "raw_reply_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/quality-q2-raw.txt",
+  "raw_reply_sha256": "81e03917062a8fb81eae8375f918bcb3cff4f8cfce4587cc51edbd93e0daf246",
+  "raw_encoding": "UTF-8",
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing": [],
+  "missing_requirements": [],
+  "critical": [],
+  "important": [],
+  "suggestions": [
+    {
+      "blocking": false,
+      "path": "qa/p2p-trace-0210/commit_r6_reviewed.py",
+      "lines": "25-29",
+      "suggestion": "可增加fresh compile原receipt/raw校验与显式拒reuse字段以加强机器自证；本轮正常R7明确无resume、不复制/伪造旧回执，不能将局部摘要探针或future pending判成当前实质FAIL。"
+    }
+  ],
+  "coverage": {
+    "live_inputs_hashed": 63,
+    "live_input_bytes": 441968,
+    "live_mismatches": [],
+    "unchanged_prior_inputs": 38,
+    "changed_prior_inputs": 3,
+    "new_inputs": 22,
+    "inheritance_basis": "仅Q1 path/SHA完全相等的38输入已有非阻断结论；原两个helper FAIL重新实读验证，不整体继承原FAIL为PASS",
+    "unchanged_inputs": [
+      "app/build.gradle.kts",
+      "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt",
+      "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt",
+      "qa/P2pCandidateBuildTest.kt",
+      "qa/diag_emulator_smoke.py",
+      "qa/diag_source_gate.py",
+      "qa/p2p-trace-0210/generate_ci_baseline.py",
+      "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in",
+      "qa/p2p-trace-0210/r6/FINAL-WAKEUP.json",
+      "qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md",
+      "qa/p2p-trace-0210/r6/ci/added-cases.json",
+      "qa/p2p-trace-0210/r6/ci/pipeline.py",
+      "qa/p2p-trace-0210/r6/ci/r6_common.py",
+      "qa/p2p-trace-0210/r6/ci/self_test.py",
+      "qa/p2p-trace-0210/r6/ci/verify_r6.py",
+      "qa/p2p-trace-0210/r6/current-identity.json",
+      "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json",
+      "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json",
+      "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt",
+      "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in",
+      "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in",
+      "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py",
+      "qa/p2p-trace-0210/register_r6_identity.py",
+      "qa/p2p-trace-0210/run_host.py",
+      "qa/p2p-trace-0210/run_native_host.py",
+      "qa/p2p-trace-0210/run_runtime_fault_host.py",
+      "qa/release-029/verify_apk.py",
+      "qa/test_mcp027_scope.py"
+    ],
+    "complete_new_or_changed_script_reads": [
+      "qa/p2p-trace-0210/check_r6_scope.py",
+      "qa/p2p-trace-0210/run_r6_final_regressions.py",
+      "qa/p2p-trace-0210/migrate_r6_quality_identity.py",
+      "qa/p2p-trace-0210/finalize_r6_delivery.py",
+      "qa/p2p-trace-0210/close_r6_reviews.py",
+      "qa/p2p-trace-0210/commit_r6_reviewed.py",
+      "qa/p2p-trace-0210/prepare_r6_publish.py",
+      "qa/p2p-trace-0210/prepare_r7_q2_review.py",
+      "qa/p2p-trace-0210/verify_r7_cached_scope.py",
+      "qa/p2p-trace-0210/rerun_r7_watch_frozen.py",
+      "qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py",
+      "qa/p2p-trace-0210/r6/helper-repair-host/test_finalize_output_guard.py"
+    ],
+    "four_product_changes": 0,
+    "original_business_assertions_changed": false,
+    "helper_non_guard_suffix_byte_identical": true,
+    "migration_AST_identical_except_single_removed_old_table_write": true,
+    "fresh_static_review_current_delivery_not_old_worker_SHA": true
+  },
+  "resolved_original_findings": [
+    {
+      "id": "Q-R7-Q1-001",
+      "accepted": true,
+      "paths_lines": "migrate_r6_quality_identity.py:29-50; recovery.json:3-19; 原SPEC R2:50,131-138",
+      "proof": "仅删除旧table写入的AST最小差分；旧table精确4f12恢复，current102cc保持；原FAIL不改"
+    },
+    {
+      "id": "Q-R7-Q1-002",
+      "accepted": true,
+      "paths_lines": "check_r6_scope.py:40-49; run_r6_final_regressions.py:24-33; test_helper_repair.py:22-143",
+      "proof": "真实RED6/7fail→GREEN6；parent/symlink/canonical/exclusive guard实际prefix内存验证；非guard原字节相等"
+    }
+  ],
+  "evidence": {
+    "formal_SPEC_Q2": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/r6-spec-q2.json",
+      "sha256": "c193a6ec05ee79d93d62e01f43eb78f5c2d90194f96b46a54ccacde3ffe3e646",
+      "raw_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/spec-q2-raw.txt",
+      "raw_sha256": "d94c01466c647a93c019b47ff45739a1c1a59de753c1ec79ca3f38841b607b32",
+      "axis_manifest_mapping_verified": true
+    },
+    "preserved_original_quality_reports": {
+      "r6-quality-r1.json": "d60ccb9fef5481042829787c5d2ac19e1e9be1667fa8aceef7276a7ee6fbf12e",
+      "quality-raw.txt": "bb6c2b373bbdcedf41d11a084ca6974409200cc2d07818ce9dcc56ad7cc9b5de",
+      "r6-quality-q1.json": "7378b05a5ce2a9ed83ae817ff2bc838d72cd8e7a46191696481ce0ebdb571974",
+      "quality-q1-raw.txt": "6709452158b00c262e74042d20756322894a252cc076a32e06f1ed25afadc058"
+    },
+    "restoration": {
+      "old_table_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+      "current_table_sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+      "old_path_equals_saved_original_bytes": true,
+      "current_table_equals_overwritten_snapshot_bytes": true,
+      "artifact_bindings_verified": 32
+    },
+    "real_TDD_readback": {
+      "helper_RED": {
+        "tests": 6,
+        "failures": 7,
+        "errors": 0,
+        "exit": 1,
+        "raw_sha256": "7e32a8f875531c10c9606e6d814b6eb79a1af413832d9706e2ff793733f705f9"
+      },
+      "helper_GREEN": {
+        "tests": 6,
+        "failures": 0,
+        "exit": 0,
+        "raw_sha256": "277b618a39ed8d091ef1da56b10b98d65c9b932058063e1129bd087e41b7085d"
+      },
+      "delivery_RED": {
+        "tests": 4,
+        "failures": 2,
+        "exit": 1,
+        "raw_sha256": "d7be7ca334f89409436e3d14cebd2bcfbe1e970193abd635a4e69b60cecd0eb4"
+      },
+      "delivery_GREEN": {
+        "tests": 4,
+        "failures": 0,
+        "exit": 0,
+        "raw_sha256": "fc9140325a4dfef6d1231d52978b52cb7ab4ad0df011efc53c77a94edbf9f8c5"
+      },
+      "test_snapshot_byte_equal": true,
+      "rerun_writing_sandbox_tests_by_reviewer": false
+    },
+    "readonly_executions": {
+      "self_test_command": "python -B qa/p2p-trace-0210/r6/ci/self_test.py",
+      "self_test_exit": 0,
+      "self_test_tests": 7,
+      "self_test_failures": 0,
+      "self_test_skips": 0,
+      "syntax_checks": 12,
+      "actual_help_exits_zero": 7,
+      "guard_prefix_memory_cases": [
+        {
+          "script": "check_r6_scope.py",
+          "case": "parent",
+          "passed": true
+        },
+        {
+          "script": "check_r6_scope.py",
+          "case": "base",
+          "passed": true
+        },
+        {
+          "script": "check_r6_scope.py",
+          "case": "outside",
+          "passed": true
+        },
+        {
+          "script": "check_r6_scope.py",
+          "case": "valid",
+          "passed": true
+        },
+        {
+          "script": "check_r6_scope.py",
+          "case": "symlink",
+          "passed": true
+        },
+        {
+          "script": "run_r6_final_regressions.py",
+          "case": "parent",
+          "passed": true
+        },
+        {
+          "script": "run_r6_final_regressions.py",
+          "case": "base",
+          "passed": true
+        },
+        {
+          "script": "run_r6_final_regressions.py",
+          "case": "outside",
+          "passed": true
+        },
+        {
+          "script": "run_r6_final_regressions.py",
+          "case": "valid",
+          "passed": true
+        },
+        {
+          "script": "run_r6_final_regressions.py",
+          "case": "symlink",
+          "passed": true
+        },
+        {
+          "script": "finalize_r6_delivery.py",
+          "case": "parent",
+          "passed": true
+        },
+        {
+          "script": "finalize_r6_delivery.py",
+          "case": "base",
+          "passed": true
+        },
+        {
+          "script": "finalize_r6_delivery.py",
+          "case": "outside",
+          "passed": true
+        },
+        {
+          "script": "finalize_r6_delivery.py",
+          "case": "valid",
+          "passed": true
+        },
+        {
+          "script": "finalize_r6_delivery.py",
+          "case": "symlink",
+          "passed": true
+        },
+        {
+          "script": "verify_r7_cached_scope.py",
+          "case": "parent",
+          "passed": true
+        },
+        {
+          "script": "verify_r7_cached_scope.py",
+          "case": "base",
+          "passed": true
+        },
+        {
+          "script": "verify_r7_cached_scope.py",
+          "case": "outside",
+          "passed": true
+        },
+        {
+          "script": "verify_r7_cached_scope.py",
+          "case": "valid",
+          "passed": true
+        },
+        {
+          "script": "verify_r7_cached_scope.py",
+          "case": "symlink",
+          "passed": true
+        },
+        {
+          "script": "rerun_r7_watch_frozen.py",
+          "case": "parent",
+          "passed": true
+        },
+        {
+          "script": "rerun_r7_watch_frozen.py",
+          "case": "base",
+          "passed": true
+        },
+        {
+          "script": "rerun_r7_watch_frozen.py",
+          "case": "outside",
+          "passed": true
+        },
+        {
+          "script": "rerun_r7_watch_frozen.py",
+          "case": "valid",
+          "passed": true
+        },
+        {
+          "script": "rerun_r7_watch_frozen.py",
+          "case": "symlink",
+          "passed": true
+        }
+      ],
+      "guard_filesystem_writes_mocked": true,
+      "delta_secret_scan_files": 25,
+      "delta_secret_matches": []
+    },
+    "original_assertions": {
+      "literal_full_byte_inverses": 7,
+      "old_test_full_byte_inverses": 35,
+      "sourcegate_byte_inverse": true,
+      "workflow_bytes_equal_BASE": true,
+      "Git_tree_entries_exact": 9461,
+      "baseline_rehashed_this_run": false
+    },
+    "observer_issues": [
+      {
+        "issue": "KeyError: reviewed_inputs on historical SPEC R2 schema",
+        "resolution": "按真实schema evidence identity_reconciliation table_sha256与path行号核实；独立恢复+artifact32检查exit0",
+        "product_failure": false
+      },
+      {
+        "issue": "StopIteration: tuple build assignment omitted by first AST observer",
+        "resolution": "AST targets递归定位实际tuple赋值，25真实prefix内存探针重新完成",
+        "product_failure": false
+      }
+    ]
+  },
+  "limitations": [
+    "仅当前63冻结输入的独立QUALITY新增/修复delta审查，38旧同源结论精确继承；不是完整产品重新审查。",
+    "原helper及delivery真实RED/GREEN原件实际读/hash，未重新执行会创建sandbox的完整测试；新增25 guard探针为actual AST+mock下层只读执行。",
+    "9461原full内容哈希receipt继承、small test/source/literal整字节逆恢复及Git tree/cache佐证；没有fresh2GB hash。",
+    "正常R7编排必须双PASS之后fresh runner无resume、实际7 lane及watch445；不复制/伪造旧回执。本审不把未来这些步骤称通过或因pending虚构FAIL。",
+    "未来精确commit/push、真实build172、原API33 three-button diagnostics/full、签名APK交付及真机握手均非本审执行/成功；delivery_ready=false，android_claims=false。",
+    "没有产品/旧测试/manifest/旧报告改写、设备/网络/CI/fullcompile/Chromium/stage/watch写操作；仅独占创建这两份正式质量报告。"
+  ],
+  "delivery_ready": false,
+  "android_claims": false,
+  "review_mode": "independent_direct_source_quality_delta_review",
+  "created_at": "2026-11-15T19:30:31.675583+08:00",
+  "summary": "独立 QUALITY Q2 PASS：63live输入及正式SPEC Q2/raw绑定核实，38同SHA输入精确继承；原两helper finding经最小差分、真实RED6/7fail→GREEN6、delivery RED4/2fail→GREEN4、旧4f12表恢复与current102cc表保持闭合。新增接线完整实读，原断言未改；只读self-test7、12语法/7实际help和25实际AST内存guard探针通过。仅质量源审，不代表未来fresh回归/commit/CI/交付已通过。"
+}

@@ -1,0 +1,17 @@
+R7 Q3 continuation — independent current-agent QUALITY delta review
+VERDICT: PASS. Source quality only; NOT fresh regression, CI, APK delivery or device acceptance.
+
+实际独立工具核验：
+1. Frozen90 live全部SHA相符，manifest d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624。Q2完整63项映射：58项同SHA继承旧QUALITY判定、5项变化独立审查、27项新增完整映射。原Q3的85项全同SHA，续件新增5项。SPEC continuation真实PASS，JSON 17558e0101a1401c451a75a200db7a46ef1bc0da9b21e6ec4776394a02879016，raw 0c8c41795727996c154d22f8f4ba870216cff35ca986a093ebc2c1c7f03ebfcd。
+2. P2pTrace lines77/138/141/150/153/158/161恰14个ASCII空格；SyncEngine lines370/371/395恰5个；新增P2pTraceEngineTest line65恰2个。仅按保存mutation指定byte offsets倒序删除新增ASCII20，先follow-up后首候选，整源逆还原等saved a0881bf7原字节及Q2 SHA。各changed line独立SequenceMatcher核全部差异insert-only ASCII20。无全局去空格、无断言/字符串/非空白token或业务变化。原test35不重新作跨历史版本审计；继承原Q3受保护源检查与原85同SHA绑定，新测试不在原35 inventory。
+3. Current identity/table/receipt SHA相符，只两个当前产品SHA行变化；所有旧/R5/Q2/首候选身份字段、其他源行、版本、old-manifest字段保留。首table与Q1 table逐字节等保存副本。32项protected historical SHA实核相符，包括首CI失败及首候选编译失败原件。
+4. 精确Q2 finalizer 8572字节SHA 0abc0f8586765c355d17104181b43f661bfa6b944e7ed6c06b9fe9beb9274e77等Q2 manifest。独立重现整old/current diff，仅table路径2处、closure-q3路径1处、新line100-101/107谱系文案。当前finalizer全部123行已读；格式/当前提交源/run/suite、APK v2单签cert/package/versionCode12/versionName0.2.10/bytes/artifact/raw/manifest/输出边界与独占APK复制门禁不变。不重建错误worker snapshot。
+5. 实际Kotlin1.9.24：RED compile exit1、11 literal错误；首候选green目录实际compile exit1、10剩余错误，原件保留。最终receipt 1dc1f78f283e1e8b33d7e91f3835af6b538e9494a16a52cf3e5deadbd3db6a15：compile0/JUnit0/171，全部61源SHA等live current；raw与.exit实核。compile raw 53352a60ee217cc647ef18f24a88eeb59696f11f7e34a676159558a62ffb9fb0，JUnit raw 06de6e301ddcd0c9e79e24344ff500d5660eebefb4cdca250f379f4d14ed0bfc含OK (171 tests)。只核既有实际证据，不重跑编译器或hash大二进制。编译warning非本增量错误，不阻断。
+6. commit_r7_q3.py全部97行已读：固定diag分支/a088 HEAD/current closure/live输入；新r7-final-regression-q3必须7 lane exit0，171/133/skip0/3784、lane raw/current source SHA，拒绝reused_actual_prior_source_identical_compile；full JVM compile/JUnit exit0与raw171；Q3 watch445/445/0/0/input_unchanged；显式源/文本路径及后缀白名单、拒绝symlink/二进制/凭据/生成overlay、staged subset、reviewed blob前后核。git add为列举paths非-A。无push/dispatch/POST/Release/device。
+7. close_r7_q3_continuation.py全部36行已读：SPEC再QUALITY passed=true、完整90map/manifest/raw SHA、非空raw、阻断列表空；exclusive new closure-q3，旧Q2与Q3 FAIL原件不改。seal不等于CI验收。
+8. 两identity registration全部69/78行、compiler runner全部72行、GETretry helper全部56行已读。GET helper核原pipeline/common字节、只wait/readback/fetch、拒绝payload与dispatch/POST、完整原身份/读回门禁保留，每次retry原件留存。未执行这些helper。
+9. 原Q3 FAIL JSON 0c825c47a2eee3f8cdb13bbe8b92f11730bbc8063de3ef516a6f4663e93098d4、raw fcd0f48e19de80b5c32b168a7b8953dc993f924292514828a474bd8500977122保留。Fresh Q3 regression/watch在独立审查时无receipt；之后父任务实跑为pending，非PASS非假FAIL。新CI/API33 diagnostic/full/signed delivery亦pending。
+
+实际工具出口：initial fingerprint validation exit0；independent source/identity/exact-finalizer/compiler audit exit0。首个报告writer在写文件前额外比较baseline35而exit1；这是超出本增量边界的观察器断言，没有任何写入，不能冒称产品/测试失败。已撤去此不适用的跨历史版本比较，按用户冻结85/同SHA58继承依据封正式本报告；无重新构造旧finalizer或扩大旧产品审计。
+
+结论：未发现具体实际source counterexample、security/logic/missing增量错误。全部阻断列表为空。仅diagnostic纯观测、握手根因unknown；scope/device/haps/旧断言固定。仅独占新增本raw与正式QUALITY JSON，源/测试/门禁/evidence/旧review不动，无网络/设备/CI/编译器/测试/Chromium/git mutation。

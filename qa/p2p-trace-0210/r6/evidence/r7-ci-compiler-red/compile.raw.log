@@ -1,0 +1,33 @@
+app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt:65:196: error: unsupported [literal prefixes and suffixes]
+    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT"else"REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
+                                                                                                                                                                                                   ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:77:121: error: unsupported [literal prefixes and suffixes]
+                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter"else"engine")
+                                                                                                                        ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:138:96: error: unsupported [literal prefixes and suffixes]
+            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none"else"present"))
+                                                                                               ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:141:96: error: unsupported [literal prefixes and suffixes]
+            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none"else"present"))
+                                                                                               ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:150:81: error: unsupported [literal prefixes and suffixes]
+                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync"else"other"),
+                                                                                ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:153:60: error: unsupported [literal prefixes and suffixes]
+                "direction" to if(outgoing)"phone-outgoing"else"watch-ingress",
+                                                           ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:158:54: error: unsupported [literal prefixes and suffixes]
+                m.opt("sender")!=(if(outgoing)"phone"else"watch")->"sender"
+                                                     ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/P2pTrace.kt:161:79: error: unsupported [literal prefixes and suffixes]
+                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted"else"fields"
+                                                                              ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/SyncEngine.kt:370:99: error: unsupported [literal prefixes and suffixes]
+        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close"else"cancel"))
+                                                                                                  ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/SyncEngine.kt:371:72: error: unsupported [literal prefixes and suffixes]
+        try { trace?.bind(generation, trigger = if(closingTrace)"close"else"cancel") } catch (_: Throwable) {}
+                                                                       ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-a5jwv501/SyncEngine.kt:395:78: error: unsupported [literal prefixes and suffixes]
+            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close"else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
+                                                                             ^

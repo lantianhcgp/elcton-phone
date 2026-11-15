@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "proof_scope": "byte-only host regression; Kotlin1.9.24 actual compiler to be executed by parent",
+  "red": {
+    "command": "python qa/p2p-trace-0210/r6/whitespace-followup-host/test_whitespace_followup.py --source live",
+    "exit_code": 1
+  },
+  "green": {
+    "command": "python qa/p2p-trace-0210/r6/whitespace-followup-host/test_whitespace_followup.py --source live",
+    "exit_code": 0
+  },
+  "inserted_ascii_spaces": 11,
+  "total_spaces_vs_committed": 21,
+  "remaining_quote_else_or_else_quote_defects": 0,
+  "files": {
+    "P2pTrace.kt": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "before_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "after_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+      "inverse_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "committed_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "inverse_committed_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "new_spaces": 7,
+      "total_spaces_vs_commit": 14,
+      "changed_lines": [
+        77,
+        138,
+        141,
+        150,
+        153,
+        158,
+        161
+      ],
+      "inverse_equals_before": true,
+      "full_inverse_equals_commit": true
+    },
+    "SyncEngine.kt": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "before_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "after_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+      "inverse_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "committed_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "inverse_committed_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "new_spaces": 2,
+      "total_spaces_vs_commit": 5,
+      "changed_lines": [
+        370,
+        371
+      ],
+      "inverse_equals_before": true,
+      "full_inverse_equals_commit": true
+    },
+    "P2pTraceEngineTest.kt": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+      "before_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "after_sha256": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+      "inverse_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "committed_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "inverse_committed_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "new_spaces": 2,
+      "total_spaces_vs_commit": 2,
+      "changed_lines": [
+        65
+      ],
+      "inverse_equals_before": true,
+      "full_inverse_equals_commit": true
+    }
+  },
+  "historical_files_unchanged": true,
+  "compiler_run_by_child": false,
+  "identity_changes": false,
+  "stage_commit_push": false,
+  "historical_fingerprints_verified": 32,
+  "first_host_test_unchanged_sha256": "87652c1b67e1b1d31c2bfecbfc6ff898c6c50b10863e774b8795bdd020b37bcf",
+  "new_host_test_sha256": "b235ae5288dddd6ce586b05e434225c2db0395dc2b807a9f53e2d045c9a89d44",
+  "mutation_sha256": "852d0e7e5bb1d061f4fb3352f1ae5a9b48a12d256f0834a549435f2fcc585c52"
+}

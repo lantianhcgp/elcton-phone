@@ -1,0 +1,39 @@
+R7 Q2 独立 SPEC 复审 — PASS（仅冻结输入的SPEC结论，非执行/交付PASS）
+root=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115
+axis=spec；revision=Q2；本评审仅创建本 raw 与 r6-spec-q2.json，不修任何受审代码。
+
+一、实际输入核验与继承边界
+先实际 SHA256 核全部 63 live inputs，共441968字节，0 missing/0 mismatch。
+input-q2/reviewed-manifest.json SHA256=761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c。
+随后完整读 Q2-REVIEW-SCOPE.md、Q2-DELTA.json、R7 两份授权，以及原 SPEC Q1 JSON/raw、原 QUALITY Q1 FAIL JSON/raw。
+原41 input-q1 manifest SHA256=93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d。
+实际比较得38 unchanged、3 changed、22 new；38逐path/SHA精确相等，且原SPEC/QUALITY reviewed_inputs都与原41mapping一致。仅这些无漂移结论继承，不将已失败helper结论继承成PASS。
+3变化仅 check_r6_scope.py、run_r6_final_regressions.py、migrate_r6_quality_identity.py。四产品 WearProbe18a693e7/SyncEngine8e0559a5/DiagnosticRuntimec82a665d/P2pTrace9ddb3b07全同Q1；版本12/0.2.10未再改。
+实际核before-bindings的旧QUALITY报告SHA7378b05a5ce2a9ed83ae817ff2bc838d72cd8e7a46191696481ce0ebdb571974及原raw SHA6709452158b00c262e74042d20756322894a252cc076a32e06f1ed25afadc058；原FAIL保持FAIL。原SPEC R2 SHAab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0也匹配。
+
+二、原helper两项修复 — 接受
+完整读取所有新增/变化Python脚本及两份新helper test；不是只看摘要或diff文件名。
+对三变化helper实际从保存Q1 before.source.txt重建unified diff：
+- check_r6_scope只将out guard变成拒绝..、拒绝所有symlink ancestry、resolve containment、独占mkdir；tree=json.loads之后全部字节与Q1原件相等。
+- run_r6_final_regressions只加同形out guard；sources=sorted之后全部字节与Q1相等，原业务断言/测试谓词未动。
+- migrate删除唯一旧table.write_text；删除该节点后main全部AST与原件相等，其他source/version/old029身份门不变。
+Q-R7-Q1-001已真实恢复：原路径identity-migration/table.json与独立previous-table.json.source.txt逐字节相等，SHA4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d；当前identity-migration-q1/table.json仍SHA102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe，与overwritten-table.source.txt逐字节相等。当前table source_identities也与current-identity精确一致。修复receipt全部32 artifact_bindings实际核SHA/bytes均匹配。
+Q-R7-Q1-002的相同实际AST main prefix HOST测试有真实RED：Ran6、failures7、errors0、exit1；同SHA测试GREEN：Ran6、OK、exit0。额外delivery prefix RED Ran4/failures2→GREEN Ran4/OK；确实只prefix，无APK/device。测试原文和失败栈已完整读，未在本评审重跑会创建sandbox的测试。
+
+三、cached scope、旧业务断言与CI合同 — 接受现有边界
+完整读取verify_r7_cached_scope.py与其receipt：明确baseline_rehashed_this_run=false，明确不是fresh2GB hash；原full9461 receipt SHA827f1404da0ee56361c5d93e0f8ded1f1cb16b3ed4fa48d765c483dcea3740c3实际相等。
+独立只读Git核原ls-tree9461条(mode,oid)与base-tree.json精确一致；当前BASE diff和9461交集恰11允许路径；7版本literal反迁移实际与BASE原字节相等；原scope中35 old-test文件实际整文件逆恢复与BASE原字节相等，另核R5 old_tests库存SHA。当前JVM目录35 classes。两workflow实际与BASE逐字节相同。没有重新全树内容哈希。
+HEAD实际de3e6f182c2def5a52d33f33684777f1fc941ccd，branch实际diag/p2p-trace-0.2.10-20261115；本评审没有stage/commit。
+完整读r6/ci/README、pipeline/common/verify/self_test，及原verify_exact_build.py。原完整172 label注册/153原label保留、API33/three-button、diagnostics先注册再full、exact run/attempt/artifact、完整JSON/pixel方法均保持；真实只读self_test.py本审执行Ran7/OK/exit0。此helper self-test不是Android或云端成功。
+完整读publish/closure/commit/delivery新helper。closure逐axis核actual raw SHA、axis/count/完整manifest mapping；publish显式whitelist/secret scan、不stage二进制；delivery主APK名称、certificate/package/code12/name0.2.10、build row SHA/size、四committed source及committed review inputs均有门；phone目标独占xb且复制后SHA/bytes核对。接线静态审读与未来真实执行结果严格区分。
+
+四、R7执行门与本审摘要复用探针的准确边界
+新commit固定读取evidence/r7-final-regression与r7-watch-frozen路径，不是旧Q1路径。R7授权明确无--resume-compiled；父补充确认双审后实际重新compile、跑171/133/3784/native/type并核新R7路径。该执行方式与现有runner fresh分支一致，保留旧Q1恢复分支不自动构成本轮放宽。
+本审确实只读取原final-q1-complete-1658真实receipt，摘出当前commit的两条regression summary assert，内存运行通过；其旧full-jvm行确实有reuse字段，72源SHA亦仍匹配。但该探针没有执行commit main、没有经过固定R7路径读取、没有新R7 receipt/source-manifest、没有closure/whitelist/staged/committed身份门；因此不能宣称“新commit已接受旧Q1证据”。禁止复制/伪造旧回执的授权边界不可忽略。此前把该局部summary probe判成实质FAIL的措辞撤回，不以未来未执行状态或违授权的复制反例阻断。
+建议（非阻断）：未来可在新commit helper额外明确拒绝full-jvm reuse字段、核fresh compile原receipt及raw绑定，使“不传resume”的R7编排合同更可机器自证。本Q2没有修改脚本；该建议不是当前63输入缺实质必需事实，也不要求产品或原断言变更。
+
+五、结论和限制
+passed=true；security_concerns=[]；logic_errors=[]；missing=[]；critical=[]；important=[]。
+四产品/版本/旧业务断言未变，原两helper实错经最小差分、原表恢复及真实同测试RED→GREEN闭合；新增发布/closure/commit/delivery接线按明确R7顺序可执行，未见实质scope/security/logic阻断。
+未来R7 full regressions、watch445重新执行、commit/push、build172、云端diagnostics/full、签名APK交付都仍是父双审后的实际工作，本审没有把其pending状态当已通过或另造FAIL。
+本评审只读本worktree与明确原small verifier；没有network/device/ADB/rish/MCP/Chromium/full compile/2GB hash、watch写入、Documents进度写入、haps或留白操作。仅两份正式报告为允许写入；无placeholder、无改原Q1 FAIL、无stage/commit。

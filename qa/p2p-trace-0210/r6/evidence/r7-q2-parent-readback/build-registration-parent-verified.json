@@ -1,0 +1,8 @@
+{
+  "registered": true,
+  "source_sha": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+  "run_id": 43710014774,
+  "run_attempt": 1,
+  "registration_sha256": "dcff40bd823eee2a948f89ac97f6fe6a811abc07ef998e43ee6090f06f1c4a82",
+  "scope": "Actual explicit CI run registration, NOT success/verified APK"
+}

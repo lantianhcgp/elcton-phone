@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "compiler": "1.9.24",
+  "tests": 171,
+  "compile_exit": 0,
+  "junit_exit": 0,
+  "receipt_sha256": "1dc1f78f283e1e8b33d7e91f3835af6b538e9494a16a52cf3e5deadbd3db6a15",
+  "source_inputs": 61,
+  "scope": "Actual Kotlin1.9.24 HOST compile/tests, not Android APK/CI acceptance"
+}

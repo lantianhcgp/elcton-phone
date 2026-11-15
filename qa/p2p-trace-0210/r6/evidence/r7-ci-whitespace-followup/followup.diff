@@ -1,0 +1,71 @@
+--- first10/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
++++ followup/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
+@@ -74,7 +74,7 @@
+             seq++
+             try {
+                 val e=JSONObject().put("schema",1).put("origin",origin).put("sid",sid).put("seq",seq)
+-                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter" else"engine")
++                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter" else "engine")
+                     .put("stage",if(stage in STAGES)stage else "OTHER").put("outcome","observed").put("stale",false)
+                     .put("bytes",JSONObject.NULL).put("generation",JSONObject.NULL).put("nativeGeneration",JSONObject.NULL)
+                     .put("attemptId",JSONObject.NULL).put("dropped",dropped)
+@@ -135,10 +135,10 @@
+         private val STAGES=setOf("CONNECT_REQUEST","PEER_CONFIG","REG_CALL","REG_TASK_OK","REG_TASK_FAIL","SEND_CALL","SEND_TASK_OK","SEND_TASK_FAIL","SEND_RESULT","RX_NATIVE_ENTRY","RX_ADAPTER_REJECT","RX_DECODE","RX_ENGINE_ENTRY","RX_PROTOCOL_ACCEPT","RX_PROTOCOL_REJECT","READY_ACCEPT","INSTALL_TIMEOUT","REG_TIMEOUT","HELLO_RETRY","READY_TIMEOUT","FAIL","CANCEL","CLOSE","UNREG_CALL","UNREG_TASK_OK","UNREG_TASK_FAIL")
+         /** Read-only replica; never replaces the original PacketIngress result. No raw fields escape. */
+         fun classify(raw:String):Map<String,Any?> = parseMetadata(raw,false).let {
+-            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else"present"))
++            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else "present"))
+         }
+         fun classifyOutgoing(raw:String):Map<String,Any?> = parseMetadata(raw,true).let {
+-            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else"present"))
++            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else "present"))
+         }
+         private fun parseMetadata(raw:String,outgoing:Boolean):Map<String,Any?> {
+             if(raw.isEmpty())return mapOf("reason" to "empty")
+@@ -147,18 +147,18 @@
+             val m=try{JSONObject(raw)}catch(_:Throwable){return mapOf("reason" to "json")}
+             val type=m.opt("type") as? String
+             val base=mapOf("type" to (if(type in SAFE_LABELS)type else "other"),
+-                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync" else"other"),
++                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync" else "other"),
+                 "sender" to (if(m.opt("sender") in setOf("watch","phone"))m.opt("sender") else "other"),
+                 "protocolVersion" to exactInteger(m.opt("version")),
+-                "direction" to if(outgoing)"phone-outgoing" else"watch-ingress",
++                "direction" to if(outgoing)"phone-outgoing" else "watch-ingress",
+                 "transferRef" to (m.opt("transferId") as? String))
+             val reason=when {
+                 m.opt("protocol")!="elcton.sync"->"protocol"
+                 exactInteger(m.opt("version"))!=1L->"version"
+-                m.opt("sender")!=(if(outgoing)"phone" else"watch")->"sender"
++                m.opt("sender")!=(if(outgoing)"phone" else "watch")->"sender"
+                 m.opt("type") !is String->"type"
+                 m.opt("transferId") !is String->"transferId"
+-                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted" else"fields"
++                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted" else "fields"
+             }
+             return base+mapOf("reason" to reason)
+         }
+--- first10/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
++++ followup/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
+@@ -367,8 +367,8 @@
+ 
+     fun cancel() {
+         if (closed) return
+-        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close" else"cancel"))
+-        try { trace?.bind(generation, trigger = if(closingTrace)"close" else"cancel") } catch (_: Throwable) {}
++        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close" else "cancel"))
++        try { trace?.bind(generation, trigger = if(closingTrace)"close" else "cancel") } catch (_: Throwable) {}
+         val id = session?.transferId ?: exporting?.id
+         if (id != null) send("{" + Wire.header("CANCEL", id) + "}", reportFailure = false)
+         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal()
+--- first10/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt
++++ followup/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt
+@@ -62,7 +62,7 @@
+         return seen
+     }
+     @Test fun originalHelloDeadlinesAndRetryStages(){val h=compare("timeout");val a=read(h.trace!!).getJSONArray("events");val retry=(0 until a.length()).map{a.getJSONObject(it)}.filter{it.getString("stage")=="HELLO_RETRY"};assertEquals(listOf(5000L,10000L,15000L),retry.map{it.getLong("elapsedMs")});assertEquals(20000L,(0 until a.length()).map{a.getJSONObject(it)}.single{it.getString("stage")=="READY_TIMEOUT"}.getLong("elapsedMs"));assertEquals(4,h.calls.count{it.startsWith("send@")} )}
+-    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT"else"REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
++    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT" else "REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
+     @Test fun validReadyAcceptedExactlyOnceAndLateResultsRemainVisible(){val h=compare("ready");assertEquals(1,stages(h.trace!!).count{it=="READY_ACCEPT"});assertEquals(2,stages(h.trace).count{it=="SEND_RESULT"});assertFalse(read(h.trace).toString().contains("PRIVATE_"))}
+     @Test fun originalRejectsAndEarlyFailuresCancelCloseAndLateCallbacksHaveZeroDrift(){for(mode in listOf("reject","resultFail","cancel","lateReg","close","syncThrow"))compare(mode)}
+     @Test fun hostileDiagnosticClockHasZeroBusinessDrift(){compare("timeout",true);compare("ready",true);compare("syncThrow",true)}

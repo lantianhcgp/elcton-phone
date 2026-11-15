@@ -1,0 +1,30 @@
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:77:122: error: unsupported [literal prefixes and suffixes]
+                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter" else"engine")
+                                                                                                                         ^
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:138:97: error: unsupported [literal prefixes and suffixes]
+            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else"present"))
+                                                                                                ^
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:141:97: error: unsupported [literal prefixes and suffixes]
+            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else"present"))
+                                                                                                ^
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:150:82: error: unsupported [literal prefixes and suffixes]
+                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync" else"other"),
+                                                                                 ^
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:153:61: error: unsupported [literal prefixes and suffixes]
+                "direction" to if(outgoing)"phone-outgoing" else"watch-ingress",
+                                                            ^
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:158:55: error: unsupported [literal prefixes and suffixes]
+                m.opt("sender")!=(if(outgoing)"phone" else"watch")->"sender"
+                                                      ^
+app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:161:80: error: unsupported [literal prefixes and suffixes]
+                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted" else"fields"
+                                                                               ^
+app/src/main/java/com/hcbiu/elcton/SyncEngine.kt:370:100: error: unsupported [literal prefixes and suffixes]
+        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close" else"cancel"))
+                                                                                                   ^
+app/src/main/java/com/hcbiu/elcton/SyncEngine.kt:371:73: error: unsupported [literal prefixes and suffixes]
+        try { trace?.bind(generation, trigger = if(closingTrace)"close" else"cancel") } catch (_: Throwable) {}
+                                                                        ^
+app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt:65:196: error: unsupported [literal prefixes and suffixes]
+    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT"else"REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
+                                                                                                                                                                                                   ^

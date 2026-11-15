@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "fresh_compile": true,
+  "no_resume": true,
+  "tests": 171,
+  "compile_raw_sha256": "9dfe7bca8fb1dca0e4e506e180571b55cef708cb210d2b170b239f6ddb2f157e",
+  "junit_raw_sha256": "ce737d5cf92eef3a1117544239a39e2532059967591ff4507db13cf1f7042c30",
+  "receipt_sha256": "1984f9c8ae0d889780743d9cbc011886640113822711221206ffac24d520acac"
+}

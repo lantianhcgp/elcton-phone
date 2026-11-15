@@ -1,0 +1,31 @@
+test_exact_ten_spaces_lexical_separation_and_git_byte_inverse (__main__.WhitespaceRepairTest.test_exact_ten_spaces_lexical_separation_and_git_byte_inverse) ... FAIL
+
+======================================================================
+FAIL: test_exact_ten_spaces_lexical_separation_and_git_byte_inverse (__main__.WhitespaceRepairTest.test_exact_ten_spaces_lexical_separation_and_git_byte_inverse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/whitespace-host/test_whitespace_repair.py", line 65, in test_exact_ten_spaces_lexical_separation_and_git_byte_inverse
+    self.assertEqual(defects, [], "pinned quote-else lexical defects in actual source bytes")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['P2pTrace.kt:161', 'P2pTrace.kt:158', 'P2[148 chars]370'] != []
+
+First list contains 10 additional elements.
+First extra element 0:
+'P2pTrace.kt:161'
+
++ []
+- ['P2pTrace.kt:161',
+-  'P2pTrace.kt:158',
+-  'P2pTrace.kt:153',
+-  'P2pTrace.kt:150',
+-  'P2pTrace.kt:141',
+-  'P2pTrace.kt:138',
+-  'P2pTrace.kt:77',
+-  'SyncEngine.kt:395',
+-  'SyncEngine.kt:371',
+-  'SyncEngine.kt:370'] : pinned quote-else lexical defects in actual source bytes
+
+----------------------------------------------------------------------
+Ran 1 test in 0.026s
+
+FAILED (failures=1)

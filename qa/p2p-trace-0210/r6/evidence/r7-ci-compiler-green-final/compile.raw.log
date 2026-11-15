@@ -1,0 +1,12 @@
+app/src/main/java/com/hcbiu/elcton/PickupClient.kt:19:19: warning: 'constructor URL(String!)' is deprecated. Deprecated in Java
+        val url = URL(endpoint + "?action=get&pickup=" + pickup)
+                  ^
+app/src/main/java/com/hcbiu/elcton/SyncEngine.kt:139:52: warning: there is more than one label with such a name in this scope
+                            if (!requesting) return@main
+                                                   ^
+app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt:49:30: warning: no cast needed
+        assertFalse((h.trace as P2pTrace).read(0,128).toString().contains("PRIVATE_"))
+                             ^
+/data/data/com.termux/files/usr/tmp/r7-kotlin19-q65qxx99/P2pTraceBaselineEngine.kt:91:52: warning: there is more than one label with such a name in this scope
+                            if (!requesting) return@main
+                                                   ^

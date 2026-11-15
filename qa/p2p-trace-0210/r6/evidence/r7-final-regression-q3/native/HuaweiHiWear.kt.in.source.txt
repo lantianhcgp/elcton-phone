@@ -1,0 +1,11 @@
+package com.huawei.wearengine
+import android.content.Context
+import com.huawei.wearengine.auth.AuthClient
+import com.huawei.wearengine.device.DeviceClient
+import com.huawei.wearengine.p2p.HostBus
+object HiWear {
+    fun getP2pClient(context:Context)=HostBus.p2p
+    fun getAuthClient(context:Context)=AuthClient()
+    fun getDeviceClient(context:Context)=DeviceClient()
+}
+open class WearEngineException:Exception("HOST exception") { val errorCode=206 }

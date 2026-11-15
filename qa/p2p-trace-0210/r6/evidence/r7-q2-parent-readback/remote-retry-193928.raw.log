@@ -1,0 +1,1 @@
+{"passed": true, "branch": "diag/p2p-trace-0.2.10-20261115", "sha": "a0881bf7c1d97724ea166f0e51988902c280a5cc", "tree": "4f305b37a1e15ea45f711b4583e287f36d778b84", "files": 698, "bytes": 10674888, "scope": "Actual remote target ref + COMPLETE Git tree blob/size identity readback; not each raw HTTP fetch"}

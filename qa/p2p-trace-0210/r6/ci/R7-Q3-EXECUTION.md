@@ -1,0 +1,11 @@
+# R7 Q3 execution continuation (not a success report)
+
+1. Frozen input-q3 manifest is 4db1f8c9cff039945846b4ddd942cac842df72367e25e656fe8c049d2c82588e, 85 files. Actual current source differs from a0881bf7 only21 spaces across P2pTrace/SyncEngine/new diagnostic P2pTraceEngineTest, plus current identity and delivery metadata table/closure paths. Old Q2 reviews/closure and all CI failures remain unchanged.
+2. Require genuine SPEC then QUALITY Q3 reports/raw, bind with close_r7_q3_reviews.py to exclusive reviews/closure-q3.
+3. Run unchanged run_r6_final_regressions.py into NEW evidence/r7-final-regression-q3 (no resume), exact unchanged watch runner into NEW evidence/r7-watch-frozen-q3. All real logs/exit/SHA must pass; original previous R7 lanes remain retained.
+4. Save previous untracked PUBLISH-CANDIDATE.json, execute unchanged original publisher, augment only explicit new lexical identity/review/evidence paths with the same secret/no-binary/regular-file/SHA checks. Commit explicit whitelist on same diag branch only after actual fresh regression and committed85 review inputs match. Do not use original commit_r6_reviewed.py because it intentionally pins the earlier de3e6f1 source; do not alter that historical script.
+5. New actual source SHA S comes only from git rev-parse after the whitespace/identity delta commit. Verify origin branch/tree/blobs and unchanged master anchor. Register172 cases to S, then original pipeline dispatch-build --review reviews/closure-q3. Registration/readback are separate from execution PASS. Never re-dispatch after an ambiguous/accepted POST.
+6. Follow original build/diagnostics/full/verify_r6.py README gates, exact run/attempt/artifact, then finalize_r6_delivery.py with S and actual verified receipts. Original CI helpers/workflows stay byte-identical to a0881bf7; only separate read-only GET-retry wrapper changes transport and cannot POST.
+7. Final evidence-only commit may produce a later HEAD but must preserve every application/test/workflow blob from S. Final APK identity remains S; report both source and evidence references.
+
+No device/ADB/rish/MCP/Chromium, /haps, Release/PR or master/release push. This file describes allowed next actual actions, not completed tests or delivery. Every previous failure original is retained.

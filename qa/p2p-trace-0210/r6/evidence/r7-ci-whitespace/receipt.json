@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "passed": true,
+  "scope": "Exactly ten ASCII 0x20 insertions at actual CI-pinned diagnostic sites; no other product bytes changed.",
+  "commit_unchanged": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+  "branch_unchanged": "diag/p2p-trace-0.2.10-20261115",
+  "source_results": {
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "before_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "after_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "inverse_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "inserted_ascii_spaces": 7,
+      "git_bytes_restored_by_inverse": true
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "before_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "after_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "inverse_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "inserted_ascii_spaces": 3,
+      "git_bytes_restored_by_inverse": true
+    }
+  },
+  "exact_total_insertions": 10,
+  "tracked_changed_paths": [
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt"
+  ],
+  "protected_unchanged_files": 192,
+  "four_q2_source_hashes_preserved_in_frozen_before": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+      "old_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+      "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+      "current_sha256": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+      "current_bytes": 16986
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "old_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+      "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+      "current_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "current_bytes": 24337
+    },
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+      "old_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+      "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "current_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+      "current_bytes": 7773,
+      "previous_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"
+    },
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "old_sha256": null,
+      "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "current_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "current_bytes": 10663
+    }
+  },
+  "current_identity_sha256_unchanged": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+  "q2_review_sha256_unchanged": {
+    "qa/p2p-trace-0210/r6/reviews/r6-quality-q2.json": "0f714f321ed96f28dd44450ea90b9a6db2dcaa3f1c6a2aafb2dcf69aad7d3c7e",
+    "qa/p2p-trace-0210/r6/reviews/r6-spec-q2.json": "c193a6ec05ee79d93d62e01f43eb78f5c2d90194f96b46a54ccacde3ffe3e646"
+  },
+  "old_r6_file_stats_unchanged": 793,
+  "version": {
+    "version_code": 12,
+    "version_name": "0.2.10",
+    "app_build_gradle_sha256_unchanged": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3"
+  },
+  "source_regression": {
+    "test": "qa/p2p-trace-0210/r6/whitespace-host/test_whitespace_repair.py",
+    "test_sha256": "87652c1b67e1b1d31c2bfecbfc6ff898c6c50b10863e774b8795bdd020b37bcf",
+    "red_source": "full recorded git-identical original source snapshots",
+    "red_exit": 1,
+    "red_raw_log_sha256": "dd6338d9bba0782ed9f60964bcf930215950fb5f47b65858ac9b9677a79d231d",
+    "green_source": "actual patched live source bytes",
+    "green_exit": 0,
+    "green_raw_log_sha256": "4281f1c91be47403bdf880ee4244963772bdb80050477fbabc0e283059258a2e",
+    "green_checks": [
+      "exact ten pinned ASCII insertions",
+      "lexical quote-else separation at ten pinned source sites",
+      "full byte inverse equals recorded originals and committed source"
+    ]
+  },
+  "actual_ci_red": {
+    "run": 43710014774,
+    "attempt": 1,
+    "task": ":app:compileDebugKotlin",
+    "raw_original_sha256": "ec410e9d31fb4fda9a8fb88c159ae0825c9bd16a6ab66925a61ad8659d40bcab",
+    "matching_diagnostics": 10
+  },
+  "not_claimed": "No compiler/build/CI run here; parent owns Kotlin1.9.24 compilation, identity migration, review and later delivery. No business behavior or hardware acceptance claims.",
+  "forbidden_actions_performed": [],
+  "created_artifacts": {
+    "mutation": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/mutation.json",
+    "frozen_before": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/frozen-before.json",
+    "diff": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/two-source.diff",
+    "red": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/red.raw.log",
+    "green": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/green.raw.log",
+    "protected_after": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace/protected-after.json"
+  },
+  "at_utc": "2026-11-15T11:59:54.580136+00:00"
+}

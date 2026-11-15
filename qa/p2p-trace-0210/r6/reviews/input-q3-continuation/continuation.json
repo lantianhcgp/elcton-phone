@@ -1,0 +1,17 @@
+{
+  "prior_reviewed_manifest_sha256": "4db1f8c9cff039945846b4ddd942cac842df72367e25e656fe8c049d2c82588e",
+  "prior_spec_incomplete_sha256": "0c825c47a2eee3f8cdb13bbe8b92f11730bbc8063de3ef516a6f4663e93098d4",
+  "unchanged_all_prior85": true,
+  "source_edits_since_Q3": [],
+  "new_evidence_or_control": [
+    "qa/p2p-trace-0210/commit_r7_q3.py",
+    "qa/p2p-trace-0210/close_r7_q3_continuation.py",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/q2-finalizer-exact/Q2-finalizer.source.txt",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/q2-finalizer-exact/Q2-to-Q3.diff",
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/q2-finalizer-exact/receipt.json"
+  ],
+  "inputs": 90,
+  "manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+  "blocking_reconstruction_resolved_by_actual_committed_Q2_source": true,
+  "prior_failed_review_preserved": true
+}

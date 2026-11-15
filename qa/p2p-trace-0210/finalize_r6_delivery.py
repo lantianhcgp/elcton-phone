@@ -56,13 +56,13 @@ def main():
     assert main['name']=='elcton-phone-probe.apk' and main['package']=='com.hcbiu.elcton'
     assert main['sha256']==digest and main['bytes']==apk.stat().st_size, 'APK differs from exact verified build artifact'
     assert main['signer_sha256']==CERT and main['versionCode']=='12' and main['versionName']=='0.2.10'
-    table=read(Q/'evidence/identity-migration-q1/table.json')
+    table=read(Q/'evidence/r7-ci-identity-final/table.json')
     current=read(Q/'current-identity.json')['source_identities']
     assert table['source_identities']==current, 'Delivery identity table is not final Q1 source'
     for path,row in current.items():
         raw=subprocess.check_output(['git','show',a.source+':'+path],cwd=ROOT,timeout=30)
         assert hashlib.sha256(raw).hexdigest()==row['current_sha256'], 'Committed delivery source differs: '+path
-    reviewdir=Q/'reviews/closure'
+    reviewdir=Q/'reviews/closure-q3'
     closure=read(reviewdir/'dual-closure.json')
     reviewed=read(reviewdir/'reviewed-manifest.json')
     assert closure['passed'] is True and {r['axis'] for r in closure['axes']}=={'spec','quality'}
@@ -76,7 +76,7 @@ def main():
     assert not target.exists(), 'Existing main APK never overwritten'
     with apk.open('rb') as src,target.open('xb') as dst:shutil.copyfileobj(src,dst,1024*1024)
     assert sha(target)==digest and target.stat().st_size==apk.stat().st_size
-    table=read(Q/'evidence/identity-migration-q1/table.json')
+    table=read(Q/'evidence/r7-ci-identity-final/table.json')
     record={'delivered':True,'source_sha':a.source,'versionCode':12,'versionName':'0.2.10','package':'com.hcbiu.elcton',
             'apk_path':str(target),'apk_bytes':target.stat().st_size,'apk_sha256':digest,'signer_certificate_sha256':CERT,
             'verified_v2':True,'signers':1,'build_receipt_sha256':sha(a.build_receipt),
@@ -97,13 +97,14 @@ def main():
         '## 身份迁移（完整旧→最终新SHA）','']
     for path,row in table['source_identities'].items():
         lines += [Path(path).name, '旧：'+str(row['old_sha256'] or '新增，无旧SHA'),
-                 'R5：'+row['r5_sha256'],'R6最终：'+row['current_sha256'],'']
+                 'R5：'+row['r5_sha256'],'Q2：'+row.get('previous_q2_sha256',row['current_sha256']),
+                 '最终（仅编译分隔空格）：'+row['current_sha256'],'']
     lines += ['版本字面：11 / 0.2.9 → 12 / 0.2.10；行为断言零改。','',
         '## CI 与评审链索引','',
         *[name+'：'+url for name,url in record['ci_links'].items()],
         '当前真双审 manifest：'+closure['manifest_sha256'],
         *[axis['axis']+'：qa/p2p-trace-0210/r6/reviews/'+axis['json_path']+' SHA256='+axis['json_sha256'] for axis in closure['axes']],
-        '历史链：r6-spec-r1 FAIL → r6-spec-r2 PASS → r6-quality-r1 FAIL(Q-R6-001) → r6-spec-q1 PASS → r6-quality-q1 FAIL(helper) → 当前Q2双审（原拒绝与失败均保留）。','',
+        '历史链：r6-spec-r1 FAIL → r6-spec-r2 PASS → r6-quality-r1 FAIL(Q-R6-001) → r6-spec-q1 PASS → r6-quality-q1 FAIL(helper) → Q2双审PASS → Kotlin1.9.24编译失败 → 当前Q3纯空格增量双审（全部原件保留）。','',
         '## 真实执行证据','',
         'HOST：JVM171、Python133零skip、HTTP3784、原表445源冻结；L3 afterREADY真RED→GREEN。',
         'Q-R6-001：真实HOST barrier RED→GREEN，原失败/quota/stop race与原断言保持。',

@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "axes": [
+    {
+      "axis": "spec",
+      "json_path": "r7-spec-q3-continuation.json",
+      "json_sha256": "17558e0101a1401c451a75a200db7a46ef1bc0da9b21e6ec4776394a02879016",
+      "raw_path": "spec-q3-continuation-raw.txt",
+      "raw_sha256": "0c8c41795727996c154d22f8f4ba870216cff35ca986a093ebc2c1c7f03ebfcd"
+    },
+    {
+      "axis": "quality",
+      "json_path": "r7-quality-q3-continuation.json",
+      "json_sha256": "378d7c45b2b497660f2b14641265700123a7267eb52165d804839efd38f27b98",
+      "raw_path": "quality-q3-continuation-raw.txt",
+      "raw_sha256": "142b04f3f73d24454febc7c2d6f682fd2e7d221823505a041ae7497071f9f43d"
+    }
+  ],
+  "manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+  "input_files": 90,
+  "scope": "Genuine independent continued Q3 source review; prior incomplete Q3 and Q2 retained; not CI/APK acceptance"
+}

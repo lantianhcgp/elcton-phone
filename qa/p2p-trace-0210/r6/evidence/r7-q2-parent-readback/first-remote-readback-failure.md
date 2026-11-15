@@ -1,0 +1,1 @@
+R7 first exact remote readback and master GET failed: gh returned nonzero at branch GET before evidence output creation. Actual push returned exit0, but success not yet claimed until exact GET/tree readback completes. No POST/re-dispatch triggered; retry is read-only.

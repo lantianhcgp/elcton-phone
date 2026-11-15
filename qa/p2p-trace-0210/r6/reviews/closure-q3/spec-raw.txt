@@ -1,0 +1,144 @@
+R7 Q3 continuation — 独立 SPEC 实际审查
+PASS：90项live SHA全匹配、原85项不变；Q2 finalizer原始字节与冻结manifest一致，准确diff仅2处table路径、closure路径和谱系文案。21空格及2行身份数据不改业务/断言；真实1.9.24编译0/JVM171源与raw绑定正确；新commit/continued seal保留当前双审、fresh回归、白名单与无POST/Release边界。原Q3 FAIL原件保留。
+
+axis=spec；passed=true；input_files=90
+input_manifest_sha256=d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624
+review_mode=independent_current_agent_spec_continuation；jev_called=false
+
+实际独立检查：
+{
+  "live_frozen90": {
+    "files": 90,
+    "bytes": 584795,
+    "manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+    "drift": []
+  },
+  "prior_Q3_immutable_continuation": {
+    "prior_report_sha256": "0c825c47a2eee3f8cdb13bbe8b92f11730bbc8063de3ef516a6f4663e93098d4",
+    "prior_raw_sha256": "fcd0f48e19de80b5c32b168a7b8953dc993f924292514828a474bd8500977122",
+    "prior_passed": false,
+    "prior85_same_sha": true,
+    "added5": [
+      "qa/p2p-trace-0210/close_r7_q3_continuation.py",
+      "qa/p2p-trace-0210/commit_r7_q3.py",
+      "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/q2-finalizer-exact/Q2-finalizer.source.txt",
+      "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/q2-finalizer-exact/Q2-to-Q3.diff",
+      "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/q2-finalizer-exact/receipt.json"
+    ],
+    "changed_Q2_inputs": [
+      "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+      "qa/p2p-trace-0210/finalize_r6_delivery.py",
+      "qa/p2p-trace-0210/r6/current-identity.json"
+    ],
+    "completed_prior_checks_carried": [
+      "lexical_exact_inverse",
+      "protected_originals",
+      "identity_lineage"
+    ],
+    "original35_whole_bytes_unchanged_prior_actual_check": true,
+    "original35_proof_basis": "继承原 Q3 已实际完成的冻结源检查；本轮不重复189文件/全仓历史审计。"
+  },
+  "exact_Q2_finalizer_and_gates": {
+    "q2_manifest_path": "qa/p2p-trace-0210/r6/reviews/input-q2/reviewed-manifest.json",
+    "q2_manifest_sha256": "761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c",
+    "q2_finalizer_sha256": "0abc0f8586765c355d17104181b43f661bfa6b944e7ed6c06b9fe9beb9274e77",
+    "q3_finalizer_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+    "exact_diff_sha256": "2e58f49feadc6cf954908c869adedc5f61e41d3e46b2a49f22a76915a6bc1682",
+    "allowed_changes_only": true,
+    "table_path_lines": [
+      59,
+      79
+    ],
+    "closure_path_line": 65,
+    "lineage_lines": [
+      100,
+      101,
+      107
+    ],
+    "unchanged_gate_lines": "30-58,61-64,66-78：source格式、输出边界、当前source/run/suite、APK单签v2/cert/package/version/bytes/artifact、committed90/SHA与raw、唯一文件名及xb复制全保留",
+    "old_failure_resolution": "直接核Q2 manifest绑定的原始8572字节；不使用错误worker snapshot重建。"
+  },
+  "current_three_lexical_sources": {
+    "rows": [
+      {
+        "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+        "spaces": 14,
+        "q2_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+        "current_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+        "exact_pinned_line_inverse": true
+      },
+      {
+        "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+        "spaces": 5,
+        "q2_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+        "current_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+        "exact_pinned_line_inverse": true
+      },
+      {
+        "path": "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+        "spaces": 2,
+        "q2_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+        "current_sha256": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+        "exact_pinned_line_inverse": true
+      }
+    ],
+    "spaces": 21,
+    "assertion_and_string_tokens_unchanged": true,
+    "basis": "只逆转已指定11行新增ASCII20；完整重建字节SHA直接等Q2 manifest，不全局去空格。"
+  },
+  "minimal_identity_current_seal": {
+    "changed_source_rows": [
+      "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt"
+    ],
+    "current_table_exact_match": true,
+    "q2_top_level_and_unaffected_rows_unchanged": true,
+    "legacy_version_and_old_manifest_fields_unchanged": true,
+    "register_source_review": "register_r7_ci_identity.py:25-46；register_r7_ci_final_identity.py:29-55，只注册2行及21空格谱系，原件新目录保存，无业务改动。"
+  },
+  "actual_compiler_receipt_sources_raw": {
+    "receipt_sha256": "1dc1f78f283e1e8b33d7e91f3835af6b538e9494a16a52cf3e5deadbd3db6a15",
+    "compiler": "1.9.24",
+    "compile_exit": 0,
+    "junit_exit": 0,
+    "tests": 171,
+    "source_files_current_sha_checked": 61,
+    "raw_hashes_bound": {
+      "compile": "53352a60ee217cc647ef18f24a88eeb59696f11f7e34a676159558a62ffb9fb0",
+      "junit": "06de6e301ddcd0c9e79e24344ff500d5660eebefb4cdca250f379f4d14ed0bfc"
+    },
+    "runner_lines": "r7_kotlin19_host.py:30-39验证compiler和源，53-71真实subprocess、原始日志exit及源未变；HOST证据不是Android/CI验收。",
+    "reexecuted": false,
+    "binary_rehashed": false
+  },
+  "new_commit_and_continued_seal": {
+    "commit_entire_source_lines": 97,
+    "commit_sha256": "9151009b049e38223db4df6fbf139d87d4cb5e81a249249cada4bd2034054d2d",
+    "current_review_binding": "23-31固定分支/a088 HEAD、closure-q3双轴manifest和全部live输入；上游continued seal严格绑定90，既有85全同SHA，非复用旧85 PASS。",
+    "fresh_regression_gates": "32-43要求独立r7-final-regression-q3、7条exit0、171/133零skip/3784，逐lane raw/current source SHA，拒绝reused_actual_prior_source_identical_compile字段，full-jvm真实compile/junit各0及171。不能据此声称尚未执行的fresh回归已PASS。",
+    "frozen_watch_gate": "44-45要求新Q3表445/445/0/0及input_unchanged。",
+    "whitelist_gates": "46-90使用显式源/文本目录和后缀，拒绝symlink/二进制/凭据/生成目录，逐字节SHA与blob，staged仅白名单，commit前后输入SHA一致。",
+    "subprocess_argv_shapes": [
+      "['git', *args]",
+      "['python', '-B', str(QA / 'prepare_r6_publish.py')]",
+      "['git', 'diff', '--check']",
+      "['git', 'add', '--', *rows]",
+      "['git', 'commit', '--quiet', '-m', 'fix(diagnostics): separate Kotlin 1.9 string tokens without behavior changes']"
+    ],
+    "push_POST_release_or_device_actions": false,
+    "helper_executed": false,
+    "continued_seal_lines": "15-26核live90、SPEC→QUALITY严格PASS、完整90map/raw SHA及全部阻断列表为空；27-33创建新closure-q3不覆盖原FAIL/Q2；未执行seal。"
+  }
+}
+
+阻断：
+[]
+
+limits：
+仅独立当前agent SPEC continuation；用户明确授权本模式，jev_called=false，未调用任何外部模型/网络。
+继承原Q3已实际完成old35/受保护源检查，以原85全同SHA绑定；不重审全仓/巨大历史，不改任何源/测试/门禁/旧review。
+编译器/二进制未重新执行或哈希；只核已有真实compiler receipt所列小型源文件、原始日志、命令和exit。
+本SPEC PASS不是QUALITY PASS、dual closure、fresh全回归完成、第二次POST/CI、APK交付或真机验收；这些仍由父任务后续实际执行。
+新commit/identity/seal只读审查未运行，未git/设备/Chromium/CI/网络/Release；本轮只新增指定两个正式文件，握手根因unknown。

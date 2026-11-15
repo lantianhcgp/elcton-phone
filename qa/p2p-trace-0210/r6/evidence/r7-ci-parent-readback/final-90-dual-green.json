@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "inputs": 90,
+  "manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+  "closure_sha256": "e6f68323595703d9b189be277765b3b69feaf91022fac45f9fdba56b27568d29",
+  "prior_failures_preserved": true,
+  "scope": "Actual source-only independent reviews, fresh regression executing separately",
+  "at": "2026-11-15 20:35:48 +0800"
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "counts": {
+    "tests": 445,
+    "pass": 445,
+    "fail": 0,
+    "skipped": 0
+  },
+  "receipt_sha256": "4458271b188e7b7942c3ae1d220adecd2039f0c8d446e92a52bec3b1fdbc4ad1",
+  "raw_sha256": "6683da9b732124acdc5c7e5a44f4a81cba3bf497b35e4f15684ff81109427097",
+  "scope": "Read-only original frozen watch HOST, not physical device"
+}

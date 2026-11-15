@@ -1,0 +1,81 @@
+{
+  "source_identities": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+      "old_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+      "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+      "current_sha256": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+      "current_bytes": 16986
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "old_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+      "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+      "current_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+      "current_bytes": 24342,
+      "previous_q2_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "previous_first_whitespace_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd"
+    },
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+      "old_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+      "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "current_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+      "current_bytes": 7773,
+      "previous_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"
+    },
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "old_sha256": null,
+      "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "current_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+      "current_bytes": 10677,
+      "previous_q2_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "previous_first_whitespace_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1"
+    }
+  },
+  "version_identity": {
+    "path": "app/build.gradle.kts",
+    "old_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+    "current_sha256": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "old_code": 11,
+    "current_code": 12,
+    "old_name": "0.2.9",
+    "current_name": "0.2.10"
+  },
+  "old_manifest_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+  "previous_first_manifest_sha256": "0ec127fc49dcc783957ee0be23014e95f694443fc96f3af82fb5710d4f2b94b9",
+  "new_manifest_sha256": "bdf622a46c0ca0a73ca39f408163abfa1a6e314dae61f86078198c6645a6c3d0",
+  "ci_whitespace_identity_final": {
+    "source_before": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+    "failed_run": 43710014774,
+    "attempt": 1,
+    "compiler": "1.9.24",
+    "changes": [
+      {
+        "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+        "total_ascii_spaces": 14,
+        "q2_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+        "first_candidate_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+        "final_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+        "bytes": 10677,
+        "exact_inverse_to_Q2": true
+      },
+      {
+        "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+        "total_ascii_spaces": 5,
+        "q2_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+        "first_candidate_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+        "final_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+        "bytes": 24342,
+        "exact_inverse_to_Q2": true
+      }
+    ],
+    "total_spaces": 21,
+    "test_lexical_identity": {
+      "path": "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+      "old_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "new_sha256": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+      "spaces": 2,
+      "new_diagnostic_test_only": true,
+      "all_assertion_tokens_unchanged": true
+    },
+    "authorization": "R7 diagnostic completion, whitespace token separation only; no behavior or original test assertion changes"
+  }
+}

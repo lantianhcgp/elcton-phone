@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "rows": {
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "spaces": 14,
+      "before_sha": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "current_sha": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084"
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "spaces": 5,
+      "before_sha": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "current_sha": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a"
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": {
+      "spaces": 2,
+      "before_sha": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "current_sha": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d"
+    }
+  },
+  "source_before": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+  "old_Q2_closure_preserved": true,
+  "scope": "Actual source lexical-only inverse to committed exact source"
+}

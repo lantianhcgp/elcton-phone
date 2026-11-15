@@ -1,0 +1,145 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 132799341152,
+      "run_id": 43710014774,
+      "workflow_name": "android-probe",
+      "head_branch": "diag/p2p-trace-0.2.10-20261115",
+      "run_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43710014774",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVd9SRM8AAAAe63UiYA",
+      "head_sha": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+      "url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/jobs/132799341152",
+      "html_url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43710014774/job/132799341152",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-11-15T11:40:02Z",
+      "started_at": "2026-11-15T11:40:04Z",
+      "completed_at": "2026-11-15T11:41:20Z",
+      "name": "build",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-15T11:40:05Z",
+          "completed_at": "2026-11-15T11:40:06Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-15T11:40:06Z",
+          "completed_at": "2026-11-15T11:40:16Z"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-15T11:40:16Z",
+          "completed_at": "2026-11-15T11:40:16Z"
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-15T11:40:16Z",
+          "completed_at": "2026-11-15T11:40:27Z"
+        },
+        {
+          "name": "Ensure Android build prerequisites",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-15T11:40:27Z",
+          "completed_at": "2026-11-15T11:40:30Z"
+        },
+        {
+          "name": "Unit tests and actual APK",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 6,
+          "started_at": "2026-11-15T11:40:30Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Real Kotlin diagnostic HTTP selftest",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Diagnostic HTTP logs (including failures)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Stable production signing and verification",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:18Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20,
+          "started_at": "2026-11-15T11:41:18Z",
+          "completed_at": "2026-11-15T11:41:19Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-11-15T11:41:19Z",
+          "completed_at": "2026-11-15T11:41:19Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/check-runs/132799341152",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000001671,
+      "runner_name": "GitHub Actions 1000001671",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

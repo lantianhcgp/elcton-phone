@@ -1,0 +1,73 @@
+diff --git a/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt b/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
+index 73dd544..06ec316 100644
+--- a/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
++++ b/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
+@@ -74,7 +74,7 @@ class P2pTrace(
+             seq++
+             try {
+                 val e=JSONObject().put("schema",1).put("origin",origin).put("sid",sid).put("seq",seq)
+-                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter"else"engine")
++                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter" else"engine")
+                     .put("stage",if(stage in STAGES)stage else "OTHER").put("outcome","observed").put("stale",false)
+                     .put("bytes",JSONObject.NULL).put("generation",JSONObject.NULL).put("nativeGeneration",JSONObject.NULL)
+                     .put("attemptId",JSONObject.NULL).put("dropped",dropped)
+@@ -135,10 +135,10 @@ class P2pTrace(
+         private val STAGES=setOf("CONNECT_REQUEST","PEER_CONFIG","REG_CALL","REG_TASK_OK","REG_TASK_FAIL","SEND_CALL","SEND_TASK_OK","SEND_TASK_FAIL","SEND_RESULT","RX_NATIVE_ENTRY","RX_ADAPTER_REJECT","RX_DECODE","RX_ENGINE_ENTRY","RX_PROTOCOL_ACCEPT","RX_PROTOCOL_REJECT","READY_ACCEPT","INSTALL_TIMEOUT","REG_TIMEOUT","HELLO_RETRY","READY_TIMEOUT","FAIL","CANCEL","CLOSE","UNREG_CALL","UNREG_TASK_OK","UNREG_TASK_FAIL")
+         /** Read-only replica; never replaces the original PacketIngress result. No raw fields escape. */
+         fun classify(raw:String):Map<String,Any?> = parseMetadata(raw,false).let {
+-            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none"else"present"))
++            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else"present"))
+         }
+         fun classifyOutgoing(raw:String):Map<String,Any?> = parseMetadata(raw,true).let {
+-            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none"else"present"))
++            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none" else"present"))
+         }
+         private fun parseMetadata(raw:String,outgoing:Boolean):Map<String,Any?> {
+             if(raw.isEmpty())return mapOf("reason" to "empty")
+@@ -147,18 +147,18 @@ class P2pTrace(
+             val m=try{JSONObject(raw)}catch(_:Throwable){return mapOf("reason" to "json")}
+             val type=m.opt("type") as? String
+             val base=mapOf("type" to (if(type in SAFE_LABELS)type else "other"),
+-                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync"else"other"),
++                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync" else"other"),
+                 "sender" to (if(m.opt("sender") in setOf("watch","phone"))m.opt("sender") else "other"),
+                 "protocolVersion" to exactInteger(m.opt("version")),
+-                "direction" to if(outgoing)"phone-outgoing"else"watch-ingress",
++                "direction" to if(outgoing)"phone-outgoing" else"watch-ingress",
+                 "transferRef" to (m.opt("transferId") as? String))
+             val reason=when {
+                 m.opt("protocol")!="elcton.sync"->"protocol"
+                 exactInteger(m.opt("version"))!=1L->"version"
+-                m.opt("sender")!=(if(outgoing)"phone"else"watch")->"sender"
++                m.opt("sender")!=(if(outgoing)"phone" else"watch")->"sender"
+                 m.opt("type") !is String->"type"
+                 m.opt("transferId") !is String->"transferId"
+-                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted"else"fields"
++                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted" else"fields"
+             }
+             return base+mapOf("reason" to reason)
+         }
+diff --git a/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt b/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
+index 1510e0a..65b4591 100644
+--- a/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
++++ b/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
+@@ -367,8 +367,8 @@ class SyncEngine(
+ 
+     fun cancel() {
+         if (closed) return
+-        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close"else"cancel"))
+-        try { trace?.bind(generation, trigger = if(closingTrace)"close"else"cancel") } catch (_: Throwable) {}
++        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close" else"cancel"))
++        try { trace?.bind(generation, trigger = if(closingTrace)"close" else"cancel") } catch (_: Throwable) {}
+         val id = session?.transferId ?: exporting?.id
+         if (id != null) send("{" + Wire.header("CANCEL", id) + "}", reportFailure = false)
+         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal()
+@@ -392,7 +392,7 @@ class SyncEngine(
+         fun accepts() = gen == generation && sendAttempts.accepts(attempt)
+         var sendContext:P2pTrace.Context? = null
+         try {
+-            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close"else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
++            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close" else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
+             transport.send(device, text, { code ->
+                 emitTrace("SEND_RESULT", mapOf("generation" to gen, "attemptId" to attempt, "resultCode" to code, "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
+                 main(gen) {

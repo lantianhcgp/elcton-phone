@@ -62,7 +62,7 @@ class P2pTraceEngineTest {
         return seen
     }
     @Test fun originalHelloDeadlinesAndRetryStages(){val h=compare("timeout");val a=read(h.trace!!).getJSONArray("events");val retry=(0 until a.length()).map{a.getJSONObject(it)}.filter{it.getString("stage")=="HELLO_RETRY"};assertEquals(listOf(5000L,10000L,15000L),retry.map{it.getLong("elapsedMs")});assertEquals(20000L,(0 until a.length()).map{a.getJSONObject(it)}.single{it.getString("stage")=="READY_TIMEOUT"}.getLong("elapsedMs"));assertEquals(4,h.calls.count{it.startsWith("send@")} )}
-    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT"else"REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
+    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT" else "REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
     @Test fun validReadyAcceptedExactlyOnceAndLateResultsRemainVisible(){val h=compare("ready");assertEquals(1,stages(h.trace!!).count{it=="READY_ACCEPT"});assertEquals(2,stages(h.trace).count{it=="SEND_RESULT"});assertFalse(read(h.trace).toString().contains("PRIVATE_"))}
     @Test fun originalRejectsAndEarlyFailuresCancelCloseAndLateCallbacksHaveZeroDrift(){for(mode in listOf("reject","resultFail","cancel","lateReg","close","syncThrow"))compare(mode)}
     @Test fun hostileDiagnosticClockHasZeroBusinessDrift(){compare("timeout",true);compare("ready",true);compare("syncThrow",true)}

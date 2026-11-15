@@ -1,0 +1,80 @@
+{
+  "rows": {
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/before/P2pTrace.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__before__P2pTrace.kt.source.txt",
+      "sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "bytes": 10670
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/before/SyncEngine.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__before__SyncEngine.kt.source.txt",
+      "sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "bytes": 24340
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/before/P2pTraceEngineTest.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__before__P2pTraceEngineTest.kt.source.txt",
+      "sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "bytes": 7952
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/after/P2pTrace.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__after__P2pTrace.kt.source.txt",
+      "sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+      "bytes": 10677
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/after/SyncEngine.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__after__SyncEngine.kt.source.txt",
+      "sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+      "bytes": 24342
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/after/P2pTraceEngineTest.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__after__P2pTraceEngineTest.kt.source.txt",
+      "sha256": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+      "bytes": 7954
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/inverse/P2pTrace.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__inverse__P2pTrace.kt.source.txt",
+      "sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+      "bytes": 10670
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/inverse/SyncEngine.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__inverse__SyncEngine.kt.source.txt",
+      "sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+      "bytes": 24340
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/inverse/P2pTraceEngineTest.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__inverse__P2pTraceEngineTest.kt.source.txt",
+      "sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "bytes": 7952
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/committed/P2pTrace.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__committed__P2pTrace.kt.source.txt",
+      "sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "bytes": 10663
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/committed/SyncEngine.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__committed__SyncEngine.kt.source.txt",
+      "sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "bytes": 24337
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/committed/P2pTraceEngineTest.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__committed__P2pTraceEngineTest.kt.source.txt",
+      "sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "bytes": 7952
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/inverse-committed/P2pTrace.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__inverse-committed__P2pTrace.kt.source.txt",
+      "sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "bytes": 10663
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/inverse-committed/SyncEngine.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__inverse-committed__SyncEngine.kt.source.txt",
+      "sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "bytes": 24337
+    },
+    "qa/p2p-trace-0210/r6/evidence/r7-ci-whitespace-followup/inverse-committed/P2pTraceEngineTest.kt": {
+      "mirror": "qa/p2p-trace-0210/r6/evidence/r7-ci-parent-readback/lexical-source-snapshot-mirrors/followup__inverse-committed__P2pTraceEngineTest.kt.source.txt",
+      "sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "bytes": 7952
+    }
+  },
+  "scope": "Lossless source proof mirrors with non-compilable suffix for Git/Gradle; originals kept"
+}

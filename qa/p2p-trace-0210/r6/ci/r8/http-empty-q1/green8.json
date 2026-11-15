@@ -1,0 +1,162 @@
+{
+  "phase": "green8",
+  "helper_under_test": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+  "helper_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+  "rows": [
+    {
+      "module": "test_finalize_r8_metadata",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_finalize_r8_metadata as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"
+      ],
+      "tests_run": 18,
+      "returncode": 0,
+      "started_at_epoch": 1794751405.537555,
+      "completed_at_epoch": 1794751406.1819527,
+      "fixtures": []
+    },
+    {
+      "module": "test_dns_parameters",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_dns_parameters as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"
+      ],
+      "tests_run": 1,
+      "returncode": 0,
+      "started_at_epoch": 1794751406.1820326,
+      "completed_at_epoch": 1794751406.3354845,
+      "fixtures": []
+    },
+    {
+      "module": "test_transport_edges",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_transport_edges as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"
+      ],
+      "tests_run": 3,
+      "returncode": 0,
+      "started_at_epoch": 1794751406.335542,
+      "completed_at_epoch": 1794751406.7463138,
+      "fixtures": []
+    },
+    {
+      "module": "test_post_http_status",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_post_http_status as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"
+      ],
+      "tests_run": 2,
+      "returncode": 0,
+      "started_at_epoch": 1794751406.746375,
+      "completed_at_epoch": 1794751406.9143376,
+      "fixtures": []
+    },
+    {
+      "module": "test_http_empty_q1",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_http_empty_q1 as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"
+      ],
+      "tests_run": 8,
+      "returncode": 0,
+      "started_at_epoch": 1794751406.914399,
+      "completed_at_epoch": 1794751407.1275225,
+      "fixtures": [
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_empty_302_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"
+        },
+        {
+          "accepted": true,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_exact_empty_204_accepted",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 7,
+          "fixture": "test_failed_curl_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_missing_status_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b''"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_newline_only_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\n\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_nonempty_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_tab_only_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\t\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_whitespace_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"
+        }
+      ]
+    }
+  ],
+  "actual_returncodes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "original_tests_run": 24,
+  "new_tests_run": 8,
+  "total_tests_run": 32,
+  "aggregate_returncode": 0,
+  "raw_log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green8.raw.log"
+}

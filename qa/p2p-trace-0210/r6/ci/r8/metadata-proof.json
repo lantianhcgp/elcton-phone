@@ -1,0 +1,94 @@
+{
+  "original_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+  "original_bytes": 8728,
+  "transformed_sha256": "28c6ef9a01d6d783ffc93137ca10673b6afec5acbf1e1e740adaad055d79f2f7",
+  "transformed_bytes": 8717,
+  "changed_spans": [
+    {
+      "line": 75,
+      "original_start": 4375,
+      "original_end": 4465,
+      "before": "    target=PHONE/('hc课程表-0.2.10-code12-'+a.source[:8]+'-'+digest[:8]+'-signed.apk')\n",
+      "after": "    target=PHONE/('hc课程表-0.2.10-code12-'+a.source[:8]+'-诊断版-signed.apk')\n"
+    },
+    {
+      "line": 92,
+      "original_start": 6012,
+      "original_end": 6076,
+      "before": "    lines=['# R6 DELIVERY — 0.2.10 诊断版实际交付','',\n",
+      "after": "    lines=['# DELIVERY-R8 — 0.2.10 诊断版实际交付','',\n"
+    },
+    {
+      "line": 116,
+      "original_start": 8321,
+      "original_end": 8364,
+      "before": "    (out/'DELIVERY.md').write_text(report)\n",
+      "after": "    (out/'DELIVERY-R8.md').write_text(report)\n"
+    },
+    {
+      "line": 117,
+      "original_start": 8364,
+      "original_end": 8405,
+      "before": "    (Q/'DELIVERY.md').write_text(report)\n",
+      "after": "    (Q/'DELIVERY-R8.md').write_text(report)\n"
+    },
+    {
+      "line": 118,
+      "original_start": 8405,
+      "original_end": 8457,
+      "before": "    phone_report=target.with_suffix('.DELIVERY.md')\n",
+      "after": "    phone_report=PHONE/'DELIVERY-R8.md'\n"
+    }
+  ],
+  "inverse_exact": true,
+  "normalized_ast_equal": true,
+  "scope": "Five output metadata spans only; all original checks/assertions retained",
+  "proof_type": "R8 metadata/helper-only offline proof, NOT delivery PASS",
+  "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "branch": "diag/p2p-trace-0.2.10-20261115",
+  "workflow_head": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+  "original_file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py",
+  "disk_equals_git_show": true,
+  "original_sha_unchanged": true,
+  "old_r6_delivery_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+  "old_r6_delivery_unchanged": true,
+  "tests": {
+    "count": 18,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-green.log",
+    "log_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+    "seconds": 0.7842143229208887
+  },
+  "red": {
+    "count": 18,
+    "failed": 18,
+    "exit_code": 1,
+    "log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-red.log",
+    "log_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+    "reason": "Adapter missing before implementation; original assertions/test cases retained"
+  },
+  "execution_limits": {
+    "delivery_executed": false,
+    "network": false,
+    "build": false,
+    "device": false,
+    "git_write": false,
+    "real_phone_paths_written": false,
+    "wrapper_tests": "Isolated Q/PHONE namespace; collision rejection or real original false-PASS guard only; no APK/signature success fixtures"
+  },
+  "files": {
+    "finalize_r8_delivery.py": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalize_r8_delivery.py",
+      "sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f"
+    },
+    "test_finalize_r8_metadata.py": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328"
+    }
+  },
+  "concurrency_note": "Read-only absence preflight is not a concurrent-writer lock. Original x/xb phone writes retained; Q/out write_text unchanged."
+}

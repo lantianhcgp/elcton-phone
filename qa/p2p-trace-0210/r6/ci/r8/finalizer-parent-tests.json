@@ -1,0 +1,6 @@
+{
+  "exit": 0,
+  "log_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+  "raw": "qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.raw.log",
+  "scope": "R8 output metadata helper only, not live CI verification"
+}

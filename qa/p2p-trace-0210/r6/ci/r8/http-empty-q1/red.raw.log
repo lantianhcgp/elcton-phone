@@ -1,0 +1,93 @@
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py"]
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.452s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py"]
+test_exact_https_sni_and_no_insecure_or_wrong_host (__main__.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py"]
+test_optimized_cli_fails_before_io (__main__.TransportEdges.test_optimized_cli_fails_before_io) ... ok
+test_optimized_invalid_post_cannot_be_accepted (__main__.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... ok
+test_single_post_never_follows_redirect (__main__.TransportEdges.test_single_post_never_follows_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.348s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py"]
+test_empty_http302_fails_without_retry (__main__.PostStatus.test_empty_http302_fails_without_retry) ... ok
+test_true_http204_accepted_once (__main__.PostStatus.test_true_http204_accepted_once) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.030s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py"]
+test_empty_302_rejected (__main__.ExactEmpty204.test_empty_302_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_empty_302_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"}
+ok
+test_exact_empty_204_accepted (__main__.ExactEmpty204.test_exact_empty_204_accepted) ... {"accepted": true, "credential_logging": false, "curl_returncode": 0, "fixture": "test_exact_empty_204_accepted", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"}
+ok
+test_failed_curl_204_rejected (__main__.ExactEmpty204.test_failed_curl_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 7, "fixture": "test_failed_curl_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"}
+ok
+test_missing_status_rejected (__main__.ExactEmpty204.test_missing_status_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_missing_status_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b''"}
+ok
+test_nonempty_204_rejected (__main__.ExactEmpty204.test_nonempty_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_nonempty_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"}
+ok
+test_whitespace_204_rejected (__main__.ExactEmpty204.test_whitespace_204_rejected) ... {"accepted": true, "credential_logging": false, "curl_returncode": 0, "fixture": "test_whitespace_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"}
+FAIL
+
+======================================================================
+FAIL: test_whitespace_204_rejected (__main__.ExactEmpty204.test_whitespace_204_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py", line 70, in test_whitespace_204_rejected
+    self.reject(b' \t\r\n\nR8-HTTP-STATUS:204')
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py", line 66, in reject
+    self.assertFalse(accepted, 'Non-exact empty HTTP204 response was accepted')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : Non-exact empty HTTP204 response was accepted
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.056s
+
+FAILED (failures=1)
+
+ACTUAL_RETURNCODE 1
+

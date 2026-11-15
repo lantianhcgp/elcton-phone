@@ -1,0 +1,34 @@
+test_optimized_cli_fails_before_io (__main__.TransportEdges.test_optimized_cli_fails_before_io) ... FAIL
+test_optimized_invalid_post_cannot_be_accepted (__main__.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... FAIL
+test_single_post_never_follows_redirect (__main__.TransportEdges.test_single_post_never_follows_redirect) ... ERROR
+
+======================================================================
+ERROR: test_single_post_never_follows_redirect (__main__.TransportEdges.test_single_post_never_follows_redirect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py", line 23, in test_single_post_never_follows_redirect
+    args = m.curl_command('/actions/workflows/ui-smoke.yml/dispatches', post=True)
+TypeError: curl_command() got an unexpected keyword argument 'post'
+
+======================================================================
+FAIL: test_optimized_cli_fails_before_io (__main__.TransportEdges.test_optimized_cli_fails_before_io)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py", line 34, in test_optimized_cli_fails_before_io
+    self.assertIn(b'Optimized Python refuses', p.stderr)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'Optimized Python refuses' not found in b'Traceback (most recent call last):\n  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 108, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 53, in main\n    out = Path(args[args.index(\'--out\') + 1]).absolute()\n                    ~~~~~~~~~~^^^^^^^^^\nValueError: \'--out\' is not in list\n'
+
+======================================================================
+FAIL: test_optimized_invalid_post_cannot_be_accepted (__main__.TransportEdges.test_optimized_invalid_post_cannot_be_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py", line 43, in test_optimized_invalid_post_cannot_be_accepted
+    self.assertNotEqual(p.returncode, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.267s
+
+FAILED (failures=2, errors=1)

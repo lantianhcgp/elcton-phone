@@ -1,0 +1,282 @@
+[
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/01-today-empty.png",
+    "sha256": "d6151d880107662181fff9f8630ffbebf5899a4144c051a7a2059487f88fdd76",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-01.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/02-week-empty.png",
+    "sha256": "0245c4466249cee30a5d45a148898ad32f16338c5c11c7d5ae33798d48e64708",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-01.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/03-editor-empty.png",
+    "sha256": "368354ba55ba4fb5dcf8f96a60d38a6bc0de505c3e7f2942bd2fe07fdcccd27a",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-01.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/04-editor-invalid.png",
+    "sha256": "17641f541bd087cd4c31a025917dcf41af68046191f3c6b0eaa371d07c5781f0",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-01.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/05-week-course.png",
+    "sha256": "3468a9f9633623d0f385b073c7dacbe0d84fc95c5b0db0b59e783603765fa2e1",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-02.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/06-editor-filled.png",
+    "sha256": "c3e9cd05673aea554da477635a46d068cbf0eef074d0c255f9627b3a045ccae2",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-02.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/07-week-edited.png",
+    "sha256": "961f2ea153a64bbc65ca066ae1e39aab21a737e85447909e5e5df6e9f48f0805",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-02.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/08-settings.png",
+    "sha256": "cb080570b061723310a2bf6133357c54716086730bf08ebd0bdd8391f8d546b3",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-02.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/09-settings-invalid.png",
+    "sha256": "9b52f8ba59f3555c71de3aa21aa026e4c0454d71e13f7e9a403747a341d0b5c7",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-03.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/10-import.png",
+    "sha256": "c0a058d50e0a9c8c6a6c061e33e2b1cf18544c9864c3ae774be34f309305d41f",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-03.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/11-import-preview.png",
+    "sha256": "a76e55d64c4fd6e3a5aae1d0bdb8e9f21017431c4a6d42059a7d1226ecba2f24",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-03.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/12-export-preview.png",
+    "sha256": "a700195af0df0bf1c9760df225c23f03caeb90ef904927e5b43259508a318129",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-03.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/13-device.png",
+    "sha256": "ebadfc3eddc223a5b657c550e88074e8b2af68f30817e22b7160865c402ac321",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-04.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/14-device-unavailable.png",
+    "sha256": "0d30aab64c2bfe4c627fe41f7c99a1127a291ddd4c233f297ae1aaca5ec77bb6",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-04.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/15-editor-bottom.png",
+    "sha256": "1bbb33208f96761aaa9c5aeabf3f3e7350f1e114a321f4e406d3695d2a168579",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-04.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/16-delete-confirm.png",
+    "sha256": "0fe80d1e4130042bb7b10b39bad93172e17208b8d02905048ee675c43125722c",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-04.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/17-course-deleted.png",
+    "sha256": "909451f0ae14d4b5e54b378a6b72c893950b563205cad68e36b781af1f750036",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-05.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/19-restore-confirm.png",
+    "sha256": "70b5d253ba6584d8fb968def184a965715e18716b1e0e0f28dccbd0f3fcd4c45",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-05.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/20-restored-course.png",
+    "sha256": "1d81ae35d3616f1336baa35f2b136862c21d03ab02e82cf60b34ecc039eb8d8c",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-05.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/21-confirmed-empty-import.png",
+    "sha256": "909451f0ae14d4b5e54b378a6b72c893950b563205cad68e36b781af1f750036",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-05.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/22-return-today.png",
+    "sha256": "1787377db3db7e06c3cf21e36be6e4ed0658eaa1f316a4e0f2beb97f7c5bb954",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-06.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/23-file-export-picker.png",
+    "sha256": "59e84c336d8655a3a8ca5d287ab259560122389bc2544544d35f799ddea4dc3a",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-06.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/24-file-exported.png",
+    "sha256": "75db64779e2e61cf4edf012a79ed820bad2972358e5883fe77d1191402c0f6ee",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-06.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/25-file-import-picker.png",
+    "sha256": "5bb1ee10df4e9159dbdb907f2c31400058781a30e9efbc87cab6387e5168d9d4",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-06.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/26-file-import-preview.png",
+    "sha256": "ee8e47b5edcc32ea89266012f577ae4d511f283128bc518f8502a3858319cf64",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-07.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/27-file-imported-course.png",
+    "sha256": "9851129b24100aef40f55810c4cbda82862a18dbe48b651a463d63f64b8701ec",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-07.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/28-restarted-file-import.png",
+    "sha256": "9851129b24100aef40f55810c4cbda82862a18dbe48b651a463d63f64b8701ec",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-07.png",
+    "full_source_preserved": true
+  },
+  {
+    "source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact/artifact/product/29-keyboard-visible.png",
+    "sha256": "dc55c308f5fe8e9502a7ff9c50e06c37177b4accb86a30661fadd4cf14d9c733",
+    "original_size": [
+      1080,
+      1920
+    ],
+    "sheet": "tour-07.png",
+    "full_source_preserved": true
+  }
+]

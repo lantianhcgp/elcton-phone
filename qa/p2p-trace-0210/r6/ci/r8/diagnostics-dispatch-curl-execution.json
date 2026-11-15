@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+    "dispatch-ui",
+    "--sha",
+    "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+    "--suite",
+    "diagnostics",
+    "--build-run",
+    "43715446826",
+    "--build-sha",
+    "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "--build-receipt",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl"
+  ],
+  "exit": 0,
+  "seconds": 39.18992614746094,
+  "raw": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl.raw.log"
+}

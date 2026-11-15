@@ -1,0 +1,59 @@
+{
+  "source_raw": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red.raw.log",
+  "fixtures": [
+    {
+      "accepted": false,
+      "credential_logging": false,
+      "curl_returncode": 0,
+      "fixture": "test_empty_302_rejected",
+      "post_calls": 1,
+      "retry_sleeps": 0,
+      "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"
+    },
+    {
+      "accepted": true,
+      "credential_logging": false,
+      "curl_returncode": 0,
+      "fixture": "test_exact_empty_204_accepted",
+      "post_calls": 1,
+      "retry_sleeps": 0,
+      "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+    },
+    {
+      "accepted": false,
+      "credential_logging": false,
+      "curl_returncode": 7,
+      "fixture": "test_failed_curl_204_rejected",
+      "post_calls": 1,
+      "retry_sleeps": 0,
+      "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+    },
+    {
+      "accepted": false,
+      "credential_logging": false,
+      "curl_returncode": 0,
+      "fixture": "test_missing_status_rejected",
+      "post_calls": 1,
+      "retry_sleeps": 0,
+      "stdout_repr": "b''"
+    },
+    {
+      "accepted": false,
+      "credential_logging": false,
+      "curl_returncode": 0,
+      "fixture": "test_nonempty_204_rejected",
+      "post_calls": 1,
+      "retry_sleeps": 0,
+      "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"
+    },
+    {
+      "accepted": true,
+      "credential_logging": false,
+      "curl_returncode": 0,
+      "fixture": "test_whitespace_204_rejected",
+      "post_calls": 1,
+      "retry_sleeps": 0,
+      "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"
+    }
+  ]
+}

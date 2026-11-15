@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 182, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 176, in main
+    if a.command.startswith('dispatch-'): dispatch(a); return 0
+                                          ~~~~~~~~^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 49, in dispatch
+    bound = exact_readback(args.build_run,args.build_sha,'build.yml',True)
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 131, in exact_readback
+    attempt = api('/actions/runs/' + run + '/attempts/' + str(current['run_attempt']))
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 111, in api
+    require(result.returncode == 0, 'gh API failed (credential not printed); exit=' + str(result.returncode))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 24, in require
+    if not condition: raise AssertionError(label)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: gh API failed (credential not printed); exit=1

@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "receipt": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-http-empty-count-q2.json",
+  "receipt_sha256": "5a12b5dc39d37a376e41d57b08fac92d08c2e49f36452de7d4f4b0d16d96da72",
+  "input_count": 88,
+  "drift": [],
+  "scope": "helper-only explicit8/32 continuation, not new product review"
+}

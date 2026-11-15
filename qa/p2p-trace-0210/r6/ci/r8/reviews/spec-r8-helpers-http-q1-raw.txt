@@ -1,0 +1,172 @@
+HTTP-Q1 helper-only SPEC PASS：仅四段POST状态元数据增量恢复fe42原稿；真实闭包离线302/204及四项负边界全部一次调用且严格拒绝/接受，原三个gate文件b3eb逐字节不变。finalizer18、DNS1、edges3、HTTP2均exit0；旧FAIL/RED保留，冻结产品双审未重审/重标。
+Personally read exact current ui_transport.py entire120lines at SHA910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11.
+Only HTTP-Q1 delta checked; four inverse spans restore full fe42b651… bytes. No new product review.
+Original pipeline/common/finalizer pinnedb3eb all byte-equal; original signature/manifest/closure/identity/remote/registration/count gates preserved.
+All fixture responses below synthetic/offline only. No real API/credentials fabricated. No network/device/git write done by reviewer.
+Initial HTTP test RED was errors=2(JSONDecodeError on sentinel), not claimed assertion2fail; raw retained.
+full-dispatch-dns2 raw confirms original pipeline52 rejected absentpreviousregistration before intent/POST; correctargv remains parents scope.
+Exact original filename source8 convention accepted; fullhash unchanged.
+HTTP inverse proof {"spans": 4, "inverse_exact": true, "previous_sha": "fe42b65106e193850b262a22210435320650485089237fa5bfc9bb2da366f9d3", "current_sha": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11"}
+SCOPE/INPUT UNCHANGED []
+
+ACTUAL EXECUTION test_finalize_r8_metadata.py exit=0
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.437s
+
+OK
+
+
+ACTUAL EXECUTION test_dns_parameters.py exit=0
+test_exact_https_sni_and_no_insecure_or_wrong_host (__main__.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.013s
+
+OK
+
+
+ACTUAL EXECUTION test_transport_edges.py exit=0
+test_optimized_cli_fails_before_io (__main__.TransportEdges.test_optimized_cli_fails_before_io) ... ok
+test_optimized_invalid_post_cannot_be_accepted (__main__.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... ok
+test_single_post_never_follows_redirect (__main__.TransportEdges.test_single_post_never_follows_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.253s
+
+OK
+
+
+ACTUAL EXECUTION test_post_http_status.py exit=0
+test_empty_http302_fails_without_retry (__main__.PostStatus.test_empty_http302_fails_without_retry) ... ok
+test_true_http204_accepted_once (__main__.PostStatus.test_true_http204_accepted_once) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.027s
+
+OK
+
+
+ACTUAL LIVE CLOSURE OFFLINE OBSERVATIONS [
+  {
+    "fixture": "302",
+    "type": "explicit offline result fixture, NOT real API",
+    "accepted": false,
+    "expected": false,
+    "calls": 1,
+    "no_location": true,
+    "no_retry": true,
+    "write_out": true,
+    "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST"
+  },
+  {
+    "fixture": "204",
+    "type": "explicit offline result fixture, NOT real API",
+    "accepted": true,
+    "expected": true,
+    "calls": 1,
+    "no_location": true,
+    "no_retry": true,
+    "write_out": true,
+    "error": null
+  },
+  {
+    "fixture": "missing-status",
+    "type": "explicit offline result fixture, NOT real API",
+    "accepted": false,
+    "expected": false,
+    "calls": 1,
+    "no_location": true,
+    "no_retry": true,
+    "write_out": true,
+    "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST"
+  },
+  {
+    "fixture": "200",
+    "type": "explicit offline result fixture, NOT real API",
+    "accepted": false,
+    "expected": false,
+    "calls": 1,
+    "no_location": true,
+    "no_retry": true,
+    "write_out": true,
+    "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST"
+  },
+  {
+    "fixture": "nonempty204",
+    "type": "explicit offline result fixture, NOT real API",
+    "accepted": false,
+    "expected": false,
+    "calls": 1,
+    "no_location": true,
+    "no_retry": true,
+    "write_out": true,
+    "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST"
+  },
+  {
+    "fixture": "curl-failure204",
+    "type": "explicit offline result fixture, NOT real API",
+    "accepted": false,
+    "expected": false,
+    "calls": 1,
+    "no_location": true,
+    "no_retry": true,
+    "write_out": true,
+    "error": "Single UI POST transport failed/ambiguous; inspect actual runs, DO NOT repeat POST"
+  }
+]
+
+GATE PROOFS {
+  "originals": {
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py": true,
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py": true,
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py": true
+  },
+  "metadata": {
+    "five_spans": 5,
+    "inverse_exact": true,
+    "full_ast_equal": true,
+    "transformed_sha256": "28c6ef9a01d6d783ffc93137ca10673b6afec5acbf1e1e740adaad055d79f2f7",
+    "old_delivery_unchanged": true
+  },
+  "parentgreen": [
+    {
+      "test": "test_post_http_status.py",
+      "exit": 0,
+      "count": 2,
+      "raw_hash_matches": true
+    },
+    {
+      "test": "test_dns_parameters.py",
+      "exit": 0,
+      "count": 1,
+      "raw_hash_matches": true
+    },
+    {
+      "test": "test_transport_edges.py",
+      "exit": 0,
+      "count": 3,
+      "raw_hash_matches": true
+    }
+  ]
+}
+
+VERDICT {"axis": "spec", "passed": true, "security_concerns": [], "logic_errors": [], "missing_requirements": []}

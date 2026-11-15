@@ -1,0 +1,185 @@
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... FAIL
+test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... FAIL
+test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... FAIL
+test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... FAIL
+test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... FAIL
+test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation) ... FAIL
+test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink) ... FAIL
+test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... FAIL
+test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report) ... FAIL
+test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report) ... FAIL
+test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report) ... FAIL
+test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation) ... FAIL
+test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation) ... FAIL
+test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation) ... FAIL
+test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent) ... FAIL
+test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent) ... FAIL
+test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci) ... FAIL
+test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source) ... FAIL
+
+======================================================================
+FAIL: test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+======================================================================
+FAIL: test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py", line 23, in setUp
+    self.assertTrue(path.is_file(), 'R8 adapter not implemented yet')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : R8 adapter not implemented yet
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.008s
+
+FAILED (failures=18)

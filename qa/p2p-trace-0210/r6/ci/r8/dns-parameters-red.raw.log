@@ -1,0 +1,15 @@
+test_exact_https_sni_and_no_insecure_or_wrong_host (__main__.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... FAIL
+
+======================================================================
+FAIL: test_exact_https_sni_and_no_insecure_or_wrong_host (__main__.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py", line 14, in test_exact_https_sni_and_no_insecure_or_wrong_host
+    self.assertTrue(hasattr(module, 'curl_command'), 'Official verified DNS argument helper missing')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Official verified DNS argument helper missing
+
+----------------------------------------------------------------------
+Ran 1 test in 0.022s
+
+FAILED (failures=1)

@@ -1,0 +1,659 @@
+{
+  "created_at": "2026-11-15T22:17:59.468502+08:00",
+  "images": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-dark-ime-bottom.png",
+      "sha256": "36e6f8cafc4d82242f203ba665a6ad760bb9544a529bfedeff525fc5423e415e",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-dark-date-dock.png",
+      "sha256": "9b197ef67e841da6b0b067fc2d364894edfc62bb1fe730037fc0461d74e79c73",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-dark-devices.png",
+      "sha256": "4c793ff149ac6db0c8162d39447032342cd20f6023739abff5dda627b400b514",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-dark-editor-top.png",
+      "sha256": "b8b3f471aae9e5ab2adfc499a8bb77a295554827cd9e8a87b969b6c90b2b2b6c",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-dark-today.png",
+      "sha256": "178ac6bbf352ceb0ad62fbf1a7523205944f3e4801fec1c7df0fc697115148fc",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-light-ime-bottom.png",
+      "sha256": "36e6f8cafc4d82242f203ba665a6ad760bb9544a529bfedeff525fc5423e415e",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-light-date-dock.png",
+      "sha256": "244930ea80a903bbdb12d5d788ab5abf59bfd42088b737b578beab4639a9fa22",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-light-devices.png",
+      "sha256": "0b721e34dae891b523de6e41323398c16f5be0ba67af6f4310dd7ecb02dcf908",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-light-editor-top.png",
+      "sha256": "a136dce76be74fa0ab2a5019c24df58ee8af072b4e36443b4be4364206c580d4",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/theme-light-today.png",
+      "sha256": "b7a5537bd7966f88dfdaa042be4528d8a96f319bc77973310c7c275f85fb249b",
+      "kind": "native_source_crop",
+      "review_level": "unviewed_derived_crop"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-dark-cold--bars.png",
+      "sha256": "f6356575c08284aed9c52ec293f384bfd399baa30c709767da6364e99ca4c9e6",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-dark-editor-bottom--component-dark-editor-bottom.png",
+      "sha256": "7ff2054e52acf9796d782270faa0f02c476122b09c3bfab6a61bb082389fead5",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-dark-options--component-dark-options.png",
+      "sha256": "3d52ecac19fb125a3c0fd23570ea9f97c3f3e5b7e89251e235f935b7e8babef9",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-dark-semester--component-dark-semester.png",
+      "sha256": "a358a570763ee841d800b3e8360d8803495352ad09bd562b062974fd3dee2bb7",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-dark-week--component-dark-week.png",
+      "sha256": "c8ed00be1eeefb0b355908774c097d99302366e20e49f6c59fb132933234a986",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-light-cold--bars.png",
+      "sha256": "b9a894b4c4ecb351fb32d41d86d6105ae86ac51e9c592c1f40093da54e1c81a4",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-light-editor-bottom--component-light-editor-bottom.png",
+      "sha256": "4f6644d5ac97fcf1e5d14f707acbe75d624450dcb38908267d7e782f7b4ea793",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-light-options--component-light-options.png",
+      "sha256": "ee5a4f555caf635644189a40d92567b7bda8361518e0318379c120a70c748894",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-light-semester--component-light-semester.png",
+      "sha256": "219933f5ea7dcf76ae1c8d1891cd1febc1f3f529e0f7f2bead7bd37ffb9723fa",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-blue-light-week--component-light-week.png",
+      "sha256": "a66a9c0853b4406122653307019dcc42fc393a721dd5efd9bf1cc0d59ba18b65",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-dark-cold--bars.png",
+      "sha256": "09ca4809fd1160016ae3a9360b35867ed8237557300ed9f97cd4db2f31ce9271",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-dark-editor-bottom--component-dark-editor-bottom.png",
+      "sha256": "f88530aa0d05e98862b962da0163f35d2823d71359bb791d24b24ffb0758221e",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-dark-options--component-dark-options.png",
+      "sha256": "5f5e99b5901202593b7ff117593380320e7292d600c287829a276340cef84aa0",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-dark-semester--component-dark-semester.png",
+      "sha256": "a24c9a2d3d33f6389ac95e6477ffe39ce5431c11b17af9161611b154b6932877",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-dark-week--component-dark-week.png",
+      "sha256": "71983b7b92159ec8ba1420e8667978265a8c241c1b46fc98be67db355472e149",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-light-cold--bars.png",
+      "sha256": "724b7c975a7a173cdba5f5364ee8c70925e415031f2adf5728d7cb3535610787",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-light-editor-bottom--component-light-editor-bottom.png",
+      "sha256": "82cb7679b1727914c87dc9e58272a3ed6b5a6c06ff80d8b62d00784fdc4b09f5",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-light-options--component-light-options.png",
+      "sha256": "3b9715d2f78e6546b7d8ea333ef96fee1b4c65c0207e809698ae74f5fb4facb4",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-light-semester--component-light-semester.png",
+      "sha256": "01291460ef8fe945472ac1651d23282613d33707315f21e920e7fe1a1afa806b",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-green-light-week--component-light-week.png",
+      "sha256": "9200b0becb45fa85456f95a237c8abc91e4bca6b33e7167019ad7df141eebaf8",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-dark-cold--bars.png",
+      "sha256": "1fa2816fb09d19da1926164397adc6d555010ca787e6b0ae9d43d40337c2d390",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-dark-editor-bottom--component-dark-editor-bottom.png",
+      "sha256": "bd38a5274ca73b8c4d84593fcea5a049c2e2113c5e23ff67d60541b6ca3211a8",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-dark-options--component-dark-options.png",
+      "sha256": "c5087335ebb3508f8e275857c4a51a45f2a6d3df07f4c0169051bd33f411d119",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-dark-semester--component-dark-semester.png",
+      "sha256": "28d099b9f8e80c6e8695b065667aca468dbb4114dfd40730706b8286108ce76b",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-dark-week--component-dark-week.png",
+      "sha256": "72fe732887be24568246ef6da48f590cce99b417fcb518610aa73191b48e520a",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-light-cold--bars.png",
+      "sha256": "67cceb8c393185fd68e000ed352e7a647510f2597b85661226283371415dbb8a",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-light-editor-bottom--component-light-editor-bottom.png",
+      "sha256": "0deacd0021b056f32ef1675f74384d6401f97075f97b4c6027ca290652f68c1b",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-light-options--component-light-options.png",
+      "sha256": "9d038f884dcaa0d5e14e882fd0901602376ac1f4bb53b6157e935ab6029b51ac",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-light-semester--component-light-semester.png",
+      "sha256": "9660b95742d20beda7abcae8b93ff7d1bf46a69f923da715ea527537e88ebe63",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-orange-light-week--component-light-week.png",
+      "sha256": "cb10c929c74ed1d45e2cacb2b3f439b31d5048c88867931e2dc494e264f4ef55",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-dark-cold--bars.png",
+      "sha256": "59d766b7b281d6a9a64306dd610eaf80a92b4b60cd2f4ce7dd998a6f666d1995",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-dark-editor-bottom--component-dark-editor-bottom.png",
+      "sha256": "2da9e618919ad53f608d1e71069a023d2e2ae83dc406d90dda2f69ebba46ae83",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-dark-options--component-dark-options.png",
+      "sha256": "aefcfd5ac8049dc826d40f9e5b3c1da505648adb28c317bf70c0fc63431acee1",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-dark-semester--component-dark-semester.png",
+      "sha256": "36b09103b6cb24e9587747d37bad705d42bcda6c081c735e4191991ba8279bcb",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-dark-week--component-dark-week.png",
+      "sha256": "138ac08b3ce8ade7f111306cb14dd1c63faa9da135deb850d700105c182aac1e",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-light-cold--bars.png",
+      "sha256": "94f0d6523d8679682eda3923b4cfa597da453401f4c46ddc181fc4bb3b6ba135",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-light-editor-bottom--component-light-editor-bottom.png",
+      "sha256": "564fab2694ea44d7207834753cce92872b541123dd2799b3728145c6c04aa87f",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-light-options--component-light-options.png",
+      "sha256": "9db2c32ecaee50c855beaf95e1a427d11ee27d5adb6d134904a34d8b6a8771d7",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-light-semester--component-light-semester.png",
+      "sha256": "855e657020b705d3c081884a25471bbb824dcf3d67635cf48db9d95a9d0510a4",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-pink-light-week--component-light-week.png",
+      "sha256": "5e29ad1bf2fae9b16e32b123808e2c5d26af09aad53e3b67d24f66588f2a9b4a",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-dark-cold--bars.png",
+      "sha256": "523836c79a922f865b2f7b2af7ca24998a05c466035d5447b6c698093ba2e3b8",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-dark-editor-bottom--component-dark-editor-bottom.png",
+      "sha256": "0393876b14d961edbd9407a50e47acd71dc9e9eac0215b6a714b03ef730ba0fe",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-dark-editor-bottom.png",
+      "sha256": "0393876b14d961edbd9407a50e47acd71dc9e9eac0215b6a714b03ef730ba0fe",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-dark-options--component-dark-options.png",
+      "sha256": "b3ce0d77b1b9cf6f0b7322a9f152eacb121b3323e4fb400a3c9959836077997a",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-dark-options.png",
+      "sha256": "b3ce0d77b1b9cf6f0b7322a9f152eacb121b3323e4fb400a3c9959836077997a",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-dark-semester--component-dark-semester.png",
+      "sha256": "b723945809692fc93a018b126d74224dc054fcad05038e555487a70e3967b68f",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-dark-semester.png",
+      "sha256": "b723945809692fc93a018b126d74224dc054fcad05038e555487a70e3967b68f",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-dark-week--component-dark-week.png",
+      "sha256": "bd691c7f2fa39df728350641a602eba6d45c3a6e3d75550c6eb8f3f773c5978e",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-dark-week.png",
+      "sha256": "bd691c7f2fa39df728350641a602eba6d45c3a6e3d75550c6eb8f3f773c5978e",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-light-cold--bars.png",
+      "sha256": "27e28924ffe41c312528070c2ebb4926cfdcf8776ea3cc02dee7b84c5df5f59c",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-light-editor-bottom--component-light-editor-bottom.png",
+      "sha256": "83326a406f99dbd69aae3276dbdbb91b347fc88f0d4bf315005ced5a000e9745",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-light-editor-bottom.png",
+      "sha256": "83326a406f99dbd69aae3276dbdbb91b347fc88f0d4bf315005ced5a000e9745",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-light-options--component-light-options.png",
+      "sha256": "116c2e7e1f6008939cc3cef28b215b810c233d196509baa47292c1d197d0f3b8",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-light-options.png",
+      "sha256": "116c2e7e1f6008939cc3cef28b215b810c233d196509baa47292c1d197d0f3b8",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-light-semester--component-light-semester.png",
+      "sha256": "b441303a1bae5e3c08ea7d2f9cae5d2bfb2de9c026f06fae3295ab91c5672084",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-light-semester.png",
+      "sha256": "b441303a1bae5e3c08ea7d2f9cae5d2bfb2de9c026f06fae3295ab91c5672084",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-purple-light-week--component-light-week.png",
+      "sha256": "083883d80457fe84c5bbd8cf8b44b0524eb9ab22389590adcba39205edfe89fa",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-light-week.png",
+      "sha256": "083883d80457fe84c5bbd8cf8b44b0524eb9ab22389590adcba39205edfe89fa",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-restored-purple-dark--component-restored-state.png",
+      "sha256": "f88cd6f09b30f8d2411ef0ce9ac683940dca06b4482b9b3fc19703fd338da935",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/native-restored-state.png",
+      "sha256": "429453b8582c96f11b996d6e1b486946a930508f8b4db30354ae14f8a6a9f6d5",
+      "kind": "native_source_crop",
+      "review_level": "native_individual"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-system-cold--component-restored-state.png",
+      "sha256": "b7f52bc723db45f72cd5e8f9d21e6ce16cf652ea78db8f10f01387a9fb544821",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-dark-cold--bars.png",
+      "sha256": "43d6d60b1fac75fc877a6ccd810794c2efc33f524b93057e3b0755afeeead598",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-dark-editor-bottom--component-dark-editor-bottom.png",
+      "sha256": "29bc84d292c822cdb4f82868a838d815b5ee31d3605dd830f431b39207e23503",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-dark-options--component-dark-options.png",
+      "sha256": "38ab38753be7b9179541980dc1e964434245b325d1448b6dc30e94c7cd9c47c3",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-dark-semester--component-dark-semester.png",
+      "sha256": "3677767249c91a39f415791f861c97da9790da64590dee06488426508dee8ad4",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-dark-week--component-dark-week.png",
+      "sha256": "c151f25c81e0f0ec53b184e857a7806dd6fc308a2dd9f3e2f8a859d84ce822e7",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-light-cold--bars.png",
+      "sha256": "9241f27ea46ec6bd2f9353d6707f38b3ecd17fb592411cbdca624f093b8f913b",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-light-editor-bottom--component-light-editor-bottom.png",
+      "sha256": "1813ed3f85ebd4234cf187a6b45318485d555c95c67bafb7340350f130735ec7",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-light-options--component-light-options.png",
+      "sha256": "adb6dee06202b3f38c4a56856b2129f40159d0dcf7dbaaa1934aa6669693428c",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-light-semester--component-light-semester.png",
+      "sha256": "ef11d68aefed3d315f8d101ad08be6c9f79e6273ed542858feb2bcaa5bbf6809",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops/r3-teal-light-week--component-light-week.png",
+      "sha256": "b24aa5f471ae56549e47913ec1a92b222761b3e3daaaa686f311ff8ace907456",
+      "kind": "native_source_crop",
+      "review_level": "sheet_component_resampled"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-light-options.png",
+      "sha256": "6d6ab3e7686089be12662f8cbb4a276fd57d35b8c02dc0433cfc75d9760ee6d1",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-light-options.png",
+      "sha256": "3ef3a0ef953d0e51982498bc6fb969a23771611e4f62c4b84fb21c60b9aff22b",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-dark-options.png",
+      "sha256": "e28b2d19813322afc64fbc6a4dd5a46a39e3d648d047a2dcc164819594bc7897",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-dark-options.png",
+      "sha256": "34dfbb73b23da9ba498fb4372df34931a6e42117ecd61c372e5e92264b338e7c",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-light-week.png",
+      "sha256": "d00308ac554d15968e67602a0a92cee8974dcf9b2e3ac507eaf1aaa7f5e482f6",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-light-week.png",
+      "sha256": "5487a9b103d101b9c1eb625d318f0fa5d3fd0921a11d812d42fe35610e02c55d",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-dark-week.png",
+      "sha256": "f6ca396799801eb07764286e79c51bb8cd8d2340f7fe45f8c43602041a2e15ef",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-dark-week.png",
+      "sha256": "b6f81f35963a64b3bb3bb0389e277047b0f1873576e58f2774849aa37db441cf",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-light-semester.png",
+      "sha256": "8c7add552e386dda985a5b70d04795278fb0b7fb770d1a758edef81a3593d50d",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-light-semester.png",
+      "sha256": "8a45326a81fcbd697b9a6cdacd3e3f9bd2bd6f10467ba1a6795c13d38646054e",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-dark-semester.png",
+      "sha256": "0c5371e97a7ef43ed86cb1fc6bd744202528c1e147626386eab60c7bd2f45e9e",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-dark-semester.png",
+      "sha256": "22e78645aa21f7db09ff619c3dfd8d24012914ce903132d5adcbf1d1ed316131",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-light-editor-bottom.png",
+      "sha256": "dc71b9ff0169fb5eeadc15b47cefadf9a82cacbbb4b5fb3a15a4ade27c3554d0",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-light-editor-bottom.png",
+      "sha256": "5e2f6407eb959acb6ce4016d40d241ef99da4b28f992ff511e68a6e3479cb36d",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-dark-editor-bottom.png",
+      "sha256": "a5e5fadc3827daa94f1c72317d40e4bee38bdd24eb7b41d652b543a7b181c73b",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-dark-editor-bottom.png",
+      "sha256": "39b974db862c92ad41f35211a2fac4de2f3d969b5febff4917e312d942c47781",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-light-cold.png",
+      "sha256": "cd44e04e4c4ead4c7f53980ec46c8acf9715894d540d2ef432808b639d187959",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-dark-cold.png",
+      "sha256": "e0e239bf26d0f249d844b31990410617c21c78d11dc067f5247b1c8dfdc1b3d5",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-system-light.png",
+      "sha256": "6ca9bc34fd4df60e9a4ec025c26e6e97455c3cb09c449fd0761616f6b2ec95f6",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-system-dark.png",
+      "sha256": "ce8543064bde5301825eea580f1fed510f60678d970302a82fa0236af20631be",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/palette-restored-system-cold.png",
+      "sha256": "0fb26e4bcbcf54a8879e32f2613392b432c76ee8b33236961133482cda8069fc",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-restored-state.png",
+      "sha256": "71c29e467616651e7a0c93c1332e2fb766a50ae98675bec98e7983b477593bb8",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/theme-overview-1.png",
+      "sha256": "e27572255ea078d0e4f98530c8f47b8700d3d63a1c866e16fdd67a692b6d9c54",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/theme-overview-2.png",
+      "sha256": "e2468e0517a574f3e3a44127189484a7d1728ec482d91bfd2ec9ae3e8ce4dda9",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/theme-overview-3.png",
+      "sha256": "359b9b6a13e45917e7647d92286e9d8ffafdf4636867a6644bccd2e7338f1693",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/theme-overview-4.png",
+      "sha256": "34e0b170b102e94e67b3cd7ea31ca666d9ecfdca4bdcd85e16c26630ed6009f1",
+      "kind": "overview_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-light-bars.png",
+      "sha256": "4ff76ea6d28e5e0a3939fcdfe700e279fe784ac3d66e5a343ed203ac7f3c6589",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets/component-dark-bars.png",
+      "sha256": "321dae062e162d32369a845e05246d95c34f704d56e4424b01df8154c2d5c505",
+      "kind": "component_sheet",
+      "review_level": "personally_viewed"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "curl_requests": [
+    {
+      "path": "/contents/qa/p2p-trace-0210/CONTINUATION-R7-20261115.md?ref=4fc3363f2b30073f1a71de4d4073460b81ec537f",
+      "try": 1,
+      "exit": 0
+    },
+    {
+      "path": "/branches/diag%2Fp2p-trace-0.2.10-20261115",
+      "try": 1,
+      "exit": 0
+    }
+  ],
+  "remote_checkpoint_full_bytes_verified": true,
+  "checkpoint_sha256": "2a6891e619661318e83b48a7f4f4faec8f095e141b3fc6504a631ce86fa36765",
+  "workflow_head": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+  "gh_exit": 0,
+  "gh_tls_error": false,
+  "gh_auth_error": false,
+  "gh_error_safe": ""
+}

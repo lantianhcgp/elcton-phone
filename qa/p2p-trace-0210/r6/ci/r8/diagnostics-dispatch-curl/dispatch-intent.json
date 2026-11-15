@@ -1,0 +1,13 @@
+{
+  "workflow": "ui-smoke.yml",
+  "workflow_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+  "branch": "diag/p2p-trace-0.2.10-20261115",
+  "inputs": {
+    "build_run": "43715446826",
+    "build_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "api_level": "33",
+    "navigation_mode": "three-button",
+    "qa_suite": "diagnostics"
+  },
+  "review": null
+}

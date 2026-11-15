@@ -1,0 +1,5 @@
+{"path": "/actions/runs/43718640929", "GET_attempt": 1, "exit": 0, "credential_values_not_stored": true}
+{"path": "/actions/runs/43718640929/attempts/1", "GET_attempt": 1, "exit": 0, "credential_values_not_stored": true}
+{"path": "/actions/runs/43718640929/artifacts?per_page=100&page=1", "GET_attempt": 1, "exit": 0, "credential_values_not_stored": true}
+{"path": "/actions/artifacts/14163891032/zip", "GET_attempt": 1, "exit": 0, "credential_values_not_stored": true}
+{"path": "/actions/runs/43718640929", "GET_attempt": 1, "exit": 0, "credential_values_not_stored": true}

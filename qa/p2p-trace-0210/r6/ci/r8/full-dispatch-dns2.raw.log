@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 113, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 109, in main
+    return namespace['main']()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 176, in main
+    if a.command.startswith('dispatch-'): dispatch(a); return 0
+                                          ~~~~~~~~^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 52, in dispatch
+    require(args.previous_registration is not None, 'Register diagnostics BEFORE second/full dispatch')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 24, in require
+    if not condition: raise AssertionError(label)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Register diagnostics BEFORE second/full dispatch

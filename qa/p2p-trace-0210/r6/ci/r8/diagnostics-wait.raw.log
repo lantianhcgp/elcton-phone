@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 99, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 95, in main
+    return namespace['main']()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 179, in main
+    return readback(a,a.command=='wait')
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 96, in readback
+    row=exact_readback(args.run,args.sha,workflow)
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 128, in exact_readback
+    current = api('/actions/runs/' + run)
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 86, in api
+    raise AssertionError('Bounded official GET failed; retain original error, no gate bypass')
+AssertionError: Bounded official GET failed; retain original error, no gate bypass

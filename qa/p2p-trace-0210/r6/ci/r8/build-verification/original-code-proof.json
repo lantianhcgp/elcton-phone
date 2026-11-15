@@ -1,0 +1,13 @@
+{
+  "original_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verify_exact_build.py",
+  "original_sha256": "aae2a5419a5e86244618553527f89d50ac112d4a312f4af98b9367f21accfaf1",
+  "effective_sha256": "c74020c3b8ab456c4651d65cff81e979580faf6892ab748e0c9c16eff1f8409a",
+  "original_case_count": 153,
+  "original_labels_unchanged": true,
+  "all_other_assertions_byte_identical": true,
+  "adaptations": [
+    "main version tuple 11/0.2.9 -> 12/0.2.10",
+    "strict registered complete actual testcase set, includes original 153 exact labels",
+    "printed version metadata only"
+  ]
+}

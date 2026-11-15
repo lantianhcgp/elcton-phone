@@ -1,0 +1,23 @@
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.590s
+
+OK

@@ -1,0 +1,83 @@
+{
+  "phase": "red",
+  "helper_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+  "raw_log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red.raw.log",
+  "rows": [
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py"
+      ],
+      "returncode": 0,
+      "tests_run": 18,
+      "started_at_epoch": 1794751229.3199067,
+      "completed_at_epoch": 1794751230.0538292,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py"
+      ],
+      "returncode": 0,
+      "tests_run": 1,
+      "started_at_epoch": 1794751230.0540664,
+      "completed_at_epoch": 1794751230.1944141,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py"
+      ],
+      "returncode": 0,
+      "tests_run": 3,
+      "started_at_epoch": 1794751230.194697,
+      "completed_at_epoch": 1794751230.670205,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py"
+      ],
+      "returncode": 0,
+      "tests_run": 2,
+      "started_at_epoch": 1794751230.6705058,
+      "completed_at_epoch": 1794751230.8309777,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py"
+      ],
+      "returncode": 1,
+      "tests_run": 6,
+      "started_at_epoch": 1794751230.8315842,
+      "completed_at_epoch": 1794751231.0103698,
+      "fixtures": []
+    }
+  ],
+  "original_tests_run": 24,
+  "new_tests_run": 6,
+  "total_tests_run": 30,
+  "actual_returncodes": [
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "aggregate_returncode": 1
+}

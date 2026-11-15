@@ -1,0 +1,131 @@
+{
+  "passed": true,
+  "read_only_preflight": true,
+  "source": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "helper_dual_receipt_sha256": "3518179ae974b6d182553e3077dfef14ce881c307c3d5a566a4aa62af5a698de",
+  "targets": {
+    "out": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final",
+    "apk": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.10-code12-b3eb5568-诊断版-signed.apk",
+    "q_report": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/DELIVERY-R8.md",
+    "phone_report": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/DELIVERY-R8.md",
+    "out_report": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final/DELIVERY-R8.md",
+    "receipt": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final/receipt.json",
+    "signature_log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final/apksigner.raw.log",
+    "manifest_log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final/badging.raw.log"
+  },
+  "old_phone_files": {
+    "apksigner-local.txt": {
+      "bytes": 1236,
+      "sha256": "88f445798a2849715957ce678280d453c82b93e1448fb575d60d1641e4d29190"
+    },
+    "apk-badging.txt": {
+      "bytes": 4488,
+      "sha256": "e6dc7cc1c1b328abe7b8e8fa77b2a9bf650bf20b3e1843ad1aaa7f764f739b5a"
+    },
+    "apk-manifest.txt": {
+      "bytes": 7897,
+      "sha256": "d5fbfe48b3ec4f0cbc7461c9962887502f7897eb3adacd0bea85a18f3fac9e61"
+    },
+    "signature-verification.json": {
+      "bytes": 589,
+      "sha256": "0e82e2ed6dd4cf4857332f85b0d1afc14e91f9bcb59d17c79e2e8385826981c3"
+    },
+    "ci-run.json": {
+      "bytes": 3636,
+      "sha256": "6cab807092f15f2c15fc825e4745acf87575897c9d018e103168cf59a6b7fe25"
+    },
+    "signing-summary.json": {
+      "bytes": 2785,
+      "sha256": "e7bdadb22345e8e11c1ec47847722476d9b1e44264a49ab4d3d811882664a5bb"
+    },
+    "ci-artifacts.json": {
+      "bytes": 961,
+      "sha256": "fff605389d217032cf6a187bf8a09254d9e595ebdfc82ad01e69640bd94fc733"
+    },
+    "stable-baseline-artifacts.json": {
+      "bytes": 940,
+      "sha256": "12b03a743b900bdd0379322dbfafc4969c73b0124a773240aab9a956005806e3"
+    },
+    "wearengine-5.0.3.301.aar": {
+      "bytes": 254003,
+      "sha256": "97adb85c1092c8b9660b7d26eb7a0bccb162201f1eea1f85373a7f59e827d2ca"
+    },
+    "apksigner-stable-baseline.txt": {
+      "bytes": 1245,
+      "sha256": "a72bd8496bcbbb1cfc6ed629ea14824d11a2ebe7b807a0324b96a972e04552a3"
+    },
+    "apksigner-current-ui-test.txt": {
+      "bytes": 1233,
+      "sha256": "420cdbbd3839046b4a0a3a897caee97ac6cdecb7558f8e77ea2b4d3fc9fd6927"
+    },
+    "stable-signing-comparison.json": {
+      "bytes": 433,
+      "sha256": "87c984acc2d6b84c2e4874d8b1b78a762dc782b39ac2a15752956989e9bdffe2"
+    },
+    "hc课程表-0.2.4-code6-6cd27de9-signed.apk": {
+      "bytes": 8151219,
+      "sha256": "190b9fc9b8eb8b3565d2c5abead6a2dc8a42b7db9f33e8b1967c2d4a66839599"
+    },
+    "ci-unit-test-summary.json": {
+      "bytes": 1545,
+      "sha256": "5e4fac7ba2c5b5a7677f90c62f43c292d117d6602aafbd0c0b8248d0046cf495"
+    },
+    "apk-secret-scan.json": {
+      "bytes": 228,
+      "sha256": "6a2f11aad22125c94939e15ad30e5599723fc438afd463880adf8be6c5a9d1c3"
+    },
+    "historical-ui-ci-status.json": {
+      "bytes": 6542,
+      "sha256": "ac8b0ff8ad6996aa3043b4c93cc0d82d7e8efcdd96303d611867ff38c73adb5b"
+    },
+    "test-summary.json": {
+      "bytes": 772,
+      "sha256": "ef9c474746790ada6a2d41bc6f5a151521c6ec29a01c10e448e02a20d0575d78"
+    },
+    "delivery-checksums.sha256": {
+      "bytes": 11498,
+      "sha256": "65feea56a6593be0220244af93541229b414956534c76ad91a7a079af79d14a6"
+    },
+    "delivery-verification.json": {
+      "bytes": 564,
+      "sha256": "72e280e00ec2c2752a31bbf5f3b3805c2f25a0f0de887392afea154cc130c12c"
+    },
+    "hc课程表-0.2.5-code7-18cd94e-signed.apk": {
+      "bytes": 8151219,
+      "sha256": "efd414519e193e522c0fa9c029652cfd2e8601a5b967d1823cb7de76ccc16eef"
+    },
+    "hc课程表-0.2.6-code8-e4513f8d-signed.apk": {
+      "bytes": 8183987,
+      "sha256": "9f2418467f5680274a768350fe9552a761e17662c2b1b6841e05890841ef0c3e"
+    },
+    "hc课程表-0.2.6-code8-e4513f8d-signed.apk.sha256": {
+      "bytes": 110,
+      "sha256": "ab97c653aaeed2f13c4d85967446887499859c8f49f34f0d651995a4a29bc407"
+    },
+    "hc课程表-0.2.7-code9-762e46dc-signed.apk": {
+      "bytes": 8200371,
+      "sha256": "e13687cf6b19ba8d1ebb0f68bdea3a0152d082843b6cbde038f185c09d198fcc"
+    },
+    "hc课程表-0.2.7-code9-762e46dc-signed.apk.sha256": {
+      "bytes": 110,
+      "sha256": "e9e0a7b4303fe96ac4b8d6b4d3198ec6d609fca9c749d1fd2682f4ffc8403cf3"
+    },
+    "hc课程表-0.2.8-code10-2097f32-p2p-signed.apk": {
+      "bytes": 8183987,
+      "sha256": "d5778fd80f1bd3758d0c9f2cead660af49aaf6912e2638dc16616bec808bc633"
+    },
+    "hc课程表-0.2.9-code11-9d3b873-合并还账-signed.apk": {
+      "bytes": 8237316,
+      "sha256": "eb9ec0dcc8dafdc0ffb5a31fb3fbb7df767f70054c9a1eafe48c77051161df1c"
+    },
+    "hc课程表-0.2.9-code11-9e300f9-合并版-signed.apk": {
+      "bytes": 8237316,
+      "sha256": "15aafee2af9509bc61f3780f74cef712fc47dfdedcb487cdd34e7d59d9a1d8b7"
+    },
+    "hc课程表-0.2.9-code11-84a6c40-全绿合并版-signed.apk": {
+      "bytes": 8237316,
+      "sha256": "664e8eae402f8390b8fcf63d0818d5a96c07b1222d06230f3f7b0927908b5065"
+    }
+  },
+  "at": "2026-11-15 22:19:14 +0800"
+}

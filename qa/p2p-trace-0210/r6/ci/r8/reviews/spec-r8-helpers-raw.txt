@@ -1,0 +1,70 @@
+独立 SPEC 实际观察原文（仅R8 helpers）
+SPEC helper-only：finalizer 五段元数据与全部原门禁保真、独立18/18通过；transport 当前稿未收敛，入口优化拒绝/单POST重定向/DNS实际接入仍有阻断。冻结产品双审未重审、未重标。
+已亲读原pipeline/common/finalizer；git show b3eb 全三文件字节一致；五段精确逆变换、完整AST相等、旧R6 DELIVERY SHA保真实测。
+原gh GET首失败和full GET三次exit28均保留，full旧尝试0POST；诊断run43718640929注册不是本审查的新网络结果。
+未联网/未设备/未git写入/未产品回归；仅临时目录运行原helper tests，回执输出独占。
+初稿优化非法POST离线返回True已向父报告；current allowed_post优化拒绝已修，其余以此实际SHA/测试输出判定。
+本机curl手册原文：If --location is used, the method string you set with --request is used for all requests, which may cause unintended side-effects.
+gate-preservation readback={"/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py": true, "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py": true, "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py": true}
+metadata readback={"five_spans": 5, "inverse_exact": true, "full_ast_equal": true, "candidate_receipt_matches": true, "old_delivery_unchanged": true}
+final transport SHA=fe42b65106e193850b262a22210435320650485089237fa5bfc9bb2da366f9d3
+changed_during_verification=[]
+
+ACTUAL OFFLINE EXECUTION test_finalize_r8_metadata.py exit=0
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.412s
+
+OK
+
+
+ACTUAL OFFLINE EXECUTION test_dns_parameters.py exit=0
+test_exact_https_sni_and_no_insecure_or_wrong_host (__main__.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.025s
+
+OK
+
+
+ACTUAL OFFLINE EXECUTION test_transport_edges.py exit=0
+test_optimized_cli_fails_before_io (__main__.TransportEdges.test_optimized_cli_fails_before_io) ... ok
+test_optimized_invalid_post_cannot_be_accepted (__main__.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... ok
+test_single_post_never_follows_redirect (__main__.TransportEdges.test_single_post_never_follows_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.309s
+
+OK
+
+
+VERDICT {
+  "axis": "spec",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [
+    {
+      "id": "R8-H-SPEC-04",
+      "finding": "最终 transport SHA 已在亲读之后变化；本回执不给未亲读新版 PASS，须新独立续件重新读取。"
+    }
+  ]
+}

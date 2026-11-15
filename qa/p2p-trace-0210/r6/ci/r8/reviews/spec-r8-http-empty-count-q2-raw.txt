@@ -1,0 +1,104 @@
+SPEC metadata-count continuation only. No source edits or old receipt rewrites.
+STARTED 2026-11-15T22:10:59.480759+08:00
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_finalize_r8_metadata as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"]
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (test_finalize_r8_metadata.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (test_finalize_r8_metadata.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (test_finalize_r8_metadata.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (test_finalize_r8_metadata.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (test_finalize_r8_metadata.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (test_finalize_r8_metadata.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (test_finalize_r8_metadata.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (test_finalize_r8_metadata.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (test_finalize_r8_metadata.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (test_finalize_r8_metadata.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.423s
+
+OK
+Q2_ACTUAL_OUTCOME {"tests_run": 18, "failures": 0, "errors": 0, "skipped": 0, "expected_failures": 0, "unexpected_successes": 0, "successful": true}
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_dns_parameters as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"]
+test_exact_https_sni_and_no_insecure_or_wrong_host (test_dns_parameters.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.015s
+
+OK
+Q2_ACTUAL_OUTCOME {"tests_run": 1, "failures": 0, "errors": 0, "skipped": 0, "expected_failures": 0, "unexpected_successes": 0, "successful": true}
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_transport_edges as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"]
+test_optimized_cli_fails_before_io (test_transport_edges.TransportEdges.test_optimized_cli_fails_before_io) ... ok
+test_optimized_invalid_post_cannot_be_accepted (test_transport_edges.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... ok
+test_single_post_never_follows_redirect (test_transport_edges.TransportEdges.test_single_post_never_follows_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.348s
+
+OK
+Q2_ACTUAL_OUTCOME {"tests_run": 3, "failures": 0, "errors": 0, "skipped": 0, "expected_failures": 0, "unexpected_successes": 0, "successful": true}
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_post_http_status as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"]
+test_empty_http302_fails_without_retry (test_post_http_status.PostStatus.test_empty_http302_fails_without_retry) ... ok
+test_true_http204_accepted_once (test_post_http_status.PostStatus.test_true_http204_accepted_once) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.033s
+
+OK
+Q2_ACTUAL_OUTCOME {"tests_run": 2, "failures": 0, "errors": 0, "skipped": 0, "expected_failures": 0, "unexpected_successes": 0, "successful": true}
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_http_empty_q1 as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"]
+test_empty_302_rejected (test_http_empty_q1.ExactEmpty204.test_empty_302_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_empty_302_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"}
+ok
+test_exact_empty_204_accepted (test_http_empty_q1.ExactEmpty204.test_exact_empty_204_accepted) ... {"accepted": true, "credential_logging": false, "curl_returncode": 0, "fixture": "test_exact_empty_204_accepted", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"}
+ok
+test_failed_curl_204_rejected (test_http_empty_q1.ExactEmpty204.test_failed_curl_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 7, "fixture": "test_failed_curl_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"}
+ok
+test_missing_status_rejected (test_http_empty_q1.ExactEmpty204.test_missing_status_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_missing_status_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b''"}
+ok
+test_newline_only_204_rejected (test_http_empty_q1.ExactEmpty204.test_newline_only_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_newline_only_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\n\\nR8-HTTP-STATUS:204'"}
+ok
+test_nonempty_204_rejected (test_http_empty_q1.ExactEmpty204.test_nonempty_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_nonempty_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"}
+ok
+test_tab_only_204_rejected (test_http_empty_q1.ExactEmpty204.test_tab_only_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_tab_only_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\t\\nR8-HTTP-STATUS:204'"}
+ok
+test_whitespace_204_rejected (test_http_empty_q1.ExactEmpty204.test_whitespace_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_whitespace_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"}
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.068s
+
+OK
+Q2_ACTUAL_OUTCOME {"tests_run": 8, "failures": 0, "errors": 0, "skipped": 0, "expected_failures": 0, "unexpected_successes": 0, "successful": true}
+
+ACTUAL_RETURNCODE 0
+
+INDEPENDENT_DELTA_PROOF {"before_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11", "current_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b", "before_bytes": 5962, "current_bytes": 5957, "old_literal": "not post_body.strip()", "new_literal": "post_body == b''", "literal_replacement_count": 1, "literal_forward_exact": true, "literal_inverse_exact": true, "all_other_bytes_unchanged": true, "normalized_one_comparison_count": 1, "full_ast_equal_after_one_comparison_normalization": true, "ast_compare_count_before": 34, "ast_compare_count_current": 35}
+INDEPENDENT_OLD_PROTECTIONS [{"fixture": "whitespace204", "type": "offline mocked subprocess executing unchanged real nested API; not live response", "accepted": false, "expected": false, "curl_returncode": 0, "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'", "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST", "protections": {"accepted_matches_expected": true, "exactly_one_call": true, "second_post_refused_without_call": true, "zero_retry_sleeps": true, "redirect_disabled": true, "retry_disabled": true, "stdin_only": true, "credential_not_logged": true, "write_out_status": true, "official_tls_no_insecure": true, "dns_pinned": true}}, {"fixture": "exactempty204", "type": "offline mocked subprocess executing unchanged real nested API; not live response", "accepted": true, "expected": true, "curl_returncode": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'", "error": null, "protections": {"accepted_matches_expected": true, "exactly_one_call": true, "second_post_refused_without_call": true, "zero_retry_sleeps": true, "redirect_disabled": true, "retry_disabled": true, "stdin_only": true, "credential_not_logged": true, "write_out_status": true, "official_tls_no_insecure": true, "dns_pinned": true}}, {"fixture": "302", "type": "offline mocked subprocess executing unchanged real nested API; not live response", "accepted": false, "expected": false, "curl_returncode": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:302'", "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST", "protections": {"accepted_matches_expected": true, "exactly_one_call": true, "second_post_refused_without_call": true, "zero_retry_sleeps": true, "redirect_disabled": true, "retry_disabled": true, "stdin_only": true, "credential_not_logged": true, "write_out_status": true, "official_tls_no_insecure": true, "dns_pinned": true}}, {"fixture": "missing-status", "type": "offline mocked subprocess executing unchanged real nested API; not live response", "accepted": false, "expected": false, "curl_returncode": 0, "stdout_repr": "b''", "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST", "protections": {"accepted_matches_expected": true, "exactly_one_call": true, "second_post_refused_without_call": true, "zero_retry_sleeps": true, "redirect_disabled": true, "retry_disabled": true, "stdin_only": true, "credential_not_logged": true, "write_out_status": true, "official_tls_no_insecure": true, "dns_pinned": true}}, {"fixture": "nonempty204", "type": "offline mocked subprocess executing unchanged real nested API; not live response", "accepted": false, "expected": false, "curl_returncode": 0, "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'", "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST", "protections": {"accepted_matches_expected": true, "exactly_one_call": true, "second_post_refused_without_call": true, "zero_retry_sleeps": true, "redirect_disabled": true, "retry_disabled": true, "stdin_only": true, "credential_not_logged": true, "write_out_status": true, "official_tls_no_insecure": true, "dns_pinned": true}}, {"fixture": "transport-failure", "type": "offline mocked subprocess executing unchanged real nested API; not live response", "accepted": false, "expected": false, "curl_returncode": 7, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'", "error": "Single UI POST transport failed/ambiguous; inspect actual runs, DO NOT repeat POST", "protections": {"accepted_matches_expected": true, "exactly_one_call": true, "second_post_refused_without_call": true, "zero_retry_sleeps": true, "redirect_disabled": true, "retry_disabled": true, "stdin_only": true, "credential_not_logged": true, "write_out_status": true, "official_tls_no_insecure": true, "dns_pinned": true}}]
+ALL_PRIOR_SPEC_INPUTS_UNCHANGED 77
+PROTECTED_OLD_FILES_UNCHANGED 58
+PRIOR_SPEC_FINDINGS {"security_concerns": [], "logic_errors": [], "missing_requirements": [{"id": "R8-SPEC-EMPTY-COUNT-01", "severity": "medium", "summary": "实际新增模块为8项而不是授权说明6项；原24+新增8=32，不能宣称30。未删测/改测。", "expected": {"original": 24, "new": 6, "total": 30}, "actual": {"original": 24, "new": 8, "total": 32}, "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py"}]}
+ORIGINAL_QUALITY_FINDINGS {"security_concerns": [], "logic_errors": [{"id": "R8-QUALITY-HTTP-EMPTY-01", "severity": "medium", "file": "qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", "line": 101, "summary": "精确空 HTTP204 判据使用 not post_body.strip()，放行带空白字节的响应体，违反精确空响应的 fail-closed 条件。", "counterexample": {"fixture_stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'", "curl_returncode": 0, "actual_accepted": true, "expected_accepted": false, "actual_post_calls": 1, "original_nested_api_unmodified": true}, "reproduce": "python -B qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py (独占输出；如已存在仅阅读保存的 POST_FIXTURE whitespace204；重跑须先将 OUTPUT 常量换到新的隔离 evidence namespace，不改被测 helper)", "evidence": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt", "minimal_fix": "将 not post_body.strip() 改为 post_body == b''；保留204/status/单次POST及原pipeline判据，加入空白体负测后重新绑定SPEC/QUALITY。"}], "missing_requirements": []}
+ACTUAL_HELPER_COUNT 32
+ACTUAL_HELPER_SKIPPED 0
+ACTUAL_HELPER_RETURNCODES [0, 0, 0, 0, 0]
+ACTUAL_AGGREGATE_RETURNCODE 0
+PRODUCT_MANIFEST_UNCHANGED 153+19=172; not rerun

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "scope": "R8 helper predicate/output metadata only; product90closure retained separately",
+  "axes": [
+    {
+      "axis": "spec",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-http-empty-count-q2.json",
+      "sha256": "5a12b5dc39d37a376e41d57b08fac92d08c2e49f36452de7d4f4b0d16d96da72",
+      "inputs": 88,
+      "live_drift": []
+    },
+    {
+      "axis": "quality",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-http-empty-q2.json",
+      "sha256": "f13c4d967f53d50edd094041a4f7a788ed481b37f221daf874acfb7016eac58d",
+      "inputs": 88,
+      "live_drift": []
+    }
+  ],
+  "at": "2026-11-15 22:17:48 +0800"
+}

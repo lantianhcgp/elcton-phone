@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/verify_r6.py",
+    "cloud",
+    "--source",
+    "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "--incoming",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact",
+    "--run",
+    "43720799962",
+    "--workflow-sha",
+    "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+    "--suite",
+    "full",
+    "--registration",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-http3/registered.json",
+    "--build-run",
+    "43715446826",
+    "--build-receipt",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-verification"
+  ],
+  "source": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "workflow_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+  "run": "43720799962",
+  "suite": "full",
+  "python": "3.13.15 (main, Aug 23 2026, 18:55:06) [Clang 21.1.8 ]",
+  "tool_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+  "scope": "OFFLINE ONLY zero ADB/device/network/CI execution; original full criteria"
+}

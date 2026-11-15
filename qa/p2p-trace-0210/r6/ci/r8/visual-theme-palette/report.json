@@ -1,0 +1,125 @@
+{
+  "review_finished_at": "2026-11-15T22:17:59.468502+08:00",
+  "source_commit": "b3eb5568",
+  "build_run": "43715446826",
+  "ui_run": "43720799962",
+  "environment": "API33 three-button cloud screenshots",
+  "scope": "Static visual inspection of ONLY theme-product/palette-product root PNGs; excludes attempts. No code edits/builds/device/browser/new app actions. Numeric gates neither rerun nor accepted as visual proof. Real handshake NOT covered. Parent owns product tour/diagnostics.",
+  "coverage": {
+    "theme_originals": 23,
+    "palette_originals": 74,
+    "originals_overview_personally_seen": 97,
+    "originals_totally_unviewed": [],
+    "per_original_review_level_counts": {
+      "overview_only": 33,
+      "overview_plus_keyboard_crop_only": 2,
+      "overview_plus_magnified_components": 62
+    },
+    "contact_sheets_generated_and_personally_seen": 28,
+    "native_crop_files_generated": 81,
+    "crop_review_level_counts": {
+      "native_individual": 11,
+      "unviewed_derived_crop": 8,
+      "sheet_component_resampled": 62
+    },
+    "important": "62 raw source crops seen in resampled component sheets + 11 crops individually loaded at native size; eight supplemental theme crops generated but UNVIEWED. All 97 original scenes have overview coverage, NOT 97 all-component-native PASS."
+  },
+  "findings": [
+    {
+      "id": "V01",
+      "classification": "No confirmed text defect in inspected component regions",
+      "detail": "All six light/dark palettes: theme labels 亮色/暗色/跟随系统, helper text, 配色 heading and six 紫/蓝/绿/青/橙/粉 labels remain inside chips with visible spacing; selected check and borders intact. Purple reference panels additionally read at native resolution.",
+      "evidence": [
+        "sheets/component-light-options.png",
+        "sheets/component-dark-options.png",
+        "crops/native-light-options.png",
+        "crops/native-dark-options.png"
+      ]
+    },
+    {
+      "id": "V02",
+      "classification": "No confirmed text defect in inspected component regions",
+      "detail": "Six-colour light/dark week headers show 第11周 · 单周 and 一至日 without collisions; M3E配色验收, 08:00/08:45, 08:00–08:45 · 1–1节, 每周 fully readable. FAB stays above dock in full overviews. Semester 学期/保存学期/date 2026-09-01/helper text retain margins.",
+      "evidence": [
+        "sheets/component-light-week.png",
+        "sheets/component-dark-week.png",
+        "sheets/component-light-semester.png",
+        "sheets/component-dark-semester.png"
+      ]
+    },
+    {
+      "id": "V03",
+      "classification": "No confirmed geometry defect in inspected component regions",
+      "detail": "Light/dark editor-bottom recurrence 每周/单周/双周 and all eight course-colour circles/check marks fit; 删除课程 glyphs and rounded outline complete. App navigation labels 今日/课表/设备/设置 and three system keys remain visibly separated in six-colour bar sheets.",
+      "evidence": [
+        "sheets/component-light-editor-bottom.png",
+        "sheets/component-dark-editor-bottom.png",
+        "sheets/component-light-bars.png",
+        "sheets/component-dark-bars.png"
+      ]
+    },
+    {
+      "id": "V04",
+      "classification": "Static state observation, not functional certification",
+      "detail": "Cold light/dark and follow-system light/dark stills across six palettes show expected selected colour and visible mode. Restored still visibly selects dark and purple, system-cold still follow-system and pink/dark. No mixed light/dark app frame seen. Stills cannot prove launch flicker absence, persistence mechanics, theme transitions, hit targets or watch handshake.",
+      "evidence": [
+        "sheets/palette-light-cold.png",
+        "sheets/palette-dark-cold.png",
+        "sheets/palette-system-light.png",
+        "sheets/palette-system-dark.png",
+        "sheets/palette-restored-system-cold.png",
+        "crops/native-restored-state.png"
+      ]
+    },
+    {
+      "id": "V05",
+      "classification": "Scroll-boundary observation; not confirmed component defect",
+      "detail": "Palette options/cold/system/restored originals are scrolled: at y=325, top of 学期开始日期 label is cut by the scroll viewport; same label fully visible in semester originals. Bottom viewport ends around y=1584 above dock. Theme options/settings show only top of palette row before that boundary. Do not mislabel off-viewport content as broken component text or claim unseen remainder passed.",
+      "source_coordinates_xyxy": [
+        53,
+        325,
+        1027,
+        1584
+      ],
+      "evidence": [
+        "palette-product/r3-purple-light-options.png",
+        "palette-product/r3-restored-purple-dark.png",
+        "palette-product/r3-purple-light-semester.png",
+        "theme-product/r2-light-options.png"
+      ]
+    },
+    {
+      "id": "V06",
+      "classification": "System IME observation / resolution limitation",
+      "detail": "Date-error light/dark theme overviews visibly retain all four app dock items above IME. Dark app has a LIGHT system keyboard and gray system keys; not treated as an app-theme bug without an IME-theme requirement. Individually loaded y=1050–1920 crops contain only keyboard/system bar; no false native-resolution app-dock claim. Eight extra native date/dock/devices/today/editor-top crops were NOT viewed because stop instruction arrived.",
+      "evidence": [
+        "sheets/theme-overview-1.png",
+        "sheets/theme-overview-3.png",
+        "crops/native-dark-ime-bottom.png",
+        "crops/native-light-ime-bottom.png"
+      ]
+    }
+  ],
+  "confirmed_visual_defects": [],
+  "visual_acceptance": "No confirmed defect in inspected visible regions; bounded partial-depth review, NOT blanket allPASS.",
+  "limitations": [
+    "All originals seen as readable contact-sheet overviews; 23 theme scenes do not all have magnified distinct-component coverage.",
+    "Every requested distinct palette component type light/dark was magnified across six colours and purple additionally at native resolution; some component sheet crops intentionally omit surrounding full-page borders.",
+    "12 palette system-mode scenes have overview-only component depth; cold scenes have magnified bars.",
+    "Eight supplemental theme native crops remain explicitly unviewed; their existence is not visual inspection.",
+    "No new runtime actions, no gate reruns, no code/UI changes, no real handshake validation."
+  ],
+  "verification": {
+    "all_original_hashes_rechecked_unchanged": true,
+    "original_mismatches": [],
+    "current_derived_image_hashes_checked": 109,
+    "derived_hash_mismatches": []
+  },
+  "paths": {
+    "image_mapping": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/image-mapping.json",
+    "derived_hashes": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/derived-image-hashes.json",
+    "contact_sheets": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/sheets",
+    "crops": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/crops",
+    "markdown_report": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/visual-theme-palette/REPORT.md"
+  }
+}

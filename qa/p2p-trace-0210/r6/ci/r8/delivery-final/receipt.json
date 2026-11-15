@@ -1,0 +1,2048 @@
+{
+  "delivered": true,
+  "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "versionCode": 12,
+  "versionName": "0.2.10",
+  "package": "com.hcbiu.elcton",
+  "apk_path": "/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone/hc课程表-0.2.10-code12-b3eb5568-诊断版-signed.apk",
+  "apk_bytes": 8253700,
+  "apk_sha256": "6a5dd165136f4928c4d172cacd32b5b541fec1784b2de08d23b72db57609969d",
+  "signer_certificate_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+  "verified_v2": true,
+  "signers": 1,
+  "build_receipt_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+  "diagnostics_receipt_sha256": "1b01bf00019b3ecf9321b25fcd95bf20e711942341ec8366296831adb1589d79",
+  "full_receipt_sha256": "96386ab327f331714850b94f53f3b6347b0e3d8de197d9f720f6443dbfbf6959",
+  "build": {
+    "passed": true,
+    "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "build_run": "43715446826",
+    "scope": "actual signed APK/manifest/CRC/hash plus all actual Gradle XML; NOT cloud/physical PASS",
+    "rows": [
+      {
+        "name": "elcton-phone-probe.apk",
+        "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r7-build-fetch-final-success/artifact/dist/elcton-phone-probe.apk",
+        "package": "com.hcbiu.elcton",
+        "versionCode": "12",
+        "versionName": "0.2.10",
+        "bytes": 8253700,
+        "sha256": "6a5dd165136f4928c4d172cacd32b5b541fec1784b2de08d23b72db57609969d",
+        "signer_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+        "v2": true,
+        "zip_crc": true
+      },
+      {
+        "name": "elcton-ui-tests.apk",
+        "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r7-build-fetch-final-success/artifact/dist/elcton-ui-tests.apk",
+        "package": "com.hcbiu.elcton.test",
+        "versionCode": "",
+        "versionName": "",
+        "bytes": 1182151,
+        "sha256": "7fecd665ebd0433c2a4bc15c6b7a744949311021abe96f2cdec8432db23e5032",
+        "signer_sha256": "fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94",
+        "v2": true,
+        "zip_crc": true
+      }
+    ],
+    "gradle": {
+      "tests": 172,
+      "suites": 36,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "suite_rows": [
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.AdapterScopeTest.xml",
+          "tests": 2,
+          "sha256": "3c1e7e2dcf016ac03f9c76e14080517200ce8f525c34a5179d8d95d36c2f12ef"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DevicePolicyTest.xml",
+          "tests": 1,
+          "sha256": "a8b942a103b1d19ffbb0fe1b8358c1270c61ab0b2d9d63372a0a9d44f1ec2d87"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticMcpServerTest.xml",
+          "tests": 14,
+          "sha256": "0631bcf7ed8c6306cefacf0c2a659147748fd5d09125e2d78202f1a8df6f276f"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticToolsTest.xml",
+          "tests": 6,
+          "sha256": "763f99bdaab138a678722ca80eb5b48dbaa8ec803cc88f11033d486775b539a7"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.DiagnosticsIntegrationTest.xml",
+          "tests": 4,
+          "sha256": "fddc69e021054398f18681265a0b07d2e2500528a3096381603f1b3134324450"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalBoundaryTest.xml",
+          "tests": 2,
+          "sha256": "f406cc55590a134746cff39096a13d1eda51518d6998c622a0d7224c443bdfd2"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorJournalTest.xml",
+          "tests": 2,
+          "sha256": "f1dd771d9d5ab8cbeb085eb8f47387de85093abdc8b80e611c36543bfa8ad9ff"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordBoundaryTest.xml",
+          "tests": 15,
+          "sha256": "75c1e543041c8b1d4adb016ffc1bb9cb20aab1dbdf5ba22270e2cb4b6d25c42a"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ErrorRecordTest.xml",
+          "tests": 1,
+          "sha256": "d1f2f955f4d8efb8fbb7be4ffc459b1a3680932dddb8ed578faf859632efc06b"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ExportSessionTest.xml",
+          "tests": 2,
+          "sha256": "6a940a3b6f7c014e9a6fd145c47585d03c20ef4f8ef12d4bbdac78a6576141db"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.MainThreadActionsTest.xml",
+          "tests": 5,
+          "sha256": "7abd032381659075c74a9d19d72f61cd940dc65e9462435805481f47b2363074"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpKeepAlivePolicyTest.xml",
+          "tests": 10,
+          "sha256": "eca713ee4f81c4fab06d4aa42c4867e8b60013941bd6925bfce802dd12c62461"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.McpTokenTest.xml",
+          "tests": 4,
+          "sha256": "dfa7869bfb4f3e6050ca3517bdbbb6d64b549c4d51b693951bbb697824298655"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pCandidateBuildTest.xml",
+          "tests": 1,
+          "sha256": "ca28505d5dc6c327e39b976d70815636c5a92d5dd3ef073e5a72705a3de4f1c7"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pContextTest.xml",
+          "tests": 5,
+          "sha256": "d6b44fea23c053d0a3f9d8b01200dd570f08d6ab3032269e2bd15d89788bddcd"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyErrorTest.xml",
+          "tests": 2,
+          "sha256": "1f5e7bb3f30599ad04ccc0616ce52bc2ff06ddf475bd0fbaf53e6118968e0806"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pReadyIngressTest.xml",
+          "tests": 2,
+          "sha256": "20947c70254b558559af259dec180bd3068b50aa4e420714306c10e3fb756bbc"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pTraceConcurrencyTest.xml",
+          "tests": 1,
+          "sha256": "bbfd4b5781f8e81ce833bd8c13e7c9e18df74de4d925bc169b89bbbac88873f9"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pTraceEngineTest.xml",
+          "tests": 5,
+          "sha256": "8b1ef782ff551d26526140d3b2715930a80660cea0871ddc04469cdf17f7d369"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pTraceIngressTest.xml",
+          "tests": 1,
+          "sha256": "eeb2367e1c85262cdb837b72a3280f1ccbf6f2b524634e337dd2976dfc3c61c6"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pTraceRuntimeTest.xml",
+          "tests": 2,
+          "sha256": "c95884180ad287043e29097d3d0c036819033aea06d67c1627dcc4dff03bb983"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.P2pTraceTest.xml",
+          "tests": 5,
+          "sha256": "0243279117a9e6618160b02b51b18f4bc890cccf48c1f3d363fc063a93edaa11"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneActionsTest.xml",
+          "tests": 11,
+          "sha256": "b64dd67e61301df6b3f39b78bf9bd459db9fbac5a15287fdbe83b0658456b4ee"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpCompositionTest.xml",
+          "tests": 2,
+          "sha256": "138152a168428a2b5220df65a98dfee97a8687a376c8715ca3c8a9c7e88d7a4e"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneMcpToolsTest.xml",
+          "tests": 14,
+          "sha256": "40af8ccc70b16087e295de4d9661be24659b4f776a0c1fda3c81143fa37952c2"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneScheduleTest.xml",
+          "tests": 6,
+          "sha256": "de56ebd119e0650d1b0aeaa65ea4592c2e947173047d54899ed9a8e55a680af5"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PhoneSnapshotTest.xml",
+          "tests": 2,
+          "sha256": "86240d733aa9c882a39501992d628c4d7fdb62dd4a64868d08267489851f2988"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.PickupClientTest.xml",
+          "tests": 9,
+          "sha256": "a663ed1c2d149fffc76c0634bcf999cd500ade0aab781c92d1103545d6cf9a11"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ProtocolIngressAuditTest.xml",
+          "tests": 6,
+          "sha256": "a48a4ede9e1bd89495d73a51804f1facc1c6b699dde9f00f44415f38c2446b23"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.ScheduleBookTest.xml",
+          "tests": 6,
+          "sha256": "05283da77516c6896c0ed4dac8de541b1e3b7bc802bf69106d0070f2850f8aa1"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SnapshotPrivacyAuditTest.xml",
+          "tests": 5,
+          "sha256": "2428245a1f848e24e0b30a98b11df8ef8b62a82c6d3baf8e8c856c689de74cb8"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.SyncEngineTest.xml",
+          "tests": 7,
+          "sha256": "5c94c85dbc6f26a256e59867c1f0b6a3d9ed478c06c0e5452a159dc425ecc532"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.TransferSessionTest.xml",
+          "tests": 2,
+          "sha256": "710e8e9657789333d6a1f9f5cbb479a6bbe42ca9cc55b4a260bfc6b55b134381"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.UserFacingErrorTest.xml",
+          "tests": 2,
+          "sha256": "f66fb88c7ce7ba9bc59872e4cfcf2c40e905fb8a37661e74a5fbf93c5a6399a4"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WearEngineConfigTest.xml",
+          "tests": 6,
+          "sha256": "4f9e281bbe044a1aaeca9522a7c7f8feb32c09436dcb72cc57812b518927ec49"
+        },
+        {
+          "path": "app/build/test-results/testDebugUnitTest/TEST-com.hcbiu.elcton.WireTest.xml",
+          "tests": 2,
+          "sha256": "442c83fc4397e043bf3071027906f1eab89906252a4a790a089ec0a1e5c59ec0"
+        }
+      ],
+      "test_cases": [
+        [
+          "com.hcbiu.elcton.AdapterScopeTest",
+          "automaticPeerWakeIsNotEnabledWithoutLifecycleAndRealDeviceEvidence"
+        ],
+        [
+          "com.hcbiu.elcton.AdapterScopeTest",
+          "backupFailureDoesNotExposeExceptionMessageInProductUi"
+        ],
+        [
+          "com.hcbiu.elcton.DevicePolicyTest",
+          "capabilitiesDetermineSupportWithoutAModelWhitelist"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "partialBodiesTimeoutAndStopClosesActiveSocketsThenRestarts"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "initializeAndToolCallsUseActualCallbacksAndJsonText"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "nestedIdsDoNotTurnNotificationsIntoCallsOrReadFiles"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "rejectsEmptyOrWhitespaceTokens"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "notificationsAreAuthenticated202WithEmptyBody"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "bindsOnlyIpv4LoopbackAndBoundedPoolRejectsOverload"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "healthIsAnonymousMinimalAndOnlyExactPathsAreAccepted"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "numericIdsAreEchoedAsExactJsonTokensOverProductionHttp"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "everyMcpMethodAndNotificationRequiresStrictBearerAuthentication"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "numericIdsStayExactOnEveryRpcErrorAndEscapedTopLevelKeys"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "rejectsNonScalarIdsAndEscapedDuplicateIdKeys"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "authenticatedRequestsPreserveStringNumberAndNullIds"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "malformedAndAmbiguousFramingIsRejected"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticMcpServerTest",
+          "jsonRpcErrorsHaveCorrectCodesAndNeverEchoRequests"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticToolsTest",
+          "callbacksReturnActualObjectsAndTailDefaultAndBounds"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticToolsTest",
+          "wrongTypesUnknownKeysAndInvalidLimitsAreRejectedBeforeCallbacks"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticToolsTest",
+          "fsReadOnlyExactWhitelistAndStrictUtf8WithBoundedReads"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticToolsTest",
+          "schemasDescribeExactlyFourReadOnlyTools"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticToolsTest",
+          "fsRejectsSymbolicFilesAndSymbolicParentEscape"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticToolsTest",
+          "unknownToolAndProviderFailuresAreSanitized"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticsIntegrationTest",
+          "diagnosticHttpUsesRawSocketWithoutRelaxingProductionCleartextPolicy"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticsIntegrationTest",
+          "fullDiagnosisIsScrollableAndKeepaliveIsExplicitlyOptIn"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticsIntegrationTest",
+          "versionCapsuleUsesActualBuildConfigAndCodeNine"
+        ],
+        [
+          "com.hcbiu.elcton.DiagnosticsIntegrationTest",
+          "sdkErrorOutletRecordsFullMessageCodeAndExactFailurePhase"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorJournalBoundaryTest",
+          "failedReplacementLeavesPreviousCompleteErrorReadable"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorJournalBoundaryTest",
+          "defaultRingKeepsLast128FullRecordsAndSerializesConcurrentAppends"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorJournalTest",
+          "ringKeepsLastRecordsAcrossRestartAsCompleteUtf8JsonLines"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorJournalTest",
+          "malformedOldLineIsArchivedWithoutLosingValidHistoryOrBlockingNewErrors"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "cyclicCauseChainTerminatesWithExplicitMarker"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "messageGetterFailureStillPreservesCodeAndNestedCause"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "codeSupplierFailureIsReportedWithoutStoppingTheCauseChain"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "causeGetterFailurePreservesFullOriginalMessageAndReportsReadFailure"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "causeGetterFailureCannotReplaceTheOriginalBusinessFailureExit"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "nestedCauseGetterFailureRetainsTheWholeCapturedPrefix"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "preservesLongMultilineUnicodeMessageWithoutEllipsis"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "ordinaryDeepCauseChainIsNotTruncatedOrMarkedAsAReadFailure"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "diagnosticFailureMetadataNeverReadsTheFailingThrowablePayload"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "preservesNullMessageAndCodeOnNestedCause"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "identityCycleDetectionNeverInvokesThrowableEqualityOrHashCode"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "providedMessageStillIsolatesCodeAndCauseFailures"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "providedPrimaryMessageIsNeverReadAgainWhileNestedMessagesAreCapturedOnce"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "providedNullMessageDoesNotFallBackToTheThrowableGetter"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordBoundaryTest",
+          "errorCodeAccessorFailureCannotHideOriginalMessage"
+        ],
+        [
+          "com.hcbiu.elcton.ErrorRecordTest",
+          "fullSdkMessageAndCauseAreAvailableWithoutChangingPrimaryUiPrivacy"
+        ],
+        [
+          "com.hcbiu.elcton.ExportSessionTest",
+          "badChecksumOrReplayCannotCorruptAnImport"
+        ],
+        [
+          "com.hcbiu.elcton.ExportSessionTest",
+          "chunksBecomeAnImportCandidateOnlyAfterLengthAndChecksumMatch"
+        ],
+        [
+          "com.hcbiu.elcton.MainThreadActionsTest",
+          "freshEpochExecutesAndExceptionsCannotStrandTheWaitingThread"
+        ],
+        [
+          "com.hcbiu.elcton.MainThreadActionsTest",
+          "timedOutQueuedWorkIsRevokedRatherThanWrittenLater"
+        ],
+        [
+          "com.hcbiu.elcton.MainThreadActionsTest",
+          "failedPostCannotLeaveAnUnboundedWait"
+        ],
+        [
+          "com.hcbiu.elcton.MainThreadActionsTest",
+          "stopInvalidatesQueuedWritesEvenWhenInterruptedWorkerHasNotRunCleanup"
+        ],
+        [
+          "com.hcbiu.elcton.MainThreadActionsTest",
+          "interruptedRequestCannotExecuteAfterItsSocketIsClosed"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "retainedIntentionIsNotShownAsAnOffSwitchDuringStartOrPermissionFailure"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "latestOptOutVetoesAPreviouslyAllowedQueuedStart"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "stopFenceVetoesLateStartEvenIfSavingFalseFailed"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "historicalExplicitTrueIsPreserved"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "nonUserStartupFailuresKeepIntendedOnButCloseTheSession"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "returningNotificationPermissionDoesNotOverrideExplicitFalse"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "missingPreferenceDefaultsToEnabled"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "defaultChoiceCanStartWhenNotificationsAreAvailable"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "notificationDenialBlocksStartWithoutChangingDefaultChoice"
+        ],
+        [
+          "com.hcbiu.elcton.McpKeepAlivePolicyTest",
+          "historicalExplicitFalseIsPreserved"
+        ],
+        [
+          "com.hcbiu.elcton.McpTokenTest",
+          "emptyMalformedAndOversizedTokensFailClosed"
+        ],
+        [
+          "com.hcbiu.elcton.McpTokenTest",
+          "symbolicTokenAndDirectoryAreRejected"
+        ],
+        [
+          "com.hcbiu.elcton.McpTokenTest",
+          "firstRunCreatesRandomStablePrivateToken"
+        ],
+        [
+          "com.hcbiu.elcton.McpTokenTest",
+          "existingTokenPermissionsAreHardened"
+        ],
+        [
+          "com.hcbiu.elcton.P2pCandidateBuildTest",
+          "actualGeneratedBuildConfigIsBoundToExplicitBuildProfile"
+        ],
+        [
+          "com.hcbiu.elcton.P2pContextTest",
+          "normalPhoneHelloIsOutgoingMetadataNotWatchSenderReject"
+        ],
+        [
+          "com.hcbiu.elcton.P2pContextTest",
+          "aNewConnectionMustNotInheritAnOldAttempt"
+        ],
+        [
+          "com.hcbiu.elcton.P2pContextTest",
+          "transferReferencesDistinguishIdsWithoutPrivateText"
+        ],
+        [
+          "com.hcbiu.elcton.P2pContextTest",
+          "readyAndRxEventsRetainTheRelatedSendAttempt"
+        ],
+        [
+          "com.hcbiu.elcton.P2pContextTest",
+          "oldHelloTaskFailureIsStaleAfterSameGenerationRetryAndReady"
+        ],
+        [
+          "com.hcbiu.elcton.P2pReadyErrorTest",
+          "staleOrActiveTransferErrorDoesNotAbortPreparation"
+        ],
+        [
+          "com.hcbiu.elcton.P2pReadyErrorTest",
+          "matchingHandshakeErrorReachesUserWithFinitePeerCode"
+        ],
+        [
+          "com.hcbiu.elcton.P2pReadyIngressTest",
+          "publishedFileFailuresAreNotDiscardedBeforeReadyDispatch"
+        ],
+        [
+          "com.hcbiu.elcton.P2pReadyIngressTest",
+          "errorCodesRemainBoundedAndDoNotAcceptPrivateTextsOrUnknownNumbers"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceConcurrencyTest",
+          "blockedWriterDoesNotHoldAppendOrReadLock"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceEngineTest",
+          "hostileDiagnosticClockHasZeroBusinessDrift"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceEngineTest",
+          "validReadyAcceptedExactlyOnceAndLateResultsRemainVisible"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceEngineTest",
+          "originalRejectsAndEarlyFailuresCancelCloseAndLateCallbacksHaveZeroDrift"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceEngineTest",
+          "originalHelloDeadlinesAndRetryStages"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceEngineTest",
+          "installAndRegistrationTimeoutAreNotReadyTimeout"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceIngressTest",
+          "diagnosticClassifierAgreesWithOriginalWithoutReturningPrivateText"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceRuntimeTest",
+          "adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceRuntimeTest",
+          "runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceTest",
+          "writerFailureAndStorageFullAreDiagnosticOnlyAndNoRetriesAfterFull"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceTest",
+          "engineKeepsFiveArgConstructorAndRequiresTraceAttachment"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceTest",
+          "schemaClockSequenceAndIndependentGenerationReferences"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceTest",
+          "hostileFieldAndClocksCannotEscapeOrInventEvent"
+        ],
+        [
+          "com.hcbiu.elcton.P2pTraceTest",
+          "boundedTailTrueDroppedCursorAndPrivacy"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "startPublishRequiresConfirmationAndConflictsRequireForce"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "explicitlyConfirmedWatchImportUsesTheSameRepository"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "coursesWriteValidatesAndOnlyConfirmedWriteMutatesTheSharedRepository"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "pickupDocumentUsesTheVerySameSharedImportAndConfirmation"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "syncConnectRequiresTheObservedPairedDevice"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "startImportReturnsPendingAndPreviewDoesNotWriteByDefault"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "abortCancelsTransferAndAnyUnconfirmedPreviewWithoutWriting"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "confirmedWatchImportCannotReplaceAnEditorSaveMadeWhileWaiting"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "deviceAndPairingOutputAreObservedNotGuessedOrModelWhitelisted"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "syncDisconnectSharesTheEngineAndInvalidatesReady"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneActionsTest",
+          "coursesReadUsesTheActualSharedRepositoryAndPendingPreview"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpCompositionTest",
+          "duplicateOwnershipCannotSilentlyReplaceAnOldTool"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpCompositionTest",
+          "originalDiagnosticSchemasAndBehaviorRemainExactAfterAppendingActions"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "abortRoutesToTheSharedAction"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "everyRequestedActionAndDataToolHasARealContractBoundary"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "devicesListRoutesToTheSharedPairing"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "coursesWriteRoutesToTheSharedData"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "coursesReadRoutesToTheSharedData"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "pairingStateReportsOnlyObservedData"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "providerFailuresAndUnknownToolsNeverEchoSecrets"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "syncDisconnectRoutesToTheSharedAction"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "startPublishRoutesToTheSharedAction"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "invalidArgumentsRejectBeforeAnyBusinessAction"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "pickupImportPreservesLeadingZeroAndRoutesToTheSharedImport"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "syncConnectRoutesToTheSharedAction"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "syncStateRoutesToTheSharedState"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneMcpToolsTest",
+          "startImportRoutesToTheSharedAction"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneScheduleTest",
+          "stalePreviewCannotReplaceNewerEditorData"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneScheduleTest",
+          "corruptStorageIsNeverSilentlyResetOrReplaced"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneScheduleTest",
+          "badImportPreservesOldDataAndAbortDiscardsPreview"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneScheduleTest",
+          "sharedPhoneDataLayerExistsRatherThanAnMcpOnlyStore"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneScheduleTest",
+          "previewCannotOverwriteBeforeExplicitConfirmation"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneScheduleTest",
+          "foreignDatasetOrOldRevisionIsRejected"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneSnapshotTest",
+          "orderedSharedDataMatchesTheWatchGoldenVector"
+        ],
+        [
+          "com.hcbiu.elcton.PhoneSnapshotTest",
+          "newerSchemaAndInvalidCalendarDateAreRejected"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "realHttpClientFetchesExactlyTheSixDigitGetRoute"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "flatPublicApiDocumentIsParsedThroughStrictExistingIngress"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "malformedFieldsAndHugeResponsesAreRejectedWithoutTruncation"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "invalidPickupNeverOpensANetworkConnection"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "notFoundAndServerErrorsAreNeverImported"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "malformedUtf8ResponseIsRejected"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "redirect404AndOversizedContentAreRejectedByRealClient"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "nestedPublicApiDocumentUsesTheSameIngress"
+        ],
+        [
+          "com.hcbiu.elcton.PickupClientTest",
+          "cancellationBeforeFetchIsTerminal"
+        ],
+        [
+          "com.hcbiu.elcton.ProtocolIngressAuditTest",
+          "malformedParserExceptionNeverAppearsInUiDiagnostic"
+        ],
+        [
+          "com.hcbiu.elcton.ProtocolIngressAuditTest",
+          "snapshotVersionDoesNotAcceptStringsOrFractions"
+        ],
+        [
+          "com.hcbiu.elcton.ProtocolIngressAuditTest",
+          "wholeOperationDeadlineIsNotExtendedByPacketActivity"
+        ],
+        [
+          "com.hcbiu.elcton.ProtocolIngressAuditTest",
+          "peerPacketMustBeStrictAsciiAndHaveAnExactNumericVersion"
+        ],
+        [
+          "com.hcbiu.elcton.ProtocolIngressAuditTest",
+          "callbackAttemptsDoNotLetAnOldSendTerminateTheCurrentPacket"
+        ],
+        [
+          "com.hcbiu.elcton.ProtocolIngressAuditTest",
+          "yearZeroIsRejectedEvenThoughLocalDateCanParseIt"
+        ],
+        [
+          "com.hcbiu.elcton.ScheduleBookTest",
+          "deletingAndRestartingDoesNotRestoreTheCourse"
+        ],
+        [
+          "com.hcbiu.elcton.ScheduleBookTest",
+          "weeklyFilterUsesMondayBoundaryAndIncludesSaturday"
+        ],
+        [
+          "com.hcbiu.elcton.ScheduleBookTest",
+          "invalidCourseCannotReplaceLastValidState"
+        ],
+        [
+          "com.hcbiu.elcton.ScheduleBookTest",
+          "emptyBookIsNotDemonstrationData"
+        ],
+        [
+          "com.hcbiu.elcton.ScheduleBookTest",
+          "importKeepsDatasetIdentityAndCreatesAnExplicitNewRevision"
+        ],
+        [
+          "com.hcbiu.elcton.ScheduleBookTest",
+          "editingPreservesCourseIdentityAndAdvancesSourceRevision"
+        ],
+        [
+          "com.hcbiu.elcton.SnapshotPrivacyAuditTest",
+          "parserErrorsAreGenericButKnownLocalValidationIsActionable"
+        ],
+        [
+          "com.hcbiu.elcton.SnapshotPrivacyAuditTest",
+          "storageRevisionCannotBeCoercedOrExceededAndYearZeroCannotBeEdited"
+        ],
+        [
+          "com.hcbiu.elcton.SnapshotPrivacyAuditTest",
+          "semesterAndCourseStringsCannotBeCoercedFromOtherJsonTypes"
+        ],
+        [
+          "com.hcbiu.elcton.SnapshotPrivacyAuditTest",
+          "diagnosticContainsOnlyExceptionTypeNotMessageOrCause"
+        ],
+        [
+          "com.hcbiu.elcton.SnapshotPrivacyAuditTest",
+          "unknownFailureNeverPromisesThatBothSchedulesWereUntouched"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "selectedDeviceMustRegisterAndReturnValidReadyBeforeAnyPublication"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "onlyMatchingAppliedAfterEndSavesBaselineTransport207IsNotCompletion"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "interactiveAuthorizationUsesVisiblePermissionRequestAndStopsIfNoActivity"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "backgroundAuthorizationWithoutPermissionNeverOpensUi"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "cancelAndCloseInvalidateCallbacksTimersAndLateReceiverRegistration"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "oldRegistrationSuccessCannotUnregisterAnAlreadyEstablishedReplacement"
+        ],
+        [
+          "com.hcbiu.elcton.SyncEngineTest",
+          "validatedOrderedExportOnlyOffersCandidateNeverSavesPhoneOrBaseline"
+        ],
+        [
+          "com.hcbiu.elcton.TransferSessionTest",
+          "transportSuccessNeverMeansTheWatchSavedData"
+        ],
+        [
+          "com.hcbiu.elcton.TransferSessionTest",
+          "invalidAppliedIsNotAcceptedAndRetryCountIsBounded"
+        ],
+        [
+          "com.hcbiu.elcton.UserFacingErrorTest",
+          "missingHealthIsActionableInChinese"
+        ],
+        [
+          "com.hcbiu.elcton.UserFacingErrorTest",
+          "unknownErrorsDoNotLeakSDKDetailsIntoThePrimaryScreen"
+        ],
+        [
+          "com.hcbiu.elcton.WearEngineConfigTest",
+          "publicCertificateAndRawPointArePinned"
+        ],
+        [
+          "com.hcbiu.elcton.WearEngineConfigTest",
+          "unrelatedWearEngineIntegrationIsPreserved"
+        ],
+        [
+          "com.hcbiu.elcton.WearEngineConfigTest",
+          "litePeerFingerprintUsesBundleAndRawPublicKey"
+        ],
+        [
+          "com.hcbiu.elcton.WearEngineConfigTest",
+          "scopeAuthenticationHasInternetPermission"
+        ],
+        [
+          "com.hcbiu.elcton.WearEngineConfigTest",
+          "fingerprintIsNeitherSpkiNorAsciiHexEncoding"
+        ],
+        [
+          "com.hcbiu.elcton.WearEngineConfigTest",
+          "peerFingerprintDecodesToActualCertificateEcPoint"
+        ],
+        [
+          "com.hcbiu.elcton.WireTest",
+          "asciiAndCrcAreIdenticalToWatchProtocol"
+        ],
+        [
+          "com.hcbiu.elcton.WireTest",
+          "chunksCountTheEntireJsonEnvelopeNotJustPayload"
+        ]
+      ]
+    },
+    "test_apk_version_fields": "AGP instrumentation artifact has actually empty versions; not release APK"
+  },
+  "diagnostics": {
+    "passed": true,
+    "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "workflow_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+    "run_id": "43718640929",
+    "suite": "diagnostics",
+    "checks": [
+      {
+        "name": "input-snapshot-all-bytes",
+        "passed": true
+      },
+      {
+        "name": "exact-run-success",
+        "passed": true
+      },
+      {
+        "name": "registered-original-inputs-and-build",
+        "passed": true
+      },
+      {
+        "name": "local-client-raw-logs",
+        "passed": true
+      },
+      {
+        "name": "diag-report-identity",
+        "passed": true
+      },
+      {
+        "name": "diag-original-png-xml",
+        "passed": true
+      },
+      {
+        "name": "diag-original-keepalive",
+        "passed": true
+      },
+      {
+        "name": "diag-shared-and-instrumentation-wire",
+        "passed": true
+      },
+      {
+        "name": "diag-http-and-signer-wire",
+        "passed": true
+      },
+      {
+        "name": "diag-background-notification-stop",
+        "passed": true
+      },
+      {
+        "name": "diagnostics-complete",
+        "passed": true
+      },
+      {
+        "name": "snapshot-inputs-unchanged-after-original-gates",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "details": {
+      "input-snapshot-all-bytes": {
+        "raw_files": 336,
+        "snapshot": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-artifact",
+        "zero_copy": true
+      },
+      "registered-original-inputs-and-build": {
+        "run": {
+          "id": 43718640929,
+          "name": "android-ui-smoke",
+          "node_id": "WFR_kwLOVd9SRM8AAAAKLdWFIQ",
+          "head_branch": "diag/p2p-trace-0.2.10-20261115",
+          "head_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+          "path": ".github/workflows/ui-smoke.yml",
+          "display_title": "android-ui-smoke",
+          "run_number": 51,
+          "event": "workflow_dispatch",
+          "status": "in_progress",
+          "conclusion": null,
+          "workflow_id": 402653422,
+          "check_suite_id": 118363595537,
+          "check_suite_node_id": "CS_kwDOVd9SRM8AAAAbjwUjEQ",
+          "url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43718640929",
+          "html_url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43718640929",
+          "pull_requests": [],
+          "created_at": "2026-11-15T13:22:10Z",
+          "updated_at": "2026-11-15T13:22:15Z",
+          "actor": {
+            "login": "lantianhcgp",
+            "id": 78584012,
+            "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/lantianhcgp",
+            "html_url": "https://github.com/lantianhcgp",
+            "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+            "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+            "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+            "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+            "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+            "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "run_attempt": 1,
+          "referenced_workflows": [],
+          "run_started_at": "2026-11-15T13:22:10Z",
+          "triggering_actor": {
+            "login": "lantianhcgp",
+            "id": 78584012,
+            "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/lantianhcgp",
+            "html_url": "https://github.com/lantianhcgp",
+            "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+            "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+            "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+            "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+            "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+            "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "jobs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43718640929/jobs",
+          "logs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43718640929/logs",
+          "check_suite_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/check-suites/118363595537",
+          "artifacts_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43718640929/artifacts",
+          "cancel_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43718640929/cancel",
+          "rerun_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43718640929/rerun",
+          "previous_attempt_url": null,
+          "workflow_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/workflows/402653422",
+          "head_commit": {
+            "id": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+            "tree_id": "26bb2e5131dc88a6442acab88fcb341e9b22bb71",
+            "message": "docs(diagnostics): preserve R7 CI-green undelivered checkpoint [skip ci]",
+            "timestamp": "2026-11-15T13:02:42Z",
+            "author": {
+              "name": "lantianhcgp",
+              "email": "lantianhcgp@users.noreply.github.com"
+            },
+            "committer": {
+              "name": "lantianhcgp",
+              "email": "lantianhcgp@users.noreply.github.com"
+            }
+          },
+          "repository": {
+            "id": 1440698948,
+            "node_id": "R_kgDOVd9SRA",
+            "name": "elcton-phone",
+            "full_name": "lantianhcgp/elcton-phone",
+            "private": false,
+            "owner": {
+              "login": "lantianhcgp",
+              "id": 78584012,
+              "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+              "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/lantianhcgp",
+              "html_url": "https://github.com/lantianhcgp",
+              "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+              "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+              "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+              "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+              "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+              "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/lantianhcgp/elcton-phone",
+            "description": "Android course timetable and capability-based Wear Engine synchronization companion",
+            "fork": false,
+            "url": "https://api.github.com/repos/lantianhcgp/elcton-phone",
+            "forks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/forks",
+            "keys_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/teams",
+            "hooks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/hooks",
+            "issue_events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/events",
+            "assignees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/tags",
+            "blobs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/languages",
+            "stargazers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/stargazers",
+            "contributors_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contributors",
+            "subscribers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscribers",
+            "subscription_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscription",
+            "commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/merges",
+            "archive_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/downloads",
+            "issues_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/labels{/name}",
+            "releases_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/deployments"
+          },
+          "head_repository": {
+            "id": 1440698948,
+            "node_id": "R_kgDOVd9SRA",
+            "name": "elcton-phone",
+            "full_name": "lantianhcgp/elcton-phone",
+            "private": false,
+            "owner": {
+              "login": "lantianhcgp",
+              "id": 78584012,
+              "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+              "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/lantianhcgp",
+              "html_url": "https://github.com/lantianhcgp",
+              "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+              "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+              "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+              "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+              "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+              "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/lantianhcgp/elcton-phone",
+            "description": "Android course timetable and capability-based Wear Engine synchronization companion",
+            "fork": false,
+            "url": "https://api.github.com/repos/lantianhcgp/elcton-phone",
+            "forks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/forks",
+            "keys_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/teams",
+            "hooks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/hooks",
+            "issue_events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/events",
+            "assignees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/tags",
+            "blobs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/languages",
+            "stargazers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/stargazers",
+            "contributors_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contributors",
+            "subscribers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscribers",
+            "subscription_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscription",
+            "commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/merges",
+            "archive_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/downloads",
+            "issues_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/labels{/name}",
+            "releases_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/deployments"
+          }
+        },
+        "inputs": {
+          "build_run": "43715446826",
+          "build_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+          "api_level": "33",
+          "navigation_mode": "three-button",
+          "qa_suite": "diagnostics"
+        },
+        "workflow_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+        "workflow": "ui-smoke.yml",
+        "before_ids": [],
+        "scope": "Distinct exact run registration, NOT execution PASS"
+      },
+      "local-client-raw-logs": {
+        "local_host": {
+          "ok": true,
+          "mode": "actual-kotlin-host",
+          "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+          "assertions": 3784,
+          "clients": [
+            "urllib",
+            "curl"
+          ],
+          "write_eof_transport": {
+            "status": "supported",
+            "excluded_checks": []
+          },
+          "all_raw_checks_passed": true,
+          "token": "REDACTED"
+        },
+        "real_client_tests": [
+          "content_length_post_survives_eof_closing_relay",
+          "direct_controls_with_and_without_write_eof_use_real_server",
+          "url_mode_really_runs_curl_and_urllib",
+          "url_mode_reports_unsupported_write_eof_without_dropping_other_checks"
+        ],
+        "scope": "Existing local JVM raw logs, not Android/physical proof"
+      },
+      "diag-original-png-xml": {
+        "instrumentationReceipt": {
+          "passed": true,
+          "sourceSha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+          "qaRun": "55042e50-e052-4fa5-8978-e8511cb24c09",
+          "scope": "real Android emulator; SYNTHETIC errors; no paired watch or WearEngine actions",
+          "captures": [
+            {
+              "name": "settings-version",
+              "attempt": 1,
+              "pixelReady": true,
+              "targetText": "0.2.10 · 测试构建",
+              "targetBounds": [
+                138,
+                1521,
+                377,
+                1566
+              ],
+              "extra": {},
+              "screenWidth": 1080,
+              "screenHeight": 1920,
+              "fullPixels": {
+                "samples": 230400,
+                "mean": 243.43235821683072,
+                "stddev": 30.105774462732267,
+                "minimum": 32.333333333333336,
+                "maximum": 253.66666666666666,
+                "step": 3
+              },
+              "targetPixels": {
+                "samples": 10755,
+                "mean": 211.27518983418338,
+                "stddev": 49.07933393347401,
+                "minimum": 115.66666666666667,
+                "maximum": 240.33333333333334,
+                "step": 1
+              },
+              "pngSha256": "aa039b2859426ab9a38a040081579c5e472097c89fa2e9808ee556e8f357afa8"
+            },
+            {
+              "name": "diagnostics-head",
+              "attempt": 1,
+              "pixelReady": true,
+              "targetText": "SYNTHETIC-BEGIN",
+              "targetBounds": [
+                183,
+                701,
+                848,
+                751
+              ],
+              "extra": {
+                "scroll": 0,
+                "scrollMax": 4449
+              },
+              "screenWidth": 1080,
+              "screenHeight": 1920,
+              "fullPixels": {
+                "samples": 230400,
+                "mean": 164.61925491871452,
+                "stddev": 69.99024814239701,
+                "minimum": 13,
+                "maximum": 255,
+                "step": 3
+              },
+              "targetPixels": {
+                "samples": 33250,
+                "mean": 221.73333333324737,
+                "stddev": 42.6999437900916,
+                "minimum": 99,
+                "maximum": 238.33333333333334,
+                "step": 1
+              },
+              "pngSha256": "472e94164ea94c8a83a35ae5b781b85e82a8c3343cfbe534df69c896707fe756"
+            },
+            {
+              "name": "diagnostics-tail",
+              "attempt": 1,
+              "pixelReady": true,
+              "targetText": "SYNTHETIC-END",
+              "targetBounds": [
+                183,
+                1252,
+                430,
+                1299
+              ],
+              "extra": {
+                "scroll": 4449,
+                "scrollMax": 4449
+              },
+              "screenWidth": 1080,
+              "screenHeight": 1920,
+              "fullPixels": {
+                "samples": 230400,
+                "mean": 164.63179976825066,
+                "stddev": 69.99019804072203,
+                "minimum": 13,
+                "maximum": 255,
+                "step": 3
+              },
+              "targetPixels": {
+                "samples": 11609,
+                "mean": 218.86237689149786,
+                "stddev": 46.0973603001203,
+                "minimum": 99,
+                "maximum": 238.33333333333334,
+                "step": 1
+              },
+              "pngSha256": "24dea8fa75eaba5fc00e89e94722d176c7c2aeb24ec958d8836093f43f92ac1b"
+            }
+          ],
+          "packageVersion": "0.2.10",
+          "packageCode": 12,
+          "passiveMcp": {
+            "host": "127.0.0.1",
+            "port": 8766,
+            "running": true,
+            "readOnly": true,
+            "startupError": null
+          },
+          "tokenBytes": 64,
+          "tokenMode": "0600",
+          "token": "REDACTED",
+          "syntheticFullSha256": "98b1bc3c375aef8d4f0d2f2ec286f91dab50542d7b088bd6c4fe28383e857920",
+          "syntheticChars": 3293,
+          "causeCount": 2,
+          "activityRecreated": true,
+          "fullTextUntruncated": true,
+          "closeVisibleAndWorks": true,
+          "androidNioHttpRead": true,
+          "httpTools": [
+            "error_tail",
+            "diag_read",
+            "version_info",
+            "fs_read",
+            "sync_connect",
+            "sync_disconnect",
+            "start_import",
+            "start_publish",
+            "abort",
+            "courses_read",
+            "courses_write",
+            "pickup_import",
+            "devices_list",
+            "pairing_state",
+            "sync_state"
+          ],
+          "originalDiagnosticSchemas": true,
+          "sharedPhoneActivityRecreated": true,
+          "businessFilesUnchanged": true
+        },
+        "independentPngChecks": [
+          {
+            "name": "settings-version",
+            "bounds": [
+              138,
+              1521,
+              377,
+              1566
+            ],
+            "fullPixels": {
+              "samples": 230400,
+              "mean": 243.43235821759257,
+              "stddev": 30.1057744542812,
+              "minimum": 32.333333333333336,
+              "maximum": 253.66666666666666,
+              "step": 3
+            },
+            "targetPixels": {
+              "samples": 10755,
+              "mean": 211.27518983418562,
+              "stddev": 49.0793339334813,
+              "minimum": 115.66666666666667,
+              "maximum": 240.33333333333334,
+              "step": 1
+            }
+          },
+          {
+            "name": "diagnostics-head",
+            "bounds": [
+              183,
+              701,
+              848,
+              751
+            ],
+            "fullPixels": {
+              "samples": 230400,
+              "mean": 164.61925491898148,
+              "stddev": 69.99024814198948,
+              "minimum": 13.0,
+              "maximum": 255.0,
+              "step": 3
+            },
+            "targetPixels": {
+              "samples": 33250,
+              "mean": 221.73333333333335,
+              "stddev": 42.69994378996103,
+              "minimum": 99.0,
+              "maximum": 238.33333333333334,
+              "step": 1
+            }
+          },
+          {
+            "name": "diagnostics-tail",
+            "bounds": [
+              183,
+              1252,
+              430,
+              1299
+            ],
+            "fullPixels": {
+              "samples": 230400,
+              "mean": 164.6317997685185,
+              "stddev": 69.99019804031315,
+              "minimum": 13.0,
+              "maximum": 255.0,
+              "step": 3
+            },
+            "targetPixels": {
+              "samples": 11609,
+              "mean": 218.86237689149223,
+              "stddev": 46.0973603000624,
+              "minimum": 99.0,
+              "maximum": 238.33333333333334,
+              "step": 1
+            }
+          }
+        ]
+      },
+      "diag-original-keepalive": {
+        "passed": true,
+        "sourceSha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+        "qaRun": "55042e50-e052-4fa5-8978-e8511cb24c09",
+        "scope": "real Android emulator; no WE calls or real phone installation",
+        "defaultOn": true,
+        "permissionDeniedFailClosed": true,
+        "defaultOnNoPermissionRetainsChoice": true,
+        "noNotificationWithoutPermission": true,
+        "bindFailureUiOnAndHintRetained": true,
+        "startingNotActive": true,
+        "onNotification": true,
+        "backgroundHttp": true,
+        "offPortClosed": true,
+        "offNotificationRemoved": true,
+        "businessAndTokenAndErrorsUnchanged": true,
+        "stopDisablesChoice": true,
+        "stopInactive": true,
+        "backgroundChannelDeniedEventStops": true,
+        "activeChannelDeniedStopsAndUiOn": true
+      },
+      "diag-shared-and-instrumentation-wire": {
+        "passed": true,
+        "sourceSha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+        "qaRun": "55042e50-e052-4fa5-8978-e8511cb24c09",
+        "scope": "emulator-only local MCP courses fixture; real WearEngine/phone pending",
+        "sharedPhoneActivityRecreated": true,
+        "pureMcpCoursesWriteRead": true,
+        "previewDoesNotWrite": true,
+        "confirmedWritePersisted": true,
+        "protectedDataUnchanged": true,
+        "fixtureFilesRestored": true
+      },
+      "diag-http-and-signer-wire": {
+        "external_android": {
+          "ok": true,
+          "mode": "read-only-app",
+          "scope": "external URL; caller must identify host vs Android",
+          "assertions": 3659,
+          "clients": [
+            "urllib",
+            "curl"
+          ],
+          "write_eof_transport": {
+            "status": "unsupported",
+            "reason": "EmptyHttpResponse",
+            "excluded_checks": [
+              "Truncated body rejected (requires client write EOF)"
+            ],
+            "required_validation": "direct production-host raw socket and Android direct Socket"
+          },
+          "all_raw_checks_passed": false,
+          "token": "REDACTED"
+        },
+        "android_socket_assertions": 133,
+        "scope": "Saved Android direct Socket instrumentation + URL clients; parent verifies APK bytes/remote inputs"
+      },
+      "diag-background-notification-stop": {
+        "background": {
+          "passed": true,
+          "scope": "ordinary emulator process; screen-on Home; finite 5s/3 probes; NOT Doze/sticky/phone proof",
+          "pid": "4456",
+          "observations": [
+            {
+              "attempt": 1,
+              "elapsedSeconds": 1.1967018689999804,
+              "foreground": true,
+              "ordinaryProcess": true,
+              "urllibVersionAndError": true
+            },
+            {
+              "attempt": 2,
+              "elapsedSeconds": 2.688473686000009,
+              "foreground": true,
+              "ordinaryProcess": true,
+              "urllibVersionAndError": true
+            },
+            {
+              "attempt": 3,
+              "elapsedSeconds": 5.257300781999959,
+              "foreground": true,
+              "ordinaryProcess": true,
+              "urllibVersionAndError": true
+            }
+          ],
+          "stopPath": "actual-notification-action",
+          "offPortClosed": true,
+          "offNotificationRemoved": true,
+          "businessAndTokenAndErrorsUnchanged": true,
+          "observationCount": 3,
+          "defaultOn": true,
+          "stopDisablesChoice": true,
+          "stopInactive": true,
+          "stopAcknowledged": true
+        },
+        "scope": "Finite 5 seconds / 3 ordinary emulator probes, NOT 10-minute, Doze, MIUI, watch or physical acceptance"
+      },
+      "snapshot-inputs-unchanged-after-original-gates": {
+        "files": 336,
+        "same_exact_bytes_before_and_after": true
+      }
+    },
+    "scope": "All ORIGINAL full assertions and COMPLETE JSON, current 12/0.2.10 literals only; offline not new device proof"
+  },
+  "full": {
+    "passed": true,
+    "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "workflow_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+    "run_id": "43720799962",
+    "suite": "full",
+    "checks": [
+      {
+        "name": "input-snapshot-all-bytes",
+        "passed": true
+      },
+      {
+        "name": "exact-run-success",
+        "passed": true
+      },
+      {
+        "name": "registered-original-inputs-and-build",
+        "passed": true
+      },
+      {
+        "name": "local-client-raw-logs",
+        "passed": true
+      },
+      {
+        "name": "full-report-identity",
+        "passed": true
+      },
+      {
+        "name": "full-theme-original",
+        "passed": true
+      },
+      {
+        "name": "full-palette-original",
+        "passed": true
+      },
+      {
+        "name": "full-tour-original-static-block",
+        "passed": true
+      },
+      {
+        "name": "full-system-bars-original",
+        "passed": true
+      },
+      {
+        "name": "full-complete",
+        "passed": true
+      },
+      {
+        "name": "snapshot-inputs-unchanged-after-original-gates",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "details": {
+      "input-snapshot-all-bytes": {
+        "raw_files": 935,
+        "snapshot": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-artifact",
+        "zero_copy": true
+      },
+      "registered-original-inputs-and-build": {
+        "run": {
+          "id": 43720799962,
+          "name": "android-ui-smoke",
+          "node_id": "WFR_kwLOVd9SRM8AAAAKLfZ22g",
+          "head_branch": "diag/p2p-trace-0.2.10-20261115",
+          "head_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+          "path": ".github/workflows/ui-smoke.yml",
+          "display_title": "android-ui-smoke",
+          "run_number": 52,
+          "event": "workflow_dispatch",
+          "status": "in_progress",
+          "conclusion": null,
+          "workflow_id": 402653422,
+          "check_suite_id": 118369243682,
+          "check_suite_node_id": "CS_kwDOVd9SRM8AAAAbj1tSIg",
+          "url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43720799962",
+          "html_url": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43720799962",
+          "pull_requests": [],
+          "created_at": "2026-11-15T13:47:07Z",
+          "updated_at": "2026-11-15T13:47:12Z",
+          "actor": {
+            "login": "lantianhcgp",
+            "id": 78584012,
+            "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/lantianhcgp",
+            "html_url": "https://github.com/lantianhcgp",
+            "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+            "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+            "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+            "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+            "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+            "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "run_attempt": 1,
+          "referenced_workflows": [],
+          "run_started_at": "2026-11-15T13:47:07Z",
+          "triggering_actor": {
+            "login": "lantianhcgp",
+            "id": 78584012,
+            "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/lantianhcgp",
+            "html_url": "https://github.com/lantianhcgp",
+            "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+            "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+            "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+            "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+            "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+            "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "jobs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43720799962/jobs",
+          "logs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43720799962/logs",
+          "check_suite_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/check-suites/118369243682",
+          "artifacts_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43720799962/artifacts",
+          "cancel_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43720799962/cancel",
+          "rerun_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/runs/43720799962/rerun",
+          "previous_attempt_url": null,
+          "workflow_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/actions/workflows/402653422",
+          "head_commit": {
+            "id": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+            "tree_id": "26bb2e5131dc88a6442acab88fcb341e9b22bb71",
+            "message": "docs(diagnostics): preserve R7 CI-green undelivered checkpoint [skip ci]",
+            "timestamp": "2026-11-15T13:02:42Z",
+            "author": {
+              "name": "lantianhcgp",
+              "email": "lantianhcgp@users.noreply.github.com"
+            },
+            "committer": {
+              "name": "lantianhcgp",
+              "email": "lantianhcgp@users.noreply.github.com"
+            }
+          },
+          "repository": {
+            "id": 1440698948,
+            "node_id": "R_kgDOVd9SRA",
+            "name": "elcton-phone",
+            "full_name": "lantianhcgp/elcton-phone",
+            "private": false,
+            "owner": {
+              "login": "lantianhcgp",
+              "id": 78584012,
+              "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+              "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/lantianhcgp",
+              "html_url": "https://github.com/lantianhcgp",
+              "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+              "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+              "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+              "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+              "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+              "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/lantianhcgp/elcton-phone",
+            "description": "Android course timetable and capability-based Wear Engine synchronization companion",
+            "fork": false,
+            "url": "https://api.github.com/repos/lantianhcgp/elcton-phone",
+            "forks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/forks",
+            "keys_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/teams",
+            "hooks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/hooks",
+            "issue_events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/events",
+            "assignees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/tags",
+            "blobs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/languages",
+            "stargazers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/stargazers",
+            "contributors_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contributors",
+            "subscribers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscribers",
+            "subscription_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscription",
+            "commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/merges",
+            "archive_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/downloads",
+            "issues_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/labels{/name}",
+            "releases_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/deployments"
+          },
+          "head_repository": {
+            "id": 1440698948,
+            "node_id": "R_kgDOVd9SRA",
+            "name": "elcton-phone",
+            "full_name": "lantianhcgp/elcton-phone",
+            "private": false,
+            "owner": {
+              "login": "lantianhcgp",
+              "id": 78584012,
+              "node_id": "MDQ6VXNlcjc4NTg0MDEy",
+              "avatar_url": "https://avatars.githubusercontent.com/u/78584012?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/lantianhcgp",
+              "html_url": "https://github.com/lantianhcgp",
+              "followers_url": "https://api.github.com/users/lantianhcgp/followers",
+              "following_url": "https://api.github.com/users/lantianhcgp/following{/other_user}",
+              "gists_url": "https://api.github.com/users/lantianhcgp/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/lantianhcgp/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/lantianhcgp/subscriptions",
+              "organizations_url": "https://api.github.com/users/lantianhcgp/orgs",
+              "repos_url": "https://api.github.com/users/lantianhcgp/repos",
+              "events_url": "https://api.github.com/users/lantianhcgp/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/lantianhcgp/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/lantianhcgp/elcton-phone",
+            "description": "Android course timetable and capability-based Wear Engine synchronization companion",
+            "fork": false,
+            "url": "https://api.github.com/repos/lantianhcgp/elcton-phone",
+            "forks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/forks",
+            "keys_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/teams",
+            "hooks_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/hooks",
+            "issue_events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/events",
+            "assignees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/tags",
+            "blobs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/languages",
+            "stargazers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/stargazers",
+            "contributors_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contributors",
+            "subscribers_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscribers",
+            "subscription_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/subscription",
+            "commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/merges",
+            "archive_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/downloads",
+            "issues_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/labels{/name}",
+            "releases_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/lantianhcgp/elcton-phone/deployments"
+          }
+        },
+        "inputs": {
+          "build_run": "43715446826",
+          "build_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+          "api_level": "33",
+          "navigation_mode": "three-button",
+          "qa_suite": "full"
+        },
+        "workflow_sha": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+        "workflow": "ui-smoke.yml",
+        "before_ids": [
+          43718640929
+        ],
+        "scope": "Distinct exact run registration, NOT execution PASS"
+      },
+      "local-client-raw-logs": {
+        "local_host": {
+          "ok": true,
+          "mode": "actual-kotlin-host",
+          "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+          "assertions": 3784,
+          "clients": [
+            "urllib",
+            "curl"
+          ],
+          "write_eof_transport": {
+            "status": "supported",
+            "excluded_checks": []
+          },
+          "all_raw_checks_passed": true,
+          "token": "REDACTED"
+        },
+        "real_client_tests": [
+          "content_length_post_survives_eof_closing_relay",
+          "direct_controls_with_and_without_write_eof_use_real_server",
+          "url_mode_really_runs_curl_and_urllib",
+          "url_mode_reports_unsupported_write_eof_without_dropping_other_checks"
+        ],
+        "scope": "Existing local JVM raw logs, not Android/physical proof"
+      },
+      "full-theme-original": {
+        "screenshots": 23,
+        "passed": true
+      },
+      "full-palette-original": {
+        "screenshots": 74,
+        "passed": true
+      },
+      "full-tour-original-static-block": {
+        "shots": 28,
+        "hierarchies": 28,
+        "states": 28,
+        "keyboard_pixel_checks": 1,
+        "original_block_lines": [
+          224,
+          244
+        ]
+      },
+      "full-system-bars-original": {
+        "scenes": 20,
+        "passed": true
+      },
+      "snapshot-inputs-unchanged-after-original-gates": {
+        "files": 935,
+        "same_exact_bytes_before_and_after": true
+      }
+    },
+    "scope": "All ORIGINAL full assertions and COMPLETE JSON, current 12/0.2.10 literals only; offline not new device proof"
+  },
+  "identity_migration": {
+    "source_identities": {
+      "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+        "old_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+        "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+        "current_sha256": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+        "current_bytes": 16986
+      },
+      "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+        "old_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+        "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+        "current_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+        "current_bytes": 24342,
+        "previous_q2_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+        "previous_first_whitespace_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd"
+      },
+      "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+        "old_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+        "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+        "current_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+        "current_bytes": 7773,
+        "previous_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"
+      },
+      "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+        "old_sha256": null,
+        "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+        "current_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+        "current_bytes": 10677,
+        "previous_q2_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+        "previous_first_whitespace_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1"
+      }
+    },
+    "version_identity": {
+      "path": "app/build.gradle.kts",
+      "old_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "current_sha256": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+      "old_code": 11,
+      "current_code": 12,
+      "old_name": "0.2.9",
+      "current_name": "0.2.10"
+    },
+    "old_manifest_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+    "previous_first_manifest_sha256": "0ec127fc49dcc783957ee0be23014e95f694443fc96f3af82fb5710d4f2b94b9",
+    "new_manifest_sha256": "bdf622a46c0ca0a73ca39f408163abfa1a6e314dae61f86078198c6645a6c3d0",
+    "ci_whitespace_identity_final": {
+      "source_before": "a0881bf7c1d97724ea166f0e51988902c280a5cc",
+      "failed_run": 43710014774,
+      "attempt": 1,
+      "compiler": "1.9.24",
+      "changes": [
+        {
+          "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+          "total_ascii_spaces": 14,
+          "q2_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+          "first_candidate_sha256": "158448cedd4876a5a486d982e9611c68c96c53f48b3b69b38baab0611e58a0a1",
+          "final_sha256": "9ffa02c51407301d8c308257609feea1961897076758f6da5ffe5ce53949f084",
+          "bytes": 10677,
+          "exact_inverse_to_Q2": true
+        },
+        {
+          "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+          "total_ascii_spaces": 5,
+          "q2_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+          "first_candidate_sha256": "4c40e292e97af3267193e179079ed54fa74cb4fdfb8091883afde01243c9e9dd",
+          "final_sha256": "84533ebc792f0c108c79f043698a20ec89018a9dba19dbb606ae1bc6d3cc4e1a",
+          "bytes": 24342,
+          "exact_inverse_to_Q2": true
+        }
+      ],
+      "total_spaces": 21,
+      "test_lexical_identity": {
+        "path": "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+        "old_sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+        "new_sha256": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+        "spaces": 2,
+        "new_diagnostic_test_only": true,
+        "all_assertion_tokens_unchanged": true
+      },
+      "authorization": "R7 diagnostic completion, whitespace token separation only; no behavior or original test assertion changes"
+    }
+  },
+  "review_closure": {
+    "passed": true,
+    "axes": [
+      {
+        "axis": "spec",
+        "json_path": "r7-spec-q3-continuation.json",
+        "json_sha256": "17558e0101a1401c451a75a200db7a46ef1bc0da9b21e6ec4776394a02879016",
+        "raw_path": "spec-q3-continuation-raw.txt",
+        "raw_sha256": "0c8c41795727996c154d22f8f4ba870216cff35ca986a093ebc2c1c7f03ebfcd"
+      },
+      {
+        "axis": "quality",
+        "json_path": "r7-quality-q3-continuation.json",
+        "json_sha256": "378d7c45b2b497660f2b14641265700123a7267eb52165d804839efd38f27b98",
+        "raw_path": "quality-q3-continuation-raw.txt",
+        "raw_sha256": "142b04f3f73d24454febc7c2d6f682fd2e7d221823505a041ae7497071f9f43d"
+      }
+    ],
+    "manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+    "input_files": 90,
+    "scope": "Genuine independent continued Q3 source review; prior incomplete Q3 and Q2 retained; not CI/APK acceptance"
+  },
+  "review_manifest_sha256": "d4b04ff2789bc67ca17a14a73f5550290f0cef66f881340976196997c0400624",
+  "ci_links": {
+    "build": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43715446826",
+    "diagnostics": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43718640929",
+    "full": "https://github.com/lantianhcgp/elcton-phone/actions/runs/43720799962"
+  },
+  "scope": "Installable diagnostic build only; no Release, no device operation, unknown handshake root cause",
+  "at": "2026-11-15 22:22:40 +0800"
+}

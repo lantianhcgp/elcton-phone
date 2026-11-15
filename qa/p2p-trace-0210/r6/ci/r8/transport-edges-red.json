@@ -1,0 +1,6 @@
+{
+  "exit": 1,
+  "phase": "RED",
+  "expected_missing_no_redirect_and_optimized_refusal": true,
+  "raw_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480"
+}

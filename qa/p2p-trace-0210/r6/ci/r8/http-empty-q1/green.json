@@ -1,0 +1,138 @@
+{
+  "phase": "green",
+  "helper_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+  "raw_log": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green.raw.log",
+  "rows": [
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py"
+      ],
+      "returncode": 0,
+      "tests_run": 18,
+      "started_at_epoch": 1794751280.063387,
+      "completed_at_epoch": 1794751281.0305681,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py"
+      ],
+      "returncode": 0,
+      "tests_run": 1,
+      "started_at_epoch": 1794751281.0307798,
+      "completed_at_epoch": 1794751281.2166946,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py"
+      ],
+      "returncode": 0,
+      "tests_run": 3,
+      "started_at_epoch": 1794751281.2168677,
+      "completed_at_epoch": 1794751281.7662134,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py"
+      ],
+      "returncode": 0,
+      "tests_run": 2,
+      "started_at_epoch": 1794751281.7663527,
+      "completed_at_epoch": 1794751281.9350677,
+      "fixtures": []
+    },
+    {
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py"
+      ],
+      "returncode": 0,
+      "tests_run": 6,
+      "started_at_epoch": 1794751281.9352229,
+      "completed_at_epoch": 1794751282.1397364,
+      "fixtures": [
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_empty_302_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"
+        },
+        {
+          "accepted": true,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_exact_empty_204_accepted",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 7,
+          "fixture": "test_failed_curl_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_missing_status_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b''"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_nonempty_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_whitespace_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"
+        }
+      ]
+    }
+  ],
+  "original_tests_run": 24,
+  "new_tests_run": 6,
+  "total_tests_run": 30,
+  "actual_returncodes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "aggregate_returncode": 0
+}

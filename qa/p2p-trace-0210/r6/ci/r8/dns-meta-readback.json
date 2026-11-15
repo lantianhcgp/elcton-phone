@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-15 21:33:32 +0800",
+  "tls_verification_on": true,
+  "results": [
+    {
+      "fresh_doh_ip": "20.27.177.116",
+      "exit": 22,
+      "actual_meta": false,
+      "response_bytes": 0
+    },
+    {
+      "fresh_doh_ip": "4.237.22.34",
+      "exit": 22,
+      "actual_meta": false,
+      "response_bytes": 0
+    }
+  ]
+}

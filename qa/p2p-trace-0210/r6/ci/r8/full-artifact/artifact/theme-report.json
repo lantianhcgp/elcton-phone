@@ -1,0 +1,378 @@
+{
+  "passed": true,
+  "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "navigation_mode": "three-button",
+  "screenshots": 23,
+  "phase_process_ids": {
+    "initial": 3758,
+    "cold-dark": 5675,
+    "cold-system-dark": 6155,
+    "cold-light-under-dark-system": 6742
+  },
+  "errors": [],
+  "scenes": [
+    {
+      "name": "r2-light-today",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 533,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "9c920ea4-fa21-4060-8e37-a3c71b7c08b4",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-light-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "56a4a344-0da2-4d0d-a61a-1144dce74655",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-light-editor",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "343be3ed-591f-4d9a-ab7a-67fbc954ea75",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-light-devices",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "00277663-74f6-4bd6-9e7c-6d6751e2ab7a",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-light-settings",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "7b4bbd3b-3ddb-4d49-8a15-10fc3889d7c3",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "7bac1865-48f3-4a9f-a1cf-5575056baffd",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-light-date-error-ime",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "88e8d0d5-5b4a-4f26-81de-f925cec72296",
+        "ime_bounds": [
+          0,
+          1048,
+          1080,
+          1794
+        ],
+        "raw_ime_bounds": [
+          0,
+          1025,
+          1080,
+          1920
+        ],
+        "keyboard_bright_fraction": 0.9418044077134986,
+        "keyboard_ink_pixels": 1593,
+        "date_error_bounds": [
+          182,
+          584,
+          937,
+          629
+        ],
+        "error_ink_pixels": 3270
+      }
+    },
+    {
+      "name": "r2-dark-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "4d71f340-dcbc-481d-96ee-d4dc9c2195ba",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-dark-today",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 622,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "e44fd4e7-73ac-466e-92df-09967d5e3749",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-dark-week",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "23128e80-a4f6-4f7c-b6fd-700d000658fe",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-dark-editor",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "50c1c73c-f1d5-472b-99b9-160739febc58",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-dark-devices",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "b856cbf4-b87b-4e8e-a224-51f11521f1e1",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-dark-settings",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "0b014ba5-5ad4-4640-8b42-db069c824273",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-dark-date-error-ime",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 3758,
+        "capture_id": "f4c8fe75-3139-4d04-ba95-6a93e9f9706e",
+        "ime_bounds": [
+          0,
+          1048,
+          1080,
+          1794
+        ],
+        "raw_ime_bounds": [
+          0,
+          1025,
+          1080,
+          1920
+        ],
+        "keyboard_bright_fraction": 0.9418044077134986,
+        "keyboard_ink_pixels": 1593,
+        "date_error_bounds": [
+          182,
+          584,
+          937,
+          629
+        ],
+        "error_ink_pixels": 4159
+      }
+    },
+    {
+      "name": "r2-cold-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": false,
+        "pid": 5675,
+        "capture_id": "8864db1e-7e60-4180-b774-5fb0db8a4828",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-system-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "SYSTEM",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 5675,
+        "capture_id": "e28e1e90-fd00-4628-9d40-1a5d30fcf89f",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-cold-system-dark",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "SYSTEM",
+        "expected_dark": true,
+        "system_dark": true,
+        "pid": 6155,
+        "capture_id": "880ddb0f-82a5-457a-a11a-79a6b14fe4b3",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-system-dark-today",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 622,
+        "theme": "SYSTEM",
+        "expected_dark": true,
+        "system_dark": true,
+        "pid": 6155,
+        "capture_id": "819d8151-d7d8-4cf8-afab-7f57292bebe8",
+        "system_navigation_ink": 1080
+      }
+    },
+    {
+      "name": "r2-system-live-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "SYSTEM",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 6155,
+        "capture_id": "3e4266a3-895b-4c5e-b083-2085e03be4df",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-explicit-light-options",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": false,
+        "pid": 6155,
+        "capture_id": "394e8ccd-cc21-4fba-85ed-f817f1c99d66",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-explicit-light-under-dark-system",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": true,
+        "pid": 6155,
+        "capture_id": "a0e21e66-d5e3-4370-ac9d-9d09e20b22b5",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-cold-light-under-dark-system",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 575,
+        "theme": "LIGHT",
+        "expected_dark": false,
+        "system_dark": true,
+        "pid": 6742,
+        "capture_id": "7cb03762-d67c-47d3-95dc-bfc782b48432",
+        "system_navigation_ink": 1078
+      }
+    },
+    {
+      "name": "r2-legacy-dark-selected",
+      "passed": true,
+      "errors": [],
+      "metrics": {
+        "label_ink": 641,
+        "theme": "DARK",
+        "expected_dark": true,
+        "system_dark": true,
+        "pid": 6742,
+        "capture_id": "aa60609a-fa98-41c6-907c-b6a67efb370d",
+        "system_navigation_ink": 1080
+      }
+    }
+  ],
+  "scope": "Actual emulator APK; independent PNG/XML/state checks; no physical paired watch"
+}

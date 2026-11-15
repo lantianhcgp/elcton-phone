@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 99, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 95, in main
+    return namespace['main']()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 176, in main
+    if a.command.startswith('dispatch-'): dispatch(a); return 0
+                                          ~~~~~~~~^^^
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py", line 49, in dispatch
+    bound = exact_readback(args.build_run,args.build_sha,'build.yml',True)
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 135, in exact_readback
+    assets = pages('/actions/runs/' + run + '/artifacts', 'artifacts')
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py", line 117, in pages
+    result = api(path + ('&' if '?' in path else '?') + 'per_page=100&page=' + str(page))
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py", line 86, in api
+    raise AssertionError('Bounded official GET failed; retain original error, no gate bypass')
+AssertionError: Bounded official GET failed; retain original error, no gate bypass

@@ -1,0 +1,65 @@
+{
+  "at": "2026-11-15 21:12:42 +0800",
+  "epoch": 1794748362,
+  "deadline_epoch": 1794753762,
+  "branch": "diag/p2p-trace-0.2.10-20261115",
+  "workflow_head": "4fc3363f2b30073f1a71de4d4073460b81ec537f",
+  "source": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "source_to_workflow_changes": [
+    "qa/p2p-trace-0210/CONTINUATION-R7-20261115.md",
+    "qa/p2p-trace-0210/r6/R7-DELIVERY-STATUS.json"
+  ],
+  "disk_free_bytes": 2436132864,
+  "artifact_bytes": 9072788,
+  "artifact_sha256": "e012b8060373a1e4c18009b8ff457d223834c923666e664fc778f35e1d2004f0",
+  "crc_pass": true,
+  "inventory_keys": [
+    "fetched",
+    "run",
+    "source_sha",
+    "workflow_sha",
+    "run_attempt",
+    "artifact_id",
+    "conclusion",
+    "inventory"
+  ],
+  "artifact_files": 47,
+  "artifact_expanded_bytes": 9584086,
+  "main_test_paths": [
+    "dist/elcton-phone-probe.apk",
+    "dist/elcton-ui-tests.apk"
+  ],
+  "transport_events": [
+    {
+      "path": "/actions/runs/43715446826",
+      "GET_attempt": 1,
+      "exit": 0,
+      "credential_values_not_stored": true
+    },
+    {
+      "path": "/actions/runs/43715446826/attempts/1",
+      "GET_attempt": 1,
+      "exit": 0,
+      "credential_values_not_stored": true
+    },
+    {
+      "path": "/actions/runs/43715446826/artifacts?per_page=100&page=1",
+      "GET_attempt": 1,
+      "exit": 0,
+      "credential_values_not_stored": true
+    },
+    {
+      "path": "/actions/artifacts/14162980048/zip",
+      "GET_attempt": 1,
+      "exit": 0,
+      "credential_values_not_stored": true
+    },
+    {
+      "path": "/actions/runs/43715446826",
+      "GET_attempt": 1,
+      "exit": 0,
+      "credential_values_not_stored": true
+    }
+  ],
+  "gh_auth_ok": false
+}

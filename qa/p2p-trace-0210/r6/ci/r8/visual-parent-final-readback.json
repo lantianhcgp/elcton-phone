@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "originals": 97,
+  "derived_images": 109,
+  "sha_drift": [],
+  "numeric_gate": "full-verification/receipt.json actual PASS11",
+  "visual_parent": "28tour fulloverview+critical originalcomponentcrops; 6light/darkoptions +darkbars; all8 supplemental theme date-dock/devices/today/editor-top originalcrops viewedbyparent",
+  "scope": "No observed visible component issue; not every component every scene or real handshake",
+  "report_sha256": "b00464043691c49b88a04d60dbe96dc380c71193eb77ede976237089d45c6b25",
+  "at": "2026-11-15 22:22:41 +0800"
+}

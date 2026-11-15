@@ -1,0 +1,7 @@
+{
+  "phase": "RED",
+  "expected_missing_dns_helper": true,
+  "exit": 1,
+  "raw": "qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.raw.log",
+  "original_transport_sha256": "80c9ba8c30b9f04fc113ebdfe78220817f07aa7d96f969ebb44490104236ed88"
+}

@@ -1,0 +1,65 @@
+{
+  "diag_emulator_smoke": {
+    "all_non_version_ast_unchanged": true,
+    "labels_unchanged": true,
+    "version_literals": [
+      {
+        "line": 156,
+        "before": "0.2.9",
+        "after": "0.2.10"
+      },
+      {
+        "line": 156,
+        "before": 11,
+        "after": 12
+      },
+      {
+        "line": 305,
+        "before": "0.2.9",
+        "after": "0.2.10"
+      },
+      {
+        "line": 305,
+        "before": 11,
+        "after": 12
+      },
+      {
+        "line": 474,
+        "before": "0.2.9",
+        "after": "0.2.10"
+      },
+      {
+        "line": 474,
+        "before": 11,
+        "after": 12
+      }
+    ],
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/diag_emulator_smoke.py",
+    "original_sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e",
+    "current_sha256": "0b01c00a0a853a5e436c5ae31f2e7368fde4a4317c7637d87220aee141c1fce1"
+  },
+  "emulator_install_and_tour": {
+    "byte_identical": true,
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/emulator_install_and_tour.py",
+    "original_sha256": "693706e964aa25a6f4f04cbf1a9eb46da0c6c8c7e79368dec9e3aaf0899f87df",
+    "current_sha256": "693706e964aa25a6f4f04cbf1a9eb46da0c6c8c7e79368dec9e3aaf0899f87df"
+  },
+  "verify_theme_evidence": {
+    "byte_identical": true,
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/verify_theme_evidence.py",
+    "original_sha256": "580679df7a8428ddd7d84f531b3e2d72c9f03c5a51344e7c7cff13cbab337514",
+    "current_sha256": "580679df7a8428ddd7d84f531b3e2d72c9f03c5a51344e7c7cff13cbab337514"
+  },
+  "verify_palette_evidence": {
+    "byte_identical": true,
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/verify_palette_evidence.py",
+    "original_sha256": "d15583aa319c533b29f62636becc2ae1c4e053dc5e81d5b0f43d4e5f22c45e08",
+    "current_sha256": "d15583aa319c533b29f62636becc2ae1c4e053dc5e81d5b0f43d4e5f22c45e08"
+  },
+  "verify_system_bars": {
+    "byte_identical": true,
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/verify_system_bars.py",
+    "original_sha256": "c4e0c0a8be07b224def60a40b9118e65515036de738cf415c729932f2d5d632e",
+    "current_sha256": "c4e0c0a8be07b224def60a40b9118e65515036de738cf415c729932f2d5d632e"
+  }
+}

@@ -1,0 +1,11 @@
+# R8 UI transport-only continuation
+
+Full dispatch recovery must explicitly pass --previous-registration r8/diagnostics-dispatch-curl/registered.json; the missed parameter was rejected at original pipeline.py:52 before before-runs/intent/POST (full-dispatch-dns2.raw.log retained). No gate edit or repeated POST occurred. New helper rejects optimized Python before I/O, leaves POST redirect/retry disabled, captures actual HTTP status with curl write-out, and accepts only empty HTTP204; offline empty302 and204 fixtures exercise the real nested api and preserve original RED. GET DNS fallback keeps hostname/SNI and TLS verification unchanged; no server substitute.
+
+R8 user authorized minimal helper-parameter recovery when registration/format blocks, without gate changes. Actual first pipeline diagnostics dispatch exited1 at r6_common exact build attempt GET, BEFORE new_out/dispatch-intent/POST. No accepted/intended/registered output existed. Original failure raw and execution JSON retained in this directory.
+
+Only new ui_transport.py substitutes official HTTPS API transport inside an in-memory original pipeline run. Every original pipeline.py/r6_common.py byte is checked against built source b3eb55680b51f5fbdf392d402acdcdae168f2b20. Original branch-head/build receipt/run-attempt/artifact/full previous registration/pagination/ambiguity/run identity/registration/readback/count predicates are unchanged.
+
+GET uses up to3 actual requests, each curl45s timeout with correct TLS verification (no insecure or invented responses). POST accepts only exact ui-smoke.yml dispatches, branch diag/p2p-trace-0.2.10-20261115 and explicit build run43715446826/build sourceb3eb5568/API33/three-button/suite diagnostics or full. Exactly one POST allowed per invocation; network-ambiguous POST must be inspected, never blindly retried. Before/after exact run IDs remain chosen only by original pipeline registration.
+
+No product/SDK/workflow/source/signer/assertion/test/timeout/retry-business change, no device operation. Authentication headers live in subprocess stdin, never saved/printed. Raw failures remain. Only successful exact-run readback counts as registered, and later only original binary/cloud gates count as PASS.

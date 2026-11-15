@@ -1,0 +1,19 @@
+{
+  "fresh_doh": [
+    {
+      "url": "https://cloudflare-dns.com/dns-query?name=api.github.com&type=A",
+      "exit": 0,
+      "answers": [
+        "20.27.177.116"
+      ]
+    },
+    {
+      "url": "https://dns.google/resolve?name=api.github.com&type=A",
+      "exit": 0,
+      "answers": [
+        "4.237.22.34"
+      ]
+    }
+  ],
+  "tls_verification_on": true
+}

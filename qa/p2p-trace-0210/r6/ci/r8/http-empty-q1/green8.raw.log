@@ -1,0 +1,85 @@
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_finalize_r8_metadata as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"]
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (test_finalize_r8_metadata.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (test_finalize_r8_metadata.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (test_finalize_r8_metadata.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (test_finalize_r8_metadata.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (test_finalize_r8_metadata.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (test_finalize_r8_metadata.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (test_finalize_r8_metadata.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (test_finalize_r8_metadata.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (test_finalize_r8_metadata.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (test_finalize_r8_metadata.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (test_finalize_r8_metadata.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (test_finalize_r8_metadata.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.424s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_dns_parameters as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"]
+test_exact_https_sni_and_no_insecure_or_wrong_host (test_dns_parameters.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.017s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_transport_edges as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"]
+test_optimized_cli_fails_before_io (test_transport_edges.TransportEdges.test_optimized_cli_fails_before_io) ... ok
+test_optimized_invalid_post_cannot_be_accepted (test_transport_edges.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... ok
+test_single_post_never_follows_redirect (test_transport_edges.TransportEdges.test_single_post_never_follows_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.274s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_post_http_status as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"]
+test_empty_http302_fails_without_retry (test_post_http_status.PostStatus.test_empty_http302_fails_without_retry) ... ok
+test_true_http204_accepted_once (test_post_http_status.PostStatus.test_true_http204_accepted_once) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.034s
+
+OK
+
+ACTUAL_RETURNCODE 0
+
+ARGV ["/data/data/com.termux/files/home/hermes-env-3.13/bin/python", "-B", "-c", "import sys, unittest; from pathlib import Path; sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1','/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_http_empty_q1 as m; unittest.main(module=m, argv=[m.__file__], verbosity=2)"]
+test_empty_302_rejected (test_http_empty_q1.ExactEmpty204.test_empty_302_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_empty_302_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"}
+ok
+test_exact_empty_204_accepted (test_http_empty_q1.ExactEmpty204.test_exact_empty_204_accepted) ... {"accepted": true, "credential_logging": false, "curl_returncode": 0, "fixture": "test_exact_empty_204_accepted", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"}
+ok
+test_failed_curl_204_rejected (test_http_empty_q1.ExactEmpty204.test_failed_curl_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 7, "fixture": "test_failed_curl_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"}
+ok
+test_missing_status_rejected (test_http_empty_q1.ExactEmpty204.test_missing_status_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_missing_status_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b''"}
+ok
+test_newline_only_204_rejected (test_http_empty_q1.ExactEmpty204.test_newline_only_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_newline_only_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\n\\nR8-HTTP-STATUS:204'"}
+ok
+test_nonempty_204_rejected (test_http_empty_q1.ExactEmpty204.test_nonempty_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_nonempty_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"}
+ok
+test_tab_only_204_rejected (test_http_empty_q1.ExactEmpty204.test_tab_only_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_tab_only_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b'\\t\\nR8-HTTP-STATUS:204'"}
+ok
+test_whitespace_204_rejected (test_http_empty_q1.ExactEmpty204.test_whitespace_204_rejected) ... {"accepted": false, "credential_logging": false, "curl_returncode": 0, "fixture": "test_whitespace_204_rejected", "post_calls": 1, "retry_sleeps": 0, "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"}
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.078s
+
+OK
+
+ACTUAL_RETURNCODE 0
+

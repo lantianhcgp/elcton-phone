@@ -1,0 +1,11 @@
+{
+  "failure": "git diff --cached --check original raw XMLCRLF/logwhitespace",
+  "actual_exit": 2,
+  "native_wrapper_exit": 1,
+  "source_output": "/data/data/com.termux/files/home/.hermes/cache/terminal-output/out-1794753086-8313-fa70.log",
+  "source_output_bytes": 4999256,
+  "source_output_sha256": "b2a5c3575e232f95e193f1bea7cad0d622656cb105856724d0a10f9b04c0aaef",
+  "action": "Keep every raw evidence byte; lint only authored helper/doc changes; index blob proof for ALL originals unchanged",
+  "source_or_acceptance_gate_not_failed": true,
+  "at": "2026-11-15 22:32:52 +0800"
+}

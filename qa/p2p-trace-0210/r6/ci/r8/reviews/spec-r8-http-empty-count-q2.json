@@ -1,0 +1,2082 @@
+{
+  "axis": "spec",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing_requirements": [],
+  "summary": "PASS scoped SPEC count continuation: parent explicitly authorized keeping current eight helper cases / 32 total; independent actual 18+1+3+2+8=32, zero failures/errors/skips, all actual process exits 0. Exactly one helper predicate replacement and every old protection verified. Original SPEC/QUALITY FAIL receipts remain unchanged; not product/QUALITY/delivery approval.",
+  "scope": "ONLY R8-QUALITY-HTTP-EMPTY-01 exact empty-body predicate and added offline helper tests. NO product90dual/regressions/cloud/device/gates/build/network/commit/delivery review or verdict rewrite.",
+  "source_sha": "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+  "started_at": "2026-11-15T22:10:59.480759+08:00",
+  "reviewed_at": "2026-11-15T22:11:01.400985+08:00",
+  "count_requirement_correction": {
+    "authority": "Explicit parent approval in this delegated request context: KEEP all current 8 new helper tests / 32 counts; never delete old tests or FAIL; no hard limit on isolated helper negatives.",
+    "old_expected": {
+      "original": 24,
+      "new": 6,
+      "total": 30
+    },
+    "approved_expected": {
+      "original": 24,
+      "new": 8,
+      "total": 32
+    },
+    "actual": {
+      "original": 24,
+      "new": 8,
+      "total": 32
+    },
+    "only_prior_spec_finding": {
+      "id": "R8-SPEC-EMPTY-COUNT-01",
+      "severity": "medium",
+      "summary": "实际新增模块为8项而不是授权说明6项；原24+新增8=32，不能宣称30。未删测/改测。",
+      "expected": {
+        "original": 24,
+        "new": 6,
+        "total": 30
+      },
+      "actual": {
+        "original": 24,
+        "new": 8,
+        "total": 32
+      },
+      "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py"
+    },
+    "resolution": "Stale parent metadata count only. Revised count expectations, no test deletion/edit, no hidden finding, no historic verdict rewrite.",
+    "original_quality_finding_preserved": [
+      {
+        "id": "R8-QUALITY-HTTP-EMPTY-01",
+        "severity": "medium",
+        "file": "qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+        "line": 101,
+        "summary": "精确空 HTTP204 判据使用 not post_body.strip()，放行带空白字节的响应体，违反精确空响应的 fail-closed 条件。",
+        "counterexample": {
+          "fixture_stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'",
+          "curl_returncode": 0,
+          "actual_accepted": true,
+          "expected_accepted": false,
+          "actual_post_calls": 1,
+          "original_nested_api_unmodified": true
+        },
+        "reproduce": "python -B qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py (独占输出；如已存在仅阅读保存的 POST_FIXTURE whitespace204；重跑须先将 OUTPUT 常量换到新的隔离 evidence namespace，不改被测 helper)",
+        "evidence": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt",
+        "minimal_fix": "将 not post_body.strip() 改为 post_body == b''；保留204/status/单次POST及原pipeline判据，加入空白体负测后重新绑定SPEC/QUALITY。"
+      }
+    ],
+    "quality_suggestions_preserved": [
+      "curl 默认配置影响的附加探针超时，未取到可执行安全反例，不升级为已证实finding；不继续联网。",
+      "只修精确空body判据，不改五处metadata、原pipeline/门禁或历史FAIL。"
+    ]
+  },
+  "new_test_count": 8,
+  "expected_new_test_count": 8,
+  "original_test_count": 24,
+  "actual_test_count": 32,
+  "expected_test_count": 32,
+  "actual_skipped": 0,
+  "actual_returncodes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "aggregate_returncode": 0,
+  "offline_test_results": [
+    {
+      "module": "test_finalize_r8_metadata",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_finalize_r8_metadata as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"
+      ],
+      "expected_count": 18,
+      "count": 18,
+      "return_code": 0,
+      "seconds": 0.6593922399915755,
+      "output_sha256": "f69d2be514699f62ff5437b4d2f9cf7d288e444346e6cbddf1596921e07b559c",
+      "fixtures": [],
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "successful": true
+    },
+    {
+      "module": "test_dns_parameters",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_dns_parameters as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"
+      ],
+      "expected_count": 1,
+      "count": 1,
+      "return_code": 0,
+      "seconds": 0.1341848960146308,
+      "output_sha256": "ec4985ab856f2b0d8001136cdf980e11b4ef22104dfe7c2205edf4c2fb18ccf5",
+      "fixtures": [],
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "successful": true
+    },
+    {
+      "module": "test_transport_edges",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_transport_edges as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"
+      ],
+      "expected_count": 3,
+      "count": 3,
+      "return_code": 0,
+      "seconds": 0.4844658332876861,
+      "output_sha256": "17154b36d53a9f153b0b58710a7ac879c578013125dd5f30ea7b9736357cd094",
+      "fixtures": [],
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "successful": true
+    },
+    {
+      "module": "test_post_http_status",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_post_http_status as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"
+      ],
+      "expected_count": 2,
+      "count": 2,
+      "return_code": 0,
+      "seconds": 0.16111224004998803,
+      "output_sha256": "e24b0c673abb14354bdcc08948276e2e78263569c0d758ded9f3e869f39e17c8",
+      "fixtures": [],
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "successful": true
+    },
+    {
+      "module": "test_http_empty_q1",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py",
+      "argv": [
+        "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+        "-B",
+        "-c",
+        "import sys, unittest, json, socket; socket.create_connection=lambda *a,**k: (_ for _ in ()).throw(RuntimeError('offline review prohibits network')); sys.path[:0]=['/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1', '/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8']; import test_http_empty_q1 as m; suite=unittest.defaultTestLoader.loadTestsFromModule(m); r=unittest.TextTestRunner(verbosity=2).run(suite); print('Q2_ACTUAL_OUTCOME '+json.dumps(dict(tests_run=r.testsRun,failures=len(r.failures),errors=len(r.errors),skipped=len(r.skipped),expected_failures=len(r.expectedFailures),unexpected_successes=len(r.unexpectedSuccesses),successful=r.wasSuccessful()))); sys.exit(0 if r.wasSuccessful() else 1)"
+      ],
+      "expected_count": 8,
+      "count": 8,
+      "return_code": 0,
+      "seconds": 0.1882616151124239,
+      "output_sha256": "b16dfea09f9d5598a07448186fe96c326b7ae4c23e7d3369fcfa6eb499846112",
+      "fixtures": [
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_empty_302_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:302'"
+        },
+        {
+          "accepted": true,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_exact_empty_204_accepted",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 7,
+          "fixture": "test_failed_curl_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_missing_status_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b''"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_newline_only_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\n\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_nonempty_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_tab_only_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b'\\t\\nR8-HTTP-STATUS:204'"
+        },
+        {
+          "accepted": false,
+          "credential_logging": false,
+          "curl_returncode": 0,
+          "fixture": "test_whitespace_204_rejected",
+          "post_calls": 1,
+          "retry_sleeps": 0,
+          "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'"
+        }
+      ],
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "successful": true
+    }
+  ],
+  "input_fingerprints": {
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": "dee0a9dd00a2c91782bfa36e6e6f5b1ba8e14832d88e41072091b273c553269d",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": "85cac5a68fe22e07e56d18aebb709d4e92874b4ebc186fe50721bbfc9873a127",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/DELIVERY.md": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/R8-TRANSPORT-SCOPE.md": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/authenticated-dns-readback.json": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/case-manifest-readback.json": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/complete-input-readback.json": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/original-code-proof.json": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl.transport.jsonl": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl/registered.json": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-execution.json": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch.raw.log": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.json": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.raw.log": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.json": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.raw.log": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-readback-latest.json": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalize_r8_delivery.py": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.json": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.raw.log": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl-execution.json": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.raw.log": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.transport.jsonl": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-dns2.raw.log": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/REPORT.md": "69eeda99e0174024088c9279a74afb18d6b40b19382893a77e54817c06dc831e",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/before-manifest.json": "e1974685ea7a52e8dc4a0ac6f9a3d26f5449794ef50edd0ed98fad51d9911e53",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green.json": "1129e8c007f560d6ea332845c011cb503a98c7f7032fd469cb37fa515f5907ae",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green.raw.log": "bee2b55d00653f80f62227f94e973ed67f33dacbfb11255d819c5ef8bcc439f7",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green8.json": "42a30484b4358ffe2e3b5746cbb0199d5949e47d88618a05dc093ea47036be73",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green8.raw.log": "9fd79be6bea23c9a312d2aca803ec404ddd49d67a89067959f2be19c944ea556",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/helper-only.diff": "b61477d165a8d323a7645e922835928659ef6b2100c96b6afe9379e83d804729",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/inverse-ast-proof.json": "93fe43b98519b2f5d2159831ca28f6ec05951afda587e9927e8816a9734dbe3d",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red-fixtures.json": "f360792d6027a0c1ec94d18fb9640508e75cc68dc04a6b1381c483fd306fed6a",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red.json": "93616cdb4a9f00d36501b5697016c37462826019df9688206a09b0e8e6f6a852",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red.raw.log": "8e04d2a10f1ffa5346d9542809e17aa0dc0bee04625ae247374230297c4b6e20",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red8.json": "cea9e5202ccc49e8100c7e4ca4278bfe777dbe2e39eed96543652adad4607346",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red8.raw.log": "fc5feb674b45ccd83e1918e1433362526b1e5455b1f592c5854ff2c7ce8177cc",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/report.json": "08bb0997a0c550f5ed963a4f212b2564fb8a6d9dfd6d2ab65131ee9d760b2319",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/run_offline.py": "340b6d18ccec0c1f230bb6b1f34b14af52e8a4c59a3049cdb7366568d26166cb",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py": "69efd70b1a7c7c90b209b16e10f1fe088c34954a3bf2af16a4d794bb1d231fe2",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/ui_transport.before.py.txt": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-final-green.json": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-proof.json": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-report.md": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-green.log": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-red.log": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.json": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.raw.log": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/preflight.json": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-curlrc-probe.py": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-helpers-raw.txt": "04aa22d903b32256d22cdc2244a07deef49f71af1ff8217da3eb132e1eb959c3",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-helpers.json": "8e51a87b17865b5f2f0ddc2cd0ec362623391745b92c4ebe9695d09c5022cdd9",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-results.json": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final-raw.txt": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final.json": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-http-q1-raw.txt": "8f82116fb5be38c4c0f2520d20facd76ccc6db7766b88505ce2d17a25df22ce6",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-http-q1.json": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-raw.txt": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers.json": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-http-empty-q1-raw.txt": "11ddf8afe15f9d9bb91b9ad63d5360b349bc6151e22fc793da0bfb8728b25536",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-http-empty-q1.json": "9eefb91eb2e877a9a983c12078bdea4786306a572b641cacd1a7536f221c1477",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/spec-http-q1-parent-readback.json": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters-http-final-green.raw.log": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status-http-final-green.raw.log": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges-http-final-green.raw.log": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.json": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.raw.log": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.json": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.raw.log": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui-transport-selfcheck.json": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/verify_r6.py": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt": "af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9",
+    "/data/data/com.termux/files/usr/bin/curl": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61"
+  },
+  "input_fingerprint_count": 88,
+  "prior_receipt_sha256": {
+    "spec": "9eefb91eb2e877a9a983c12078bdea4786306a572b641cacd1a7536f221c1477",
+    "quality": "8e51a87b17865b5f2f0ddc2cd0ec362623391745b92c4ebe9695d09c5022cdd9",
+    "spec_raw": "11ddf8afe15f9d9bb91b9ad63d5360b349bc6151e22fc793da0bfb8728b25536",
+    "quality_raw": "04aa22d903b32256d22cdc2244a07deef49f71af1ff8217da3eb132e1eb959c3"
+  },
+  "prior_spec_input_verification": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.raw.log",
+      "expected_sha256": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+      "actual_sha256": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.transport.jsonl",
+      "expected_sha256": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+      "actual_sha256": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/preflight.json",
+      "expected_sha256": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+      "actual_sha256": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red8.raw.log",
+      "expected_sha256": "fc5feb674b45ccd83e1918e1433362526b1e5455b1f592c5854ff2c7ce8177cc",
+      "actual_sha256": "fc5feb674b45ccd83e1918e1433362526b1e5455b1f592c5854ff2c7ce8177cc",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red.raw.log",
+      "expected_sha256": "8e04d2a10f1ffa5346d9542809e17aa0dc0bee04625ae247374230297c4b6e20",
+      "actual_sha256": "8e04d2a10f1ffa5346d9542809e17aa0dc0bee04625ae247374230297c4b6e20",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red-fixtures.json",
+      "expected_sha256": "f360792d6027a0c1ec94d18fb9640508e75cc68dc04a6b1381c483fd306fed6a",
+      "actual_sha256": "f360792d6027a0c1ec94d18fb9640508e75cc68dc04a6b1381c483fd306fed6a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/REPORT.md",
+      "expected_sha256": "69eeda99e0174024088c9279a74afb18d6b40b19382893a77e54817c06dc831e",
+      "actual_sha256": "69eeda99e0174024088c9279a74afb18d6b40b19382893a77e54817c06dc831e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-report.md",
+      "expected_sha256": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+      "actual_sha256": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/original-code-proof.json",
+      "expected_sha256": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+      "actual_sha256": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl/registered.json",
+      "expected_sha256": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+      "actual_sha256": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.json",
+      "expected_sha256": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+      "actual_sha256": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-results.json",
+      "expected_sha256": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+      "actual_sha256": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.raw.log",
+      "expected_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+      "actual_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/R8-TRANSPORT-SCOPE.md",
+      "expected_sha256": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+      "actual_sha256": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.raw.log",
+      "expected_sha256": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+      "actual_sha256": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/run_offline.py",
+      "expected_sha256": "340b6d18ccec0c1f230bb6b1f34b14af52e8a4c59a3049cdb7366568d26166cb",
+      "actual_sha256": "340b6d18ccec0c1f230bb6b1f34b14af52e8a4c59a3049cdb7366568d26166cb",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-dns2.raw.log",
+      "expected_sha256": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+      "actual_sha256": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.raw.log",
+      "expected_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "actual_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green8.json",
+      "expected_sha256": "42a30484b4358ffe2e3b5746cbb0199d5949e47d88618a05dc093ea47036be73",
+      "actual_sha256": "42a30484b4358ffe2e3b5746cbb0199d5949e47d88618a05dc093ea47036be73",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.json",
+      "expected_sha256": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+      "actual_sha256": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/helper-only.diff",
+      "expected_sha256": "b61477d165a8d323a7645e922835928659ef6b2100c96b6afe9379e83d804729",
+      "actual_sha256": "b61477d165a8d323a7645e922835928659ef6b2100c96b6afe9379e83d804729",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+      "expected_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+      "actual_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-helpers.json",
+      "expected_sha256": "8e51a87b17865b5f2f0ddc2cd0ec362623391745b92c4ebe9695d09c5022cdd9",
+      "actual_sha256": "8e51a87b17865b5f2f0ddc2cd0ec362623391745b92c4ebe9695d09c5022cdd9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch.raw.log",
+      "expected_sha256": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+      "actual_sha256": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py",
+      "expected_sha256": "69efd70b1a7c7c90b209b16e10f1fe088c34954a3bf2af16a4d794bb1d231fe2",
+      "actual_sha256": "69efd70b1a7c7c90b209b16e10f1fe088c34954a3bf2af16a4d794bb1d231fe2",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.json",
+      "expected_sha256": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+      "actual_sha256": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/ui_transport.before.py.txt",
+      "expected_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+      "actual_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "expected_sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+      "actual_sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.raw.log",
+      "expected_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+      "actual_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/inverse-ast-proof.json",
+      "expected_sha256": "93fe43b98519b2f5d2159831ca28f6ec05951afda587e9927e8816a9734dbe3d",
+      "actual_sha256": "93fe43b98519b2f5d2159831ca28f6ec05951afda587e9927e8816a9734dbe3d",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt",
+      "expected_sha256": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+      "actual_sha256": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.raw.log",
+      "expected_sha256": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+      "actual_sha256": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json",
+      "expected_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+      "actual_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-red.log",
+      "expected_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+      "actual_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl.transport.jsonl",
+      "expected_sha256": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+      "actual_sha256": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui-transport-selfcheck.json",
+      "expected_sha256": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+      "actual_sha256": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.json",
+      "expected_sha256": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+      "actual_sha256": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.json",
+      "expected_sha256": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+      "actual_sha256": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers.json",
+      "expected_sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "actual_sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py",
+      "expected_sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "actual_sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py",
+      "expected_sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "actual_sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status-http-final-green.raw.log",
+      "expected_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "actual_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-readback-latest.json",
+      "expected_sha256": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+      "actual_sha256": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/spec-http-q1-parent-readback.json",
+      "expected_sha256": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+      "actual_sha256": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py",
+      "expected_sha256": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+      "actual_sha256": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/before-manifest.json",
+      "expected_sha256": "e1974685ea7a52e8dc4a0ac6f9a3d26f5449794ef50edd0ed98fad51d9911e53",
+      "actual_sha256": "e1974685ea7a52e8dc4a0ac6f9a3d26f5449794ef50edd0ed98fad51d9911e53",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green.json",
+      "expected_sha256": "1129e8c007f560d6ea332845c011cb503a98c7f7032fd469cb37fa515f5907ae",
+      "actual_sha256": "1129e8c007f560d6ea332845c011cb503a98c7f7032fd469cb37fa515f5907ae",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green8.raw.log",
+      "expected_sha256": "9fd79be6bea23c9a312d2aca803ec404ddd49d67a89067959f2be19c944ea556",
+      "actual_sha256": "9fd79be6bea23c9a312d2aca803ec404ddd49d67a89067959f2be19c944ea556",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-curlrc-probe.py",
+      "expected_sha256": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+      "actual_sha256": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-execution.json",
+      "expected_sha256": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+      "actual_sha256": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py",
+      "expected_sha256": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+      "actual_sha256": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py",
+      "expected_sha256": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+      "actual_sha256": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-http-q1.json",
+      "expected_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "actual_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalize_r8_delivery.py",
+      "expected_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+      "actual_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.raw.log",
+      "expected_sha256": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+      "actual_sha256": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-proof.json",
+      "expected_sha256": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+      "actual_sha256": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final-raw.txt",
+      "expected_sha256": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+      "actual_sha256": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/verify_r6.py",
+      "expected_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "actual_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-raw.txt",
+      "expected_sha256": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+      "actual_sha256": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red8.json",
+      "expected_sha256": "cea9e5202ccc49e8100c7e4ca4278bfe777dbe2e39eed96543652adad4607346",
+      "actual_sha256": "cea9e5202ccc49e8100c7e4ca4278bfe777dbe2e39eed96543652adad4607346",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/case-manifest-readback.json",
+      "expected_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+      "actual_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters-http-final-green.raw.log",
+      "expected_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "actual_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/report.json",
+      "expected_sha256": "08bb0997a0c550f5ed963a4f212b2564fb8a6d9dfd6d2ab65131ee9d760b2319",
+      "actual_sha256": "08bb0997a0c550f5ed963a4f212b2564fb8a6d9dfd6d2ab65131ee9d760b2319",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py",
+      "expected_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "actual_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final.json",
+      "expected_sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "actual_sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/red.json",
+      "expected_sha256": "93616cdb4a9f00d36501b5697016c37462826019df9688206a09b0e8e6f6a852",
+      "actual_sha256": "93616cdb4a9f00d36501b5697016c37462826019df9688206a09b0e8e6f6a852",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/authenticated-dns-readback.json",
+      "expected_sha256": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+      "actual_sha256": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges-http-final-green.raw.log",
+      "expected_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "actual_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py",
+      "expected_sha256": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+      "actual_sha256": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/usr/bin/curl",
+      "expected_sha256": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61",
+      "actual_sha256": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-final-green.json",
+      "expected_sha256": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+      "actual_sha256": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl-execution.json",
+      "expected_sha256": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+      "actual_sha256": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/green.raw.log",
+      "expected_sha256": "bee2b55d00653f80f62227f94e973ed67f33dacbfb11255d819c5ef8bcc439f7",
+      "actual_sha256": "bee2b55d00653f80f62227f94e973ed67f33dacbfb11255d819c5ef8bcc439f7",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/complete-input-readback.json",
+      "expected_sha256": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+      "actual_sha256": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-green.log",
+      "expected_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+      "actual_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/DELIVERY.md",
+      "expected_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+      "actual_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.json",
+      "expected_sha256": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+      "actual_sha256": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+      "unchanged": true
+    }
+  ],
+  "original_quality_input_verification": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-http-q1.json",
+      "expected_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "actual_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/spec-http-q1-parent-readback.json",
+      "expected_sha256": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+      "actual_sha256": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+      "expected_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+      "actual_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+      "unchanged": false,
+      "authorized_helper_delta": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalize_r8_delivery.py",
+      "expected_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+      "actual_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "expected_sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+      "actual_sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py",
+      "expected_sha256": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+      "actual_sha256": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py",
+      "expected_sha256": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+      "actual_sha256": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-proof.json",
+      "expected_sha256": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+      "actual_sha256": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-report.md",
+      "expected_sha256": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+      "actual_sha256": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-red.log",
+      "expected_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+      "actual_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-green.log",
+      "expected_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+      "actual_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui-transport-selfcheck.json",
+      "expected_sha256": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+      "actual_sha256": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/R8-TRANSPORT-SCOPE.md",
+      "expected_sha256": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+      "actual_sha256": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.json",
+      "expected_sha256": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+      "actual_sha256": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.raw.log",
+      "expected_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+      "actual_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch.raw.log",
+      "expected_sha256": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+      "actual_sha256": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-execution.json",
+      "expected_sha256": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+      "actual_sha256": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.transport.jsonl",
+      "expected_sha256": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+      "actual_sha256": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.raw.log",
+      "expected_sha256": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+      "actual_sha256": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl-execution.json",
+      "expected_sha256": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+      "actual_sha256": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl/registered.json",
+      "expected_sha256": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+      "actual_sha256": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl.transport.jsonl",
+      "expected_sha256": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+      "actual_sha256": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/original-code-proof.json",
+      "expected_sha256": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+      "actual_sha256": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/case-manifest-readback.json",
+      "expected_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+      "actual_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/complete-input-readback.json",
+      "expected_sha256": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+      "actual_sha256": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json",
+      "expected_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+      "actual_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/preflight.json",
+      "expected_sha256": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+      "actual_sha256": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-readback-latest.json",
+      "expected_sha256": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+      "actual_sha256": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/authenticated-dns-readback.json",
+      "expected_sha256": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+      "actual_sha256": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.json",
+      "expected_sha256": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+      "actual_sha256": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.raw.log",
+      "expected_sha256": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+      "actual_sha256": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.json",
+      "expected_sha256": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+      "actual_sha256": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.raw.log",
+      "expected_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+      "actual_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py",
+      "expected_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "actual_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py",
+      "expected_sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "actual_sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py",
+      "expected_sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "actual_sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/DELIVERY.md",
+      "expected_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+      "actual_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.json",
+      "expected_sha256": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+      "actual_sha256": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.raw.log",
+      "expected_sha256": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+      "actual_sha256": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.json",
+      "expected_sha256": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+      "actual_sha256": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.raw.log",
+      "expected_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "actual_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py",
+      "expected_sha256": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+      "actual_sha256": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.raw.log",
+      "expected_sha256": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+      "actual_sha256": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.json",
+      "expected_sha256": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+      "actual_sha256": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-dns2.raw.log",
+      "expected_sha256": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+      "actual_sha256": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-final-green.json",
+      "expected_sha256": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+      "actual_sha256": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status-http-final-green.raw.log",
+      "expected_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "actual_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters-http-final-green.raw.log",
+      "expected_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "actual_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges-http-final-green.raw.log",
+      "expected_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "actual_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers.json",
+      "expected_sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "actual_sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-raw.txt",
+      "expected_sha256": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+      "actual_sha256": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final.json",
+      "expected_sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "actual_sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final-raw.txt",
+      "expected_sha256": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+      "actual_sha256": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py",
+      "expected_sha256": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+      "actual_sha256": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/verify_r6.py",
+      "expected_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "actual_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-results.json",
+      "expected_sha256": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+      "actual_sha256": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt",
+      "expected_sha256": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+      "actual_sha256": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-curlrc-probe.py",
+      "expected_sha256": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+      "actual_sha256": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    },
+    {
+      "path": "/data/data/com.termux/files/usr/bin/curl",
+      "expected_sha256": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61",
+      "actual_sha256": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61",
+      "unchanged": true,
+      "authorized_helper_delta": false
+    }
+  ],
+  "delta_proof": {
+    "before_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+    "current_sha256": "56ed545dde2aee95292220770a3f3b23962178b68e4039cb2542829728f5916b",
+    "before_bytes": 5962,
+    "current_bytes": 5957,
+    "old_literal": "not post_body.strip()",
+    "new_literal": "post_body == b''",
+    "literal_replacement_count": 1,
+    "literal_forward_exact": true,
+    "literal_inverse_exact": true,
+    "all_other_bytes_unchanged": true,
+    "normalized_one_comparison_count": 1,
+    "full_ast_equal_after_one_comparison_normalization": true,
+    "ast_compare_count_before": 34,
+    "ast_compare_count_current": 35
+  },
+  "independent_live_closure_fixtures": [
+    {
+      "fixture": "whitespace204",
+      "type": "offline mocked subprocess executing unchanged real nested API; not live response",
+      "accepted": false,
+      "expected": false,
+      "curl_returncode": 0,
+      "stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'",
+      "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST",
+      "protections": {
+        "accepted_matches_expected": true,
+        "exactly_one_call": true,
+        "second_post_refused_without_call": true,
+        "zero_retry_sleeps": true,
+        "redirect_disabled": true,
+        "retry_disabled": true,
+        "stdin_only": true,
+        "credential_not_logged": true,
+        "write_out_status": true,
+        "official_tls_no_insecure": true,
+        "dns_pinned": true
+      }
+    },
+    {
+      "fixture": "exactempty204",
+      "type": "offline mocked subprocess executing unchanged real nested API; not live response",
+      "accepted": true,
+      "expected": true,
+      "curl_returncode": 0,
+      "stdout_repr": "b'\\nR8-HTTP-STATUS:204'",
+      "error": null,
+      "protections": {
+        "accepted_matches_expected": true,
+        "exactly_one_call": true,
+        "second_post_refused_without_call": true,
+        "zero_retry_sleeps": true,
+        "redirect_disabled": true,
+        "retry_disabled": true,
+        "stdin_only": true,
+        "credential_not_logged": true,
+        "write_out_status": true,
+        "official_tls_no_insecure": true,
+        "dns_pinned": true
+      }
+    },
+    {
+      "fixture": "302",
+      "type": "offline mocked subprocess executing unchanged real nested API; not live response",
+      "accepted": false,
+      "expected": false,
+      "curl_returncode": 0,
+      "stdout_repr": "b'\\nR8-HTTP-STATUS:302'",
+      "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST",
+      "protections": {
+        "accepted_matches_expected": true,
+        "exactly_one_call": true,
+        "second_post_refused_without_call": true,
+        "zero_retry_sleeps": true,
+        "redirect_disabled": true,
+        "retry_disabled": true,
+        "stdin_only": true,
+        "credential_not_logged": true,
+        "write_out_status": true,
+        "official_tls_no_insecure": true,
+        "dns_pinned": true
+      }
+    },
+    {
+      "fixture": "missing-status",
+      "type": "offline mocked subprocess executing unchanged real nested API; not live response",
+      "accepted": false,
+      "expected": false,
+      "curl_returncode": 0,
+      "stdout_repr": "b''",
+      "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST",
+      "protections": {
+        "accepted_matches_expected": true,
+        "exactly_one_call": true,
+        "second_post_refused_without_call": true,
+        "zero_retry_sleeps": true,
+        "redirect_disabled": true,
+        "retry_disabled": true,
+        "stdin_only": true,
+        "credential_not_logged": true,
+        "write_out_status": true,
+        "official_tls_no_insecure": true,
+        "dns_pinned": true
+      }
+    },
+    {
+      "fixture": "nonempty204",
+      "type": "offline mocked subprocess executing unchanged real nested API; not live response",
+      "accepted": false,
+      "expected": false,
+      "curl_returncode": 0,
+      "stdout_repr": "b'nonempty\\nR8-HTTP-STATUS:204'",
+      "error": "Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST",
+      "protections": {
+        "accepted_matches_expected": true,
+        "exactly_one_call": true,
+        "second_post_refused_without_call": true,
+        "zero_retry_sleeps": true,
+        "redirect_disabled": true,
+        "retry_disabled": true,
+        "stdin_only": true,
+        "credential_not_logged": true,
+        "write_out_status": true,
+        "official_tls_no_insecure": true,
+        "dns_pinned": true
+      }
+    },
+    {
+      "fixture": "transport-failure",
+      "type": "offline mocked subprocess executing unchanged real nested API; not live response",
+      "accepted": false,
+      "expected": false,
+      "curl_returncode": 7,
+      "stdout_repr": "b'\\nR8-HTTP-STATUS:204'",
+      "error": "Single UI POST transport failed/ambiguous; inspect actual runs, DO NOT repeat POST",
+      "protections": {
+        "accepted_matches_expected": true,
+        "exactly_one_call": true,
+        "second_post_refused_without_call": true,
+        "zero_retry_sleeps": true,
+        "redirect_disabled": true,
+        "retry_disabled": true,
+        "stdin_only": true,
+        "credential_not_logged": true,
+        "write_out_status": true,
+        "official_tls_no_insecure": true,
+        "dns_pinned": true
+      }
+    }
+  ],
+  "protected_existing_files": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-http-q1.json",
+      "expected_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "actual_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/spec-http-q1-parent-readback.json",
+      "expected_sha256": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+      "actual_sha256": "b247f47fab1d8918ccd6ef9f8ffa1e872fecd7a82aea9c5687cef48989b72d24",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalize_r8_delivery.py",
+      "expected_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+      "actual_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_finalize_r8_metadata.py",
+      "expected_sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+      "actual_sha256": "5fe10acbc6f1046996f625799f99d9e3b70ecd999ef2e05c3cf876adac624328",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters.py",
+      "expected_sha256": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+      "actual_sha256": "75b1566232352b8ecb0ba32e6c6e40d8152177db0587da6662e77fc621b9e8d1",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges.py",
+      "expected_sha256": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+      "actual_sha256": "1876885798545d835b3dd30bf869be57e567052e5328685643c5f256f018e6ca",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-proof.json",
+      "expected_sha256": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+      "actual_sha256": "78a94e3fc399515d6a6bbe5cbe732203561e65d643db8cc22cd892f96331e77e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-report.md",
+      "expected_sha256": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+      "actual_sha256": "e4e7adb7aed986dbc4fe9059aace17f4f427592f4a8644b76d0a0b3943d35723",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-red.log",
+      "expected_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+      "actual_sha256": "42c4bb9478cb67383c830df50b7d14a97c2ee785fabee3ae86a4a56d1d170445",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/metadata-tests-green.log",
+      "expected_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+      "actual_sha256": "bc101032d4d36e8ddeae1f5009c6af729d1c99b99170501a3cf723e2f9a2076f",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/ui-transport-selfcheck.json",
+      "expected_sha256": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+      "actual_sha256": "75e39bf4c5fcb6c198d2a2a028db58e5b3cf91486e51c44ab963b3d038c956d6",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/R8-TRANSPORT-SCOPE.md",
+      "expected_sha256": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+      "actual_sha256": "1b1aad3b9ced102d4aeb8e7f9da7a31cb38d8b820081dad44713a035a83ffbd6",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.json",
+      "expected_sha256": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+      "actual_sha256": "3ca6f5345e3406d859827df7e17d0563a330d7ab25b96e86890b5ab6e2e0c0e5",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalizer-parent-tests.raw.log",
+      "expected_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+      "actual_sha256": "5b901ce027bb16ab613386551d7e584fc1028b0c0b356a37fc4ffabdf7f68549",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch.raw.log",
+      "expected_sha256": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+      "actual_sha256": "84f28246fad4c28b8d58bde23761a49e68cd459553f80581a26f81a9284e263a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-execution.json",
+      "expected_sha256": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+      "actual_sha256": "1a5dfaec2615d6f08ec2e640ea4f0f3504eabcb8b3e928c8849ef83f8c17adca",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.transport.jsonl",
+      "expected_sha256": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+      "actual_sha256": "773a93ddb29a85f8d0c895a973648af21a37b4f283caaf7e4099c572271aee4e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl.raw.log",
+      "expected_sha256": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+      "actual_sha256": "051c029e5a4cb9fd512c4da4cc5c11c754f427310881f74aac0eff42ad0df072",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-curl-execution.json",
+      "expected_sha256": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+      "actual_sha256": "66ee25758850211f6be00214d7475c54d4a53db89bc2e138fb0ed87399174dbf",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl/registered.json",
+      "expected_sha256": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+      "actual_sha256": "8d601108d08d310710b0ea0a29c6e7d51b2e5d6c70a39c039797a2ecd347bd2b",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-dispatch-curl.transport.jsonl",
+      "expected_sha256": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+      "actual_sha256": "6e0ce07c7a7912c5be55a45d9e44178ac8ba304aba33c87588832173e775cba3",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/original-code-proof.json",
+      "expected_sha256": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+      "actual_sha256": "7f812e7b63b35a356210ba3e78a4f64ff22493982e48122725ade273e5824527",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/case-manifest-readback.json",
+      "expected_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+      "actual_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/complete-input-readback.json",
+      "expected_sha256": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+      "actual_sha256": "8762e4817fe7d5b3671310df79348203d7e8962433962b06f5c5b0c1a118a892",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json",
+      "expected_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+      "actual_sha256": "abd21c42d4d080fca1965e65e1d12709d25cb2e6efe3909c0a5e38701ceab7c9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/preflight.json",
+      "expected_sha256": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+      "actual_sha256": "5f5c226229bacc03cbed5cb42122e52303e92638a32ac456551bb8ae63e5fe64",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-readback-latest.json",
+      "expected_sha256": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+      "actual_sha256": "90a9cce26108a91f810248824380b276ba3bcec56aeabb17954a058c314882d9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/authenticated-dns-readback.json",
+      "expected_sha256": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+      "actual_sha256": "995adfa1a959cf7442f82225acc0829bd29fbf5992f2e9c6486ec717e1e428d2",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.json",
+      "expected_sha256": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+      "actual_sha256": "f6faa414e5f3419562c1bdbe67a1201424ac74fa9420bb7f69c6e9fbd041fb4a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-red.raw.log",
+      "expected_sha256": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+      "actual_sha256": "7e2a959edf49268d1ab0d436201515d1faefb6792b508ed0e0ee9dcf7c385b4a",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.json",
+      "expected_sha256": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+      "actual_sha256": "5b537e1ec0cdcdad83ac3550a31039040aef11b276dd82fbff5825d57e85d8db",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-red.raw.log",
+      "expected_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+      "actual_sha256": "5a7a7dc6efa066a49370a7ffe0def202551c7b090982446f9c17932b0a2b9480",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py",
+      "expected_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "actual_sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py",
+      "expected_sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "actual_sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py",
+      "expected_sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "actual_sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/DELIVERY.md",
+      "expected_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+      "actual_sha256": "9d03c24ff769a364d3d3e2510b43d96942d4891f24b5694867fefd268858c456",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.json",
+      "expected_sha256": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+      "actual_sha256": "98ad3d28d5ecad7ec6cc00447347799be994996a6c736ebadc0eb518e159f57d",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/dns-parameters-green.raw.log",
+      "expected_sha256": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+      "actual_sha256": "cda09bbaa7a0021ff5c7badff4eb05bedac9a3d4bef62896a36812b9ab5d028d",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.json",
+      "expected_sha256": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+      "actual_sha256": "0a52bffdb9a21f1cfb28598079843ec66a376cc8d38ddd54d73d48641ae1ab1c",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/transport-edges-green.raw.log",
+      "expected_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "actual_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status.py",
+      "expected_sha256": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+      "actual_sha256": "f743c8d2a45f485942be9b5aee8ee9030d1b275c5bc26bf2dc89d71f554ced86",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.raw.log",
+      "expected_sha256": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+      "actual_sha256": "faa7b5835b814b62ca34661defaee7172c1612d0624ad243fd1f2e9bd0945bb8",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/post-http-red.json",
+      "expected_sha256": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+      "actual_sha256": "040b0ac4f6a91baab30a1ffd51206c74de6001dad146bd60d872ec3d67becdfa",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-dispatch-dns2.raw.log",
+      "expected_sha256": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+      "actual_sha256": "694866e04cf76a562eea4da031dc1fb608d9e2007f25a070f07bca0eac43b18e",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-final-green.json",
+      "expected_sha256": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+      "actual_sha256": "896dd92986a69b35bb666c254c839ea66c6fc5369b0f36f6867b00bc89c4f5f9",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_post_http_status-http-final-green.raw.log",
+      "expected_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "actual_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_dns_parameters-http-final-green.raw.log",
+      "expected_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "actual_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/test_transport_edges-http-final-green.raw.log",
+      "expected_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "actual_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers.json",
+      "expected_sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "actual_sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-raw.txt",
+      "expected_sha256": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+      "actual_sha256": "06634a7cf2337df9669d334336d6d831b792c321a484c25bec92c8c5fbc99215",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final.json",
+      "expected_sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "actual_sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final-raw.txt",
+      "expected_sha256": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+      "actual_sha256": "ee8fc1a6edde1e150cd6355331f260e7d4fb0d4aadb7452dda8c3e18e96331df",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py",
+      "expected_sha256": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+      "actual_sha256": "6c10b410b63175494b5ba2843f8e720a67704d620b49853703c777a9fb27cf35",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/verify_r6.py",
+      "expected_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "actual_sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-results.json",
+      "expected_sha256": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+      "actual_sha256": "10369fe04cd43e3050e7b665967fb836f5d35f339d0d6ee2f156b67197001865",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt",
+      "expected_sha256": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+      "actual_sha256": "cf94978f50f89833143c68b19f379e787b9abf13dd6ba35dd2dc7fd0d6558777",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-curlrc-probe.py",
+      "expected_sha256": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+      "actual_sha256": "6569a0de0767c71df4c6c91e40222abd0644c6bc494ac25449b76814e2b8e326",
+      "unchanged": true
+    },
+    {
+      "path": "/data/data/com.termux/files/usr/bin/curl",
+      "expected_sha256": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61",
+      "actual_sha256": "e9cd08920d448bb6aa448c87c5b84dc62e55b5ed654664684d79348a1b06de61",
+      "unchanged": true
+    }
+  ],
+  "changed_during_verification": [],
+  "original_gate_byte_proof": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py",
+      "sha256": "5e631132ed51fcea7a4406dbdecfe75dcf1ea4edeec3531a2c05e1ff3fbcbe03",
+      "original_source_bytes_equal": true,
+      "git_show_return_code": 0
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py",
+      "sha256": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+      "original_source_bytes_equal": true,
+      "git_show_return_code": 0
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py",
+      "sha256": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+      "original_source_bytes_equal": true,
+      "git_show_return_code": 0
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/verify_r6.py",
+      "sha256": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+      "original_source_bytes_equal": true,
+      "git_show_return_code": 0
+    }
+  ],
+  "metadata_gate_preservation": {
+    "adapter_sha256": "3c6792465a28df4bdecb05016f55a803fccc4e3741544ee406557c501e31588f",
+    "five_spans": 5,
+    "changed_spans": [
+      {
+        "line": 75,
+        "original_start": 4375,
+        "original_end": 4465,
+        "before": "    target=PHONE/('hc课程表-0.2.10-code12-'+a.source[:8]+'-'+digest[:8]+'-signed.apk')\n",
+        "after": "    target=PHONE/('hc课程表-0.2.10-code12-'+a.source[:8]+'-诊断版-signed.apk')\n"
+      },
+      {
+        "line": 92,
+        "original_start": 6012,
+        "original_end": 6076,
+        "before": "    lines=['# R6 DELIVERY — 0.2.10 诊断版实际交付','',\n",
+        "after": "    lines=['# DELIVERY-R8 — 0.2.10 诊断版实际交付','',\n"
+      },
+      {
+        "line": 116,
+        "original_start": 8321,
+        "original_end": 8364,
+        "before": "    (out/'DELIVERY.md').write_text(report)\n",
+        "after": "    (out/'DELIVERY-R8.md').write_text(report)\n"
+      },
+      {
+        "line": 117,
+        "original_start": 8364,
+        "original_end": 8405,
+        "before": "    (Q/'DELIVERY.md').write_text(report)\n",
+        "after": "    (Q/'DELIVERY-R8.md').write_text(report)\n"
+      },
+      {
+        "line": 118,
+        "original_start": 8405,
+        "original_end": 8457,
+        "before": "    phone_report=target.with_suffix('.DELIVERY.md')\n",
+        "after": "    phone_report=PHONE/'DELIVERY-R8.md'\n"
+      }
+    ],
+    "transformed_sha256": "28c6ef9a01d6d783ffc93137ca10673b6afec5acbf1e1e740adaad055d79f2f7",
+    "inverse_exact": true,
+    "full_ast_normalized_equal": true,
+    "tests_count": 18,
+    "test_return_code": 0
+  },
+  "historic_verdicts_preserved": [
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-helpers.json",
+      "sha256": "8e51a87b17865b5f2f0ddc2cd0ec362623391745b92c4ebe9695d09c5022cdd9",
+      "axis": "quality",
+      "passed": false,
+      "original_blocking_arrays": {
+        "security_concerns": [],
+        "logic_errors": [
+          {
+            "id": "R8-QUALITY-HTTP-EMPTY-01",
+            "severity": "medium",
+            "file": "qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+            "line": 101,
+            "summary": "精确空 HTTP204 判据使用 not post_body.strip()，放行带空白字节的响应体，违反精确空响应的 fail-closed 条件。",
+            "counterexample": {
+              "fixture_stdout_repr": "b' \\t\\r\\n\\nR8-HTTP-STATUS:204'",
+              "curl_returncode": 0,
+              "actual_accepted": true,
+              "expected_accepted": false,
+              "actual_post_calls": 1,
+              "original_nested_api_unmodified": true
+            },
+            "reproduce": "python -B qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check.py (独占输出；如已存在仅阅读保存的 POST_FIXTURE whitespace204；重跑须先将 OUTPUT 常量换到新的隔离 evidence namespace，不改被测 helper)",
+            "evidence": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/quality-r8-offline-check-raw.txt",
+            "minimal_fix": "将 not post_body.strip() 改为 post_body == b''；保留204/status/单次POST及原pipeline判据，加入空白体负测后重新绑定SPEC/QUALITY。"
+          }
+        ],
+        "missing_requirements": []
+      },
+      "unchanged_at_finish": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-final.json",
+      "sha256": "c9eca0811acb14288f505c5d5f37989927b6ade6079bf1fdd57143b77ac5617c",
+      "axis": "spec",
+      "passed": false,
+      "original_blocking_arrays": {
+        "security_concerns": [],
+        "logic_errors": [
+          {
+            "id": "R8-H-SPEC-FINAL-01",
+            "path": "qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+            "lines": "L88-L98 (original pipeline.py L66-L68)",
+            "requirement": "fail-closed; dispatch-accepted must represent accepted actual POST, ambiguous/nonaccepted POST must stop and never repeat",
+            "finding": "POST 禁用重定向后仍仅用 curl.returncode==0 判成功；--fail 只拒绝HTTP>=400，空体302可exit0并返回None，原pipeline随即写dispatch-accepted。未保存/校验HTTP状态，无法区别204接受与3xx未接受。",
+            "reproduction": "已用 live main 的原 api code object/closure 离线调用，curl empty302 result fixture（明确非真实API）得到None、1次调用、exit0日志；本机curl --manual确认--fail边界。",
+            "suggested_minimal_fix": "只在新transport捕获实际HTTP状态并仅接受正确UI dispatch成功状态；3xx/其他状态拒绝，保留原单POST与所有原gate，不改product。"
+          }
+        ],
+        "missing_requirements": []
+      },
+      "unchanged_at_finish": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers-http-q1.json",
+      "sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b",
+      "axis": "spec",
+      "passed": true,
+      "original_blocking_arrays": {
+        "security_concerns": [],
+        "logic_errors": [],
+        "missing_requirements": []
+      },
+      "unchanged_at_finish": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-helpers.json",
+      "sha256": "70f4b2f9a67e9bf6aa68c5c2c082cd56c3e4bd74b32e5d1c574612f15434de43",
+      "axis": "spec",
+      "passed": false,
+      "original_blocking_arrays": {
+        "security_concerns": [],
+        "logic_errors": [],
+        "missing_requirements": [
+          {
+            "id": "R8-H-SPEC-04",
+            "finding": "最终 transport SHA 已在亲读之后变化；本回执不给未亲读新版 PASS，须新独立续件重新读取。"
+          }
+        ]
+      },
+      "unchanged_at_finish": true
+    },
+    {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-http-empty-q1.json",
+      "sha256": "9eefb91eb2e877a9a983c12078bdea4786306a572b641cacd1a7536f221c1477",
+      "axis": "spec",
+      "passed": false,
+      "original_blocking_arrays": {
+        "security_concerns": [],
+        "logic_errors": [],
+        "missing_requirements": [
+          {
+            "id": "R8-SPEC-EMPTY-COUNT-01",
+            "severity": "medium",
+            "summary": "实际新增模块为8项而不是授权说明6项；原24+新增8=32，不能宣称30。未删测/改测。",
+            "expected": {
+              "original": 24,
+              "new": 6,
+              "total": 30
+            },
+            "actual": {
+              "original": 24,
+              "new": 8,
+              "total": 32
+            },
+            "file": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/http-empty-q1/test_http_empty_q1.py"
+          }
+        ]
+      },
+      "unchanged_at_finish": true
+    }
+  ],
+  "historic_red_green_receipts_preserved": [
+    {
+      "phase": "red",
+      "counts": [
+        18,
+        1,
+        3,
+        2,
+        6
+      ],
+      "total": 30,
+      "failures": 1,
+      "actual_returncodes": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "json_sha256": "93616cdb4a9f00d36501b5697016c37462826019df9688206a09b0e8e6f6a852",
+      "raw_sha256": "8e04d2a10f1ffa5346d9542809e17aa0dc0bee04625ae247374230297c4b6e20",
+      "unchanged": true
+    },
+    {
+      "phase": "green",
+      "counts": [
+        18,
+        1,
+        3,
+        2,
+        6
+      ],
+      "total": 30,
+      "failures": 0,
+      "actual_returncodes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "json_sha256": "1129e8c007f560d6ea332845c011cb503a98c7f7032fd469cb37fa515f5907ae",
+      "raw_sha256": "bee2b55d00653f80f62227f94e973ed67f33dacbfb11255d819c5ef8bcc439f7",
+      "unchanged": true
+    },
+    {
+      "phase": "red8",
+      "counts": [
+        18,
+        1,
+        3,
+        2,
+        8
+      ],
+      "total": 32,
+      "failures": 3,
+      "actual_returncodes": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "json_sha256": "cea9e5202ccc49e8100c7e4ca4278bfe777dbe2e39eed96543652adad4607346",
+      "raw_sha256": "fc5feb674b45ccd83e1918e1433362526b1e5455b1f592c5854ff2c7ce8177cc",
+      "unchanged": true
+    },
+    {
+      "phase": "green8",
+      "counts": [
+        18,
+        1,
+        3,
+        2,
+        8
+      ],
+      "total": 32,
+      "failures": 0,
+      "actual_returncodes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "json_sha256": "42a30484b4358ffe2e3b5746cbb0199d5949e47d88618a05dc093ea47036be73",
+      "raw_sha256": "9fd79be6bea23c9a312d2aca803ec404ddd49d67a89067959f2be19c944ea556",
+      "unchanged": true
+    }
+  ],
+  "parent_proof_sha256": "93fe43b98519b2f5d2159831ca28f6ec05951afda587e9927e8816a9734dbe3d",
+  "parent_report_sha256": "08bb0997a0c550f5ed963a4f212b2564fb8a6d9dfd6d2ab65131ee9d760b2319",
+  "product_test_count_preservation": {
+    "expected": 172,
+    "actual_saved_manifest_count": 172,
+    "original_case_count": 153,
+    "added_case_count": 19,
+    "unique_case_count": 172,
+    "manifest_sha256": "466b683465a2a0a368b94e68a3a804535fd8a2112663cf388d40fb3f650a922a",
+    "manifest_unchanged": true,
+    "source_fingerprints_unchanged": true,
+    "product_execution_or_review": false,
+    "frozen_product90_dual_verdict_not_rewritten": true
+  },
+  "raw_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/reviews/spec-r8-http-empty-count-q2-raw.txt",
+  "raw_sha256": "54a23a50294992f43cfc25323777840387f3e978a5d4afaabe5d02842ee15b09",
+  "execution_limits": {
+    "network": false,
+      "build": false,
+      "cloud": false,
+      "device": false,
+      "gate_execution": false,
+      "commit": false,
+      "push": false,
+      "delivery": false,
+      "source_edits": false,
+      "existing_files_edited": false,
+      "only_offline_helpers_executed": true,
+      "real_credentials_read": false,
+      "hard_box_seconds": 120,
+      "elapsed_seconds": 217.903543,
+      "independent_verification_seconds": 1.9209827077575028,
+      "observed_task_started_at": "2026-11-15T22:08:13+08:00",
+      "hard_box_met": false,
+      "return_by_22_11_met": false,
+      "timing_issue": "Initial clock observed 22:08:13 CST; first completed receipt timing check 22:11:20 CST. Two-minute budget and 22:11 return deadline missed; prior elapsed_seconds measured verification script only, now corrected to entire observed task."
+  },
+  "schema_validation": {
+    "valid": true,
+    "axis_type": "string; enum spec",
+    "passed_type": "boolean",
+    "blocking_array_types": {
+      "security_concerns": "array",
+      "logic_errors": "array",
+      "missing_requirements": "array"
+    },
+    "full_input_fingerprints": "object absolute path -> 64 lowercase hex SHA256",
+    "actual_counts_and_exit_codes_verified": true,
+    "required_fields_present": [
+      "axis",
+      "passed",
+      "security_concerns",
+      "logic_errors",
+      "missing_requirements",
+      "input_fingerprints",
+      "raw_path",
+      "raw_sha256"
+    ],
+    "prior_receipt_hashes_present": true
+  }
+}

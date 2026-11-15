@@ -1,0 +1,28 @@
+{
+  "all_non_version_ast_unchanged": true,
+  "labels_unchanged": true,
+  "version_literals": [
+    {
+      "line": 236,
+      "before": "0.2.9",
+      "after": "0.2.10"
+    },
+    {
+      "line": 236,
+      "before": 11,
+      "after": 12
+    }
+  ],
+  "original_path": "/data/data/com.termux/files/home/elcton-phone-release-029-20261114/qa/release-029/evidence/resume-1720/resume-fourth/verifiers/verify_cloud.py",
+  "original_sha256": "1093d106014452ced8eb484034013b1cf9e480c21b2151965aff7649918f64e6",
+  "effective_sha256": "ab294b7a3f1d4928fc7de48404bf30d3cfb655c116563d5298658c654e7c1074",
+  "method_code_sha256": {
+    "clients": "a82477160883f25b5ef39c781fbad08c99fc7a98459cfb3903f91ce48c55b2f4",
+    "diagnostics": "64b5586a5f62133b72517c0b6cbdf66d6dc9dda429b284aa95a5e367f155e78c",
+    "background": "5f5aed668dc83946fffdb020e3b084569363875cbc9d463c7f181ebf7769038b",
+    "full": "1a47edc0fa0a41a01109f477068320a031e6a5ccc5a01a90561846debc94bc23",
+    "tour": "a846940a39ca1f53fedcd21473a16448c850dfb4cee4f70b9b003e362c6d1087",
+    "check": "20a048b0a6a38351a3045a8d5bc245a1ffc963962ac609fa83ee09f7594b7697",
+    "write": "8bcd8a407f9b830d1dfdc6173e0c0b8b739dfbdcb0182f7c20a6a3df22548544"
+  }
+}

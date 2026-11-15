@@ -1,0 +1,3209 @@
+{
+  "passed": true,
+  "scenes": 20,
+  "scope": "Full-screen emulator screenshots; keyboard/SAF system chrome is outside app ownership",
+  "results": [
+    {
+      "name": "01-today-empty.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 622,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "02-week-empty.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "03-editor-empty.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "04-editor-invalid.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "05-week-course.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "06-editor-filled.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "07-week-edited.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "08-settings.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "09-settings-invalid.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": true,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1038,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            960,
+            158,
+            1005
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "13-device.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "14-device-unavailable.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "15-editor-bottom.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "17-course-deleted.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "20-restored-course.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "21-confirmed-empty-import.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "22-return-today.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 622,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "24-file-exported.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "27-file-imported-course.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "28-restarted-file-import.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": false,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1784,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "system_navigation": {
+          "row": 1910,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            1706,
+            158,
+            1751
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/back",
+          "bounds": [
+            124,
+            1794,
+            331,
+            1920
+          ],
+          "visible_pixels": 1051,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/recent_apps",
+          "bounds": [
+            747,
+            1794,
+            955,
+            1920
+          ],
+          "visible_pixels": 1509,
+          "passed": true
+        },
+        {
+          "component": "com.android.systemui:id/home_button",
+          "bounds": [
+            435,
+            1794,
+            645,
+            1920
+          ],
+          "visible_pixels": 1593,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "29-keyboard-visible.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "expected_rgb": [
+        12,
+        15,
+        21
+      ],
+      "ime_visible": true,
+      "bands": {
+        "status_bar": {
+          "row": 10,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "page": {
+          "row": 640,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        },
+        "app_navigation": {
+          "row": 1038,
+          "rgb": [
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ],
+            [
+              12,
+              15,
+              21
+            ]
+          ],
+          "matches_page_background": true
+        }
+      },
+      "capture_readiness": [
+        {
+          "component": "app_navigation_label",
+          "bounds": [
+            96,
+            960,
+            158,
+            1005
+          ],
+          "visible_pixels": 641,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+最终 helper-only SPEC FAIL：finalizer保真且18/18；DNS1/1、edges3/3，三项原阻断已修。仅余已离线独立复现的POST空体3xx被当accepted缺口。产品冻结双审完全未重审/重标。
+Final SHA fe42b65106e193850b262a22210435320650485089237fa5bfc9bb2da366f9d3 personally read in full.
+Final helper ordinary tests executed; actual DNS count=1 (parent narrative 2 not accepted as count).
+原三个文件git show b3eb逐字节相等；metadata五段逆变换/全AST/旧R6 DELIVERY SHA保真。
+Final main/allowed_post debug refusal, api DNS command wiring and POST no-follow personally confirmed.
+curl local --manual: --fail fails HTTP response codes at400 or greater. Default does not consider HTTP response codes failure.
+COUNTEREXAMPLE (synthetic result only; no network/API/credentials) {
+  "type": "Offline documented curl empty302 result fixture; NOT actual network/API",
+  "actual_api_return": "None",
+  "actual_call_count": 1,
+  "post_has_location": false,
+  "status_inspected": false,
+  "actual_log": "{\"method\": \"POST\", \"path\": \"/actions/workflows/ui-smoke.yml/dispatches\", \"attempt\": 1, \"exit\": 0, \"pinned_official_dns\": true, \"post_redirects_disabled\": true, \"at\": 0, \"credential_values_not_saved\": true}\n"
+}
+No new POST/GET/device/git write; no product regression or frozen dual review relabel; only helper tests in isolated temporary outputs.
+
+ACTUAL EXECUTION test_finalize_r8_metadata.py exit=0
+test_actual_wrapper_reaches_unchanged_false_pass_guard_only (__main__.R8MetadataTests.test_actual_wrapper_reaches_unchanged_false_pass_guard_only) ... ok
+test_actual_wrapper_rejects_collision_before_original_mkdir (__main__.R8MetadataTests.test_actual_wrapper_rejects_collision_before_original_mkdir) ... ok
+test_exact_inverse_full_ast_and_five_spans (__main__.R8MetadataTests.test_exact_inverse_full_ast_and_five_spans) ... ok
+test_original_pinned_and_original_globals_preserved (__main__.R8MetadataTests.test_original_pinned_and_original_globals_preserved) ... ok
+test_preflight_exact_source_filename_and_no_writes (__main__.R8MetadataTests.test_preflight_exact_source_filename_and_no_writes) ... ok
+test_reject_artifact_source_name_mutation (__main__.R8MetadataTests.test_reject_artifact_source_name_mutation) ... ok
+test_reject_dangling_report_symlink (__main__.R8MetadataTests.test_reject_dangling_report_symlink) ... ok
+test_reject_existing_apk_preserves_bytes (__main__.R8MetadataTests.test_reject_existing_apk_preserves_bytes) ... ok
+test_reject_existing_output_directory_and_report (__main__.R8MetadataTests.test_reject_existing_output_directory_and_report) ... ok
+test_reject_existing_phone_report (__main__.R8MetadataTests.test_reject_existing_phone_report) ... ok
+test_reject_existing_q_report (__main__.R8MetadataTests.test_reject_existing_q_report) ... ok
+test_reject_expected_certificate_mutation (__main__.R8MetadataTests.test_reject_expected_certificate_mutation) ... ok
+test_reject_identity_guard_mutation (__main__.R8MetadataTests.test_reject_identity_guard_mutation) ... ok
+test_reject_signature_boolean_mutation (__main__.R8MetadataTests.test_reject_signature_boolean_mutation) ... ok
+test_reject_symlink_output_parent (__main__.R8MetadataTests.test_reject_symlink_output_parent) ... ok
+test_reject_symlink_phone_parent (__main__.R8MetadataTests.test_reject_symlink_phone_parent) ... ok
+test_reject_traversal_and_outside_ci (__main__.R8MetadataTests.test_reject_traversal_and_outside_ci) ... ok
+test_reject_wrong_or_malformed_source (__main__.R8MetadataTests.test_reject_wrong_or_malformed_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.437s
+
+OK
+
+
+ACTUAL EXECUTION test_dns_parameters.py exit=0
+test_exact_https_sni_and_no_insecure_or_wrong_host (__main__.DnsParameters.test_exact_https_sni_and_no_insecure_or_wrong_host) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.017s
+
+OK
+
+
+ACTUAL EXECUTION test_transport_edges.py exit=0
+test_optimized_cli_fails_before_io (__main__.TransportEdges.test_optimized_cli_fails_before_io) ... ok
+test_optimized_invalid_post_cannot_be_accepted (__main__.TransportEdges.test_optimized_invalid_post_cannot_be_accepted) ... ok
+test_single_post_never_follows_redirect (__main__.TransportEdges.test_single_post_never_follows_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.331s
+
+OK
+
+
+CURRENT GATE PROOFS {
+  "originals": {
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/finalize_r6_delivery.py": true,
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/pipeline.py": true,
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r6_common.py": true
+  },
+  "metadata": {
+    "five_spans": 5,
+    "inverse_exact": true,
+    "full_ast_equal": true,
+    "transformed_sha256": "28c6ef9a01d6d783ffc93137ca10673b6afec5acbf1e1e740adaad055d79f2f7",
+    "old_delivery_unchanged": true
+  },
+  "green": {
+    "dns-parameters-green": {
+      "exit": 0,
+      "count": 1,
+      "log_hash_matches": true
+    },
+    "transport-edges-green": {
+      "exit": 0,
+      "count": 3,
+      "log_hash_matches": true
+    }
+  }
+}
+
+VERDICT {
+  "axis": "spec",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "R8-H-SPEC-FINAL-01",
+      "path": "qa/p2p-trace-0210/r6/ci/r8/ui_transport.py",
+      "lines": "L88-L98 (original pipeline.py L66-L68)",
+      "requirement": "fail-closed; dispatch-accepted must represent accepted actual POST, ambiguous/nonaccepted POST must stop and never repeat",
+      "finding": "POST 禁用重定向后仍仅用 curl.returncode==0 判成功；--fail 只拒绝HTTP>=400，空体302可exit0并返回None，原pipeline随即写dispatch-accepted。未保存/校验HTTP状态，无法区别204接受与3xx未接受。",
+      "reproduction": "已用 live main 的原 api code object/closure 离线调用，curl empty302 result fixture（明确非真实API）得到None、1次调用、exit0日志；本机curl --manual确认--fail边界。",
+      "suggested_minimal_fix": "只在新transport捕获实际HTTP状态并仅接受正确UI dispatch成功状态；3xx/其他状态拒绝，保留原单POST与所有原gate，不改product。"
+    }
+  ],
+  "missing_requirements": []
+}

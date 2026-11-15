@@ -1,0 +1,8 @@
+{
+  "at": "21:48:41",
+  "passed": true,
+  "input_count": 51,
+  "drift": [],
+  "scope": "ONLY final R8 transport/output-metadata helpers and HTTP-Q1 delta; NOT product regression/frozen dual reviews/CI/device/delivery",
+  "receipt_sha256": "0b16fdad8c5e66cb2142acc43d4f040b4967802c824b4ccd63e0071f43c60a0b"
+}

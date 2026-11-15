@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/data/data/com.termux/files/home/hermes-env-3.13/bin/python",
+    "-B",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/finalize_r8_delivery.py",
+    "--source",
+    "b3eb55680b51f5fbdf392d402acdcdae168f2b20",
+    "--build-receipt",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/build-verification/receipt.json",
+    "--diagnostics-receipt",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/diagnostics-verification/receipt.json",
+    "--full-receipt",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/full-verification/receipt.json",
+    "--apk",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r7-build-fetch-final-success/artifact/dist/elcton-phone-probe.apk",
+    "--out",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final"
+  ],
+  "exit": 0,
+  "seconds": 2.5093061923980713,
+  "raw": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/ci/r8/delivery-final.raw.log"
+}

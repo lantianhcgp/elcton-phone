@@ -1,0 +1,10 @@
+{
+  "offline_helper_checks": 7,
+  "passed": true,
+  "negative_checks": 6,
+  "original_gate_sha256": {
+    "pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+    "r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d"
+  },
+  "not_ci_or_device_execution": true
+}

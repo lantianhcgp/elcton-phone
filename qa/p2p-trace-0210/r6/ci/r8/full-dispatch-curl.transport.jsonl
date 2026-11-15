@@ -1,0 +1,11 @@
+{"original_code_sha256": {"pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7", "r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d"}, "scope": "Transport-only; no original gate edits"}
+{"method": "GET", "path": "/branches/diag%2Fp2p-trace-0.2.10-20261115", "attempt": 1, "exit": 0, "at": 1794749299.9674654, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826", "attempt": 1, "exit": 28, "at": 1794749310.0033157, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826", "attempt": 2, "exit": 28, "at": 1794749321.0456119, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826", "attempt": 3, "exit": 0, "at": 1794749330.3814561, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826/attempts/1", "attempt": 1, "exit": 28, "at": 1794749340.4179034, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826/attempts/1", "attempt": 2, "exit": 28, "at": 1794749351.4551494, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826/attempts/1", "attempt": 3, "exit": 0, "at": 1794749356.2717538, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826/artifacts?per_page=100&page=1", "attempt": 1, "exit": 28, "at": 1794749366.306403, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826/artifacts?per_page=100&page=1", "attempt": 2, "exit": 28, "at": 1794749377.3405185, "credential_values_not_saved": true}
+{"method": "GET", "path": "/actions/runs/43715446826/artifacts?per_page=100&page=1", "attempt": 3, "exit": 28, "at": 1794749388.3613155, "credential_values_not_saved": true}

@@ -1,0 +1,24 @@
+{
+  "external_android": {
+    "ok": true,
+    "mode": "read-only-app",
+    "scope": "external URL; caller must identify host vs Android",
+    "assertions": 3659,
+    "clients": [
+      "urllib",
+      "curl"
+    ],
+    "write_eof_transport": {
+      "status": "unsupported",
+      "reason": "EmptyHttpResponse",
+      "excluded_checks": [
+        "Truncated body rejected (requires client write EOF)"
+      ],
+      "required_validation": "direct production-host raw socket and Android direct Socket"
+    },
+    "all_raw_checks_passed": false,
+    "token": "REDACTED"
+  },
+  "android_socket_assertions": 133,
+  "scope": "Saved Android direct Socket instrumentation + URL clients; parent verifies APK bytes/remote inputs"
+}

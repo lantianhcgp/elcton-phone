@@ -1,0 +1,11 @@
+--- ui_transport.before.py
++++ ui_transport.py
+@@ -98,7 +98,7 @@
+                 log.flush()
+                 if result.returncode == 0:
+                     if method == 'POST':
+-                        assert status_marker and post_status == b'204' and not post_body.strip(), 'Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST'
++                        assert status_marker and post_status == b'204' and post_body == b'', 'Single UI POST must be exact HTTP204; ambiguous/nonaccepted result, DO NOT repeat POST'
+                         return None
+                     return json.loads(result.stdout) if result.stdout.strip() else None
+                 if method == 'POST':

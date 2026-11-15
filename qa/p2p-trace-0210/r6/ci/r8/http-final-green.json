@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "ui_transport_sha256": "910c8b3d2baae1f218621142f2559dd046187902e540a195a173b69994ce9a11",
+  "rows": [
+    {
+      "test": "test_post_http_status.py",
+      "exit": 0,
+      "raw_sha256": "8b494137320dd25bff3eb1d1498a06905791a5361b990b7554418bb03ac699dc",
+      "helper_only_offline_fixture": true
+    },
+    {
+      "test": "test_dns_parameters.py",
+      "exit": 0,
+      "raw_sha256": "fea917af8657ed027c37c7b73ae4c63fcb28ce9315f557fac1e1298167ef0f0c",
+      "helper_only_offline_fixture": true
+    },
+    {
+      "test": "test_transport_edges.py",
+      "exit": 0,
+      "raw_sha256": "83a16fc5693ca9c5a4e9e094aa5097486535ca87da612f4ff4eff9f867c039ef",
+      "helper_only_offline_fixture": true
+    }
+  ],
+  "scope": "new helper only, NOT cloud PASS"
+}

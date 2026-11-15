@@ -1,0 +1,172 @@
+package com.hcbiu.elcton
+
+import android.content.Context
+import com.huawei.hmf.tasks.Task
+import com.huawei.wearengine.p2p.HostBus
+import com.huawei.wearengine.p2p.Message
+import com.huawei.wearengine.p2p.SendCallback
+import org.json.JSONObject
+import org.junit.Assert.*
+import org.junit.Test
+
+/** R6 L3-r2 HOST only: real WearProbe shared engine + real send/onMessage; fake SDK, no device claim.
+ * Each run owns a fresh probe and Task. A Task is never completed both successfully and exceptionally.
+ * Reflection only seeds the connection because this frozen HOST installed() Task is not exposed.
+ */
+class NativeAfterReadyAdapterTest {
+    private class CountingError : Exception() {
+        var reads = 0
+        override val message: String get() { reads++; return "host-after-ready-error" }
+    }
+    private data class Outcome(
+        val calls: List<String>, val updates: List<SyncEngine.State>, val state: SyncEngine.State,
+        val pending: Boolean, val rxCallbacks: Int, val regCallbacks: Int,
+        val errors: Int, val errorReads: Int, val sends: Int, val registrations: Int, val releases: Int,
+        val terminalSuccess: Int, val terminalFailure: Int, val sendResults: Int
+    )
+    private data class Run(val outcome: Outcome, val events: List<JSONObject>, val before: SyncEngine.State)
+    private fun field(owner: Any, name: String) = owner.javaClass.getDeclaredField(name).apply { isAccessible = true }
+    private fun invoke(owner: Any, name: String, vararg args: Any) {
+        val method = owner.javaClass.declaredMethods.single { it.name == name && it.parameterCount == args.size }
+        method.isAccessible = true
+        method.invoke(owner, *args)
+    }
+    private fun business(state: SyncEngine.State) = state.copy(diagnostic = if (state.diagnostic.isEmpty()) "" else "<error>")
+    private fun events(trace: P2pTrace): List<JSONObject> {
+        val page = trace.read(0, 128)
+        assertEquals("host-test", page.getString("origin"))
+        assertFalse(page.getBoolean("has_more"))
+        val array = page.getJSONArray("events")
+        return (0 until array.length()).map { array.getJSONObject(it) }
+    }
+    private fun run(mode: String, phase: String, original: Boolean): Run {
+        HostBus.reset()
+        val diagnostics = DiagnosticRuntime()
+        val name = if (original) "P2pTraceBaselineProbe" else "WearProbe"
+        val probe = Class.forName("com.hcbiu.elcton.$name")
+            .getConstructor(Context::class.java, DiagnosticRuntime::class.java).newInstance(Context(), diagnostics)
+        val transport = probe as SyncTransport
+        var found: List<SyncDevice> = emptyList()
+        transport.scan({ found = it }, { fail(it) })
+        HostBus.scan!!.succeed()
+        val device = found.single()
+        val engine = probe.javaClass.getMethod("getEngine").invoke(probe) as SyncEngine
+        assertSame("must use the actual application-owned shared engine", engine, probe.javaClass.getMethod("getEngine").invoke(probe))
+        val updates = mutableListOf<SyncEngine.State>()
+        field(probe, "update").set(probe, { state: SyncEngine.State -> updates += business(state) })
+        field(engine, "generation").set(engine, 7)
+        field(engine, "peer").set(engine, device)
+        field(engine, "awaitingReady").set(engine, true)
+        field(engine, "state").set(engine, SyncEngine.State(status = "等待手表准备", devices = found,
+            selected = device.id, ready = false, busy = true))
+        diagnostics.p2pTrace.bind(7, deviceRef = 0, trigger = "connect")
+        var rxCallbacks = 0
+        var regCallbacks = 0
+        transport.register(device, { raw -> rxCallbacks++; invoke(engine, "onMessage", raw) }, { regCallbacks++ }, { fail(it) })
+        val (receiver, registrationTask) = HostBus.p2p.registrations.single()
+        registrationTask.succeed()
+        invoke(engine, "hello") // REAL hello -> private send -> REAL WearProbe.send -> SDK-seam Task.
+        val (_, callback, task) = HostBus.p2p.sends.single()
+        assertTrue("original failure listener remains attached", task.failureAttached())
+        val attempts = field(engine, "sendAttempts").get(engine) as SendAttempts
+        assertTrue("fresh HELLO is current", attempts.accepts(1))
+        assertFalse(engine.state.ready)
+        assertTrue(engine.state.busy)
+        assertTrue(field(engine, "awaitingReady").getBoolean(engine))
+        when (phase) {
+            "ready" -> {
+                val packet = Message(READY.toByteArray(Charsets.US_ASCII))
+                receiver.onReceiveMessage(packet)
+                assertEquals(1, packet.typeReads)
+                assertEquals(1, packet.dataReads)
+                assertTrue(engine.state.ready)
+                assertFalse(engine.state.busy)
+                assertFalse(field(engine, "awaitingReady").getBoolean(engine))
+                assertFalse("REAL READY must retire the original attempt without changing generation", attempts.accepts(1))
+                assertEquals(7, field(engine, "generation").getInt(engine))
+            }
+            "retry" -> {
+                invoke(engine, "hello") // same original retry action; a NEW independent SDK Task.
+                assertEquals(2, HostBus.p2p.sends.size)
+                assertNotSame(task, HostBus.p2p.sends.last().third)
+                assertFalse(attempts.accepts(1))
+                assertTrue(attempts.accepts(2))
+            }
+            "cancel" -> engine.cancel()
+            "close" -> probe.javaClass.getMethod("close").invoke(probe)
+            "current" -> Unit
+            else -> error("unknown phase")
+        }
+        val before = business(engine.state)
+        val pendingBefore = field(engine, "awaitingReady").getBoolean(engine)
+        val callsBefore = HostBus.calls.toList()
+        val updatesBefore = updates.size
+        val failureError = CountingError()
+        var terminalSuccess = 0
+        var terminalFailure = 0
+        var sendResults = 0
+        // One terminal outcome per fresh Task; SendResult is NOT a Task completion.
+        when (mode) {
+            "success" -> { terminalSuccess++; task.succeed() }
+            "failure" -> { terminalFailure++; task.fail(failureError) }
+            "result" -> { sendResults++; callback.onSendResult(if (phase == "current") 207 else 206) }
+            else -> error("unknown mode")
+        }
+        assertTrue("Task was not made success+failure", terminalSuccess + terminalFailure <= 1)
+        if (phase != "current" || mode != "failure") {
+            assertEquals("late terminal event must not change readiness/status/business state", before,
+                business(engine.state).copy(diagnostic = before.diagnostic))
+            assertEquals("pending READY unchanged by late terminal event", pendingBefore, field(engine, "awaitingReady").getBoolean(engine))
+            assertEquals("no additional SDK calls from late terminal event", callsBefore, HostBus.calls)
+            assertEquals("only original describe() diagnostic update is allowed", updatesBefore + if (mode == "failure" && phase != "close") 1 else 0, updates.size)
+        } else {
+            assertFalse(engine.state.ready)
+            assertFalse(engine.state.busy)
+            assertFalse(field(engine, "awaitingReady").getBoolean(engine))
+            assertEquals("操作未完成", engine.state.status)
+        }
+        assertEquals(if (mode == "failure") 1 else 0, failureError.reads)
+        assertEquals(if (mode == "failure") 1 else 0, diagnostics.recorded.size)
+        assertEquals(if (phase == "ready") 1 else 0, rxCallbacks)
+        assertEquals(1, regCallbacks)
+        val outcome = Outcome(HostBus.calls.toList(), updates.toList(), business(engine.state),
+            field(engine, "awaitingReady").getBoolean(engine), rxCallbacks, regCallbacks,
+            diagnostics.recorded.size, failureError.reads, HostBus.p2p.sends.size, HostBus.p2p.registrations.size,
+            HostBus.p2p.releases.size, terminalSuccess, terminalFailure, sendResults)
+        return Run(outcome, events(diagnostics.p2pTrace), before)
+    }
+    private fun check(mode: String, phase: String) {
+        val baseline = run(mode, phase, true)
+        val observed = run(mode, phase, false)
+        assertEquals("frozen original SDK calls/order, business updates, ready/pending/callback counts: $phase/$mode",
+            baseline.outcome, observed.outcome)
+        val stage = when (mode) { "success" -> "SEND_TASK_OK"; "failure" -> "SEND_TASK_FAIL"; else -> "SEND_RESULT" }
+        val adapter = observed.events.single { it.getString("layer") == "adapter" && it.getString("stage") == stage }
+        val engine = observed.events.filter { it.getString("layer") == "engine" && it.getString("stage") == stage }
+        if (mode == "success") assertTrue("Task OK is not a protocol result", engine.isEmpty())
+        else {
+            assertEquals(1, engine.size)
+            assertEquals("same engine attempt", adapter.getLong("attemptId"), engine.single().getLong("attemptId"))
+            assertEquals("same generation", adapter.getInt("generation"), engine.single().getInt("generation"))
+            assertEquals("engine observes original attempt guard", phase != "current", engine.single().getBoolean("stale"))
+        }
+        assertEquals(1L, adapter.getLong("attemptId"))
+        if (phase == "ready") {
+            assertEquals(1, observed.events.count { it.getString("stage") == "READY_ACCEPT" })
+            assertTrue(observed.events.any { it.getString("layer") == "adapter" && it.getString("stage") == "RX_DECODE" })
+        }
+        println("R6_HOST phase=$phase mode=$mode adapterStale=${adapter.getBoolean("stale")} engineStale=${engine.singleOrNull()?.getBoolean("stale")} ready=${observed.outcome.state.ready} pending=${observed.outcome.pending} sends=${observed.outcome.sends} rx=${observed.outcome.rxCallbacks} reg=${observed.outcome.regCallbacks} errors=${observed.outcome.errors} taskOk=${observed.outcome.terminalSuccess} taskFail=${observed.outcome.terminalFailure} results=${observed.outcome.sendResults} baselineEqual=true")
+        assertEquals("$phase/$mode adapter must observe REAL original attempt retirement", phase != "current", adapter.getBoolean("stale"))
+    }
+    @Test fun afterReadyIndependentTaskSuccessIsStale() { check("success", "ready") }
+    @Test fun afterReadyIndependentTaskFailureMatchesEngineStale() { check("failure", "ready") }
+    @Test fun afterReadyIndependentSendResultMatchesEngineStale() { check("result", "ready") }
+    @Test fun beforeReadyCurrentAttemptRemainsNonStale() { for (mode in listOf("success", "failure", "result")) check(mode, "current") }
+    @Test fun retryCancelCloseKeepOriginalBusinessAndStaleCompatibility() {
+        for (phase in listOf("retry", "cancel", "close"))
+            for (mode in listOf("success", "failure", "result")) check(mode, phase)
+    }
+    companion object {
+        const val READY = "{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"watch\",\"type\":\"READY\",\"transferId\":\"\",\"maxBytes\":8192,\"sourceRevision\":0,\"datasetId\":\"\",\"digest\":\"\",\"localDirty\":false,\"hasData\":false}"
+    }
+}

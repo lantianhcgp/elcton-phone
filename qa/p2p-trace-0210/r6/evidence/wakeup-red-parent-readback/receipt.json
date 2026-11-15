@@ -1,0 +1,18 @@
+{
+  "actual_red_raw_sha256": "25042c11304ef27f2b7e135af85e2a76eda2a1e5e1a62cfcead7d4f07ead08d2",
+  "red_at_original_RuntimeSHA": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+  "data": {
+    "diskSeq": 1,
+    "releaseHits": 1,
+    "pending": 1,
+    "writing": false,
+    "stateWrites": 1,
+    "traceSeq": 2,
+    "ringSeq": 2,
+    "revision": 0,
+    "stateSeq": 1
+  },
+  "real_jvm_barrier": true,
+  "nativeAndroid_claims": false,
+  "validated_before_product_edit": true
+}

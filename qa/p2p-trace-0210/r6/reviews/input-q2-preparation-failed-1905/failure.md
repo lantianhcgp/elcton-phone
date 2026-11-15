@@ -1,0 +1,1 @@
+Q2 preparation failed before manifest creation: first KeyError raw_reply_sha256 (actual Q1 field raw_sha256), second nonexistent checks.json. Empty partial snapshot retained. Parent corrected field/path based on actual readback, all existence checks now precede exclusive mkdir. No review PASS existed or was modified.

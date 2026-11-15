@@ -1,0 +1,95 @@
+R6 INDEPENDENT QUALITY R1 - FAIL
+Scope: QUALITY after independent SPEC R2 PASS; not a second SPEC review.
+Only output files: reviews/r6-quality-r1.json and reviews/quality-raw.txt.
+No product/test/helper edits; no compiler, SDK execution, devices, browser,
+ADB/rish, push, commit, dispatch, HAP or watch modifications.
+No Jev invocation or claim. No fabricated future-CI result.
+
+INPUT PIN
+Manifest SHA256: 48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027
+All 32 current manifest rows hashed; zero mismatches (checked twice).
+SPEC R2 JSON SHA256: ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0
+SPEC R2 raw SHA256: b48ede8e253b7b95dbe52cf821717218942e07fdf2046814387ac7617e76eaec
+Frozen diff SHA256: 0c9cbb6bdefaedfd438eb37a0bec19c7b5c59b782efb0b1f4870bcff942a532c
+
+Q-R6-001 MEDIUM BLOCKING LOGIC: TRACE-ONLY LOST WRITER WAKEUP
+Path: app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt:129,145,150-154
+Related producer: app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:97-105
+1. Writer flushes event A and writes state; revision stays R, traceSeq is S.
+2. Line 145 checks revision==R and trace sequence==S, decides to break.
+3. Before line 151 clears writing, event B is appended; seq becomes S+1.
+4. B invokes onChanged -> persistLater; line 129 sees writing==true, returns.
+5. Writer clears writing, but line 154 only compares business revision R.
+6. No replacement writer is scheduled. B stays in memory/pending; JSONL and
+   state.json omit it until another observation. Final callback after close
+   can be the last event, so process exit can discard it without a flush.
+This is source-proven diagnostic data-loss/lag, NOT business-state drift.
+The original revision-only lost-wakeup repair does not cover trace-only emits.
+Suggested repair for a later authorized code round: track the actually handled
+trace sequence alongside persisted revision and recheck BOTH after clearing
+writing, retaining the failed-write no-self-retry/quota policy. Add a deterministic
+barrier regression for emit between final sequence check and writing release.
+No assertion was modified or relaxed in this review. No repair performed.
+Verification level: static interleaving anchored to exact current source;
+NOT a newly executed Kotlin race test. Existing runtime4 covers other faults,
+not this final trace-only wakeup window.
+
+FOCUSED SOURCE QUALITY COVERAGE
+- SyncEngine.kt:67-72,215-239,255-258,384-409: diagnostic catches surround
+  observation; original ingress result, send/READY guards and callbacks remain.
+- SendAttempts.kt:6-8 + SyncEngine.kt:392-405 + WearProbe.kt:39-43,248-270:
+  attemptCurrent only reads original guard. No new protocol completion or SDK
+  call. Task success is independently observed, not a SendResult/READY action.
+- WearProbe.kt:165-245: existing exact receiver lifecycle and native generation;
+  packet type/data each read once; no extra Receiver/timer/SDK query.
+- NativeAfterReadyAdapterTest.kt.in:42-115,138-167: fresh per-phase/per-mode
+  Task with <=1 terminal completion; real engine HELLO/READY/attempt retirement;
+  frozen baseline call/state/getter oracle remains an assertion, not invented green.
+- P2pTrace.kt:53-65,71-116,132-164: integer/enum-only event whitelist, salted
+  bounded 128-entry transfer references, no raw packet/error/token/device PII.
+  Peer package/fingerprint are existing static public peer identity, not secrets.
+- P2pTrace.kt:96-105,118-129: bounded tail/pending; callback and disk write
+  outside trace monitor. DiagnosticRuntime.kt:37,137-141: existing single writer,
+  append quota check stays on writer thread; no multi-writer product path.
+  One real exit-scheduling race is Q-R6-001; do not report blanket storage PASS.
+- New six test classes: 19 exact source/registered labels; assertions retained.
+  RuntimeTest.kt:9-18: ancestor project-root discovery works from app/root;
+  exact inverse SHA d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43.
+- app/build.gradle.kts:25, run_native_host.py:19-39: HOST SDK/Android templates
+  stay .kt.in and generated files use temporary dir. Parent staging whitelist
+  and final local staged-path enumeration exclude historical fake .kt files.
+  Local untracked historical .kt copies exist but are NOT cloud committed inputs.
+- r6_common.py:126-166 + pipeline.py:39-89,110-154: exact run/head/attempt,
+  ambiguous asset refusal, complete archive readback, no implicit dispatch.
+- verify_r6.py:33-49,52-74,77-138,141-207 + r6_common.py:74-79:
+  pinned original verifier source, not exec of artifact/input data; complete
+  original criteria and strict original153+new19=172 exact unique labels.
+- Identity migration current source/version/old manifest/table checks all true;
+  no rewriting old approvals or weakening original predicate checks.
+
+EXISTING EXECUTION EVIDENCE - READ/HASH VERIFIED, NOT RERUN
+final-current-cwd-1616 receipt: bc02c0aa6de6e52ef91d328912e5f895e80ce8b6f4d7a7a6ea48c391213be20b
+full-jvm/junit.log: b2b72906e02efe8e024fc36301359f8750f3f5c0f62e45750d20525c4a8eba77; OK 171.
+full-jvm receipt: 62 source rows checked, zero mismatches; recorded exits 0/0.
+app-cwd.junit.log: 99f476875290847ed092886460e66d51b67c374a5f88597cc921c0db2dc047ea; OK 7 at line 5.
+python.raw.log: 6741571055896ad9f9c9f2b5e797962c9d7cb0c3412c595b8555a2c7bb261a8e; Ran 133 at line 140, OK line 142, zero skip.
+http.raw.log: eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1; 3784 assertions, all raw checks PASS line 1.
+adapter-red junit: 287ab26183d33d185e38922075890c430db77852669ef3792e0dc98a105a34c2; 8 tests, 3 failures line 43; compile exit 0/JUnit exit 1.
+adapter-green junit: 7c8e707afb49dc51cb28cbab7eb0807480789d1babaf0d816fdca0ba21b2536e; OK 8 line 20; exits 0/0.
+Adapter red+green: 26 source/template rows each verified against archive/current, no mismatches.
+runtime-final-1551 junit: 17ae88652461d47406136215ad7cad759a100e42e1be0d6c09d05844af253fb6; OK 4 line 10; 15 source/template rows verified, no mismatches; exits 0/0.
+watch-frozen-445 raw: 201d9af9a8f4e1af6caa09fa94509e7b096050deaf72146b69e2be44060cf9c1; tests/pass 445, fail/skip/cancelled/todo 0 at lines 2733-2739.
+Watch receipt exit 0 and input_unchanged true; 48 declared rows. This quality
+review reads receipt/raw only, does not rerun/hash all watch inputs or claim HAP/device.
+Historical whole-baseline/35-old/version inverses remain SPEC-owned evidence;
+not exhaustively reread in this focused QUALITY pass.
+Future actual Android CI, signatures, and device delivergate are separate;
+not quality missing evidence. delivery_ready=false; android_claims=false.
+
+ACTUAL FINAL READ-ONLY CHECK OUTPUT
+UTC=2026-11-15T08:34:45.965115+00:00
+input32_sha_mismatches=[]
+original_labels=153 original_unique=153 added=19 required=172 required_unique=172
+staged_qa_kotlin=['qa/P2pCandidateBuildTest.kt', 'qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt']
+product_diff_check_exit=0
+STATIC_INTERLEAVING_SOURCE_ANCHORS=verified; final_seq_check=1; emit_B_seq=2; callback_schedule=false; finally_schedule=false; pending_B=true; NOT_RUNTIME_REPLAY

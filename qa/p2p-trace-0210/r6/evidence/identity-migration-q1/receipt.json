@@ -1,0 +1,8 @@
+{
+  "old_runtime_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+  "new_runtime_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+  "preserved_prior_manifest_sha256": "422fce3a3196d017a4a2305b46a8b30e2a7a34dd4d387116178d662032201c45",
+  "current_manifest_sha256": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+  "other_production_hashes_unchanged": true,
+  "old029_manifest_unchanged": true
+}

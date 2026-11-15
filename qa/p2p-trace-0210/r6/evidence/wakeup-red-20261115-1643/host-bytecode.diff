@@ -1,0 +1,29 @@
+--- original
++++ HOST-barrier
+@@ -1710,6 +1710,8 @@
+ ALOAD 0
+ GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ ICONST_0
++ALOAD 0
++INVOKESTATIC com/hcbiu/elcton/HostWakeBarrier.beforeRelease(Lcom/hcbiu/elcton/DiagnosticRuntime;)V false
+ INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.set(Z)V false
+ META 8 L27
+ META 15 154 L27
+@@ -1788,6 +1790,8 @@
+ ALOAD 0
+ GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ ICONST_0
++ALOAD 0
++INVOKESTATIC com/hcbiu/elcton/HostWakeBarrier.beforeRelease(Lcom/hcbiu/elcton/DiagnosticRuntime;)V false
+ INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.set(Z)V false
+ META 8 L41
+ META 15 154 L41
+@@ -1803,6 +1807,8 @@
+ ALOAD 0
+ GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ ICONST_0
++ALOAD 0
++INVOKESTATIC com/hcbiu/elcton/HostWakeBarrier.beforeRelease(Lcom/hcbiu/elcton/DiagnosticRuntime;)V false
+ INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.set(Z)V false
+ META 8 L45
+ META 15 154 L45

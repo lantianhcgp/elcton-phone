@@ -1,0 +1,19 @@
+--- run_r6_final_regressions.py.before
++++ run_r6_final_regressions.py.after
+@@ -21,8 +21,15 @@
+     p.add_argument('--out', type=Path, required=True)
+     p.add_argument('--resume-compiled', type=Path)
+     a = p.parse_args()
++    if '..' in a.out.parts:
++        p.error('Output must not contain parent traversal')
+     out = a.out.absolute()
+-    assert out.is_relative_to(QA/'r6/evidence')
++    if any(path.is_symlink() for path in (out, *out.parents)):
++        p.error('Output must not have symlink ancestry')
++    base = (QA/'r6/evidence').resolve()
++    out = out.resolve()
++    if out == base or not out.is_relative_to(base):
++        p.error('Output must be a new directory within R6 evidence')
+     out.mkdir(parents=True, exist_ok=False)
+     sources = sorted((ROOT/'app/src/main').rglob('*.kt')) + sorted((ROOT/'app/src/test').rglob('*.kt'))
+     watched = sources + [ROOT/'qa/diag_source_gate.py', QA/'r6/current-identity.json', ROOT/'app/build.gradle.kts']

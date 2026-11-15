@@ -1,0 +1,12 @@
+test_all_case_labels_preserved (self_test.HelperTests.test_all_case_labels_preserved) ... ok
+test_attempt_ambiguity_is_rejected (self_test.HelperTests.test_attempt_ambiguity_is_rejected) ... ok
+test_crc_and_unsafe_member_checks (self_test.HelperTests.test_crc_and_unsafe_member_checks) ... ok
+test_helpers_exist (self_test.HelperTests.test_helpers_exist) ... ok
+test_literal_tokens_not_normalized (self_test.HelperTests.test_literal_tokens_not_normalized) ... ok
+test_original_binary_adaptation_is_narrow (self_test.HelperTests.test_original_binary_adaptation_is_narrow) ... ok
+test_original_complete_json_comparator (self_test.HelperTests.test_original_complete_json_comparator) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.078s
+
+OK

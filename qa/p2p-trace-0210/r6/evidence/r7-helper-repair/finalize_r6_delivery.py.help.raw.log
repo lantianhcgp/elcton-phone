@@ -1,0 +1,13 @@
+usage: finalize_r6_delivery.py [-h] --source SOURCE
+                               --build-receipt BUILD_RECEIPT
+                               --diagnostics-receipt DIAGNOSTICS_RECEIPT
+                               --full-receipt FULL_RECEIPT --apk APK --out OUT
+
+options:
+  -h, --help            show this help message and exit
+  --source SOURCE
+  --build-receipt BUILD_RECEIPT
+  --diagnostics-receipt DIAGNOSTICS_RECEIPT
+  --full-receipt FULL_RECEIPT
+  --apk APK
+  --out OUT

@@ -1,0 +1,159 @@
+package com.hcbiu.elcton
+
+import org.json.JSONObject
+import org.junit.Assert.*
+import org.junit.Test
+import java.io.File
+import java.io.IOException
+import java.util.ArrayDeque
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
+
+/** HOST ONLY: injected call suspends actual compiled Runtime immediately before writing.set(false).
+ * No field, sequence, callback, branch or product invocation is replaced by the instrumentation.
+ */
+object HostWakeBarrier {
+    @Volatile var target: DiagnosticRuntime? = null
+    @Volatile var entered = CountDownLatch(1)
+    @Volatile var release = CountDownLatch(1)
+    private val once = AtomicBoolean(false)
+    val hits = AtomicInteger()
+    fun arm(r: DiagnosticRuntime) {
+        target = r; entered = CountDownLatch(1); release = CountDownLatch(1)
+        hits.set(0); once.set(true)
+    }
+    @JvmStatic fun beforeRelease(r: DiagnosticRuntime) {
+        if (r !== target) return
+        hits.incrementAndGet()
+        if (once.compareAndSet(true, false)) {
+            entered.countDown()
+            check(release.await(10, TimeUnit.SECONDS)) { "HOST bytecode barrier timed out" }
+        }
+    }
+}
+
+class RuntimeWakeupTest {
+    private fun field(r: DiagnosticRuntime, name: String): Any = DiagnosticRuntime::class.java
+        .getDeclaredField(name).apply { isAccessible = true }.get(r)
+    private fun executor(r: DiagnosticRuntime) = field(r, "writer") as ExecutorService
+    private fun writing(r: DiagnosticRuntime) = (field(r, "writing") as AtomicBoolean).get()
+    private fun revision(r: DiagnosticRuntime) = field(r, "revision") as Long
+    private fun fence(r: DiagnosticRuntime) { repeat(3) { executor(r).submit {}.get(5, TimeUnit.SECONDS) } }
+    private fun pending(r: DiagnosticRuntime): Int {
+        @Suppress("UNCHECKED_CAST")
+        val q = P2pTrace::class.java.getDeclaredField("pending").apply { isAccessible = true }
+            .get(r.p2pTrace) as ArrayDeque<String>
+        return q.size
+    }
+    private fun diskSeq(dir: File): Long {
+        val f = File(dir, "diagnostics/p2p-trace.jsonl")
+        return if (!f.isFile) 0 else f.readLines().filter { it.isNotBlank() }.lastOrNull()
+            ?.let { JSONObject(it).getLong("seq") } ?: 0
+    }
+    private fun stateSeq(dir: File): Long {
+        val f = File(dir, "diagnostics/state.json")
+        return if (!f.isFile) -1 else JSONObject(f.readText()).getJSONObject("p2p").getLong("traceSeq")
+    }
+    private fun evidence(name: String, value: JSONObject) {
+        File(requireNotNull(System.getProperty("diag.evidence")), "$name.json").writeText(value.toString(2))
+        println("HOST_ACTUAL $name=" + value)
+    }
+    private fun run(name: String, failState: Boolean = false, body: (File, DiagnosticRuntime, AtomicInteger, AtomicBoolean) -> Unit) {
+        val dir = File(requireNotNull(System.getProperty("diag.work")), name).apply { check(mkdir()) }
+        val count = AtomicInteger(); val fail = AtomicBoolean(failState)
+        val r = DiagnosticRuntime(dir, { f, s ->
+            count.incrementAndGet()
+            if (fail.get()) throw IOException("HOST requested unavailable state disk")
+            replaceDiagnosticFile(f, s)
+        }, "host-test")
+        HostWakeBarrier.arm(r)
+        try { body(dir, r, count, fail) }
+        finally {
+            HostWakeBarrier.release.countDown(); fence(r); HostWakeBarrier.target = null
+            executor(r).shutdown(); assertTrue(executor(r).awaitTermination(5, TimeUnit.SECONDS))
+        }
+    }
+    private fun awaitFinal(r: DiagnosticRuntime) {
+        assertTrue("actual Runtime reached compiled release instruction", HostWakeBarrier.entered.await(5, TimeUnit.SECONDS))
+        assertTrue("writing remains true after final check", writing(r))
+    }
+    @Test fun traceOnlyLastWakeAfterFinalCheckMustReachDisk() = run("trace-only") { dir, r, count, _ ->
+        r.p2pTrace.emit("adapter", "CLOSE", emptyMap()); awaitFinal(r)
+        val initialRevision = revision(r)
+        assertEquals(1L, diskSeq(dir)); assertEquals(1L, stateSeq(dir)); assertEquals(0, pending(r))
+        assertEquals(1, count.get())
+        // No observe, SDK, timer, listener or manual persist: the real onChanged callback loses CAS.
+        r.p2pTrace.emit("adapter", "UNREG_TASK_OK", mapOf("reason" to "close"))
+        assertEquals(initialRevision, revision(r)); assertEquals(2L, r.p2pTrace.sequence())
+        assertEquals(1, pending(r)); assertEquals(1, count.get()); assertTrue(writing(r))
+        evidence("trace-only-before-release", JSONObject().put("revision", revision(r))
+            .put("traceSeq", r.p2pTrace.sequence()).put("diskSeq", diskSeq(dir)).put("stateSeq", stateSeq(dir))
+            .put("pending", pending(r)).put("writing", writing(r)).put("stateWrites", count.get()))
+        HostWakeBarrier.release.countDown(); fence(r)
+        val actual = JSONObject().put("revision", revision(r)).put("traceSeq", r.p2pTrace.sequence())
+            .put("ringSeq", r.p2pTrace.read(0, 128).getJSONArray("events").getJSONObject(1).getLong("seq"))
+            .put("diskSeq", diskSeq(dir)).put("stateSeq", stateSeq(dir)).put("pending", pending(r))
+            .put("writing", writing(r)).put("stateWrites", count.get()).put("releaseHits", HostWakeBarrier.hits.get())
+        evidence("trace-only-after-release", actual)
+        assertFalse("writer quiescent, not just pending", writing(r))
+        assertEquals("Q-R6-001 last trace event must be on real disk despite no revision change: $actual", 2L, diskSeq(dir))
+        assertEquals("state must contain final trace sequence", 2L, stateSeq(dir))
+        assertEquals(0, pending(r)); assertEquals("one successor only; no self-spin", 2, count.get())
+    }
+    @Test fun releaseStillCatchesLateRevisionWithoutTraceChange() = run("revision-only") { dir, r, count, _ ->
+        r.p2pTrace.emit("engine", "CLOSE", emptyMap()); awaitFinal(r)
+        r.observe("HOST-late-revision", "diagnostic-only fixture", false, false, 0)
+        assertEquals(1L, revision(r)); assertEquals(1L, r.p2pTrace.sequence()); assertEquals(1, count.get())
+        HostWakeBarrier.release.countDown(); fence(r)
+        val state = JSONObject(File(dir, "diagnostics/state.json").readText())
+        evidence("revision-only-after-release", JSONObject().put("status", state.getString("status"))
+            .put("traceSeq", stateSeq(dir)).put("stateWrites", count.get()).put("writing", writing(r)))
+        assertEquals("HOST-late-revision", state.getString("status")); assertEquals(1L, stateSeq(dir))
+        assertFalse(writing(r)); assertEquals(2, count.get())
+    }
+    @Test fun failedStateDoesNotAutoRetryEvenWithLateTraceAndRevision() = run("state-failure", true) { dir, r, count, fail ->
+        r.p2pTrace.emit("engine", "CLOSE", emptyMap()); awaitFinal(r)
+        assertEquals(1, count.get()); assertEquals(1L, diskSeq(dir)); assertEquals(-1L, stateSeq(dir))
+        r.p2pTrace.emit("adapter", "UNREG_TASK_OK", emptyMap())
+        r.observe("HOST-late-during-failure", "diagnostic fixture", false, false, 0)
+        HostWakeBarrier.release.countDown(); fence(r)
+        evidence("state-failure-quiescent", JSONObject().put("stateWrites", count.get()).put("writing", writing(r))
+            .put("diskSeq", diskSeq(dir)).put("traceSeq", r.p2pTrace.sequence()).put("pending", pending(r)))
+        assertFalse(writing(r)); assertEquals("failed writer must not self-requeue on either counter", 1, count.get())
+        assertEquals(1L, diskSeq(dir)); assertEquals(1, pending(r)); assertEquals(-1L, stateSeq(dir))
+        fail.set(false); r.observe("HOST-explicit-later-observation", "retry authorized by new observation", false, false, 0); fence(r)
+        assertEquals(2L, diskSeq(dir)); assertEquals(2L, stateSeq(dir)); assertEquals(0, pending(r)); assertEquals(2, count.get())
+    }
+    @Test fun traceWriteFailureRetainedPendingDoesNotSpin() = run("trace-failure") { dir, r, count, _ ->
+        File(dir, "diagnostics/p2p-trace.jsonl").mkdirs()
+        r.p2pTrace.emit("engine", "SEND_CALL", emptyMap()); awaitFinal(r)
+        assertEquals("trace_write_failed", r.read().getJSONObject("p2p").getString("storage"))
+        HostWakeBarrier.release.countDown(); fence(r)
+        evidence("trace-failure-quiescent", JSONObject().put("stateWrites", count.get()).put("writing", writing(r))
+            .put("traceSeq", r.p2pTrace.sequence()).put("stateSeq", stateSeq(dir)).put("pending", pending(r)))
+        assertFalse(writing(r)); assertEquals(1, count.get()); assertEquals(1, pending(r)); assertEquals(1L, stateSeq(dir))
+        fence(r); assertEquals("captured processed seq, not committed-disk seq, prevents spin", 1, count.get())
+    }
+    @Test fun quotaDoesNotSpinOrInventNewRequest() = run("quota") { dir, r, count, _ ->
+        val f = File(dir, "diagnostics/p2p-trace.jsonl"); f.parentFile.mkdirs(); f.writeBytes(ByteArray(2 * 1024 * 1024) { 65 })
+        r.p2pTrace.emit("engine", "SEND_CALL", emptyMap()); awaitFinal(r)
+        HostWakeBarrier.release.countDown(); fence(r)
+        assertEquals("trace_storage_full", r.read().getJSONObject("p2p").getString("storage"))
+        assertEquals(2L * 1024 * 1024, f.length()); assertFalse(writing(r)); assertEquals(1, count.get())
+        fence(r); assertEquals(1, count.get())
+        evidence("quota-quiescent", JSONObject().put("stateWrites", count.get()).put("writing", writing(r))
+            .put("traceSeq", r.p2pTrace.sequence()).put("stateSeq", stateSeq(dir)).put("fileBytes", f.length()))
+    }
+    @Test fun transparentBarrierWithNoLateWorkKeepsSingleWrite() = run("control") { dir, r, count, _ ->
+        r.p2pTrace.emit("engine", "CLOSE", emptyMap()); awaitFinal(r)
+        HostWakeBarrier.release.countDown(); fence(r)
+        assertFalse(writing(r)); assertEquals(1, count.get()); assertEquals(1L, diskSeq(dir)); assertEquals(1L, stateSeq(dir))
+        assertEquals(0, pending(r)); assertEquals(1, HostWakeBarrier.hits.get())
+        evidence("control", JSONObject().put("stateWrites", count.get()).put("diskSeq", diskSeq(dir))
+            .put("stateSeq", stateSeq(dir)).put("writing", writing(r)).put("releaseHits", HostWakeBarrier.hits.get()))
+    }
+}

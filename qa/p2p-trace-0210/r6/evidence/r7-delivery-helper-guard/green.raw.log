@@ -1,0 +1,9 @@
+test_existing (__main__.OutputTests.test_existing) ... ok
+test_symlink (__main__.OutputTests.test_symlink) ... ok
+test_traversal (__main__.OutputTests.test_traversal) ... ok
+test_valid (__main__.OutputTests.test_valid) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK

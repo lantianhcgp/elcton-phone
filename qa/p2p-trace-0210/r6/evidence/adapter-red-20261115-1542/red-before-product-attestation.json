@@ -1,0 +1,11 @@
+{
+  "verifiedAt": "2026-11-15T15:43:44.165500+08:00",
+  "productUneditedBeforeAssertionRed": true,
+  "appSourcesAndOldTestsUnchanged": true,
+  "compileExit": 0,
+  "junitExit": 1,
+  "tests": 8,
+  "targetAssertionFailures": 3,
+  "redReceiptSha256": "4de79685dde8f40825247f813c6fc840b08c24107cd4f4fe29418c1435e3b4d8",
+  "redLogSha256": "287ab26183d33d185e38922075890c430db77852669ef3792e0dc98a105a34c2"
+}

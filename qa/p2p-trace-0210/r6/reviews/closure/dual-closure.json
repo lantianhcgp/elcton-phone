@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "axes": [
+    {
+      "axis": "spec",
+      "json_path": "r6-spec-q2.json",
+      "json_sha256": "c193a6ec05ee79d93d62e01f43eb78f5c2d90194f96b46a54ccacde3ffe3e646",
+      "raw_path": "spec-q2-raw.txt",
+      "raw_sha256": "d94c01466c647a93c019b47ff45739a1c1a59de753c1ec79ca3f38841b607b32"
+    },
+    {
+      "axis": "quality",
+      "json_path": "r6-quality-q2.json",
+      "json_sha256": "0f714f321ed96f28dd44450ea90b9a6db2dcaa3f1c6a2aafb2dcf69aad7d3c7e",
+      "raw_path": "quality-q2-raw.txt",
+      "raw_sha256": "81e03917062a8fb81eae8375f918bcb3cff4f8cfce4587cc51edbd93e0daf246"
+    }
+  ],
+  "manifest_sha256": "761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c",
+  "input_files": 63,
+  "at": "2026-11-15 19:31:22 +0800",
+  "scope": "Actual independent source-review closure ONLY; APK/run not yet verified"
+}

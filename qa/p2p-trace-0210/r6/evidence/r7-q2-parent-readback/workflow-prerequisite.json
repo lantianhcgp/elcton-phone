@@ -1,0 +1,20 @@
+{
+  "actual_push_branches": [
+    "master",
+    "fix/p2p-ready-receipt-20261114",
+    "release/0.2.9-20261114"
+  ],
+  "build_dispatch_explicit": true,
+  "diag_push_no_automatic_build": true,
+  "ui_inputs": {
+    "api_level": "33",
+    "navigation_mode": "three-button",
+    "qa_suite": [
+      "diagnostics",
+      "full"
+    ]
+  },
+  "exact_artifact_name_pins": true,
+  "source_writes": [],
+  "scope": "Actual frozen workflow readback; no run dispatched"
+}

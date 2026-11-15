@@ -1,0 +1,46 @@
+package com.huawei.wearengine.p2p
+import com.huawei.wearengine.device.Device
+import com.huawei.hmf.tasks.Task
+
+/** HOST fake API. Call logs assert ORIGINAL SDK-seam arguments/order, not BLE/network results. */
+object HostBus {
+    var device=Device()
+    var scan:Task<List<Device>>?=null
+    var p2p=P2pClient()
+    val calls=mutableListOf<String>()
+    fun reset() { device=Device();scan=null;p2p=P2pClient();calls.clear() }
+}
+open class Message(private val payload:ByteArray?,private val kind:Int=MESSAGE_TYPE_DATA) {
+    var typeReads=0;var dataReads=0
+    open val type:Int get() { typeReads++;return kind }
+    open val data:ByteArray? get() { dataReads++;return payload }
+    class Builder { private var bytes:ByteArray?=null;fun setPayload(b:ByteArray)=apply{bytes=b};fun build()=Message(bytes) }
+    companion object { const val MESSAGE_TYPE_DATA=1;const val MESSAGE_TYPE_FILE=2 }
+}
+fun interface Receiver { fun onReceiveMessage(message:Message) }
+interface SendCallback { fun onSendResult(code:Int);fun onSendProgress(progress:Long) }
+class P2pClient {
+    val registrations=mutableListOf<Pair<Receiver,Task<Void>>>()
+    val sends=mutableListOf<Triple<Message,SendCallback,Task<Void>>>()
+    val releases=mutableListOf<Pair<Receiver,Task<Void>>>()
+    var successAttachThrows=false
+    var sendThrows=false
+    private val receiverIds=java.util.IdentityHashMap<Receiver,Int>()
+    fun receiverId(r:Receiver)=receiverIds.getOrPut(r){receiverIds.size+1}
+    fun setPeerPkgName(s:String):P2pClient { HostBus.calls += "setPeerPkgName:$s";return this }
+    fun setPeerFingerPrint(s:String):P2pClient { HostBus.calls += "setPeerFingerPrint:$s";return this }
+    fun isAppInstalled(d:Device,p:String):Task<Boolean> { HostBus.calls += "installed:${d.uuid}:$p";return Task("installed",true) }
+    fun registerReceiver(d:Device,r:Receiver):Task<Void> {
+        HostBus.calls += "register:${d.uuid}:${receiverId(r)}"
+        return Task<Void>("register").also{registrations += r to it}
+    }
+    fun unregisterReceiver(r:Receiver):Task<Void> {
+        HostBus.calls += "unregister:${receiverId(r)}"
+        return Task<Void>("unregister").also{it.throwSuccessAttach=successAttachThrows;releases += r to it}
+    }
+    fun send(d:Device,m:Message,cb:SendCallback):Task<Void> {
+        HostBus.calls += "send:${d.uuid}:${m.data?.toString(Charsets.US_ASCII)}"
+        if(sendThrows)throw IllegalStateException("host-original-send-throw")
+        return Task<Void>("send").also{it.throwSuccessAttach=successAttachThrows;sends += Triple(m,cb,it)}
+    }
+}

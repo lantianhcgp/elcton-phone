@@ -63,8 +63,8 @@ class Mcp027ScopeTests(unittest.TestCase):
     def test_version_027_code9(self):
         text = (ROOT / 'app/build.gradle.kts').read_text()
         # Keep the historical method name for count/lineage; explicit release requirement.
-        self.assertIn('versionCode = 11', text)
-        self.assertIn('versionName = "0.2.9"', text)
+        self.assertIn('versionCode = 12', text)
+        self.assertIn('versionName = "0.2.10"', text)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

@@ -1,0 +1,90 @@
+{
+  "task": "R6 L3-r2 diagnostic stale ONLY",
+  "writer": "FROZEN after minimal GREEN; no further product edits",
+  "verifiedAt": "2026-11-15T15:50:10.487923+08:00",
+  "scope": "HOST fake Android/Huawei SDK seam; REAL WearProbe shared engine hello/send and REAL onMessage READY. NOT device/BLE/network/ACK validation.",
+  "red": {
+    "directory": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542",
+    "receipt": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542/receipt.json",
+    "receiptSha256": "4de79685dde8f40825247f813c6fc840b08c24107cd4f4fe29418c1435e3b4d8",
+    "junitLogSha256": "287ab26183d33d185e38922075890c430db77852669ef3792e0dc98a105a34c2",
+    "compileExit": 0,
+    "junitExit": 1,
+    "tests": 8,
+    "targetAssertionFailures": 3,
+    "beforeProductAttestation": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542/red-before-product-attestation.json",
+    "sourcesPreserved": true
+  },
+  "green": {
+    "directory": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-green-20261115-1544",
+    "receipt": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-green-20261115-1544/receipt.json",
+    "receiptSha256": "1600ec742a043022324e35e9f90843868851ca463198371d1d4e62df7bc1bb1d",
+    "junitLogSha256": "7c8e707afb49dc51cb28cbab7eb0807480789d1babaf0d816fdca0ba21b2536e",
+    "compileExit": 0,
+    "junitExit": 0,
+    "tests": 8,
+    "failures": 0,
+    "sourcesPreserved": true
+  },
+  "fourSourceSha256": {
+    "WearProbe.kt": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+    "SyncEngine.kt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "DiagnosticRuntime.kt": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+    "P2pTrace.kt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8"
+  },
+  "sourceDirectory": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton",
+  "beforeSnapshotDirectory": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-before-20261115-1542",
+  "sameRegressionTest": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in",
+    "sha256": "d54c61255f96b922b31a74a3b0d44b77e62912d31bef208eea1f5c0c882081a9",
+    "freshScenarios": 15,
+    "taskSuccessFailureAndSendResultSeparate": true,
+    "afterReadyAdapterStale": true,
+    "afterReadyMatchingEngineStaleWhereEmitted": true,
+    "beforeReadyCurrentNonStale": true,
+    "retryCancelCloseCompatible": true,
+    "frozenOriginalBusinessSdkStatePendingCallbackCountComparisonPassed": true
+  },
+  "oldNativeOracleSha256": "1cdb57b0f156946ab064b76f8c657d5d99e640944c06242ee1336b70d2c16eab",
+  "productFix": "Capture original pure accepts() closure in diagnostic Context; adapter observes !closed && accepts() inside existing Throwable-isolated diagnostics. No business invalidation/timers/SDK guards/callback statements/order changes.",
+  "ownedFiles": [
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+    "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in",
+    "qa/p2p-trace-0210/run_native_host.py"
+  ],
+  "productExactDiffSha256": "58d9a00bdb4c1a429215c3362a3f219ca2ba08b5408134abad0bb032f28033ea",
+  "productExactDiff": "--- a/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt\n+++ b/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt\n@@ -11,7 +11,8 @@\n     private val elapsedClock: () -> Long\n ) {\n     data class Context(val generation: Int? = null, val attemptId: Long? = null,\n-        val nativeGeneration: Long? = null, val deviceRef: Int? = null, val trigger: String = \"none\")\n+        val nativeGeneration: Long? = null, val deviceRef: Int? = null, val trigger: String = \"none\",\n+        val attemptCurrent: (() -> Boolean)? = null)\n     private val lock = Any()\n     private val sid = \"s-\" + java.lang.Long.toUnsignedString(System.nanoTime(),36)\n     private val tail = ArrayDeque<String>()\n@@ -28,11 +29,12 @@\n     fun peerIdentity(pkg: String, fingerprint: String) { synchronized(lock) { peerPackage=pkg; peerFingerprint=fingerprint } }\n     init { require(origin == \"phone-device\" || origin == \"host-test\") }\n     fun onChanged(callback: () -> Unit) { synchronized(lock) { changed=callback } }\n-    fun bind(generation:Int, attemptId:Long?=null, deviceRef:Int?=null, trigger:String=\"none\") {\n+    fun bind(generation:Int, attemptId:Long?=null, deviceRef:Int?=null, trigger:String=\"none\", attemptCurrent:(()->Boolean)?=null) {\n         synchronized(lock) {\n             val previous=if(context.generation==generation)context else Context()\n             context=Context(generation,attemptId ?: previous.attemptId,previous.nativeGeneration,\n-                deviceRef ?: previous.deviceRef,trigger)\n+                deviceRef ?: previous.deviceRef,trigger,\n+                attemptCurrent ?: if(attemptId==null)previous.attemptCurrent else null)\n         }\n     }\n     fun bindRegistration(c:Context):Context = synchronized(lock) {\n--- a/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt\n+++ b/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt\n@@ -392,7 +392,7 @@\n         fun accepts() = gen == generation && sendAttempts.accepts(attempt)\n         var sendContext:P2pTrace.Context? = null\n         try {\n-            try { trace?.bind(gen, attempt, trigger = if(closingTrace)\"close\"else trace?.context()?.trigger ?: \"none\"); sendContext=trace?.context(); emitTrace(\"SEND_CALL\", (trace?.metadata(text,true) ?: emptyMap()) + mapOf(\"generation\" to gen, \"attemptId\" to attempt, \"bytes\" to text.length)) } catch (_: Throwable) {}\n+            try { trace?.bind(gen, attempt, trigger = if(closingTrace)\"close\"else trace?.context()?.trigger ?: \"none\", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace(\"SEND_CALL\", (trace?.metadata(text,true) ?: emptyMap()) + mapOf(\"generation\" to gen, \"attemptId\" to attempt, \"bytes\" to text.length)) } catch (_: Throwable) {}\n             transport.send(device, text, { code ->\n                 emitTrace(\"SEND_RESULT\", mapOf(\"generation\" to gen, \"attemptId\" to attempt, \"resultCode\" to code, \"stale\" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)\n                 main(gen) {\n--- a/app/src/main/java/com/hcbiu/elcton/WearProbe.kt\n+++ b/app/src/main/java/com/hcbiu/elcton/WearProbe.kt\n@@ -37,7 +37,7 @@\n         c?.let { diagnostics.p2pTrace.related(it) }\n     } catch (_:Throwable) { c }\n     private fun stale(c:P2pTrace.Context?):Boolean = try {\n-        c==null || c.nativeGeneration!=synchronized(lock){nativeGeneration} || !diagnostics.p2pTrace.matches(c)\n+        c==null || c.nativeGeneration!=synchronized(lock){nativeGeneration} || !diagnostics.p2pTrace.matches(c) || c.attemptCurrent?.invoke()==false\n     } catch (_:Throwable) { true }\n     private fun trace(stage: String, c: P2pTrace.Context?, fields: Map<String, Any?> = emptyMap()) {\n         try { diagnostics.p2pTrace.emit(\"adapter\", stage, (c?.let { diagnostics.p2pTrace.fields(it) } ?: emptyMap()) + fields) } catch (_: Throwable) {}\n",
+  "runnerChange": "Only add com.hcbiu.elcton.NativeAfterReadyAdapterTest to explicit JUnit execution; existing skip-junit/actual-sdk test skipping unchanged.",
+  "jvmAlreadyCompleted": {
+    "directory": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-jvm-green-20261115-1545",
+    "receipt": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-jvm-green-20261115-1545/receipt.json",
+    "receiptSha256": "b32f7fdf8f6a3eb94fffcdec2fa38ad74a0e68486787cb95548897cd505c6a15",
+    "junitLogSha256": "f434432a0408f67fb8eea70f24383144429fcd3e2c1a9b268232bd4c174c8689",
+    "tests": 171,
+    "compileExit": 0,
+    "junitExit": 0,
+    "noFurtherCompile": true
+  },
+  "scopeExceptions": {
+    "parentOwnsTwoVersionLiteralMigrations": true,
+    "excludedFromThisWriterDiff": true,
+    "notReportedAsUnauthorized": true
+  },
+  "protectedUnchanged": [
+    "DiagnosticRuntime.kt",
+    "SendAttempts.kt",
+    "PacketIngress.kt",
+    "old native oracle assertions",
+    "READY business statements",
+    "SendAttempts original lifecycle",
+    "SDK callback business statements/guards/timer/order"
+  ],
+  "issues": [
+    "Termux jansi libc.so.6 warning, compile exits 0",
+    "Read-only inline verifier syntax error was not treated as RED; no product impact"
+  ],
+  "unusedEvidenceScript": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-verification-20261115-1548/verify.py (created before final-only steering; not executed)",
+  "noVersionIdentityCommitsCiDeviceOperationsByThisWriter": true
+}

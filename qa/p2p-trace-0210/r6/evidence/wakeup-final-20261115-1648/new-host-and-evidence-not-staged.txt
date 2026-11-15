@@ -1,0 +1,2 @@
+git diff --cached --name-only new HOST/evidence paths: empty
+No git add or commit performed by this focused subagent.

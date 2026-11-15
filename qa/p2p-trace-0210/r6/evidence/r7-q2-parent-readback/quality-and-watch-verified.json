@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "dual_closure_sha256": "af10ae20822d88f375b97c6aa7a73c5506fc35e37c76fbc042e4d0c47f0071cf",
+  "review_manifest_sha256": "761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c",
+  "watch_receipt_sha256": "5f0215550af6305d8bb4e99c7f82022350e3c81bffa5d797eb56d15c5b0d80e7",
+  "watch_raw_sha256": "20c8fe0aad1ab18921743764c56d6ed15eaddbb95c4dd6b5d3769404d8122ad7",
+  "quality_report_sha256": "0f714f321ed96f28dd44450ea90b9a6db2dcaa3f1c6a2aafb2dcf69aad7d3c7e",
+  "scope": "Actual dual-review and read-only watch HOST445 verification; phone fresh regression in progress",
+  "at": "2026-11-15 19:33:12 +0800"
+}

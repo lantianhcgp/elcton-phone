@@ -1,0 +1,6 @@
+{
+  "original_class": "0203a826772472f258e3339cb3b7d3a6b04a06f5102ba602ef9c96a15ee89c3d",
+  "instrumented_class": "6bfde8913dff56efabceab35489770c26d77708349c095682c1917f9a2234b13",
+  "actual_runtime_jar": "5a3f506794220eac39042606972f27ea240c2dd6fb224ef9fdfd9353f7228713",
+  "instruction_inverse_equal": true
+}

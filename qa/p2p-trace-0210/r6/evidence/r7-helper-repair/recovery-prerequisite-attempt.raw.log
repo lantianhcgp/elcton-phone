@@ -1,0 +1,7 @@
+
+--- stderr ---
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/usr/tmp/hermes_sandbox_26f8zrz2/script.py", line 12, in <module>
+    assert '"qa/p2p-trace-0210/r6/evidence/identity-migration/table.json": "'+sha(original)+'"' in specraw.decode()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

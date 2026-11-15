@@ -1,0 +1,9 @@
+{
+  "classification": "New host helper assumed7 but unchanged actual two classes declare6; actualJUnit6pass exit0 and source identity unchanged. No test/assertion migration",
+  "counts": {
+    "P2pTraceRuntimeTest": 2,
+    "DiagnosticsIntegrationTest": 4
+  },
+  "old_helper_sha256": "adc7ea69494d0f6cad40210c75adc776d03ae951cc57016e258776d64d7864cc",
+  "full_jvm_raw_sha256": "7c7d82686339dfaccbeaeafb48813ada758104d60e40fab077e4fe2b21c89809"
+}

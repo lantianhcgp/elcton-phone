@@ -1,0 +1,4 @@
+package android.os
+/** Minimal HOST type shell for real Huawei class hierarchy resolution only. */
+interface Parcelable { interface Creator<T> }
+class Parcel

@@ -11,8 +11,8 @@ android {
         applicationId = "com.hcbiu.elcton"
         minSdk = 26
         targetSdk = 34
-        versionCode = 11
-        versionName = "0.2.9"
+        versionCode = 12
+        versionName = "0.2.10"
         // READY receipts are production behavior in the merged release, never a parallel lane.
         buildConfigField("boolean", "P2P_READY_CANDIDATE", "true")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -1,0 +1,11 @@
+{
+  "diskSeq": 2,
+  "releaseHits": 2,
+  "pending": 0,
+  "writing": false,
+  "stateWrites": 2,
+  "traceSeq": 2,
+  "ringSeq": 2,
+  "revision": 0,
+  "stateSeq": 2
+}

@@ -1,0 +1,13 @@
+{
+  "previous_manifest_sha256": "48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027",
+  "manifest_sha256": "93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d",
+  "changed_prior_paths": [
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "qa/p2p-trace-0210/check_r6_scope.py",
+    "qa/p2p-trace-0210/r6/current-identity.json"
+  ],
+  "input_files": 41,
+  "q1_report_sha256": "20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b",
+  "final_regression_sha256": "9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9",
+  "scope": "Current identity/readback only; not independent approval"
+}

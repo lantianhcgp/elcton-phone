@@ -1,0 +1,8 @@
+{
+  "original_new_test_sha256": "d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43",
+  "current_new_test_sha256": "85cac5a68fe22e07e56d18aebb709d4e92874b4ebc186fe50721bbfc9873a127",
+  "restored_sha256": "d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43",
+  "all_assertions_labels_and_business_bytes_preserved": true,
+  "only_file_base_resolution_changes": 3,
+  "old_35_inventory_frozen": true
+}

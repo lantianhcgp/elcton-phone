@@ -1,0 +1,116 @@
+qa/p2p-trace-0210/r6/evidence/adapter-green-20261115-1544/junit.log:21: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/adapter-jvm-green-20261115-1545/junit.log:6: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542/junit.log:44: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/app-cwd.junit.log:6: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/compile-jvm.raw.log:39: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/full-jvm/junit.log:6: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:89: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:114: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:126: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:205: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:223: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:234: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:237: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:239: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:274: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:287: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:299: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:310: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:386: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:406: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:436: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:452: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:505: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:506: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff:566: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/gradle-cwd-preflight-1615/junit.log:24: new blank line at EOF.
+qa/p2p-trace-0210/r6/evidence/gradle-cwd-preflight-1615/source-fix.diff:4: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/evidence/runtime-final-1551/junit.log:11: new blank line at EOF.
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:89: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:114: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:126: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:205: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:223: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:234: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:237: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:239: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:274: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:287: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:299: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:310: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:386: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:406: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:436: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:452: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:505: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:506: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff:566: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:52: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:77: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:89: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:168: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:186: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:197: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:200: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:202: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:237: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:250: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:262: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:273: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:349: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:369: trailing whitespace.
++ 
+qa/p2p-trace-0210/r6/reviews/input/r5-product.diff:399: trailing whitespace.
++ 

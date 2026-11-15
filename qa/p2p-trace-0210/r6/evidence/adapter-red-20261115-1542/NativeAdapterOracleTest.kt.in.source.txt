@@ -1,0 +1,91 @@
+package com.hcbiu.elcton
+
+import android.content.Context
+import com.huawei.wearengine.p2p.HostBus
+import com.huawei.wearengine.p2p.Message
+import org.junit.Assert.*
+import org.junit.Test
+import org.json.JSONObject
+
+/** HOST fake API oracle; both classes are real source bytes (baseline changes only the class name). */
+class NativeAdapterOracleTest {
+    private class CountingError:Exception() {
+        var reads=0
+        override val message:String get() { reads++;return "host-error" }
+    }
+    private data class Outcome(val calls:List<String>,val business:List<String>,val errors:Int,val messageReads:Int,
+        val counts:List<Pair<Int,Int>>,val failureListeners:List<Boolean>)
+    private fun run(mode:String,original:Boolean):Outcome {
+        HostBus.reset()
+        val diagnostics=DiagnosticRuntime()
+        diagnostics.p2pTrace.bind(3,trigger="connect")
+        val name=if(original)"com.hcbiu.elcton.P2pTraceBaselineProbe" else "com.hcbiu.elcton.WearProbe"
+        val p=Class.forName(name).getConstructor(Context::class.java,DiagnosticRuntime::class.java)
+            .newInstance(Context(),diagnostics) as SyncTransport
+        val events=mutableListOf<String>()
+        var devices:List<SyncDevice> = emptyList()
+        p.scan({devices=it;events += "scan:${it.size}"},{events += "scan_fail:$it"})
+        HostBus.scan!!.succeed()
+        val d=devices.single()
+        p.register(d,{events += "rx:$it"},{events += "registered"},{events += "reg_fail:$it"})
+        val (receiver,reg)=HostBus.p2p.registrations.single()
+        if(mode=="stale-register") {
+            p.unregister()
+            p.register(d,{events += "rx2:$it"},{events += "registered2"},{events += "reg_fail2:$it"})
+            reg.succeed()
+            HostBus.p2p.registrations.last().second.succeed()
+            assertSame("exact original stale receiver released",receiver,HostBus.p2p.releases.first().first)
+            assertSame("exact callback cleanup identity",receiver,HostBus.p2p.releases.last().first)
+        } else reg.succeed()
+        val packet=Message("{}".toByteArray(Charsets.US_ASCII))
+        val wrongType=Message("{}".toByteArray(),Message.MESSAGE_TYPE_FILE)
+        val large=Message(ByteArray(1025){65})
+        val nonAscii=Message(byteArrayOf(0))
+        val missing=Message(null)
+        val stale=Message("{}".toByteArray())
+        receiver.onReceiveMessage(packet)
+        receiver.onReceiveMessage(wrongType)
+        receiver.onReceiveMessage(large)
+        receiver.onReceiveMessage(nonAscii)
+        receiver.onReceiveMessage(missing)
+        val error=CountingError()
+        if(mode=="attach-throw")HostBus.p2p.successAttachThrows=true
+        if(mode=="send-throw")HostBus.p2p.sendThrows=true
+        p.send(d,"{\"type\":\"HELLO\"}",{events += "result:$it"},{events += "send_fail:$it"})
+        if(mode!="send-throw") {
+            val (_,cb,task)=HostBus.p2p.sends.single()
+            if(mode=="task-failure")task.fail(error)
+            else if(mode=="late-task") { p.unregister();task.succeed();task.fail(error);cb.onSendResult(206) }
+            else { task.succeed();cb.onSendResult(207);cb.onSendResult(206) }
+        }
+        p.unregister()
+        receiver.onReceiveMessage(stale)
+        for((_,task) in HostBus.p2p.releases)task.succeed()
+        val counts=listOf(packet,wrongType,large,nonAscii,missing,stale).map{it.typeReads to it.dataReads}
+        if(mode!="stale-register")assertEquals("original getter short-circuit counts",listOf(1 to 1,1 to 0,1 to 1,1 to 1,1 to 1,0 to 0),counts)
+        val failures=HostBus.p2p.sends.map{it.third.failureAttached()}+HostBus.p2p.releases.map{it.second.failureAttached()}
+        return Outcome(HostBus.calls.toList(),events.toList(),diagnostics.recorded.size,error.reads,counts,failures)
+    }
+    @Test fun originalAndObservationSdkCallsFiltersAndCallbackCountsAreEqual() {
+        for(mode in listOf("ok","task-failure","late-task","stale-register","send-throw"))
+            assertEquals("mode=$mode",run(mode,true),run(mode,false))
+    }
+    @Test fun diagnosticSuccessListenerAttachFailureNeverCreatesBusinessFailure() {
+        assertEquals("new success listener registration is diagnostic-only",run("attach-throw",true),run("attach-throw",false))
+    }
+    @Test fun taskSuccessIsNotNativeSendResultAndTraceHasHostOrigin() {
+        HostBus.reset();val diagnostics=DiagnosticRuntime();val p=WearProbe(Context(),diagnostics)
+        diagnostics.p2pTrace.bind(1,trigger="connect")
+        var devices:List<SyncDevice> = emptyList();p.scan({devices=it},{fail(it)});HostBus.scan!!.succeed()
+        p.register(devices.single(),{}, {}, {fail(it)});HostBus.p2p.registrations.single().second.succeed()
+        val callbacks=mutableListOf<Int>()
+        diagnostics.p2pTrace.bind(1,8)
+        p.send(devices.single(),"{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"phone\",\"type\":\"HELLO\",\"transferId\":\"\"}",{callbacks += it},{fail(it)})
+        val (_,cb,task)=HostBus.p2p.sends.single();task.succeed();assertTrue(callbacks.isEmpty())
+        cb.onSendResult(206);assertEquals(listOf(206),callbacks)
+        val data=diagnostics.p2pTrace.read(0,128);assertEquals("host-test",data.getString("origin"))
+        val e=data.getJSONArray("events");val stages=(0 until e.length()).map{e.getJSONObject(it).getString("stage")}
+        assertTrue(stages.contains("REG_TASK_OK"));assertTrue(stages.contains("SEND_TASK_OK"));assertTrue(stages.contains("SEND_RESULT"))
+        p.unregister()
+    }
+}

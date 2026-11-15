@@ -1,0 +1,6 @@
+{
+  "branch": "master",
+  "sha": "519f0d5450f77ce4ba757a644b2144607b0a5c06",
+  "protected": false,
+  "scope": "Read-only origin anchor, no master or release write"
+}

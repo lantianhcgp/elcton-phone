@@ -1,0 +1,20 @@
+{
+  "sealed": {
+    "qa/p2p-trace-0210/r6/reviews/r6-spec-r1.json": {
+      "bytes": 7377,
+      "sha256": "75637544ab1c440a50218afbd4966b04c9fdef211a030e4d16b32b35394f0d02"
+    },
+    "qa/p2p-trace-0210/r6/reviews/spec-raw.txt": {
+      "bytes": 1819,
+      "sha256": "656add6d106c53e3359dc9c370dc00fd05576272754fd3fcc2492d92c9704760"
+    },
+    "qa/p2p-trace-0210/r6/reviews/input/reviewed-manifest.json": {
+      "bytes": 3625,
+      "sha256": "c78a51884c38e4ee4014ff06a59afa879eb6f5d27b513702bd21ddb5e9bba81c"
+    }
+  },
+  "no_product_changes": true,
+  "cause": "Independent r1 review incomplete coverage not new defect; r2 read-only supplements pending",
+  "repo_visibility_observed": "public, unchanged",
+  "at": "2026-11-15 16:11:31 +0800"
+}

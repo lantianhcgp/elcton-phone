@@ -1,0 +1,6 @@
+usage: migrate_r6_quality_identity.py [-h]
+                                      --expected-runtime-sha256 EXPECTED_RUNTIME_SHA256
+
+options:
+  -h, --help            show this help message and exit
+  --expected-runtime-sha256 EXPECTED_RUNTIME_SHA256

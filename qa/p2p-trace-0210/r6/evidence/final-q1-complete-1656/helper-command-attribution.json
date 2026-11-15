@@ -1,0 +1,6 @@
+{
+  "kind": "New helper wrong HTTP command (synthetic unittest versus original mcp_http_selftest entry), not product/test failure",
+  "original_http_entry": "qa/mcp_http_selftest.py --classpath actual-jar:deps",
+  "python133_passed_raw_sha256": "4c3ceb450c84f8ee4fa581428bad7146f84ffe835271f1cf662b129028c58348",
+  "retained": true
+}

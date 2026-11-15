@@ -1,0 +1,28 @@
+--- before-Q-R6-001/DiagnosticRuntime.kt
++++ after-Q-R6-001/DiagnosticRuntime.kt
+@@ -129,6 +129,7 @@
+         if (!writing.compareAndSet(false, true)) return
+         writer.execute {
+             var persisted = -1L
++            var processedTraceSeq = -1L
+             var failed = false
+             try {
+                 while (true) {
+@@ -142,6 +143,7 @@
+                     }
+                     stateWriter(File(filesDir, "diagnostics/state.json"), read().toString())
+                     persisted = version
++                    processedTraceSeq = traceVersion
+                     if (synchronized(lock) { revision } == version && p2pTrace.sequence() == traceVersion) break
+                 }
+             } catch (error: Exception) {
+@@ -151,7 +153,8 @@
+                 writing.set(false)
+                 // A failed disk write is retried only after a later observation,
+                 // never a self-sustaining background loop on an unavailable disk.
+-                if (!failed && persisted >= 0 && synchronized(lock) { revision } != persisted) persistLater()
++                if (!failed && persisted >= 0 &&
++                    (synchronized(lock) { revision } != persisted || p2pTrace.sequence() != processedTraceSeq)) persistLater()
+             }
+         }
+     }

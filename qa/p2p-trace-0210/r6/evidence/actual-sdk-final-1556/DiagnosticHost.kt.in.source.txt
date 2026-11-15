@@ -1,0 +1,10 @@
+package com.hcbiu.elcton
+import android.content.Context
+/** HOST fake diagnostics isolates WearProbe seam tests. Runtime execution is a separate lane. */
+class DiagnosticRuntime {
+    val p2pTrace=P2pTrace("host-test",{100L},{200L})
+    val recorded=mutableListOf<String>()
+    fun record(r:WearErrorRecord) { recorded += r.full }
+    fun observe(status:String,detail:String,ready:Boolean,busy:Boolean,count:Int) {}
+}
+class ElctonApplication:Context() { val diagnostics=DiagnosticRuntime() }

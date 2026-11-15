@@ -1,0 +1,14 @@
+{
+  "time": "2026-11-15 18:50:36 +0800",
+  "raw_sha256": "6709452158b00c262e74042d20756322894a252cc076a32e06f1ed25afadc058",
+  "input_manifest_sha256": "93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d",
+  "live_drift": [],
+  "accepted_product_repair": true,
+  "quality_passed": false,
+  "finding_ids": [
+    "Q-R7-Q1-001",
+    "Q-R7-Q1-002"
+  ],
+  "restore_original_table_expected_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+  "no_ci_dispatch": true
+}

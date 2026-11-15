@@ -1,0 +1,17 @@
+package android.content
+
+/** HOST fake Android compile boundary. Not a device implementation. */
+open class Context {
+    open val applicationContext: Context get() = this
+    fun getSharedPreferences(name:String, mode:Int)=SharedPreferences()
+    companion object { const val MODE_PRIVATE=0 }
+}
+class SharedPreferences {
+    fun getLong(key:String,fallback:Long)=fallback
+    fun edit()=Editor()
+    class Editor {
+        fun putString(key:String,value:String)=this
+        fun putLong(key:String,value:Long)=this
+        fun apply() {}
+    }
+}

@@ -153,7 +153,7 @@ class Harness:
         from PIL import Image
         report = json.loads((target / "report.json").read_text())
         require(report.get("passed") is True and report.get("sourceSha") == head and report.get("qaRun") == run_id, "Instrumentation receipt is not for this exact successful run")
-        require(report.get("packageVersion") == "0.2.9" and report.get("packageCode") == 11, "Installed package identity")
+        require(report.get("packageVersion") == "0.2.10" and report.get("packageCode") == 12, "Installed package identity")
         tools = report.get("httpTools")
         require(isinstance(tools, list) and len(tools) == 15 and set(tools) == TOOLS, "Real Android exact 15-tool receipt")
         for key in ("activityRecreated", "fullTextUntruncated", "closeVisibleAndWorks", "androidNioHttpRead", "businessFilesUnchanged", "originalDiagnosticSchemas", "sharedPhoneActivityRecreated"):
@@ -302,7 +302,7 @@ class Harness:
             label = "normal-background-" + str(attempt)
             self.foreground_receipt(label, pid)
             version = self.background_rpc(suite, label + "-version", "version_info", {})
-            require(version.get("versionName") == "0.2.9" and version.get("versionCode") == 11 and version.get("packageName") == PACKAGE, "Ordinary background exact version")
+            require(version.get("versionName") == "0.2.10" and version.get("versionCode") == 12 and version.get("packageName") == PACKAGE, "Ordinary background exact version")
             errors = self.background_rpc(suite, label + "-errors", "error_tail", {"limit": 1})
             require(len(errors.get("errors", [])) == 1 and errors["errors"][0]["full"] == expected, "Ordinary background persisted full error")
             observations.append({"attempt": attempt, "elapsedSeconds": time.monotonic() - started, "foreground": True, "ordinaryProcess": True, "urllibVersionAndError": True})
@@ -471,7 +471,7 @@ class Harness:
         suite = Suite("http://127.0.0.1:18766", token_result.stdout.decode("ascii"))
         expected = (target / "synthetic-expected.txt").read_text()
         failed, version = suite.call("version_info")
-        require(not failed and version.get("versionName") == "0.2.9" and version.get("versionCode") == 11 and version.get("packageName") == PACKAGE, "Cold-process real version_info")
+        require(not failed and version.get("versionName") == "0.2.10" and version.get("versionCode") == 12 and version.get("packageName") == PACKAGE, "Cold-process real version_info")
         failed, errors = suite.call("error_tail", {"limit": 1})
         require(not failed and errors["errors"][-1]["full"] == expected, "Cold-process actual persisted error_tail")
         failed, diagnostic = suite.call("diag_read")

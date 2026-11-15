@@ -1,0 +1,20 @@
+{
+  "rows": [
+    {
+      "name": "help",
+      "exit": 0,
+      "sha256": "dea6b4262fda8ab30a30dfd69695c2a4f5419f47e98a952fcd603450240fe9d6"
+    },
+    {
+      "name": "selftest",
+      "exit": 0,
+      "sha256": "cdcb7be1f204a9bcdac204d214cd6c088594ab07b9f50e8ce17ff4d3b38e73bd"
+    },
+    {
+      "name": "sourcegate",
+      "exit": 0,
+      "sha256": "44e4d5e5ebffc2c94b91947e428ae9c18546695359b57ef183eb339aea55eee7"
+    }
+  ],
+  "scope": "Read-only helper actual execution; no network/dispatch/device action"
+}

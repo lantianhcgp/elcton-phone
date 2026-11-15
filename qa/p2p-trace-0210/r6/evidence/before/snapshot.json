@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-15 15:37:24 +0800",
+  "remote_continuation_sha256": "9e88290e9ac3752e1b1f3a552d5643569b983de56336b32d86d0dedf7fa458d8",
+  "remote_local_equal": true,
+  "current_commit": "de3e6f182c2def5a52d33f33684777f1fc941ccd",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "files": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+      "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+      "bytes": 16949
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+      "bytes": 24294
+    },
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+      "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "bytes": 7614
+    },
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "bytes": 10486
+    },
+    "app/src/main/java/com/hcbiu/elcton/SendAttempts.kt": {
+      "r5_sha256": "5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529",
+      "bytes": 277
+    },
+    "app/src/main/java/com/hcbiu/elcton/PacketIngress.kt": {
+      "r5_sha256": "3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb",
+      "bytes": 2481
+    },
+    "app/build.gradle.kts": {
+      "r5_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "bytes": 2637
+    },
+    "qa/diag_source_gate.py": {
+      "r5_sha256": "6278a451605275825e1556d3302e2b22dfeb7ed2918c1c5ff0e25491e365b9ff",
+      "bytes": 9046
+    },
+    "qa/release-029/approved-release-delta.json": {
+      "r5_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+      "bytes": 128182
+    },
+    "qa/release-029/verify_apk.py": {
+      "r5_sha256": "f9b96d77b5a044611068e8756bc59924f077b4556ddb73a7155467dc09dc08eb",
+      "bytes": 934
+    },
+    "qa/test_diag_source_gate.py": {
+      "r5_sha256": "5bacc49053d492cf03a8fd405aca57dae30740df77b5bb30e539181664d25a00",
+      "bytes": 5096
+    },
+    "qa/test_mcp027_scope.py": {
+      "r5_sha256": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+      "bytes": 4095
+    }
+  }
+}

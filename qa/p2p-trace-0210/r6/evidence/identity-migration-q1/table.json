@@ -1,0 +1,48 @@
+{
+  "source_identities": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+      "old_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+      "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+      "current_sha256": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+      "current_bytes": 16986
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "old_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+      "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+      "current_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "current_bytes": 24337
+    },
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+      "old_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+      "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "current_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+      "current_bytes": 7773,
+      "previous_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"
+    },
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "old_sha256": null,
+      "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "current_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "current_bytes": 10663
+    }
+  },
+  "version_identity": {
+    "path": "app/build.gradle.kts",
+    "old_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+    "current_sha256": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "old_code": 11,
+    "current_code": 12,
+    "old_name": "0.2.9",
+    "current_name": "0.2.10"
+  },
+  "old_manifest_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+  "previous_r6_manifest_sha256": "422fce3a3196d017a4a2305b46a8b30e2a7a34dd4d387116178d662032201c45",
+  "new_manifest_sha256": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+  "quality_repair_identity": {
+    "finding": "Q-R6-001",
+    "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "old_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+    "new_r6_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+    "authorization": "R6 original diagnostic writer scope; no business behavior modification"
+  }
+}

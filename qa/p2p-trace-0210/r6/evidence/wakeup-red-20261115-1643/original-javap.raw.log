@@ -1,0 +1,1340 @@
+Compiled from "DiagnosticRuntime.kt"
+public final class com.hcbiu.elcton.DiagnosticRuntime {
+  private final java.io.File filesDir;
+
+  private final kotlin.jvm.functions.Function2<java.io.File, java.lang.String, kotlin.Unit> stateWriter;
+
+  private java.lang.String traceOrigin;
+
+  private final kotlin.Lazy p2pTrace$delegate;
+
+  private final java.lang.Object lock;
+
+  private org.json.JSONObject snapshot;
+
+  private long revision;
+
+  private org.json.JSONObject lastError;
+
+  private com.hcbiu.elcton.ErrorJournal journal;
+
+  private com.hcbiu.elcton.DiagnosticMcpServer server;
+
+  private com.hcbiu.elcton.McpToolProvider actions;
+
+  private java.lang.String startupError;
+
+  private final java.util.concurrent.ExecutorService writer;
+
+  private final java.util.concurrent.atomic.AtomicBoolean writing;
+
+  private final java.lang.Object listenerLock;
+
+  private boolean initialized;
+
+  public com.hcbiu.elcton.DiagnosticRuntime(java.io.File, kotlin.jvm.functions.Function2<? super java.io.File, ? super java.lang.String, kotlin.Unit>);
+    Code:
+       0: aload_1
+       1: ldc           #10                 // String filesDir
+       3: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_2
+       7: ldc           #18                 // String stateWriter
+       9: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_0
+      13: invokespecial #21                 // Method java/lang/Object."<init>":()V
+      16: aload_0
+      17: aload_1
+      18: putfield      #24                 // Field filesDir:Ljava/io/File;
+      21: aload_0
+      22: aload_2
+      23: putfield      #27                 // Field stateWriter:Lkotlin/jvm/functions/Function2;
+      26: aload_0
+      27: ldc           #29                 // String phone-device
+      29: putfield      #33                 // Field traceOrigin:Ljava/lang/String;
+      32: aload_0
+      33: aload_0
+      34: invokedynamic #53,  0             // InvokeDynamic #0:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0;
+      39: invokestatic  #59                 // Method kotlin/LazyKt.lazy:(Lkotlin/jvm/functions/Function0;)Lkotlin/Lazy;
+      42: putfield      #63                 // Field p2pTrace$delegate:Lkotlin/Lazy;
+      45: aload_0
+      46: new           #4                  // class java/lang/Object
+      49: dup
+      50: invokespecial #21                 // Method java/lang/Object."<init>":()V
+      53: putfield      #67                 // Field lock:Ljava/lang/Object;
+      56: aload_0
+      57: new           #69                 // class org/json/JSONObject
+      60: dup
+      61: invokespecial #70                 // Method org/json/JSONObject."<init>":()V
+      64: ldc           #72                 // String status
+      66: ldc           #74                 // String 尚未连接手表
+      68: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      71: ldc           #80                 // String phase
+      73: ldc           #82                 // String idle
+      75: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      78: ldc           #84                 // String timestampMs
+      80: invokestatic  #90                 // Method java/lang/System.currentTimeMillis:()J
+      83: invokevirtual #93                 // Method org/json/JSONObject.put:(Ljava/lang/String;J)Lorg/json/JSONObject;
+      86: ldc           #95                 // String ready
+      88: iconst_0
+      89: invokevirtual #98                 // Method org/json/JSONObject.put:(Ljava/lang/String;Z)Lorg/json/JSONObject;
+      92: ldc           #100                // String busy
+      94: iconst_0
+      95: invokevirtual #98                 // Method org/json/JSONObject.put:(Ljava/lang/String;Z)Lorg/json/JSONObject;
+      98: ldc           #102                // String deviceCount
+     100: iconst_0
+     101: invokevirtual #105                // Method org/json/JSONObject.put:(Ljava/lang/String;I)Lorg/json/JSONObject;
+     104: putfield      #109                // Field snapshot:Lorg/json/JSONObject;
+     107: aload_0
+     108: ldc           #111                // String
+     110: putfield      #114                // Field startupError:Ljava/lang/String;
+     113: aload_0
+     114: invokedynamic #124,  0            // InvokeDynamic #1:newThread:()Ljava/util/concurrent/ThreadFactory;
+     119: invokestatic  #130                // Method java/util/concurrent/Executors.newSingleThreadExecutor:(Ljava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;
+     122: putfield      #134                // Field writer:Ljava/util/concurrent/ExecutorService;
+     125: aload_0
+     126: new           #136                // class java/util/concurrent/atomic/AtomicBoolean
+     129: dup
+     130: iconst_0
+     131: invokespecial #139                // Method java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+     134: putfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+     137: aload_0
+     138: new           #4                  // class java/lang/Object
+     141: dup
+     142: invokespecial #21                 // Method java/lang/Object."<init>":()V
+     145: putfield      #146                // Field listenerLock:Ljava/lang/Object;
+     148: return
+
+  public com.hcbiu.elcton.DiagnosticRuntime(java.io.File, kotlin.jvm.functions.Function2, int, kotlin.jvm.internal.DefaultConstructorMarker);
+    Code:
+       0: iload_3
+       1: iconst_2
+       2: iand
+       3: ifeq          13
+       6: getstatic     #155                // Field com/hcbiu/elcton/DiagnosticRuntime$1.INSTANCE:Lcom/hcbiu/elcton/DiagnosticRuntime$1;
+       9: checkcast     #157                // class kotlin/jvm/functions/Function2
+      12: astore_2
+      13: aload_0
+      14: aload_1
+      15: aload_2
+      16: invokespecial #159                // Method "<init>":(Ljava/io/File;Lkotlin/jvm/functions/Function2;)V
+      19: return
+
+  public com.hcbiu.elcton.DiagnosticRuntime(java.io.File, kotlin.jvm.functions.Function2<? super java.io.File, ? super java.lang.String, kotlin.Unit>, java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #10                 // String filesDir
+       3: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_2
+       7: ldc           #18                 // String stateWriter
+       9: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_3
+      13: ldc           #162                // String traceOrigin
+      15: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      18: aload_0
+      19: aload_1
+      20: aload_2
+      21: invokespecial #159                // Method "<init>":(Ljava/io/File;Lkotlin/jvm/functions/Function2;)V
+      24: aload_0
+      25: aload_3
+      26: putfield      #33                 // Field traceOrigin:Ljava/lang/String;
+      29: return
+
+  public final com.hcbiu.elcton.P2pTrace getP2pTrace();
+    Code:
+       0: aload_0
+       1: getfield      #63                 // Field p2pTrace$delegate:Lkotlin/Lazy;
+       4: astore_1
+       5: aload_1
+       6: invokeinterface #168,  1          // InterfaceMethod kotlin/Lazy.getValue:()Ljava/lang/Object;
+      11: checkcast     #170                // class com/hcbiu/elcton/P2pTrace
+      14: areturn
+
+  public final void attachActions(com.hcbiu.elcton.McpToolProvider);
+    Code:
+       0: aload_1
+       1: ldc           #174                // String provider
+       3: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #146                // Field listenerLock:Ljava/lang/Object;
+      10: astore_2
+      11: aload_2
+      12: monitorenter
+      13: nop
+      14: iconst_0
+      15: istore_3
+      16: aload_0
+      17: getfield      #178                // Field server:Lcom/hcbiu/elcton/DiagnosticMcpServer;
+      20: ifnonnull     27
+      23: iconst_1
+      24: goto          28
+      27: iconst_0
+      28: ifne          41
+      31: new           #180                // class java/lang/IllegalStateException
+      34: dup
+      35: ldc           #182                // String Check failed.
+      37: invokespecial #185                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      40: athrow
+      41: aload_0
+      42: aload_1
+      43: putfield      #189                // Field actions:Lcom/hcbiu/elcton/McpToolProvider;
+      46: getstatic     #194                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+      49: astore_3
+      50: aload_2
+      51: monitorexit
+      52: goto          62
+      55: astore        4
+      57: aload_2
+      58: monitorexit
+      59: aload         4
+      61: athrow
+      62: return
+    Exception table:
+       from    to  target type
+          13    50    55   any
+          55    57    55   any
+
+  public final void start(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #146                // Field listenerLock:Ljava/lang/Object;
+       4: astore_2
+       5: aload_2
+       6: monitorenter
+       7: nop
+       8: iconst_0
+       9: istore_3
+      10: aload_0
+      11: getfield      #207                // Field initialized:Z
+      14: ifne          129
+      17: aload_0
+      18: iconst_1
+      19: putfield      #207                // Field initialized:Z
+      22: nop
+      23: aload_0
+      24: new           #209                // class com/hcbiu/elcton/ErrorJournal
+      27: dup
+      28: new           #211                // class java/io/File
+      31: dup
+      32: aload_0
+      33: getfield      #24                 // Field filesDir:Ljava/io/File;
+      36: ldc           #213                // String diagnostics/wear-errors.jsonl
+      38: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+      41: iconst_0
+      42: iconst_2
+      43: aconst_null
+      44: invokespecial #219                // Method com/hcbiu/elcton/ErrorJournal."<init>":(Ljava/io/File;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      47: putfield      #223                // Field journal:Lcom/hcbiu/elcton/ErrorJournal;
+      50: goto          85
+      53: astore        4
+      55: aload_0
+      56: new           #225                // class java/lang/StringBuilder
+      59: dup
+      60: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+      63: ldc           #228                // String journal:
+      65: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      68: aload         4
+      70: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      73: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+      76: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      79: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      82: putfield      #114                // Field startupError:Ljava/lang/String;
+      85: aload_0
+      86: getfield      #223                // Field journal:Lcom/hcbiu/elcton/ErrorJournal;
+      89: dup
+      90: ifnull        127
+      93: iconst_1
+      94: invokevirtual #249                // Method com/hcbiu/elcton/ErrorJournal.tail:(I)Lorg/json/JSONArray;
+      97: dup
+      98: ifnull        127
+     101: astore        5
+     103: iconst_0
+     104: istore        6
+     106: aload         5
+     108: invokevirtual #255                // Method org/json/JSONArray.length:()I
+     111: ifle          124
+     114: aload_0
+     115: aload         5
+     117: iconst_0
+     118: invokevirtual #259                // Method org/json/JSONArray.getJSONObject:(I)Lorg/json/JSONObject;
+     121: putfield      #262                // Field lastError:Lorg/json/JSONObject;
+     124: goto          129
+     127: pop
+     128: nop
+     129: nop
+     130: getstatic     #194                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+     133: astore_3
+     134: aload_2
+     135: monitorexit
+     136: goto          146
+     139: astore        4
+     141: aload_2
+     142: monitorexit
+     143: aload         4
+     145: athrow
+     146: iload_1
+     147: ifeq          155
+     150: aload_0
+     151: invokevirtual #266                // Method startListener:()Z
+     154: pop
+     155: return
+    Exception table:
+       from    to  target type
+          22    50    53   Class java/lang/Exception
+           7   134   139   any
+         139   141   139   any
+
+  public static void start$default(com.hcbiu.elcton.DiagnosticRuntime, boolean, int, java.lang.Object);
+    Code:
+       0: iload_2
+       1: iconst_1
+       2: iand
+       3: ifeq          8
+       6: iconst_1
+       7: istore_1
+       8: aload_0
+       9: iload_1
+      10: invokevirtual #277                // Method start:(Z)V
+      13: return
+
+  public final boolean startListener();
+    Code:
+       0: aload_0
+       1: getfield      #146                // Field listenerLock:Ljava/lang/Object;
+       4: astore_2
+       5: aload_2
+       6: monitorenter
+       7: nop
+       8: iconst_0
+       9: istore_3
+      10: nop
+      11: aload_0
+      12: getfield      #178                // Field server:Lcom/hcbiu/elcton/DiagnosticMcpServer;
+      15: ifnonnull     141
+      18: new           #211                // class java/io/File
+      21: dup
+      22: aload_0
+      23: getfield      #24                 // Field filesDir:Ljava/io/File;
+      26: ldc_w         #279                // String mcp/token
+      29: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+      32: invokestatic  #285                // Method com/hcbiu/elcton/McpToken.loadOrCreate:(Ljava/io/File;)Ljava/lang/String;
+      35: astore        5
+      37: new           #287                // class com/hcbiu/elcton/DiagnosticTools
+      40: dup
+      41: aload_0
+      42: getfield      #24                 // Field filesDir:Ljava/io/File;
+      45: aload_0
+      46: invokedynamic #299,  0            // InvokeDynamic #2:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function1;
+      51: aload_0
+      52: invokedynamic #307,  0            // InvokeDynamic #3:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0;
+      57: aload_0
+      58: invokedynamic #312,  0            // InvokeDynamic #4:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0;
+      63: invokespecial #315                // Method com/hcbiu/elcton/DiagnosticTools."<init>":(Ljava/io/File;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+      66: astore        6
+      68: aload_0
+      69: getfield      #189                // Field actions:Lcom/hcbiu/elcton/McpToolProvider;
+      72: dup
+      73: ifnull        115
+      76: astore        7
+      78: iconst_0
+      79: istore        8
+      81: new           #317                // class com/hcbiu/elcton/CombinedMcpTools
+      84: dup
+      85: iconst_2
+      86: anewarray     #198                // class com/hcbiu/elcton/McpToolProvider
+      89: astore        9
+      91: aload         9
+      93: iconst_0
+      94: aload         6
+      96: aastore
+      97: aload         9
+      99: iconst_1
+     100: aload         7
+     102: aastore
+     103: aload         9
+     105: invokespecial #320                // Method com/hcbiu/elcton/CombinedMcpTools."<init>":([Lcom/hcbiu/elcton/McpToolProvider;)V
+     108: nop
+     109: checkcast     #198                // class com/hcbiu/elcton/McpToolProvider
+     112: goto          121
+     115: pop
+     116: aload         6
+     118: checkcast     #198                // class com/hcbiu/elcton/McpToolProvider
+     121: astore        10
+     123: aload_0
+     124: new           #322                // class com/hcbiu/elcton/DiagnosticMcpServer
+     127: dup
+     128: aload         5
+     130: aload         10
+     132: sipush        8766
+     135: invokespecial #325                // Method com/hcbiu/elcton/DiagnosticMcpServer."<init>":(Ljava/lang/String;Lcom/hcbiu/elcton/McpToolProvider;I)V
+     138: putfield      #178                // Field server:Lcom/hcbiu/elcton/DiagnosticMcpServer;
+     141: aload_0
+     142: getfield      #178                // Field server:Lcom/hcbiu/elcton/DiagnosticMcpServer;
+     145: dup
+     146: invokestatic  #329                // Method kotlin/jvm/internal/Intrinsics.checkNotNull:(Ljava/lang/Object;)V
+     149: invokevirtual #331                // Method com/hcbiu/elcton/DiagnosticMcpServer.start:()I
+     152: istore        5
+     154: aload_0
+     155: getfield      #114                // Field startupError:Ljava/lang/String;
+     158: ldc_w         #333                // String mcp:
+     161: iconst_0
+     162: iconst_2
+     163: aconst_null
+     164: invokestatic  #339                // Method kotlin/text/StringsKt.startsWith$default:(Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Z
+     167: ifeq          176
+     170: aload_0
+     171: ldc           #111                // String
+     173: putfield      #114                // Field startupError:Ljava/lang/String;
+     176: ldc_w         #341                // String ElctonMcp
+     179: new           #225                // class java/lang/StringBuilder
+     182: dup
+     183: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+     186: ldc_w         #343                // String MCP listening on 127.0.0.1:
+     189: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     192: iload         5
+     194: invokevirtual #346                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+     197: ldc_w         #348                // String ; token=<redacted>; read-only
+     200: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     203: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     206: invokestatic  #354                // Method android/util/Log.i:(Ljava/lang/String;Ljava/lang/String;)I
+     209: pop
+     210: iconst_1
+     211: istore        5
+     213: goto          286
+     216: astore        6
+     218: aload_0
+     219: new           #225                // class java/lang/StringBuilder
+     222: dup
+     223: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+     226: ldc_w         #333                // String mcp:
+     229: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     232: aload         6
+     234: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     237: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     240: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     243: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     246: putfield      #114                // Field startupError:Ljava/lang/String;
+     249: ldc_w         #341                // String ElctonMcp
+     252: new           #225                // class java/lang/StringBuilder
+     255: dup
+     256: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+     259: ldc_w         #356                // String MCP startup failed:
+     262: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     265: aload         6
+     267: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     270: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     273: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     276: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     279: invokestatic  #359                // Method android/util/Log.w:(Ljava/lang/String;Ljava/lang/String;)I
+     282: pop
+     283: iconst_0
+     284: istore        5
+     286: iload         5
+     288: nop
+     289: istore_3
+     290: aload_2
+     291: monitorexit
+     292: iload_3
+     293: goto          303
+     296: astore        5
+     298: aload_2
+     299: monitorexit
+     300: aload         5
+     302: athrow
+     303: istore_1
+     304: aload_0
+     305: getfield      #67                 // Field lock:Ljava/lang/Object;
+     308: astore_2
+     309: aload_2
+     310: monitorenter
+     311: nop
+     312: iconst_0
+     313: istore_3
+     314: aload_0
+     315: getfield      #363                // Field revision:J
+     318: lstore        5
+     320: aload_0
+     321: lload         5
+     323: lconst_1
+     324: ladd
+     325: putfield      #363                // Field revision:J
+     328: lload         5
+     330: lstore_3
+     331: aload_2
+     332: monitorexit
+     333: lload_3
+     334: goto          344
+     337: astore        7
+     339: aload_2
+     340: monitorexit
+     341: aload         7
+     343: athrow
+     344: pop2
+     345: aload_0
+     346: invokespecial #366                // Method persistLater:()V
+     349: iload_1
+     350: ireturn
+    Exception table:
+       from    to  target type
+          10   213   216   Class java/lang/Exception
+           7   290   296   any
+         296   298   296   any
+         311   331   337   any
+         337   339   337   any
+
+  public final void stopListener();
+    Code:
+       0: aload_0
+       1: getfield      #146                // Field listenerLock:Ljava/lang/Object;
+       4: astore_1
+       5: aload_1
+       6: monitorenter
+       7: nop
+       8: iconst_0
+       9: istore_2
+      10: aload_0
+      11: getfield      #178                // Field server:Lcom/hcbiu/elcton/DiagnosticMcpServer;
+      14: dup
+      15: ifnull        27
+      18: invokevirtual #381                // Method com/hcbiu/elcton/DiagnosticMcpServer.stop:()V
+      21: getstatic     #194                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+      24: goto          29
+      27: pop
+      28: aconst_null
+      29: astore_2
+      30: aload_1
+      31: monitorexit
+      32: goto          42
+      35: astore        4
+      37: aload_1
+      38: monitorexit
+      39: aload         4
+      41: athrow
+      42: aload_0
+      43: getfield      #67                 // Field lock:Ljava/lang/Object;
+      46: astore_1
+      47: aload_1
+      48: monitorenter
+      49: nop
+      50: iconst_0
+      51: istore_2
+      52: aload_0
+      53: getfield      #363                // Field revision:J
+      56: lstore        4
+      58: aload_0
+      59: lload         4
+      61: lconst_1
+      62: ladd
+      63: putfield      #363                // Field revision:J
+      66: lload         4
+      68: lstore_2
+      69: aload_1
+      70: monitorexit
+      71: lload_2
+      72: goto          82
+      75: astore        6
+      77: aload_1
+      78: monitorexit
+      79: aload         6
+      81: athrow
+      82: pop2
+      83: aload_0
+      84: invokespecial #366                // Method persistLater:()V
+      87: return
+    Exception table:
+       from    to  target type
+           7    30    35   any
+          35    37    35   any
+          49    69    75   any
+          75    77    75   any
+
+  public final void observe(java.lang.String, java.lang.String, boolean, boolean, int);
+    Code:
+       0: aload_1
+       1: ldc           #72                 // String status
+       3: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_2
+       7: ldc_w         #387                // String detail
+      10: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      13: aload_0
+      14: getfield      #67                 // Field lock:Ljava/lang/Object;
+      17: astore        6
+      19: aload         6
+      21: monitorenter
+      22: nop
+      23: iconst_0
+      24: istore        7
+      26: aload_0
+      27: new           #69                 // class org/json/JSONObject
+      30: dup
+      31: aload_0
+      32: getfield      #109                // Field snapshot:Lorg/json/JSONObject;
+      35: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+      38: invokespecial #389                // Method org/json/JSONObject."<init>":(Ljava/lang/String;)V
+      41: ldc           #72                 // String status
+      43: aload_1
+      44: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      47: ldc_w         #387                // String detail
+      50: aload_2
+      51: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      54: ldc           #95                 // String ready
+      56: iload_3
+      57: invokevirtual #98                 // Method org/json/JSONObject.put:(Ljava/lang/String;Z)Lorg/json/JSONObject;
+      60: ldc           #100                // String busy
+      62: iload         4
+      64: invokevirtual #98                 // Method org/json/JSONObject.put:(Ljava/lang/String;Z)Lorg/json/JSONObject;
+      67: ldc           #102                // String deviceCount
+      69: iload         5
+      71: invokevirtual #105                // Method org/json/JSONObject.put:(Ljava/lang/String;I)Lorg/json/JSONObject;
+      74: ldc           #84                 // String timestampMs
+      76: invokestatic  #90                 // Method java/lang/System.currentTimeMillis:()J
+      79: invokevirtual #93                 // Method org/json/JSONObject.put:(Ljava/lang/String;J)Lorg/json/JSONObject;
+      82: putfield      #109                // Field snapshot:Lorg/json/JSONObject;
+      85: aload_0
+      86: getfield      #363                // Field revision:J
+      89: lstore        9
+      91: aload_0
+      92: lload         9
+      94: lconst_1
+      95: ladd
+      96: putfield      #363                // Field revision:J
+      99: lload         9
+     101: lstore        7
+     103: aload         6
+     105: monitorexit
+     106: lload         7
+     108: goto          119
+     111: astore        11
+     113: aload         6
+     115: monitorexit
+     116: aload         11
+     118: athrow
+     119: pop2
+     120: aload_0
+     121: invokespecial #366                // Method persistLater:()V
+     124: return
+    Exception table:
+       from    to  target type
+          22   103   111   any
+         111   113   111   any
+
+  public final void record(com.hcbiu.elcton.WearErrorRecord);
+    Code:
+       0: aload_1
+       1: ldc_w         #393                // String record
+       4: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_0
+       8: getfield      #67                 // Field lock:Ljava/lang/Object;
+      11: astore_3
+      12: aload_3
+      13: monitorenter
+      14: nop
+      15: iconst_0
+      16: istore        4
+      18: aload_0
+      19: aload_1
+      20: invokevirtual #398                // Method com/hcbiu/elcton/WearErrorRecord.toJson:()Lorg/json/JSONObject;
+      23: putfield      #262                // Field lastError:Lorg/json/JSONObject;
+      26: aload_0
+      27: new           #69                 // class org/json/JSONObject
+      30: dup
+      31: aload_0
+      32: getfield      #109                // Field snapshot:Lorg/json/JSONObject;
+      35: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+      38: invokespecial #389                // Method org/json/JSONObject."<init>":(Ljava/lang/String;)V
+      41: ldc           #80                 // String phase
+      43: aload_1
+      44: invokevirtual #401                // Method com/hcbiu/elcton/WearErrorRecord.getPhase:()Ljava/lang/String;
+      47: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      50: ldc           #84                 // String timestampMs
+      52: aload_1
+      53: invokevirtual #404                // Method com/hcbiu/elcton/WearErrorRecord.getTimestampMs:()J
+      56: invokevirtual #93                 // Method org/json/JSONObject.put:(Ljava/lang/String;J)Lorg/json/JSONObject;
+      59: putfield      #109                // Field snapshot:Lorg/json/JSONObject;
+      62: aload_0
+      63: getfield      #363                // Field revision:J
+      66: lstore        6
+      68: aload_0
+      69: lload         6
+      71: lconst_1
+      72: ladd
+      73: putfield      #363                // Field revision:J
+      76: lload         6
+      78: lstore        4
+      80: aload_3
+      81: monitorexit
+      82: lload         4
+      84: goto          94
+      87: astore        8
+      89: aload_3
+      90: monitorexit
+      91: aload         8
+      93: athrow
+      94: pop2
+      95: nop
+      96: aload_0
+      97: getfield      #223                // Field journal:Lcom/hcbiu/elcton/ErrorJournal;
+     100: dup
+     101: ifnonnull     145
+     104: pop
+     105: new           #209                // class com/hcbiu/elcton/ErrorJournal
+     108: dup
+     109: new           #211                // class java/io/File
+     112: dup
+     113: aload_0
+     114: getfield      #24                 // Field filesDir:Ljava/io/File;
+     117: ldc           #213                // String diagnostics/wear-errors.jsonl
+     119: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+     122: iconst_0
+     123: iconst_2
+     124: aconst_null
+     125: invokespecial #219                // Method com/hcbiu/elcton/ErrorJournal."<init>":(Ljava/io/File;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+     128: astore        4
+     130: aload         4
+     132: astore        6
+     134: iconst_0
+     135: istore        7
+     137: aload_0
+     138: aload         6
+     140: putfield      #223                // Field journal:Lcom/hcbiu/elcton/ErrorJournal;
+     143: aload         4
+     145: astore_2
+     146: aload_2
+     147: aload_1
+     148: invokevirtual #406                // Method com/hcbiu/elcton/ErrorJournal.append:(Lcom/hcbiu/elcton/WearErrorRecord;)V
+     151: goto          188
+     154: astore_3
+     155: ldc_w         #341                // String ElctonMcp
+     158: new           #225                // class java/lang/StringBuilder
+     161: dup
+     162: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+     165: ldc_w         #408                // String Cannot persist full SDK error:
+     168: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     171: aload_3
+     172: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     175: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     178: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     181: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     184: invokestatic  #359                // Method android/util/Log.w:(Ljava/lang/String;Ljava/lang/String;)I
+     187: pop
+     188: aload_0
+     189: invokespecial #366                // Method persistLater:()V
+     192: return
+    Exception table:
+       from    to  target type
+          14    80    87   any
+          87    89    87   any
+          95   151   154   Class java/lang/Exception
+
+  public final java.lang.String latestFull();
+    Code:
+       0: aload_0
+       1: getfield      #67                 // Field lock:Ljava/lang/Object;
+       4: astore_1
+       5: aload_1
+       6: monitorenter
+       7: nop
+       8: iconst_0
+       9: istore_2
+      10: aload_0
+      11: getfield      #262                // Field lastError:Lorg/json/JSONObject;
+      14: dup
+      15: ifnull        29
+      18: ldc_w         #415                // String full
+      21: ldc           #111                // String
+      23: invokevirtual #419                // Method org/json/JSONObject.optString:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      26: goto          31
+      29: pop
+      30: aconst_null
+      31: dup
+      32: ifnonnull     38
+      35: pop
+      36: ldc           #111                // String
+      38: nop
+      39: astore_2
+      40: aload_1
+      41: monitorexit
+      42: aload_2
+      43: goto          51
+      46: astore_3
+      47: aload_1
+      48: monitorexit
+      49: aload_3
+      50: athrow
+      51: areturn
+    Exception table:
+       from    to  target type
+           7    40    46   any
+          46    47    46   any
+
+  public final org.json.JSONArray errorTail(int);
+    Code:
+       0: aload_0
+       1: getfield      #223                // Field journal:Lcom/hcbiu/elcton/ErrorJournal;
+       4: dup
+       5: ifnull        16
+       8: iload_1
+       9: invokevirtual #249                // Method com/hcbiu/elcton/ErrorJournal.tail:(I)Lorg/json/JSONArray;
+      12: dup
+      13: ifnonnull     96
+      16: pop
+      17: aload_0
+      18: getfield      #67                 // Field lock:Ljava/lang/Object;
+      21: astore_2
+      22: aload_2
+      23: monitorenter
+      24: nop
+      25: iconst_0
+      26: istore_3
+      27: new           #251                // class org/json/JSONArray
+      30: dup
+      31: invokespecial #422                // Method org/json/JSONArray."<init>":()V
+      34: astore        4
+      36: aload         4
+      38: astore        5
+      40: iconst_0
+      41: istore        6
+      43: aload_0
+      44: getfield      #262                // Field lastError:Lorg/json/JSONObject;
+      47: dup
+      48: ifnull        77
+      51: astore        7
+      53: iconst_0
+      54: istore        8
+      56: aload         5
+      58: new           #69                 // class org/json/JSONObject
+      61: dup
+      62: aload         7
+      64: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+      67: invokespecial #389                // Method org/json/JSONObject."<init>":(Ljava/lang/String;)V
+      70: invokevirtual #425                // Method org/json/JSONArray.put:(Ljava/lang/Object;)Lorg/json/JSONArray;
+      73: pop
+      74: goto          79
+      77: pop
+      78: nop
+      79: aload         4
+      81: nop
+      82: astore_3
+      83: aload_2
+      84: monitorexit
+      85: aload_3
+      86: goto          96
+      89: astore        4
+      91: aload_2
+      92: monitorexit
+      93: aload         4
+      95: athrow
+      96: areturn
+    Exception table:
+       from    to  target type
+          24    83    89   any
+          89    91    89   any
+
+  public final org.json.JSONObject read();
+    Code:
+       0: aload_0
+       1: getfield      #67                 // Field lock:Ljava/lang/Object;
+       4: astore_1
+       5: aload_1
+       6: monitorenter
+       7: nop
+       8: iconst_0
+       9: istore_2
+      10: new           #69                 // class org/json/JSONObject
+      13: dup
+      14: aload_0
+      15: getfield      #109                // Field snapshot:Lorg/json/JSONObject;
+      18: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+      21: invokespecial #389                // Method org/json/JSONObject."<init>":(Ljava/lang/String;)V
+      24: ldc_w         #433                // String latestError
+      27: aload_0
+      28: getfield      #262                // Field lastError:Lorg/json/JSONObject;
+      31: dup
+      32: ifnull        66
+      35: astore_3
+      36: astore        4
+      38: astore        5
+      40: iconst_0
+      41: istore        6
+      43: new           #69                 // class org/json/JSONObject
+      46: dup
+      47: aload_3
+      48: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+      51: invokespecial #389                // Method org/json/JSONObject."<init>":(Ljava/lang/String;)V
+      54: astore        7
+      56: aload         5
+      58: aload         4
+      60: aload         7
+      62: nop
+      63: goto          70
+      66: pop
+      67: getstatic     #436                // Field org/json/JSONObject.NULL:Ljava/lang/Object;
+      70: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      73: ldc_w         #438                // String mcp
+      76: new           #69                 // class org/json/JSONObject
+      79: dup
+      80: invokespecial #70                 // Method org/json/JSONObject."<init>":()V
+      83: ldc_w         #440                // String host
+      86: ldc_w         #442                // String 127.0.0.1
+      89: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      92: ldc_w         #443                // String port
+      95: sipush        8766
+      98: invokevirtual #105                // Method org/json/JSONObject.put:(Ljava/lang/String;I)Lorg/json/JSONObject;
+     101: ldc_w         #445                // String running
+     104: aload_0
+     105: getfield      #178                // Field server:Lcom/hcbiu/elcton/DiagnosticMcpServer;
+     108: dup
+     109: ifnull        127
+     112: invokevirtual #448                // Method com/hcbiu/elcton/DiagnosticMcpServer.getRunning:()Z
+     115: iconst_1
+     116: if_icmpne     123
+     119: iconst_1
+     120: goto          129
+     123: iconst_0
+     124: goto          129
+     127: pop
+     128: iconst_0
+     129: invokevirtual #98                 // Method org/json/JSONObject.put:(Ljava/lang/String;Z)Lorg/json/JSONObject;
+     132: ldc_w         #449                // String readOnly
+     135: iconst_1
+     136: invokevirtual #98                 // Method org/json/JSONObject.put:(Ljava/lang/String;Z)Lorg/json/JSONObject;
+     139: ldc_w         #450                // String startupError
+     142: aload_0
+     143: getfield      #114                // Field startupError:Ljava/lang/String;
+     146: astore        8
+     148: aload         8
+     150: astore        9
+     152: astore        10
+     154: astore        7
+     156: astore        4
+     158: astore        5
+     160: iconst_0
+     161: istore_3
+     162: aload         9
+     164: checkcast     #452                // class java/lang/CharSequence
+     167: invokeinterface #453,  1          // InterfaceMethod java/lang/CharSequence.length:()I
+     172: ifle          179
+     175: iconst_1
+     176: goto          180
+     179: iconst_0
+     180: nop
+     181: istore        11
+     183: aload         5
+     185: aload         4
+     187: aload         7
+     189: aload         10
+     191: iload         11
+     193: ifeq          201
+     196: aload         8
+     198: goto          202
+     201: aconst_null
+     202: dup
+     203: ifnonnull     210
+     206: pop
+     207: getstatic     #436                // Field org/json/JSONObject.NULL:Ljava/lang/Object;
+     210: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+     213: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+     216: astore        12
+     218: aload         12
+     220: astore        8
+     222: iconst_0
+     223: istore        9
+     225: nop
+     226: aload         8
+     228: ldc_w         #455                // String p2p
+     231: aload_0
+     232: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+     235: lconst_0
+     236: sipush        128
+     239: invokevirtual #460                // Method com/hcbiu/elcton/P2pTrace.read:(JI)Lorg/json/JSONObject;
+     242: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+     245: pop
+     246: goto          250
+     249: astore_3
+     250: aload         12
+     252: nop
+     253: astore_2
+     254: aload_1
+     255: monitorexit
+     256: aload_2
+     257: goto          265
+     260: astore_3
+     261: aload_1
+     262: monitorexit
+     263: aload_3
+     264: athrow
+     265: dup
+     266: ldc_w         #462                // String synchronized(...)
+     269: invokestatic  #465                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+     272: areturn
+    Exception table:
+       from    to  target type
+         225   246   249   Class java/lang/Throwable
+           7   254   260   any
+         260   261   260   any
+
+  public final org.json.JSONObject versionInfo();
+    Code:
+       0: new           #69                 // class org/json/JSONObject
+       3: dup
+       4: invokespecial #70                 // Method org/json/JSONObject."<init>":()V
+       7: ldc_w         #473                // String packageName
+      10: ldc_w         #475                // String host.test.only
+      13: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      16: ldc_w         #477                // String versionName
+      19: ldc_w         #479                // String host-test
+      22: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      25: ldc_w         #481                // String versionCode
+      28: iconst_0
+      29: invokevirtual #105                // Method org/json/JSONObject.put:(Ljava/lang/String;I)Lorg/json/JSONObject;
+      32: ldc_w         #483                // String buildType
+      35: ldc_w         #479                // String host-test
+      38: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      41: ldc_w         #485                // String wearEngineSdk
+      44: ldc_w         #487                // String 5.0.3.301
+      47: invokevirtual #78                 // Method org/json/JSONObject.put:(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+      50: dup
+      51: ldc_w         #489                // String put(...)
+      54: invokestatic  #465                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      57: areturn
+
+  private final void persistLater();
+    Code:
+       0: aload_0
+       1: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+       4: iconst_0
+       5: iconst_1
+       6: invokevirtual #493                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+       9: ifne          13
+      12: return
+      13: aload_0
+      14: getfield      #134                // Field writer:Ljava/util/concurrent/ExecutorService;
+      17: aload_0
+      18: invokedynamic #503,  0            // InvokeDynamic #5:run:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Ljava/lang/Runnable;
+      23: invokeinterface #509,  2          // InterfaceMethod java/util/concurrent/ExecutorService.execute:(Ljava/lang/Runnable;)V
+      28: return
+
+  private static final long p2pTrace_delegate$lambda$0$0();
+    Code:
+       0: invokestatic  #90                 // Method java/lang/System.currentTimeMillis:()J
+       3: lreturn
+
+  private static final long p2pTrace_delegate$lambda$0$1();
+    Code:
+       0: invokestatic  #514                // Method java/lang/System.nanoTime:()J
+       3: ldc_w         #515                // int 1000000
+       6: i2l
+       7: ldiv
+       8: lreturn
+
+  private static final kotlin.Unit p2pTrace_delegate$lambda$0$2$0(com.hcbiu.elcton.DiagnosticRuntime);
+    Code:
+       0: nop
+       1: aload_0
+       2: invokespecial #366                // Method persistLater:()V
+       5: goto          9
+       8: astore_1
+       9: getstatic     #194                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+      12: areturn
+    Exception table:
+       from    to  target type
+           0     5     8   Class java/lang/Throwable
+
+  private static final com.hcbiu.elcton.P2pTrace p2pTrace_delegate$lambda$0(com.hcbiu.elcton.DiagnosticRuntime);
+    Code:
+       0: new           #170                // class com/hcbiu/elcton/P2pTrace
+       3: dup
+       4: aload_0
+       5: getfield      #33                 // Field traceOrigin:Ljava/lang/String;
+       8: invokedynamic #526,  0            // InvokeDynamic #6:invoke:()Lkotlin/jvm/functions/Function0;
+      13: invokedynamic #530,  0            // InvokeDynamic #7:invoke:()Lkotlin/jvm/functions/Function0;
+      18: invokespecial #533                // Method com/hcbiu/elcton/P2pTrace."<init>":(Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+      21: astore_1
+      22: aload_1
+      23: astore_2
+      24: iconst_0
+      25: istore_3
+      26: aload_2
+      27: aload_0
+      28: invokedynamic #539,  0            // InvokeDynamic #8:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0;
+      33: invokevirtual #543                // Method com/hcbiu/elcton/P2pTrace.onChanged:(Lkotlin/jvm/functions/Function0;)V
+      36: nop
+      37: aload_1
+      38: areturn
+
+  private static final java.lang.Thread writer$lambda$0(java.lang.Runnable);
+    Code:
+       0: new           #548                // class java/lang/Thread
+       3: dup
+       4: aload_0
+       5: ldc_w         #550                // String elcton-diagnostic-file
+       8: invokespecial #553                // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;Ljava/lang/String;)V
+      11: astore_1
+      12: aload_1
+      13: astore_2
+      14: iconst_0
+      15: istore_3
+      16: aload_2
+      17: iconst_1
+      18: invokevirtual #556                // Method java/lang/Thread.setDaemon:(Z)V
+      21: aload_1
+      22: areturn
+
+  private static final org.json.JSONArray startListener$lambda$0$0(com.hcbiu.elcton.DiagnosticRuntime, int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokevirtual #563                // Method errorTail:(I)Lorg/json/JSONArray;
+       5: areturn
+
+  private static final org.json.JSONObject startListener$lambda$0$1(com.hcbiu.elcton.DiagnosticRuntime);
+    Code:
+       0: aload_0
+       1: invokevirtual #565                // Method read:()Lorg/json/JSONObject;
+       4: areturn
+
+  private static final org.json.JSONObject startListener$lambda$0$2(com.hcbiu.elcton.DiagnosticRuntime);
+    Code:
+       0: aload_0
+       1: invokevirtual #567                // Method versionInfo:()Lorg/json/JSONObject;
+       4: areturn
+
+  private static final boolean persistLater$lambda$0$1(com.hcbiu.elcton.DiagnosticRuntime, java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc_w         #571                // String line
+       4: invokestatic  #16                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: new           #211                // class java/io/File
+      10: dup
+      11: aload_0
+      12: getfield      #24                 // Field filesDir:Ljava/io/File;
+      15: ldc_w         #573                // String diagnostics/p2p-trace.jsonl
+      18: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+      21: astore_2
+      22: aload_1
+      23: getstatic     #579                // Field kotlin/text/Charsets.UTF_8:Ljava/nio/charset/Charset;
+      26: invokevirtual #583                // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+      29: dup
+      30: ldc_w         #585                // String getBytes(...)
+      33: invokestatic  #465                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      36: astore_3
+      37: aload_2
+      38: invokevirtual #587                // Method java/io/File.length:()J
+      41: aload_3
+      42: arraylength
+      43: i2l
+      44: ladd
+      45: ldc2_w        #588                // long 2097152l
+      48: lcmp
+      49: ifle          56
+      52: iconst_0
+      53: goto          78
+      56: aload_2
+      57: invokevirtual #593                // Method java/io/File.getParentFile:()Ljava/io/File;
+      60: dup
+      61: ifnull        71
+      64: invokevirtual #596                // Method java/io/File.mkdirs:()Z
+      67: pop
+      68: goto          72
+      71: pop
+      72: aload_2
+      73: aload_3
+      74: invokestatic  #602                // Method kotlin/io/FilesKt.appendBytes:(Ljava/io/File;[B)V
+      77: iconst_1
+      78: ireturn
+
+  private static final void persistLater$lambda$0(com.hcbiu.elcton.DiagnosticRuntime);
+    Code:
+       0: ldc2_w        #606                // long -1l
+       3: lstore_1
+       4: iconst_0
+       5: istore_3
+       6: nop
+       7: nop
+       8: aload_0
+       9: getfield      #67                 // Field lock:Ljava/lang/Object;
+      12: astore        7
+      14: aload         7
+      16: monitorenter
+      17: nop
+      18: iconst_0
+      19: istore        9
+      21: aload_0
+      22: getfield      #363                // Field revision:J
+      25: lstore        9
+      27: aload         7
+      29: monitorexit
+      30: lload         9
+      32: goto          43
+      35: astore        11
+      37: aload         7
+      39: monitorexit
+      40: aload         11
+      42: athrow
+      43: lstore        4
+      45: aload_0
+      46: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+      49: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
+      52: lstore        6
+      54: aload_0
+      55: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+      58: aload_0
+      59: invokedynamic #616,  0            // InvokeDynamic #9:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function1;
+      64: invokevirtual #620                // Method com/hcbiu/elcton/P2pTrace.persist:(Lkotlin/jvm/functions/Function1;)V
+      67: aload_0
+      68: getfield      #27                 // Field stateWriter:Lkotlin/jvm/functions/Function2;
+      71: new           #211                // class java/io/File
+      74: dup
+      75: aload_0
+      76: getfield      #24                 // Field filesDir:Ljava/io/File;
+      79: ldc_w         #622                // String diagnostics/state.json
+      82: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+      85: aload_0
+      86: invokevirtual #565                // Method read:()Lorg/json/JSONObject;
+      89: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+      92: dup
+      93: ldc_w         #624                // String toString(...)
+      96: invokestatic  #465                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      99: invokeinterface #627,  3          // InterfaceMethod kotlin/jvm/functions/Function2.invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     104: pop
+     105: lload         4
+     107: lstore_1
+     108: aload_0
+     109: getfield      #67                 // Field lock:Ljava/lang/Object;
+     112: astore        11
+     114: aload         11
+     116: monitorenter
+     117: nop
+     118: iconst_0
+     119: istore        12
+     121: aload_0
+     122: getfield      #363                // Field revision:J
+     125: lstore        12
+     127: aload         11
+     129: monitorexit
+     130: lload         12
+     132: goto          143
+     135: astore        14
+     137: aload         11
+     139: monitorexit
+     140: aload         14
+     142: athrow
+     143: lload         4
+     145: lcmp
+     146: ifne          7
+     149: aload_0
+     150: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+     153: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
+     156: lload         6
+     158: lcmp
+     159: ifne          7
+     162: goto          165
+     165: aload_0
+     166: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+     169: iconst_0
+     170: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+     173: lload_1
+     174: lconst_0
+     175: lcmp
+     176: iflt          223
+     179: aload_0
+     180: getfield      #67                 // Field lock:Ljava/lang/Object;
+     183: astore        6
+     185: aload         6
+     187: monitorenter
+     188: nop
+     189: iconst_0
+     190: istore        7
+     192: aload_0
+     193: getfield      #363                // Field revision:J
+     196: lstore        7
+     198: aload         6
+     200: monitorexit
+     201: lload         7
+     203: goto          214
+     206: astore        9
+     208: aload         6
+     210: monitorexit
+     211: aload         9
+     213: athrow
+     214: lload_1
+     215: lcmp
+     216: ifeq          223
+     219: aload_0
+     220: invokespecial #366                // Method persistLater:()V
+     223: goto          343
+     226: astore        5
+     228: iconst_1
+     229: istore_3
+     230: ldc_w         #341                // String ElctonMcp
+     233: new           #225                // class java/lang/StringBuilder
+     236: dup
+     237: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+     240: ldc_w         #632                // String Cannot persist diagnostic state:
+     243: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     246: aload         5
+     248: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+     251: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+     254: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     257: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     260: invokestatic  #359                // Method android/util/Log.w:(Ljava/lang/String;Ljava/lang/String;)I
+     263: pop
+     264: aload_0
+     265: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+     268: iconst_0
+     269: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+     272: nop
+     273: goto          343
+     276: astore        5
+     278: aload_0
+     279: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+     282: iconst_0
+     283: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+     286: iload_3
+     287: ifne          340
+     290: lload_1
+     291: lconst_0
+     292: lcmp
+     293: iflt          340
+     296: aload_0
+     297: getfield      #67                 // Field lock:Ljava/lang/Object;
+     300: astore        7
+     302: aload         7
+     304: monitorenter
+     305: nop
+     306: iconst_0
+     307: istore        9
+     309: aload_0
+     310: getfield      #363                // Field revision:J
+     313: lstore        9
+     315: aload         7
+     317: monitorexit
+     318: lload         9
+     320: goto          331
+     323: astore        11
+     325: aload         7
+     327: monitorexit
+     328: aload         11
+     330: athrow
+     331: lload_1
+     332: lcmp
+     333: ifeq          340
+     336: aload_0
+     337: invokespecial #366                // Method persistLater:()V
+     340: aload         5
+     342: athrow
+     343: return
+    Exception table:
+       from    to  target type
+          17    27    35   any
+          35    37    35   any
+         117   127   135   any
+         135   137   135   any
+         188   198   206   any
+         206   208   206   any
+           6   165   226   Class java/lang/Exception
+         305   315   323   any
+         323   325   323   any
+           6   165   276   any
+         226   264   276   any
+         276   278   276   any
+}

@@ -66,6 +66,37 @@ for _path, _commit in [(ACTIVITY, '1e14980f19cf5c510722d9521d9762586a3a91eb'), (
     assert digest(_change['after'].encode('utf-8')) == _change['after_sha256']
 
 
+# R6 migrates ONLY the current identity data after the historical record above
+# has passed every original integrity predicate. Its old record stays immutable.
+R6 = json.loads((ROOT / 'qa/p2p-trace-0210/r6/current-identity.json').read_text())
+assert R6['schema'] == 1 and R6['base'] == 'bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
+assert R6['release'] == '0.2.10' and R6['version_code'] == 12
+assert R6['old_manifest'] == 'qa/release-029/approved-release-delta.json'
+assert digest((ROOT / R6['old_manifest']).read_bytes()) == R6['old_manifest_sha256']
+R6_SOURCES = R6['source_identities']
+R6_RUNTIME = 'app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt'
+R6_TRACE = 'app/src/main/java/com/hcbiu/elcton/P2pTrace.kt'
+assert set(R6_SOURCES) == {PROBE, ENGINE, R6_RUNTIME, R6_TRACE}
+assert R6_SOURCES[PROBE]['old_sha256'] == RELEASE['patches'][PROBE][0]['after_sha256']
+for _path in (ENGINE, R6_RUNTIME):
+    assert R6_SOURCES[_path]['old_sha256'] == RELEASE['guarded_source_sha256'][_path]
+assert R6_SOURCES[R6_TRACE]['old_sha256'] is None
+assert digest(R6['probe_current_after'].encode('utf-8')) == R6_SOURCES[PROBE]['current_sha256']
+R6_VERSION = R6['version_identity']
+assert R6_VERSION['path'] == 'app/build.gradle.kts'
+assert R6_VERSION['old_sha256'] == RELEASE['guarded_source_sha256'][R6_VERSION['path']]
+assert (R6_VERSION['old_code'], R6_VERSION['current_code'], R6_VERSION['old_name'], R6_VERSION['current_name']) == (11, 12, '0.2.9', '0.2.10')
+# A private current copy changes exact SHA/snapshot values, never the predicates
+# below, immutable group, workflow/signing requirements, or old approvals.
+import copy
+RELEASE = copy.deepcopy(RELEASE)
+RELEASE['patches'][PROBE][0]['after'] = R6['probe_current_after']
+RELEASE['patches'][PROBE][0]['after_sha256'] = R6_SOURCES[PROBE]['current_sha256']
+for _path in (ENGINE, R6_RUNTIME, R6_TRACE):
+    RELEASE['guarded_source_sha256'][_path] = R6_SOURCES[_path]['current_sha256']
+RELEASE['guarded_source_sha256'][R6_VERSION['path']] = R6_VERSION['current_sha256']
+
+
 def reverse_exact(text, path):
     # Required order: complete release -> READY/KEEPALIVE -> observation -> 0.2.5.
     for change in reversed(RELEASE['patches'].get(path, [])):

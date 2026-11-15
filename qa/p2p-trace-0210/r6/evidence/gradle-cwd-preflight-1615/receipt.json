@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "java",
+    "-cp",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-jvm-green-20261115-1545/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+    "org.junit.runner.JUnitCore",
+    "com.hcbiu.elcton.P2pTraceRuntimeTest",
+    "com.hcbiu.elcton.P2pTraceTest"
+  ],
+  "cwd": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app",
+  "exit": 1,
+  "jar_sha256": "882ffe754d803697278c272ebf08023099e8613f88f59c7c1938a22dc28a7393",
+  "scope": "Real HOST JUnit source-path preflight with typical Gradle project cwd, not Android CI",
+  "raw_sha256": "650065961dbac5703059a0f3d23de35dba33a617ca56eaa6f43edd5e4ec440bd"
+}

@@ -1,0 +1,21 @@
+JUnit version 4.13.2
+....R6_HOST phase=ready mode=success adapterStale=true engineStale=null ready=true pending=false sends=1 rx=1 reg=1 errors=0 taskOk=1 taskFail=0 results=0 baselineEqual=true
+.R6_HOST phase=ready mode=failure adapterStale=true engineStale=true ready=true pending=false sends=1 rx=1 reg=1 errors=1 taskOk=0 taskFail=1 results=0 baselineEqual=true
+.R6_HOST phase=ready mode=result adapterStale=true engineStale=true ready=true pending=false sends=1 rx=1 reg=1 errors=0 taskOk=0 taskFail=0 results=1 baselineEqual=true
+.R6_HOST phase=retry mode=success adapterStale=true engineStale=null ready=false pending=true sends=2 rx=0 reg=1 errors=0 taskOk=1 taskFail=0 results=0 baselineEqual=true
+R6_HOST phase=retry mode=failure adapterStale=true engineStale=true ready=false pending=true sends=2 rx=0 reg=1 errors=1 taskOk=0 taskFail=1 results=0 baselineEqual=true
+R6_HOST phase=retry mode=result adapterStale=true engineStale=true ready=false pending=true sends=2 rx=0 reg=1 errors=0 taskOk=0 taskFail=0 results=1 baselineEqual=true
+R6_HOST phase=cancel mode=success adapterStale=true engineStale=null ready=false pending=false sends=1 rx=0 reg=1 errors=0 taskOk=1 taskFail=0 results=0 baselineEqual=true
+R6_HOST phase=cancel mode=failure adapterStale=true engineStale=true ready=false pending=false sends=1 rx=0 reg=1 errors=1 taskOk=0 taskFail=1 results=0 baselineEqual=true
+R6_HOST phase=cancel mode=result adapterStale=true engineStale=true ready=false pending=false sends=1 rx=0 reg=1 errors=0 taskOk=0 taskFail=0 results=1 baselineEqual=true
+R6_HOST phase=close mode=success adapterStale=true engineStale=null ready=false pending=false sends=1 rx=0 reg=1 errors=0 taskOk=1 taskFail=0 results=0 baselineEqual=true
+R6_HOST phase=close mode=failure adapterStale=true engineStale=true ready=false pending=false sends=1 rx=0 reg=1 errors=1 taskOk=0 taskFail=1 results=0 baselineEqual=true
+R6_HOST phase=close mode=result adapterStale=true engineStale=true ready=false pending=false sends=1 rx=0 reg=1 errors=0 taskOk=0 taskFail=0 results=1 baselineEqual=true
+.R6_HOST phase=current mode=success adapterStale=false engineStale=null ready=false pending=true sends=1 rx=0 reg=1 errors=0 taskOk=1 taskFail=0 results=0 baselineEqual=true
+R6_HOST phase=current mode=failure adapterStale=false engineStale=false ready=false pending=false sends=1 rx=0 reg=1 errors=1 taskOk=0 taskFail=1 results=0 baselineEqual=true
+R6_HOST phase=current mode=result adapterStale=false engineStale=false ready=false pending=true sends=1 rx=0 reg=1 errors=0 taskOk=0 taskFail=0 results=1 baselineEqual=true
+
+Time: 0.253
+
+OK (8 tests)
+

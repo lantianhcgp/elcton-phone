@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "actual_compile": true,
+  "reused": false,
+  "tests": 171,
+  "receipt_sha256": "a1955a8618a8a62256088bbd93f9edf123924fcb68ae7d3b4ce93c8b581eb03c",
+  "compile_log_sha256": "51220ed43d1cd6b2a30e609b03cac84d16bdca6355aaec5c18526437b79eb8dc",
+  "junit_log_sha256": "5bb2bd2725d55addb5e866ef6c253e5750c276acc859350ecbf21b06e3c8ace2"
+}

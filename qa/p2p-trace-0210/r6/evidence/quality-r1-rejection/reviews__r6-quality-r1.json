@@ -1,0 +1,246 @@
+{
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "Q-R6-001",
+      "severity": "medium",
+      "blocking": true,
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "line": 145,
+      "end_line": 154,
+      "related_paths": [
+        {
+          "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+          "line": 129
+        },
+        {
+          "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+          "line": 97,
+          "end_line": 105
+        }
+      ],
+      "problem": "trace-only emit 可在退出检查之后、writing 清零之前丢失 writer 唤醒。finally 只复查业务 revision，未复查已处理的 traceSeq。",
+      "impact": "末尾 P2P 事件虽保留在 bounded ring/pending，却可能一直未写入 p2p-trace.jsonl 或 state.json，直到下一次观察；若是 close 后最后回调并随后退出，诊断事件会丢失。此项不指称业务状态漂移。",
+      "proof": "静态确定性交错：line145 确认 seq=S 并 break；新 emit 将 seq 置 S+1 且 callback 在 line129 因 writing=true 返回；line151 清零；line154 revision 不变因此无新 writer。工具验证源码三处锚点与该调度状态；未伪称新 Kotlin race test。",
+      "recommendation": "后续授权修复同时记录已处理 traceSeq，在 writing 清零后复查 revision 与 traceSeq；保留失败落盘不自旋策略。增加 final sequence check 与释放 writing 之间 emit 的确定性 barrier 回归，不削弱原 assertion。"
+    }
+  ],
+  "missing": [],
+  "suggestions": [],
+  "summary": "独立 QUALITY R1 不通过：32 个当前输入 SHA 全匹配，完整读取当前四产品源码、新测试及辅助门禁；发现 1 个真实中等严重度诊断落盘竞态 Q-R6-001（DiagnosticRuntime.kt:129,145,150-154），最终 trace-only 事件可能丢失 writer 唤醒并滞留内存。未发现新增 PII/token 泄漏、业务 callback/Task/guard 漂移或云端 HOST fake 纳入问题。已核既有 HOST 171/appcwd7/Python133零skip/HTTP3784、adapter RED8/3→GREEN8、runtime4 与 watch445 原始证据及适用源码绑定，未重编译或补造绿灯。未来 Android CI/验签/设备验收是分离交付门，不列为 quality missing；未修改任何产品或原 assertion。",
+  "input_manifest_sha256": "48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027",
+  "verified_paths": [
+    "app/build.gradle.kts",
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt",
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt",
+    "qa/P2pCandidateBuildTest.kt",
+    "qa/diag_emulator_smoke.py",
+    "qa/diag_source_gate.py",
+    "qa/p2p-trace-0210/check_r6_scope.py",
+    "qa/p2p-trace-0210/generate_ci_baseline.py",
+    "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in",
+    "qa/p2p-trace-0210/r6/ci/pipeline.py",
+    "qa/p2p-trace-0210/r6/ci/r6_common.py",
+    "qa/p2p-trace-0210/r6/ci/self_test.py",
+    "qa/p2p-trace-0210/r6/ci/verify_r6.py",
+    "qa/p2p-trace-0210/r6/current-identity.json",
+    "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt",
+    "qa/p2p-trace-0210/register_r6_identity.py",
+    "qa/p2p-trace-0210/run_host.py",
+    "qa/p2p-trace-0210/run_native_host.py",
+    "qa/p2p-trace-0210/run_runtime_fault_host.py",
+    "qa/release-029/verify_apk.py",
+    "qa/test_mcp027_scope.py",
+    "qa/p2p-trace-0210/r6/ci/added-cases.json",
+    "qa/p2p-trace-0210/r6/reviews/input-r2/reviewed-manifest.json",
+    "qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff",
+    "qa/p2p-trace-0210/r6/reviews/r6-spec-r2.json",
+    "qa/p2p-trace-0210/r6/reviews/spec-r2-raw.txt",
+    "qa/p2p-trace-0210/r6/reviews/input-r2/new-diagnostic-test-path-fix.json",
+    "app/src/main/java/com/hcbiu/elcton/SendAttempts.kt",
+    "qa/p2p-trace-0210/runtime-fault-host/P2pRuntimeFaultTest.kt.in",
+    "qa/runtime_revision_host/DiagnosticRuntimeRevisionTest.kt.in",
+    "qa/p2p-trace-0210/r6/evidence/identity-migration/table.json",
+    ".github/workflows/build.yml",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/receipt.json",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/full-jvm/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/app-cwd.junit.log",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/python.raw.log",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/http.raw.log",
+    "qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/adapter-green-20261115-1544/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/runtime-final-1551/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/watch-frozen-445/raw.log"
+  ],
+  "evidence": [
+    {
+      "kind": "input_sha_readback",
+      "path": "qa/p2p-trace-0210/r6/reviews/input-r2/reviewed-manifest.json",
+      "sha256": "48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027",
+      "files": 32,
+      "mismatches": 0
+    },
+    {
+      "kind": "independent_spec_prerequisite",
+      "path": "qa/p2p-trace-0210/r6/reviews/r6-spec-r2.json",
+      "sha256": "ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0",
+      "passed": true,
+      "raw_path": "qa/p2p-trace-0210/r6/reviews/spec-r2-raw.txt",
+      "raw_sha256": "b48ede8e253b7b95dbe52cf821717218942e07fdf2046814387ac7617e76eaec"
+    },
+    {
+      "kind": "frozen_diff",
+      "path": "qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff",
+      "sha256": "0c9cbb6bdefaedfd438eb37a0bec19c7b5c59b782efb0b1f4870bcff942a532c"
+    },
+    {
+      "kind": "source_backed_static_interleaving",
+      "finding": "Q-R6-001",
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "lines": [
+        129,
+        145,
+        151,
+        154
+      ],
+      "runtime_replayed": false,
+      "source_anchors_verified": true,
+      "event_pending": true,
+      "callback_scheduled": false,
+      "finally_scheduled": false
+    },
+    {
+      "kind": "existing_host_regression_raw_readback",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/receipt.json",
+      "sha256": "bc02c0aa6de6e52ef91d328912e5f895e80ce8b6f4d7a7a6ea48c391213be20b",
+      "recorded_exits": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "jvm_tests": 171,
+      "app_cwd_tests": 7,
+      "python_tests": 133,
+      "python_skips": 0,
+      "http_assertions": 3784,
+      "full_jvm_source_rows_verified": 62,
+      "source_mismatches": 0,
+      "rerun": false
+    },
+    {
+      "kind": "raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/full-jvm/junit.log",
+      "sha256": "b2b72906e02efe8e024fc36301359f8750f3f5c0f62e45750d20525c4a8eba77",
+      "tests": 171
+    },
+    {
+      "kind": "raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/app-cwd.junit.log",
+      "sha256": "99f476875290847ed092886460e66d51b67c374a5f88597cc921c0db2dc047ea",
+      "line": 5,
+      "tests": 7
+    },
+    {
+      "kind": "raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/python.raw.log",
+      "sha256": "6741571055896ad9f9c9f2b5e797962c9d7cb0c3412c595b8555a2c7bb261a8e",
+      "line": 140,
+      "tests": 133,
+      "skips": 0
+    },
+    {
+      "kind": "raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/http.raw.log",
+      "sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+      "line": 1,
+      "assertions": 3784,
+      "all_raw_checks_passed": true
+    },
+    {
+      "kind": "adapter_red_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542/junit.log",
+      "sha256": "287ab26183d33d185e38922075890c430db77852669ef3792e0dc98a105a34c2",
+      "line": 43,
+      "tests": 8,
+      "failures": 3,
+      "source_archive_rows_verified": 26,
+      "rerun": false
+    },
+    {
+      "kind": "adapter_green_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/adapter-green-20261115-1544/junit.log",
+      "sha256": "7c8e707afb49dc51cb28cbab7eb0807480789d1babaf0d816fdca0ba21b2536e",
+      "line": 20,
+      "tests": 8,
+      "source_rows_verified": 26,
+      "rerun": false
+    },
+    {
+      "kind": "runtime_fault_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/runtime-final-1551/junit.log",
+      "sha256": "17ae88652461d47406136215ad7cad759a100e42e1be0d6c09d05844af253fb6",
+      "line": 10,
+      "tests": 4,
+      "source_rows_verified": 15,
+      "rerun": false,
+      "covers_final_trace_wakeup_window": false
+    },
+    {
+      "kind": "watch_raw_readback",
+      "path": "qa/p2p-trace-0210/r6/evidence/watch-frozen-445/raw.log",
+      "sha256": "201d9af9a8f4e1af6caa09fa94509e7b096050deaf72146b69e2be44060cf9c1",
+      "line": 2733,
+      "end_line": 2739,
+      "tests": 445,
+      "pass": 445,
+      "fail": 0,
+      "skip": 0,
+      "rerun": false,
+      "watch_input_hashes_recomputed_by_quality": false
+    },
+    {
+      "kind": "helper_test_registration_and_identity",
+      "path": "qa/p2p-trace-0210/r6/ci/verify_r6.py",
+      "line": 52,
+      "end_line": 138,
+      "original_labels": 153,
+      "new_labels": 19,
+      "strict_required_unique_labels": 172,
+      "source_labels_match": true,
+      "path_fix_exact_inverse_sha256": "d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43",
+      "identity_checks_all_true": true,
+      "staged_qa_kotlin": [
+        "qa/P2pCandidateBuildTest.kt",
+        "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt"
+      ]
+    },
+    {
+      "kind": "quality_raw",
+      "path": "qa/p2p-trace-0210/r6/reviews/quality-raw.txt",
+      "sha256": "bb6c2b373bbdcedf41d11a084ca6974409200cc2d07818ce9dcc56ad7cc9b5de",
+      "encoding": "ASCII"
+    }
+  ],
+  "delivery_ready": false,
+  "android_claims": false,
+  "review_axis": "QUALITY_ONLY",
+  "spec_r2_pass_preserved": true,
+  "raw_path": "qa/p2p-trace-0210/r6/reviews/quality-raw.txt",
+  "raw_sha256": "bb6c2b373bbdcedf41d11a084ca6974409200cc2d07818ce9dcc56ad7cc9b5de",
+  "limitations": [
+    "Q-R6-001 为精确源码支持的静态交错，不伪称已新跑 Kotlin barrier 回归。",
+    "本轮不重新穷尽 9461 基线或重跑 watch/Android；SPEC 既有冻结基线证据不冒称本轮执行。"
+  ]
+}

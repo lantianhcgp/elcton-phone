@@ -1,0 +1,4 @@
+package android.app
+import android.content.Context
+/** HOST-only. No activities or frontend are started. */
+open class Activity: Context() { val isFinishing=false; val isDestroyed=false }

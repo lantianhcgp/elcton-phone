@@ -1,0 +1,32 @@
+{
+  "original": {
+    "reviews/r6-quality-r1.json": {
+      "bytes": 10851,
+      "sha256": "d60ccb9fef5481042829787c5d2ac19e1e9be1667fa8aceef7276a7ee6fbf12e"
+    },
+    "reviews/quality-raw.txt": {
+      "bytes": 7069,
+      "sha256": "bb6c2b373bbdcedf41d11a084ca6974409200cc2d07818ce9dcc56ad7cc9b5de"
+    },
+    "reviews/r6-spec-r2.json": {
+      "bytes": 11993,
+      "sha256": "ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0"
+    },
+    "reviews/spec-r2-raw.txt": {
+      "bytes": 3391,
+      "sha256": "b48ede8e253b7b95dbe52cf821717218942e07fdf2046814387ac7617e76eaec"
+    },
+    "current-identity.json": {
+      "bytes": 19900,
+      "sha256": "422fce3a3196d017a4a2305b46a8b30e2a7a34dd4d387116178d662032201c45"
+    },
+    "evidence/identity-migration/table.json": {
+      "bytes": 1942,
+      "sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d"
+    }
+  },
+  "quality_passed": false,
+  "new_finding": "Q-R6-001 diagnostic writer lost wakeup",
+  "no_future_ci_or_device_claim": true,
+  "at": "2026-11-15 16:36:07 +0800"
+}

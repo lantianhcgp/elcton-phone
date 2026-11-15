@@ -1,0 +1,52 @@
+{
+  "rows": [
+    {
+      "lane": "compile-current-full-jvm",
+      "exit": 0
+    },
+    {
+      "lane": "typical-gradle-app-cwd-targeted-test",
+      "argv": [
+        "java",
+        "-cp",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/full-jvm/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+        "org.junit.runner.JUnitCore",
+        "com.hcbiu.elcton.P2pTraceRuntimeTest",
+        "com.hcbiu.elcton.P2pTraceTest"
+      ],
+      "exit": 0,
+      "cwd": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app"
+    },
+    {
+      "lane": "python",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "qa",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit": 0,
+      "raw_sha256": "6741571055896ad9f9c9f2b5e797962c9d7cb0c3412c595b8555a2c7bb261a8e"
+    },
+    {
+      "lane": "http",
+      "argv": [
+        "python",
+        "-B",
+        "qa/mcp_http_selftest.py",
+        "--classpath",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/full-jvm/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+      ],
+      "exit": 0,
+      "raw_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+    }
+  ],
+  "jar_sha256": "7e78e9b28049f21c6f92bad619c9d54fd1a7af9d54d56cfac53a2c8650971adb",
+  "scope": "same frozen production sources after new source-path test harness fix; not Android"
+}

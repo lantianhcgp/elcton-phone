@@ -1,0 +1,20 @@
+{
+  "authorization": "Explicit R7 FAIL修到绿 recovery; original SPEC/QUALITY FAIL/json/raw kept",
+  "original_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/identity-migration/table.json",
+  "independent_saved_source": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/identity-migration-q1/previous-table.json.source.txt",
+  "before_sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+  "restored_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+  "current_q1_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json",
+  "current_q1_sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+  "overwritten_snapshot": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/r7-helper-repair/overwritten-table.source.txt",
+  "snapshot_equals_current_q1": true,
+  "original_SPEC_R2": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/r6-spec-r2.json",
+    "sha256": "ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0",
+    "original_table_binding_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+    "binding_lines": "50,131-137"
+  },
+  "historical_bytes_changed_by_explicit_recovery": true,
+  "historical_review_and_manifest_edits": false,
+  "recovery_verified_exact": true
+}

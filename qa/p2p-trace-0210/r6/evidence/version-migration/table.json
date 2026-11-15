@@ -1,0 +1,55 @@
+{
+  "old_version": {
+    "code": 11,
+    "name": "0.2.9"
+  },
+  "current_version": {
+    "code": 12,
+    "name": "0.2.10"
+  },
+  "paths": {
+    "app/build.gradle.kts": {
+      "old_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "new_sha256": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+      "original_bytes": 2637,
+      "current_bytes": 2638
+    },
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": {
+      "old_sha256": "2572fb52a68c962dbfdb48f80fc201598f09101182c5cbe81be6e74671ede4c0",
+      "new_sha256": "787661d88f7161ffa5ec209a4621d59b60aeacb68fd07953ae026fd6c1b9aba4",
+      "original_bytes": 4045,
+      "current_bytes": 4046
+    },
+    "qa/P2pCandidateBuildTest.kt": {
+      "old_sha256": "3d03974cf7ff5c1728d2978415950dc9cc42987409025a3c9227fe256a9420e9",
+      "new_sha256": "1fd25cedaed4f90ba4f8cf132b8ac5ef06382fe87eea84b20c2055f62dced31d",
+      "original_bytes": 645,
+      "current_bytes": 646
+    },
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": {
+      "old_sha256": "c0b50dc722f549766b343f8bc546af006a48f03d07e4793e0df46d7e456ee18d",
+      "new_sha256": "51dff0ac27fb73c10fe470b7a0911d5592c2fcaa7fdade1cbdf18077b4c1f6e2",
+      "original_bytes": 25913,
+      "current_bytes": 25915
+    },
+    "qa/test_mcp027_scope.py": {
+      "old_sha256": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+      "new_sha256": "7915281eb830e010c4890f3a5cf15f54a69d4d407ed45bfd17fba1aeeee0157f",
+      "original_bytes": 4095,
+      "current_bytes": 4096
+    },
+    "qa/release-029/verify_apk.py": {
+      "old_sha256": "f9b96d77b5a044611068e8756bc59924f077b4556ddb73a7155467dc09dc08eb",
+      "new_sha256": "c005b01419683235c3c21c8ea1345e8dd7fe7bad910a7c0850497c479c712e18",
+      "original_bytes": 934,
+      "current_bytes": 935
+    },
+    "qa/diag_emulator_smoke.py": {
+      "old_sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e",
+      "new_sha256": "0b01c00a0a853a5e436c5ae31f2e7368fde4a4317c7637d87220aee141c1fce1",
+      "original_bytes": 41068,
+      "current_bytes": 41071
+    }
+  },
+  "old_tests_business_assertions_unchanged": true
+}

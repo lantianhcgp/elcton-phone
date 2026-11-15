@@ -1,0 +1,19 @@
+{
+  "read_actual_sources": {
+    "run_wakeup_host.py": {
+      "sha256": "92f534dbfa7c84b64d1f66794a8118d12b3d4637d1df091dbd92d310edc2da15",
+      "bytes": 7171
+    },
+    "InjectWakeBarrier.java.in": {
+      "sha256": "70301210e1b3d704716a1d41884ddb12eadd1d10f07c7b8b4baff6753071a191",
+      "bytes": 6919
+    },
+    "RuntimeWakeupTest.kt.in": {
+      "sha256": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+      "bytes": 10344
+    }
+  },
+  "reviewed": "host actualRuntime class injection only stackneutral ALOAD0+CALL before existing writingfalse; source prod unchanged, inverse originalinstructions/callcounts assertions intact, targetRED+5controls no business callback/SDK rewrite",
+  "not_execution_claim": true,
+  "at": "2026-11-15 16:42:36 +0800"
+}

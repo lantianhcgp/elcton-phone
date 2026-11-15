@@ -1,0 +1,94 @@
+test_both_identity_table_reads_use_q1 (__main__.DeliveryIdentityTests.test_both_identity_table_reads_use_q1) ... FAIL
+test_actual_migration_preserves_original_table_and_registers_q1 (__main__.MigrationTests.test_actual_migration_preserves_original_table_and_registers_q1) ... FAIL
+test_reject_existing_empty_output (__main__.OutputGuardTests.test_reject_existing_empty_output) ... 
+  test_reject_existing_empty_output (__main__.OutputGuardTests.test_reject_existing_empty_output) (script='check_r6_scope.py') ... FAIL
+test_reject_parent_traversal (__main__.OutputGuardTests.test_reject_parent_traversal) ... 
+  test_reject_parent_traversal (__main__.OutputGuardTests.test_reject_parent_traversal) (script='run_r6_final_regressions.py') ... FAIL
+  test_reject_parent_traversal (__main__.OutputGuardTests.test_reject_parent_traversal) (script='check_r6_scope.py') ... FAIL
+test_reject_symlink_ancestor (__main__.OutputGuardTests.test_reject_symlink_ancestor) ... 
+  test_reject_symlink_ancestor (__main__.OutputGuardTests.test_reject_symlink_ancestor) (script='run_r6_final_regressions.py') ... FAIL
+  test_reject_symlink_ancestor (__main__.OutputGuardTests.test_reject_symlink_ancestor) (script='check_r6_scope.py') ... FAIL
+test_valid_new_output (__main__.OutputGuardTests.test_valid_new_output) ... ok
+
+======================================================================
+FAIL: test_both_identity_table_reads_use_q1 (__main__.DeliveryIdentityTests.test_both_identity_table_reads_use_q1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 142, in test_both_identity_table_reads_use_q1
+    self.assertEqual([n.args[0].right.value for n in reads],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     ['evidence/identity-migration-q1/table.json'] * 2)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['evi[19 chars]ation/table.json', 'evidence/identity-migration/table.json'] != ['evi[19 chars]ation-q1/table.json', 'evidence/identity-migra[15 chars]son']
+
+First differing element 0:
+'evidence/identity-migration/table.json'
+'evidence/identity-migration-q1/table.json'
+
+- ['evidence/identity-migration/table.json',
++ ['evidence/identity-migration-q1/table.json',
+?                              +++
+
+-  'evidence/identity-migration/table.json']
++  'evidence/identity-migration-q1/table.json']
+?                              +++
+
+
+======================================================================
+FAIL: test_actual_migration_preserves_original_table_and_registers_q1 (__main__.MigrationTests.test_actual_migration_preserves_original_table_and_registers_q1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 130, in test_actual_migration_preserves_original_table_and_registers_q1
+    self.assertEqual(table.read_bytes(), original, 'Historical SPEC R2 table was overwritten')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'{\n[1022 chars]6": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f4[1518 chars]n}\n' != b'{\n[1022 chars]6": "e6e10f6ddb3f4cd620879509a28e61433139feddf[906 chars]n}\n' : Historical SPEC R2 table was overwritten
+
+======================================================================
+FAIL: test_reject_existing_empty_output (__main__.OutputGuardTests.test_reject_existing_empty_output) (script='check_r6_scope.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 81, in test_reject_existing_empty_output
+    with self.assertRaises((SystemExit, ValueError, FileExistsError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'SystemExit'>, <class 'ValueError'>, <class 'FileExistsError'>) not raised
+
+======================================================================
+FAIL: test_reject_parent_traversal (__main__.OutputGuardTests.test_reject_parent_traversal) (script='run_r6_final_regressions.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 57, in test_reject_parent_traversal
+    with self.assertRaises((SystemExit, ValueError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'SystemExit'>, <class 'ValueError'>) not raised
+
+======================================================================
+FAIL: test_reject_parent_traversal (__main__.OutputGuardTests.test_reject_parent_traversal) (script='check_r6_scope.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 57, in test_reject_parent_traversal
+    with self.assertRaises((SystemExit, ValueError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'SystemExit'>, <class 'ValueError'>) not raised
+
+======================================================================
+FAIL: test_reject_symlink_ancestor (__main__.OutputGuardTests.test_reject_symlink_ancestor) (script='run_r6_final_regressions.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 71, in test_reject_symlink_ancestor
+    with self.assertRaises((SystemExit, ValueError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'SystemExit'>, <class 'ValueError'>) not raised
+
+======================================================================
+FAIL: test_reject_symlink_ancestor (__main__.OutputGuardTests.test_reject_symlink_ancestor) (script='check_r6_scope.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_helper_repair.py", line 71, in test_reject_symlink_ancestor
+    with self.assertRaises((SystemExit, ValueError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'SystemExit'>, <class 'ValueError'>) not raised
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.105s
+
+FAILED (failures=7)

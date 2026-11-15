@@ -1,0 +1,166 @@
+{
+  "phase": "green",
+  "origin": "host-test",
+  "root": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115",
+  "out": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646",
+  "inputs": {
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/PacketIngress.kt": "3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/PhoneSnapshot.kt": "dceeb0b41a52d6a3eecad765443820ffe03ce10d460bf0cad3efbeb79975c9bf",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/Wire.kt": "4d36667a311696cf98891455365af9a9bab09df4171d1e434b14056cdd1bc584",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/WearErrorRecord.kt": "543a04a1ba4fc93e6e17f3999d161bd32730d648cdbfd1f116aaac5d6ea86c54",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/ErrorJournal.kt": "e39bd97ae63ba8880d3653b80cc6609d17d8fd3829824b27b6c00440e8c7e898",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/McpToken.kt": "76c8da5de0d3fcac175315c46f75ed542c4bbd2ea952bfc93e7cd39b99675601",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/McpToolProvider.kt": "00957be37b3848d1d9aca3c6c056da53852e69b28d8452a43704ecf1096aca5f",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt": "160cc7e9df1554b2b767fceb39b128d0ef461ae8035d5bb79bbf617f22f689f7",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticMcpServer.kt": "609994ffef2c39adefeeacf1ec71cba24492efe9e5447c991dadd95be4ca64aa",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/runtime_revision_host/HostBuildConfig.kt.in": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/runtime_revision_host/HostLog.kt.in": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/runtime_revision_host/DiagnosticRuntimeRevisionTest.kt.in": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/runtime-fault-host/P2pRuntimeFaultTest.kt.in": "2621ae91f59029f0cfc1ddc2c088a50f09da43f0cb2a0751d47a5e95615b7b76",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in": "6b62c0f49d1775a2a0cb4c005a01964165444637eea82445a9cfdad4c73af9b8",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py": "7c33cc10ddf03894ab6a84674eadee73c50f8e10bbfa92eaef40192e4476cc7e",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/SendAttempts.kt": "5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/build.gradle.kts": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/current-identity.json": "422fce3a3196d017a4a2305b46a8b30e2a7a34dd4d387116178d662032201c45"
+  },
+  "commands": [
+    {
+      "name": "compile",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "kotlinc",
+        "-J-Xmx384m",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/DiagnosticRuntime.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/P2pTrace.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/PacketIngress.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/PhoneSnapshot.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/Wire.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/WearErrorRecord.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/ErrorJournal.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/McpToken.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/McpToolProvider.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/DiagnosticTools.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/DiagnosticMcpServer.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/HostBuildConfig.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/HostLog.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/DiagnosticRuntimeRevisionTest.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/P2pRuntimeFaultTest.kt",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/RuntimeWakeupTest.kt",
+        "-classpath",
+        "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+        "-include-runtime",
+        "-d",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/actual-runtime.jar"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "compile-asm",
+      "argv": [
+        "javac",
+        "-J-Xmx128m",
+        "-cp",
+        "/data/data/com.termux/files/usr/opt/kotlin/lib/kotlin-compiler.jar",
+        "-d",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/asm-classes",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/generated/InjectWakeBarrier.java"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "instrument",
+      "argv": [
+        "java",
+        "-Xmx128m",
+        "-cp",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/asm-classes:/data/data/com.termux/files/usr/opt/kotlin/lib/kotlin-compiler.jar",
+        "InjectWakeBarrier",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/DiagnosticRuntime.original.class",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/host-overlay/com/hcbiu/elcton/DiagnosticRuntime.class",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "original-javap",
+      "argv": [
+        "javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/actual-runtime.jar",
+        "com.hcbiu.elcton.DiagnosticRuntime"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "instrumented-javap",
+      "argv": [
+        "javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/host-overlay:/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/actual-runtime.jar",
+        "com.hcbiu.elcton.DiagnosticRuntime"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "wakeup-junit",
+      "argv": [
+        "java",
+        "-Xmx128m",
+        "-Ddiag.evidence=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646",
+        "-Ddiag.work=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/wakeup-work",
+        "-cp",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/host-overlay:/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/actual-runtime.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+        "org.junit.runner.JUnitCore",
+        "com.hcbiu.elcton.RuntimeWakeupTest"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "original-runtimefault4",
+      "argv": [
+        "java",
+        "-Xmx128m",
+        "-Ddiag.evidence=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/legacy-runtime4",
+        "-Ddiag.work=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/legacy-runtime4",
+        "-cp",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/actual-runtime.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+        "org.junit.runner.JUnitCore",
+        "com.hcbiu.elcton.P2pRuntimeFaultTest",
+        "com.hcbiu.elcton.DiagnosticRuntimeRevisionTest"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "original-stoprevision1",
+      "argv": [
+        "java",
+        "-Xmx128m",
+        "-Ddiag.evidence=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-stoprevision1",
+        "-Ddiag.work=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-stoprevision1",
+        "-cp",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/actual-runtime.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+        "org.junit.runner.JUnitCore",
+        "com.hcbiu.elcton.DiagnosticRuntimeRevisionTest"
+      ],
+      "exit": 0
+    }
+  ],
+  "wakeup_summary": {
+    "exit": 0,
+    "true_assertion_red": false,
+    "cases_expected": 6
+  },
+  "sources_unchanged_during_execution": true,
+  "validated": true
+}

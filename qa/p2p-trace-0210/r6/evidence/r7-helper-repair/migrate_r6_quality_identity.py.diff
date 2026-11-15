@@ -1,0 +1,10 @@
+--- migrate_r6_quality_identity.py.before
++++ migrate_r6_quality_identity.py.after
+@@ -45,7 +45,6 @@
+     currenttable = {'source_identities':new['source_identities'],'version_identity':new['version_identity'],
+             'old_manifest_sha256':new['old_manifest_sha256'],'previous_r6_manifest_sha256':sha(before),
+             'new_manifest_sha256':sha(raw),'quality_repair_identity':new['quality_repair_identity']}
+-    table.write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')
+     for path,row in new['source_identities'].items():
+         (evidence/(Path(path).name+'.current.source.txt')).write_bytes((ROOT/path).read_bytes())
+     (evidence/'table.json').write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')

@@ -1,0 +1,9 @@
+{
+  "validated_true_red_before_product_edit": true,
+  "deterministic_repeat": true,
+  "runtime_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+  "at": "2026-11-15T16:46:16.455278+08:00",
+  "raw": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/wakeup-junit.raw.log",
+  "repeat_raw": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/repeat/wakeup-junit.raw.log",
+  "source_unchanged": true
+}

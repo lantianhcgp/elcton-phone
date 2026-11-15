@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+"""Q-R6-001 current identity migration only after exact new Runtime is frozen.
+Preserve the prior current manifest/table/source snapshots, never change old029.
+"""
+import argparse
+import copy
+import hashlib
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+Q = Path(__file__).resolve().parent/'r6'
+sha = lambda data: hashlib.sha256(data).hexdigest()
+RUNTIME = 'app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt'
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument('--expected-runtime-sha256', required=True)
+    a = p.parse_args()
+    dest = Q/'current-identity.json'
+    before = dest.read_bytes()
+    old = json.loads(before)
+    runtime = (ROOT/RUNTIME).read_bytes()
+    assert sha(runtime) == a.expected_runtime_sha256
+    assert sha(runtime) != old['source_identities'][RUNTIME]['current_sha256'], 'No Runtime repair present'
+    for path,row in old['source_identities'].items():
+        if path != RUNTIME: assert sha((ROOT/path).read_bytes()) == row['current_sha256'], 'Unexpected other production drift'
+    assert sha((ROOT/old['old_manifest']).read_bytes()) == old['old_manifest_sha256'], 'Old029 identity bytes changed'
+    table = Q/'evidence/identity-migration/table.json'
+    evidence = Q/'evidence/identity-migration-q1'
+    evidence.mkdir(parents=True,exist_ok=False)
+    (evidence/'previous-current-identity.json.source.txt').write_bytes(before)
+    (evidence/'previous-table.json.source.txt').write_bytes(table.read_bytes())
+    new = copy.deepcopy(old)
+    row = new['source_identities'][RUNTIME]
+    oldsha = row['current_sha256']
+    row['previous_r6_sha256'] = oldsha
+    row['current_sha256'] = sha(runtime)
+    row['current_bytes'] = len(runtime)
+    new['quality_repair_identity'] = {'finding':'Q-R6-001','path':RUNTIME,'old_r6_sha256':oldsha,
+            'new_r6_sha256':sha(runtime),'authorization':'R6 original diagnostic writer scope; no business behavior modification'}
+    raw = (json.dumps(new,ensure_ascii=False,indent=2)+'\n').encode()
+    # Prior bytes have been preserved, this is a current-identity registration.
+    dest.write_bytes(raw)
+    currenttable = {'source_identities':new['source_identities'],'version_identity':new['version_identity'],
+            'old_manifest_sha256':new['old_manifest_sha256'],'previous_r6_manifest_sha256':sha(before),
+            'new_manifest_sha256':sha(raw),'quality_repair_identity':new['quality_repair_identity']}
+    table.write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')
+    for path,row in new['source_identities'].items():
+        (evidence/(Path(path).name+'.current.source.txt')).write_bytes((ROOT/path).read_bytes())
+    (evidence/'table.json').write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')
+    (evidence/'receipt.json').write_text(json.dumps({'old_runtime_sha256':oldsha,'new_runtime_sha256':sha(runtime),
+        'preserved_prior_manifest_sha256':sha(before),'current_manifest_sha256':sha(raw),
+        'other_production_hashes_unchanged':True,'old029_manifest_unchanged':True},indent=2)+'\n')
+    assert dest.read_bytes()==raw
+    print(json.dumps({'registered':True,'old_runtime_sha256':oldsha,'new_runtime_sha256':sha(runtime),'evidence':str(evidence)}))
+
+if __name__=='__main__':main()

@@ -1,0 +1,14 @@
+JUnit version 4.13.2
+.HOST_ACTUAL trace-failure-quiescent={"writing":false,"pending":1,"stateWrites":1,"traceSeq":1,"stateSeq":1}
+.HOST_ACTUAL revision-only-after-release={"writing":false,"stateWrites":2,"traceSeq":1,"status":"HOST-late-revision"}
+.HOST-TEST LOG W/ElctonMcp: Cannot persist diagnostic state: IOException
+HOST_ACTUAL state-failure-quiescent={"diskSeq":1,"writing":false,"pending":1,"stateWrites":1,"traceSeq":2}
+.HOST_ACTUAL control={"diskSeq":1,"releaseHits":1,"writing":false,"stateWrites":1,"stateSeq":1}
+.HOST_ACTUAL quota-quiescent={"writing":false,"stateWrites":1,"fileBytes":2097152,"traceSeq":1,"stateSeq":1}
+.HOST_ACTUAL trace-only-before-release={"diskSeq":1,"pending":1,"writing":true,"stateWrites":1,"traceSeq":2,"revision":0,"stateSeq":1}
+HOST_ACTUAL trace-only-after-release={"diskSeq":2,"releaseHits":2,"pending":0,"writing":false,"stateWrites":2,"traceSeq":2,"ringSeq":2,"revision":0,"stateSeq":2}
+
+Time: 0.356
+
+OK (6 tests)
+

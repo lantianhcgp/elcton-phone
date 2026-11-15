@@ -1,0 +1,21 @@
+[
+  ["com.hcbiu.elcton.P2pContextTest", "aNewConnectionMustNotInheritAnOldAttempt"],
+  ["com.hcbiu.elcton.P2pContextTest", "normalPhoneHelloIsOutgoingMetadataNotWatchSenderReject"],
+  ["com.hcbiu.elcton.P2pContextTest", "oldHelloTaskFailureIsStaleAfterSameGenerationRetryAndReady"],
+  ["com.hcbiu.elcton.P2pContextTest", "readyAndRxEventsRetainTheRelatedSendAttempt"],
+  ["com.hcbiu.elcton.P2pContextTest", "transferReferencesDistinguishIdsWithoutPrivateText"],
+  ["com.hcbiu.elcton.P2pTraceConcurrencyTest", "blockedWriterDoesNotHoldAppendOrReadLock"],
+  ["com.hcbiu.elcton.P2pTraceEngineTest", "originalHelloDeadlinesAndRetryStages"],
+  ["com.hcbiu.elcton.P2pTraceEngineTest", "installAndRegistrationTimeoutAreNotReadyTimeout"],
+  ["com.hcbiu.elcton.P2pTraceEngineTest", "validReadyAcceptedExactlyOnceAndLateResultsRemainVisible"],
+  ["com.hcbiu.elcton.P2pTraceEngineTest", "originalRejectsAndEarlyFailuresCancelCloseAndLateCallbacksHaveZeroDrift"],
+  ["com.hcbiu.elcton.P2pTraceEngineTest", "hostileDiagnosticClockHasZeroBusinessDrift"],
+  ["com.hcbiu.elcton.P2pTraceIngressTest", "diagnosticClassifierAgreesWithOriginalWithoutReturningPrivateText"],
+  ["com.hcbiu.elcton.P2pTraceRuntimeTest", "runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema"],
+  ["com.hcbiu.elcton.P2pTraceRuntimeTest", "adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks"],
+  ["com.hcbiu.elcton.P2pTraceTest", "schemaClockSequenceAndIndependentGenerationReferences"],
+  ["com.hcbiu.elcton.P2pTraceTest", "boundedTailTrueDroppedCursorAndPrivacy"],
+  ["com.hcbiu.elcton.P2pTraceTest", "hostileFieldAndClocksCannotEscapeOrInventEvent"],
+  ["com.hcbiu.elcton.P2pTraceTest", "writerFailureAndStorageFullAreDiagnosticOnlyAndNoRetriesAfterFull"],
+  ["com.hcbiu.elcton.P2pTraceTest", "engineKeepsFiveArgConstructorAndRequiresTraceAttachment"]
+]

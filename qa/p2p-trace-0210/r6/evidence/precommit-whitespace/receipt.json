@@ -1,0 +1,21 @@
+{
+  "original_exit": 2,
+  "source_errors": [],
+  "evidence_only_paths": [
+    "qa/p2p-trace-0210/r6/evidence/adapter-green-20261115-1544/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/adapter-jvm-green-20261115-1545/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/adapter-red-20261115-1542/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/app-cwd.junit.log",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/compile-jvm.raw.log",
+    "qa/p2p-trace-0210/r6/evidence/final-current-cwd-1616/full-jvm/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/frozen-scope-final/allowed-source.diff",
+    "qa/p2p-trace-0210/r6/evidence/gradle-cwd-preflight-1615/junit.log",
+    "qa/p2p-trace-0210/r6/evidence/gradle-cwd-preflight-1615/source-fix.diff",
+    "qa/p2p-trace-0210/r6/evidence/runtime-final-1551/junit.log",
+    "qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff",
+    "qa/p2p-trace-0210/r6/reviews/input/r5-product.diff"
+  ],
+  "raw_sha256": "2e2e297ea36f32296a45c7a52f615dd08f42a937320e8c272fa128087e007060",
+  "preserved_original_bytes": true,
+  "scope": "Original evidence whitespace is retained; not build/test or behavioral acceptance"
+}

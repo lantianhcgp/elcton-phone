@@ -1,0 +1,27 @@
+test_existing (__main__.OutputTests.test_existing) ... ok
+test_symlink (__main__.OutputTests.test_symlink) ... FAIL
+test_traversal (__main__.OutputTests.test_traversal) ... FAIL
+test_valid (__main__.OutputTests.test_valid) ... ok
+
+======================================================================
+FAIL: test_symlink (__main__.OutputTests.test_symlink)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_finalize_output_guard.py", line 52, in test_symlink
+    with self.assertRaises((AssertionError, SystemExit)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'AssertionError'>, <class 'SystemExit'>) not raised
+
+======================================================================
+FAIL: test_traversal (__main__.OutputTests.test_traversal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/helper-repair-host/test_finalize_output_guard.py", line 44, in test_traversal
+    with self.assertRaises((AssertionError, SystemExit)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'AssertionError'>, <class 'SystemExit'>) not raised
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+FAILED (failures=2)

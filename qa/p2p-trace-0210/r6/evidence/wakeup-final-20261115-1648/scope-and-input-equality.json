@@ -1,0 +1,29 @@
+{
+  "only_input_changed_red_green": [
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt"
+  ],
+  "all_new_tests_asm_runner_and_legacy_templates_sha_identical": true,
+  "runtime_before": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+  "runtime_after": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+  "unchanged_input_count": 22,
+  "templates": {
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/runtime_revision_host/HostBuildConfig.kt.in": "e027a5ca0881eceac8202401a14c6270d76e36c12a94b4d1d85242cc9e8c19a2",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/runtime_revision_host/HostLog.kt.in": "c49b5106a18451061729f94574c76d05db95140c0b99faa729f1fb4d6e1b2bd3",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/runtime_revision_host/DiagnosticRuntimeRevisionTest.kt.in": "0ad3b7d45358a776793030d52ecc745f638a8c427fad09371244311defe28762",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/runtime-fault-host/P2pRuntimeFaultTest.kt.in": "2621ae91f59029f0cfc1ddc2c088a50f09da43f0cb2a0751d47a5e95615b7b76",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in": "6b62c0f49d1775a2a0cb4c005a01964165444637eea82445a9cfdad4c73af9b8",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py": "7c33cc10ddf03894ab6a84674eadee73c50f8e10bbfa92eaef40192e4476cc7e"
+  },
+  "runtime_diff": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/runtime-minimal.diff",
+    "sha256": "a1dba07c3c4efbecfad676723803ce6030e904fad1c45e87566b09ae262224ad"
+  },
+  "runtime_bytecode_diff": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/runtime-compiled-before-after.diff",
+    "sha256": "2f6cbf0a28e0a637a31414a448c2c2ad11f645cb611662d247aa4a7d67dd2de5"
+  },
+  "no_product_test_hook": true,
+  "failed_guard_unchanged": true,
+  "processed_trace_sequence_is_loop_entry_capture": true
+}

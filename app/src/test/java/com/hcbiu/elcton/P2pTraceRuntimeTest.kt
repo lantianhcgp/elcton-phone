@@ -1,0 +1,27 @@
+package com.hcbiu.elcton
+
+import java.io.File
+import org.junit.Assert.*
+import org.junit.Test
+
+/** Static absence RED; actual Runtime execution belongs to the separate Android HOST stub lane. */
+class P2pTraceRuntimeTest {
+    // Gradle executes from app/, HOST from repository root. Resolve the same
+    // source file without altering any diagnostic assertion or its label.
+    private val root = generateSequence(File("").absoluteFile) { it.parentFile }
+        .first { File(it, "app/src/main/AndroidManifest.xml").isFile }
+    @Test fun runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema() {
+        val f=File(root, "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt").readText()
+        assertTrue("Missing shared P2pTrace diagnostic runtime",f.contains("val p2pTrace"))
+        assertTrue("Missing diag_read additive p2p",f.contains(".put(\"p2p\""))
+        assertTrue("Missing existing writer trace flush",f.contains("p2pTrace.persist"))
+        assertFalse(File(root, "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt").readText().contains("p2p_trace_tail"))
+    }
+    @Test fun adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks() {
+        val f=File(root, "app/src/main/java/com/hcbiu/elcton/WearProbe.kt").readText()
+        for(s in listOf("RX_NATIVE_ENTRY","RX_ADAPTER_REJECT","RX_DECODE","REG_TASK_OK","REG_TASK_FAIL","SEND_TASK_OK","SEND_TASK_FAIL","SEND_RESULT","UNREG_TASK_OK"))assertTrue("Missing adapter $s",f.contains(s))
+        assertEquals(1,Regex("packet\\.type").findAll(f).count())
+        assertEquals(1,Regex("packet\\.data").findAll(f).count())
+        assertEquals(1,Regex("val message = e\\.message").findAll(f).count())
+    }
+}

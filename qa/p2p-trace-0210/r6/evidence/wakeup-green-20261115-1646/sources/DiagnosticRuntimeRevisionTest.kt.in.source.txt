@@ -1,0 +1,83 @@
+package com.hcbiu.elcton
+
+import org.json.JSONObject
+import org.junit.Assert.*
+import org.junit.Test
+import java.io.File
+import java.net.ConnectException
+import java.net.InetSocketAddress
+import java.net.Socket
+
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
+
+/** Genuine Runtime + loopback socket + atomic state file; only Log/BuildConfig are host adapters. */
+class DiagnosticRuntimeRevisionTest {
+    @Test fun stopDuringCapturedRunningWritePersistsStoppedState() {
+        val evidence = File(requireNotNull(System.getProperty("diag.evidence")))
+        val dir = File(requireNotNull(System.getProperty("diag.work")), "runtime-files").apply { check(mkdir()) }
+        val captured = CountDownLatch(1)
+        val release = CountDownLatch(1)
+        val once = AtomicBoolean(true)
+        val events = mutableListOf<String>()
+        val runtime = DiagnosticRuntime(dir) { file, text ->
+            if (JSONObject(text).getJSONObject("mcp").getBoolean("running") && once.compareAndSet(true, false)) {
+                File(evidence, "captured-old.json").writeText(text)
+                captured.countDown()
+                check(release.await(10, TimeUnit.SECONDS)) { "write barrier release timeout" }
+            }
+            replaceDiagnosticFile(file, text)
+        }
+        // Port 8766 was unavailable in the first host run. Test-local reflection
+        // selects a real ephemeral listener without changing any production port/configuration.
+        val listener = DiagnosticMcpServer("host-test-only-token", DiagnosticTools(dir,
+            { runtime.errorTail(it) }, { runtime.read() }, { runtime.versionInfo() }), 0)
+        DiagnosticRuntime::class.java.getDeclaredField("server").apply { isAccessible = true }.set(runtime, listener)
+        // Test-local executor fence: no production timer, polling loop, global hook or altered Runtime.
+        val executor = DiagnosticRuntime::class.java.getDeclaredField("writer").apply { isAccessible = true }
+            .get(runtime) as ExecutorService
+        try {
+            assertTrue("real loopback listener must start", runtime.startListener())
+            assertTrue("captured old running=true before disk replacement", captured.await(5, TimeUnit.SECONDS))
+            val writing = DiagnosticRuntime::class.java.getDeclaredField("writing").apply { isAccessible = true }
+                .get(runtime) as AtomicBoolean
+            assertTrue("writer is active at the barrier", writing.get())
+            val port = listener.boundPort
+            Socket().use { socket ->
+                socket.connect(InetSocketAddress("127.0.0.1", port), 1000)
+                socket.soTimeout = 1000
+                socket.getOutputStream().write("GET /health HTTP/1.1\r\nHost: localhost\r\n\r\n".toByteArray())
+                val response = socket.getInputStream().bufferedReader().readText()
+                assertTrue("actual HTTP health response", response.startsWith("HTTP/1.1 200"))
+                events += "real_socket_health=200; captured_running=true; writing=true"
+            }
+            runtime.stopListener()
+            assertFalse("in-memory running must stop", runtime.read().getJSONObject("mcp").getBoolean("running"))
+            var refused = false
+            try { Socket().use { it.connect(InetSocketAddress("127.0.0.1", port), 1000) } }
+            catch (_: ConnectException) { refused = true }
+            assertTrue("real port must be closed before releasing old write", refused)
+            events += "stopListener_returned; live_running=false; real_socket_refused=true"
+            release.countDown()
+            executor.submit {}.get(5, TimeUnit.SECONDS)
+            executor.submit {}.get(5, TimeUnit.SECONDS)
+            assertFalse("writer must be quiescent, not merely scheduled", writing.get())
+            val finalText = File(dir, "diagnostics/state.json").readText()
+            File(evidence, "final-state.json").writeText(finalText)
+            val running = JSONObject(finalText).getJSONObject("mcp").getBoolean("running")
+            events += "released_old_write; writer_quiescent=true; final_file_running=$running"
+            File(evidence, "barrier-events.txt").writeText(events.joinToString("\n") + "\n")
+            println(events.joinToString("\n"))
+            assertFalse("state.json must persist running=false after stop during captured running=true write", running)
+        } finally {
+            release.countDown()
+            if (runtime.read().getJSONObject("mcp").getBoolean("running")) runtime.stopListener()
+            executor.submit {}.get(5, TimeUnit.SECONDS)
+            executor.shutdown()
+            check(executor.awaitTermination(5, TimeUnit.SECONDS))
+            println("retained_real_runtime_files=" + dir.absolutePath)
+        }
+    }
+}

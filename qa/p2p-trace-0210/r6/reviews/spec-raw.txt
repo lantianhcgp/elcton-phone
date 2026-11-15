@@ -1,0 +1,10 @@
+R6 INDEPENDENT SPEC REVIEW
+Verdict: FAIL CLOSED due to incomplete exhaustive input/receipt semantic coverage within 480-second limit. No new product logic defect asserted.
+Input manifest SHA256: c78a51884c38e4ee4014ff06a59afa879eb6f5d27b513702bd21ddb5e9bba81c
+L3 independently re-executed saved RED jar: JUnit exit 1, 8 tests, exact 3 separate afterREADY stale assertions fail. Saved GREEN jar: exit 0, 8 tests. Full saved current JVM jar: exit 0, 171 tests. No build/compiler/device/CI invoked.
+Original accepts closure is read-only; READY, issue/invalidate, callback guards/order and RX getter multiplicities are unchanged in inspected bytes. Fifteen fresh phase/mode scenarios compare original SDK calls and business state; no real Task double-terminal assumption.
+All 31 input hashes match, tracked diff equals git diff HEAD. Original gate byte restoration exact; old identity manifest preserved, full identity table fields exact. All 7 version literal inverses exact. Full git base inventory 9461 entries, 9450 non-exceptions verified against original blob OIDs. Fixture af97 exact class rename and shared type removal. build.yml frozen and actually uses Gradle, not run_host_tests.py. No evidence .kt tracked, but old untracked generated .kt remain and must not be staged recursively.
+Raw evidence: Python 133 zero skips and real JVM HTTP 3784 hashes/current jar match; Runtime 4 and actual Huawei jar typecheck compile0 receipts read; watch 445/445 and 48 current input hashes match. These are HOST/raw receipt checks, never Android or device PASS.
+Remaining gap: exhaustive all new test/helper semantics and every preserved receipt/archive link not completed; no invented blanket PASS.
+Last old-test inventory probe tool output:
+{"old_tests_count": 35, "verified": 35, "errors": [], "elapsed": 519.820517539978}

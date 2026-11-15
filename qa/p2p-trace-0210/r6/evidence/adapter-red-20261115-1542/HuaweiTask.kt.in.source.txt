@@ -1,0 +1,22 @@
+package com.huawei.hmf.tasks
+
+/** HOST fake seam to execute both real WearProbe sources. Never a Huawei runtime replacement. */
+class Task<T>(private val lane:String, var value:T?=null) {
+    var throwSuccessAttach=false
+    var throwFailureAttach=false
+    private var ok:((T?)->Unit)?=null
+    private var fail:((Exception)->Unit)?=null
+    fun addOnSuccessListener(listener:(T?)->Unit):Task<T> {
+        if(throwSuccessAttach)throw IllegalStateException("host-success-attach")
+        ok=listener
+        return this
+    }
+    fun addOnFailureListener(listener:(Exception)->Unit):Task<T> {
+        if(throwFailureAttach)throw IllegalStateException("host-failure-attach")
+        fail=listener
+        return this
+    }
+    fun succeed() { ok?.invoke(value) }
+    fun fail(error:Exception) { fail?.invoke(error) }
+    fun failureAttached()=fail!=null
+}

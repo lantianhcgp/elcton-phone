@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tests": 4,
+  "red_exit": 1,
+  "green_exit": 0,
+  "test_sha256": "e6468c1faf3b5bb994418694429f34c2071f9c1e20a613c570fd66ec30109b10",
+  "green_raw_sha256": "fc9140325a4dfef6d1231d52978b52cb7ab4ad0df011efc53c77a94edbf9f8c5",
+  "scope": "New delivery helper output guard only; actual prefix no build/APK/device"
+}

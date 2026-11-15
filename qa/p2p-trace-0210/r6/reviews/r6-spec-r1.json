@@ -1,0 +1,169 @@
+{
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing": [
+    {
+      "id": "SPEC-COMPLETE-INPUT-REVIEW",
+      "severity": "blocking-verification-gap",
+      "finding": "8分钟硬时限内已核全部31个manifest SHA、L3真实RED/GREEN、9461基线中的9450非例外原字节及7份版本逆变换；但未完成全部新增测试/QA helper逐条语义审查及所有回执字段/归档原件的穷尽式链接核验。不能把有限已核结果声称全current change SPEC PASS。",
+      "paths": [
+        "qa/p2p-trace-0210/r6/ci/pipeline.py",
+        "qa/p2p-trace-0210/r6/ci/verify_r6.py",
+        "qa/p2p-trace-0210/r6/evidence/adapter-before-20261115-1542/source-manifest.json"
+      ]
+    }
+  ],
+  "suggestions": [
+    "L3-r2修复已独立实证闭合；下一轮优先只读补齐剩余完整输入/回执语义门，不改产品或旧证据。",
+    "发布前白名单stage须排除现存未tracked的历史evidence/*.kt；实际Gradle test sourceSet递归qa，不能整目录git add。",
+    "新的Android Gradle/CI、APK同证书与真机握手均尚无本审查PASS，不沿用HOST/旧Android绿件。"
+  ],
+  "summary": "独立SPEC fail-closed（验证覆盖未完成，非新产品缺陷）。L3-r2：保存RED jar独立重放8测/3精确afterREADY失败；同断言GREEN独立8/8，完整JVM独立171/171。真实闭包仅观察原!closed&&accepts()，READY/SendAttempts/业务守卫未改。身份表、新P2pTrace钉扎、旧identity predicates字节、7份版本逆变换及冻结workflow已核。HOST证据不等于Android/设备PASS。",
+  "input_manifest_sha256": "c78a51884c38e4ee4014ff06a59afa879eb6f5d27b513702bd21ddb5e9bba81c",
+  "verified_paths": [
+    "qa/p2p-trace-0210/r6/reviews/input/reviewed-manifest.json",
+    "qa/p2p-trace-0210/r6/reviews/input/current-tracked.diff",
+    "qa/p2p-trace-0210/r6/reviews/input/r5-product.diff",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "qa/diag_source_gate.py",
+    "qa/p2p-trace-0210/r6/current-identity.json",
+    "qa/p2p-trace-0210/r6/evidence/identity-migration/table.json",
+    "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt",
+    ".github/workflows/build.yml"
+  ],
+  "evidence": [
+    {
+      "kind": "manifest",
+      "files": 31,
+      "mismatches": 0,
+      "tracked_diff_matches_actual": true,
+      "source_stable_at_last_check": true,
+      "head": "de3e6f182c2def5a52d33f33684777f1fc941ccd"
+    },
+    {
+      "kind": "independent_execution",
+      "lane": "adapter-red-20261115-1542",
+      "exit": 1,
+      "tests": 8,
+      "failures": 3,
+      "names": [
+        "afterReadyIndependentTaskSuccessIsStale",
+        "afterReadyIndependentTaskFailureMatchesEngineStale",
+        "afterReadyIndependentSendResultMatchesEngineStale"
+      ],
+      "receipt_sha256": "4de79685dde8f40825247f813c6fc840b08c24107cd4f4fe29418c1435e3b4d8",
+      "raw_sha256": "287ab26183d33d185e38922075890c430db77852669ef3792e0dc98a105a34c2",
+      "compile_exit_recorded": 0
+    },
+    {
+      "kind": "independent_execution",
+      "lane": "adapter-green-20261115-1544",
+      "exit": 0,
+      "tests": 8,
+      "receipt_sha256": "1600ec742a043022324e35e9f90843868851ca463198371d1d4e62df7bc1bb1d",
+      "raw_sha256": "7c8e707afb49dc51cb28cbab7eb0807480789d1babaf0d816fdca0ba21b2536e",
+      "same_test_bytes_red_green": true,
+      "scenarios": 15
+    },
+    {
+      "kind": "independent_execution",
+      "lane": "adapter-jvm-green-20261115-1545",
+      "exit": 0,
+      "tests": 171,
+      "receipt_sha256": "b32f7fdf8f6a3eb94fffcdec2fa38ad74a0e68486787cb95548897cd505c6a15"
+    },
+    {
+      "kind": "raw_receipt_verified_not_rerun",
+      "lane": "python-http-final-1553",
+      "python": 133,
+      "skip": 0,
+      "http_assertions": 3784,
+      "raw_hashes_match": true,
+      "current_jar_sha256": "882ffe754d803697278c272ebf08023099e8613f88f59c7c1938a22dc28a7393"
+    },
+    {
+      "kind": "raw_receipt_verified_not_rerun",
+      "lane": "runtime-final-1551",
+      "exit": 0,
+      "tests": 4,
+      "receipt_sha256": "5b05900dbb5796099b360f729ccf45d0b508f2bb25251cca891abe29a897405e",
+      "templates_verified": 4
+    },
+    {
+      "kind": "raw_receipt_verified_not_rerun",
+      "lane": "actual-sdk-final-1556",
+      "compile_exit": 0,
+      "receipt_sha256": "1113f8fef6ecfdc90b4c29b3028d805fe4e1d200621f30fc4b505c6cfd90ee5f",
+      "proof_level": "actual Huawei jar type-check with HOST Android shell, not Android execution"
+    },
+    {
+      "kind": "watch_raw_receipt",
+      "tests": 445,
+      "pass": 445,
+      "fail": 0,
+      "skip": 0,
+      "input_hashes_verified": 48,
+      "head_match": true,
+      "receipt_sha256": "6dd7c240144b52e1c8475d84393afa612eb9fcfbd9d70c685c8b919bb61157e8"
+    },
+    {
+      "kind": "mechanical_boundary",
+      "base_entries": 9461,
+      "non_exception_git_blob_hashes_verified": 9450,
+      "mismatches": 0,
+      "version_inverse_files": 7,
+      "old_identity_gate_all_original_bytes_equal_after_removing_new_data_block": true,
+      "identity_table_and_manifest_all_fields_equal": true,
+      "fixture_exact_class_rename_and_shared_interface_removal": true,
+      "fixture_sha256": "af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9",
+      "workflow_base_head_current_equal": true,
+      "workflow_sha256": "ae61e37478852ca2263912eb0f28792aed6b4aab93bec0632a281177b9f12487",
+      "workflow_executes": "gradle -PelctonP2pCandidate=true testDebugUnitTest assembleDebug assembleDebugAndroidTest --no-daemon --stacktrace",
+      "tracked_evidence_kt": 0
+    },
+    {
+      "kind": "verification_limit",
+      "notes": [
+        "最初通用SHA解析器误将历史RED绑定到当前源码、watch相对path绑定到phone root以及日志SHA当路径；已按真实schema纠正，153份主要hash链接全部匹配。",
+        "最初fixture推导使用错误注释标记；按实际生成器重新推导，af97完整字节严格相同。",
+        "工具输出曾截断；需要的L3/identity/boundary后续窄输出重读，未把缺失输出当成功。"
+      ]
+    }
+  ],
+  "l3_counterexamples": [
+    {
+      "phase": "READY",
+      "modes": [
+        "success",
+        "failure",
+        "result"
+      ],
+      "independent_tasks": true,
+      "red_adapter_stale": false,
+      "green_adapter_stale": true,
+      "green_engine_stale_for_failure_result": true,
+      "business_outcome_equal_frozen_oracle": true
+    },
+    {
+      "phase": "current",
+      "adapter_stale": false,
+      "business_outcome_equal_frozen_oracle": true
+    },
+    {
+      "phase": "retry/cancel/close",
+      "adapter_stale": true,
+      "engine_stale_where_emitted": true,
+      "business_outcome_equal_frozen_oracle": true
+    },
+    {
+      "kind": "static_original_guard",
+      "source": "SyncEngine.kt:392-409 / WearProbe.kt:39-41 / P2pTrace.kt:13-15,32-38",
+      "observation": "attemptCurrent={ !closed && accepts() }; accepts() reads original generation and SendAttempts.accepts without issuing/invalidation; adapter invokes only within Throwable-isolated stale; original READY invalidate and callback statements remain byte-equivalent in actual R5->R6 diff."
+    }
+  ],
+  "android_claims": false
+}

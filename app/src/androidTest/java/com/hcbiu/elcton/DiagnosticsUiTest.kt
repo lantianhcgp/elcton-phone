@@ -160,7 +160,7 @@ class DiagnosticsUiTest {
         try {
             ui.waitUntil(15000) { ui.onAllNodesWithTag("nav-settings").fetchSemanticsNodes().isNotEmpty() }
             @Suppress("DEPRECATION") val installed = instrumentation.targetContext.packageManager.getPackageInfo("com.hcbiu.elcton", 0)
-            assertEquals("0.2.9", installed.versionName); assertEquals(11L, installed.longVersionCode)
+            assertEquals("0.2.10", installed.versionName); assertEquals(12L, installed.longVersionCode)
             assertEquals(installed.versionName, BuildConfig.VERSION_NAME); assertEquals(installed.longVersionCode, BuildConfig.VERSION_CODE.toLong())
             val app = ui.activity.application as ElctonApplication
             val runtime = app.diagnostics
@@ -262,7 +262,7 @@ class DiagnosticsUiTest {
                 }
             }
             val version = call(token, "version_info")
-            assertEquals("0.2.9", version.getString("versionName")); assertEquals(11, version.getInt("versionCode"))
+            assertEquals("0.2.10", version.getString("versionName")); assertEquals(12, version.getInt("versionCode"))
             assertEquals("com.hcbiu.elcton", version.getString("packageName"))
             assertEquals(full, call(token, "diag_read").getJSONObject("latestError").getString("full"))
             assertEquals(full, call(token, "error_tail", JSONObject().put("limit", 1)).getJSONArray("errors").getJSONObject(0).getString("full"))

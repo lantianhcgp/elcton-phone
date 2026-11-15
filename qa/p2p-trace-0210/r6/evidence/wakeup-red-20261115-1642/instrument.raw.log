@@ -1,0 +1,2 @@
+Exception in thread "main" java.lang.AssertionError: expected normal and exceptional release sites, found 3
+	at InjectWakeBarrier.main(InjectWakeBarrier.java:72)

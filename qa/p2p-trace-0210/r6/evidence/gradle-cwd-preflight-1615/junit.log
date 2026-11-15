@@ -1,0 +1,24 @@
+JUnit version 4.13.2
+.E.E.....
+Time: 0.244
+There were 2 failures:
+1) adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks(com.hcbiu.elcton.P2pTraceRuntimeTest)
+java.io.FileNotFoundException: app/src/main/java/com/hcbiu/elcton/WearProbe.kt (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at kotlin.io.FilesKt__FileReadWriteKt.readText(FileReadWrite.kt:135)
+	at kotlin.io.FilesKt__FileReadWriteKt.readText$default(FileReadWrite.kt:135)
+	at com.hcbiu.elcton.P2pTraceRuntimeTest.adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks(P2pTraceRuntimeTest.kt:17)
+2) runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema(com.hcbiu.elcton.P2pTraceRuntimeTest)
+java.io.FileNotFoundException: app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at kotlin.io.FilesKt__FileReadWriteKt.readText(FileReadWrite.kt:135)
+	at kotlin.io.FilesKt__FileReadWriteKt.readText$default(FileReadWrite.kt:135)
+	at com.hcbiu.elcton.P2pTraceRuntimeTest.runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema(P2pTraceRuntimeTest.kt:10)
+
+FAILURES!!!
+Tests run: 7,  Failures: 2
+

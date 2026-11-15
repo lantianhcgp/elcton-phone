@@ -1,0 +1,70 @@
+--- migrate_r6_quality_identity.py.before
++++ migrate_r6_quality_identity.py.after
+@@ -45,7 +45,6 @@
+     currenttable = {'source_identities':new['source_identities'],'version_identity':new['version_identity'],
+             'old_manifest_sha256':new['old_manifest_sha256'],'previous_r6_manifest_sha256':sha(before),
+             'new_manifest_sha256':sha(raw),'quality_repair_identity':new['quality_repair_identity']}
+-    table.write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')
+     for path,row in new['source_identities'].items():
+         (evidence/(Path(path).name+'.current.source.txt')).write_bytes((ROOT/path).read_bytes())
+     (evidence/'table.json').write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')
+--- run_r6_final_regressions.py.before
++++ run_r6_final_regressions.py.after
+@@ -21,8 +21,15 @@
+     p.add_argument('--out', type=Path, required=True)
+     p.add_argument('--resume-compiled', type=Path)
+     a = p.parse_args()
++    if '..' in a.out.parts:
++        p.error('Output must not contain parent traversal')
+     out = a.out.absolute()
+-    assert out.is_relative_to(QA/'r6/evidence')
++    if any(path.is_symlink() for path in (out, *out.parents)):
++        p.error('Output must not have symlink ancestry')
++    base = (QA/'r6/evidence').resolve()
++    out = out.resolve()
++    if out == base or not out.is_relative_to(base):
++        p.error('Output must be a new directory within R6 evidence')
+     out.mkdir(parents=True, exist_ok=False)
+     sources = sorted((ROOT/'app/src/main').rglob('*.kt')) + sorted((ROOT/'app/src/test').rglob('*.kt'))
+     watched = sources + [ROOT/'qa/diag_source_gate.py', QA/'r6/current-identity.json', ROOT/'app/build.gradle.kts']
+--- check_r6_scope.py.before
++++ check_r6_scope.py.after
+@@ -37,9 +37,16 @@
+     parser = argparse.ArgumentParser()
+     parser.add_argument('--out', type=Path, default=QA/'r6/evidence/frozen-scope-final')
+     args = parser.parse_args()
++    if '..' in args.out.parts:
++        parser.error('Output must not contain parent traversal')
+     out = args.out.absolute()
+-    assert out.is_relative_to(QA/'r6/evidence')
+-    out.mkdir(parents=True, exist_ok=True)
++    if any(path.is_symlink() for path in (out, *out.parents)):
++        parser.error('Output must not have symlink ancestry')
++    base = (QA/'r6/evidence').resolve()
++    out = out.resolve()
++    if out == base or not out.is_relative_to(base):
++        parser.error('Output must be a new directory within R6 evidence')
++    out.mkdir(parents=True, exist_ok=False)
+     assert not (out/'receipt.json').exists(), 'Preserve prior completed scope receipt'
+     tree = json.loads((QA/'r6/evidence/before/base-tree.json').read_bytes())
+     assert tree['base'] == BASE and len(tree['entries']) == 9461
+--- finalize_r6_delivery.py.before
++++ finalize_r6_delivery.py.after
+@@ -52,7 +52,7 @@
+     assert main['name']=='elcton-phone-probe.apk' and main['package']=='com.hcbiu.elcton'
+     assert main['sha256']==digest and main['bytes']==apk.stat().st_size, 'APK differs from exact verified build artifact'
+     assert main['signer_sha256']==CERT and main['versionCode']=='12' and main['versionName']=='0.2.10'
+-    table=read(Q/'evidence/identity-migration/table.json')
++    table=read(Q/'evidence/identity-migration-q1/table.json')
+     current=read(Q/'current-identity.json')['source_identities']
+     assert table['source_identities']==current, 'Delivery identity table is not final Q1 source'
+     for path,row in current.items():
+@@ -63,7 +63,7 @@
+     assert not target.exists(), 'Existing main APK never overwritten'
+     with apk.open('rb') as src,target.open('xb') as dst:shutil.copyfileobj(src,dst,1024*1024)
+     assert sha(target)==digest and target.stat().st_size==apk.stat().st_size
+-    table=read(Q/'evidence/identity-migration/table.json')
++    table=read(Q/'evidence/identity-migration-q1/table.json')
+     record={'delivered':True,'source_sha':a.source,'versionCode':12,'versionName':'0.2.10','package':'com.hcbiu.elcton',
+             'apk_path':str(target),'apk_bytes':target.stat().st_size,'apk_sha256':digest,'signer_certificate_sha256':CERT,
+             'verified_v2':True,'signers':1,'build_receipt_sha256':sha(a.build_receipt),

@@ -11,7 +11,7 @@ apk, out = map(Path, sys.argv[1:])
 aapt = Path(os.environ['ANDROID_HOME']) / 'build-tools/34.0.0/aapt'
 result = subprocess.run([str(aapt), 'dump', 'badging', str(apk)], text=True, capture_output=True, check=True)
 match = re.search(r"package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", result.stdout)
-assert match and match.groups() == ('com.hcbiu.elcton', '11', '0.2.9'), 'Final APK binary version mismatch'
+assert match and match.groups() == ('com.hcbiu.elcton', '12', '0.2.10'), 'Final APK binary version mismatch'
 report = {'passed': True, 'package': match[1], 'versionCode': int(match[2]), 'versionName': match[3],
           'scope': 'Actual binary APK manifest only; not device/WE acceptance'}
 out.parent.mkdir(parents=True, exist_ok=True)

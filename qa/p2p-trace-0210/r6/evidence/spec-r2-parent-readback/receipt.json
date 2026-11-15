@@ -1,0 +1,10 @@
+{
+  "actual_spec_passed": true,
+  "input_count": 32,
+  "manifest_sha256": "48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027",
+  "spec_sha256": "ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0",
+  "raw_sha256": "b48ede8e253b7b95dbe52cf821717218942e07fdf2046814387ac7617e76eaec",
+  "actual_input_drift": [],
+  "future_android_delivery_claims": false,
+  "at": "2026-11-15 16:28:29 +0800"
+}

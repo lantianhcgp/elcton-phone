@@ -1,0 +1,5 @@
+usage: check_r6_scope.py [-h] [--out OUT]
+
+options:
+  -h, --help  show this help message and exit
+  --out OUT

@@ -1,0 +1,403 @@
+--- RED-real-Runtime.javap
++++ GREEN-real-Runtime.javap
+@@ -1146,195 +1146,211 @@
+     Code:
+        0: ldc2_w        #606                // long -1l
+        3: lstore_1
+-       4: iconst_0
+-       5: istore_3
+-       6: nop
+-       7: nop
+-       8: aload_0
+-       9: getfield      #67                 // Field lock:Ljava/lang/Object;
+-      12: astore        7
+-      14: aload         7
+-      16: monitorenter
+-      17: nop
+-      18: iconst_0
+-      19: istore        9
+-      21: aload_0
+-      22: getfield      #363                // Field revision:J
+-      25: lstore        9
+-      27: aload         7
+-      29: monitorexit
+-      30: lload         9
+-      32: goto          43
+-      35: astore        11
+-      37: aload         7
+-      39: monitorexit
+-      40: aload         11
+-      42: athrow
+-      43: lstore        4
+-      45: aload_0
+-      46: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+-      49: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
+-      52: lstore        6
+-      54: aload_0
+-      55: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+-      58: aload_0
+-      59: invokedynamic #616,  0            // InvokeDynamic #9:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function1;
+-      64: invokevirtual #620                // Method com/hcbiu/elcton/P2pTrace.persist:(Lkotlin/jvm/functions/Function1;)V
+-      67: aload_0
+-      68: getfield      #27                 // Field stateWriter:Lkotlin/jvm/functions/Function2;
+-      71: new           #211                // class java/io/File
+-      74: dup
+-      75: aload_0
+-      76: getfield      #24                 // Field filesDir:Ljava/io/File;
+-      79: ldc_w         #622                // String diagnostics/state.json
+-      82: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+-      85: aload_0
+-      86: invokevirtual #565                // Method read:()Lorg/json/JSONObject;
+-      89: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
+-      92: dup
+-      93: ldc_w         #624                // String toString(...)
+-      96: invokestatic  #465                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+-      99: invokeinterface #627,  3          // InterfaceMethod kotlin/jvm/functions/Function2.invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+-     104: pop
+-     105: lload         4
+-     107: lstore_1
+-     108: aload_0
+-     109: getfield      #67                 // Field lock:Ljava/lang/Object;
+-     112: astore        11
+-     114: aload         11
+-     116: monitorenter
+-     117: nop
+-     118: iconst_0
+-     119: istore        12
+-     121: aload_0
+-     122: getfield      #363                // Field revision:J
+-     125: lstore        12
+-     127: aload         11
+-     129: monitorexit
+-     130: lload         12
+-     132: goto          143
+-     135: astore        14
+-     137: aload         11
+-     139: monitorexit
+-     140: aload         14
+-     142: athrow
+-     143: lload         4
+-     145: lcmp
+-     146: ifne          7
+-     149: aload_0
+-     150: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
+-     153: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
+-     156: lload         6
+-     158: lcmp
+-     159: ifne          7
+-     162: goto          165
+-     165: aload_0
+-     166: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+-     169: iconst_0
+-     170: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+-     173: lload_1
+-     174: lconst_0
+-     175: lcmp
+-     176: iflt          223
+-     179: aload_0
+-     180: getfield      #67                 // Field lock:Ljava/lang/Object;
+-     183: astore        6
+-     185: aload         6
+-     187: monitorenter
+-     188: nop
+-     189: iconst_0
+-     190: istore        7
+-     192: aload_0
+-     193: getfield      #363                // Field revision:J
+-     196: lstore        7
+-     198: aload         6
+-     200: monitorexit
+-     201: lload         7
+-     203: goto          214
+-     206: astore        9
+-     208: aload         6
+-     210: monitorexit
+-     211: aload         9
+-     213: athrow
+-     214: lload_1
+-     215: lcmp
+-     216: ifeq          223
+-     219: aload_0
+-     220: invokespecial #366                // Method persistLater:()V
+-     223: goto          343
+-     226: astore        5
+-     228: iconst_1
+-     229: istore_3
+-     230: ldc_w         #341                // String ElctonMcp
+-     233: new           #225                // class java/lang/StringBuilder
+-     236: dup
+-     237: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
+-     240: ldc_w         #632                // String Cannot persist diagnostic state:
+-     243: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-     246: aload         5
+-     248: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+-     251: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+-     254: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-     257: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+-     260: invokestatic  #359                // Method android/util/Log.w:(Ljava/lang/String;Ljava/lang/String;)I
+-     263: pop
+-     264: aload_0
+-     265: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+-     268: iconst_0
+-     269: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+-     272: nop
+-     273: goto          343
+-     276: astore        5
+-     278: aload_0
+-     279: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
+-     282: iconst_0
+-     283: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+-     286: iload_3
+-     287: ifne          340
+-     290: lload_1
+-     291: lconst_0
+-     292: lcmp
+-     293: iflt          340
+-     296: aload_0
+-     297: getfield      #67                 // Field lock:Ljava/lang/Object;
+-     300: astore        7
+-     302: aload         7
+-     304: monitorenter
+-     305: nop
+-     306: iconst_0
+-     307: istore        9
+-     309: aload_0
+-     310: getfield      #363                // Field revision:J
+-     313: lstore        9
+-     315: aload         7
+-     317: monitorexit
+-     318: lload         9
+-     320: goto          331
+-     323: astore        11
+-     325: aload         7
+-     327: monitorexit
+-     328: aload         11
+-     330: athrow
+-     331: lload_1
+-     332: lcmp
+-     333: ifeq          340
+-     336: aload_0
+-     337: invokespecial #366                // Method persistLater:()V
+-     340: aload         5
+-     342: athrow
+-     343: return
++       4: ldc2_w        #606                // long -1l
++       7: lstore_3
++       8: iconst_0
++       9: istore        5
++      11: nop
++      12: nop
++      13: aload_0
++      14: getfield      #67                 // Field lock:Ljava/lang/Object;
++      17: astore        9
++      19: aload         9
++      21: monitorenter
++      22: nop
++      23: iconst_0
++      24: istore        11
++      26: aload_0
++      27: getfield      #363                // Field revision:J
++      30: lstore        11
++      32: aload         9
++      34: monitorexit
++      35: lload         11
++      37: goto          48
++      40: astore        13
++      42: aload         9
++      44: monitorexit
++      45: aload         13
++      47: athrow
++      48: lstore        6
++      50: aload_0
++      51: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
++      54: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
++      57: lstore        8
++      59: aload_0
++      60: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
++      63: aload_0
++      64: invokedynamic #616,  0            // InvokeDynamic #9:invoke:(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function1;
++      69: invokevirtual #620                // Method com/hcbiu/elcton/P2pTrace.persist:(Lkotlin/jvm/functions/Function1;)V
++      72: aload_0
++      73: getfield      #27                 // Field stateWriter:Lkotlin/jvm/functions/Function2;
++      76: new           #211                // class java/io/File
++      79: dup
++      80: aload_0
++      81: getfield      #24                 // Field filesDir:Ljava/io/File;
++      84: ldc_w         #622                // String diagnostics/state.json
++      87: invokespecial #216                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
++      90: aload_0
++      91: invokevirtual #565                // Method read:()Lorg/json/JSONObject;
++      94: invokevirtual #388                // Method org/json/JSONObject.toString:()Ljava/lang/String;
++      97: dup
++      98: ldc_w         #624                // String toString(...)
++     101: invokestatic  #465                // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
++     104: invokeinterface #627,  3          // InterfaceMethod kotlin/jvm/functions/Function2.invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
++     109: pop
++     110: lload         6
++     112: lstore_1
++     113: lload         8
++     115: lstore_3
++     116: aload_0
++     117: getfield      #67                 // Field lock:Ljava/lang/Object;
++     120: astore        13
++     122: aload         13
++     124: monitorenter
++     125: nop
++     126: iconst_0
++     127: istore        14
++     129: aload_0
++     130: getfield      #363                // Field revision:J
++     133: lstore        14
++     135: aload         13
++     137: monitorexit
++     138: lload         14
++     140: goto          151
++     143: astore        16
++     145: aload         13
++     147: monitorexit
++     148: aload         16
++     150: athrow
++     151: lload         6
++     153: lcmp
++     154: ifne          12
++     157: aload_0
++     158: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
++     161: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
++     164: lload         8
++     166: lcmp
++     167: ifne          12
++     170: goto          173
++     173: aload_0
++     174: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
++     177: iconst_0
++     178: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
++     181: lload_1
++     182: lconst_0
++     183: lcmp
++     184: iflt          243
++     187: aload_0
++     188: getfield      #67                 // Field lock:Ljava/lang/Object;
++     191: astore        8
++     193: aload         8
++     195: monitorenter
++     196: nop
++     197: iconst_0
++     198: istore        9
++     200: aload_0
++     201: getfield      #363                // Field revision:J
++     204: lstore        9
++     206: aload         8
++     208: monitorexit
++     209: lload         9
++     211: goto          222
++     214: astore        11
++     216: aload         8
++     218: monitorexit
++     219: aload         11
++     221: athrow
++     222: lload_1
++     223: lcmp
++     224: ifne          239
++     227: aload_0
++     228: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
++     231: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
++     234: lload_3
++     235: lcmp
++     236: ifeq          243
++     239: aload_0
++     240: invokespecial #366                // Method persistLater:()V
++     243: goto          377
++     246: astore        7
++     248: iconst_1
++     249: istore        5
++     251: ldc_w         #341                // String ElctonMcp
++     254: new           #225                // class java/lang/StringBuilder
++     257: dup
++     258: invokespecial #226                // Method java/lang/StringBuilder."<init>":()V
++     261: ldc_w         #632                // String Cannot persist diagnostic state:
++     264: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
++     267: aload         7
++     269: invokevirtual #236                // Method java/lang/Object.getClass:()Ljava/lang/Class;
++     272: invokevirtual #242                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
++     275: invokevirtual #232                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
++     278: invokevirtual #245                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
++     281: invokestatic  #359                // Method android/util/Log.w:(Ljava/lang/String;Ljava/lang/String;)I
++     284: pop
++     285: aload_0
++     286: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
++     289: iconst_0
++     290: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
++     293: nop
++     294: goto          377
++     297: astore        7
++     299: aload_0
++     300: getfield      #143                // Field writing:Ljava/util/concurrent/atomic/AtomicBoolean;
++     303: iconst_0
++     304: invokevirtual #630                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
++     307: iload         5
++     309: ifne          374
++     312: lload_1
++     313: lconst_0
++     314: lcmp
++     315: iflt          374
++     318: aload_0
++     319: getfield      #67                 // Field lock:Ljava/lang/Object;
++     322: astore        9
++     324: aload         9
++     326: monitorenter
++     327: nop
++     328: iconst_0
++     329: istore        11
++     331: aload_0
++     332: getfield      #363                // Field revision:J
++     335: lstore        11
++     337: aload         9
++     339: monitorexit
++     340: lload         11
++     342: goto          353
++     345: astore        13
++     347: aload         9
++     349: monitorexit
++     350: aload         13
++     352: athrow
++     353: lload_1
++     354: lcmp
++     355: ifne          370
++     358: aload_0
++     359: invokevirtual #457                // Method getP2pTrace:()Lcom/hcbiu/elcton/P2pTrace;
++     362: invokevirtual #610                // Method com/hcbiu/elcton/P2pTrace.sequence:()J
++     365: lload_3
++     366: lcmp
++     367: ifeq          374
++     370: aload_0
++     371: invokespecial #366                // Method persistLater:()V
++     374: aload         7
++     376: athrow
++     377: return
+     Exception table:
+        from    to  target type
+-          17    27    35   any
+-          35    37    35   any
+-         117   127   135   any
+-         135   137   135   any
+-         188   198   206   any
+-         206   208   206   any
+-           6   165   226   Class java/lang/Exception
+-         305   315   323   any
+-         323   325   323   any
+-           6   165   276   any
+-         226   264   276   any
+-         276   278   276   any
++          22    32    40   any
++          40    42    40   any
++         125   135   143   any
++         143   145   143   any
++         196   206   214   any
++         214   216   214   any
++          11   173   246   Class java/lang/Exception
++         327   337   345   any
++         345   347   345   any
++          11   173   297   any
++         246   285   297   any
++         297   299   297   any
+ }

@@ -1,0 +1,40 @@
+Failed to load native library:jansi-2.4.0-99479e8f098aaca-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-99479e8f098aaca-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-99479e8f098aaca-libjansi.so in namespace (default)
+app/src/main/java/com/hcbiu/elcton/PickupClient.kt:19:19: warning: 'constructor(p0: String!): URL' is deprecated. Deprecated in Java.
+        val url = URL(endpoint + "?action=get&pickup=" + pickup)
+                  ^^^
+app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt:49:30: warning: cast is redundant.
+        assertFalse((h.trace as P2pTrace).read(0,128).toString().contains("PRIVATE_"))
+                             ^^^^^^^^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt:12:96: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function0' instead.
+        val trace=type.getConstructor(String::class.java,kotlin.jvm.functions.Function0::class.java,kotlin.jvm.functions.Function0::class.java).newInstance("host-test",{1L},{2L})
+                                                                                               ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt:12:139: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function0' instead.
+        val trace=type.getConstructor(String::class.java,kotlin.jvm.functions.Function0::class.java,kotlin.jvm.functions.Function0::class.java).newInstance("host-test",{1L},{2L})
+                                                                                                                                          ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt:17:90: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function1' instead.
+        val writer=Thread{type.getMethod("persist",kotlin.jvm.functions.Function1::class.java).invoke(trace,{_:String->entered.countDown();release.await();true})}
+                                                                                         ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt:10:156: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function0' instead.
+    private fun trace(clock:Clock,broken:Boolean=false):Any = required("P2pTrace").getConstructor(String::class.java,kotlin.jvm.functions.Function0::class.java,kotlin.jvm.functions.Function0::class.java)
+                                                                                                                                                           ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt:10:199: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function0' instead.
+    private fun trace(clock:Clock,broken:Boolean=false):Any = required("P2pTrace").getConstructor(String::class.java,kotlin.jvm.functions.Function0::class.java,kotlin.jvm.functions.Function0::class.java)
+                                                                                                                                                                                                      ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt:15:89: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function0' instead.
+        type().getConstructor(String::class.java, kotlin.jvm.functions.Function0::class.java, kotlin.jvm.functions.Function0::class.java)
+                                                                                        ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt:15:133: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function0' instead.
+        type().getConstructor(String::class.java, kotlin.jvm.functions.Function0::class.java, kotlin.jvm.functions.Function0::class.java)
+                                                                                                                                    ^^^^
+app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt:53:86: warning: this class is not recommended for use in Kotlin. Use 'kotlin.Function1' instead.
+        val persist=type().getMethod("persist",kotlin.jvm.functions.Function1::class.java)
+                                                                                     ^^^^
+
+JUnit version 4.13.2
+...........................................................................................................................................................................
+Time: 15.157
+
+OK (171 tests)
+
+

@@ -1,0 +1,9 @@
+package android.os
+/** HOST fake scheduler. Native Android/Looper semantics are not claimed. */
+class Looper { companion object { fun getMainLooper()=Looper() } }
+class Handler(looper:Looper) {
+    fun post(block:()->Unit):Boolean { block(); return true }
+    fun postDelayed(runnable:Runnable,ms:Long)=true
+    fun removeCallbacks(runnable:Runnable) {}
+}
+object SystemClock { fun elapsedRealtime()=0L }

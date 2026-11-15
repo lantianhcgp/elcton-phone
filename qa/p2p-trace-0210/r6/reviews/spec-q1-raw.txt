@@ -1,0 +1,272 @@
+{
+  "axis": "spec",
+  "revision": "Q1",
+  "passed": true,
+  "security_concerns": [],
+  "logic_errors": [],
+  "missing": [],
+  "missing_requirements": [],
+  "input_manifest_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/input-q1/reviewed-manifest.json",
+  "input_manifest_sha256": "93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d",
+  "reviewed_inputs": {
+    "app/build.gradle.kts": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": "51dff0ac27fb73c10fe470b7a0911d5592c2fcaa7fdade1cbdf18077b4c1f6e2",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": "787661d88f7161ffa5ec209a4621d59b60aeacb68fd07953ae026fd6c1b9aba4",
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": "85cac5a68fe22e07e56d18aebb709d4e92874b4ebc186fe50721bbfc9873a127",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+    "qa/P2pCandidateBuildTest.kt": "1fd25cedaed4f90ba4f8cf132b8ac5ef06382fe87eea84b20c2055f62dced31d",
+    "qa/diag_emulator_smoke.py": "0b01c00a0a853a5e436c5ae31f2e7368fde4a4317c7637d87220aee141c1fce1",
+    "qa/diag_source_gate.py": "b3df0fc43ac03f918109a2e32d13ab8a46066b7df0601f0c0b9598e375a7a7b1",
+    "qa/p2p-trace-0210/check_r6_scope.py": "92e1708911fadb1310215b548b66e82a6237084cbf6cb6b626f36435b3c7e08b",
+    "qa/p2p-trace-0210/generate_ci_baseline.py": "bc7a366d2cbc9fa46159db436fe584ba90ab3ec3d1cc9eba10f6d313ae1de56e",
+    "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in": "d54c61255f96b922b31a74a3b0d44b77e62912d31bef208eea1f5c0c882081a9",
+    "qa/p2p-trace-0210/r6/ci/pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+    "qa/p2p-trace-0210/r6/ci/r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+    "qa/p2p-trace-0210/r6/ci/self_test.py": "e3bb62ad949921dd125e9b8f6cefd518fa1c77bdb72f59e4dc258ab570920df6",
+    "qa/p2p-trace-0210/r6/ci/verify_r6.py": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+    "qa/p2p-trace-0210/r6/current-identity.json": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+    "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt": "af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9",
+    "qa/p2p-trace-0210/register_r6_identity.py": "5da56f3ea199a2cf3d39fb147824a3160b4577239eab85c9647e46b9e4c14bff",
+    "qa/p2p-trace-0210/run_host.py": "1aa479adafc0038b40870c927ef3cad93fb14c3d759af22a1a08e88a5c9a8bc6",
+    "qa/p2p-trace-0210/run_native_host.py": "a948e0ff9719b936532cfeb0170b5bb8bf97dd7f8a9a8e6d89151e11d252e396",
+    "qa/p2p-trace-0210/run_runtime_fault_host.py": "f3cba84f77eb526e14b80d4fcd30f69151c29aaef4ad26545a85cb3580de0533",
+    "qa/release-029/verify_apk.py": "c005b01419683235c3c21c8ea1345e8dd7fe7bad910a7c0850497c479c712e18",
+    "qa/test_mcp027_scope.py": "7915281eb830e010c4890f3a5cf15f54a69d4d407ed45bfd17fba1aeeee0157f",
+    "qa/p2p-trace-0210/r6/ci/added-cases.json": "62e9fe15ef80aede736a5b0916251213abda733c41a371f2bc3c34d5786858c7",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in": "6b62c0f49d1775a2a0cb4c005a01964165444637eea82445a9cfdad4c73af9b8",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py": "7c33cc10ddf03894ab6a84674eadee73c50f8e10bbfa92eaef40192e4476cc7e",
+    "qa/p2p-trace-0210/run_r6_final_regressions.py": "d9fb732f71bdf58e7e4b6689eae26dc6dcd0d36114bcbc4f1c9b3d015acefdf0",
+    "qa/p2p-trace-0210/migrate_r6_quality_identity.py": "0a51868e6df53d5e4f52babe5af64b9dee0ef4d60940f86bd83757b0572777f1",
+    "qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md": "7c31de4a4264c75f86e93086957df4723d78f29355dcf3b28fbca3b8353a444a",
+    "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+    "qa/p2p-trace-0210/r6/FINAL-WAKEUP.json": "20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b",
+    "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json": "9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9"
+  },
+  "review": {
+    "mode": "direct_source_review",
+    "jev_called": false,
+    "created_at": "2026-11-15T17:05:56.470267+08:00",
+    "delta_only_with_previous_R2_guarantees": true,
+    "previous_manifest_sha256": "48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027",
+    "unchanged_prior_inputs": 29,
+    "changed_prior_inputs": [
+      "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "qa/p2p-trace-0210/check_r6_scope.py",
+      "qa/p2p-trace-0210/r6/current-identity.json"
+    ],
+    "new_inputs": [
+      "qa/p2p-trace-0210/migrate_r6_quality_identity.py",
+      "qa/p2p-trace-0210/r6/FINAL-WAKEUP.json",
+      "qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md",
+      "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json",
+      "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json",
+      "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in",
+      "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in",
+      "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py",
+      "qa/p2p-trace-0210/run_r6_final_regressions.py"
+    ],
+    "full_remaining_Q1_contract_closed": true,
+    "full_existing_31_source_reread": false,
+    "baseline_2GB_rehash": false,
+    "compile_test_device_CI_commit_or_publish_by_this_review": false
+  },
+  "source_review": [
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "lines": "19-22,43-53,56-93,95-122,128-159",
+      "finding": "完整读取 actual 原件。Q1 only +4/-1 exact transform；processedTraceSeq 本轮入口 capture 在 stateWriter 成功后登记；finally 先写 writing=false，再复查 revision OR trace sequence。start/stop revision、observe/record、read/MCP/tool/token/address/default stateWriter/SDK边界全部保持原 R4 + R2。"
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "lines": "31,68,71-105,118-129",
+      "finding": "完整读取实际 unchanged Trace。emit 锁内递增seq/append；锁外原 onChanged 回调；persist I/O 在Trace lock外，失败/quota状态原样保持。新增 finally 不用 pending 或 committed-disk seq续排，无磁盘故障自旋。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in",
+      "lines": "19-159",
+      "finding": "实际完整读取六例/所有helpers。目标仅真实 CLOSE和UNREG_TASK_OK emit、无observe/SDK/manual persist；三executor fence后断言 real disk/state seq2/pending0/write2。其他5控制已在RED绿；state failure保留pending，后续显式observe才恢复；trace失败/quota/control断言未改。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in",
+      "lines": "48-88",
+      "finding": "完整读取actual ASM。三个实际 static persistLater lambda 的 writing false release前只加ALOAD0+INVOKESTATIC；原接收者和false保留，net stack neutral。精确三处、normalized inverse原instruction/labels/frame/trycatch/calls相等，raw/classes hash独立核。不是原class字节相等或Android执行证明。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py",
+      "lines": "23-117",
+      "finding": "完整读取 runner。生成目录/evidence边界、独占输出、源封存、reuse pre-fix compiled KotlinSHA门、真正 JUnit RED1fail/GREEN6、legacy4/stop1 uninstrumented classpath、最后源SHA全部保留。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/migrate_r6_quality_identity.py",
+      "lines": "16-56",
+      "finding": "完整读取迁移helper。明确expected RuntimeSHA、other3 SHA/old029 guard、prior manifest/table独占封存、只current Runtime row+repair metadata、旧登记保留；实际table/previous manifest/current hash核等。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/run_r6_final_regressions.py",
+      "lines": "19-75",
+      "finding": "完整读取new helper。串行原入口、full manifest一致才能复用compile；app cwd真6（不是旧叙述7）、Python133零skip、HTTP原mcp_http_selftest JSON3784、runtime/native8/actualSdk type-only，最终72源SHA不漂移。两次helper前置命令/计数错误原件保留，真实final当前门闭合。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/check_r6_scope.py",
+      "lines": "34-109",
+      "finding": "完整读取current辅助；only argparse --out默认原目录+evidence containment，全部原9461blob/7literal inverse/35oldtest/identity/frozen baseline/fixture/diffcheck谓词精确保留。无再次运行2GB门，核现receipt各current SHA并继承R2基线证据。"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "independent_full_readback",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/spec-q1-readback-continuation.json",
+      "sha256": "0c4946995a790d789241f8c93f36542e2ecf24892e03f412e446a96733db56ba",
+      "checks": 31,
+      "all_checks_pass": true
+    },
+    {
+      "kind": "preserved_first_observer_failure_not_product",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/spec-q1-readback.json",
+      "sha256": "dbe29aaecfdbf3f071c0d515aefc9c49b3e93ab5ce15c1b4df348fdba21fc4f6",
+      "finding": "mid-review parent staging changed index; historical scope restored losslessly and bound to old immutable manifest SHA in continuation"
+    },
+    {
+      "kind": "current_input_manifest",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/input-q1/reviewed-manifest.json",
+      "sha256": "93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d",
+      "files": 41,
+      "mismatches": 0
+    },
+    {
+      "kind": "immutable_previous_SPEC",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/r6-spec-r2.json",
+      "sha256": "ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0",
+      "passed": true
+    },
+    {
+      "kind": "preserved_original_quality_rejection",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/r6-quality-r1.json",
+      "sha256": "d60ccb9fef5481042829787c5d2ac19e1e9be1667fa8aceef7276a7ee6fbf12e",
+      "passed": false,
+      "finding": "Q-R6-001"
+    },
+    {
+      "kind": "original_R4_contract",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/diag-mcp-027/RUNTIME-SPEC-R4.json",
+      "sha256": "dd39b4fe6cfd32df5c09afd0b05355c733c61bc888767211f57bd6e2b5df0d04",
+      "passed": true,
+      "current_old_stop_template_sha_equal": true
+    },
+    {
+      "kind": "authorized_Q1_scope",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md",
+      "sha256": "7c31de4a4264c75f86e93086957df4723d78f29355dcf3b28fbca3b8353a444a"
+    },
+    {
+      "kind": "real_RED_original_raw",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/wakeup-junit.raw.log",
+      "sha256": "25042c11304ef27f2b7e135af85e2a76eda2a1e5e1a62cfcead7d4f07ead08d2",
+      "tests": 6,
+      "failures": 1,
+      "compile_exit": 0,
+      "junit_exit": 1
+    },
+    {
+      "kind": "real_RED_repeat_raw",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/repeat/wakeup-junit.raw.log",
+      "sha256": "7fb8325832239a052d4bbe3ce34491088d0d5b04129c1568777048e2d0f23f8c",
+      "tests": 6,
+      "failures": 1
+    },
+    {
+      "kind": "same_test_GREEN_raw",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/wakeup-junit.raw.log",
+      "sha256": "a1ca2b22efbc95258eaa8d3a880ef52faa04b13074b6d5d5c82ddc1abe6613db",
+      "tests": 6,
+      "failures": 0,
+      "junit_exit": 0
+    },
+    {
+      "kind": "uninstrumented_original_Runtime4",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-runtimefault4.raw.log",
+      "sha256": "758b6f6f68024c96b36951aee859f787024f8fdd71af0fee3c035802b886af84",
+      "tests": 4,
+      "exit": 0
+    },
+    {
+      "kind": "uninstrumented_original_Stop1",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-stoprevision1.raw.log",
+      "sha256": "f7722f289df59f6866491cc7b3195458e253087c1424fe7ddb6cc879e128c542",
+      "tests": 1,
+      "exit": 0,
+      "real_socket_health": 200,
+      "real_socket_refused": true,
+      "final_running": false
+    },
+    {
+      "kind": "RED_ASM_transparency",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/instrumentation-proof.txt",
+      "sha256": "b311fc3d8e81c9b616d1b6e0322b7c0a5967c39ee39a56fa4eb33a76cbea40fa",
+      "release_sites": 3,
+      "inverse_equal": true
+    },
+    {
+      "kind": "GREEN_ASM_transparency",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/instrumentation-proof.txt",
+      "sha256": "d45ab7ccbcd1c7c6a919f3c9d280a66853be3b4c00addee42a2f1d7fadc71f51",
+      "release_sites": 3,
+      "inverse_equal": true
+    },
+    {
+      "kind": "source_frozen_and_reference_chain",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/FINAL-WAKEUP.json",
+      "sha256": "20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b",
+      "references_verified": 27
+    },
+    {
+      "kind": "frozen_original_scope_receipt",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/frozen-scope-q1-1650/receipt.json",
+      "sha256": "827f1404da0ee56361c5d93e0f8ded1f1cb16b3ed4fa48d765c483dcea3740c3",
+      "base_entries": 9461,
+      "actual_receipt_source_test_and_version_rows_match": true,
+      "baseline_full_rehash_by_this_review": false
+    },
+    {
+      "kind": "current_identity_migration",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json",
+      "sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+      "only_Runtime_row_changed": true,
+      "previous_manifest_preserved": true,
+      "old029_unchanged": true
+    },
+    {
+      "kind": "final_current_HOST_regression",
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json",
+      "sha256": "9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9",
+      "passed": true,
+      "jvm": 171,
+      "python": 133,
+      "python_skip": 0,
+      "http_assertions": 3784,
+      "app_cwd": 6,
+      "runtime": 4,
+      "native_adapter": 8,
+      "actual_sdk_type_compile_exit": 0,
+      "current_source_rows": 72,
+      "all_recorded_lanes": 7,
+      "rerun_by_this_review": false
+    }
+  ],
+  "scope_limits": [
+    "仅Q1同源增量SPEC；冻结9461全baseline为原R2与父本轮scope receipt证据，不宣称本审再次哈希2GB。",
+    "实际JVM HOST barrier证明，不是Android CI/验签/设备或真实Huawei握手修复。",
+    "本SPEC PASS不替代后续QUALITY轴和父交付门；未发CI、设备、commit或publish。",
+    "首observer用git index取旧input遇父staging，false原回执保留；continuation仅用精确无损inverse绑定原input-r2 SHA纠正取源，未改产品/测试/旧审查。"
+  ],
+  "summary": "独立 SPEC Q1 PASS：正式 input-q1 41文件全SHA当前不漂移，原32只Runtime/currentidentity/checkscope三项允许变化，其余29由原R2同源保障。读取actual Runtime/Trace/ASM/新六测试与runner、迁移和回归helpers，精确+4/-1诊断-only修复闭合Q-R6-001：true RED6/1及同断言repeat→same GREEN6，旧uninstrumented Runtime4/stop1、故障与quota静默策略不变；原R4业务/监听合同保持。独立核27 report refs、31读回谓词、现final JVM171/Python133skip0/HTTP3784/appcwd6/runtime4/native8+actualSDKtype0原件及72源绑定。旧SPEC/QUALITY拒绝原件未改；不重编译/跑设备/再哈希2GB，不声称Android或真实握手验收。"
+}

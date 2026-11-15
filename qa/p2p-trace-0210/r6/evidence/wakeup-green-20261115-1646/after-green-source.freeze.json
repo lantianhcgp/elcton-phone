@@ -1,0 +1,8 @@
+{
+  "product_frozen_after_green": true,
+  "at": "2026-11-15T16:48:18.492331+08:00",
+  "runtime_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+  "runtime_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+  "green_receipt": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/receipt.json",
+  "no_more_product_edits": true
+}

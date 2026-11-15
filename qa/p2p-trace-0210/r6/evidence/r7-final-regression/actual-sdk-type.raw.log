@@ -1,0 +1,4 @@
+{"name": "compile", "exit": 0, "seconds": 25.513020562939346}
+Failed to load native library:jansi-2.4.0-99fcb7a40d658992-libjansi.so. osinfo: Linux/arm64
+java.lang.UnsatisfiedLinkError: /data/data/com.termux/files/usr/tmp/jansi-2.4.0-99fcb7a40d658992-libjansi.so: dlopen failed: library "libc.so.6" not found: needed by /data/data/com.termux/files/usr/tmp/jansi-2.4.0-99fcb7a40d658992-libjansi.so in namespace (default)
+

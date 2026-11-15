@@ -1,0 +1,461 @@
+diff --git a/qa/p2p-trace-0210/check_r6_scope.py b/qa/p2p-trace-0210/check_r6_scope.py
+new file mode 100644
+index 0000000..9f8d699
+--- /dev/null
++++ b/qa/p2p-trace-0210/check_r6_scope.py
+@@ -0,0 +1,120 @@
++#!/usr/bin/env python3
++"""R6 frozen-scope: complete git baseline + exact permitted literal inversions.
++New rows are registered separately, never alter original assertions or evidence.
++"""
++import argparse
++from pathlib import Path
++import hashlib
++import json
++import os
++import subprocess
++import time
++ROOT = Path(__file__).resolve().parents[2]
++QA = Path(__file__).resolve().parent
++BASE = 'bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
++PRODUCT = {f'app/src/main/java/com/hcbiu/elcton/{n}.kt' for n in ('WearProbe','SyncEngine','DiagnosticRuntime')}
++VERSION = {
++    'app/build.gradle.kts': [('versionCode = 12', 'versionCode = 11'), ('versionName = "0.2.10"', 'versionName = "0.2.9"')],
++    'app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt': [('versionCode = 12','versionCode = 11'), ('0.2.10','0.2.9')],
++    'qa/P2pCandidateBuildTest.kt': [('assertEquals(12, BuildConfig.VERSION_CODE)','assertEquals(11, BuildConfig.VERSION_CODE)'), ('0.2.10','0.2.9')],
++    'app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt': [('0.2.10','0.2.9'), ('assertEquals(12L, installed.longVersionCode)','assertEquals(11L, installed.longVersionCode)'), ('assertEquals(12, version.getInt("versionCode"))','assertEquals(11, version.getInt("versionCode"))')],
++    'qa/test_mcp027_scope.py': [('versionCode = 12','versionCode = 11'), ('0.2.10','0.2.9')],
++    'qa/release-029/verify_apk.py': [("'12', '0.2.10'", "'11', '0.2.9'")],
++    'qa/diag_emulator_smoke.py': [('"0.2.10"','"0.2.9"'), ('report.get("packageCode") == 12','report.get("packageCode") == 11'), ('version.get("versionCode") == 12','version.get("versionCode") == 11')],
++}
++GATE = 'qa/diag_source_gate.py'
++
++
++def git(*args):
++    return subprocess.check_output(['git', *args], cwd=ROOT)
++
++
++def sha(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--out', type=Path, default=QA/'r6/evidence/frozen-scope-final')
++    args = parser.parse_args()
++    if '..' in args.out.parts:
++        parser.error('Output must not contain parent traversal')
++    out = args.out.absolute()
++    if any(path.is_symlink() for path in (out, *out.parents)):
++        parser.error('Output must not have symlink ancestry')
++    base = (QA/'r6/evidence').resolve()
++    out = out.resolve()
++    if out == base or not out.is_relative_to(base):
++        parser.error('Output must be a new directory within R6 evidence')
++    out.mkdir(parents=True, exist_ok=False)
++    assert not (out/'receipt.json').exists(), 'Preserve prior completed scope receipt'
++    tree = json.loads((QA/'r6/evidence/before/base-tree.json').read_bytes())
++    assert tree['base'] == BASE and len(tree['entries']) == 9461
++    expected = PRODUCT | set(VERSION) | {GATE}
++    # Exact full-content read of ALL baseline entries. New R5/R6 evidence is not
++    # part of the old baseline, and no deleted old path is excluded.
++    changed = set()
++    for row in tree['entries']:
++        p = ROOT/row['path']
++        assert p.exists() or p.is_symlink(), 'Missing baseline path: '+row['path']
++        data = os.readlink(p).encode() if p.is_symlink() else p.read_bytes()
++        oid = hashlib.sha1(b'blob '+str(len(data)).encode()+b'\x00'+data).hexdigest()
++        if oid != row['oid']: changed.add(row['path'])
++    assert changed == expected, sorted(changed ^ expected)
++    inverses = {}
++    for path, changes in VERSION.items():
++        current = (ROOT/path).read_bytes()
++        restored = current
++        counts = []
++        for new, old in changes:
++            assert restored.count(new.encode()) > 0, (path,new)
++            counts.append({'new':new,'old':old,'count':restored.count(new.encode())})
++            restored = restored.replace(new.encode(),old.encode())
++        original = git('show', BASE+':'+path)
++        assert restored == original, 'Nonliteral version/test delta: '+path
++        inverses[path] = {'old_sha256':sha(original),'current_sha256':sha(current), 'reverse_sha256':sha(restored),'counts':counts,'all_other_bytes_unchanged':True}
++    original_gate = git('show',BASE+':'+GATE)
++    current_gate = (ROOT/GATE).read_bytes()
++    left = current_gate.index(b'# R6 migrates ONLY the current identity data')
++    right = current_gate.index(b'def reverse_exact(text, path):',left)
++    restored_gate = current_gate[:left] + current_gate[right:]
++    assert restored_gate == original_gate, 'Original source gate predicates changed'
++    old_test_files = [x for x in tree['entries'] if (x['path'].startswith('app/src/test/') or x['path'].startswith('app/src/androidTest/') or x['path']=='qa/P2pCandidateBuildTest.kt') and x['path'].endswith('.kt')]
++    old_tests = {}
++    for row in old_test_files:
++        path=row['path']; current=(ROOT/path).read_bytes();original=git('show',BASE+':'+path)
++        restored=current
++        for new,old in VERSION.get(path,[]):restored=restored.replace(new.encode(),old.encode())
++        assert restored == original
++        old_tests[path]={'old_sha256':sha(original),'current_sha256':sha(current),'non_version_bytes_unchanged':True}
++    # Independent R5 inventory includes retained original audit test classes too.
++    r5=json.loads((QA/'baseline.json').read_bytes())
++    frozen_inventory=r5['old_tests']
++    if isinstance(frozen_inventory,dict):
++        for path,value in frozen_inventory.items():
++            data=(ROOT/path).read_bytes()
++            for new,old in VERSION.get(path,[]):data=data.replace(new.encode(),old.encode())
++            expected_sha=value if isinstance(value,str) else value.get('sha256')
++            assert expected_sha==sha(data),(path,'R5 original test identity')
++    identity=json.loads((QA/'r6/current-identity.json').read_bytes())
++    for path,row in identity['source_identities'].items(): assert sha((ROOT/path).read_bytes())==row['current_sha256']
++    build_tests = sorted((ROOT/'app/src/test/java/com/hcbiu/elcton').glob('*Test.kt'))
++    assert len(build_tests)==35
++    fixture=ROOT/'qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt'
++    base_engine=git('show',BASE+':app/src/main/java/com/hcbiu/elcton/SyncEngine.kt').decode()
++    expected_fixture='package com.hcbiu.elcton\n\n'+base_engine[base_engine.index('class SyncEngine('):].replace('class SyncEngine(','class P2pTraceBaselineEngine(',1)
++    assert fixture.read_text()==expected_fixture
++    dcheck=subprocess.run(['git','diff','--check'],cwd=ROOT,capture_output=True)
++    assert dcheck.returncode==0
++    record={'at':time.strftime('%Y-%m-%d %H:%M:%S %z'),'base':BASE,'base_entries':len(tree['entries']),
++        'allowed_diagnostic_paths':sorted(PRODUCT),'literal_migrations':inverses,'allowed_identity_gate_path':GATE,
++        'all_original_sourcegate_predicates_byte_identical':True,'all_other_base_entries_unchanged':True,
++        'old_test_files':old_tests,'current_test_classes':len(build_tests),'original_business_assertions_byte_identical':True,
++        'source_identities':identity['source_identities'],'new_test_only_baseline_sha256':sha(fixture.read_bytes()),
++        'workflow_bytes_frozen':True,'devices':[],'haps':[],'diff_check_exit':0}
++    (out/'receipt.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
++    (out/'allowed-source.diff').write_bytes(git('diff','--binary',BASE,'--',*sorted(expected)))
++    print(json.dumps({k:v for k,v in record.items() if k not in ('old_test_files','source_identities','literal_migrations')},ensure_ascii=False))
++
++
++if __name__=='__main__':main()
+diff --git a/qa/p2p-trace-0210/close_r6_reviews.py b/qa/p2p-trace-0210/close_r6_reviews.py
+new file mode 100644
+index 0000000..b5e37b0
+--- /dev/null
++++ b/qa/p2p-trace-0210/close_r6_reviews.py
+@@ -0,0 +1,48 @@
++#!/usr/bin/env python3
++"""Bind actual independent SPEC then QUALITY raw replies to immutable inputs.
++Only executed after both genuine review JSONs are present; not a review itself.
++"""
++from pathlib import Path
++import json, hashlib, shutil, time
++ROOT=Path(__file__).resolve().parents[2]
++Q=Path(__file__).resolve().parent/'r6/reviews'
++sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
++
++def main():
++    import argparse
++    parser=argparse.ArgumentParser()
++    parser.add_argument('--manifest',type=Path,default=Q/'input-r2/reviewed-manifest.json')
++    parser.add_argument('--spec',default='r6-spec-r2.json')
++    parser.add_argument('--spec-raw',default='spec-r2-raw.txt')
++    parser.add_argument('--quality',default='r6-quality-r1.json')
++    parser.add_argument('--quality-raw',default='quality-raw.txt')
++    args=parser.parse_args()
++    manifest=args.manifest.absolute()
++    assert '..' not in args.manifest.parts and not any(p.is_symlink() for p in (manifest,*manifest.parents))
++    manifest=manifest.resolve()
++    assert manifest.is_relative_to(Q.resolve()) and manifest.is_file()
++    m=json.loads(manifest.read_bytes())
++    assert len(m)>=32 and set(json.loads((Q/'input-r2/reviewed-manifest.json').read_bytes()))<=set(m)
++    assert all(sha(ROOT/p)==h for p,h in m.items()), 'Actual reviewed input changed'
++    axes=[]
++    for axis,name,rawname in [('spec',args.spec,args.spec_raw),('quality',args.quality,args.quality_raw)]:
++        assert '/' not in name and '/' not in rawname
++        data=json.loads((Q/name).read_bytes())
++        assert data['input_manifest_sha256']==sha(manifest), axis+' actual reviewed identity differs'
++        assert data['passed'] is True, axis+' failed actual review'
++        assert not any(data.get(k,[]) for k in ['security_concerns','logic_errors','missing','critical','important']), axis+' inconsistent open blockers'
++        assert (Q/rawname).is_file() and (Q/rawname).stat().st_size>0, 'Missing actual raw '+axis
++        assert data['raw_reply_sha256']==sha(Q/rawname), axis+' raw is not the actual reviewed reply'
++        assert data['axis']==axis and data['input_files']==len(m), axis+' input count/axis mismatch'
++        assert data['reviewed_inputs']==m, axis+' manifest mapping differs'
++        axes.append({'axis':axis,'json_path':name,'json_sha256':sha(Q/name),'raw_path':rawname,'raw_sha256':sha(Q/rawname)})
++    target=Q/'closure'
++    target.mkdir(parents=True,exist_ok=False)
++    for axis in axes:
++        shutil.copyfile(Q/axis['raw_path'],target/(axis['axis']+'-raw.txt'))
++    shutil.copyfile(manifest,target/'reviewed-manifest.json')
++    closure={'passed':True,'axes':axes,'manifest_sha256':sha(manifest),'input_files':len(m),'at':time.strftime('%Y-%m-%d %H:%M:%S %z'),'scope':'Actual independent source-review closure ONLY; APK/run not yet verified'}
++    (target/'dual-closure.json').write_text(json.dumps(closure,indent=2)+'\n')
++    print(json.dumps({'passed':True,'closure':str(target),'inputs':len(m)}))
++
++if __name__=='__main__':main()
+diff --git a/qa/p2p-trace-0210/finalize_r6_delivery.py b/qa/p2p-trace-0210/finalize_r6_delivery.py
+new file mode 100644
+index 0000000..8bec8cb
+--- /dev/null
++++ b/qa/p2p-trace-0210/finalize_r6_delivery.py
+@@ -0,0 +1,122 @@
++#!/usr/bin/env python3
++"""Produce main APK/report from verified actual CI receipts, never from stubs.
++Non-covering phone output, exact source/run/artifact/signature/manifest SHA.
++"""
++import argparse
++import hashlib
++import json
++from pathlib import Path
++import re
++import shutil
++import subprocess
++import time
++
++ROOT = Path(__file__).resolve().parents[2]
++Q = Path(__file__).resolve().parent/'r6'
++PHONE = Path('/storage/emulated/0/Documents/elcton-WearEngine-真机联调-20261113-123000/phone')
++CERT = 'fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94'
++sha = lambda p: hashlib.file_digest(p.open('rb'),'sha256').hexdigest()
++read = lambda p: json.loads(p.read_bytes())
++
++def main():
++    p=argparse.ArgumentParser()
++    p.add_argument('--source',required=True)
++    p.add_argument('--build-receipt',type=Path,required=True)
++    p.add_argument('--diagnostics-receipt',type=Path,required=True)
++    p.add_argument('--full-receipt',type=Path,required=True)
++    p.add_argument('--apk',type=Path,required=True)
++    p.add_argument('--out',type=Path,required=True)
++    a=p.parse_args()
++    assert re.fullmatch('[0-9a-f]{40}',a.source)
++    assert '..' not in a.out.parts, 'Output parent traversal refused'
++    out=a.out.absolute()
++    assert not any(path.is_symlink() for path in (out,*out.parents)), 'Output symlink refused'
++    out=out.resolve();base=(Q/'ci').resolve()
++    assert out!=base and out.is_relative_to(base), 'Output must be new below R6 ci'
++    out.mkdir(parents=True,exist_ok=False)
++    build,diag,full=map(read,[a.build_receipt,a.diagnostics_receipt,a.full_receipt])
++    assert build['passed'] is True and build['source_sha']==a.source
++    assert diag['passed'] is True and full['passed'] is True
++    assert diag['source_sha']==a.source and full['source_sha']==a.source, 'UI receipts not current-source'
++    assert diag['suite']=='diagnostics' and full['suite']=='full'
++    assert str(diag['run_id'])!=str(full['run_id']), 'UI lanes not separately registered'
++    apk=a.apk.absolute();assert apk.is_file()
++    certcmd=['java','-jar','/data/data/com.termux/files/home/rb_build/bt/android-14/lib/apksigner.jar','verify','--verbose','--print-certs',str(apk)]
++    signed=subprocess.run(certcmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
++    (out/'apksigner.raw.log').write_text(signed.stdout)
++    assert signed.returncode==0 and 'Verified using v2 scheme (APK Signature Scheme v2): true' in signed.stdout
++    assert 'Number of signers: 1' in signed.stdout and CERT in signed.stdout
++    assert re.search(r'Signer #1 certificate SHA-256 digest: '+CERT,signed.stdout)
++    manifest=subprocess.run(['aapt2','dump','badging',str(apk)],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
++    (out/'badging.raw.log').write_text(manifest.stdout)
++    assert manifest.returncode==0
++    assert "package: name='com.hcbiu.elcton' versionCode='12' versionName='0.2.10'" in manifest.stdout
++    digest=sha(apk)
++    main=build['rows'][0]
++    assert main['name']=='elcton-phone-probe.apk' and main['package']=='com.hcbiu.elcton'
++    assert main['sha256']==digest and main['bytes']==apk.stat().st_size, 'APK differs from exact verified build artifact'
++    assert main['signer_sha256']==CERT and main['versionCode']=='12' and main['versionName']=='0.2.10'
++    table=read(Q/'evidence/identity-migration-q1/table.json')
++    current=read(Q/'current-identity.json')['source_identities']
++    assert table['source_identities']==current, 'Delivery identity table is not final Q1 source'
++    for path,row in current.items():
++        raw=subprocess.check_output(['git','show',a.source+':'+path],cwd=ROOT,timeout=30)
++        assert hashlib.sha256(raw).hexdigest()==row['current_sha256'], 'Committed delivery source differs: '+path
++    reviewdir=Q/'reviews/closure'
++    closure=read(reviewdir/'dual-closure.json')
++    reviewed=read(reviewdir/'reviewed-manifest.json')
++    assert closure['passed'] is True and {r['axis'] for r in closure['axes']}=={'spec','quality'}
++    assert closure['manifest_sha256']==sha(reviewdir/'reviewed-manifest.json')
++    for path,expected in reviewed.items():
++        assert hashlib.sha256(subprocess.check_output(['git','show',a.source+':'+path],cwd=ROOT,timeout=30)).hexdigest()==expected
++    for axis in closure['axes']:
++        assert sha(reviewdir/(axis['axis']+'-raw.txt'))==axis['raw_sha256']
++    PHONE.mkdir(parents=True,exist_ok=True)
++    target=PHONE/('hc课程表-0.2.10-code12-'+a.source[:8]+'-'+digest[:8]+'-signed.apk')
++    assert not target.exists(), 'Existing main APK never overwritten'
++    with apk.open('rb') as src,target.open('xb') as dst:shutil.copyfileobj(src,dst,1024*1024)
++    assert sha(target)==digest and target.stat().st_size==apk.stat().st_size
++    table=read(Q/'evidence/identity-migration-q1/table.json')
++    record={'delivered':True,'source_sha':a.source,'versionCode':12,'versionName':'0.2.10','package':'com.hcbiu.elcton',
++            'apk_path':str(target),'apk_bytes':target.stat().st_size,'apk_sha256':digest,'signer_certificate_sha256':CERT,
++            'verified_v2':True,'signers':1,'build_receipt_sha256':sha(a.build_receipt),
++            'diagnostics_receipt_sha256':sha(a.diagnostics_receipt),'full_receipt_sha256':sha(a.full_receipt),
++            'build':build,'diagnostics':diag,'full':full,'identity_migration':table,
++            'review_closure':closure,'review_manifest_sha256':sha(reviewdir/'reviewed-manifest.json'),
++            'ci_links':{'build':'https://github.com/lantianhcgp/elcton-phone/actions/runs/'+str(build['build_run']),
++                        'diagnostics':'https://github.com/lantianhcgp/elcton-phone/actions/runs/'+str(diag['run_id']),
++                        'full':'https://github.com/lantianhcgp/elcton-phone/actions/runs/'+str(full['run_id'])},
++            'scope':'Installable diagnostic build only; no Release, no device operation, unknown handshake root cause',
++            'at':time.strftime('%Y-%m-%d %H:%M:%S %z')}
++    (out/'receipt.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
++    lines=['# R6 DELIVERY — 0.2.10 诊断版实际交付','',
++        '版本：12 / 0.2.10；包名 com.hcbiu.elcton。仅诊断观测，不声称真机握手已修复；根因仍 unknown。',
++        '不发 Release；未安装、未操作用户设备；表端/表盘/留白/haps未动。','',
++        'APK：'+str(target),'字节数：'+str(target.stat().st_size),'SHA256：'+digest,
++        '源码提交：'+a.source,'同签名证书 SHA256：'+CERT,'真实 apksigner v2=true，signers=1。','',
++        '## 身份迁移（完整旧→最终新SHA）','']
++    for path,row in table['source_identities'].items():
++        lines += [Path(path).name, '旧：'+str(row['old_sha256'] or '新增，无旧SHA'),
++                 'R5：'+row['r5_sha256'],'R6最终：'+row['current_sha256'],'']
++    lines += ['版本字面：11 / 0.2.9 → 12 / 0.2.10；行为断言零改。','',
++        '## CI 与评审链索引','',
++        *[name+'：'+url for name,url in record['ci_links'].items()],
++        '当前真双审 manifest：'+closure['manifest_sha256'],
++        *[axis['axis']+'：qa/p2p-trace-0210/r6/reviews/'+axis['json_path']+' SHA256='+axis['json_sha256'] for axis in closure['axes']],
++        '历史链：r6-spec-r1 FAIL → r6-spec-r2 PASS → r6-quality-r1 FAIL(Q-R6-001) → r6-spec-q1 PASS → r6-quality-q1 FAIL(helper) → 当前Q2双审（原拒绝与失败均保留）。','',
++        '## 真实执行证据','',
++        'HOST：JVM171、Python133零skip、HTTP3784、原表445源冻结；L3 afterREADY真RED→GREEN。',
++        'Q-R6-001：真实HOST barrier RED→GREEN，原失败/quota/stop race与原断言保持。',
++        'Android/云端构建、UI、实际 artifact/run_attempt 和完整精确 testcase/pixel 原门禁均以以下JSON为依据，非HOST替代。','',
++        '构建回执：'+str(a.build_receipt),'诊断UI回执：'+str(a.diagnostics_receipt),'完整UI回执：'+str(a.full_receipt),
++        '交付JSON：'+str(out/'receipt.json'),'',
++        '旧029包未覆盖；所有RED和拒绝原件保留。请发起方自行装机/真机取流水，设备验收未由本轮执行。','']
++    report='\n'.join(lines)
++    (out/'DELIVERY.md').write_text(report)
++    (Q/'DELIVERY.md').write_text(report)
++    phone_report=target.with_suffix('.DELIVERY.md')
++    with phone_report.open('x') as f:f.write(report)
++    assert phone_report.is_file()
++    print(json.dumps({'delivered':True,'apk':str(target),'sha256':digest,'bytes':target.stat().st_size,'report':str(phone_report)},ensure_ascii=False))
++
++if __name__=='__main__':main()
+diff --git a/qa/p2p-trace-0210/migrate_r6_quality_identity.py b/qa/p2p-trace-0210/migrate_r6_quality_identity.py
+new file mode 100644
+index 0000000..08085bb
+--- /dev/null
++++ b/qa/p2p-trace-0210/migrate_r6_quality_identity.py
+@@ -0,0 +1,57 @@
++#!/usr/bin/env python3
++"""Q-R6-001 current identity migration only after exact new Runtime is frozen.
++Preserve the prior current manifest/table/source snapshots, never change old029.
++"""
++import argparse
++import copy
++import hashlib
++import json
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[2]
++Q = Path(__file__).resolve().parent/'r6'
++sha = lambda data: hashlib.sha256(data).hexdigest()
++RUNTIME = 'app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt'
++
++def main():
++    p = argparse.ArgumentParser()
++    p.add_argument('--expected-runtime-sha256', required=True)
++    a = p.parse_args()
++    dest = Q/'current-identity.json'
++    before = dest.read_bytes()
++    old = json.loads(before)
++    runtime = (ROOT/RUNTIME).read_bytes()
++    assert sha(runtime) == a.expected_runtime_sha256
++    assert sha(runtime) != old['source_identities'][RUNTIME]['current_sha256'], 'No Runtime repair present'
++    for path,row in old['source_identities'].items():
++        if path != RUNTIME: assert sha((ROOT/path).read_bytes()) == row['current_sha256'], 'Unexpected other production drift'
++    assert sha((ROOT/old['old_manifest']).read_bytes()) == old['old_manifest_sha256'], 'Old029 identity bytes changed'
++    table = Q/'evidence/identity-migration/table.json'
++    evidence = Q/'evidence/identity-migration-q1'
++    evidence.mkdir(parents=True,exist_ok=False)
++    (evidence/'previous-current-identity.json.source.txt').write_bytes(before)
++    (evidence/'previous-table.json.source.txt').write_bytes(table.read_bytes())
++    new = copy.deepcopy(old)
++    row = new['source_identities'][RUNTIME]
++    oldsha = row['current_sha256']
++    row['previous_r6_sha256'] = oldsha
++    row['current_sha256'] = sha(runtime)
++    row['current_bytes'] = len(runtime)
++    new['quality_repair_identity'] = {'finding':'Q-R6-001','path':RUNTIME,'old_r6_sha256':oldsha,
++            'new_r6_sha256':sha(runtime),'authorization':'R6 original diagnostic writer scope; no business behavior modification'}
++    raw = (json.dumps(new,ensure_ascii=False,indent=2)+'\n').encode()
++    # Prior bytes have been preserved, this is a current-identity registration.
++    dest.write_bytes(raw)
++    currenttable = {'source_identities':new['source_identities'],'version_identity':new['version_identity'],
++            'old_manifest_sha256':new['old_manifest_sha256'],'previous_r6_manifest_sha256':sha(before),
++            'new_manifest_sha256':sha(raw),'quality_repair_identity':new['quality_repair_identity']}
++    for path,row in new['source_identities'].items():
++        (evidence/(Path(path).name+'.current.source.txt')).write_bytes((ROOT/path).read_bytes())
++    (evidence/'table.json').write_text(json.dumps(currenttable,ensure_ascii=False,indent=2)+'\n')
++    (evidence/'receipt.json').write_text(json.dumps({'old_runtime_sha256':oldsha,'new_runtime_sha256':sha(runtime),
++        'preserved_prior_manifest_sha256':sha(before),'current_manifest_sha256':sha(raw),
++        'other_production_hashes_unchanged':True,'old029_manifest_unchanged':True},indent=2)+'\n')
++    assert dest.read_bytes()==raw
++    print(json.dumps({'registered':True,'old_runtime_sha256':oldsha,'new_runtime_sha256':sha(runtime),'evidence':str(evidence)}))
++
++if __name__=='__main__':main()
+diff --git a/qa/p2p-trace-0210/run_r6_final_regressions.py b/qa/p2p-trace-0210/run_r6_final_regressions.py
+new file mode 100644
+index 0000000..6765e01
+--- /dev/null
++++ b/qa/p2p-trace-0210/run_r6_final_regressions.py
+@@ -0,0 +1,84 @@
++#!/usr/bin/env python3
++"""Re-run final current production/test inputs serially, preserving each old lane.
++No migration, dispatch, device, assertion edits or file deletion. Fails closed.
++"""
++import argparse
++import hashlib
++import json
++import os
++from pathlib import Path
++import re
++import subprocess
++import time
++
++ROOT = Path(__file__).resolve().parents[2]
++DEPS = Path.home()/'.hermes/tmp/elcton-jvm-test'
++QA = Path(__file__).resolve().parent
++sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
++
++def main():
++    p = argparse.ArgumentParser()
++    p.add_argument('--out', type=Path, required=True)
++    p.add_argument('--resume-compiled', type=Path)
++    a = p.parse_args()
++    if '..' in a.out.parts:
++        p.error('Output must not contain parent traversal')
++    out = a.out.absolute()
++    if any(path.is_symlink() for path in (out, *out.parents)):
++        p.error('Output must not have symlink ancestry')
++    base = (QA/'r6/evidence').resolve()
++    out = out.resolve()
++    if out == base or not out.is_relative_to(base):
++        p.error('Output must be a new directory within R6 evidence')
++    out.mkdir(parents=True, exist_ok=False)
++    sources = sorted((ROOT/'app/src/main').rglob('*.kt')) + sorted((ROOT/'app/src/test').rglob('*.kt'))
++    watched = sources + [ROOT/'qa/diag_source_gate.py', QA/'r6/current-identity.json', ROOT/'app/build.gradle.kts']
++    manifest = {str(f.relative_to(ROOT)): sha(f) for f in watched}
++    rows = []
++    (out/'source-manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
++    def run(label, argv, env=None, cwd=ROOT):
++        r = subprocess.run(argv, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
++        (out/(label+'.raw.log')).write_text(r.stdout)
++        row = {'lane': label, 'exit': r.returncode, 'argv': argv, 'raw_sha256': sha(out/(label+'.raw.log'))}
++        rows.append(row)
++        (out/'receipt.json').write_text(json.dumps({'rows': rows, 'source_manifest_sha256': sha(out/'source-manifest.json'),
++                    'scope':'Actual HOST current-source execution, no Android/device or CI claim'},indent=2)+'\n')
++        print(json.dumps({'lane':label,'exit':r.returncode}), flush=True)
++        assert r.returncode == 0, label+' actual execution failed; raw preserved'
++        return r.stdout
++    if a.resume_compiled:
++        prior=a.resume_compiled.absolute()
++        assert prior.is_relative_to(QA/'r6/evidence')
++        assert json.loads((prior/'source-manifest.json').read_bytes())==manifest, 'Cannot reuse stale compiled inputs'
++        receipt=json.loads((prior/'full-jvm/receipt.json').read_bytes())
++        assert {c['name']:c['exit'] for c in receipt['commands']} == {'compile':0,'junit':0}
++        assert (prior/'full-jvm/compile.exit').read_text().strip()=='0'
++        assert (prior/'full-jvm/junit.exit').read_text().strip()=='0'
++        assert 'OK (171 tests)' in (prior/'full-jvm/junit.log').read_text()
++        jar=prior/'full-jvm/host-tests.jar'
++        rows.append({'lane':'full-jvm','exit':0,'reused_actual_prior_source_identical_compile':str(prior),'jar_sha256':sha(jar), 'raw_sha256':sha(prior/'full-jvm/junit.log')})
++    else:
++        run('full-jvm', ['nice','-n','10','python','-B',str(QA/'run_host.py'),'--deps',str(DEPS),'--out',str(out/'full-jvm')])
++        jar = out/'full-jvm/host-tests.jar'
++    cp = os.pathsep.join(str(DEPS/(n+'.jar')) for n in ['json','junit','hamcrest'])
++    classes = ['com.hcbiu.elcton.P2pTraceRuntimeTest','com.hcbiu.elcton.DiagnosticsIntegrationTest']
++    raw = run('app-cwd', ['java','-cp',str(jar)+os.pathsep+cp,'org.junit.runner.JUnitCore',*classes],cwd=ROOT/'app')
++    assert 'OK (6 tests)' in raw
++    env = dict(os.environ, MCP_HTTP_TEST_CLASSPATH=str(jar)+os.pathsep+cp, PYTHONDONTWRITEBYTECODE='1')
++    raw = run('python-all', ['python','-B','-m','unittest','discover','-s','qa','-p','test_*.py','-v'],env)
++    match = re.search(r'Ran (\d+) tests',raw)
++    assert match and int(match.group(1)) == 133 and re.search(r'\bOK\s*$',raw) and 'skipped' not in raw.lower()
++    raw = run('http', ['python','-B','qa/mcp_http_selftest.py','--classpath',str(jar)+os.pathsep+cp],env)
++    http_result=json.loads(raw)
++    assert http_result['ok'] is True and http_result['assertions']==3784 and http_result['all_raw_checks_passed'] is True
++    run('runtime-fault-and-stop', ['nice','-n','10','python','-B',str(QA/'run_runtime_fault_host.py'),'--deps',str(DEPS),'--out',str(out/'runtime')])
++    run('native-adapter', ['nice','-n','10','python','-B',str(QA/'run_native_host.py'),'--deps',str(DEPS),'--out',str(out/'native')])
++    run('actual-sdk-type', ['nice','-n','10','python','-B',str(QA/'run_native_host.py'),'--deps',str(DEPS),'--out',str(out/'actual-sdk'),'--actual-sdk','--skip-junit'])
++    assert all(sha(ROOT/f)==h for f,h in manifest.items()), 'Current source changed during final lanes'
++    result = {'passed':True,'rows':rows,'source_manifest_sha256':sha(out/'source-manifest.json'),'jar_sha256':sha(jar),
++            'source_rows':len(manifest),'source_drift':[],'jvm':171,'python':133,'python_skip':0,'app_cwd':6,'http_assertions':3784,
++            'scope':'Real HOST full regressions only; Android CI and device are separate','at':time.strftime('%Y-%m-%d %H:%M:%S %z')}
++    (out/'receipt.json').write_text(json.dumps(result,indent=2)+'\n')
++    print(json.dumps(result),flush=True)
++
++if __name__=='__main__':main()

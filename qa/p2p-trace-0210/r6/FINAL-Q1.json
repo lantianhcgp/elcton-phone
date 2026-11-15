@@ -1,0 +1,224 @@
+{
+  "finding": "Q-R6-001",
+  "result": "FIXED_TARGETED_HOST_GREEN_FROZEN_PENDING_INDEPENDENT_SPEC_QUALITY",
+  "runtime_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+  "runtime_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+  "runtime_before_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+  "frozen_at": "2026-11-15T16:48:18.492331+08:00",
+  "minimal_product_scope": [
+    "DiagnosticRuntime.persistLater only: local processedTraceSeq; capture traceVersion after successful stateWriter; post-writing=false revision OR traceSeq check"
+  ],
+  "product_delta": {
+    "inserted_lines": 4,
+    "removed_lines": 1,
+    "paths": [
+      "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt"
+    ]
+  },
+  "no_product_test_hook": true,
+  "new_host_paths": [
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py"
+  ],
+  "new_templates_and_runner_frozen": true,
+  "original_assertions_modified": false,
+  "trace_only_case_no_observe_no_sdk": true,
+  "failed_disk_no_auto_retry": true,
+  "trace_failure_and_quota_no_spin": true,
+  "source_input_equality": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/scope-and-input-equality.json",
+    "sha256": "4b746ec9904cbc52a37813cdc5e081e72edb4d9c8e968a7a8b148793b23196a8"
+  },
+  "true_red": {
+    "actual_jvm": true,
+    "compile_exit": 0,
+    "junit_exit": 1,
+    "tests": 6,
+    "failures": 1,
+    "failure_kind": "java.lang.AssertionError; Q-R6-001 disk sequence expected 2 but was 1",
+    "repeat_same_assertion": true,
+    "after_release": {
+      "diskSeq": 1,
+      "releaseHits": 1,
+      "pending": 1,
+      "writing": false,
+      "stateWrites": 1,
+      "traceSeq": 2,
+      "ringSeq": 2,
+      "revision": 0,
+      "stateSeq": 1
+    },
+    "raw": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/wakeup-junit.raw.log",
+      "sha256": "25042c11304ef27f2b7e135af85e2a76eda2a1e5e1a62cfcead7d4f07ead08d2"
+    },
+    "repeat_raw": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/repeat/wakeup-junit.raw.log",
+      "sha256": "7fb8325832239a052d4bbe3ce34491088d0d5b04129c1568777048e2d0f23f8c"
+    },
+    "before_product_attestation": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/true-red-before-product.freeze.json",
+      "sha256": "7aa4af9a87ab08fec3de1b9fef1d0aeb3dc29e992a83941bf71cea799e2b63f1"
+    },
+    "before_manifest": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/before-manifest.freeze.json",
+      "sha256": "8bd0a2c9e89421996384d0c5ecad40d65f45818563e6d5fd890dcee4b82f491d"
+    },
+    "receipt": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/receipt.json",
+      "sha256": "7aa82e9672aaed258341fabb41741f65f514b0d38eca741b2f007615b4f57446"
+    }
+  },
+  "green": {
+    "same_exact_tests": true,
+    "tests": 6,
+    "failures": 0,
+    "junit_exit": 0,
+    "after_release": {
+      "diskSeq": 2,
+      "releaseHits": 2,
+      "pending": 0,
+      "writing": false,
+      "stateWrites": 2,
+      "traceSeq": 2,
+      "ringSeq": 2,
+      "revision": 0,
+      "stateSeq": 2
+    },
+    "raw": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/wakeup-junit.raw.log",
+      "sha256": "a1ca2b22efbc95258eaa8d3a880ef52faa04b13074b6d5d5c82ddc1abe6613db"
+    },
+    "original_runtimefault4": {
+      "tests": 4,
+      "exit": 0,
+      "unmodified": true,
+      "uninstrumented_runtime": true,
+      "raw": {
+        "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-runtimefault4.raw.log",
+        "sha256": "758b6f6f68024c96b36951aee859f787024f8fdd71af0fee3c035802b886af84"
+      }
+    },
+    "original_stoprevision1": {
+      "tests": 1,
+      "exit": 0,
+      "unmodified": true,
+      "uninstrumented_runtime": true,
+      "raw": {
+        "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-stoprevision1.raw.log",
+        "sha256": "f7722f289df59f6866491cc7b3195458e253087c1424fe7ddb6cc879e128c542"
+      }
+    },
+    "receipt": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/receipt.json",
+      "sha256": "bbcb39bae0ab41818174173111af5739b5656852f4220488ee69ceb8c7433efb"
+    },
+    "freeze": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/after-green-source.freeze.json",
+      "sha256": "1886c97fe61ad169557e52867d06f6f411c6c247c839baf1ff68738bf392ee1f"
+    }
+  },
+  "instrumentation": {
+    "host_only": true,
+    "release_sites": 3,
+    "anchor": "actual compiled persistLater lambda; GETFIELD writing, ICONST_0, insert ALOAD 0 + INVOKESTATIC HOST immediately before original AtomicBoolean.set(false)",
+    "existing_instructions_and_invocations_retained": true,
+    "normalized_inverse_equal": true,
+    "byte_for_byte_class_inverse_claimed": false,
+    "red_proof": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/instrumentation-proof.txt",
+      "sha256": "b311fc3d8e81c9b616d1b6e0322b7c0a5967c39ee39a56fa4eb33a76cbea40fa"
+    },
+    "green_proof": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/instrumentation-proof.txt",
+      "sha256": "d45ab7ccbcd1c7c6a919f3c9d280a66853be3b4c00addee42a2f1d7fadc71f51"
+    },
+    "red_bytecode_sha": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/bytecode-sha.json",
+      "sha256": "6427107dfcd6988d87a3ce5de6e7d224ea3d7dc9ccaf8ca15a9a2402a8b06f32"
+    },
+    "green_bytecode_sha": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/bytecode-sha.json",
+      "sha256": "10f15ceaf11caf14db17d9e1999cacd39585994df9da4f04561d23cdd532d95b"
+    },
+    "red_host_diff": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/host-bytecode.diff",
+      "sha256": "5f6292e5b628d1515026bcb9db4f3cf38557cd647c07f510fa5d77f2fb1a3bb3"
+    },
+    "green_host_diff": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/host-bytecode.diff",
+      "sha256": "f438d15fb395e28d726f671ab33348729d9ead80d290e1c4c5cabbe164709f5d"
+    }
+  },
+  "prerequisite_issue": {
+    "not_red": true,
+    "issue": "Initial HOST instrumenter expected 2 finally copies; actual kotlinc emits normal, Exception catch and catch-all = 3. Corrected only HOST count before true RED; compiled Kotlin sources unchanged; successful pre-fix jar reused after per-input SHA check.",
+    "failed_raw": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1642/instrument.raw.log",
+      "sha256": "60bb70f943520158eea2f4d7b7e0635e2269e63c9fa24a7965eab2886d370f23"
+    },
+    "compile_raw": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1642/compile.raw.log",
+      "sha256": "c0c2ad76ec46805afef3ebe43cfdd0e607b1df7fe9d90cd7b1d37d9b8ad73d8d"
+    },
+    "actual_javap": {
+      "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1642/prerequisite-javap.raw.log",
+      "sha256": "c84e7e30d1f2c67648bac94c2db9225256495908714558b38e3ea3277a6aa14b"
+    },
+    "benign_compile_warning": "Termux Jansi glibc load warning preserved; compile exits 0 both phases."
+  },
+  "explanation": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/EXPLANATION.md",
+    "sha256": "e7013006971283c1949e0c9dfcc2b4bb09f67a04112ce40335b133bff51ffc6c"
+  },
+  "runtime_source_diff": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/runtime-minimal.diff",
+    "sha256": "a1dba07c3c4efbecfad676723803ce6030e904fad1c45e87566b09ae262224ad"
+  },
+  "runtime_compiled_diff": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/runtime-compiled-before-after.diff",
+    "sha256": "2f6cbf0a28e0a637a31414a448c2c2ad11f645cb611662d247aa4a7d67dd2de5"
+  },
+  "evidence_manifest": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/evidence-sha-manifest.json",
+    "sha256": "a01284f74f3bc9436f49f1854037397b397bda931f4e0b6ca5d62daefa1d6d83"
+  },
+  "working_never_stage_manifest": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/never-stage-working-paths.json",
+    "sha256": "49b71d4e51d63f1bab1c9175266db0373fe92125e062e31a60847bedf525d8f3"
+  },
+  "review_text_manifest": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/review-text-evidence-paths.json",
+    "sha256": "42ac92680c695abad98fc897666cb2e0452b3fa2fd47cfd76ac1df4911d2ea10"
+  },
+  "stage_state": {
+    "path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/new-host-and-evidence-not-staged.txt",
+    "sha256": "4a054d86a0d0b7dc7627162f5d65e9e5cd396db3ba679ee74133a5f057dd9b9c"
+  },
+  "subagent_did_not_modify": [
+    "WearProbe",
+    "SyncEngine",
+    "P2pTrace",
+    "SendAttempts",
+    "version",
+    "identity",
+    "old tests",
+    "business"
+  ],
+  "not_run": [
+    "full JVM",
+    "full Python",
+    "CI",
+    "remote",
+    "device",
+    "watch"
+  ],
+  "parent_next": "independent SPEC then QUALITY review; parent owns identity/scope updates, full regressions and delivery gates",
+  "evidence_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648",
+  "report_paths": [
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/FINAL-Q1.json",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/FINAL-WAKEUP.json",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/wakeup-final-20261115-1648/FINAL-Q1.json"
+  ]
+}

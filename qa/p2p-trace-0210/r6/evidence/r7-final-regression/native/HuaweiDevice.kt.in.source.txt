@@ -1,0 +1,5 @@
+package com.huawei.wearengine.device
+import com.huawei.hmf.tasks.Task
+import com.huawei.wearengine.p2p.HostBus
+class Device(var uuid:String?="d1",var name:String?="HOST",var model:String?="fake",var isConnected:Boolean=true,var p2pCapability:Int=0)
+class DeviceClient { val commonDevice:Task<List<Device>> get()=Task("scan",listOf(HostBus.device)).also { HostBus.scan=it } }

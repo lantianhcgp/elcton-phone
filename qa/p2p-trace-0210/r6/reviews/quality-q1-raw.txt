@@ -1,0 +1,92 @@
+R7 INDEPENDENT QUALITY Q1 — FAIL (two auxiliary logic/scope defects; product fix accepted)
+Root: /data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115
+Actual review base: qa/p2p-trace-0210/r6/reviews
+Scope: Q-R6-001 repair delta + its HOST/identity/regression helpers; unchanged earlier QUALITY coverage inherited only after exact SHA comparison. No product/test/helper/old-evidence edit by this reviewer.
+
+INPUT AND INHERITANCE — ACTUALLY READ/HASHED
+input-q1/reviewed-manifest.json SHA256=93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d
+41 live rows=41 exact matches; missing=0; drift=0.
+input-r2/reviewed-manifest.json SHA256=48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027
+Prior rows=32, unchanged=29, changed=3: DiagnosticRuntime.kt, check_r6_scope.py, r6/current-identity.json. New rows=9.
+r6-spec-q1.json SHA256=3ab778dcc0ea54d4c04da86af3d56702ee750633b99ad26deb061b3ed8fd761c; actual axis=spec, revision=Q1, passed=true, three blocking lists empty, reviewed_inputs exactly current 41 manifest.
+r6-quality-r1.json SHA256=d60ccb9fef5481042829787c5d2ac19e1e9be1667fa8aceef7276a7ee6fbf12e; actual passed=false, original blocker Q-R6-001 retained.
+quality-raw.txt SHA256=bb6c2b373bbdcedf41d11a084ca6974409200cc2d07818ce9dcc56ad7cc9b5de; read original nonblocking quality conclusions and exact earlier evidence bindings.
+r6-spec-r2.json SHA256=ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0; prior identity reconciliation lines 131-137 pins the ORIGINAL migration table SHA below.
+The first attempted top-level reviews path did not exist. search_files located the exact pinned manifest under qa/p2p-trace-0210/r6; this was resolved, not missing evidence or a substituted manifest.
+
+COMPLETE FOCUSED SOURCE READ
+DiagnosticRuntime.kt:1-161; P2pTrace.kt:1-166; runtime-minimal.diff:1-28;
+RuntimeWakeupTest.kt.in:1-159; InjectWakeBarrier.java.in:1-90; run_wakeup_host.py:1-117;
+migrate_r6_quality_identity.py:1-58; run_r6_final_regressions.py:1-77; check_r6_scope.py:1-113;
+CI pipeline.py:1-182, r6_common.py:1-173, verify_r6.py:1-234, self_test.py:1-88;
+original fault template:1-46; original stop template:1-83; inherited native terminal/oracle template:1-172.
+Current identity/table and frozen scope receipt parsed, including embedded long values through Python rather than assuming read_file's line truncation is complete.
+
+Q-R6-001 PRODUCT REPAIR — ACCEPTED, NOT A NEW PRODUCT FAILURE
+Actual Runtime SHA=c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6.
+Original archived Runtime SHA=e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7.
+Python unified diff of original archive vs live source EXACTLY equals runtime-minimal.diff SHA=a1dba07c3c4efbecfad676723803ce6030e904fad1c45e87566b09ae262224ad; +4/-1 only, private persistLater worker.
+Runtime:132 adds local processedTraceSeq; 136-137 captures revision and trace sequence; 144-146 updates processed counters only after successful stateWriter; 153 clears writing, then 156-157 checks !failed && persisted>=0 && (revision changed OR traceSeq changed).
+Producer Trace:68 sequence under lock; 71-105 emit increments seq/queues under trace lock and invokes original changed callback OUTSIDE it. Old-window emit sees writing=true and loses CAS, but post-release traceSeq!=processedTraceSeq now schedules successor. Emit after post-release read sees writing=false and schedules itself; concurrent scheduler winner is CAS-coalesced. Late revision is still independently caught.
+The counters track attempted/processed loop-entry seq, NOT pending size or committed-disk seq. Trace persist:118-129 catches write failures/retains pending, quota returns storage_full; stable seq therefore quiesces rather than self-spins. Runtime state-writer exception leaves failed=true and suppresses counter-based retry, even for late trace AND revision; a later explicit observation retries. No stronger guarantee for failed-write lost notifications is claimed: this is the deliberately unchanged failure policy.
+Original start/stop listener revision, MCP tool/host/port/token handling and stateWriter remain exact. No new SDK call, product test hook, callback wrapper, Task result reinterpretation, READY/attempt guard, timer, credential or raw-packet field in the four added product lines. P2pTrace, WearProbe, SyncEngine hashes equal prior approved candidate rows; SendAttempts SHA=5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529.
+
+REAL HOST RED/GREEN — READ ORIGINAL OUTPUTS, NOT REPLAYED
+FINAL-Q1.json and FINAL-WAKEUP.json are byte/content equal, SHA=20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b.
+Recursively enumerated all 27 path+sha256 references and hashed exact targets: 27/27 match.
+RED wakeup-junit.raw.log SHA=25042c11304ef27f2b7e135af85e2a76eda2a1e5e1a62cfcead7d4f07ead08d2: lines 13-14 actual assertion at test line 103, expected disk 2 but actual 1; line24 Tests run:6 Failures:1. Not compiler/infrastructure RED.
+Repeat RED SHA=7fb8325832239a052d4bbe3ce34491088d0d5b04129c1568777048e2d0f23f8c; same 6/1 assertion.
+GREEN SHA=a1ca2b22efbc95258eaa8d3a880ef52faa04b13074b6d5d5c82ddc1abe6613db: line9 actual diskSeq=2/stateSeq=2/pending=0/writing=false/stateWrites=2/revision=0; line13 OK (6 tests).
+RuntimeWakeupTest:84-105 target has no observe/SDK/listener/manual persist. It uses actual emit CLOSE + UNREG_TASK_OK, actual onChanged, real files, executor fences, and checks independent ring/disk/state/pending/writes. Five other controls already pass RED: revision, failed state, failed trace, quota, no-late-work.
+Read receipt commands: RED compile/instrument/javap exit0 and JUnit exit1; GREEN all exit0, including ORIGINAL uninstrumented runtime4/stop1 using jar classpath without overlay.
+Original runtime4 raw SHA=758b6f6f68024c96b36951aee859f787024f8fdd71af0fee3c035802b886af84, OK(4) line10.
+Original stop1 raw SHA=f7722f289df59f6866491cc7b3195458e253087c1424fe7ddb6cc879e128c542, OK(1) line10; lines3-5 real socket health200 -> socket refused -> final_file_running=false, writer quiescent.
+Archived input source hashes checked for both phases; live exceptions explicitly accounted: RED pre-fix Runtime + pre-migration identity; GREEN only pre-migration identity. Current 72-row final source manifest separately binds migrated identity.
+
+ASM TRANSPARENCY — ACTUAL INDEPENDENT READ-ONLY CHECKS
+Reviewed Java:57-72 three static lambda (Runtime)->void releases, GETFIELD writing + ICONST_0; inserts ALOAD0 + INVOKESTATIC before original set(false); stack receiver/false remain, extra Runtime reference consumed, no changed original operands or business invocation. COMPUTE_MAXS only, no original branch/trycatch replacement.
+For BOTH RED and GREEN independently removed only the exact six added instructions in Python: reduced instrumented stream == original stream == saved inverse, including labels/frames/TRY entries. Original 39 TRY entries each phase retained; frames84 RED/86 GREEN are unchanged WITHIN each phase, not claimed equal ACROSS product versions.
+RED original/inverse instructions SHA=9a72025aba4e0fdb392b9a10d647ed6be9ad86d18f56dd6d2e8b5ddc178e01e6; overlay SHA=1feec0aa23943a49d0593ae12851bc5e755b6da1b0803a14cf259ce4b7101431.
+GREEN original/inverse SHA=2f9ff55efb4712d55b4fa9a4324e1ac3de0c9a0c8d44c022e6a77ecc90eec895; overlay SHA=397b42d4baf552e5a251f4bb69751108cbb6c5851adb7e3ad3d1dff9b1b3b383.
+RED proof SHA=b311fc3d8e81c9b616d1b6e0322b7c0a5967c39ee39a56fa4eb33a76cbea40fa; GREEN proof SHA=d45ab7ccbcd1c7c6a919f3c9d280a66853be3b4c00addee42a2f1d7fadc71f51.
+Fresh READ-ONLY javap original+instrumented both phases exit0 and EXACT stdout==preserved javap logs; actual each class has 3 original set releases, original HOST calls0, overlay HOST calls3.
+Hashed original/overlay classes and jars against bytecode-sha.json. Compared actual 3442 jar member bytes RED/GREEN: ONLY DiagnosticRuntime.class differs; RuntimeWakeupTest/HostWakeBarrier/original legacy tests/P2pTrace classes byte-identical.
+No byte-for-byte class inverse or Android runtime transparency claim. Latch timeout throws only in HOST; actual successful barriers did not time out.
+
+CURRENT FINAL REGRESSIONS — VERIFIED EXISTING EVIDENCE ONLY
+final-q1-complete-1658/receipt.json SHA=9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9; 7 unique lanes, each original exit0/raw SHA verified.
+source-manifest SHA=8ffc410f3d82a3488e08f8938cddaf40449aaca240f9c69764e8c49660b34f69; exact 72 live rows, no drift; resume source manifest byte-content equal and jar SHA=7e78e9b28049f21c6f92bad619c9d54fd1a7af9d54d56cfac53a2c8650971adb.
+Full JVM raw SHA=7c7d82686339dfaccbeaeafb48813ada758104d60e40fab077e4fe2b21c89809; line5 OK171.
+Actual app-cwd raw SHA=7348a8cb32bb3f49ce289502f8f57e97e5348f08d981b1bc2eb16ac3ffb2df1b; line5 OK6, NOT the old narrative7.
+Python raw SHA=108da2fb57f5f7a4fd0514495948083918130d54102fed5dada2c7469cfe26d6; lines140/142 Ran133/OK, no skipped; HTTP raw SHA=eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1, JSON actual assertions3784/all_raw_checks_passed=true.
+Runtime current original JUnit4; native adapter actual HOST JUnit8; real Huawei jar TYPE compile exit0, --skip-junit means NO native Android/SDK execution. Independent per-mode Task completion/original business oracle retained in NativeAfterReadyAdapterTest:42-159; 15 actual ready/retry/cancel/close/current rows in native raw, all baselineEqual=true.
+Frozen scope receipt SHA=827f1404da0ee56361c5d93e0f8ded1f1cb16b3ed4fa48d765c483dcea3740c3: recorded baseline9461, 35 original test rows and 7 literal rows match current SHAs, identity rows match. 2GB baseline NOT rehashed; original full scope predicates inherited, new output guard inspected below.
+CI helpers exact prior 32-manifest hashes; complete reread this review. No dispatch or network performed; pure helper-sanity original log Ran7/OK read. Future publishing/dual-closure wiring remains parent-owned and is not silently declared passed here.
+
+BLOCKING FINDING Q-R7-Q1-001 — ORIGINAL EVIDENCE TABLE OVERWRITTEN
+Severity: medium; kind: logic/scope/evidence immutability; not a product bug.
+Source: qa/p2p-trace-0210/migrate_r6_quality_identity.py:29,32-33,44-51, especially line48.
+1. Prior SPEC R2 actual JSON:50,131-137 binds evidence/identity-migration/table.json to 4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d.
+2. Migration reads that old table and saves previous-table.json.source.txt:33, whose actual SHA STILL matches that old binding.
+3. Line48 table.write_text(currenttable) nevertheless overwrites the ORIGINAL path; independent current SHA at old path is 102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe, identical to NEW identity-migration-q1/table.json, not the old 4f12... bytes.
+4. Consequently the historical original path+SHA evidence chain no longer reads back. Preserving a copy at a new path does NOT satisfy authorized QUALITY-R1-REPAIR-SCOPE.md:9 'Original manifest and prior migration evidence are not overwritten'.
+The actual current identity change itself is exact Runtime row plus repair metadata; three other rows/version/old029 unchanged. This does not excuse old-table overwrite.
+Required parent repair (reviewer did not execute): stop writing old table; use Q1 current table only, and recover original path from the independently SHA-matched saved old bytes under separately authorized correction, preserving this FAIL and current Q1 evidence. Do not rewrite old SPEC/QUALITY JSON to match changed bytes.
+
+BLOCKING FINDING Q-R7-Q1-002 — NEW OUTPUT CONTAINMENT GUARD ACCEPTS PARENT ESCAPE
+Severity: medium; kind: logic/scope filesystem boundary, trusted CLI input (no invented remote attack/credential leak).
+Sources: qa/p2p-trace-0210/run_r6_final_regressions.py:24-26,31-38,74 and qa/p2p-trace-0210/check_r6_scope.py:40-43,108-109.
+Both call Path.absolute(), then is_relative_to(evidence), without resolving '..' or rejecting symlink ancestors. Path.absolute does NOT normalize parent segments.
+ACTUAL READ-ONLY Python proof for BOTH current helpers' expression:
+provided_out=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/../reviews/quality-q1-no-write-counterexample
+out.absolute().is_relative_to(evidence)=true
+out.absolute().resolve()=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/quality-q1-no-write-counterexample
+resolved_out.is_relative_to(evidence)=false
+Thus mkdir/write occurs outside allowed evidence despite accepted guard. check_scope additionally accepts an existing directory lacking receipt.json, then can overwrite existing source-diff output there. This is a new output boundary, not an unrelated old source re-review. No such directory or counterexample file was created; no helper/full baseline run performed.
+Required parent repair: reject parent traversal/symlink ancestry before writes, resolve/check canonical containment and use exclusive new output creation (existing r6_common.new_out demonstrates fail-closed pattern, with its own CI directory scope); keep all substantive frozen predicates/assertions unchanged.
+
+VERDICT AND LIMITS
+passed=false; security_concerns=[]; logic_errors=[Q-R7-Q1-001,Q-R7-Q1-002]; missing=[].
+All required available source/evidence was actually checked; FAIL is NOT missing context and NOT an invented Runtime interleaving. Original Q-R6-001 is closed by source plus genuine unchanged-case RED6/1 -> GREEN6; new helpers fail evidence-preservation/containment requirements.
+No full recompilation, test rerun, cloud/CI/device, ADB/rish, signing, commit/push, watch/HAP/Release/PR action, 2GB hash, skill modification or unrelated review. No existing files overwritten by this reviewer. Only this new raw and new r6-quality-q1.json are authorized writes.
+Parent must not treat SPEC PASS or existing green execution as overriding these concrete auxiliary failures. Subsequent repair must issue fresh review inputs/evidence and retain both original R1 FAIL and this Q1 FAIL.

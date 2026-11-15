@@ -1,0 +1,1908 @@
+METHOD 1 <init>(Ljava/io/File;Lkotlin/jvm/functions/Function2;)V
+META 8 L0
+ALOAD 1
+LDC filesDir
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+ALOAD 2
+LDC stateWriter
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L1
+META 15 11 L1
+ALOAD 0
+INVOKESPECIAL java/lang/Object.<init>()V false
+META 8 L2
+META 15 12 L2
+ALOAD 0
+ALOAD 1
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+META 8 L3
+META 15 13 L3
+ALOAD 0
+ALOAD 2
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.stateWriter Lkotlin/jvm/functions/Function2;
+META 8 L4
+META 15 15 L4
+ALOAD 0
+LDC phone-device
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.traceOrigin Ljava/lang/String;
+META 8 L5
+META 15 19 L5
+ALOAD 0
+ALOAD 0
+INVOKEDYNAMIC invoke(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.p2pTrace_delegate$lambda$0(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lcom/hcbiu/elcton/P2pTrace; (6), ()Lcom/hcbiu/elcton/P2pTrace;]
+INVOKESTATIC kotlin/LazyKt.lazy(Lkotlin/jvm/functions/Function0;)Lkotlin/Lazy; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.p2pTrace$delegate Lkotlin/Lazy;
+META 8 L6
+META 15 24 L6
+ALOAD 0
+NEW java/lang/Object
+DUP
+INVOKESPECIAL java/lang/Object.<init>()V false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+META 8 L7
+META 15 26 L7
+ALOAD 0
+META 8 L8
+META 15 25 L8
+NEW org/json/JSONObject
+DUP
+INVOKESPECIAL org/json/JSONObject.<init>()V false
+LDC status
+LDC 尚未连接手表
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+LDC phase
+LDC idle
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+META 8 L9
+META 15 26 L9
+LDC timestampMs
+INVOKESTATIC java/lang/System.currentTimeMillis()J false
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;J)Lorg/json/JSONObject; false
+LDC ready
+ICONST_0
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Z)Lorg/json/JSONObject; false
+LDC busy
+ICONST_0
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Z)Lorg/json/JSONObject; false
+LDC deviceCount
+ICONST_0
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;I)Lorg/json/JSONObject; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.snapshot Lorg/json/JSONObject;
+META 8 L10
+META 15 36 L10
+ALOAD 0
+LDC 
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.startupError Ljava/lang/String;
+META 8 L11
+META 15 37 L11
+ALOAD 0
+INVOKEDYNAMIC newThread()Ljava/util/concurrent/ThreadFactory; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [(Ljava/lang/Runnable;)Ljava/lang/Thread;, com/hcbiu/elcton/DiagnosticRuntime.writer$lambda$0(Ljava/lang/Runnable;)Ljava/lang/Thread; (6), (Ljava/lang/Runnable;)Ljava/lang/Thread;]
+INVOKESTATIC java/util/concurrent/Executors.newSingleThreadExecutor(Ljava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.writer Ljava/util/concurrent/ExecutorService;
+META 8 L12
+META 15 38 L12
+ALOAD 0
+NEW java/util/concurrent/atomic/AtomicBoolean
+DUP
+ICONST_0
+INVOKESPECIAL java/util/concurrent/atomic/AtomicBoolean.<init>(Z)V false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+META 8 L13
+META 15 40 L13
+ALOAD 0
+NEW java/lang/Object
+DUP
+INVOKESPECIAL java/lang/Object.<init>()V false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.listenerLock Ljava/lang/Object;
+META 8 L14
+META 15 11 L14
+RETURN
+META 8 L15
+METHOD 4097 <init>(Ljava/io/File;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+META 8 L0
+META 15 11 L0
+ILOAD 3
+ICONST_2
+IAND
+IFEQ L2
+META 8 L1
+META 15 13 L1
+GETSTATIC com/hcbiu/elcton/DiagnosticRuntime$1.INSTANCE Lcom/hcbiu/elcton/DiagnosticRuntime$1;
+CHECKCAST kotlin/jvm/functions/Function2
+ASTORE 2
+META 8 L2
+META 15 11 L2
+META 14 3 null null
+ALOAD 0
+ALOAD 1
+ALOAD 2
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.<init>(Ljava/io/File;Lkotlin/jvm/functions/Function2;)V false
+META 8 L3
+META 15 14 L3
+RETURN
+METHOD 1 <init>(Ljava/io/File;Lkotlin/jvm/functions/Function2;Ljava/lang/String;)V
+META 8 L0
+ALOAD 1
+LDC filesDir
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+ALOAD 2
+LDC stateWriter
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+ALOAD 3
+LDC traceOrigin
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L1
+META 15 16 L1
+ALOAD 0
+ALOAD 1
+ALOAD 2
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.<init>(Ljava/io/File;Lkotlin/jvm/functions/Function2;)V false
+META 8 L2
+META 15 17 L2
+ALOAD 0
+ALOAD 3
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.traceOrigin Ljava/lang/String;
+META 8 L3
+META 15 18 L3
+RETURN
+META 8 L4
+METHOD 17 getP2pTrace()Lcom/hcbiu/elcton/P2pTrace;
+META 8 L0
+META 15 19 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.p2pTrace$delegate Lkotlin/Lazy;
+ASTORE 1
+ALOAD 1
+INVOKEINTERFACE kotlin/Lazy.getValue()Ljava/lang/Object; true
+CHECKCAST com/hcbiu/elcton/P2pTrace
+META 8 L1
+META 15 19 L1
+ARETURN
+META 8 L2
+METHOD 17 attachActions(Lcom/hcbiu/elcton/McpToolProvider;)V
+META 8 L0
+ALOAD 1
+LDC provider
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L1
+META 15 34 L1
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.listenerLock Ljava/lang/Object;
+ASTORE 2
+ALOAD 2
+MONITORENTER
+META 8 L2
+NOP
+META 8 L3
+META 15 163 L3
+ICONST_0
+ISTORE 3
+META 8 L4
+META 15 34 L4
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.server Lcom/hcbiu/elcton/DiagnosticMcpServer;
+IFNONNULL L5
+ICONST_1
+GOTO L6
+META 8 L5
+META 14 1 [java/lang/Object, 1] null
+ICONST_0
+META 8 L6
+META 14 4 null [1]
+IFNE L7
+NEW java/lang/IllegalStateException
+DUP
+LDC Check failed.
+INVOKESPECIAL java/lang/IllegalStateException.<init>(Ljava/lang/String;)V false
+ATHROW
+META 8 L7
+META 15 34 L7
+META 14 3 null null
+ALOAD 0
+ALOAD 1
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.actions Lcom/hcbiu/elcton/McpToolProvider;
+META 8 L8
+GETSTATIC kotlin/Unit.INSTANCE Lkotlin/Unit;
+META 8 L9
+META 15 34 L9
+ASTORE 3
+META 8 L10
+ALOAD 2
+MONITOREXIT
+GOTO L13
+META 8 L11
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, com/hcbiu/elcton/McpToolProvider, java/lang/Object] [java/lang/Throwable]
+ASTORE 4
+META 8 L12
+ALOAD 2
+MONITOREXIT
+ALOAD 4
+ATHROW
+META 8 L13
+META 15 35 L13
+META 14 1 [kotlin/Unit] null
+RETURN
+META 8 L14
+TRY L2 L10 L11 null
+TRY L11 L12 L11 null
+METHOD 17 start(Z)V
+META 8 L0
+META 15 44 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.listenerLock Ljava/lang/Object;
+ASTORE 2
+ALOAD 2
+MONITORENTER
+META 8 L1
+NOP
+ICONST_0
+ISTORE 3
+META 8 L2
+META 15 45 L2
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.initialized Z
+IFNE L13
+META 8 L3
+META 15 46 L3
+ALOAD 0
+ICONST_1
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.initialized Z
+META 8 L4
+META 15 47 L4
+NOP
+ALOAD 0
+NEW com/hcbiu/elcton/ErrorJournal
+DUP
+NEW java/io/File
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+LDC diagnostics/wear-errors.jsonl
+INVOKESPECIAL java/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V false
+ICONST_0
+ICONST_2
+ACONST_NULL
+INVOKESPECIAL com/hcbiu/elcton/ErrorJournal.<init>(Ljava/io/File;IILkotlin/jvm/internal/DefaultConstructorMarker;)V false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.journal Lcom/hcbiu/elcton/ErrorJournal;
+META 8 L5
+GOTO L8
+META 8 L6
+META 15 48 L6
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object, 1] [java/lang/Exception]
+ASTORE 4
+META 8 L7
+ALOAD 0
+NEW java/lang/StringBuilder
+DUP
+INVOKESPECIAL java/lang/StringBuilder.<init>()V false
+LDC journal: 
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+ALOAD 4
+INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class; false
+INVOKEVIRTUAL java/lang/Class.getSimpleName()Ljava/lang/String; false
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.startupError Ljava/lang/String;
+META 8 L8
+META 15 49 L8
+META 14 3 null null
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.journal Lcom/hcbiu/elcton/ErrorJournal;
+DUP
+IFNULL L12
+ICONST_1
+INVOKEVIRTUAL com/hcbiu/elcton/ErrorJournal.tail(I)Lorg/json/JSONArray; false
+DUP
+IFNULL L12
+ASTORE 5
+META 8 L9
+META 15 163 L9
+ICONST_0
+ISTORE 6
+META 8 L10
+META 15 49 L10
+ALOAD 5
+INVOKEVIRTUAL org/json/JSONArray.length()I false
+IFLE L11
+ALOAD 0
+ALOAD 5
+ICONST_0
+INVOKEVIRTUAL org/json/JSONArray.getJSONObject(I)Lorg/json/JSONObject; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.lastError Lorg/json/JSONObject;
+META 8 L11
+META 15 49 L11
+META 14 1 [0, org/json/JSONArray, 1] null
+GOTO L13
+META 8 L12
+META 15 49 L12
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object, 1] [java/lang/Object]
+POP
+NOP
+META 8 L13
+META 15 51 L13
+META 14 3 null null
+NOP
+META 8 L14
+GETSTATIC kotlin/Unit.INSTANCE Lkotlin/Unit;
+META 8 L15
+META 15 44 L15
+ASTORE 3
+META 8 L16
+ALOAD 2
+MONITOREXIT
+GOTO L19
+META 8 L17
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object] [java/lang/Throwable]
+ASTORE 4
+META 8 L18
+ALOAD 2
+MONITOREXIT
+ALOAD 4
+ATHROW
+META 8 L19
+META 15 52 L19
+META 14 1 [kotlin/Unit] null
+ILOAD 1
+IFEQ L20
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.startListener()Z false
+POP
+META 8 L20
+META 15 53 L20
+META 14 3 null null
+RETURN
+META 8 L21
+TRY L4 L5 L6 java/lang/Exception
+TRY L1 L16 L17 null
+TRY L17 L18 L17 null
+METHOD 4105 start$default(Lcom/hcbiu/elcton/DiagnosticRuntime;ZILjava/lang/Object;)V
+META 8 L0
+META 15 43 L0
+ILOAD 2
+ICONST_1
+IAND
+IFEQ L1
+ICONST_1
+ISTORE 1
+META 8 L1
+META 14 3 null null
+ALOAD 0
+ILOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.start(Z)V false
+RETURN
+METHOD 17 startListener()Z
+META 8 L0
+META 15 57 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.listenerLock Ljava/lang/Object;
+ASTORE 2
+ALOAD 2
+MONITORENTER
+META 8 L1
+NOP
+ICONST_0
+ISTORE 3
+META 8 L2
+META 15 58 L2
+NOP
+META 8 L3
+META 15 59 L3
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.server Lcom/hcbiu/elcton/DiagnosticMcpServer;
+IFNONNULL L14
+META 8 L4
+META 15 60 L4
+NEW java/io/File
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+LDC mcp/token
+INVOKESPECIAL java/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V false
+INVOKESTATIC com/hcbiu/elcton/McpToken.loadOrCreate(Ljava/io/File;)Ljava/lang/String; false
+ASTORE 5
+META 8 L5
+META 15 61 L5
+NEW com/hcbiu/elcton/DiagnosticTools
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+ALOAD 0
+INVOKEDYNAMIC invoke(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function1; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [(Ljava/lang/Object;)Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.startListener$lambda$0$0(Lcom/hcbiu/elcton/DiagnosticRuntime;I)Lorg/json/JSONArray; (6), (Ljava/lang/Integer;)Lorg/json/JSONArray;]
+ALOAD 0
+INVOKEDYNAMIC invoke(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.startListener$lambda$0$1(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lorg/json/JSONObject; (6), ()Lorg/json/JSONObject;]
+ALOAD 0
+INVOKEDYNAMIC invoke(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.startListener$lambda$0$2(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lorg/json/JSONObject; (6), ()Lorg/json/JSONObject;]
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticTools.<init>(Ljava/io/File;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V false
+ASTORE 6
+META 8 L6
+META 15 62 L6
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.actions Lcom/hcbiu/elcton/McpToolProvider;
+DUP
+IFNULL L11
+ASTORE 7
+META 8 L7
+META 15 163 L7
+ICONST_0
+ISTORE 8
+META 8 L8
+META 15 62 L8
+NEW com/hcbiu/elcton/CombinedMcpTools
+DUP
+ICONST_2
+ANEWARRAY com/hcbiu/elcton/McpToolProvider
+ASTORE 9
+ALOAD 9
+ICONST_0
+ALOAD 6
+AASTORE
+ALOAD 9
+ICONST_1
+ALOAD 7
+AASTORE
+ALOAD 9
+INVOKESPECIAL com/hcbiu/elcton/CombinedMcpTools.<init>([Lcom/hcbiu/elcton/McpToolProvider;)V false
+META 8 L9
+META 15 62 L9
+NOP
+META 8 L10
+META 15 62 L10
+CHECKCAST com/hcbiu/elcton/McpToolProvider
+GOTO L12
+META 8 L11
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 0, java/lang/Object, 1, 0, java/lang/String, com/hcbiu/elcton/DiagnosticTools] [com/hcbiu/elcton/McpToolProvider]
+POP
+ALOAD 6
+CHECKCAST com/hcbiu/elcton/McpToolProvider
+META 8 L12
+META 14 4 null [com/hcbiu/elcton/McpToolProvider]
+ASTORE 10
+META 8 L13
+META 15 63 L13
+ALOAD 0
+NEW com/hcbiu/elcton/DiagnosticMcpServer
+DUP
+ALOAD 5
+ALOAD 10
+SIPUSH 8766
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticMcpServer.<init>(Ljava/lang/String;Lcom/hcbiu/elcton/McpToolProvider;I)V false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.server Lcom/hcbiu/elcton/DiagnosticMcpServer;
+META 8 L14
+META 15 65 L14
+META 14 2 [null, null, null] null
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.server Lcom/hcbiu/elcton/DiagnosticMcpServer;
+DUP
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNull(Ljava/lang/Object;)V false
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticMcpServer.start()I false
+ISTORE 5
+META 8 L15
+META 15 66 L15
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.startupError Ljava/lang/String;
+LDC mcp: 
+ICONST_0
+ICONST_2
+ACONST_NULL
+INVOKESTATIC kotlin/text/StringsKt.startsWith$default(Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Z false
+IFEQ L16
+ALOAD 0
+LDC 
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.startupError Ljava/lang/String;
+META 8 L16
+META 15 67 L16
+META 14 1 [0, 1] null
+LDC ElctonMcp
+NEW java/lang/StringBuilder
+DUP
+INVOKESPECIAL java/lang/StringBuilder.<init>()V false
+LDC MCP listening on 127.0.0.1:
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+ILOAD 5
+INVOKEVIRTUAL java/lang/StringBuilder.append(I)Ljava/lang/StringBuilder; false
+LDC ; token=<redacted>; read-only
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String; false
+INVOKESTATIC android/util/Log.i(Ljava/lang/String;Ljava/lang/String;)I false
+POP
+META 8 L17
+META 15 68 L17
+ICONST_1
+META 8 L18
+ISTORE 5
+META 8 L19
+GOTO L24
+META 8 L20
+META 15 69 L20
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 0, java/lang/Object, 1] [java/lang/Exception]
+ASTORE 6
+META 8 L21
+META 15 70 L21
+ALOAD 0
+NEW java/lang/StringBuilder
+DUP
+INVOKESPECIAL java/lang/StringBuilder.<init>()V false
+LDC mcp: 
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+ALOAD 6
+INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class; false
+INVOKEVIRTUAL java/lang/Class.getSimpleName()Ljava/lang/String; false
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.startupError Ljava/lang/String;
+META 8 L22
+META 15 71 L22
+LDC ElctonMcp
+NEW java/lang/StringBuilder
+DUP
+INVOKESPECIAL java/lang/StringBuilder.<init>()V false
+LDC MCP startup failed: 
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+ALOAD 6
+INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class; false
+INVOKEVIRTUAL java/lang/Class.getSimpleName()Ljava/lang/String; false
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String; false
+INVOKESTATIC android/util/Log.w(Ljava/lang/String;Ljava/lang/String;)I false
+POP
+META 8 L23
+META 15 72 L23
+ICONST_0
+ISTORE 5
+META 8 L24
+META 14 1 [0, 1] null
+ILOAD 5
+META 8 L25
+META 15 73 L25
+NOP
+META 8 L26
+META 15 57 L26
+ISTORE 3
+META 8 L27
+ALOAD 2
+MONITOREXIT
+ILOAD 3
+GOTO L30
+META 8 L28
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 0, java/lang/Object] [java/lang/Throwable]
+ASTORE 5
+META 8 L29
+ALOAD 2
+MONITOREXIT
+ALOAD 5
+ATHROW
+META 8 L30
+META 15 57 L30
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 0, java/lang/Object, 1, 0, 1] [1]
+ISTORE 1
+META 8 L31
+META 15 75 L31
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 2
+ALOAD 2
+MONITORENTER
+META 8 L32
+NOP
+META 8 L33
+META 15 163 L33
+ICONST_0
+ISTORE 3
+META 8 L34
+META 15 75 L34
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LSTORE 5
+ALOAD 0
+LLOAD 5
+LCONST_1
+LADD
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LLOAD 5
+META 8 L35
+META 15 75 L35
+LSTORE 3
+META 8 L36
+ALOAD 2
+MONITOREXIT
+LLOAD 3
+GOTO L39
+META 8 L37
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object] [java/lang/Throwable]
+ASTORE 7
+META 8 L38
+ALOAD 2
+MONITOREXIT
+ALOAD 7
+ATHROW
+META 8 L39
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object, 4, 4] [4]
+POP2
+META 8 L40
+META 15 76 L40
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L41
+META 15 77 L41
+ILOAD 1
+IRETURN
+META 8 L42
+TRY L2 L19 L20 java/lang/Exception
+TRY L1 L27 L28 null
+TRY L28 L29 L28 null
+TRY L32 L36 L37 null
+TRY L37 L38 L37 null
+METHOD 17 stopListener()V
+META 8 L0
+META 15 81 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.listenerLock Ljava/lang/Object;
+ASTORE 1
+ALOAD 1
+MONITORENTER
+META 8 L1
+NOP
+META 8 L2
+META 15 163 L2
+ICONST_0
+ISTORE 2
+META 8 L3
+META 15 81 L3
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.server Lcom/hcbiu/elcton/DiagnosticMcpServer;
+DUP
+IFNULL L4
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticMcpServer.stop()V false
+GETSTATIC kotlin/Unit.INSTANCE Lkotlin/Unit;
+GOTO L5
+META 8 L4
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [com/hcbiu/elcton/DiagnosticMcpServer]
+POP
+ACONST_NULL
+META 8 L5
+META 15 81 L5
+META 14 4 null [kotlin/Unit]
+ASTORE 2
+META 8 L6
+ALOAD 1
+MONITOREXIT
+GOTO L9
+META 8 L7
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object] [java/lang/Throwable]
+ASTORE 4
+META 8 L8
+ALOAD 1
+MONITOREXIT
+ALOAD 4
+ATHROW
+META 8 L9
+META 15 82 L9
+META 14 1 [kotlin/Unit] null
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 1
+ALOAD 1
+MONITORENTER
+META 8 L10
+NOP
+META 8 L11
+META 15 163 L11
+ICONST_0
+ISTORE 2
+META 8 L12
+META 15 82 L12
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LSTORE 4
+ALOAD 0
+LLOAD 4
+LCONST_1
+LADD
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LLOAD 4
+META 8 L13
+META 15 82 L13
+LSTORE 2
+META 8 L14
+ALOAD 1
+MONITOREXIT
+LLOAD 2
+GOTO L17
+META 8 L15
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object] [java/lang/Throwable]
+ASTORE 6
+META 8 L16
+ALOAD 1
+MONITOREXIT
+ALOAD 6
+ATHROW
+META 8 L17
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 4, 4] [4]
+POP2
+META 8 L18
+META 15 83 L18
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L19
+META 15 84 L19
+RETURN
+META 8 L20
+TRY L1 L6 L7 null
+TRY L7 L8 L7 null
+TRY L10 L14 L15 null
+TRY L15 L16 L15 null
+METHOD 17 observe(Ljava/lang/String;Ljava/lang/String;ZZI)V
+META 8 L0
+ALOAD 1
+LDC status
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+ALOAD 2
+LDC detail
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L1
+META 15 87 L1
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 6
+ALOAD 6
+MONITORENTER
+META 8 L2
+NOP
+ICONST_0
+ISTORE 7
+META 8 L3
+META 15 88 L3
+ALOAD 0
+NEW org/json/JSONObject
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.snapshot Lorg/json/JSONObject;
+INVOKEVIRTUAL org/json/JSONObject.toString()Ljava/lang/String; false
+INVOKESPECIAL org/json/JSONObject.<init>(Ljava/lang/String;)V false
+LDC status
+ALOAD 1
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+LDC detail
+ALOAD 2
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+META 8 L4
+META 15 89 L4
+LDC ready
+ILOAD 3
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Z)Lorg/json/JSONObject; false
+LDC busy
+ILOAD 4
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Z)Lorg/json/JSONObject; false
+LDC deviceCount
+ILOAD 5
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;I)Lorg/json/JSONObject; false
+LDC timestampMs
+INVOKESTATIC java/lang/System.currentTimeMillis()J false
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;J)Lorg/json/JSONObject; false
+META 8 L5
+META 15 88 L5
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.snapshot Lorg/json/JSONObject;
+META 8 L6
+META 15 90 L6
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LSTORE 9
+ALOAD 0
+LLOAD 9
+LCONST_1
+LADD
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LLOAD 9
+META 8 L7
+META 15 87 L7
+LSTORE 7
+META 8 L8
+ALOAD 6
+MONITOREXIT
+LLOAD 7
+GOTO L11
+META 8 L9
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/String, java/lang/String, 1, 1, 1, java/lang/Object] [java/lang/Throwable]
+ASTORE 11
+META 8 L10
+ALOAD 6
+MONITOREXIT
+ALOAD 11
+ATHROW
+META 8 L11
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/String, java/lang/String, 1, 1, 1, java/lang/Object, 4, 4] [4]
+POP2
+META 8 L12
+META 15 92 L12
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L13
+META 15 93 L13
+RETURN
+META 8 L14
+TRY L2 L8 L9 null
+TRY L9 L10 L9 null
+METHOD 17 record(Lcom/hcbiu/elcton/WearErrorRecord;)V
+META 8 L0
+ALOAD 1
+LDC record
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L1
+META 15 96 L1
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 3
+ALOAD 3
+MONITORENTER
+META 8 L2
+NOP
+ICONST_0
+ISTORE 4
+META 8 L3
+META 15 97 L3
+ALOAD 0
+ALOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/WearErrorRecord.toJson()Lorg/json/JSONObject; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.lastError Lorg/json/JSONObject;
+META 8 L4
+META 15 98 L4
+ALOAD 0
+NEW org/json/JSONObject
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.snapshot Lorg/json/JSONObject;
+INVOKEVIRTUAL org/json/JSONObject.toString()Ljava/lang/String; false
+INVOKESPECIAL org/json/JSONObject.<init>(Ljava/lang/String;)V false
+LDC phase
+ALOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/WearErrorRecord.getPhase()Ljava/lang/String; false
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+LDC timestampMs
+ALOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/WearErrorRecord.getTimestampMs()J false
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;J)Lorg/json/JSONObject; false
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.snapshot Lorg/json/JSONObject;
+META 8 L5
+META 15 99 L5
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LSTORE 6
+ALOAD 0
+LLOAD 6
+LCONST_1
+LADD
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+LLOAD 6
+META 8 L6
+META 15 96 L6
+LSTORE 4
+META 8 L7
+ALOAD 3
+MONITOREXIT
+LLOAD 4
+GOTO L10
+META 8 L8
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, com/hcbiu/elcton/WearErrorRecord, 0, java/lang/Object] [java/lang/Throwable]
+ASTORE 8
+META 8 L9
+ALOAD 3
+MONITOREXIT
+ALOAD 8
+ATHROW
+META 8 L10
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, com/hcbiu/elcton/WearErrorRecord, 0, java/lang/Object, 4, 4] [4]
+POP2
+META 8 L11
+META 15 102 L11
+NOP
+META 8 L12
+META 15 103 L12
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.journal Lcom/hcbiu/elcton/ErrorJournal;
+DUP
+IFNONNULL L16
+POP
+NEW com/hcbiu/elcton/ErrorJournal
+DUP
+NEW java/io/File
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+LDC diagnostics/wear-errors.jsonl
+INVOKESPECIAL java/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V false
+ICONST_0
+ICONST_2
+ACONST_NULL
+INVOKESPECIAL com/hcbiu/elcton/ErrorJournal.<init>(Ljava/io/File;IILkotlin/jvm/internal/DefaultConstructorMarker;)V false
+ASTORE 4
+ALOAD 4
+ASTORE 6
+META 8 L13
+META 15 163 L13
+ICONST_0
+ISTORE 7
+META 8 L14
+META 15 103 L14
+ALOAD 0
+ALOAD 6
+PUTFIELD com/hcbiu/elcton/DiagnosticRuntime.journal Lcom/hcbiu/elcton/ErrorJournal;
+META 8 L15
+META 15 103 L15
+ALOAD 4
+META 8 L16
+META 15 103 L16
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, com/hcbiu/elcton/WearErrorRecord, 0, java/lang/Object] [com/hcbiu/elcton/ErrorJournal]
+ASTORE 2
+META 8 L17
+META 15 104 L17
+ALOAD 2
+ALOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/ErrorJournal.append(Lcom/hcbiu/elcton/WearErrorRecord;)V false
+META 8 L18
+GOTO L21
+META 8 L19
+META 15 105 L19
+META 14 4 null [java/lang/Exception]
+ASTORE 3
+META 8 L20
+META 15 106 L20
+LDC ElctonMcp
+NEW java/lang/StringBuilder
+DUP
+INVOKESPECIAL java/lang/StringBuilder.<init>()V false
+LDC Cannot persist full SDK error: 
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+ALOAD 3
+INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class; false
+INVOKEVIRTUAL java/lang/Class.getSimpleName()Ljava/lang/String; false
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String; false
+INVOKESTATIC android/util/Log.w(Ljava/lang/String;Ljava/lang/String;)I false
+POP
+META 8 L21
+META 15 108 L21
+META 14 3 null null
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L22
+META 15 109 L22
+RETURN
+META 8 L23
+TRY L2 L7 L8 null
+TRY L8 L9 L8 null
+TRY L11 L18 L19 java/lang/Exception
+METHOD 17 latestFull()Ljava/lang/String;
+META 8 L0
+META 15 111 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 1
+ALOAD 1
+MONITORENTER
+META 8 L1
+NOP
+META 8 L2
+META 15 163 L2
+ICONST_0
+ISTORE 2
+META 8 L3
+META 15 111 L3
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lastError Lorg/json/JSONObject;
+DUP
+IFNULL L4
+LDC full
+LDC 
+INVOKEVIRTUAL org/json/JSONObject.optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; false
+GOTO L5
+META 8 L4
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [org/json/JSONObject]
+POP
+ACONST_NULL
+META 8 L5
+META 14 4 null [java/lang/String]
+DUP
+IFNONNULL L6
+POP
+LDC 
+META 8 L6
+META 15 111 L6
+META 14 4 null [java/lang/String]
+NOP
+META 8 L7
+META 15 111 L7
+ASTORE 2
+META 8 L8
+ALOAD 1
+MONITOREXIT
+ALOAD 2
+GOTO L11
+META 8 L9
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object] [java/lang/Throwable]
+ASTORE 3
+META 8 L10
+ALOAD 1
+MONITOREXIT
+ALOAD 3
+ATHROW
+META 8 L11
+META 15 111 L11
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, java/lang/String] [java/lang/String]
+ARETURN
+META 8 L12
+TRY L1 L8 L9 null
+TRY L9 L10 L9 null
+METHOD 17 errorTail(I)Lorg/json/JSONArray;
+META 8 L0
+META 15 112 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.journal Lcom/hcbiu/elcton/ErrorJournal;
+DUP
+IFNULL L1
+ILOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/ErrorJournal.tail(I)Lorg/json/JSONArray; false
+DUP
+IFNONNULL L16
+META 8 L1
+META 14 4 null [java/lang/Object]
+POP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 2
+ALOAD 2
+MONITORENTER
+META 8 L2
+NOP
+ICONST_0
+ISTORE 3
+META 8 L3
+META 15 113 L3
+NEW org/json/JSONArray
+DUP
+INVOKESPECIAL org/json/JSONArray.<init>()V false
+ASTORE 4
+ALOAD 4
+ASTORE 5
+META 8 L4
+META 15 163 L4
+ICONST_0
+ISTORE 6
+META 8 L5
+META 15 113 L5
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lastError Lorg/json/JSONObject;
+DUP
+IFNULL L9
+ASTORE 7
+META 8 L6
+META 15 163 L6
+ICONST_0
+ISTORE 8
+META 8 L7
+META 15 113 L7
+ALOAD 5
+NEW org/json/JSONObject
+DUP
+ALOAD 7
+INVOKEVIRTUAL org/json/JSONObject.toString()Ljava/lang/String; false
+INVOKESPECIAL org/json/JSONObject.<init>(Ljava/lang/String;)V false
+INVOKEVIRTUAL org/json/JSONArray.put(Ljava/lang/Object;)Lorg/json/JSONArray; false
+POP
+META 8 L8
+META 15 113 L8
+GOTO L10
+META 8 L9
+META 15 113 L9
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object, 1, org/json/JSONArray, org/json/JSONArray, 1] [org/json/JSONObject]
+POP
+NOP
+META 8 L10
+META 15 113 L10
+META 14 3 null null
+ALOAD 4
+META 8 L11
+META 15 113 L11
+NOP
+META 8 L12
+META 15 112 L12
+ASTORE 3
+META 8 L13
+ALOAD 2
+MONITOREXIT
+ALOAD 3
+GOTO L16
+META 8 L14
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1, java/lang/Object] [java/lang/Throwable]
+ASTORE 4
+META 8 L15
+ALOAD 2
+MONITOREXIT
+ALOAD 4
+ATHROW
+META 8 L16
+META 15 114 L16
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 1] [org/json/JSONArray]
+ARETURN
+META 8 L17
+TRY L2 L13 L14 null
+TRY L14 L15 L14 null
+METHOD 17 read()Lorg/json/JSONObject;
+META 8 L0
+META 15 115 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 1
+ALOAD 1
+MONITORENTER
+META 8 L1
+NOP
+ICONST_0
+ISTORE 2
+META 8 L2
+META 15 116 L2
+NEW org/json/JSONObject
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.snapshot Lorg/json/JSONObject;
+INVOKEVIRTUAL org/json/JSONObject.toString()Ljava/lang/String; false
+INVOKESPECIAL org/json/JSONObject.<init>(Ljava/lang/String;)V false
+META 8 L3
+META 15 117 L3
+LDC latestError
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lastError Lorg/json/JSONObject;
+DUP
+IFNULL L10
+ASTORE 3
+META 8 L4
+META 15 163 L4
+ASTORE 4
+ASTORE 5
+META 8 L5
+ICONST_0
+ISTORE 6
+META 8 L6
+META 15 117 L6
+NEW org/json/JSONObject
+DUP
+ALOAD 3
+INVOKEVIRTUAL org/json/JSONObject.toString()Ljava/lang/String; false
+INVOKESPECIAL org/json/JSONObject.<init>(Ljava/lang/String;)V false
+META 8 L7
+ASTORE 7
+ALOAD 5
+ALOAD 4
+ALOAD 7
+META 8 L8
+META 15 117 L8
+NOP
+META 8 L9
+META 15 117 L9
+GOTO L11
+META 8 L10
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject]
+POP
+GETSTATIC org/json/JSONObject.NULL Ljava/lang/Object;
+META 8 L11
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [org/json/JSONObject, java/lang/String, java/lang/Object]
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+META 8 L12
+META 15 118 L12
+LDC mcp
+NEW org/json/JSONObject
+DUP
+INVOKESPECIAL org/json/JSONObject.<init>()V false
+LDC host
+LDC 127.0.0.1
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+LDC port
+SIPUSH 8766
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;I)Lorg/json/JSONObject; false
+META 8 L13
+META 15 119 L13
+LDC running
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.server Lcom/hcbiu/elcton/DiagnosticMcpServer;
+DUP
+IFNULL L15
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticMcpServer.getRunning()Z false
+ICONST_1
+IF_ICMPNE L14
+ICONST_1
+GOTO L16
+META 8 L14
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject, java/lang/String]
+ICONST_0
+GOTO L16
+META 8 L15
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject, java/lang/String, com/hcbiu/elcton/DiagnosticMcpServer]
+POP
+ICONST_0
+META 8 L16
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject, java/lang/String, 1]
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Z)Lorg/json/JSONObject; false
+LDC readOnly
+ICONST_1
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Z)Lorg/json/JSONObject; false
+META 8 L17
+META 15 120 L17
+LDC startupError
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.startupError Ljava/lang/String;
+ASTORE 8
+ALOAD 8
+ASTORE 9
+META 8 L18
+META 15 163 L18
+ASTORE 10
+ASTORE 7
+ASTORE 4
+ASTORE 5
+META 8 L19
+ICONST_0
+ISTORE 3
+META 8 L20
+META 15 120 L20
+ALOAD 9
+CHECKCAST java/lang/CharSequence
+INVOKEINTERFACE java/lang/CharSequence.length()I true
+IFLE L21
+ICONST_1
+GOTO L22
+META 8 L21
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1, 1, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, java/lang/String, java/lang/String, java/lang/String] []
+ICONST_0
+META 8 L22
+META 15 120 L22
+META 14 4 null [1]
+NOP
+META 8 L23
+ISTORE 11
+ALOAD 5
+ALOAD 4
+ALOAD 7
+ALOAD 10
+ILOAD 11
+META 8 L24
+META 15 120 L24
+IFEQ L25
+ALOAD 8
+GOTO L26
+META 8 L25
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1, 1, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, java/lang/String, java/lang/String, java/lang/String, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject, java/lang/String]
+ACONST_NULL
+META 8 L26
+META 15 120 L26
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1, 1, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, java/lang/String, java/lang/String, java/lang/String, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject, java/lang/String, java/lang/String]
+DUP
+IFNONNULL L27
+POP
+GETSTATIC org/json/JSONObject.NULL Ljava/lang/Object;
+META 8 L27
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1, 1, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, java/lang/String, java/lang/String, java/lang/String, 1] [org/json/JSONObject, java/lang/String, org/json/JSONObject, java/lang/String, java/lang/Object]
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+META 8 L28
+META 15 118 L28
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+ASTORE 12
+META 8 L29
+META 15 121 L29
+ALOAD 12
+ASTORE 8
+META 8 L30
+META 15 163 L30
+ICONST_0
+ISTORE 9
+META 8 L31
+META 15 121 L31
+NOP
+ALOAD 8
+LDC p2p
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.getP2pTrace()Lcom/hcbiu/elcton/P2pTrace; false
+LCONST_0
+SIPUSH 128
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.read(JI)Lorg/json/JSONObject; false
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+POP
+META 8 L32
+GOTO L34
+META 8 L33
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1, 1, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, org/json/JSONObject, 1, java/lang/String, 1, org/json/JSONObject] [java/lang/Throwable]
+ASTORE 3
+META 8 L34
+META 15 121 L34
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, 1, 0, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, org/json/JSONObject, 1, java/lang/String, 1, org/json/JSONObject] []
+ALOAD 12
+META 8 L35
+META 15 121 L35
+NOP
+META 8 L36
+META 15 115 L36
+ASTORE 2
+META 8 L37
+ALOAD 1
+MONITOREXIT
+ALOAD 2
+GOTO L40
+META 8 L38
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object] [java/lang/Throwable]
+ASTORE 3
+META 8 L39
+ALOAD 1
+MONITOREXIT
+ALOAD 3
+ATHROW
+META 8 L40
+META 15 115 L40
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, java/lang/Object, org/json/JSONObject, 0, java/lang/String, org/json/JSONObject, 0, org/json/JSONObject, org/json/JSONObject, 1, java/lang/String, 1, org/json/JSONObject] [org/json/JSONObject]
+DUP
+LDC synchronized(...)
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L41
+META 15 122 L41
+ARETURN
+META 8 L42
+TRY L31 L32 L33 java/lang/Throwable
+TRY L1 L37 L38 null
+TRY L38 L39 L38 null
+METHOD 17 versionInfo()Lorg/json/JSONObject;
+META 8 L0
+META 15 123 L0
+NEW org/json/JSONObject
+DUP
+INVOKESPECIAL org/json/JSONObject.<init>()V false
+LDC packageName
+LDC host.test.only
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+META 8 L1
+META 15 124 L1
+LDC versionName
+LDC host-test
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+LDC versionCode
+ICONST_0
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;I)Lorg/json/JSONObject; false
+META 8 L2
+META 15 125 L2
+LDC buildType
+LDC host-test
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+LDC wearEngineSdk
+LDC 5.0.3.301
+INVOKEVIRTUAL org/json/JSONObject.put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject; false
+DUP
+LDC put(...)
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue(Ljava/lang/Object;Ljava/lang/String;)V false
+ARETURN
+META 8 L3
+METHOD 18 persistLater()V
+META 8 L0
+META 15 129 L0
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ICONST_0
+ICONST_1
+INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.compareAndSet(ZZ)Z false
+IFNE L1
+RETURN
+META 8 L1
+META 15 130 L1
+META 14 3 null null
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writer Ljava/util/concurrent/ExecutorService;
+ALOAD 0
+INVOKEDYNAMIC run(Lcom/hcbiu/elcton/DiagnosticRuntime;)Ljava/lang/Runnable; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()V, com/hcbiu/elcton/DiagnosticRuntime.persistLater$lambda$0(Lcom/hcbiu/elcton/DiagnosticRuntime;)V (6), ()V]
+INVOKEINTERFACE java/util/concurrent/ExecutorService.execute(Ljava/lang/Runnable;)V true
+META 8 L2
+META 15 160 L2
+RETURN
+META 8 L3
+METHOD 26 p2pTrace_delegate$lambda$0$0()J
+META 8 L0
+META 15 20 L0
+INVOKESTATIC java/lang/System.currentTimeMillis()J false
+LRETURN
+METHOD 26 p2pTrace_delegate$lambda$0$1()J
+META 8 L0
+META 15 20 L0
+INVOKESTATIC java/lang/System.nanoTime()J false
+LDC 1000000
+I2L
+LDIV
+LRETURN
+METHOD 26 p2pTrace_delegate$lambda$0$2$0(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/Unit;
+META 8 L0
+META 15 21 L0
+NOP
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L1
+GOTO L3
+META 8 L2
+META 14 4 null [java/lang/Throwable]
+ASTORE 1
+META 8 L3
+META 14 3 null null
+GETSTATIC kotlin/Unit.INSTANCE Lkotlin/Unit;
+ARETURN
+META 8 L4
+TRY L0 L1 L2 java/lang/Throwable
+METHOD 26 p2pTrace_delegate$lambda$0(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lcom/hcbiu/elcton/P2pTrace;
+META 8 L0
+META 15 20 L0
+NEW com/hcbiu/elcton/P2pTrace
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.traceOrigin Ljava/lang/String;
+INVOKEDYNAMIC invoke()Lkotlin/jvm/functions/Function0; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.p2pTrace_delegate$lambda$0$0()J (6), ()Ljava/lang/Long;]
+INVOKEDYNAMIC invoke()Lkotlin/jvm/functions/Function0; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.p2pTrace_delegate$lambda$0$1()J (6), ()Ljava/lang/Long;]
+INVOKESPECIAL com/hcbiu/elcton/P2pTrace.<init>(Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V false
+ASTORE 1
+ALOAD 1
+ASTORE 2
+META 8 L1
+ICONST_0
+ISTORE 3
+META 8 L2
+META 15 21 L2
+ALOAD 2
+ALOAD 0
+INVOKEDYNAMIC invoke(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function0; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [()Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.p2pTrace_delegate$lambda$0$2$0(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/Unit; (6), ()Lkotlin/Unit;]
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.onChanged(Lkotlin/jvm/functions/Function0;)V false
+META 8 L3
+META 15 22 L3
+NOP
+META 8 L4
+META 15 20 L4
+ALOAD 1
+META 8 L5
+META 15 22 L5
+ARETURN
+META 8 L6
+METHOD 26 writer$lambda$0(Ljava/lang/Runnable;)Ljava/lang/Thread;
+META 8 L0
+META 15 37 L0
+NEW java/lang/Thread
+DUP
+ALOAD 0
+LDC elcton-diagnostic-file
+INVOKESPECIAL java/lang/Thread.<init>(Ljava/lang/Runnable;Ljava/lang/String;)V false
+ASTORE 1
+ALOAD 1
+ASTORE 2
+META 8 L1
+META 15 163 L1
+ICONST_0
+ISTORE 3
+META 8 L2
+META 15 37 L2
+ALOAD 2
+ICONST_1
+INVOKEVIRTUAL java/lang/Thread.setDaemon(Z)V false
+META 8 L3
+META 15 37 L3
+ALOAD 1
+META 8 L4
+META 15 37 L4
+ARETURN
+META 8 L5
+METHOD 26 startListener$lambda$0$0(Lcom/hcbiu/elcton/DiagnosticRuntime;I)Lorg/json/JSONArray;
+META 8 L0
+META 15 61 L0
+ALOAD 0
+ILOAD 1
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.errorTail(I)Lorg/json/JSONArray; false
+ARETURN
+META 8 L1
+METHOD 26 startListener$lambda$0$1(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lorg/json/JSONObject;
+META 8 L0
+META 15 61 L0
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.read()Lorg/json/JSONObject; false
+ARETURN
+META 8 L1
+METHOD 26 startListener$lambda$0$2(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lorg/json/JSONObject;
+META 8 L0
+META 15 61 L0
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.versionInfo()Lorg/json/JSONObject; false
+ARETURN
+META 8 L1
+METHOD 26 persistLater$lambda$0$1(Lcom/hcbiu/elcton/DiagnosticRuntime;Ljava/lang/String;)Z
+META 8 L0
+ALOAD 1
+LDC line
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullParameter(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L1
+META 15 139 L1
+NEW java/io/File
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+LDC diagnostics/p2p-trace.jsonl
+INVOKESPECIAL java/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V false
+ASTORE 2
+META 8 L2
+META 15 140 L2
+ALOAD 1
+GETSTATIC kotlin/text/Charsets.UTF_8 Ljava/nio/charset/Charset;
+INVOKEVIRTUAL java/lang/String.getBytes(Ljava/nio/charset/Charset;)[B false
+DUP
+LDC getBytes(...)
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue(Ljava/lang/Object;Ljava/lang/String;)V false
+META 8 L3
+META 15 140 L3
+ASTORE 3
+META 8 L4
+META 15 141 L4
+ALOAD 2
+INVOKEVIRTUAL java/io/File.length()J false
+ALOAD 3
+ARRAYLENGTH
+I2L
+LADD
+LDC 2097152
+LCMP
+IFLE L5
+ICONST_0
+GOTO L8
+META 8 L5
+META 15 142 L5
+META 14 1 [java/io/File, [B] null
+ALOAD 2
+INVOKEVIRTUAL java/io/File.getParentFile()Ljava/io/File; false
+DUP
+IFNULL L6
+INVOKEVIRTUAL java/io/File.mkdirs()Z false
+POP
+GOTO L7
+META 8 L6
+META 14 4 null [java/io/File]
+POP
+META 8 L7
+META 14 3 null null
+ALOAD 2
+ALOAD 3
+INVOKESTATIC kotlin/io/FilesKt.appendBytes(Ljava/io/File;[B)V false
+ICONST_1
+META 8 L8
+META 14 4 null [1]
+IRETURN
+META 8 L9
+METHOD 26 persistLater$lambda$0(Lcom/hcbiu/elcton/DiagnosticRuntime;)V
+META 8 L0
+META 15 131 L0
+LDC -1
+LSTORE 1
+META 8 L1
+META 15 132 L1
+LDC -1
+LSTORE 3
+META 8 L2
+META 15 133 L2
+ICONST_0
+ISTORE 5
+META 8 L3
+META 15 134 L3
+NOP
+META 8 L4
+META 15 135 L4
+META 14 1 [4, 4, 1] null
+NOP
+META 8 L5
+META 15 136 L5
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 9
+ALOAD 9
+MONITORENTER
+META 8 L6
+NOP
+META 8 L7
+META 15 163 L7
+ICONST_0
+ISTORE 11
+META 8 L8
+META 15 136 L8
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+META 8 L9
+META 15 136 L9
+LSTORE 11
+META 8 L10
+ALOAD 9
+MONITOREXIT
+LLOAD 11
+GOTO L13
+META 8 L11
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 0, 0, 0, java/lang/Object] [java/lang/Throwable]
+ASTORE 13
+META 8 L12
+ALOAD 9
+MONITOREXIT
+ALOAD 13
+ATHROW
+META 8 L13
+META 15 136 L13
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 0, 0, 0, java/lang/Object, 0, 4] [4]
+LSTORE 6
+META 8 L14
+META 15 137 L14
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.getP2pTrace()Lcom/hcbiu/elcton/P2pTrace; false
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.sequence()J false
+LSTORE 8
+META 8 L15
+META 15 138 L15
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.getP2pTrace()Lcom/hcbiu/elcton/P2pTrace; false
+ALOAD 0
+INVOKEDYNAMIC invoke(Lcom/hcbiu/elcton/DiagnosticRuntime;)Lkotlin/jvm/functions/Function1; java/lang/invoke/LambdaMetafactory.metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; (6) [(Ljava/lang/Object;)Ljava/lang/Object;, com/hcbiu/elcton/DiagnosticRuntime.persistLater$lambda$0$1(Lcom/hcbiu/elcton/DiagnosticRuntime;Ljava/lang/String;)Z (6), (Ljava/lang/String;)Ljava/lang/Boolean;]
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.persist(Lkotlin/jvm/functions/Function1;)V false
+META 8 L16
+META 15 144 L16
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.stateWriter Lkotlin/jvm/functions/Function2;
+NEW java/io/File
+DUP
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.filesDir Ljava/io/File;
+LDC diagnostics/state.json
+INVOKESPECIAL java/io/File.<init>(Ljava/io/File;Ljava/lang/String;)V false
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.read()Lorg/json/JSONObject; false
+INVOKEVIRTUAL org/json/JSONObject.toString()Ljava/lang/String; false
+DUP
+LDC toString(...)
+INVOKESTATIC kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue(Ljava/lang/Object;Ljava/lang/String;)V false
+INVOKEINTERFACE kotlin/jvm/functions/Function2.invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; true
+POP
+META 8 L17
+META 15 145 L17
+LLOAD 6
+LSTORE 1
+META 8 L18
+META 15 146 L18
+LLOAD 8
+LSTORE 3
+META 8 L19
+META 15 147 L19
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 13
+ALOAD 13
+MONITORENTER
+META 8 L20
+NOP
+META 8 L21
+META 15 163 L21
+ICONST_0
+ISTORE 14
+META 8 L22
+META 15 147 L22
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+META 8 L23
+META 15 147 L23
+LSTORE 14
+META 8 L24
+ALOAD 13
+MONITOREXIT
+LLOAD 14
+GOTO L27
+META 8 L25
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 4, 4, 0, 4, java/lang/Object] [java/lang/Throwable]
+ASTORE 16
+META 8 L26
+ALOAD 13
+MONITOREXIT
+ALOAD 16
+ATHROW
+META 8 L27
+META 15 147 L27
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 4, 4, 0, 4, java/lang/Object, 4] [4]
+LLOAD 6
+LCMP
+IFNE L4
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.getP2pTrace()Lcom/hcbiu/elcton/P2pTrace; false
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.sequence()J false
+LLOAD 8
+LCMP
+IFNE L4
+GOTO L28
+META 8 L28
+META 15 153 L28
+META 14 3 null null
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ICONST_0
+ALOAD 0
+INVOKESTATIC com/hcbiu/elcton/HostWakeBarrier.beforeRelease(Lcom/hcbiu/elcton/DiagnosticRuntime;)V false
+INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.set(Z)V false
+META 8 L29
+META 15 156 L29
+LLOAD 1
+LCONST_0
+LCMP
+IFLT L40
+META 8 L30
+META 15 157 L30
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 8
+ALOAD 8
+MONITORENTER
+META 8 L31
+NOP
+META 8 L32
+META 15 163 L32
+ICONST_0
+ISTORE 9
+META 8 L33
+META 15 157 L33
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+META 8 L34
+META 15 157 L34
+LSTORE 9
+META 8 L35
+ALOAD 8
+MONITOREXIT
+LLOAD 9
+GOTO L38
+META 8 L36
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 4, java/lang/Object, 0, 0, 0, 0, java/lang/Object, 4] [java/lang/Throwable]
+ASTORE 11
+META 8 L37
+ALOAD 8
+MONITOREXIT
+ALOAD 11
+ATHROW
+META 8 L38
+META 15 157 L38
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 4, java/lang/Object, 4, 4, java/lang/Object, 4] [4]
+LLOAD 1
+LCMP
+IFNE L39
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.getP2pTrace()Lcom/hcbiu/elcton/P2pTrace; false
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.sequence()J false
+LLOAD 3
+LCMP
+IFEQ L40
+META 8 L39
+META 14 3 null null
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L40
+META 15 158 L40
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 4, 0, 0, 0, 4, java/lang/Object, 4] []
+GOTO L61
+META 8 L41
+META 15 149 L41
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1] [java/lang/Exception]
+ASTORE 7
+META 8 L42
+META 15 150 L42
+ICONST_1
+ISTORE 5
+META 8 L43
+META 15 151 L43
+LDC ElctonMcp
+NEW java/lang/StringBuilder
+DUP
+INVOKESPECIAL java/lang/StringBuilder.<init>()V false
+LDC Cannot persist diagnostic state: 
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+ALOAD 7
+INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class; false
+INVOKEVIRTUAL java/lang/Class.getSimpleName()Ljava/lang/String; false
+INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder; false
+INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String; false
+INVOKESTATIC android/util/Log.w(Ljava/lang/String;Ljava/lang/String;)I false
+POP
+META 8 L44
+META 15 153 L44
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ICONST_0
+ALOAD 0
+INVOKESTATIC com/hcbiu/elcton/HostWakeBarrier.beforeRelease(Lcom/hcbiu/elcton/DiagnosticRuntime;)V false
+INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.set(Z)V false
+META 8 L45
+META 15 156 L45
+NOP
+META 8 L46
+META 15 158 L46
+GOTO L61
+META 8 L47
+META 15 153 L47
+META 14 4 null [java/lang/Throwable]
+ASTORE 7
+META 8 L48
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.writing Ljava/util/concurrent/atomic/AtomicBoolean;
+ICONST_0
+ALOAD 0
+INVOKESTATIC com/hcbiu/elcton/HostWakeBarrier.beforeRelease(Lcom/hcbiu/elcton/DiagnosticRuntime;)V false
+INVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.set(Z)V false
+META 8 L49
+META 15 156 L49
+ILOAD 5
+IFNE L60
+LLOAD 1
+LCONST_0
+LCMP
+IFLT L60
+META 8 L50
+META 15 157 L50
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.lock Ljava/lang/Object;
+ASTORE 9
+ALOAD 9
+MONITORENTER
+META 8 L51
+NOP
+META 8 L52
+META 15 163 L52
+ICONST_0
+ISTORE 11
+META 8 L53
+META 15 157 L53
+ALOAD 0
+GETFIELD com/hcbiu/elcton/DiagnosticRuntime.revision J
+META 8 L54
+META 15 157 L54
+LSTORE 11
+META 8 L55
+ALOAD 9
+MONITOREXIT
+LLOAD 11
+GOTO L58
+META 8 L56
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 0, java/lang/Throwable, 0, java/lang/Object] [java/lang/Throwable]
+ASTORE 13
+META 8 L57
+ALOAD 9
+MONITOREXIT
+ALOAD 13
+ATHROW
+META 8 L58
+META 15 157 L58
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 0, java/lang/Throwable, 0, java/lang/Object, 0, 4] [4]
+LLOAD 1
+LCMP
+IFNE L59
+ALOAD 0
+INVOKEVIRTUAL com/hcbiu/elcton/DiagnosticRuntime.getP2pTrace()Lcom/hcbiu/elcton/P2pTrace; false
+INVOKEVIRTUAL com/hcbiu/elcton/P2pTrace.sequence()J false
+LLOAD 3
+LCMP
+IFEQ L60
+META 8 L59
+META 14 3 null null
+ALOAD 0
+INVOKESPECIAL com/hcbiu/elcton/DiagnosticRuntime.persistLater()V false
+META 8 L60
+META 14 0 [com/hcbiu/elcton/DiagnosticRuntime, 4, 4, 1, 0, java/lang/Throwable] []
+ALOAD 7
+ATHROW
+META 8 L61
+META 15 159 L61
+META 14 2 [null, null] null
+RETURN
+META 8 L62
+TRY L6 L10 L11 null
+TRY L11 L12 L11 null
+TRY L20 L24 L25 null
+TRY L25 L26 L25 null
+TRY L31 L35 L36 null
+TRY L36 L37 L36 null
+TRY L3 L28 L41 java/lang/Exception
+TRY L51 L55 L56 null
+TRY L56 L57 L56 null
+TRY L3 L28 L47 null
+TRY L41 L44 L47 null
+TRY L47 L48 L47 null

@@ -1,0 +1,46 @@
+package com.hcbiu.elcton
+
+import org.json.JSONObject
+import org.junit.Assert.*
+import org.junit.Test
+import java.io.File
+import java.nio.file.Files
+import java.util.ArrayDeque
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
+
+/** Real Runtime writer/files; Android Log/BuildConfig are explicitly HOST-only templates. */
+class P2pRuntimeFaultTest {
+    private fun executor(r:DiagnosticRuntime):ExecutorService = DiagnosticRuntime::class.java.getDeclaredField("writer").apply{isAccessible=true}.get(r) as ExecutorService
+    private fun fence(r:DiagnosticRuntime) { executor(r).submit{}.get(5,TimeUnit.SECONDS);executor(r).submit{}.get(5,TimeUnit.SECONDS) }
+    private fun run(body:(File,DiagnosticRuntime,AtomicInteger)->Unit) {
+        val dir=Files.createTempDirectory("p2p-runtime-fault-host-").toFile();val count=AtomicInteger()
+        val r=DiagnosticRuntime(dir,{f,s->count.incrementAndGet();replaceDiagnosticFile(f,s)},"host-test")
+        try { body(dir,r,count) } finally { fence(r);executor(r).shutdown();assertTrue(executor(r).awaitTermination(5,TimeUnit.SECONDS)) }
+    }
+    @Test fun quotaStopsLogAppendWithoutDeletingOrStoppingOriginalStateWriter() = run { dir,r,count ->
+        val f=File(dir,"diagnostics/p2p-trace.jsonl");f.parentFile.mkdirs();f.writeBytes(ByteArray(2*1024*1024){65})
+        r.p2pTrace.emit("engine","CONNECT_REQUEST",emptyMap());r.observe("quota-first","business-detail",false,true,1);fence(r)
+        assertEquals(2L*1024*1024,f.length());assertEquals("trace_storage_full",r.read().getJSONObject("p2p").getString("storage"))
+        val before=count.get();r.p2pTrace.emit("engine","SEND_CALL",emptyMap());r.observe("quota-next","business-next",true,false,2);fence(r)
+        assertEquals(2L*1024*1024,f.length());assertTrue(count.get()>before)
+        assertEquals("quota-next",JSONObject(File(dir,"diagnostics/state.json").readText()).getString("status"))
+        assertEquals("host-test",r.read().getJSONObject("p2p").getString("origin"))
+    }
+    @Test fun logPathFailureDoesNotSkipStateWriteAndDoesNotSelfRetry() = run { dir,r,count ->
+        File(dir,"diagnostics/p2p-trace.jsonl").mkdirs()
+        r.p2pTrace.emit("engine","SEND_CALL",emptyMap());r.observe("path-fault","detail",false,true,1);fence(r)
+        assertEquals("trace_write_failed",r.read().getJSONObject("p2p").getString("storage"))
+        assertEquals("path-fault",JSONObject(File(dir,"diagnostics/state.json").readText()).getString("status"))
+        val once=count.get();fence(r);assertEquals("writer must remain quiescent without a new observation",once,count.get())
+    }
+    @Test fun malformedTraceSnapshotCannotSkipOriginalReadOrStateWrite() = run { dir,r,count ->
+        val t=r.p2pTrace
+        @Suppress("UNCHECKED_CAST") val tail=P2pTrace::class.java.getDeclaredField("tail").apply{isAccessible=true}.get(t) as ArrayDeque<String>
+        tail.add("HOST-malformed-json") // only fault-injected fixture; no product hook
+        r.observe("snapshot-fault","original-detail",true,false,3);fence(r)
+        val read=r.read();assertEquals("snapshot-fault",read.getString("status"));assertFalse(read.has("p2p"))
+        val disk=JSONObject(File(dir,"diagnostics/state.json").readText());assertEquals("snapshot-fault",disk.getString("status"));assertEquals(3,disk.getInt("deviceCount"));assertTrue(count.get()>0)
+    }
+}

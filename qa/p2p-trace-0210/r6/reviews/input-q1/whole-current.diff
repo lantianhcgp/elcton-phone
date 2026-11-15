@@ -1,0 +1,2705 @@
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index 6314645..6022e21 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -11,8 +11,8 @@ android {
+         applicationId = "com.hcbiu.elcton"
+         minSdk = 26
+         targetSdk = 34
+-        versionCode = 11
+-        versionName = "0.2.9"
++        versionCode = 12
++        versionName = "0.2.10"
+         // READY receipts are production behavior in the merged release, never a parallel lane.
+         buildConfigField("boolean", "P2P_READY_CANDIDATE", "true")
+         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+diff --git a/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt b/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt
+index 08d2e89..83a6ab9 100644
+--- a/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt
++++ b/app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt
+@@ -160,7 +160,7 @@ class DiagnosticsUiTest {
+         try {
+             ui.waitUntil(15000) { ui.onAllNodesWithTag("nav-settings").fetchSemanticsNodes().isNotEmpty() }
+             @Suppress("DEPRECATION") val installed = instrumentation.targetContext.packageManager.getPackageInfo("com.hcbiu.elcton", 0)
+-            assertEquals("0.2.9", installed.versionName); assertEquals(11L, installed.longVersionCode)
++            assertEquals("0.2.10", installed.versionName); assertEquals(12L, installed.longVersionCode)
+             assertEquals(installed.versionName, BuildConfig.VERSION_NAME); assertEquals(installed.longVersionCode, BuildConfig.VERSION_CODE.toLong())
+             val app = ui.activity.application as ElctonApplication
+             val runtime = app.diagnostics
+@@ -262,7 +262,7 @@ class DiagnosticsUiTest {
+                 }
+             }
+             val version = call(token, "version_info")
+-            assertEquals("0.2.9", version.getString("versionName")); assertEquals(11, version.getInt("versionCode"))
++            assertEquals("0.2.10", version.getString("versionName")); assertEquals(12, version.getInt("versionCode"))
+             assertEquals("com.hcbiu.elcton", version.getString("packageName"))
+             assertEquals(full, call(token, "diag_read").getJSONObject("latestError").getString("full"))
+             assertEquals(full, call(token, "error_tail", JSONObject().put("limit", 1)).getJSONArray("errors").getJSONObject(0).getString("full"))
+diff --git a/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt b/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt
+index 8787500..9712595 100644
+--- a/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt
++++ b/app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt
+@@ -12,6 +12,15 @@ class DiagnosticRuntime(
+     private val filesDir: File,
+     private val stateWriter: (File, String) -> Unit = ::replaceDiagnosticFile
+ ) {
++    private var traceOrigin = "phone-device"
++    constructor(filesDir: File, stateWriter: (File, String) -> Unit, traceOrigin: String) : this(filesDir, stateWriter) {
++        this.traceOrigin = traceOrigin
++    }
++    val p2pTrace by lazy {
++        P2pTrace(traceOrigin, { System.currentTimeMillis() }, { System.nanoTime() / 1_000_000 }).also { trace ->
++            trace.onChanged { try { persistLater() } catch (_: Throwable) {} }
++        }
++    }
+     private val lock = Any()
+     private var snapshot = JSONObject().put("status", "尚未连接手表").put("phase", "idle")
+         .put("timestampMs", System.currentTimeMillis()).put("ready", false).put("busy", false).put("deviceCount", 0)
+@@ -109,6 +118,7 @@ class DiagnosticRuntime(
+             .put("mcp", JSONObject().put("host", "127.0.0.1").put("port", 8766)
+                 .put("running", server?.running == true).put("readOnly", true)
+                 .put("startupError", startupError.takeIf { it.isNotEmpty() } ?: JSONObject.NULL))
++            .also { result -> try { result.put("p2p", p2pTrace.read(0, 128)) } catch (_: Throwable) {} }
+     }
+     fun versionInfo(): JSONObject = JSONObject().put("packageName", BuildConfig.APPLICATION_ID)
+         .put("versionName", BuildConfig.VERSION_NAME).put("versionCode", BuildConfig.VERSION_CODE)
+@@ -119,13 +129,22 @@ class DiagnosticRuntime(
+         if (!writing.compareAndSet(false, true)) return
+         writer.execute {
+             var persisted = -1L
++            var processedTraceSeq = -1L
+             var failed = false
+             try {
+                 while (true) {
+                     val version = synchronized(lock) { revision }
++                    val traceVersion = p2pTrace.sequence()
++                    p2pTrace.persist { line ->
++                        val target = File(filesDir, "diagnostics/p2p-trace.jsonl")
++                        val bytes = line.toByteArray(Charsets.UTF_8)
++                        if (target.length() + bytes.size > 2L * 1024 * 1024) false
++                        else { target.parentFile?.mkdirs(); target.appendBytes(bytes); true }
++                    }
+                     stateWriter(File(filesDir, "diagnostics/state.json"), read().toString())
+                     persisted = version
+-                    if (synchronized(lock) { revision } == version) break
++                    processedTraceSeq = traceVersion
++                    if (synchronized(lock) { revision } == version && p2pTrace.sequence() == traceVersion) break
+                 }
+             } catch (error: Exception) {
+                 failed = true
+@@ -134,7 +153,8 @@ class DiagnosticRuntime(
+                 writing.set(false)
+                 // A failed disk write is retried only after a later observation,
+                 // never a self-sustaining background loop on an unavailable disk.
+-                if (!failed && persisted >= 0 && synchronized(lock) { revision } != persisted) persistLater()
++                if (!failed && persisted >= 0 &&
++                    (synchronized(lock) { revision } != persisted || p2pTrace.sequence() != processedTraceSeq)) persistLater()
+             }
+         }
+     }
+diff --git a/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt b/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
+new file mode 100644
+index 0000000..73dd544
+--- /dev/null
++++ b/app/src/main/java/com/hcbiu/elcton/P2pTrace.kt
+@@ -0,0 +1,166 @@
++package com.hcbiu.elcton
++
++import org.json.JSONArray
++import org.json.JSONObject
++import java.util.ArrayDeque
++
++/** Diagnostics only: bounded in-memory append, no SDK, disk, timer or executor. */
++class P2pTrace(
++    val origin: String,
++    private val wallClock: () -> Long,
++    private val elapsedClock: () -> Long
++) {
++    data class Context(val generation: Int? = null, val attemptId: Long? = null,
++        val nativeGeneration: Long? = null, val deviceRef: Int? = null, val trigger: String = "none",
++        val attemptCurrent: (() -> Boolean)? = null)
++    private val lock = Any()
++    private val sid = "s-" + java.lang.Long.toUnsignedString(System.nanoTime(),36)
++    private val tail = ArrayDeque<String>()
++    private val pending = ArrayDeque<String>()
++    private var seq = 0L
++    private var dropped = 0L
++    private var storage = "ok"
++    private var context = Context()
++    private val transferRefs = linkedMapOf<String,String>()
++    private var refSerial = 0L
++    private var changed: (() -> Unit)? = null
++    private var peerPackage: String? = null
++    private var peerFingerprint: String? = null
++    fun peerIdentity(pkg: String, fingerprint: String) { synchronized(lock) { peerPackage=pkg; peerFingerprint=fingerprint } }
++    init { require(origin == "phone-device" || origin == "host-test") }
++    fun onChanged(callback: () -> Unit) { synchronized(lock) { changed=callback } }
++    fun bind(generation:Int, attemptId:Long?=null, deviceRef:Int?=null, trigger:String="none", attemptCurrent:(()->Boolean)?=null) {
++        synchronized(lock) {
++            val previous=if(context.generation==generation)context else Context()
++            context=Context(generation,attemptId ?: previous.attemptId,previous.nativeGeneration,
++                deviceRef ?: previous.deviceRef,trigger,
++                attemptCurrent ?: if(attemptId==null)previous.attemptCurrent else null)
++        }
++    }
++    fun bindRegistration(c:Context):Context = synchronized(lock) {
++        val registered=c.copy(attemptId=null)
++        if(context.generation==c.generation)context=registered
++        registered
++    }
++    /** Only the captured registration's exact two-generation pair can borrow a recent send. */
++    fun related(c:Context):Context = synchronized(lock) {
++        if(context.generation==c.generation && context.nativeGeneration==c.nativeGeneration)
++            c.copy(attemptId=context.attemptId,trigger=context.trigger) else c
++    }
++    fun matches(c:Context):Boolean = synchronized(lock) {
++        context.generation==c.generation && context.nativeGeneration==c.nativeGeneration && context.attemptId==c.attemptId
++    }
++    fun metadata(raw:String,outgoing:Boolean=false):Map<String,Any?> {
++        val m=parseMetadata(raw,outgoing)
++        val id=m["transferRef"] as? String
++        val ref=if(id.isNullOrEmpty())"none" else synchronized(lock) {
++            // Salted keys, no raw transferId retained; bounded per trace SID.
++            val digest=java.security.MessageDigest.getInstance("SHA-256").digest((sid+":"+id).toByteArray(Charsets.UTF_8))
++                .joinToString(""){"%02x".format(it)}
++            transferRefs[digest] ?: run {
++                if(transferRefs.size==128)transferRefs.remove(transferRefs.keys.first())
++                ("r"+(++refSerial)).also{transferRefs[digest]=it}
++            }
++        }
++        return m+mapOf("transferRef" to ref)
++    }
++    fun context(): Context = synchronized(lock) { context }
++    fun sequence(): Long = synchronized(lock) { seq }
++    fun fields(c:Context):Map<String,Any?> = mapOf("generation" to c.generation,"attemptId" to c.attemptId,
++        "nativeGeneration" to c.nativeGeneration,"deviceRef" to c.deviceRef,"trigger" to c.trigger)
++    fun emit(layer:String, stage:String, fields:Map<String,Any?>) {
++        var notify:(()->Unit)?=null
++        synchronized(lock) {
++            seq++
++            try {
++                val e=JSONObject().put("schema",1).put("origin",origin).put("sid",sid).put("seq",seq)
++                    .put("wallMs",wallClock()).put("elapsedMs",elapsedClock()).put("layer",if(layer=="adapter")"adapter"else"engine")
++                    .put("stage",if(stage in STAGES)stage else "OTHER").put("outcome","observed").put("stale",false)
++                    .put("bytes",JSONObject.NULL).put("generation",JSONObject.NULL).put("nativeGeneration",JSONObject.NULL)
++                    .put("attemptId",JSONObject.NULL).put("dropped",dropped)
++                for((key,value) in fields) {
++                    if(key in NUMBERS && (value is Byte || value is Short || value is Int || value is Long))e.put(key,value)
++                    else if(key=="stale" && value is Boolean)e.put(key,value)
++                    else if(key in LABELS && value is String)e.put(key,if(value in SAFE_LABELS || (key=="transferRef" && value.matches(Regex("r[0-9]{1,19}"))))value else "other")
++                }
++                e.put("truncated",false).put("originalBytes",0)
++                val original=e.toString().toByteArray(Charsets.UTF_8).size
++                e.put("originalBytes",original)
++                var line=e.toString()
++                if(line.toByteArray(Charsets.UTF_8).size>2048) {
++                    e.put("truncated",true)
++                    for(key in LABELS)e.remove(key)
++                    line=e.toString()
++                }
++                check(line.toByteArray(Charsets.UTF_8).size<=2048)
++                val evicted=if(tail.size==128){dropped++;tail.removeFirst()}else null
++                tail.addLast(line)
++                if(storage!="trace_storage_full") {
++                    if(pending.size==128){if(pending.removeFirst()!=evicted)dropped++}
++                    pending.addLast(line)
++                }
++                notify=changed
++            } catch(_:Throwable) { dropped++ }
++        }
++        try { notify?.invoke() }catch(_:Throwable){}
++    }
++    fun read(afterSeq:Long,limit:Int):JSONObject = synchronized(lock) {
++        val selected=tail.map{JSONObject(it)}.filter{it.getLong("seq")>afterSeq}
++        val page=selected.take(limit.coerceIn(1,128))
++        val oldest=tail.firstOrNull()?.let{JSONObject(it).getLong("seq")}?:0L
++        JSONObject().put("schema",1).put("origin",origin).put("sid",sid).put("traceSeq",seq).put("clockBasis","monotonic-supplied-ms")
++            .put("events",JSONArray(page)).put("buffer",tail.size).put("dropped",dropped).put("storage",storage)
++            .put("afterSeq",afterSeq).put("nextSeq",page.lastOrNull()?.getLong("seq")?:afterSeq)
++            .put("oldestSeq",oldest).put("has_more",selected.size>page.size || (oldest>0 && afterSeq<oldest-1))
++            .put("peerPackage",peerPackage ?: JSONObject.NULL).put("peerFingerprint",peerFingerprint ?: JSONObject.NULL)
++    }
++    /** Called only by the existing DiagnosticRuntime writer. false = quota exhausted. */
++    fun persist(write:(String)->Boolean) {
++        while(true) {
++            val line=synchronized(lock) { if(storage=="trace_storage_full")return; pending.firstOrNull() } ?: return
++            try {
++                val accepted=write(line+"\n")
++                synchronized(lock) {
++                    if(!accepted){storage="trace_storage_full";return}
++                    if(pending.firstOrNull()==line)pending.removeFirst()
++                    storage="ok"
++                }
++            }catch(_:Throwable){synchronized(lock){storage="trace_write_failed"};return}
++        }
++    }
++    companion object {
++        private val NUMBERS=setOf("generation","nativeGeneration","attemptId","deviceRef","bytes","resultCode","retry","protocolVersion")
++        private val LABELS=setOf("outcome","reason","trigger","type","protocol","sender","transferRef","direction")
++        private val SAFE_LABELS=setOf("observed","ok","fail","sync_exception","none","connect","scan","cancel","close","fail_cleanup","register_replace","stale_registration","task_fail_cleanup","sync_fail_cleanup","ready_timeout","install_timeout","reg_timeout","generation","type","data","size","ascii","empty","json","protocol","version","sender","transferId","fields","accepted","other","READY","HELLO","ACK","APPLIED","EXPORT_META","EXPORT_CHUNK","ERROR","CANCELLED","EXPORT_CLOSED","CANCEL","BEGIN","CHUNK","END","EXPORT_REQUEST","EXPORT_NEXT","EXPORT_DONE","elcton.sync","watch","phone","present","phone-outgoing","watch-ingress")
++        private val STAGES=setOf("CONNECT_REQUEST","PEER_CONFIG","REG_CALL","REG_TASK_OK","REG_TASK_FAIL","SEND_CALL","SEND_TASK_OK","SEND_TASK_FAIL","SEND_RESULT","RX_NATIVE_ENTRY","RX_ADAPTER_REJECT","RX_DECODE","RX_ENGINE_ENTRY","RX_PROTOCOL_ACCEPT","RX_PROTOCOL_REJECT","READY_ACCEPT","INSTALL_TIMEOUT","REG_TIMEOUT","HELLO_RETRY","READY_TIMEOUT","FAIL","CANCEL","CLOSE","UNREG_CALL","UNREG_TASK_OK","UNREG_TASK_FAIL")
++        /** Read-only replica; never replaces the original PacketIngress result. No raw fields escape. */
++        fun classify(raw:String):Map<String,Any?> = parseMetadata(raw,false).let {
++            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none"else"present"))
++        }
++        fun classifyOutgoing(raw:String):Map<String,Any?> = parseMetadata(raw,true).let {
++            it+mapOf("transferRef" to (if((it["transferRef"] as? String).isNullOrEmpty())"none"else"present"))
++        }
++        private fun parseMetadata(raw:String,outgoing:Boolean):Map<String,Any?> {
++            if(raw.isEmpty())return mapOf("reason" to "empty")
++            if(raw.length>1024)return mapOf("reason" to "size")
++            if(raw.any{it.code !in 32..126})return mapOf("reason" to "ascii")
++            val m=try{JSONObject(raw)}catch(_:Throwable){return mapOf("reason" to "json")}
++            val type=m.opt("type") as? String
++            val base=mapOf("type" to (if(type in SAFE_LABELS)type else "other"),
++                "protocol" to (if(m.opt("protocol")=="elcton.sync")"elcton.sync"else"other"),
++                "sender" to (if(m.opt("sender") in setOf("watch","phone"))m.opt("sender") else "other"),
++                "protocolVersion" to exactInteger(m.opt("version")),
++                "direction" to if(outgoing)"phone-outgoing"else"watch-ingress",
++                "transferRef" to (m.opt("transferId") as? String))
++            val reason=when {
++                m.opt("protocol")!="elcton.sync"->"protocol"
++                exactInteger(m.opt("version"))!=1L->"version"
++                m.opt("sender")!=(if(outgoing)"phone"else"watch")->"sender"
++                m.opt("type") !is String->"type"
++                m.opt("transferId") !is String->"transferId"
++                else->if(outgoing || PacketIngress.watch(raw)!=null)"accepted"else"fields"
++            }
++            return base+mapOf("reason" to reason)
++        }
++    }
++}
+diff --git a/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt b/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
+index 1de4795..1510e0a 100644
+--- a/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
++++ b/app/src/main/java/com/hcbiu/elcton/SyncEngine.kt
+@@ -61,6 +61,16 @@ class SyncEngine(
+ 
+     var state = State()
+         private set
++    private var trace: P2pTrace? = null
++    fun attachTrace(value: P2pTrace) { trace = value }
++    private var closingTrace = false
++    private fun emitTrace(stage:String, fields:Map<String,Any?> = emptyMap(), captured:P2pTrace.Context? = null) {
++        try {
++            val t=trace ?: return
++            val c=if(captured==null)t.context()else if(captured.attemptId==null)t.related(captured)else captured
++            t.emit("engine",stage,t.fields(c)+fields)
++        } catch (_:Throwable) {}
++    }
+     private var generation = 0
+     private var closed = false
+     private var peer: SyncDevice? = null
+@@ -98,14 +108,18 @@ class SyncEngine(
+     }
+     private fun unregister() { transport.unregister(); peer = null }
+     private fun fail(message: String) {
++        emitTrace("FAIL", mapOf("generation" to generation ,"trigger" to "fail_cleanup"))
++        try { trace?.bind(generation, trigger = "fail_cleanup") } catch (_: Throwable) {}
+         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal(); session = null; exporting = null; awaitingReady = false; unregister()
+         publish(state.copy(status = "操作未完成", detail = message.take(200), selected = "", ready = false, busy = false))
+     }
+ 
+     fun authorizeAndScan(interactive: Boolean = false): Boolean {
+         if (closed || state.busy) return false
++        try { trace?.bind(generation, trigger = "scan") } catch (_: Throwable) {}
+         unregister(); cancelTimer(); finishTotal(); sendAttempts.invalidate(); awaitingReady = false
+         val gen = ++generation
++        try { trace?.bind(gen, trigger = "scan") } catch (_: Throwable) {}
+         var checking = true
+         publish(state.copy(status = "检查设备授权", selected = "", busy = true, ready = false, diagnostic = ""))
+         deadline(20_000) { fail("授权检查超时。请打开运动健康，确认已登录并保持手表连接。") }
+@@ -160,6 +174,7 @@ class SyncEngine(
+     }
+ 
+     fun connect(deviceId: String): Boolean {
++        emitTrace("CONNECT_REQUEST", mapOf("generation" to generation ,"trigger" to "connect"))
+         if (closed || state.busy) return false
+         val selected = state.devices.firstOrNull { it.id == deviceId }
+         if (selected == null || selected.id.isEmpty()) { fail("请先查询并选择真实配对设备。"); return false }
+@@ -167,12 +182,14 @@ class SyncEngine(
+         if (!DevicePolicy.canAttemptSync(selected.connected, selected.p2pCapability, 0, 1)) {
+             fail("设备未连接，或明确不支持应用间通信。"); return false
+         }
++        try { trace?.bind(generation, deviceRef = state.devices.indexOf(selected), trigger = "connect") } catch (_: Throwable) {}
+         unregister(); cancelTimer(); finishTotal(); sendAttempts.invalidate(); awaitingReady = false
+         val gen = ++generation
++        try { trace?.bind(gen, deviceRef = state.devices.indexOf(selected), trigger = "connect") } catch (_: Throwable) {}
+         var installing = true
+         publish(state.copy(status = "检查配套手表应用", selected = selected.id, busy = true, ready = false,
+             dirty = false, datasetId = "", hasData = false))
+-        deadline(15_000) { fail("检查手表应用超时，请确认运动健康仍连接。") }
++        deadline(15_000) { emitTrace("INSTALL_TIMEOUT", mapOf("generation" to generation ,"trigger" to "install_timeout")); fail("检查手表应用超时，请确认运动健康仍连接。") }
+         try {
+             transport.installed(selected, { installed -> main(gen) {
+                 if (!installing) return@main
+@@ -183,9 +200,25 @@ class SyncEngine(
+                 }
+                 peer = selected
+                 var registering = true
+-                deadline(15_000) { fail("接收器注册超时，未发送课表。") }
++                deadline(15_000) { emitTrace("REG_TIMEOUT", mapOf("generation" to generation ,"trigger" to "reg_timeout")); fail("接收器注册超时，未发送课表。") }
++                var registrationContext:P2pTrace.Context? = null
++                fun registeredContext():P2pTrace.Context? {
++                    try {
++                        if(registrationContext==null) {
++                            val c=trace?.context()
++                            if(c?.generation==gen)registrationContext=c.copy(attemptId=null)
++                        }
++                    } catch (_:Throwable) {}
++                    return registrationContext ?: P2pTrace.Context(generation=gen)
++                }
+                 try {
+-                    transport.register(selected, { raw -> main(gen) { onMessage(raw) } }, { scheduler.post {
++                    try { trace?.bind(gen, deviceRef = state.devices.indexOf(selected), trigger = "connect"); emitTrace("REG_CALL", mapOf("generation" to gen)) } catch (_: Throwable) {}
++                    transport.register(selected, { raw ->
++                        emitTrace("RX_ENGINE_ENTRY", mapOf("generation" to gen, "stale" to (closed || gen != generation), "bytes" to raw.length), registeredContext())
++                        main(gen) { onMessage(raw) }
++                    }, {
++                        emitTrace("REG_TASK_OK", mapOf("generation" to gen, "stale" to (closed || gen != generation)), registeredContext())
++                        scheduler.post {
+                         if (closed || gen != generation) {
+                             // The adapter owns exact native cleanup. A global fallback is only
+                             // safe while no replacement receiver OR scan can be current.
+@@ -196,8 +229,15 @@ class SyncEngine(
+                         registering = false; handshakeAttempts = 0; awaitingReady = true
+                         publish(state.copy(status = "等待手表准备", detail = "可在手表进入：周视图 → 同步 → 开始接收。手机正在尝试检测对端。"))
+                         hello()
+-                    } }, { message -> main(gen) { if (registering) { registering = false; fail(message) } } })
+-                } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
++                    } }, { message ->
++                        emitTrace("REG_TASK_FAIL", mapOf("generation" to gen, "stale" to (closed || gen != generation)), registeredContext())
++                        main(gen) { if (registering) { registering = false; fail(message) } }
++                    })
++                    registeredContext()
++                } catch (error: Exception) {
++                    emitTrace("REG_TASK_FAIL", mapOf("generation" to gen, "outcome" to "sync_exception", "stale" to (gen != generation)), registeredContext())
++                    if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty()))
++                }
+             } }, { message -> main(gen) { if (installing) { installing = false; fail(message) } } })
+         } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
+         return true
+@@ -206,14 +246,16 @@ class SyncEngine(
+     private fun hello() {
+         if (peer == null) { fail("请先连接设备。"); return }
+         deadline(5_000) {
+-            if (++handshakeAttempts <= 3) hello()
+-            else fail("未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。")
++            if (++handshakeAttempts <= 3) { emitTrace("HELLO_RETRY", mapOf("generation" to generation ,"retry" to handshakeAttempts)); hello() }
++            else { emitTrace("READY_TIMEOUT", mapOf("generation" to generation ,"trigger" to "ready_timeout")); fail("未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。") }
+         }
+         send("{" + Wire.header("HELLO", "") + "}")
+     }
+ 
+     private fun onMessage(raw: String) {
+-        val message = PacketIngress.watch(raw) ?: return
++        val observedMessage = PacketIngress.watch(raw)
++        try { emitTrace(if (observedMessage == null) "RX_PROTOCOL_REJECT" else "RX_PROTOCOL_ACCEPT", (trace?.metadata(raw) ?: emptyMap()) + mapOf("generation" to generation, "bytes" to raw.length)) } catch (_: Throwable) {}
++        val message = observedMessage ?: return
+         val type = message.optString("type")
+         PacketIngress.preparationError(message, awaitingReady, session != null || exporting != null)?.let { fail(it); return }
+         val export = exporting
+@@ -245,6 +287,7 @@ class SyncEngine(
+             return
+         }
+         if (type == "READY" && session == null && awaitingReady) {
++            emitTrace("READY_ACCEPT", mapOf("generation" to generation))
+             awaitingReady = false; cancelTimer(); sendAttempts.invalidate()
+             publish(state.copy(status = "手表已准备", detail = "可以同步手机课表，或先导入手表已有课表。",
+                 ready = true, busy = false, digest = message.optString("digest"), dirty = message.optBoolean("localDirty"),
+@@ -324,6 +367,8 @@ class SyncEngine(
+ 
+     fun cancel() {
+         if (closed) return
++        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close"else"cancel"))
++        try { trace?.bind(generation, trigger = if(closingTrace)"close"else"cancel") } catch (_: Throwable) {}
+         val id = session?.transferId ?: exporting?.id
+         if (id != null) send("{" + Wire.header("CANCEL", id) + "}", reportFailure = false)
+         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal()
+@@ -332,7 +377,7 @@ class SyncEngine(
+             detail = "已停止等待回执；若已进入保存阶段，请重新连接核对最终课表。手机不会自动导入或合并。"))
+     }
+ 
+-    fun close() { if (!closed) { cancel(); closed = true } }
++    fun close() { if (!closed) { emitTrace("CLOSE", mapOf("generation" to generation ,"trigger" to "close")); closingTrace = true; cancel(); closed = true } }
+ 
+     fun updateDiagnostic(full: String) { if (!closed) publish(state.copy(diagnostic = full)) }
+ 
+@@ -345,13 +390,23 @@ class SyncEngine(
+             return
+         }
+         fun accepts() = gen == generation && sendAttempts.accepts(attempt)
++        var sendContext:P2pTrace.Context? = null
+         try {
+-            transport.send(device, text, { code -> main(gen) {
++            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close"else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
++            transport.send(device, text, { code ->
++                emitTrace("SEND_RESULT", mapOf("generation" to gen, "attemptId" to attempt, "resultCode" to code, "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
++                main(gen) {
+                 if (!accepts()) return@main
+                 if (code != 207) {
+                     if (reportFailure) fail("Wear Engine 发送失败（$code），没有成功保存证据。")
+                 } else session?.transportSucceeded()
+-            } }, { message -> main(gen) { if (reportFailure && accepts()) fail(message) } })
+-        } catch (error: Exception) { if (reportFailure && accepts()) fail(UserFacingError.explain(error.message.orEmpty())) }
++            } }, { message ->
++                emitTrace("SEND_TASK_FAIL", mapOf("generation" to gen, "attemptId" to attempt, "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
++                main(gen) { if (reportFailure && accepts()) fail(message) }
++            })
++        } catch (error: Exception) {
++            emitTrace("SEND_TASK_FAIL", mapOf("generation" to gen, "attemptId" to attempt, "outcome" to "sync_exception", "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
++            if (reportFailure && accepts()) fail(UserFacingError.explain(error.message.orEmpty()))
++        }
+     }
+ }
+diff --git a/app/src/main/java/com/hcbiu/elcton/WearProbe.kt b/app/src/main/java/com/hcbiu/elcton/WearProbe.kt
+index 6216a7d..7f04012 100644
+--- a/app/src/main/java/com/hcbiu/elcton/WearProbe.kt
++++ b/app/src/main/java/com/hcbiu/elcton/WearProbe.kt
+@@ -31,7 +31,17 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) :
+     private var registration: NativeRegistration? = null
+     private var latestDiagnostic = ""
+ 
+-    private class NativeRegistration(val generation: Long, val receiver: Receiver)
++    private class NativeRegistration(val generation: Long, val receiver: Receiver, val traceContext: P2pTrace.Context?)
++    private fun traceContext(): P2pTrace.Context? = try { diagnostics.p2pTrace.context() } catch (_: Throwable) { null }
++    private fun related(c:P2pTrace.Context?):P2pTrace.Context? = try {
++        c?.let { diagnostics.p2pTrace.related(it) }
++    } catch (_:Throwable) { c }
++    private fun stale(c:P2pTrace.Context?):Boolean = try {
++        c==null || c.nativeGeneration!=synchronized(lock){nativeGeneration} || !diagnostics.p2pTrace.matches(c) || c.attemptCurrent?.invoke()==false
++    } catch (_:Throwable) { true }
++    private fun trace(stage: String, c: P2pTrace.Context?, fields: Map<String, Any?> = emptyMap()) {
++        try { diagnostics.p2pTrace.emit("adapter", stage, (c?.let { diagnostics.p2pTrace.fields(it) } ?: emptyMap()) + fields) } catch (_: Throwable) {}
++    }
+ 
+     constructor(context: Context, update: (SyncEngine.State) -> Unit, importCandidate: (String, Long) -> Unit) :
+         this(context, (context.applicationContext as ElctonApplication).diagnostics) {
+@@ -60,7 +70,9 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) :
+             update(state)
+             try { diagnostics.observe(state.status, state.detail, state.ready, state.busy, state.devices.size) }
+             catch (_: Exception) {}
+-        }, { text, revision -> importCandidate(text, revision) })
++        }, { text, revision -> importCandidate(text, revision) }).also { built ->
++            try { built.attachTrace(diagnostics.p2pTrace) } catch (_: Throwable) {}
++        }
+     }
+ 
+     val engine: SyncEngine get() = sharedEngine.value
+@@ -86,7 +98,10 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) :
+     private val watchPackage="watchapp.nexus.0zzip"
+     // Lite identity: bundleName + '_' + Base64(SEC1 uncompressed certificate EC point), not a cert hash/SPKI.
+     private val watchFingerprint="watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM="
+-    private fun identify() { p2p.setPeerPkgName(watchPackage).setPeerFingerPrint(watchFingerprint) }
++    private fun identify() {
++        try { diagnostics.p2pTrace.peerIdentity(watchPackage, watchFingerprint); trace("PEER_CONFIG", traceContext()) } catch (_: Throwable) {}
++        p2p.setPeerPkgName(watchPackage).setPeerFingerPrint(watchFingerprint)
++    }
+ 
+     override fun checkPermission(success: (Boolean) -> Unit, failure: (String) -> Unit) {
+         try {
+@@ -150,35 +165,54 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) :
+     override fun register(device: SyncDevice, message: (String) -> Unit, success: () -> Unit, failure: (String) -> Unit) {
+         val selected = native(device)
+         if (selected == null) { failure("设备列表已改变，请重新查询真实配对设备。"); return }
++        val captured = try { traceContext()?.copy(attemptId=null) } catch (_:Throwable) { null }
+         unregister()
+         val generation = synchronized(lock) { nativeGeneration }
++        val correlated = try { captured?.copy(nativeGeneration = generation) } catch (_: Throwable) { null }
++        try { correlated?.let { diagnostics.p2pTrace.bindRegistration(it) } } catch (_:Throwable) {}
+         val receiver = Receiver { packet ->
+             val current = synchronized(lock) { registration?.generation == generation && nativeGeneration == generation }
+-            if (current && packet.type == Message.MESSAGE_TYPE_DATA) {
+-                val bytes = packet.data
+-                if (bytes != null && bytes.size <= 1024 && bytes.all { it.toInt() in 32..126 }) {
+-                    message(bytes.toString(Charsets.US_ASCII))
++            try { trace("RX_NATIVE_ENTRY", related(correlated), mapOf("stale" to !current)) } catch (_: Throwable) {}
++            if (current) {
++                val packetType = packet.type
++                if (packetType == Message.MESSAGE_TYPE_DATA) {
++                    val bytes = packet.data
++                    if (bytes != null && bytes.size <= 1024 && bytes.all { it.toInt() in 32..126 }) {
++                        val decoded = bytes.toString(Charsets.US_ASCII)
++                        try { trace("RX_DECODE", related(correlated), mapOf("bytes" to bytes.size)) } catch (_: Throwable) {}
++                        message(decoded)
++                    } else {
++                        try { trace("RX_ADAPTER_REJECT", related(correlated), mapOf("reason" to (if (bytes == null) "data" else if (bytes.size > 1024) "size" else "ascii"), "bytes" to bytes?.size)) } catch (_: Throwable) {}
++                    }
++                } else {
++                    try { trace("RX_ADAPTER_REJECT", related(correlated), mapOf("reason" to "type")) } catch (_: Throwable) {}
+                 }
++            } else {
++                try { trace("RX_ADAPTER_REJECT", correlated, mapOf("reason" to "generation", "stale" to true)) } catch (_: Throwable) {}
+             }
+         }
+-        val item = NativeRegistration(generation, receiver)
++        val item = NativeRegistration(generation, receiver, correlated)
+         synchronized(lock) { registration = item }
+         try {
+             identify()
++            try { trace("REG_CALL", correlated) } catch (_: Throwable) {}
+             p2p.registerReceiver(selected, receiver).addOnSuccessListener {
+                 // Cleanup is keyed to the exact callback, not whichever receiver is current now.
+                 val current = synchronized(lock) { registration === item && generation == nativeGeneration }
+-                if (current) success() else release(receiver)
++                try { trace("REG_TASK_OK", correlated, mapOf("stale" to !current)) } catch (_: Throwable) {}
++                if (current) success() else release(receiver, correlated, "stale_registration")
+             }.addOnFailureListener { error ->
+                 val current = synchronized(lock) {
+                     if (registration === item && generation == nativeGeneration) { registration = null; true } else false
+                 }
+-                release(receiver)
++                try { trace("REG_TASK_FAIL", correlated, mapOf("stale" to !current)) } catch (_: Throwable) {}
++                release(receiver, correlated, "task_fail_cleanup")
+                 if (current) failure(describe(error, "registerReceiver"))
+             }
+         } catch (error: Exception) {
+             synchronized(lock) { if (registration === item) registration = null }
+-            release(receiver)
++            try { trace("REG_TASK_FAIL", correlated, mapOf("outcome" to "sync_exception")) } catch (_: Throwable) {}
++            release(receiver, correlated, "sync_fail_cleanup")
+             failure(describe(error, "registerReceiver"))
+         }
+     }
+@@ -188,24 +222,53 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) :
+             nativeGeneration++; scanGeneration++
+             registration.also { registration = null }
+         }
+-        old?.let { release(it.receiver) }
++        old?.let {
++            val cause = try { traceContext()?.trigger ?: "none" } catch (_: Throwable) { "none" }
++            release(it.receiver, related(it.traceContext), cause)
++        }
+     }
+ 
+-    private fun release(receiver: Receiver) {
+-        try { p2p.unregisterReceiver(receiver).addOnFailureListener { describe(it, "unregisterReceiver") } }
+-        catch (error: Exception) { describe(error, "unregisterReceiver") }
++    private fun release(receiver: Receiver, correlated: P2pTrace.Context?, cause: String) {
++        try { trace("UNREG_CALL", correlated, mapOf("trigger" to cause)) } catch (_: Throwable) {}
++        try {
++            val task = p2p.unregisterReceiver(receiver).addOnFailureListener {
++            try { trace("UNREG_TASK_FAIL", correlated, mapOf("trigger" to cause)) } catch (_: Throwable) {}
++            describe(it, "unregisterReceiver")
++            }
++            try { task.addOnSuccessListener {
++                try { trace("UNREG_TASK_OK", correlated, mapOf("trigger" to cause)) } catch (_: Throwable) {}
++            } } catch (_:Throwable) {}
++        }
++        catch (error: Exception) {
++            try { trace("UNREG_TASK_FAIL", correlated, mapOf("trigger" to cause, "outcome" to "sync_exception")) } catch (_: Throwable) {}
++            describe(error, "unregisterReceiver")
++        }
+     }
+ 
+     override fun send(device: SyncDevice, text: String, result: (Int) -> Unit, failure: (String) -> Unit) {
+         val selected = native(device)
+         if (selected == null) { failure("设备列表已改变，请重新查询真实配对设备。"); return }
+         if (text.length > 1024 || text.any { it.code !in 32..126 }) { failure("消息超出传输上限，未发送。"); return }
++        val correlated = try { traceContext()?.copy(nativeGeneration = synchronized(lock) { nativeGeneration }) } catch (_: Throwable) { null }
+         try {
+-            p2p.send(selected, Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(), object : SendCallback {
+-                override fun onSendResult(code: Int) { result(code) }
++            try { trace("SEND_CALL", correlated, diagnostics.p2pTrace.metadata(text,true) + mapOf("bytes" to text.length)) } catch (_: Throwable) {}
++            val task = p2p.send(selected, Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(), object : SendCallback {
++                override fun onSendResult(code: Int) {
++                    try { trace("SEND_RESULT", correlated, mapOf("resultCode" to code, "stale" to stale(correlated))) } catch (_: Throwable) {}
++                    result(code)
++                }
+                 override fun onSendProgress(progress: Long) {}
+-            }).addOnFailureListener { failure(describe(it, "p2p.send")) }
+-        } catch (error: Exception) { failure(describe(error, "p2p.send")) }
++            }).addOnFailureListener {
++                try { trace("SEND_TASK_FAIL", correlated, mapOf("stale" to stale(correlated))) } catch (_: Throwable) {}
++                failure(describe(it, "p2p.send"))
++            }
++            try { task.addOnSuccessListener {
++                try { trace("SEND_TASK_OK", correlated, mapOf("stale" to stale(correlated))) } catch (_: Throwable) {}
++            } } catch (_:Throwable) {}
++        } catch (error: Exception) {
++            try { trace("SEND_TASK_FAIL", correlated, mapOf("outcome" to "sync_exception", "stale" to stale(correlated))) } catch (_: Throwable) {}
++            failure(describe(error, "p2p.send"))
++        }
+     }
+ 
+     private fun describe(e: Exception, phase: String): String {
+diff --git a/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt b/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt
+index 052dcff..c976283 100644
+--- a/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt
++++ b/app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt
+@@ -22,8 +22,8 @@ class DiagnosticsIntegrationTest {
+         val gradle = File(root(), "app/build.gradle.kts").readText(Charsets.UTF_8)
+         assertTrue("Version capsule must use the installed build version", main.contains("BuildConfig.VERSION_NAME"))
+         assertFalse(main.contains("0.2.4 · 测试构建"))
+-        assertTrue(gradle.contains("versionCode = 11"))
+-        assertTrue(gradle.contains("versionName = \"0.2.9\""))
++        assertTrue(gradle.contains("versionCode = 12"))
++        assertTrue(gradle.contains("versionName = \"0.2.10\""))
+         assertTrue(gradle.contains("buildConfig = true"))
+     }
+ 
+diff --git a/app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt b/app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt
+new file mode 100644
+index 0000000..c3ac186
+--- /dev/null
++++ b/app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt
+@@ -0,0 +1,51 @@
++package com.hcbiu.elcton
++
++import org.json.JSONObject
++import org.junit.Assert.*
++import org.junit.Test
++
++/** R5 r1 real producer counterexamples; HOST, no SDK or device claim. */
++class P2pContextTest {
++    private fun events(t:P2pTrace):List<JSONObject> { val a=t.read(0,128).getJSONArray("events");return (0 until a.length()).map{a.getJSONObject(it)} }
++    @Test fun aNewConnectionMustNotInheritAnOldAttempt() {
++        val t=P2pTrace("host-test",{1L},{2L})
++        t.bind(7,9,3); t.bind(8,deviceRef=4)
++        assertNull("new generation inherited previous attempt",t.context().attemptId)
++        assertEquals(4,t.context().deviceRef)
++    }
++    @Test fun normalPhoneHelloIsOutgoingMetadataNotWatchSenderReject() {
++        val h=P2pTraceEngineTest().Harness("SyncEngine",true); h.start()
++        val send=events(h.trace as P2pTrace).first{it.getString("stage")=="SEND_CALL"}
++        assertEquals("phone",send.getString("sender"))
++        assertEquals("accepted",send.getString("reason"))
++        assertEquals(1,send.getInt("protocolVersion"))
++        assertEquals("phone-outgoing",send.getString("direction"))
++    }
++    @Test fun oldHelloTaskFailureIsStaleAfterSameGenerationRetryAndReady() {
++        for(ready in listOf(false,true)) {
++            val h=P2pTraceEngineTest().Harness("SyncEngine",true); h.start()
++            val old=h.transport.sendFail!!
++            if(ready) { h.transport.receiver!!(P2pTraceEngineTest.READY);h.clock.advance(0) }
++            else h.clock.advance(5000)
++            val before=h.updates.toList();old("late original failure");h.clock.advance(0)
++            assertEquals(before,h.updates)
++            val failed=events(h.trace as P2pTrace).last{it.getString("stage")=="SEND_TASK_FAIL"}
++            assertTrue("old attempt Task failure marked current",failed.getBoolean("stale"))
++        }
++    }
++    @Test fun readyAndRxEventsRetainTheRelatedSendAttempt() {
++        val h=P2pTraceEngineTest().Harness("SyncEngine",true);h.start()
++        h.transport.receiver!!(P2pTraceEngineTest.READY);h.clock.advance(0)
++        val es=events(h.trace as P2pTrace);val sent=es.first{it.getString("stage")=="SEND_CALL"}
++        for(stage in listOf("RX_ENGINE_ENTRY","RX_PROTOCOL_ACCEPT","READY_ACCEPT"))
++            assertEquals("$stage dropped related attempt",sent.getLong("attemptId"),es.single{it.getString("stage")==stage}.getLong("attemptId"))
++    }
++    @Test fun transferReferencesDistinguishIdsWithoutPrivateText() {
++        val h=P2pTraceEngineTest().Harness("SyncEngine",true);h.start()
++        fun ack(id:String)="{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"watch\",\"type\":\"ACK\",\"transferId\":\"$id\",\"seq\":0}"
++        for(id in listOf("PRIVATE_A","PRIVATE_B","PRIVATE_A")){h.transport.receiver!!(ack(id));h.clock.advance(0)}
++        val refs=events(h.trace as P2pTrace).filter{it.getString("stage")=="RX_PROTOCOL_ACCEPT"}.map{it.getString("transferRef")}
++        assertEquals(3,refs.size);assertEquals(refs[0],refs[2]);assertNotEquals("different IDs collapsed",refs[0],refs[1])
++        assertFalse((h.trace as P2pTrace).read(0,128).toString().contains("PRIVATE_"))
++    }
++}
+diff --git a/app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt b/app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt
+new file mode 100644
+index 0000000..8baadd6
+--- /dev/null
++++ b/app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt
+@@ -0,0 +1,25 @@
++package com.hcbiu.elcton
++
++import org.junit.Assert.*
++import org.junit.Test
++import java.util.concurrent.CountDownLatch
++import java.util.concurrent.TimeUnit
++
++/** HOST latch proof: writer is held inside write, emit/read complete before it is released. */
++class P2pTraceConcurrencyTest {
++    @Test fun blockedWriterDoesNotHoldAppendOrReadLock() {
++        val type=Class.forName("com.hcbiu.elcton.P2pTrace")
++        val trace=type.getConstructor(String::class.java,kotlin.jvm.functions.Function0::class.java,kotlin.jvm.functions.Function0::class.java).newInstance("host-test",{1L},{2L})
++        val emit=type.getMethod("emit",String::class.java,String::class.java,Map::class.java)
++        val read=type.getMethod("read",Long::class.javaPrimitiveType,Int::class.javaPrimitiveType)
++        emit.invoke(trace,"engine","SEND_CALL",emptyMap<String,Any?>())
++        val entered=CountDownLatch(1);val release=CountDownLatch(1);val completed=CountDownLatch(1)
++        val writer=Thread{type.getMethod("persist",kotlin.jvm.functions.Function1::class.java).invoke(trace,{_:String->entered.countDown();release.await();true})}
++        writer.start(); assertTrue("writer entered real write",entered.await(5,TimeUnit.SECONDS))
++        val observer=Thread{emit.invoke(trace,"engine","SEND_RESULT",emptyMap<String,Any?>());read.invoke(trace,0L,128);completed.countDown()}
++        observer.start()
++        try { assertTrue("emit and read must complete while writer remains blocked",completed.await(5,TimeUnit.SECONDS)); assertEquals(1L,release.count) }
++        finally { release.countDown();writer.join(5000);observer.join(5000) }
++        assertFalse(writer.isAlive);assertFalse(observer.isAlive)
++    }
++}
+diff --git a/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt b/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt
+new file mode 100644
+index 0000000..e1f45e0
+--- /dev/null
++++ b/app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt
+@@ -0,0 +1,70 @@
++package com.hcbiu.elcton
++
++import org.json.JSONObject
++import org.junit.Assert.*
++import org.junit.Test
++
++/** Actual SyncEngine vs frozen baseline source compiled in a separate class; HOST only. */
++class P2pTraceEngineTest {
++    private fun required(name:String):Class<*> = runCatching{Class.forName("com.hcbiu.elcton.$name")}.getOrNull().also{assertNotNull("Missing $name observation/oracle seam",it)}!!
++    private fun trace(clock:Clock,broken:Boolean=false):Any = required("P2pTrace").getConstructor(String::class.java,kotlin.jvm.functions.Function0::class.java,kotlin.jvm.functions.Function0::class.java)
++        .newInstance("host-test",{ 700L+clock.time },{ if(broken) throw AssertionError("clock sentinel") else clock.time })
++    private fun read(t:Any):JSONObject = t.javaClass.getMethod("read",Long::class.javaPrimitiveType,Int::class.javaPrimitiveType).invoke(t,0L,128) as JSONObject
++    private fun stages(t:Any):List<String> { val a=read(t).getJSONArray("events");return (0 until a.length()).map{a.getJSONObject(it).getString("stage")} }
++    class Clock(val calls:MutableList<String>):SyncScheduler {
++        data class Task(val at:Long,val order:Int,val f:()->Unit,var cancelled:Boolean=false)
++        var time=0L;var serial=0;val tasks=mutableListOf<Task>()
++        override fun post(block:()->Unit){calls+="post@$time";tasks+=Task(time,++serial,block)}
++        override fun after(ms:Long,block:()->Unit):SyncCancellation{calls+="after:$ms@$time";val t=Task(time+ms,++serial,block);tasks+=t;return SyncCancellation{calls+="cancel:${t.at}";t.cancelled=true}}
++        override fun now():Long {calls+="now@$time";return time}
++        override fun wallTime():Long{calls+="wall@$time";return 700L+time}
++        fun advance(ms:Long){val end=time+ms;while(true){val t=tasks.filter{!it.cancelled&&it.at<=end}.minWithOrNull(compareBy({it.at},{it.order}))?:break;tasks.remove(t);time=t.at;t.f()};time=end}
++    }
++    class Transport(val calls:MutableList<String>,val clock:Clock):SyncTransport {
++        val peer=SyncDevice("PRIVATE_UUID","PRIVATE_NAME","PRIVATE_MODEL",true,0)
++        var installing=true;var registering=true;var throwSend=false
++        var receiver:((String)->Unit)?=null;var regOk:(()->Unit)?=null;var regFail:((String)->Unit)?=null
++        var result:((Int)->Unit)?=null;var sendFail:((String)->Unit)?=null
++        override fun checkPermission(success:(Boolean)->Unit,failure:(String)->Unit){calls+="check";success(true)}
++        override fun requestPermission(success:(Boolean)->Unit,failure:(String)->Unit):Boolean{calls+="request";return false}
++        override fun scan(success:(List<SyncDevice>)->Unit,failure:(String)->Unit){calls+="scan";success(listOf(peer))}
++        override fun installed(device:SyncDevice,success:(Boolean)->Unit,failure:(String)->Unit){assertSame(peer,device);calls+="installed";if(installing)success(true)}
++        override fun register(device:SyncDevice,message:(String)->Unit,success:()->Unit,failure:(String)->Unit){assertSame(peer,device);calls+="register";receiver=message;regOk=success;regFail=failure;if(registering)success()}
++        override fun unregister(){calls+="unregister"}
++        override fun send(device:SyncDevice,text:String,result:(Int)->Unit,failure:(String)->Unit){assertSame(peer,device);calls+="send@$${clock.time}:$text";this.result=result;sendFail=failure;if(throwSend)throw IllegalStateException("same business sentinel")}
++    }
++    inner class Harness(name:String,observed:Boolean,broken:Boolean=false) {
++        val calls=mutableListOf<String>();val clock=Clock(calls);val transport=Transport(calls,clock);val updates=mutableListOf<String>()
++        val baselines=object:SyncBaselines{override fun lastSuccess(deviceId:String):Long{calls+="lastSuccess:$deviceId";return 123L};override fun save(deviceId:String,datasetId:String,digest:String,revision:Long,at:Long){calls+="save:$deviceId:$datasetId:$digest:$revision:$at"}}
++        val engine=required(name).constructors.single{it.parameterCount==5}.newInstance(transport,clock,baselines,{s:Any->updates+=s.toString()},{s:String,r:Long->calls+="import:$s:$r"})
++        val trace=if(observed)trace(clock,broken).also{t->engine.javaClass.methods.firstOrNull{it.name=="attachTrace"&&it.parameterCount==1}.also{assertNotNull("Missing attachTrace stage support",it)}!!.invoke(engine,t)}else null
++        fun action(name:String,vararg args:Any):Any?=engine.javaClass.methods.single{it.name==name&&it.parameterCount==args.size}.invoke(engine,*args)
++        fun start(){assertEquals(true,action("authorizeAndScan",false));clock.advance(0);assertEquals(true,action("connect",transport.peer.id));clock.advance(0)}
++    }
++    private fun compare(mode:String,broken:Boolean=false):Harness {
++        val base=Harness("P2pTraceBaselineEngine",false);val seen=Harness("SyncEngine",true,broken)
++        for(h in listOf(base,seen)) {
++            if(mode=="install")h.transport.installing=false
++            if(mode=="reg"||mode=="lateReg")h.transport.registering=false
++            if(mode=="syncThrow")h.transport.throwSend=true
++            h.start()
++            when(mode){
++                "ready"->{h.transport.receiver!!(READY);h.clock.advance(0);h.transport.result!!(206);h.transport.result!!(207);h.clock.advance(0);h.clock.advance(20000)}
++                "reject"->{for(raw in listOf(READY.replace("watch","phone"),READY.replace("\"version\":1","\"version\":2"),"X".repeat(1025),"中",READY.replace("8192","0"))){h.transport.receiver!!(raw);h.clock.advance(0)};h.clock.advance(20000)}
++                "resultFail"->{h.clock.advance(1000);h.transport.result!!(206);h.clock.advance(0);h.transport.result!!(207);h.transport.sendFail!!("late failure");h.clock.advance(40000)}
++                "cancel"->{h.clock.advance(1000);h.action("cancel");h.transport.result!!(206);h.transport.receiver!!(READY);h.clock.advance(40000)}
++                "lateReg"->{h.action("cancel");h.transport.regOk!!();h.transport.regFail!!("late registration");h.clock.advance(40000)}
++                "close"->{h.action("close");h.action("close");h.transport.result!!(207);h.clock.advance(40000)}
++                else->h.clock.advance(20000)
++            }
++        }
++        assertEquals("Business calls/order/bytes differ: $mode",base.calls,seen.calls);assertEquals("Business updates differ: $mode",base.updates,seen.updates)
++        return seen
++    }
++    @Test fun originalHelloDeadlinesAndRetryStages(){val h=compare("timeout");val a=read(h.trace!!).getJSONArray("events");val retry=(0 until a.length()).map{a.getJSONObject(it)}.filter{it.getString("stage")=="HELLO_RETRY"};assertEquals(listOf(5000L,10000L,15000L),retry.map{it.getLong("elapsedMs")});assertEquals(20000L,(0 until a.length()).map{a.getJSONObject(it)}.single{it.getString("stage")=="READY_TIMEOUT"}.getLong("elapsedMs"));assertEquals(4,h.calls.count{it.startsWith("send@")} )}
++    @Test fun installAndRegistrationTimeoutAreNotReadyTimeout(){for(mode in listOf("install","reg")){val h=compare(mode);assertTrue(stages(h.trace!!).contains(if(mode=="install")"INSTALL_TIMEOUT"else"REG_TIMEOUT"));assertFalse(stages(h.trace).contains("READY_TIMEOUT"))}}
++    @Test fun validReadyAcceptedExactlyOnceAndLateResultsRemainVisible(){val h=compare("ready");assertEquals(1,stages(h.trace!!).count{it=="READY_ACCEPT"});assertEquals(2,stages(h.trace).count{it=="SEND_RESULT"});assertFalse(read(h.trace).toString().contains("PRIVATE_"))}
++    @Test fun originalRejectsAndEarlyFailuresCancelCloseAndLateCallbacksHaveZeroDrift(){for(mode in listOf("reject","resultFail","cancel","lateReg","close","syncThrow"))compare(mode)}
++    @Test fun hostileDiagnosticClockHasZeroBusinessDrift(){compare("timeout",true);compare("ready",true);compare("syncThrow",true)}
++    companion object{const val READY="{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"watch\",\"type\":\"READY\",\"transferId\":\"\",\"maxBytes\":8192,\"sourceRevision\":0,\"datasetId\":\"\",\"digest\":\"\",\"localDirty\":false,\"hasData\":false}"}
++}
+diff --git a/app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt b/app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt
+new file mode 100644
+index 0000000..2cc8951
+--- /dev/null
++++ b/app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt
+@@ -0,0 +1,24 @@
++package com.hcbiu.elcton
++
++import org.junit.Assert.*
++import org.junit.Test
++import org.json.JSONObject
++
++/** HOST equivalence against unchanged PacketIngress, all legal packet families and field boundaries. */
++class P2pTraceIngressTest {
++    @Test fun diagnosticClassifierAgreesWithOriginalWithoutReturningPrivateText() {
++        val c=Class.forName("com.hcbiu.elcton.P2pTrace").getField("Companion").get(null)
++        val method=c.javaClass.getMethod("classify",String::class.java)
++        val samples=mutableListOf<String>()
++        fun packet(type:String,fields:String="",id:String="t-1")="{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"watch\",\"type\":\"$type\",\"transferId\":\"$id\"$fields}"
++        samples+=P2pTraceEngineTest.READY
++        samples+=packet("ACK",",\"seq\":-1");samples+=packet("ACK",",\"seq\":127");samples+=packet("APPLIED",",\"digest\":\"1234abcd\",\"sourceRevision\":1")
++        samples+=packet("EXPORT_META",",\"length\":32768,\"chunks\":128,\"digest\":\"1234abcd\",\"sourceRevision\":0")
++        samples+=packet("EXPORT_CHUNK",",\"seq\":127,\"data\":\"PRIVATE_COURSE\"")
++        samples+=packet("ERROR",",\"code\":\"READY_FAIL\"","");samples+=packet("CANCELLED");samples+=packet("EXPORT_CLOSED")
++        val valid=samples.toList();assertTrue(valid.all{PacketIngress.watch(it)!=null})
++        for(raw in valid){samples+=raw.replace("elcton.sync","PRIVATE_PROTOCOL");samples+=raw.replace("watch","PRIVATE_SENDER");samples+=raw.replace("\"version\":1","\"version\":1.5");samples+=raw.replace("\"version\":1","\"version\":\"1\"");samples+=raw.replace("t-1","PRIVATE_BAD_ID!")}
++        samples+=listOf("","中","X".repeat(1025),"{",packet("PRIVATE_TYPE"),packet("ACK",",\"seq\":128"),packet("ACK",",\"seq\":-2"),packet("ACK",",\"seq\":1.2"),packet("EXPORT_CHUNK",",\"seq\":0,\"data\":\"${"X".repeat(901)}\""),P2pTraceEngineTest.READY.replace("8192","0"),P2pTraceEngineTest.READY.replace("false","\"false\""))
++        for(raw in samples){@Suppress("UNCHECKED_CAST") val observed=method.invoke(c,raw) as Map<String,Any?>;assertEquals("classification differs on length ${raw.length}",PacketIngress.watch(raw)!=null,observed["reason"]=="accepted");assertFalse(JSONObject(observed).toString().contains("PRIVATE_"))}
++    }
++}
+diff --git a/app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt b/app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt
+new file mode 100644
+index 0000000..bd8306d
+--- /dev/null
++++ b/app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt
+@@ -0,0 +1,27 @@
++package com.hcbiu.elcton
++
++import java.io.File
++import org.junit.Assert.*
++import org.junit.Test
++
++/** Static absence RED; actual Runtime execution belongs to the separate Android HOST stub lane. */
++class P2pTraceRuntimeTest {
++    // Gradle executes from app/, HOST from repository root. Resolve the same
++    // source file without altering any diagnostic assertion or its label.
++    private val root = generateSequence(File("").absoluteFile) { it.parentFile }
++        .first { File(it, "app/src/main/AndroidManifest.xml").isFile }
++    @Test fun runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema() {
++        val f=File(root, "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt").readText()
++        assertTrue("Missing shared P2pTrace diagnostic runtime",f.contains("val p2pTrace"))
++        assertTrue("Missing diag_read additive p2p",f.contains(".put(\"p2p\""))
++        assertTrue("Missing existing writer trace flush",f.contains("p2pTrace.persist"))
++        assertFalse(File(root, "app/src/main/java/com/hcbiu/elcton/DiagnosticTools.kt").readText().contains("p2p_trace_tail"))
++    }
++    @Test fun adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks() {
++        val f=File(root, "app/src/main/java/com/hcbiu/elcton/WearProbe.kt").readText()
++        for(s in listOf("RX_NATIVE_ENTRY","RX_ADAPTER_REJECT","RX_DECODE","REG_TASK_OK","REG_TASK_FAIL","SEND_TASK_OK","SEND_TASK_FAIL","SEND_RESULT","UNREG_TASK_OK"))assertTrue("Missing adapter $s",f.contains(s))
++        assertEquals(1,Regex("packet\\.type").findAll(f).count())
++        assertEquals(1,Regex("packet\\.data").findAll(f).count())
++        assertEquals(1,Regex("val message = e\\.message").findAll(f).count())
++    }
++}
+diff --git a/app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt b/app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt
+new file mode 100644
+index 0000000..59ec097
+--- /dev/null
++++ b/app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt
+@@ -0,0 +1,64 @@
++package com.hcbiu.elcton
++
++import org.json.JSONObject
++import org.junit.Assert.*
++import org.junit.Test
++
++/** HOST only. Reflection makes the first RED an assertion, not a compiler failure. */
++class P2pTraceTest {
++    private fun type(): Class<*> {
++        val found = runCatching { Class.forName("com.hcbiu.elcton.P2pTrace") }.getOrNull()
++        assertNotNull("Missing P2pTrace schema1 observation seam", found)
++        return found!!
++    }
++    private fun trace(wall: () -> Long = { 700L }, elapsed: () -> Long = { 9L }): Any =
++        type().getConstructor(String::class.java, kotlin.jvm.functions.Function0::class.java, kotlin.jvm.functions.Function0::class.java)
++            .newInstance("host-test", wall, elapsed)
++    private fun emit(t: Any, stage: String, fields: Map<String, Any?> = emptyMap()) {
++        type().getMethod("emit", String::class.java, String::class.java, Map::class.java).invoke(t, "engine", stage, fields)
++    }
++    private fun read(t: Any, after: Long = 0, limit: Int = 128) = type()
++        .getMethod("read", Long::class.javaPrimitiveType, Int::class.javaPrimitiveType).invoke(t, after, limit) as JSONObject
++    @Test fun schemaClockSequenceAndIndependentGenerationReferences() {
++        val t=trace(); emit(t,"SEND_CALL",mapOf("generation" to 2,"nativeGeneration" to 17L,"attemptId" to 6L,"bytes" to 90))
++        emit(t,"SEND_RESULT",mapOf("resultCode" to 206,"stale" to true))
++        val r=read(t); val events=r.getJSONArray("events"); assertEquals(2,events.length())
++        val e=events.getJSONObject(0)
++        assertEquals(1,e.getInt("schema")); assertEquals("host-test",e.getString("origin")); assertEquals(1L,e.getLong("seq"))
++        assertEquals(700L,e.getLong("wallMs")); assertEquals(9L,e.getLong("elapsedMs")); assertEquals(2,e.getInt("generation"))
++        assertEquals(17L,e.getLong("nativeGeneration")); assertEquals(6L,e.getLong("attemptId")); assertEquals(206,events.getJSONObject(1).getInt("resultCode"))
++        assertEquals(e.getString("sid"),events.getJSONObject(1).getString("sid")); assertTrue(events.getJSONObject(1).getBoolean("stale"))
++    }
++    @Test fun boundedTailTrueDroppedCursorAndPrivacy() {
++        val t=trace(); repeat(140) { emit(t,"SEND_CALL",mapOf("name" to "PRIVATE_NAME","MAC" to "PRIVATE_MAC","data" to "PRIVATE_COURSE","token" to "PRIVATE_TOKEN","url" to "PRIVATE_URL","type" to "PRIVATE_TYPE","reason" to "PRIVATE_REASON","bytes" to it)) }
++        val r=read(t); assertEquals(128,r.getInt("buffer")); assertEquals(12L,r.getLong("dropped"))
++        assertEquals(13L,r.getJSONArray("events").getJSONObject(0).getLong("seq")); assertTrue(r.getBoolean("has_more"))
++        val page=read(t,135,2); assertEquals(2,page.getJSONArray("events").length()); assertTrue(page.getBoolean("has_more")); assertEquals(137L,page.getLong("nextSeq"))
++        assertFalse(r.toString().contains("PRIVATE_")); assertTrue(r.toString().toByteArray().size<1024*1024)
++        for(i in 0 until r.getJSONArray("events").length()) {
++            val e=r.getJSONArray("events").getJSONObject(i); assertTrue(e.toString().toByteArray(Charsets.UTF_8).size<=2048)
++            assertTrue(e.has("truncated")); assertTrue(e.has("originalBytes"))
++        }
++    }
++    @Test fun hostileFieldAndClocksCannotEscapeOrInventEvent() {
++        val t=trace(elapsed={ throw IllegalStateException("PRIVATE_CLOCK") }); emit(t,"SEND_CALL")
++        assertEquals(0,read(t).getInt("buffer")); assertEquals(1L,read(t).getLong("dropped"))
++        val good=trace(); val hostile=object: java.util.AbstractMap<String,Any?>() {
++            override val entries: MutableSet<MutableMap.MutableEntry<String, Any?>> get()=throw IllegalStateException("PRIVATE_GETTER")
++        }
++        emit(good,"SEND_CALL",hostile); assertEquals(0,read(good).getInt("buffer")); assertEquals(1L,read(good).getLong("dropped"))
++    }
++    @Test fun writerFailureAndStorageFullAreDiagnosticOnlyAndNoRetriesAfterFull() {
++        val t=trace(); emit(t,"SEND_CALL"); var calls=0
++        val persist=type().getMethod("persist",kotlin.jvm.functions.Function1::class.java)
++        persist.invoke(t,{ _:String -> calls++; throw IllegalStateException("PRIVATE_WRITER") })
++        assertEquals(1,calls); assertEquals("trace_write_failed",read(t).getString("storage"))
++        persist.invoke(t,{ _:String -> calls++; false }); assertEquals(2,calls); assertEquals("trace_storage_full",read(t).getString("storage"))
++        emit(t,"SEND_RESULT"); persist.invoke(t,{ _:String -> calls++; true }); assertEquals(2,calls)
++        assertFalse(read(t).toString().contains("PRIVATE_WRITER"))
++    }
++    @Test fun engineKeepsFiveArgConstructorAndRequiresTraceAttachment() {
++        assertEquals(1,SyncEngine::class.java.constructors.count{it.parameterCount==5})
++        assertNotNull("Missing diagnostic-only attachTrace",SyncEngine::class.java.methods.firstOrNull{it.name=="attachTrace"&&it.parameterCount==1})
++    }
++}
+diff --git a/qa/P2pCandidateBuildTest.kt b/qa/P2pCandidateBuildTest.kt
+index 4af446c..ef98eed 100644
+--- a/qa/P2pCandidateBuildTest.kt
++++ b/qa/P2pCandidateBuildTest.kt
+@@ -8,8 +8,8 @@ class P2pCandidateBuildTest {
+     @Test fun actualGeneratedBuildConfigIsBoundToExplicitBuildProfile() {
+         assertEquals("com.hcbiu.elcton", BuildConfig.APPLICATION_ID)
+         if (BuildConfig.P2P_READY_CANDIDATE) {
+-            assertEquals(11, BuildConfig.VERSION_CODE)
+-            assertEquals("0.2.9", BuildConfig.VERSION_NAME)
++            assertEquals(12, BuildConfig.VERSION_CODE)
++            assertEquals("0.2.10", BuildConfig.VERSION_NAME)
+         } else {
+             assertEquals(8, BuildConfig.VERSION_CODE)
+             assertEquals("0.2.6", BuildConfig.VERSION_NAME)
+diff --git a/qa/diag_emulator_smoke.py b/qa/diag_emulator_smoke.py
+index 769c486..90ab587 100644
+--- a/qa/diag_emulator_smoke.py
++++ b/qa/diag_emulator_smoke.py
+@@ -153,7 +153,7 @@ class Harness:
+         from PIL import Image
+         report = json.loads((target / "report.json").read_text())
+         require(report.get("passed") is True and report.get("sourceSha") == head and report.get("qaRun") == run_id, "Instrumentation receipt is not for this exact successful run")
+-        require(report.get("packageVersion") == "0.2.9" and report.get("packageCode") == 11, "Installed package identity")
++        require(report.get("packageVersion") == "0.2.10" and report.get("packageCode") == 12, "Installed package identity")
+         tools = report.get("httpTools")
+         require(isinstance(tools, list) and len(tools) == 15 and set(tools) == TOOLS, "Real Android exact 15-tool receipt")
+         for key in ("activityRecreated", "fullTextUntruncated", "closeVisibleAndWorks", "androidNioHttpRead", "businessFilesUnchanged", "originalDiagnosticSchemas", "sharedPhoneActivityRecreated"):
+@@ -302,7 +302,7 @@ class Harness:
+             label = "normal-background-" + str(attempt)
+             self.foreground_receipt(label, pid)
+             version = self.background_rpc(suite, label + "-version", "version_info", {})
+-            require(version.get("versionName") == "0.2.9" and version.get("versionCode") == 11 and version.get("packageName") == PACKAGE, "Ordinary background exact version")
++            require(version.get("versionName") == "0.2.10" and version.get("versionCode") == 12 and version.get("packageName") == PACKAGE, "Ordinary background exact version")
+             errors = self.background_rpc(suite, label + "-errors", "error_tail", {"limit": 1})
+             require(len(errors.get("errors", [])) == 1 and errors["errors"][0]["full"] == expected, "Ordinary background persisted full error")
+             observations.append({"attempt": attempt, "elapsedSeconds": time.monotonic() - started, "foreground": True, "ordinaryProcess": True, "urllibVersionAndError": True})
+@@ -471,7 +471,7 @@ class Harness:
+         suite = Suite("http://127.0.0.1:18766", token_result.stdout.decode("ascii"))
+         expected = (target / "synthetic-expected.txt").read_text()
+         failed, version = suite.call("version_info")
+-        require(not failed and version.get("versionName") == "0.2.9" and version.get("versionCode") == 11 and version.get("packageName") == PACKAGE, "Cold-process real version_info")
++        require(not failed and version.get("versionName") == "0.2.10" and version.get("versionCode") == 12 and version.get("packageName") == PACKAGE, "Cold-process real version_info")
+         failed, errors = suite.call("error_tail", {"limit": 1})
+         require(not failed and errors["errors"][-1]["full"] == expected, "Cold-process actual persisted error_tail")
+         failed, diagnostic = suite.call("diag_read")
+diff --git a/qa/diag_source_gate.py b/qa/diag_source_gate.py
+index dd49dea..46c1f1a 100644
+--- a/qa/diag_source_gate.py
++++ b/qa/diag_source_gate.py
+@@ -66,6 +66,37 @@ for _path, _commit in [(ACTIVITY, '1e14980f19cf5c510722d9521d9762586a3a91eb'), (
+     assert digest(_change['after'].encode('utf-8')) == _change['after_sha256']
+ 
+ 
++# R6 migrates ONLY the current identity data after the historical record above
++# has passed every original integrity predicate. Its old record stays immutable.
++R6 = json.loads((ROOT / 'qa/p2p-trace-0210/r6/current-identity.json').read_text())
++assert R6['schema'] == 1 and R6['base'] == 'bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
++assert R6['release'] == '0.2.10' and R6['version_code'] == 12
++assert R6['old_manifest'] == 'qa/release-029/approved-release-delta.json'
++assert digest((ROOT / R6['old_manifest']).read_bytes()) == R6['old_manifest_sha256']
++R6_SOURCES = R6['source_identities']
++R6_RUNTIME = 'app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt'
++R6_TRACE = 'app/src/main/java/com/hcbiu/elcton/P2pTrace.kt'
++assert set(R6_SOURCES) == {PROBE, ENGINE, R6_RUNTIME, R6_TRACE}
++assert R6_SOURCES[PROBE]['old_sha256'] == RELEASE['patches'][PROBE][0]['after_sha256']
++for _path in (ENGINE, R6_RUNTIME):
++    assert R6_SOURCES[_path]['old_sha256'] == RELEASE['guarded_source_sha256'][_path]
++assert R6_SOURCES[R6_TRACE]['old_sha256'] is None
++assert digest(R6['probe_current_after'].encode('utf-8')) == R6_SOURCES[PROBE]['current_sha256']
++R6_VERSION = R6['version_identity']
++assert R6_VERSION['path'] == 'app/build.gradle.kts'
++assert R6_VERSION['old_sha256'] == RELEASE['guarded_source_sha256'][R6_VERSION['path']]
++assert (R6_VERSION['old_code'], R6_VERSION['current_code'], R6_VERSION['old_name'], R6_VERSION['current_name']) == (11, 12, '0.2.9', '0.2.10')
++# A private current copy changes exact SHA/snapshot values, never the predicates
++# below, immutable group, workflow/signing requirements, or old approvals.
++import copy
++RELEASE = copy.deepcopy(RELEASE)
++RELEASE['patches'][PROBE][0]['after'] = R6['probe_current_after']
++RELEASE['patches'][PROBE][0]['after_sha256'] = R6_SOURCES[PROBE]['current_sha256']
++for _path in (ENGINE, R6_RUNTIME, R6_TRACE):
++    RELEASE['guarded_source_sha256'][_path] = R6_SOURCES[_path]['current_sha256']
++RELEASE['guarded_source_sha256'][R6_VERSION['path']] = R6_VERSION['current_sha256']
++
++
+ def reverse_exact(text, path):
+     # Required order: complete release -> READY/KEEPALIVE -> observation -> 0.2.5.
+     for change in reversed(RELEASE['patches'].get(path, [])):
+diff --git a/qa/p2p-trace-0210/check_r6_scope.py b/qa/p2p-trace-0210/check_r6_scope.py
+new file mode 100644
+index 0000000..42b4e3b
+--- /dev/null
++++ b/qa/p2p-trace-0210/check_r6_scope.py
+@@ -0,0 +1,113 @@
++#!/usr/bin/env python3
++"""R6 frozen-scope: complete git baseline + exact permitted literal inversions.
++New rows are registered separately, never alter original assertions or evidence.
++"""
++import argparse
++from pathlib import Path
++import hashlib
++import json
++import os
++import subprocess
++import time
++ROOT = Path(__file__).resolve().parents[2]
++QA = Path(__file__).resolve().parent
++BASE = 'bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
++PRODUCT = {f'app/src/main/java/com/hcbiu/elcton/{n}.kt' for n in ('WearProbe','SyncEngine','DiagnosticRuntime')}
++VERSION = {
++    'app/build.gradle.kts': [('versionCode = 12', 'versionCode = 11'), ('versionName = "0.2.10"', 'versionName = "0.2.9"')],
++    'app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt': [('versionCode = 12','versionCode = 11'), ('0.2.10','0.2.9')],
++    'qa/P2pCandidateBuildTest.kt': [('assertEquals(12, BuildConfig.VERSION_CODE)','assertEquals(11, BuildConfig.VERSION_CODE)'), ('0.2.10','0.2.9')],
++    'app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt': [('0.2.10','0.2.9'), ('assertEquals(12L, installed.longVersionCode)','assertEquals(11L, installed.longVersionCode)'), ('assertEquals(12, version.getInt("versionCode"))','assertEquals(11, version.getInt("versionCode"))')],
++    'qa/test_mcp027_scope.py': [('versionCode = 12','versionCode = 11'), ('0.2.10','0.2.9')],
++    'qa/release-029/verify_apk.py': [("'12', '0.2.10'", "'11', '0.2.9'")],
++    'qa/diag_emulator_smoke.py': [('"0.2.10"','"0.2.9"'), ('report.get("packageCode") == 12','report.get("packageCode") == 11'), ('version.get("versionCode") == 12','version.get("versionCode") == 11')],
++}
++GATE = 'qa/diag_source_gate.py'
++
++
++def git(*args):
++    return subprocess.check_output(['git', *args], cwd=ROOT)
++
++
++def sha(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--out', type=Path, default=QA/'r6/evidence/frozen-scope-final')
++    args = parser.parse_args()
++    out = args.out.absolute()
++    assert out.is_relative_to(QA/'r6/evidence')
++    out.mkdir(parents=True, exist_ok=True)
++    assert not (out/'receipt.json').exists(), 'Preserve prior completed scope receipt'
++    tree = json.loads((QA/'r6/evidence/before/base-tree.json').read_bytes())
++    assert tree['base'] == BASE and len(tree['entries']) == 9461
++    expected = PRODUCT | set(VERSION) | {GATE}
++    # Exact full-content read of ALL baseline entries. New R5/R6 evidence is not
++    # part of the old baseline, and no deleted old path is excluded.
++    changed = set()
++    for row in tree['entries']:
++        p = ROOT/row['path']
++        assert p.exists() or p.is_symlink(), 'Missing baseline path: '+row['path']
++        data = os.readlink(p).encode() if p.is_symlink() else p.read_bytes()
++        oid = hashlib.sha1(b'blob '+str(len(data)).encode()+b'\x00'+data).hexdigest()
++        if oid != row['oid']: changed.add(row['path'])
++    assert changed == expected, sorted(changed ^ expected)
++    inverses = {}
++    for path, changes in VERSION.items():
++        current = (ROOT/path).read_bytes()
++        restored = current
++        counts = []
++        for new, old in changes:
++            assert restored.count(new.encode()) > 0, (path,new)
++            counts.append({'new':new,'old':old,'count':restored.count(new.encode())})
++            restored = restored.replace(new.encode(),old.encode())
++        original = git('show', BASE+':'+path)
++        assert restored == original, 'Nonliteral version/test delta: '+path
++        inverses[path] = {'old_sha256':sha(original),'current_sha256':sha(current), 'reverse_sha256':sha(restored),'counts':counts,'all_other_bytes_unchanged':True}
++    original_gate = git('show',BASE+':'+GATE)
++    current_gate = (ROOT/GATE).read_bytes()
++    left = current_gate.index(b'# R6 migrates ONLY the current identity data')
++    right = current_gate.index(b'def reverse_exact(text, path):',left)
++    restored_gate = current_gate[:left] + current_gate[right:]
++    assert restored_gate == original_gate, 'Original source gate predicates changed'
++    old_test_files = [x for x in tree['entries'] if (x['path'].startswith('app/src/test/') or x['path'].startswith('app/src/androidTest/') or x['path']=='qa/P2pCandidateBuildTest.kt') and x['path'].endswith('.kt')]
++    old_tests = {}
++    for row in old_test_files:
++        path=row['path']; current=(ROOT/path).read_bytes();original=git('show',BASE+':'+path)
++        restored=current
++        for new,old in VERSION.get(path,[]):restored=restored.replace(new.encode(),old.encode())
++        assert restored == original
++        old_tests[path]={'old_sha256':sha(original),'current_sha256':sha(current),'non_version_bytes_unchanged':True}
++    # Independent R5 inventory includes retained original audit test classes too.
++    r5=json.loads((QA/'baseline.json').read_bytes())
++    frozen_inventory=r5['old_tests']
++    if isinstance(frozen_inventory,dict):
++        for path,value in frozen_inventory.items():
++            data=(ROOT/path).read_bytes()
++            for new,old in VERSION.get(path,[]):data=data.replace(new.encode(),old.encode())
++            expected_sha=value if isinstance(value,str) else value.get('sha256')
++            assert expected_sha==sha(data),(path,'R5 original test identity')
++    identity=json.loads((QA/'r6/current-identity.json').read_bytes())
++    for path,row in identity['source_identities'].items(): assert sha((ROOT/path).read_bytes())==row['current_sha256']
++    build_tests = sorted((ROOT/'app/src/test/java/com/hcbiu/elcton').glob('*Test.kt'))
++    assert len(build_tests)==35
++    fixture=ROOT/'qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt'
++    base_engine=git('show',BASE+':app/src/main/java/com/hcbiu/elcton/SyncEngine.kt').decode()
++    expected_fixture='package com.hcbiu.elcton\n\n'+base_engine[base_engine.index('class SyncEngine('):].replace('class SyncEngine(','class P2pTraceBaselineEngine(',1)
++    assert fixture.read_text()==expected_fixture
++    dcheck=subprocess.run(['git','diff','--check'],cwd=ROOT,capture_output=True)
++    assert dcheck.returncode==0
++    record={'at':time.strftime('%Y-%m-%d %H:%M:%S %z'),'base':BASE,'base_entries':len(tree['entries']),
++        'allowed_diagnostic_paths':sorted(PRODUCT),'literal_migrations':inverses,'allowed_identity_gate_path':GATE,
++        'all_original_sourcegate_predicates_byte_identical':True,'all_other_base_entries_unchanged':True,
++        'old_test_files':old_tests,'current_test_classes':len(build_tests),'original_business_assertions_byte_identical':True,
++        'source_identities':identity['source_identities'],'new_test_only_baseline_sha256':sha(fixture.read_bytes()),
++        'workflow_bytes_frozen':True,'devices':[],'haps':[],'diff_check_exit':0}
++    (out/'receipt.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
++    (out/'allowed-source.diff').write_bytes(git('diff','--binary',BASE,'--',*sorted(expected)))
++    print(json.dumps({k:v for k,v in record.items() if k not in ('old_test_files','source_identities','literal_migrations')},ensure_ascii=False))
++
++
++if __name__=='__main__':main()
+diff --git a/qa/p2p-trace-0210/generate_ci_baseline.py b/qa/p2p-trace-0210/generate_ci_baseline.py
+new file mode 100644
+index 0000000..7c66b24
+--- /dev/null
++++ b/qa/p2p-trace-0210/generate_ci_baseline.py
+@@ -0,0 +1,23 @@
++#!/usr/bin/env python3
++"""Generate one CI-only frozen business baseline class, no callbacks/types duplicated.
++The business-only source is pinned to the pre-diagnostic bb26c64 commit.
++"""
++from pathlib import Path
++import hashlib
++import json
++import subprocess
++ROOT = Path(__file__).resolve().parents[2]
++BASE = 'bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
++SOURCE = 'app/src/main/java/com/hcbiu/elcton/SyncEngine.kt'
++raw = subprocess.check_output(['git', 'show', BASE + ':' + SOURCE], cwd=ROOT)
++text = raw.decode()
++assert text.count('class SyncEngine(') == 1
++baseline = 'package com.hcbiu.elcton\n\n' + text[text.index('class SyncEngine('):].replace('class SyncEngine(', 'class P2pTraceBaselineEngine(', 1)
++dest = ROOT / 'qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt'
++dest.parent.mkdir(parents=True, exist_ok=True)
++with dest.open('x') as file:
++    file.write(baseline)
++print(json.dumps({'base': BASE, 'baseline_source_sha256': hashlib.sha256(raw).hexdigest(),
++                  'generated_path': str(dest), 'generated_sha256': hashlib.sha256(dest.read_bytes()).hexdigest(),
++                  'transformation': 'only class rename + package; shared interfaces/imports use real current sources',
++                  'scope': 'test-only baseline; no APK product inclusion'}))
+diff --git a/qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in b/qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in
+new file mode 100644
+index 0000000..aa76f66
+--- /dev/null
++++ b/qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in
+@@ -0,0 +1,172 @@
++package com.hcbiu.elcton
++
++import android.content.Context
++import com.huawei.hmf.tasks.Task
++import com.huawei.wearengine.p2p.HostBus
++import com.huawei.wearengine.p2p.Message
++import com.huawei.wearengine.p2p.SendCallback
++import org.json.JSONObject
++import org.junit.Assert.*
++import org.junit.Test
++
++/** R6 L3-r2 HOST only: real WearProbe shared engine + real send/onMessage; fake SDK, no device claim.
++ * Each run owns a fresh probe and Task. A Task is never completed both successfully and exceptionally.
++ * Reflection only seeds the connection because this frozen HOST installed() Task is not exposed.
++ */
++class NativeAfterReadyAdapterTest {
++    private class CountingError : Exception() {
++        var reads = 0
++        override val message: String get() { reads++; return "host-after-ready-error" }
++    }
++    private data class Outcome(
++        val calls: List<String>, val updates: List<SyncEngine.State>, val state: SyncEngine.State,
++        val pending: Boolean, val rxCallbacks: Int, val regCallbacks: Int,
++        val errors: Int, val errorReads: Int, val sends: Int, val registrations: Int, val releases: Int,
++        val terminalSuccess: Int, val terminalFailure: Int, val sendResults: Int
++    )
++    private data class Run(val outcome: Outcome, val events: List<JSONObject>, val before: SyncEngine.State)
++    private fun field(owner: Any, name: String) = owner.javaClass.getDeclaredField(name).apply { isAccessible = true }
++    private fun invoke(owner: Any, name: String, vararg args: Any) {
++        val method = owner.javaClass.declaredMethods.single { it.name == name && it.parameterCount == args.size }
++        method.isAccessible = true
++        method.invoke(owner, *args)
++    }
++    private fun business(state: SyncEngine.State) = state.copy(diagnostic = if (state.diagnostic.isEmpty()) "" else "<error>")
++    private fun events(trace: P2pTrace): List<JSONObject> {
++        val page = trace.read(0, 128)
++        assertEquals("host-test", page.getString("origin"))
++        assertFalse(page.getBoolean("has_more"))
++        val array = page.getJSONArray("events")
++        return (0 until array.length()).map { array.getJSONObject(it) }
++    }
++    private fun run(mode: String, phase: String, original: Boolean): Run {
++        HostBus.reset()
++        val diagnostics = DiagnosticRuntime()
++        val name = if (original) "P2pTraceBaselineProbe" else "WearProbe"
++        val probe = Class.forName("com.hcbiu.elcton.$name")
++            .getConstructor(Context::class.java, DiagnosticRuntime::class.java).newInstance(Context(), diagnostics)
++        val transport = probe as SyncTransport
++        var found: List<SyncDevice> = emptyList()
++        transport.scan({ found = it }, { fail(it) })
++        HostBus.scan!!.succeed()
++        val device = found.single()
++        val engine = probe.javaClass.getMethod("getEngine").invoke(probe) as SyncEngine
++        assertSame("must use the actual application-owned shared engine", engine, probe.javaClass.getMethod("getEngine").invoke(probe))
++        val updates = mutableListOf<SyncEngine.State>()
++        field(probe, "update").set(probe, { state: SyncEngine.State -> updates += business(state) })
++        field(engine, "generation").set(engine, 7)
++        field(engine, "peer").set(engine, device)
++        field(engine, "awaitingReady").set(engine, true)
++        field(engine, "state").set(engine, SyncEngine.State(status = "等待手表准备", devices = found,
++            selected = device.id, ready = false, busy = true))
++        diagnostics.p2pTrace.bind(7, deviceRef = 0, trigger = "connect")
++        var rxCallbacks = 0
++        var regCallbacks = 0
++        transport.register(device, { raw -> rxCallbacks++; invoke(engine, "onMessage", raw) }, { regCallbacks++ }, { fail(it) })
++        val (receiver, registrationTask) = HostBus.p2p.registrations.single()
++        registrationTask.succeed()
++        invoke(engine, "hello") // REAL hello -> private send -> REAL WearProbe.send -> SDK-seam Task.
++        val (_, callback, task) = HostBus.p2p.sends.single()
++        assertTrue("original failure listener remains attached", task.failureAttached())
++        val attempts = field(engine, "sendAttempts").get(engine) as SendAttempts
++        assertTrue("fresh HELLO is current", attempts.accepts(1))
++        assertFalse(engine.state.ready)
++        assertTrue(engine.state.busy)
++        assertTrue(field(engine, "awaitingReady").getBoolean(engine))
++        when (phase) {
++            "ready" -> {
++                val packet = Message(READY.toByteArray(Charsets.US_ASCII))
++                receiver.onReceiveMessage(packet)
++                assertEquals(1, packet.typeReads)
++                assertEquals(1, packet.dataReads)
++                assertTrue(engine.state.ready)
++                assertFalse(engine.state.busy)
++                assertFalse(field(engine, "awaitingReady").getBoolean(engine))
++                assertFalse("REAL READY must retire the original attempt without changing generation", attempts.accepts(1))
++                assertEquals(7, field(engine, "generation").getInt(engine))
++            }
++            "retry" -> {
++                invoke(engine, "hello") // same original retry action; a NEW independent SDK Task.
++                assertEquals(2, HostBus.p2p.sends.size)
++                assertNotSame(task, HostBus.p2p.sends.last().third)
++                assertFalse(attempts.accepts(1))
++                assertTrue(attempts.accepts(2))
++            }
++            "cancel" -> engine.cancel()
++            "close" -> probe.javaClass.getMethod("close").invoke(probe)
++            "current" -> Unit
++            else -> error("unknown phase")
++        }
++        val before = business(engine.state)
++        val pendingBefore = field(engine, "awaitingReady").getBoolean(engine)
++        val callsBefore = HostBus.calls.toList()
++        val updatesBefore = updates.size
++        val failureError = CountingError()
++        var terminalSuccess = 0
++        var terminalFailure = 0
++        var sendResults = 0
++        // One terminal outcome per fresh Task; SendResult is NOT a Task completion.
++        when (mode) {
++            "success" -> { terminalSuccess++; task.succeed() }
++            "failure" -> { terminalFailure++; task.fail(failureError) }
++            "result" -> { sendResults++; callback.onSendResult(if (phase == "current") 207 else 206) }
++            else -> error("unknown mode")
++        }
++        assertTrue("Task was not made success+failure", terminalSuccess + terminalFailure <= 1)
++        if (phase != "current" || mode != "failure") {
++            assertEquals("late terminal event must not change readiness/status/business state", before,
++                business(engine.state).copy(diagnostic = before.diagnostic))
++            assertEquals("pending READY unchanged by late terminal event", pendingBefore, field(engine, "awaitingReady").getBoolean(engine))
++            assertEquals("no additional SDK calls from late terminal event", callsBefore, HostBus.calls)
++            assertEquals("only original describe() diagnostic update is allowed", updatesBefore + if (mode == "failure" && phase != "close") 1 else 0, updates.size)
++        } else {
++            assertFalse(engine.state.ready)
++            assertFalse(engine.state.busy)
++            assertFalse(field(engine, "awaitingReady").getBoolean(engine))
++            assertEquals("操作未完成", engine.state.status)
++        }
++        assertEquals(if (mode == "failure") 1 else 0, failureError.reads)
++        assertEquals(if (mode == "failure") 1 else 0, diagnostics.recorded.size)
++        assertEquals(if (phase == "ready") 1 else 0, rxCallbacks)
++        assertEquals(1, regCallbacks)
++        val outcome = Outcome(HostBus.calls.toList(), updates.toList(), business(engine.state),
++            field(engine, "awaitingReady").getBoolean(engine), rxCallbacks, regCallbacks,
++            diagnostics.recorded.size, failureError.reads, HostBus.p2p.sends.size, HostBus.p2p.registrations.size,
++            HostBus.p2p.releases.size, terminalSuccess, terminalFailure, sendResults)
++        return Run(outcome, events(diagnostics.p2pTrace), before)
++    }
++    private fun check(mode: String, phase: String) {
++        val baseline = run(mode, phase, true)
++        val observed = run(mode, phase, false)
++        assertEquals("frozen original SDK calls/order, business updates, ready/pending/callback counts: $phase/$mode",
++            baseline.outcome, observed.outcome)
++        val stage = when (mode) { "success" -> "SEND_TASK_OK"; "failure" -> "SEND_TASK_FAIL"; else -> "SEND_RESULT" }
++        val adapter = observed.events.single { it.getString("layer") == "adapter" && it.getString("stage") == stage }
++        val engine = observed.events.filter { it.getString("layer") == "engine" && it.getString("stage") == stage }
++        if (mode == "success") assertTrue("Task OK is not a protocol result", engine.isEmpty())
++        else {
++            assertEquals(1, engine.size)
++            assertEquals("same engine attempt", adapter.getLong("attemptId"), engine.single().getLong("attemptId"))
++            assertEquals("same generation", adapter.getInt("generation"), engine.single().getInt("generation"))
++            assertEquals("engine observes original attempt guard", phase != "current", engine.single().getBoolean("stale"))
++        }
++        assertEquals(1L, adapter.getLong("attemptId"))
++        if (phase == "ready") {
++            assertEquals(1, observed.events.count { it.getString("stage") == "READY_ACCEPT" })
++            assertTrue(observed.events.any { it.getString("layer") == "adapter" && it.getString("stage") == "RX_DECODE" })
++        }
++        println("R6_HOST phase=$phase mode=$mode adapterStale=${adapter.getBoolean("stale")} engineStale=${engine.singleOrNull()?.getBoolean("stale")} ready=${observed.outcome.state.ready} pending=${observed.outcome.pending} sends=${observed.outcome.sends} rx=${observed.outcome.rxCallbacks} reg=${observed.outcome.regCallbacks} errors=${observed.outcome.errors} taskOk=${observed.outcome.terminalSuccess} taskFail=${observed.outcome.terminalFailure} results=${observed.outcome.sendResults} baselineEqual=true")
++        assertEquals("$phase/$mode adapter must observe REAL original attempt retirement", phase != "current", adapter.getBoolean("stale"))
++    }
++    @Test fun afterReadyIndependentTaskSuccessIsStale() { check("success", "ready") }
++    @Test fun afterReadyIndependentTaskFailureMatchesEngineStale() { check("failure", "ready") }
++    @Test fun afterReadyIndependentSendResultMatchesEngineStale() { check("result", "ready") }
++    @Test fun beforeReadyCurrentAttemptRemainsNonStale() { for (mode in listOf("success", "failure", "result")) check(mode, "current") }
++    @Test fun retryCancelCloseKeepOriginalBusinessAndStaleCompatibility() {
++        for (phase in listOf("retry", "cancel", "close"))
++            for (mode in listOf("success", "failure", "result")) check(mode, phase)
++    }
++    companion object {
++        const val READY = "{\"protocol\":\"elcton.sync\",\"version\":1,\"sender\":\"watch\",\"type\":\"READY\",\"transferId\":\"\",\"maxBytes\":8192,\"sourceRevision\":0,\"datasetId\":\"\",\"digest\":\"\",\"localDirty\":false,\"hasData\":false}"
++    }
++}
+diff --git a/qa/p2p-trace-0210/r6/ci/added-cases.json b/qa/p2p-trace-0210/r6/ci/added-cases.json
+new file mode 100644
+index 0000000..ac40a33
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/ci/added-cases.json
+@@ -0,0 +1,21 @@
++[
++  ["com.hcbiu.elcton.P2pContextTest", "aNewConnectionMustNotInheritAnOldAttempt"],
++  ["com.hcbiu.elcton.P2pContextTest", "normalPhoneHelloIsOutgoingMetadataNotWatchSenderReject"],
++  ["com.hcbiu.elcton.P2pContextTest", "oldHelloTaskFailureIsStaleAfterSameGenerationRetryAndReady"],
++  ["com.hcbiu.elcton.P2pContextTest", "readyAndRxEventsRetainTheRelatedSendAttempt"],
++  ["com.hcbiu.elcton.P2pContextTest", "transferReferencesDistinguishIdsWithoutPrivateText"],
++  ["com.hcbiu.elcton.P2pTraceConcurrencyTest", "blockedWriterDoesNotHoldAppendOrReadLock"],
++  ["com.hcbiu.elcton.P2pTraceEngineTest", "originalHelloDeadlinesAndRetryStages"],
++  ["com.hcbiu.elcton.P2pTraceEngineTest", "installAndRegistrationTimeoutAreNotReadyTimeout"],
++  ["com.hcbiu.elcton.P2pTraceEngineTest", "validReadyAcceptedExactlyOnceAndLateResultsRemainVisible"],
++  ["com.hcbiu.elcton.P2pTraceEngineTest", "originalRejectsAndEarlyFailuresCancelCloseAndLateCallbacksHaveZeroDrift"],
++  ["com.hcbiu.elcton.P2pTraceEngineTest", "hostileDiagnosticClockHasZeroBusinessDrift"],
++  ["com.hcbiu.elcton.P2pTraceIngressTest", "diagnosticClassifierAgreesWithOriginalWithoutReturningPrivateText"],
++  ["com.hcbiu.elcton.P2pTraceRuntimeTest", "runtimeAddsP2pToExistingReadAndWriterWithoutChangingRevisionOrToolSchema"],
++  ["com.hcbiu.elcton.P2pTraceRuntimeTest", "adapterObservesNativeEntryAndSendTaskWithoutReplacingOriginalCallbacks"],
++  ["com.hcbiu.elcton.P2pTraceTest", "schemaClockSequenceAndIndependentGenerationReferences"],
++  ["com.hcbiu.elcton.P2pTraceTest", "boundedTailTrueDroppedCursorAndPrivacy"],
++  ["com.hcbiu.elcton.P2pTraceTest", "hostileFieldAndClocksCannotEscapeOrInventEvent"],
++  ["com.hcbiu.elcton.P2pTraceTest", "writerFailureAndStorageFullAreDiagnosticOnlyAndNoRetriesAfterFull"],
++  ["com.hcbiu.elcton.P2pTraceTest", "engineKeepsFiveArgConstructorAndRequiresTraceAttachment"]
++]
+diff --git a/qa/p2p-trace-0210/r6/ci/pipeline.py b/qa/p2p-trace-0210/r6/ci/pipeline.py
+new file mode 100644
+index 0000000..ff0cca8
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/ci/pipeline.py
+@@ -0,0 +1,182 @@
++#!/usr/bin/env python3
++"""R6 explicit-action CLI. Default/help/self-test NEVER dispatch. No push/build/ADB."""
++import argparse
++import datetime
++import json
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import time
++from urllib.parse import quote
++import zipfile
++from r6_common import (ROOT, HERE, REPO, BRANCH, api, pages, require, sha40, run_id,
++    read_json, save, new_out, digest, inventory, exact_readback, select_asset, zip_members, archive_readback)
++sys.dont_write_bytecode = True
++
++
++def branch_head(sha):
++    sha40(sha)
++    branch = api('/branches/' + quote(BRANCH, safe=''))
++    require(branch['commit']['sha'] == sha, 'Remote diag branch is not exact reviewed workflow head')
++    return branch
++
++
++def reviewed(args):
++    closure = read_json(args.review/'dual-closure.json')
++    require(closure['passed'] is True and closure['axes'], 'Actual dual review not passed')
++    for axis in closure['axes']:
++        require(digest(args.review/(axis['axis']+'-raw.txt')) == axis['raw_sha256'], 'Review raw fingerprint mismatch')
++    manifest = read_json(args.review/'reviewed-manifest.json')
++    require(manifest, 'Empty reviewed source manifest')
++    for path, expected in manifest.items():
++        raw = subprocess.check_output(['git','show',args.sha+':'+path],cwd=ROOT,timeout=30)
++        import hashlib
++        require(hashlib.sha256(raw).hexdigest()==expected, 'Committed reviewed input differs: '+path)
++    return {'closure':closure,'manifest':manifest}
++
++
++def dispatch(args):
++    """Only called through the literal dispatch-build or dispatch-ui subcommand."""
++    workflow = 'build.yml' if args.command=='dispatch-build' else 'ui-smoke.yml'
++    branch = branch_head(args.sha)
++    inputs = {}
++    proof = reviewed(args) if workflow=='build.yml' else None
++    if workflow=='ui-smoke.yml':
++        sha40(args.build_sha); run_id(args.build_run)
++        build = read_json(args.build_receipt)
++        require(build['passed'] is True and build['source_sha']==args.build_sha and build['build_run']==args.build_run, 'Actual binary/Gradle build receipt differs')
++        bound = exact_readback(args.build_run,args.build_sha,'build.yml',True)
++        require(bound['run-api']['conclusion']=='success', 'Exact build run is RED')
++        if args.suite=='full':
++            require(args.previous_registration is not None, 'Register diagnostics BEFORE second/full dispatch')
++            previous = read_json(args.previous_registration)
++            require(previous['inputs']=={'build_run':args.build_run,'build_sha':args.build_sha,
++                    'api_level':'33','navigation_mode':'three-button','qa_suite':'diagnostics'}, 'Previous registered diagnostics inputs differ')
++            require(previous['workflow_sha']==args.sha and previous['run']['id'], 'Previous registered workflow head differs')
++        inputs={'build_run':args.build_run,'build_sha':args.build_sha,'api_level':'33',
++                'navigation_mode':'three-button','qa_suite':args.suite}
++    before = pages('/actions/workflows/'+workflow+'/runs?head_sha='+args.sha+'&event=workflow_dispatch', 'workflow_runs')
++    ids={r['id'] for r in before['workflow_runs']}
++    out=new_out(args.out)
++    save(out,'before-runs.json',before)
++    save(out,'dispatch-intent.json',{'workflow':workflow,'workflow_sha':args.sha,'branch':BRANCH,'inputs':inputs,'review':proof})
++    # Explicit POST; gh owns authentication. Credentials and redirect URLs never saved.
++    payload={'ref':BRANCH,'inputs':inputs}
++    api('/actions/workflows/'+workflow+'/dispatches',payload)
++    save(out,'dispatch-accepted.json',{'posted':True,'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),
++                                    'scope':'POST accepted, not run registered or success'})
++    end=time.monotonic()+120
++    while True:
++        after=pages('/actions/workflows/'+workflow+'/runs?head_sha='+args.sha+'&event=workflow_dispatch','workflow_runs')
++        new=[r for r in after['workflow_runs'] if r['id'] not in ids]
++        if len(new)>1:
++            save(out,'ambiguous-runs.json',after)
++            raise AssertionError('Ambiguous new runs; preserve intent and DO NOT repeat dispatch or choose latest')
++        if new:
++            r=api('/actions/runs/'+str(new[0]['id']))
++            require(r['head_sha']==args.sha and r['head_branch']==BRANCH and r['event']=='workflow_dispatch'
++                    and r['path']=='.github/workflows/'+workflow, 'Exact registered workflow mismatch')
++            branch_head(args.sha)
++            registration={'run':r,'inputs':inputs,'workflow_sha':args.sha,'workflow':workflow,
++                          'before_ids':sorted(ids),'scope':'Distinct exact run registration, NOT execution PASS'}
++            save(out,'registered.json',registration)
++            print(json.dumps({'registered_run':r['id'],'workflow_sha':args.sha,'inputs':inputs,'receipt':str(out/'registered.json')}))
++            return
++        if time.monotonic()>end:
++            save(out,'registration-timeout.json',after)
++            raise AssertionError('Registration timeout; read back this saved intent, NEVER re-dispatch blindly')
++        time.sleep(3)
++
++
++def readback(args, wait=False):
++    workflow='build.yml' if args.kind=='build' else 'ui-smoke.yml'
++    out=new_out(args.out); start=time.monotonic(); polls=[]
++    while True:
++        row=exact_readback(args.run,args.sha,workflow)
++        polls.append({'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'status':row['run-api']['status'],
++                      'conclusion':row['run-api']['conclusion'],'run_attempt':row['run-api']['run_attempt']})
++        if not wait or row['run-api']['status']=='completed' or time.monotonic()-start>=args.seconds: break
++        time.sleep(10)
++    for k,v in row.items(): save(out,k+'.json',v)
++    save(out,'polls.json',polls)
++    print(json.dumps({'run':args.run,'head':args.sha,'attempt':row['run-api']['run_attempt'],
++                      'status':row['run-api']['status'],'conclusion':row['run-api']['conclusion'],
++                      'artifacts':row['artifacts']['total_count'],'out':str(out)}))
++    if wait: return 0 if row['run-api']['status']=='completed' and row['run-api']['conclusion']=='success' else 1
++    return 0
++
++
++def fetch(args):
++    workflow='build.yml' if args.kind=='build' else 'ui-smoke.yml'
++    sha40(args.source); row=exact_readback(args.run,args.sha,workflow,True)
++    if args.kind=='build':
++        require(args.source==args.sha and row['run-api']['conclusion']=='success','Build exact source/conclusion mismatch')
++    name=('android-probe-' if args.kind=='build' else 'android-ui-')+args.sha
++    asset=select_asset(row['artifacts']['artifacts'],row['attempt-api'],name,args.run,args.sha)
++    # Check extraction budget BEFORE downloading; ZIP expansion cannot be predicted by compressed size alone.
++    out=new_out(args.out)
++    for k,v in row.items(): save(out,k+'.json',v)
++    normalized={'databaseId':int(args.run),'headSha':args.sha,'headBranch':BRANCH,
++                'status':row['run-api']['status'],'conclusion':row['run-api']['conclusion'],
++                'event':row['run-api']['event'],'url':row['run-api']['html_url']}
++    save(out,'run-exact.json' if args.kind=='build' else 'run.json',normalized)
++    save(out,'exact-artifact.json',{'run_id':args.run,'run_attempt':row['run-api']['run_attempt'],'artifact':asset})
++    require(shutil.disk_usage(out).free > asset['size_in_bytes']+128*1024*1024, 'Not enough free space for ZIP; use remote evidence host')
++    archive=out/'artifact-original.zip'
++    with archive.open('xb') as stream:
++        result=subprocess.run(['gh','api','repos/'+REPO+'/actions/artifacts/'+str(asset['id'])+'/zip'],
++                              stdout=stream,stderr=subprocess.PIPE,timeout=600,cwd=ROOT)
++    require(result.returncode==0,'gh artifact download failed; token/redirect not printed; exit='+str(result.returncode))
++    require(archive.stat().st_size==asset['size_in_bytes'],'Remote artifact byte size mismatch')
++    if asset.get('digest'): require(asset['digest']=='sha256:'+digest(archive),'Remote artifact SHA mismatch')
++    with zipfile.ZipFile(archive) as z:
++        members=zip_members(z)
++        expanded=sum(v.file_size for v in members.values() if not v.is_dir())
++        require(shutil.disk_usage(out).free > expanded+128*1024*1024,'Not enough free space for full artifact; ZIP retained, DO NOT copy old tree')
++        for name,item in members.items():
++            if item.is_dir(): continue
++            target=out/'artifact'/name; target.parent.mkdir(parents=True,exist_ok=True)
++            with z.open(item) as source, target.open('xb') as stream:
++                shutil.copyfileobj(source,stream,length=1024*1024)
++    checked=archive_readback(archive,out/'artifact')
++    save(out,'zip-readback.json',checked)
++    if args.kind=='build':
++        pins=list((out/'artifact').rglob('source-sha.txt'))
++        require(len(pins)==1 and pins[0].read_bytes()==(args.source+'\n').encode(),'Exact literal build source-sha.txt mismatch')
++        require(len(list((out/'artifact').rglob('elcton-phone-probe.apk')))==1 and
++                len(list((out/'artifact').rglob('elcton-ui-tests.apk')))==1,'Missing/duplicate signed main/test APK')
++    fresh=api('/actions/runs/'+args.run)
++    require(fresh['run_attempt']==row['run-api']['run_attempt'] and fresh['status']=='completed', 'Run rerun during fetch; exact attempt changed')
++    save(out,'post-fetch-run-api.json',fresh)
++    rows=inventory(out)
++    save(out,'inventory.json',{'fetched':True,'run':args.run,'source_sha':args.source,'workflow_sha':args.sha,
++         'run_attempt':row['run-api']['run_attempt'],'artifact_id':asset['id'],'conclusion':row['run-api']['conclusion'],'inventory':rows})
++    print(json.dumps({'fetched':True,'run':args.run,'attempt':row['run-api']['run_attempt'],'artifact_id':asset['id'],
++                      'zip_bytes':checked['archive_bytes'],'zip_sha256':checked['archive_sha256'],'files':len(rows),'out':str(out)}))
++
++
++def main():
++    if sys.argv[1:]==['--self-test']:
++        import self_test
++        return self_test.main()
++    p=argparse.ArgumentParser(description=__doc__)
++    s=p.add_subparsers(dest='command',required=True)
++    build=s.add_parser('dispatch-build'); build.add_argument('--review',type=Path,required=True)
++    ui=s.add_parser('dispatch-ui'); ui.add_argument('--suite',choices=('diagnostics','full'),required=True)
++    ui.add_argument('--build-run',required=True); ui.add_argument('--build-sha',required=True)
++    ui.add_argument('--build-receipt',type=Path,required=True); ui.add_argument('--previous-registration',type=Path)
++    for x in (build,ui): x.add_argument('--sha',required=True); x.add_argument('--out',type=Path,required=True)
++    for cmd in ('readback','wait','fetch'):
++        x=s.add_parser(cmd); x.add_argument('--run',required=True); x.add_argument('--sha',required=True)
++        x.add_argument('--kind',choices=('build','android'),required=True); x.add_argument('--out',type=Path,required=True)
++        if cmd=='wait': x.add_argument('--seconds',type=int,default=1800)
++        if cmd=='fetch': x.add_argument('--source',required=True)
++    a=p.parse_args(); sha40(a.sha)
++    if a.command.startswith('dispatch-'): dispatch(a); return 0
++    run_id(a.run)
++    if a.command=='fetch': fetch(a); return 0
++    return readback(a,a.command=='wait')
++
++if __name__=='__main__':
++    raise SystemExit(main())
+diff --git a/qa/p2p-trace-0210/r6/ci/r6_common.py b/qa/p2p-trace-0210/r6/ci/r6_common.py
+new file mode 100644
+index 0000000..e769c70
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/ci/r6_common.py
+@@ -0,0 +1,173 @@
++#!/usr/bin/env python3
++"""R6 exact identity/readback primitives. No import-time I/O or dispatch."""
++import hashlib
++import json
++from pathlib import Path, PurePosixPath
++from typing import Any
++import re
++import stat
++import subprocess
++import zipfile
++
++HERE = Path(__file__).resolve().parent
++ROOT = HERE.parents[3]
++OLD = Path('/data/data/com.termux/files/home/elcton-phone-release-029-20261114')
++FOURTH = Path('qa/release-029/evidence/resume-1720/resume-fourth')
++REPO = 'lantianhcgp/elcton-phone'
++BRANCH = 'diag/p2p-trace-0.2.10-20261115'
++CERT = 'fc08a0b474a8ffca5887bd5c88ac15e865a63a64eca81c10f344496c46d9ad94'
++PINS = {'verifiers/verify_cloud.py': '1093d106014452ced8eb484034013b1cf9e480c21b2151965aff7649918f64e6',
++        'verify_exact_build.py': 'aae2a5419a5e86244618553527f89d50ac112d4a312f4af98b9367f21accfaf1',
++        'verify_cloud_snapshot_map.py': '3cd44b787e7804c322a87ced1c6eae67a580680bc66c137290e4307d37641ad3'}
++
++def require(condition, label):
++    if not condition: raise AssertionError(label)
++
++def sha40(value):
++    require(isinstance(value, str) and re.fullmatch('[0-9a-f]{40}', value), 'Malformed literal source SHA')
++    return value
++
++def run_id(value):
++    require(isinstance(value, str) and re.fullmatch('[1-9][0-9]*', value), 'Malformed literal run ID')
++    return value
++
++def digest(path):
++    with Path(path).open('rb') as stream: return hashlib.file_digest(stream, 'sha256').hexdigest()
++
++def read_json(path):
++    def unique(pairs):
++        out = {}
++        for k, v in pairs:
++            require(k not in out, 'Duplicate JSON key: ' + k); out[k] = v
++        return out
++    return json.loads(Path(path).read_bytes(), object_pairs_hook=unique,
++                      parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x)))
++
++def save(directory, name, data):
++    with (Path(directory) / name).open('x') as stream:
++        json.dump(data, stream, indent=2, ensure_ascii=False, allow_nan=False); stream.write('\n')
++
++def new_out(path):
++    require('..' not in Path(path).parts, 'Output parent traversal refused')
++    path = Path(path).absolute()
++    require(path.is_relative_to(HERE) and path != HERE, 'New output must be below exclusive R6 ci directory')
++    require(not any(p.is_symlink() for p in (path, *path.parents)), 'Symlink output refused')
++    path.mkdir(parents=True, exist_ok=False)
++    return path
++
++def original(name):
++    path = OLD / FOURTH / name
++    require(name in PINS and digest(path) == PINS[name], 'Original criterion fingerprint changed: ' + str(path))
++    return path.read_text()
++
++def inventory(directory):
++    directory = Path(directory)
++    require(directory.is_dir() and not directory.is_symlink(), 'Input root must be a real directory')
++    rows = {}
++    for p in sorted(directory.rglob('*')):
++        require(not p.is_symlink(), 'Symlink input refused: ' + str(p))
++        if p.is_file():
++            require(stat.S_ISREG(p.stat().st_mode), 'Nonregular input refused')
++            rows[p.relative_to(directory).as_posix()] = {'bytes': p.stat().st_size, 'sha256': digest(p)}
++    return rows
++
++def check_cases(actual, original_cases, registered, label='Incomplete or duplicate Gradle tests'):
++    a, o, r = [list(map(tuple, group)) for group in (actual, original_cases, registered)]
++    require(all(len(x) == 2 and all(isinstance(k, str) and k for k in x) for group in (a, o, r) for x in group), 'Malformed testcase label')
++    require(len(o) == len(set(o)) and len(r) == len(set(r)) and len(a) == len(set(a)), 'Incomplete or duplicate Gradle tests')
++    require(set(o) <= set(r), 'Original testcase set/labels missing from registered set')
++    require(set(a) == set(r) and len(a) == len(r), 'Incomplete or duplicate Gradle tests')
++
++def zip_members(z):
++    require(z.testzip() is None, 'Original artifact ZIP CRC failure')
++    rows = {}
++    for item in z.infolist():
++        name = PurePosixPath(item.filename)
++        require(not name.is_absolute() and '..' not in name.parts and '\\' not in item.filename and name.parts, 'Unsafe ZIP member path')
++        require(not stat.S_ISLNK(item.external_attr >> 16), 'ZIP symlink refused')
++        require(item.filename not in rows, 'Duplicate ZIP member')
++        rows[item.filename] = item
++    return rows
++
++def archive_readback(archive, directory):
++    """Stream all ZIP bytes and compare every extracted file; no second copy."""
++    rows = {}
++    with zipfile.ZipFile(archive) as z:
++        for name, item in zip_members(z).items():
++            if item.is_dir(): continue
++            h = hashlib.sha256(); size = 0
++            with z.open(item) as stream:
++                while block := stream.read(1024 * 1024): h.update(block); size += len(block)
++            rows[name] = {'bytes': size, 'sha256': h.hexdigest()}
++    require(rows == inventory(directory), 'Complete ZIP/extracted size/SHA inventory differs')
++    return {'archive_bytes': Path(archive).stat().st_size, 'archive_sha256': digest(archive),
++            'zip_crc': True, 'files': rows}
++
++def api(path, payload=None) -> Any:
++    cmd = ['gh', 'api', 'repos/' + REPO + path]
++    if payload is not None: cmd += ['--method', 'POST', '--input', '-']
++    result = subprocess.run(cmd, input=None if payload is None else json.dumps(payload).encode(),
++                            capture_output=True, timeout=90, cwd=ROOT)
++    require(result.returncode == 0, 'gh API failed (credential not printed); exit=' + str(result.returncode))
++    return json.loads(result.stdout) if result.stdout.strip() else None
++
++def pages(path, key):
++    rows = []; page = 1; total = None
++    while True:
++        result = api(path + ('&' if '?' in path else '?') + 'per_page=100&page=' + str(page))
++        require(total is None or total == result['total_count'], 'API total changed during pagination; retry readback')
++        total = result['total_count']; rows += result[key]
++        require(len(rows) <= total, 'API enumerated count exceeds total')
++        if len(rows) == total: break
++        require(result[key], 'API pagination incomplete'); page += 1
++    require(len({x['id'] for x in rows}) == total, 'Duplicate/paginated API rows')
++    return {'total_count': total, key: rows}
++
++def exact_readback(run, head, workflow, complete=False):
++    run_id(run); sha40(head)
++    current = api('/actions/runs/' + run)
++    require(str(current['id']) == run and current['head_sha'] == head and current['head_branch'] == BRANCH, 'Exact run/head/diag branch mismatch')
++    require(current['path'] == '.github/workflows/' + workflow and current['event'] == 'workflow_dispatch', 'Workflow/event mismatch')
++    attempt = api('/actions/runs/' + run + '/attempts/' + str(current['run_attempt']))
++    for k in ('id', 'head_sha', 'head_branch', 'run_attempt', 'status', 'conclusion'):
++        require(attempt[k] == current[k], 'Exact attempt mismatch: ' + k)
++    if complete: require(current['status'] == 'completed', 'Run is not complete')
++    assets = pages('/actions/runs/' + run + '/artifacts', 'artifacts')
++    return {'run-api': current, 'attempt-api': attempt, 'artifacts': assets}
++
++def select_asset(assets, attempt, name, run, head):
++    matches = [a for a in assets if a['name'] == name and not a['expired'] and a['created_at'] >= attempt['run_started_at']]
++    require(len(matches) == 1, 'Exact-attempt artifact absent or ambiguous: ' + name)
++    asset = matches[0]
++    require(asset['workflow_run']['id'] == int(run) and asset['workflow_run']['head_sha'] == head, 'Artifact run/workflow-head mismatch')
++    return asset
++
++def offline_binding(incoming, run, source, workflow_head, kind):
++    run_id(run); sha40(source); sha40(workflow_head)
++    incoming = Path(incoming)
++    before = inventory(incoming); declared = read_json(incoming / 'inventory.json')
++    require({k:v for k,v in before.items() if k != 'inventory.json'} == declared['inventory'], 'ALL fetched files differ from declared size/SHA')
++    require(str(declared['run']) == run and declared['source_sha'] == source and declared['workflow_sha'] == workflow_head, 'Fetch identity mismatch')
++    current, attempt = read_json(incoming/'run-api.json'), read_json(incoming/'attempt-api.json')
++    require(str(current['id']) == run and current['head_sha'] == workflow_head and current['head_branch'] == BRANCH, 'Exact saved run/head/branch mismatch')
++    require(current['path'] == '.github/workflows/' + ('build.yml' if kind == 'build' else 'ui-smoke.yml') and current['event'] == 'workflow_dispatch', 'Saved workflow/event mismatch')
++    for key in ('id','head_sha','head_branch','run_attempt','status','conclusion'):
++        require(current[key] == attempt[key], 'Saved exact attempt mismatch: ' + key)
++    require(current['status'] == 'completed' and current['conclusion'] == 'success', 'Saved exact run not completed/success')
++    assets = read_json(incoming/'artifacts.json')
++    require(len(assets['artifacts']) == assets['total_count'], 'Incomplete saved artifact list')
++    selected = read_json(incoming/'exact-artifact.json')
++    expected_name = ('android-probe-' if kind == 'build' else 'android-ui-') + workflow_head
++    asset = select_asset(assets['artifacts'], attempt, expected_name, run, workflow_head)
++    require(asset == selected['artifact'] and selected['run_attempt'] == current['run_attempt'], 'Selected asset identity mismatch')
++    archive = archive_readback(incoming/'artifact-original.zip', incoming/'artifact')
++    require(archive['archive_bytes'] == asset['size_in_bytes'], 'Remote artifact size differs')
++    if asset.get('digest'): require(asset['digest'] == 'sha256:' + archive['archive_sha256'], 'Remote artifact SHA digest differs')
++    return before, archive
++
++if __name__ == '__main__':
++    import sys
++    if sys.argv[1:] == ['--self-test']:
++        import self_test
++        raise SystemExit(self_test.main())
++    raise SystemExit('No actions at this entrypoint; use --self-test')
+diff --git a/qa/p2p-trace-0210/r6/ci/self_test.py b/qa/p2p-trace-0210/r6/ci/self_test.py
+new file mode 100644
+index 0000000..a206ae6
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/ci/self_test.py
+@@ -0,0 +1,88 @@
++#!/usr/bin/env python3
++"""Pure helper tests only: in-memory fixtures, no gh/ADB/build/network/file writes."""
++import importlib.util
++import io
++import json
++from pathlib import Path
++import unittest
++import zipfile
++
++HERE = Path(__file__).resolve().parent
++
++class HelperTests(unittest.TestCase):
++    def test_helpers_exist(self):
++        self.assertTrue((HERE / 'r6_common.py').is_file(), 'R6 explicit identity helper not implemented')
++
++    def setUp(self):
++        if not (HERE / 'r6_common.py').is_file():
++            return
++        import r6_common
++        self.c = r6_common
++
++    def test_literal_tokens_not_normalized(self):
++        if not hasattr(self, 'c'): return
++        self.c.sha40('a' * 40)
++        self.c.run_id('123')
++        for value in ('A' * 40, ' ' + 'a' * 40, 'a' * 39):
++            with self.assertRaises(AssertionError): self.c.sha40(value)
++        for value in ('0123', '123 ', '0'):
++            with self.assertRaises(AssertionError): self.c.run_id(value)
++
++    def test_all_case_labels_preserved(self):
++        if not hasattr(self, 'c'): return
++        original = [['C', 'original label'], ['C', 'second']]
++        registered = original + [['N', 'new label']]
++        self.c.check_cases(registered, original, registered)
++        for actual in (registered[:-1], registered + registered[:1], [['C', 'renamed']] + registered[1:]):
++            with self.assertRaises(AssertionError): self.c.check_cases(actual, original, registered)
++        with self.assertRaises(AssertionError): self.c.check_cases(registered[1:], original, registered[1:])
++
++    def test_crc_and_unsafe_member_checks(self):
++        if not hasattr(self, 'c'): return
++        safe = io.BytesIO()
++        with zipfile.ZipFile(safe, 'w') as z: z.writestr('dist/source-sha.txt', 'a' * 40 + '\n')
++        safe.seek(0)
++        with zipfile.ZipFile(safe) as z: self.c.zip_members(z)
++        for name in ('../escape', '/absolute', 'a/../escape'):
++            bad = io.BytesIO()
++            with zipfile.ZipFile(bad, 'w') as z: z.writestr(name, b'test fixture')
++            bad.seek(0)
++            with zipfile.ZipFile(bad) as z:
++                with self.assertRaises(AssertionError): self.c.zip_members(z)
++
++    def test_original_complete_json_comparator(self):
++        if not hasattr(self, 'c'): return
++        import verify_r6
++        m, proof = verify_r6.cloud_module()
++        m.compare({'rgb': (1, 2, 3), 'passed': True}, {'rgb': [1, 2, 3], 'passed': True}, 'fixture')
++        for bad in ({'rgb': [1, 2, 4], 'passed': True}, {'rgb': [1, 2, 3]}, {'rgb': [1, 2, 3], 'passed': False}):
++            with self.assertRaises(AssertionError): m.compare({'rgb': (1, 2, 3), 'passed': True}, bad, 'fixture')
++        self.assertTrue(proof['all_non_version_ast_unchanged'])
++        self.assertTrue(proof['labels_unchanged'])
++
++    def test_original_binary_adaptation_is_narrow(self):
++        if not hasattr(self, 'c'): return
++        import verify_r6
++        source, proof = verify_r6.binary_source()
++        compile(source, 'r6-binary-adaptation', 'exec')
++        self.assertEqual(proof['original_case_count'], 153)
++        self.assertIn("(package, '12', '0.2.10')", source)
++        self.assertIn("(package, '', '')", source)
++        self.assertIn('Incomplete or duplicate Gradle tests', source)
++
++    def test_attempt_ambiguity_is_rejected(self):
++        if not hasattr(self, 'c'): return
++        attempt = {'run_started_at': '2026-11-15T01:00:00Z', 'run_attempt': 2}
++        asset = {'id': 1, 'name': 'android-ui-' + 'a' * 40, 'expired': False,
++                 'created_at': '2026-11-15T01:00:01Z', 'workflow_run': {'id': 123, 'head_sha': 'a' * 40}}
++        self.assertEqual(self.c.select_asset([asset], attempt, asset['name'], '123', 'a' * 40)['id'], 1)
++        with self.assertRaises(AssertionError): self.c.select_asset([asset, dict(asset, id=2)], attempt, asset['name'], '123', 'a' * 40)
++        with self.assertRaises(AssertionError): self.c.select_asset([dict(asset, created_at='2026-11-14T00:00:00Z')], attempt, asset['name'], '123', 'a' * 40)
++
++
++def main():
++    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(HelperTests))
++    return 0 if result.wasSuccessful() else 1
++
++if __name__ == '__main__':
++    raise SystemExit(main())
+diff --git a/qa/p2p-trace-0210/r6/ci/verify_r6.py b/qa/p2p-trace-0210/r6/ci/verify_r6.py
+new file mode 100644
+index 0000000..152b34f
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/ci/verify_r6.py
+@@ -0,0 +1,234 @@
++#!/usr/bin/env python3
++"""R6 binary and zero-copy full original cloud criteria; never dispatch/build/ADB."""
++import argparse
++import ast
++import hashlib
++import json
++import marshal
++from pathlib import Path
++import sys
++import types
++import xml.etree.ElementTree as ET
++from r6_common import (ROOT, OLD, HERE, FOURTH, original, require, read_json, save,
++                       new_out, digest, inventory, check_cases, offline_binding)
++sys.dont_write_bytecode = True
++
++
++def literal_only(before, after, label):
++    """Prove ALL AST including assertion labels unchanged except 11/0.2.9 literals."""
++    left, right = ast.parse(before), ast.parse(after)
++    changes = []
++    class Version(ast.NodeTransformer):
++        def visit_Constant(self, node):
++            if type(node.value) is int and node.value == 11:
++                changes.append({'line': node.lineno, 'before': 11, 'after': 12}); node.value = 12
++            elif node.value == '0.2.9':
++                changes.append({'line': node.lineno, 'before': '0.2.9', 'after': '0.2.10'}); node.value = '0.2.10'
++            return node
++    transformed = Version().visit(left)
++    require(ast.dump(transformed, include_attributes=False) == ast.dump(right, include_attributes=False), label + ': change outside version literals')
++    return {'all_non_version_ast_unchanged': True, 'labels_unchanged': True, 'version_literals': changes}
++
++
++def cloud_module():
++    path = OLD / FOURTH / 'verifiers/verify_cloud.py'
++    before = original('verifiers/verify_cloud.py')
++    token = "(d.PACKAGE,'0.2.9',11)"
++    require(before.count(token) == 1, 'Original background version span missing/ambiguous')
++    after = before.replace(token, "(d.PACKAGE,'0.2.10',12)", 1)
++    proof = literal_only(before, after, 'Original full cloud verifier')
++    proof.update(original_path=str(path), original_sha256=digest(path),
++                 effective_sha256=hashlib.sha256(after.encode()).hexdigest())
++    m = types.ModuleType('r6_original_cloud'); m.__file__ = str(path)
++    exec(compile(after, str(path), 'exec'), m.__dict__)
++    # Path/metadata relocation only; criteria functions are unmodified current QA.
++    m.__dict__['ROOT'] = ROOT
++    sys.path.insert(0, str(ROOT))
++    methods = ('clients','diagnostics','background','full','tour','check','write')
++    proof['method_code_sha256'] = {name: hashlib.sha256(marshal.dumps(getattr(m.Gate, name).__code__)).hexdigest() for name in methods}
++    return m, proof
++
++
++def binary_source():
++    path = OLD / FOURTH / 'verify_exact_build.py'
++    before = original('verify_exact_build.py')
++    old_version = "(package, '11', '0.2.9')"
++    old_count = "assert len(cases) == 153 and len({tuple(x) for x in cases}) == 153, 'Incomplete or duplicate Gradle tests'"
++    require(before.count(old_version) == before.count(old_count) == 1, 'Original binary adaptation span ambiguous')
++    after = before.replace(old_version, "(package, '12', '0.2.10')", 1)
++    # The original fixed 153 guard becomes a STRICT registered set equality,
++    # with 153 original actual XML labels retained. Not >=153 or substring matching.
++    after = after.replace(old_count, "check_cases(cases, ORIGINAL_CASES, REGISTERED_CASES, 'Incomplete or duplicate Gradle tests')", 1)
++    after = after.replace("'version': '0.2.9/code11'", "'version': '0.2.10/code12'", 1)
++    # Reversibility is stronger than selectively inspecting assertions.
++    inverse = after.replace("(package, '12', '0.2.10')", old_version, 1).replace(
++        "check_cases(cases, ORIGINAL_CASES, REGISTERED_CASES, 'Incomplete or duplicate Gradle tests')", old_count, 1).replace(
++        "'version': '0.2.10/code12'", "'version': '0.2.9/code11'", 1)
++    require(inverse == before, 'Binary helper adaptation not exact reversible')
++    return after, {'original_path': str(path), 'original_sha256': digest(path),
++                   'effective_sha256': hashlib.sha256(after.encode()).hexdigest(),
++                   'original_case_count': 153, 'original_labels_unchanged': True,
++                   'all_other_assertions_byte_identical': True,
++                   'adaptations': ['main version tuple 11/0.2.9 -> 12/0.2.10',
++                                   'strict registered complete actual testcase set, includes original 153 exact labels',
++                                   'printed version metadata only']}
++
++
++def register_cases(args):
++    """Offline source/manifest registration; no Gradle or Kotlin compilation."""
++    baseline = OLD / FOURTH / 'r11/exact-cloud-pipeline/build-verification/receipt.json'
++    old = read_json(baseline)['gradle']['test_cases']
++    require(len(old) == len({tuple(x) for x in old}) == 153, 'Original real Gradle 153 labels lost')
++    added = read_json(args.added_cases)
++    require(isinstance(added, list) and added == read_json(HERE/'added-cases.json') and len(added)==19,
++            'Require all 19 registered R6 exact labels; no inferred post-build inventory')
++    import re
++    sources = {}
++    observed = []
++    for classname in sorted({row[0] for row in added}):
++        path = 'app/src/test/java/' + classname.replace('.', '/') + '.kt'
++        text = (ROOT/path).read_text()
++        found = re.findall(r'@Test(?:\([^)]*\))?\s+fun\s+(?:`([^`]+)`|([A-Za-z_][A-Za-z_0-9]*))\s*\(', text)
++        observed += [[classname, a or b] for a,b in found]
++        sources[path] = digest(ROOT/path)
++    require({tuple(x) for x in observed} == {tuple(x) for x in added} and len(observed)==19, 'Current source labels differ from registered 19')
++    fixture = 'qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt'
++    sources[fixture] = digest(ROOT/fixture)
++    require(sources[fixture]=='af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9', 'Exact class-only baseline fixture changed')
++    registered = old + added
++    check_cases(registered, old, registered)
++    out = new_out(args.out)
++    save(out, 'testcases.json', {'source_sha': args.source, 'original_receipt': str(baseline),
++         'original_receipt_sha256': digest(baseline), 'original_cases': old, 'added_cases': added,
++         'test_cases': registered, 'tests': len(registered), 'source_sha256': sources,
++         'scope': 'Required future actual Gradle XML set, NOT test execution'})
++    print(json.dumps({'registered': len(registered), 'original': 153, 'manifest': str(out/'testcases.json')}))
++
++
++def verify_build(args):
++    manifest = read_json(args.case_manifest)
++    require(manifest['source_sha'] == args.source, 'Case manifest source not final build SHA')
++    baseline = OLD / FOURTH / 'r11/exact-cloud-pipeline/build-verification/receipt.json'
++    require(digest(baseline) == manifest['original_receipt_sha256'], 'Original actual case receipt changed')
++    old = read_json(baseline)['gradle']['test_cases']
++    require(manifest['original_cases'] == old and len(old) == 153, 'Original 153 labels changed')
++    require(manifest['test_cases'] == old + manifest['added_cases'], 'Registered case list changed')
++    require(manifest['added_cases']==read_json(HERE/'added-cases.json') and manifest['tests']==172, 'Exact registered R6 172 cases required')
++    import subprocess
++    for path, expected in manifest['source_sha256'].items():
++        raw = subprocess.check_output(['git','show',args.source+':'+path],cwd=ROOT,timeout=30)
++        require(hashlib.sha256(raw).hexdigest()==expected, 'Final committed testcase/fixture differs: '+path)
++    before, archive = offline_binding(args.incoming, args.run, args.source, args.source, 'build')
++    source, proof = binary_source()
++    require('..' not in Path(args.out).parts, 'Build output traversal refused')
++    out = Path(args.out).absolute()
++    require(not any(p.is_symlink() for p in (out, *out.parents)), 'Build output symlink refused')
++    require(out.is_relative_to(HERE) and not out.exists(), 'New build output must be below R6 ci')
++    require(not out.is_relative_to(args.incoming.absolute()), 'Build output overlaps input')
++    namespace = {'__name__': 'r6_original_binary', '__file__': str(OLD/FOURTH/'verify_exact_build.py'),
++                 'check_cases': check_cases, 'ORIGINAL_CASES': old, 'REGISTERED_CASES': manifest['test_cases']}
++    argv = sys.argv
++    sys.argv = [namespace['__file__'], '--incoming', str(args.incoming), '--sha', args.source,
++                '--run', args.run, '--out', str(out)]
++    try: exec(compile(source, namespace['__file__'], 'exec'), namespace)
++    finally: sys.argv = argv
++    require(inventory(args.incoming) == before, 'Complete build input changed during verification')
++    save(out, 'original-code-proof.json', proof)
++    save(out, 'complete-input-readback.json', {'before': before, 'after': before, 'archive': archive})
++    save(out, 'case-manifest-readback.json', manifest)
++
++
++def verify_cloud(args):
++    m, proof = cloud_module()
++    before, archive = offline_binding(args.incoming, args.run, args.source, args.workflow_sha, 'android')
++    criteria = {}
++    for name in m.CRITERIA:
++        old = OLD/'qa'/(name+'.py'); current = ROOT/'qa'/(name+'.py')
++        if name == 'diag_emulator_smoke':
++            criteria[name] = literal_only(old.read_text(), current.read_text(), 'Current diag_emulator_smoke')
++        else:
++            require(old.read_bytes() == current.read_bytes(), 'Frozen current criterion changed: ' + str(current))
++            criteria[name] = {'byte_identical': True}
++        criteria[name].update(path=str(current), original_sha256=digest(old), current_sha256=digest(current))
++    out = new_out(args.out)
++    require(not out.is_relative_to(args.incoming.absolute()), 'Cloud output overlaps input')
++    args.out = out
++    class ZeroGate(m.Gate):
++        def snapshot(self):
++            now = inventory(self.args.incoming)
++            m.compare(now, before, 'ALL original fetched bytes before')
++            declared = m.read_json(self.args.incoming/'inventory.json')
++            m.compare({k:v for k,v in now.items() if k != 'inventory.json'}, declared['inventory'], 'ALL fetched files')
++            self.art = self.args.incoming/'artifact'
++            self.write('input-inventory.json', now)
++            self.write('snapshot-map.json', {key: str(self.args.incoming/key) for key in now})
++            return {'raw_files':len(now), 'snapshot':str(self.args.incoming), 'zero_copy':True}
++    methods = ('clients','diagnostics','background','full','tour','check','write')
++    require(all(getattr(ZeroGate,k).__code__ is getattr(m.Gate,k).__code__ for k in methods), 'Original full assertion methods not inherited')
++    gate = ZeroGate(args)
++    gate.write('execution.json', {'argv':sys.argv,'source':args.source,'workflow_sha':args.workflow_sha,
++        'run':args.run,'suite':args.suite,'python':sys.version,'tool_sha256':digest(__file__),
++        'scope':'OFFLINE ONLY zero ADB/device/network/CI execution; original full criteria'})
++    gate.write('criteria-sha256.json', criteria)
++    gate.write('original-method-identity.json', proof)
++    gate.write('complete-archive-readback.json', archive)
++    gate.check('input-snapshot-all-bytes', gate.snapshot)
++    gate.check('exact-run-success', lambda:m.check_run(m.read_json(args.incoming/'run.json'),args.workflow_sha,args.run))
++    def inputs():
++        registration = read_json(args.registration)
++        require(str(registration['run']['id']) == args.run and registration['workflow_sha'] == args.workflow_sha, 'Registered exact UI workflow head/run differs')
++        require(registration['inputs'] == {'build_run':args.build_run,'build_sha':args.source,'api_level':'33',
++                'navigation_mode':'three-button','qa_suite':args.suite}, 'Original explicit UI inputs differ')
++        build = read_json(args.build_receipt)
++        require(build['passed'] is True and build['source_sha']==args.source and build['build_run']==args.build_run, 'Verified actual build binding differs')
++        if args.suite == 'diagnostics':
++            host = m.read_json(args.incoming/'artifact/diag-host-report.json')
++            require(host['sdk']=='33' and host['navigationMode']=='three-button', 'Actual diagnostics SDK/navigation differs')
++            build = read_json(args.build_receipt)
++            require(build['passed'] is True and build['source_sha']==args.source and build['build_run']==args.build_run, 'Verified actual build binding differs')
++            require(host['apkSha256'] == {'main':build['rows'][0]['sha256'],'tests':build['rows'][1]['sha256']}, 'Actual diagnostics main/test APK hashes differ')
++        else:
++            env = m.read_json(args.incoming/'artifact/environment.json')
++            require(env['sdk']=='33' and env['navigation_mode']=='three-button', 'Actual full SDK/navigation differs')
++        return registration
++    gate.check('registered-original-inputs-and-build', inputs)
++    gate.check('local-client-raw-logs', gate.clients)
++    gate.check(args.suite+'-complete', gate.diagnostics if args.suite=='diagnostics' else gate.full)
++    def after():
++        m.compare(inventory(args.incoming), before, 'ALL original input bytes after')
++        for name,row in criteria.items(): require(digest(Path(row['path']))==row['current_sha256'], 'Criterion changed during gates: '+name)
++        return {'files':len(before),'same_exact_bytes_before_and_after':True}
++    gate.check('snapshot-inputs-unchanged-after-original-gates', after)
++    receipt = {'passed':not gate.errors,'source_sha':args.source,'workflow_sha':args.workflow_sha,
++        'run_id':args.run,'suite':args.suite,'checks':gate.checks,'errors':gate.errors,'details':gate.details,
++        'scope':'All ORIGINAL full assertions and COMPLETE JSON, current 12/0.2.10 literals only; offline not new device proof'}
++    gate.write('receipt.json', receipt)
++    print(json.dumps({'passed':receipt['passed'],'errors':gate.errors,'receipt':str(out/'receipt.json')},ensure_ascii=False))
++    return 0 if receipt['passed'] else 1
++
++
++def main():
++    if sys.argv[1:] == ['--self-test']:
++        import self_test
++        return self_test.main()
++    parser = argparse.ArgumentParser(description=__doc__)
++    sub = parser.add_subparsers(dest='command', required=True)
++    reg = sub.add_parser('register-cases'); reg.add_argument('--added-cases', type=Path, required=True)
++    b = sub.add_parser('build'); b.add_argument('--case-manifest', type=Path, required=True)
++    c = sub.add_parser('cloud')
++    c.add_argument('--workflow-sha', required=True); c.add_argument('--suite', choices=('diagnostics','full'), required=True)
++    c.add_argument('--registration',type=Path,required=True); c.add_argument('--build-run',required=True)
++    c.add_argument('--build-receipt',type=Path,required=True)
++    for p in (reg,b,c):
++        p.add_argument('--source', required=True); p.add_argument('--out',type=Path,required=True)
++    for p in (b,c):
++        p.add_argument('--incoming',type=Path,required=True); p.add_argument('--run',required=True)
++    args = parser.parse_args()
++    from r6_common import sha40
++    sha40(args.source)
++    if args.command=='register-cases': register_cases(args); return 0
++    if args.command=='build': verify_build(args); return 0
++    return verify_cloud(args)
++
++if __name__=='__main__':
++    raise SystemExit(main())
+diff --git a/qa/p2p-trace-0210/r6/current-identity.json b/qa/p2p-trace-0210/r6/current-identity.json
+new file mode 100644
+index 0000000..30c17ea
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/current-identity.json
+@@ -0,0 +1,60 @@
++{
++  "schema": 1,
++  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
++  "release": "0.2.10",
++  "version_code": 12,
++  "authorization": "R6 explicit user ruling 2026-11-15; diagnostics only + version/identity migration",
++  "old_manifest": "qa/release-029/approved-release-delta.json",
++  "old_manifest_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
++  "source_identities": {
++    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
++      "old_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
++      "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
++      "current_sha256": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
++      "current_bytes": 16986
++    },
++    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
++      "old_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
++      "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
++      "current_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
++      "current_bytes": 24337
++    },
++    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
++      "old_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
++      "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
++      "current_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
++      "current_bytes": 7773,
++      "previous_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"
++    },
++    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
++      "old_sha256": null,
++      "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
++      "current_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
++      "current_bytes": 10663
++    }
++  },
++  "probe_current_after": "package com.hcbiu.elcton\n\nimport android.app.Activity\nimport android.content.Context\nimport android.os.Handler\nimport android.os.Looper\nimport android.os.SystemClock\nimport android.util.Log\nimport com.huawei.wearengine.HiWear\nimport com.huawei.wearengine.WearEngineException\nimport com.huawei.wearengine.auth.AuthCallback\nimport com.huawei.wearengine.auth.Permission\nimport com.huawei.wearengine.device.Device\nimport com.huawei.wearengine.p2p.Message\nimport com.huawei.wearengine.p2p.Receiver\nimport com.huawei.wearengine.p2p.SendCallback\nimport java.lang.ref.WeakReference\n\n/** Application-context SDK boundary. All protocol decisions belong to the ONE [engine]. */\nclass WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) : SyncTransport {\n    private val context: Context = context.applicationContext\n    private val handler = Handler(Looper.getMainLooper())\n    private val p2p by lazy { HiWear.getP2pClient(this.context) }\n    private var activity = WeakReference<Activity>(null)\n    private var update: (SyncEngine.State) -> Unit = {}\n    private var importCandidate: (String, Long) -> Unit = { _, _ -> }\n    private val lock = Any()\n    private val devices = mutableMapOf<String, Device>()\n    private var scanGeneration = 0L\n    private var nativeGeneration = 0L\n    private var registration: NativeRegistration? = null\n    private var latestDiagnostic = \"\"\n\n    private class NativeRegistration(val generation: Long, val receiver: Receiver, val traceContext: P2pTrace.Context?)\n    private fun traceContext(): P2pTrace.Context? = try { diagnostics.p2pTrace.context() } catch (_: Throwable) { null }\n    private fun related(c:P2pTrace.Context?):P2pTrace.Context? = try {\n        c?.let { diagnostics.p2pTrace.related(it) }\n    } catch (_:Throwable) { c }\n    private fun stale(c:P2pTrace.Context?):Boolean = try {\n        c==null || c.nativeGeneration!=synchronized(lock){nativeGeneration} || !diagnostics.p2pTrace.matches(c) || c.attemptCurrent?.invoke()==false\n    } catch (_:Throwable) { true }\n    private fun trace(stage: String, c: P2pTrace.Context?, fields: Map<String, Any?> = emptyMap()) {\n        try { diagnostics.p2pTrace.emit(\"adapter\", stage, (c?.let { diagnostics.p2pTrace.fields(it) } ?: emptyMap()) + fields) } catch (_: Throwable) {}\n    }\n\n    constructor(context: Context, update: (SyncEngine.State) -> Unit, importCandidate: (String, Long) -> Unit) :\n        this(context, (context.applicationContext as ElctonApplication).diagnostics) {\n        this.update = update\n        this.importCandidate = importCandidate\n    }\n\n    private val sharedEngine = lazy {\n        val baselines = this.context.getSharedPreferences(\"device-baselines\", Context.MODE_PRIVATE)\n        SyncEngine(this, object : SyncScheduler {\n            override fun post(block: () -> Unit) { handler.post { block() } }\n            override fun after(ms: Long, block: () -> Unit): SyncCancellation {\n                val runnable = Runnable { block() }\n                handler.postDelayed(runnable, ms)\n                return SyncCancellation { handler.removeCallbacks(runnable) }\n            }\n            override fun now() = SystemClock.elapsedRealtime()\n            override fun wallTime() = System.currentTimeMillis()\n        }, object : SyncBaselines {\n            override fun lastSuccess(deviceId: String) = baselines.getLong(deviceId + \".at\", 0)\n            override fun save(deviceId: String, datasetId: String, digest: String, revision: Long, at: Long) {\n                baselines.edit().putString(deviceId + \".dataset\", datasetId).putString(deviceId + \".digest\", digest)\n                    .putLong(deviceId + \".revision\", revision).putLong(deviceId + \".at\", at).apply()\n            }\n        }, { state ->\n            update(state)\n            try { diagnostics.observe(state.status, state.detail, state.ready, state.busy, state.devices.size) }\n            catch (_: Exception) {}\n        }, { text, revision -> importCandidate(text, revision) }).also { built ->\n            try { built.attachTrace(diagnostics.p2pTrace) } catch (_: Throwable) {}\n        }\n    }\n\n    val engine: SyncEngine get() = sharedEngine.value\n    val state: SyncEngine.State get() = engine.state\n\n    fun attach(activity: Activity) { this.activity = WeakReference(activity) }\n    fun detach(activity: Activity) { if (this.activity.get() === activity) clearActivity() }\n    fun clearActivity() { activity.clear() }\n    fun authorizeAndScan(interactive: Boolean = false, activity: Activity? = null): Boolean {\n        if (interactive) {\n            if (activity != null) attach(activity) else clearActivity()\n        }\n        return engine.authorizeAndScan(interactive)\n    }\n    fun connect(deviceId: String): Boolean = engine.connect(deviceId)\n    fun connect(device: SyncDevice): Boolean = engine.connect(device.id)\n    fun publishSnapshot(text: String, force: Boolean, datasetId: String, revision: Long): Boolean =\n        engine.publishSnapshot(text, force, datasetId, revision)\n    fun requestExport(): Boolean = engine.requestExport()\n    fun cancel() = engine.cancel()\n    fun close() { engine.close(); clearActivity() }\n\n    private val watchPackage=\"watchapp.nexus.0zzip\"\n    // Lite identity: bundleName + '_' + Base64(SEC1 uncompressed certificate EC point), not a cert hash/SPKI.\n    private val watchFingerprint=\"watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM=\"\n    private fun identify() {\n        try { diagnostics.p2pTrace.peerIdentity(watchPackage, watchFingerprint); trace(\"PEER_CONFIG\", traceContext()) } catch (_: Throwable) {}\n        p2p.setPeerPkgName(watchPackage).setPeerFingerPrint(watchFingerprint)\n    }\n\n    override fun checkPermission(success: (Boolean) -> Unit, failure: (String) -> Unit) {\n        try {\n            HiWear.getAuthClient(context).checkPermission(Permission.DEVICE_MANAGER)\n                .addOnSuccessListener { success(it == true) }\n                .addOnFailureListener { failure(describe(it, \"checkPermission\")) }\n        } catch (error: Exception) { failure(describe(error, \"checkPermission\")) }\n    }\n\n    /** Never launches an Activity. Only an explicitly supplied, still-visible weak reference can authorize. */\n    override fun requestPermission(success: (Boolean) -> Unit, failure: (String) -> Unit): Boolean {\n        val visible = activity.get() ?: return false\n        if (visible.isFinishing || visible.isDestroyed) return false\n        try {\n            // Only the permission UI client uses Activity; every background client uses application Context.\n            HiWear.getAuthClient(visible).requestPermission(object : AuthCallback {\n                override fun onOk(permissions: Array<Permission>) {\n                    success(permissions.any { it.name == Permission.DEVICE_MANAGER.name })\n                }\n                override fun onCancel() { success(false) }\n            }, Permission.DEVICE_MANAGER).addOnFailureListener { failure(describe(it, \"requestPermission\")) }\n        } catch (error: Exception) { failure(describe(error, \"requestPermission\")) }\n        return true\n    }\n\n    override fun scan(success: (List<SyncDevice>) -> Unit, failure: (String) -> Unit) {\n        val generation = synchronized(lock) { ++scanGeneration }\n        try {\n            HiWear.getDeviceClient(context).commonDevice.addOnSuccessListener { found ->\n                try {\n                    val byId = linkedMapOf<String, Device>()\n                    val result = linkedMapOf<String, SyncDevice>()\n                    for (device in found.orEmpty()) {\n                        val id = device.uuid.orEmpty()\n                        if (id.isEmpty()) continue\n                        byId[id] = device\n                        result[id] = SyncDevice(id, device.name.orEmpty(), device.model.orEmpty(), device.isConnected, device.p2pCapability)\n                    }\n                    val current = synchronized(lock) {\n                        if (generation != scanGeneration) false\n                        else { devices.clear(); devices.putAll(byId); true }\n                    }\n                    if (current) success(result.values.toList())\n                } catch (error: Exception) { failure(describe(error, \"getCommonDevice\")) }\n            }.addOnFailureListener { failure(describe(it, \"getCommonDevice\")) }\n        } catch (error: Exception) { failure(describe(error, \"getCommonDevice\")) }\n    }\n\n    private fun native(device: SyncDevice): Device? = synchronized(lock) { devices[device.id] }\n\n    override fun installed(device: SyncDevice, success: (Boolean) -> Unit, failure: (String) -> Unit) {\n        val selected = native(device)\n        if (selected == null) { failure(\"设备列表已改变，请重新查询真实配对设备。\"); return }\n        try {\n            identify()\n            p2p.isAppInstalled(selected, watchPackage).addOnSuccessListener { success(it == true) }\n                .addOnFailureListener { failure(describe(it, \"isAppInstalled\")) }\n        } catch (error: Exception) { failure(describe(error, \"isAppInstalled\")) }\n    }\n\n    override fun register(device: SyncDevice, message: (String) -> Unit, success: () -> Unit, failure: (String) -> Unit) {\n        val selected = native(device)\n        if (selected == null) { failure(\"设备列表已改变，请重新查询真实配对设备。\"); return }\n        val captured = try { traceContext()?.copy(attemptId=null) } catch (_:Throwable) { null }\n        unregister()\n        val generation = synchronized(lock) { nativeGeneration }\n        val correlated = try { captured?.copy(nativeGeneration = generation) } catch (_: Throwable) { null }\n        try { correlated?.let { diagnostics.p2pTrace.bindRegistration(it) } } catch (_:Throwable) {}\n        val receiver = Receiver { packet ->\n            val current = synchronized(lock) { registration?.generation == generation && nativeGeneration == generation }\n            try { trace(\"RX_NATIVE_ENTRY\", related(correlated), mapOf(\"stale\" to !current)) } catch (_: Throwable) {}\n            if (current) {\n                val packetType = packet.type\n                if (packetType == Message.MESSAGE_TYPE_DATA) {\n                    val bytes = packet.data\n                    if (bytes != null && bytes.size <= 1024 && bytes.all { it.toInt() in 32..126 }) {\n                        val decoded = bytes.toString(Charsets.US_ASCII)\n                        try { trace(\"RX_DECODE\", related(correlated), mapOf(\"bytes\" to bytes.size)) } catch (_: Throwable) {}\n                        message(decoded)\n                    } else {\n                        try { trace(\"RX_ADAPTER_REJECT\", related(correlated), mapOf(\"reason\" to (if (bytes == null) \"data\" else if (bytes.size > 1024) \"size\" else \"ascii\"), \"bytes\" to bytes?.size)) } catch (_: Throwable) {}\n                    }\n                } else {\n                    try { trace(\"RX_ADAPTER_REJECT\", related(correlated), mapOf(\"reason\" to \"type\")) } catch (_: Throwable) {}\n                }\n            } else {\n                try { trace(\"RX_ADAPTER_REJECT\", correlated, mapOf(\"reason\" to \"generation\", \"stale\" to true)) } catch (_: Throwable) {}\n            }\n        }\n        val item = NativeRegistration(generation, receiver, correlated)\n        synchronized(lock) { registration = item }\n        try {\n            identify()\n            try { trace(\"REG_CALL\", correlated) } catch (_: Throwable) {}\n            p2p.registerReceiver(selected, receiver).addOnSuccessListener {\n                // Cleanup is keyed to the exact callback, not whichever receiver is current now.\n                val current = synchronized(lock) { registration === item && generation == nativeGeneration }\n                try { trace(\"REG_TASK_OK\", correlated, mapOf(\"stale\" to !current)) } catch (_: Throwable) {}\n                if (current) success() else release(receiver, correlated, \"stale_registration\")\n            }.addOnFailureListener { error ->\n                val current = synchronized(lock) {\n                    if (registration === item && generation == nativeGeneration) { registration = null; true } else false\n                }\n                try { trace(\"REG_TASK_FAIL\", correlated, mapOf(\"stale\" to !current)) } catch (_: Throwable) {}\n                release(receiver, correlated, \"task_fail_cleanup\")\n                if (current) failure(describe(error, \"registerReceiver\"))\n            }\n        } catch (error: Exception) {\n            synchronized(lock) { if (registration === item) registration = null }\n            try { trace(\"REG_TASK_FAIL\", correlated, mapOf(\"outcome\" to \"sync_exception\")) } catch (_: Throwable) {}\n            release(receiver, correlated, \"sync_fail_cleanup\")\n            failure(describe(error, \"registerReceiver\"))\n        }\n    }\n\n    override fun unregister() {\n        val old = synchronized(lock) {\n            nativeGeneration++; scanGeneration++\n            registration.also { registration = null }\n        }\n        old?.let {\n            val cause = try { traceContext()?.trigger ?: \"none\" } catch (_: Throwable) { \"none\" }\n            release(it.receiver, related(it.traceContext), cause)\n        }\n    }\n\n    private fun release(receiver: Receiver, correlated: P2pTrace.Context?, cause: String) {\n        try { trace(\"UNREG_CALL\", correlated, mapOf(\"trigger\" to cause)) } catch (_: Throwable) {}\n        try {\n            val task = p2p.unregisterReceiver(receiver).addOnFailureListener {\n            try { trace(\"UNREG_TASK_FAIL\", correlated, mapOf(\"trigger\" to cause)) } catch (_: Throwable) {}\n            describe(it, \"unregisterReceiver\")\n            }\n            try { task.addOnSuccessListener {\n                try { trace(\"UNREG_TASK_OK\", correlated, mapOf(\"trigger\" to cause)) } catch (_: Throwable) {}\n            } } catch (_:Throwable) {}\n        }\n        catch (error: Exception) {\n            try { trace(\"UNREG_TASK_FAIL\", correlated, mapOf(\"trigger\" to cause, \"outcome\" to \"sync_exception\")) } catch (_: Throwable) {}\n            describe(error, \"unregisterReceiver\")\n        }\n    }\n\n    override fun send(device: SyncDevice, text: String, result: (Int) -> Unit, failure: (String) -> Unit) {\n        val selected = native(device)\n        if (selected == null) { failure(\"设备列表已改变，请重新查询真实配对设备。\"); return }\n        if (text.length > 1024 || text.any { it.code !in 32..126 }) { failure(\"消息超出传输上限，未发送。\"); return }\n        val correlated = try { traceContext()?.copy(nativeGeneration = synchronized(lock) { nativeGeneration }) } catch (_: Throwable) { null }\n        try {\n            try { trace(\"SEND_CALL\", correlated, diagnostics.p2pTrace.metadata(text,true) + mapOf(\"bytes\" to text.length)) } catch (_: Throwable) {}\n            val task = p2p.send(selected, Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(), object : SendCallback {\n                override fun onSendResult(code: Int) {\n                    try { trace(\"SEND_RESULT\", correlated, mapOf(\"resultCode\" to code, \"stale\" to stale(correlated))) } catch (_: Throwable) {}\n                    result(code)\n                }\n                override fun onSendProgress(progress: Long) {}\n            }).addOnFailureListener {\n                try { trace(\"SEND_TASK_FAIL\", correlated, mapOf(\"stale\" to stale(correlated))) } catch (_: Throwable) {}\n                failure(describe(it, \"p2p.send\"))\n            }\n            try { task.addOnSuccessListener {\n                try { trace(\"SEND_TASK_OK\", correlated, mapOf(\"stale\" to stale(correlated))) } catch (_: Throwable) {}\n            } } catch (_:Throwable) {}\n        } catch (error: Exception) {\n            try { trace(\"SEND_TASK_FAIL\", correlated, mapOf(\"outcome\" to \"sync_exception\", \"stale\" to stale(correlated))) } catch (_: Throwable) {}\n            failure(describe(error, \"p2p.send\"))\n        }\n    }\n\n    private fun describe(e: Exception, phase: String): String {\n        // Keep the original primary message read singular; observability cannot gate the failure callback.\n        val message = e.message\n        try {\n            val record = WearErrorRecord.captureWithMessage(e, phase, System.currentTimeMillis(), message) { cause ->\n                (cause as? WearEngineException)?.errorCode\n            }\n            val raw = record.full\n            latestDiagnostic = raw\n            Log.w(\"ElctonWear\", raw)\n            try { diagnostics.record(record) } catch (_: Exception) {}\n            // Diagnostics change no protocol generation. SDK callbacks themselves are guarded by SyncEngine.\n            if (sharedEngine.isInitialized()) handler.post {\n                try { engine.updateDiagnostic(raw) } catch (_: Exception) {}\n            }\n        } catch (observationError: Exception) {\n            Log.w(\"ElctonWear\", \"Diagnostic capture failed: \" + observationError.javaClass.simpleName)\n        }\n        return UserFacingError.explain(message.orEmpty())\n    }\n}\n",
++  "version_identity": {
++    "path": "app/build.gradle.kts",
++    "old_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
++    "current_sha256": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
++    "old_code": 11,
++    "current_code": 12,
++    "old_name": "0.2.9",
++    "current_name": "0.2.10"
++  },
++  "frozen": {
++    "business_assertions": "unchanged",
++    "SDK_callbacks_and_guards": "unchanged",
++    "old_release_manifest": "unchanged",
++    "build_workflows": "unchanged"
++  },
++  "scope": "Exact candidate source identity registration; NOT independent approval or hardware acceptance",
++  "quality_repair_identity": {
++    "finding": "Q-R6-001",
++    "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
++    "old_r6_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
++    "new_r6_sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
++    "authorization": "R6 original diagnostic writer scope; no business behavior modification"
++  }
++}
+diff --git a/qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt b/qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt
+new file mode 100644
+index 0000000..d210904
+--- /dev/null
++++ b/qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt
+@@ -0,0 +1,323 @@
++package com.hcbiu.elcton
++
++class P2pTraceBaselineEngine(
++    private val transport: SyncTransport,
++    private val scheduler: SyncScheduler,
++    private val baselines: SyncBaselines,
++    private val update: (State) -> Unit,
++    private val importCandidate: (String, Long) -> Unit
++) {
++    data class State(
++        val status: String = "尚未连接手表",
++        val detail: String = "通过华为运动健康配对后，查询可用设备。",
++        val devices: List<SyncDevice> = emptyList(),
++        val selected: String = "",
++        val ready: Boolean = false,
++        val busy: Boolean = false,
++        val digest: String = "",
++        val dirty: Boolean = false,
++        val revision: Long = 0,
++        val maxBytes: Int = 8192,
++        val datasetId: String = "",
++        val hasData: Boolean = false,
++        val diagnostic: String = "",
++        val lastSuccessAt: Long = 0,
++        val permissionGranted: Boolean? = null
++    )
++
++    var state = State()
++        private set
++    private var generation = 0
++    private var closed = false
++    private var peer: SyncDevice? = null
++    private var timer: SyncCancellation? = null
++    private var timerSerial = 0L
++    private var handshakeAttempts = 0
++    private var awaitingReady = false
++    private var session: TransferSession? = null
++    private var exporting: ExportSession? = null
++    private var exportRetries = 0
++    private val sendAttempts = SendAttempts()
++    private val total = OperationDeadline()
++    private var totalTimer: SyncCancellation? = null
++    private var totalSerial = 0L
++
++    private fun publish(next: State) { state = next; update(next) }
++    private fun finishTotal() { totalSerial++; totalTimer?.cancel(); totalTimer = null; total.clear() }
++    private fun beginTotal(message: String) {
++        finishTotal(); total.begin(scheduler.now(), 45_000)
++        val gen = generation
++        val serial = totalSerial
++        totalTimer = scheduler.after(45_000) { main(gen) {
++            if (serial == totalSerial && total.expired(scheduler.now())) fail(message)
++        } }
++    }
++    private fun main(gen: Int, block: () -> Unit) = scheduler.post {
++        if (!closed && gen == generation) block()
++    }
++    private fun cancelTimer() { timerSerial++; timer?.cancel(); timer = null }
++    private fun deadline(ms: Long, block: () -> Unit) {
++        cancelTimer()
++        val gen = generation
++        val serial = timerSerial
++        timer = scheduler.after(ms) { main(gen) { if (serial == timerSerial) block() } }
++    }
++    private fun unregister() { transport.unregister(); peer = null }
++    private fun fail(message: String) {
++        generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal(); session = null; exporting = null; awaitingReady = false; unregister()
++        publish(state.copy(status = "操作未完成", detail = message.take(200), selected = "", ready = false, busy = false))
++    }
++
++    fun authorizeAndScan(interactive: Boolean = false): Boolean {
++        if (closed || state.busy) return false
++        unregister(); cancelTimer(); finishTotal(); sendAttempts.invalidate(); awaitingReady = false
++        val gen = ++generation
++        var checking = true
++        publish(state.copy(status = "检查设备授权", selected = "", busy = true, ready = false, diagnostic = ""))
++        deadline(20_000) { fail("授权检查超时。请打开运动健康，确认已登录并保持手表连接。") }
++        try {
++            transport.checkPermission({ granted -> main(gen) {
++                if (!checking) return@main
++                checking = false
++                publish(state.copy(permissionGranted = granted))
++                if (granted) scan(gen)
++                else if (!interactive) permissionRequired()
++                else {
++                    var requesting = true
++                    publish(state.copy(status = "等待你确认授权", busy = true))
++                    deadline(90_000) { fail("授权未完成，没有查询或传输课表。") }
++                    try {
++                        val accepted = transport.requestPermission({ allowed -> main(gen) {
++                            if (!requesting) return@main
++                            requesting = false
++                            publish(state.copy(permissionGranted = allowed))
++                            if (allowed) scan(gen) else fail("设备权限未获准或已取消授权，没有传输课表。")
++                        } }, { message -> main(gen) { if (requesting) { requesting = false; fail(message) } } })
++                        if (!accepted) { requesting = false; permissionRequired() }
++                    } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
++                }
++            } }, { message -> main(gen) { if (checking) { checking = false; fail(message) } } })
++        } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
++        return true
++    }
++
++    private fun permissionRequired() {
++        cancelTimer()
++        publish(state.copy(status = "需要设备授权", detail = "需要用户在可见页面确认设备授权，后台不会弹出授权窗口。",
++            permissionGranted = false, busy = false, ready = false))
++    }
++
++    private fun scan(gen: Int) {
++        var pending = true
++        publish(state.copy(status = "查询配对设备", busy = true))
++        deadline(15_000) { fail("设备查询超时，请检查运动健康的连接状态。") }
++        try {
++            transport.scan({ found -> main(gen) {
++                if (!pending) return@main
++                pending = false; cancelTimer()
++                val devices = found.toList()
++                publish(state.copy(
++                    status = if (devices.isEmpty()) "未找到可用设备" else "选择要同步的手表",
++                    detail = if (devices.isEmpty()) "确认运动健康已配对且设备支持应用间通信。" else "设备按实际通信能力判断，不限定 FIT3 型号。",
++                    devices = devices, busy = false
++                ))
++            } }, { message -> main(gen) { if (pending) { pending = false; fail(message) } } })
++        } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
++    }
++
++    fun connect(deviceId: String): Boolean {
++        if (closed || state.busy) return false
++        val selected = state.devices.firstOrNull { it.id == deviceId }
++        if (selected == null || selected.id.isEmpty()) { fail("请先查询并选择真实配对设备。"); return false }
++        // Values are the SDK's documented capability codes: SUPPORT=0, NOT_SUPPORT=1.
++        if (!DevicePolicy.canAttemptSync(selected.connected, selected.p2pCapability, 0, 1)) {
++            fail("设备未连接，或明确不支持应用间通信。"); return false
++        }
++        unregister(); cancelTimer(); finishTotal(); sendAttempts.invalidate(); awaitingReady = false
++        val gen = ++generation
++        var installing = true
++        publish(state.copy(status = "检查配套手表应用", selected = selected.id, busy = true, ready = false,
++            dirty = false, datasetId = "", hasData = false))
++        deadline(15_000) { fail("检查手表应用超时，请确认运动健康仍连接。") }
++        try {
++            transport.installed(selected, { installed -> main(gen) {
++                if (!installing) return@main
++                installing = false
++                if (!installed) {
++                    fail("这台手表没有安装匹配的课程表应用。不同系统运行时需要对应安装包，不能强装 Lite 包。")
++                    return@main
++                }
++                peer = selected
++                var registering = true
++                deadline(15_000) { fail("接收器注册超时，未发送课表。") }
++                try {
++                    transport.register(selected, { raw -> main(gen) { onMessage(raw) } }, { scheduler.post {
++                        if (closed || gen != generation) {
++                            // The adapter owns exact native cleanup. A global fallback is only
++                            // safe while no replacement receiver OR scan can be current.
++                            if (peer == null && state.selected.isEmpty() && !state.busy) transport.unregister()
++                            return@post
++                        }
++                        if (!registering) return@post
++                        registering = false; handshakeAttempts = 0; awaitingReady = true
++                        publish(state.copy(status = "等待手表准备", detail = "可在手表进入：周视图 → 同步 → 开始接收。手机正在尝试检测对端。"))
++                        hello()
++                    } }, { message -> main(gen) { if (registering) { registering = false; fail(message) } } })
++                } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
++            } }, { message -> main(gen) { if (installing) { installing = false; fail(message) } } })
++        } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
++        return true
++    }
++
++    private fun hello() {
++        if (peer == null) { fail("请先连接设备。"); return }
++        deadline(5_000) {
++            if (++handshakeAttempts <= 3) hello()
++            else fail("未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。")
++        }
++        send("{" + Wire.header("HELLO", "") + "}")
++    }
++
++    private fun onMessage(raw: String) {
++        val message = PacketIngress.watch(raw) ?: return
++        val type = message.optString("type")
++        PacketIngress.preparationError(message, awaitingReady, session != null || exporting != null)?.let { fail(it); return }
++        val export = exporting
++        if (export != null) {
++            if (message.optString("transferId") != export.id) return
++            if (type == "ERROR") {
++                fail("手表导出失败：${message.optString("code")}，手机课表没有改变。"); return
++            }
++            if (type == "EXPORT_META") {
++                if (!export.meta(export.id, message.optInt("length"), message.optString("digest"),
++                        message.optInt("chunks"), message.optLong("sourceRevision"))) return
++                exportRetries = 0; requestExportPacket(); return
++            }
++            if (type == "EXPORT_CHUNK") {
++                if (!export.chunk(export.id, message.optInt("seq", -1), message.optString("data"))) return
++                cancelTimer(); exportRetries = 0
++                if (export.error != null) { fail("手表导出内容校验失败，手机旧课表保留。"); return }
++                val result = export.result
++                if (result != null) {
++                    val validated = try { PhoneSnapshot.encode(result) }
++                        catch (error: Exception) { fail("手表导出格式无效：${UserFacingError.validation(error.message)}"); return }
++                    finishTotal(); sendAttempts.invalidate()
++                    send("{" + Wire.header("EXPORT_DONE", export.id) + "}", reportFailure = false)
++                    exporting = null
++                    publish(state.copy(status = "手表课表已取回", detail = "请在导入预览中决定是否替换手机课表。", busy = false))
++                    importCandidate(validated, export.sourceRevision)
++                } else requestExportPacket()
++            }
++            return
++        }
++        if (type == "READY" && session == null && awaitingReady) {
++            awaitingReady = false; cancelTimer(); sendAttempts.invalidate()
++            publish(state.copy(status = "手表已准备", detail = "可以同步手机课表，或先导入手表已有课表。",
++                ready = true, busy = false, digest = message.optString("digest"), dirty = message.optBoolean("localDirty"),
++                revision = message.optLong("sourceRevision"), maxBytes = message.optInt("maxBytes"),
++                datasetId = message.optString("datasetId"), hasData = message.optBoolean("hasData"),
++                lastSuccessAt = baselines.lastSuccess(state.selected)))
++            return
++        }
++        val current = session ?: return
++        if (!current.reply(type, message.optString("transferId"), message.optInt("seq", -99),
++                message.optString("digest"), message.optLong("sourceRevision"), message.optString("code"))) return
++        cancelTimer(); sendAttempts.invalidate()
++        if (current.complete) {
++            finishTotal(); session = null
++            val now = scheduler.wallTime()
++            baselines.save(state.selected, current.datasetId, current.digest, current.revision, now)
++            publish(state.copy(status = "同步成功", detail = "手表已保存并读回确认。", busy = false,
++                digest = current.digest, dirty = false, revision = current.revision, datasetId = current.datasetId,
++                hasData = true, lastSuccessAt = now))
++        } else if (current.error != null) {
++            fail("手表未确认本次提交（${current.error}）。请重新连接核对最终课表，不把取消或发送回执当作回滚证据。")
++        } else transmitCurrent()
++    }
++
++    fun publishSnapshot(text: String, force: Boolean, datasetId: String, revision: Long): Boolean {
++        if (closed || !state.ready || state.busy || peer == null) return false
++        val validated = try { PhoneSnapshot.encode(text) }
++            catch (error: Exception) { fail(UserFacingError.validation(error.message)); return false }
++        if (validated.length > state.maxBytes) {
++            fail("课表超出当前手表的安全接收容量，未截断或发送。请查看兼容报告。"); return false
++        }
++        if (state.datasetId == datasetId && !state.dirty && state.digest == Wire.crc32(validated)) {
++            publish(state.copy(status = "已是最新课表", detail = "手表内容与手机一致，无需重复写入。")); return true
++        }
++        try {
++            session = TransferSession(validated, "t-" + scheduler.wallTime().toString(36), datasetId,
++                maxOf(1L, revision), state.digest, force)
++            beginTotal("同步总时限已到。请重新连接核对手表最终版本；未把发送成功当作保存成功。")
++            publish(state.copy(status = "正在同步", detail = "等待手表确认接收，旧课表尚未替换。", busy = true))
++            transmitCurrent()
++        } catch (error: Exception) { fail(UserFacingError.validation(error.message)); return false }
++        return true
++    }
++
++    private fun transmitCurrent() {
++        val current = session ?: return
++        publish(state.copy(status = if (current.acceptedChunks == current.chunkCount) "正在校验保存" else "正在同步",
++            detail = "已确认 ${current.acceptedChunks}/${current.chunkCount} 包；收到保存回执才算完成。"))
++        deadline(5_000) {
++            if (session === current) {
++                if (current.timeout()) transmitCurrent()
++                else fail("保存回执超时。重新连接可核对最终版本，未把发送成功当作保存成功。")
++            }
++        }
++        current.currentMessage?.let { send(it) }
++    }
++
++    fun requestExport(): Boolean {
++        if (closed || !state.ready || state.busy || peer == null) return false
++        exporting = ExportSession("e-" + scheduler.wallTime().toString(36)); exportRetries = 0
++        beginTotal("回传总时限已到，手机课表未自动改变。请重新连接再取回。")
++        publish(state.copy(status = "从手表读取课表", detail = "手机已有课表不会自动替换。", busy = true))
++        requestExportPacket()
++        return true
++    }
++
++    private fun requestExportPacket() {
++        val export = exporting ?: return
++        val type = if (export.initialized) "EXPORT_NEXT" else "EXPORT_REQUEST"
++        deadline(5_000) {
++            if (exporting === export) {
++                if (exportRetries++ < 3) requestExportPacket() else fail("手表回传超时，手机课表未改变。")
++            }
++        }
++        send("{" + Wire.header(type, export.id) + (if (export.initialized) ",\"seq\":" + export.nextSequence else "") + "}")
++    }
++
++    fun cancel() {
++        if (closed) return
++        val id = session?.transferId ?: exporting?.id
++        if (id != null) send("{" + Wire.header("CANCEL", id) + "}", reportFailure = false)
++        generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal()
++        session = null; exporting = null; awaitingReady = false; unregister()
++        publish(state.copy(status = "已断开", selected = "", busy = false, ready = false,
++            detail = "已停止等待回执；若已进入保存阶段，请重新连接核对最终课表。手机不会自动导入或合并。"))
++    }
++
++    fun close() { if (!closed) { cancel(); closed = true } }
++
++    fun updateDiagnostic(full: String) { if (!closed) publish(state.copy(diagnostic = full)) }
++
++    private fun send(text: String, reportFailure: Boolean = true) {
++        val device = peer ?: return
++        val gen = generation
++        val attempt = sendAttempts.issue()
++        if (text.length > 1024 || text.any { it.code !in 32..126 }) {
++            if (reportFailure) fail("消息超出传输上限，未发送。")
++            return
++        }
++        fun accepts() = gen == generation && sendAttempts.accepts(attempt)
++        try {
++            transport.send(device, text, { code -> main(gen) {
++                if (!accepts()) return@main
++                if (code != 207) {
++                    if (reportFailure) fail("Wear Engine 发送失败（$code），没有成功保存证据。")
++                } else session?.transportSucceeded()
++            } }, { message -> main(gen) { if (reportFailure && accepts()) fail(message) } })
++        } catch (error: Exception) { if (reportFailure && accepts()) fail(UserFacingError.explain(error.message.orEmpty())) }
++    }
++}
+diff --git a/qa/p2p-trace-0210/register_r6_identity.py b/qa/p2p-trace-0210/register_r6_identity.py
+new file mode 100644
+index 0000000..71c94ec
+--- /dev/null
++++ b/qa/p2p-trace-0210/register_r6_identity.py
+@@ -0,0 +1,83 @@
++#!/usr/bin/env python3
++"""R6 current identity registration: never rewrites the frozen 0.2.9 record.
++Run only after the diagnostic writer has frozen. Exclusive output directory.
++"""
++import copy
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++
++ROOT = Path(__file__).resolve().parents[2]
++QA = Path(__file__).resolve().parent
++BASE = 'bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
++PRODUCT = 'app/src/main/java/com/hcbiu/elcton/'
++OLD_MANIFEST = 'qa/release-029/approved-release-delta.json'
++R5 = json.loads((QA / 'r6/evidence/before/snapshot.json').read_text())
++
++
++def digest(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def base_bytes(path):
++    return subprocess.check_output(['git', 'show', BASE + ':' + path], cwd=ROOT)
++
++
++def main():
++    old = (ROOT / OLD_MANIFEST).read_bytes()
++    assert digest(old) == R5['files'][OLD_MANIFEST]['r5_sha256']
++    prior = json.loads(old)
++    rows = {}
++    for name in ('WearProbe', 'SyncEngine', 'DiagnosticRuntime', 'P2pTrace'):
++        path = PRODUCT + name + '.kt'
++        current = (ROOT / path).read_bytes()
++        before = base_bytes(path) if name != 'P2pTrace' else None
++        rows[path] = {
++            'old_sha256': digest(before) if before is not None else None,
++            'r5_sha256': R5['files'][path]['r5_sha256'],
++            'current_sha256': digest(current),
++            'current_bytes': len(current),
++        }
++    probe = PRODUCT + 'WearProbe.kt'
++    assert digest(prior['patches'][probe][0]['after'].encode()) == rows[probe]['old_sha256']
++    gradle_path = 'app/build.gradle.kts'
++    old_gradle, new_gradle = base_bytes(gradle_path), (ROOT / gradle_path).read_bytes()
++    expected = old_gradle.replace(b'versionCode = 11', b'versionCode = 12').replace(
++        b'versionName = "0.2.9"', b'versionName = "0.2.10"')
++    assert old_gradle.count(b'versionCode = 11') == 1 and old_gradle.count(b'versionName = "0.2.9"') == 1
++    assert new_gradle == expected, 'Version migration contains nonliteral drift'
++    manifest = {
++        'schema': 1, 'base': BASE, 'release': '0.2.10', 'version_code': 12,
++        'authorization': 'R6 explicit user ruling 2026-11-15; diagnostics only + version/identity migration',
++        'old_manifest': OLD_MANIFEST, 'old_manifest_sha256': digest(old),
++        'source_identities': rows,
++        'probe_current_after': (ROOT / probe).read_text(),
++        'version_identity': {
++            'path': gradle_path, 'old_sha256': digest(old_gradle), 'current_sha256': digest(new_gradle),
++            'old_code': 11, 'current_code': 12, 'old_name': '0.2.9', 'current_name': '0.2.10',
++        },
++        'frozen': {'business_assertions': 'unchanged', 'SDK_callbacks_and_guards': 'unchanged',
++                   'old_release_manifest': 'unchanged', 'build_workflows': 'unchanged'},
++        'scope': 'Exact candidate source identity registration; NOT independent approval or hardware acceptance',
++    }
++    dest = QA / 'r6/current-identity.json'
++    with dest.open('x') as file:
++        json.dump(manifest, file, ensure_ascii=False, indent=2)
++        file.write('\n')
++    evidence = QA / 'r6/evidence/identity-migration'
++    evidence.mkdir(parents=True, exist_ok=False)
++    with (evidence / 'table.json').open('x') as file:
++        json.dump({'source_identities': rows, 'version_identity': manifest['version_identity'],
++                   'old_manifest_sha256': digest(old), 'new_manifest_sha256': digest(dest.read_bytes())},
++                  file, ensure_ascii=False, indent=2)
++        file.write('\n')
++    (evidence / 'original-manifest.json.source.txt').write_bytes(old)
++    for name in ('WearProbe', 'SyncEngine', 'DiagnosticRuntime', 'P2pTrace'):
++        (evidence / (name + '.kt.current.source.txt')).write_bytes((ROOT / (PRODUCT + name + '.kt')).read_bytes())
++    print(json.dumps({'manifest': str(dest), 'table': str(evidence / 'table.json'),
++                      'source_rows': rows, 'version': manifest['version_identity']}, ensure_ascii=False))
++
++
++if __name__ == '__main__':
++    main()
+diff --git a/qa/p2p-trace-0210/run_host.py b/qa/p2p-trace-0210/run_host.py
+new file mode 100644
+index 0000000..6d312c6
+--- /dev/null
++++ b/qa/p2p-trace-0210/run_host.py
+@@ -0,0 +1,29 @@
++#!/usr/bin/env python3
++"""R5 HOST runner: unchanged old source/test bytes plus the new trace source.
++No Android/Huawei API simulation is compiled in this lane. Logs are exclusive.
++"""
++import argparse, hashlib, json, os, pathlib, subprocess, sys
++p=argparse.ArgumentParser(); p.add_argument('--deps',required=True); p.add_argument('--out',required=True); p.add_argument('--classes',nargs='*'); a=p.parse_args()
++root=pathlib.Path(__file__).resolve().parents[2]; deps=pathlib.Path(a.deps); out=pathlib.Path(a.out).resolve()
++out.mkdir(parents=True,exist_ok=False)
++source=root/'app/src/main/java/com/hcbiu/elcton'; test=root/'app/src/test/java/com/hcbiu/elcton'
++names=['Wire','PhoneSnapshot','ScheduleBook','TransferSession','ExportSession','DevicePolicy','UserFacingError','PacketIngress','SendAttempts','OperationDeadline','WearErrorRecord','ErrorJournal','McpToken','McpToolProvider','DiagnosticTools','DiagnosticMcpServer','PhoneSchedule','PhoneActions','PhoneMcpTools','PickupClient','SyncEngine','McpKeepAlivePolicy','MainThreadActions','P2pTrace']
++files=[source/(n+'.kt') for n in names if (source/(n+'.kt')).exists()]+sorted(test.glob('*Test.kt'))
++files += [root/'qa'/n for n in ['PhoneMcpHost.kt','McpHost.kt'] if (root/'qa'/n).is_file()]
++baseline=subprocess.check_output(['git','show','bb26c64b67e1cfa7903cd709c2aac482f6490e6b:app/src/main/java/com/hcbiu/elcton/SyncEngine.kt'],cwd=root,text=True)
++import tempfile
++scratch=pathlib.Path(tempfile.mkdtemp(prefix='p2p-trace-host-'))
++baseline_file=scratch/'P2pTraceBaselineEngine.kt'
++baseline_file.write_text('package com.hcbiu.elcton\n\n'+baseline[baseline.index('class SyncEngine('):].replace('class SyncEngine(', 'class P2pTraceBaselineEngine('))
++(out/'P2pTraceBaselineEngine.source.txt').write_bytes(baseline_file.read_bytes())
++files.append(baseline_file)
++cp=os.pathsep.join(str(deps/(n+'.jar')) for n in ['json','junit','hamcrest']); jar=out/'host-tests.jar'
++receipt={'source':'host-test','files':{str(f.relative_to(root) if f.is_relative_to(root) else f):hashlib.sha256(f.read_bytes()).hexdigest() for f in files},'commands':[]}
++commands=[['kotlinc',*[str(f) for f in files],'-classpath',cp,'-include-runtime','-d',str(jar)],['java','-cp',str(jar)+os.pathsep+cp,'org.junit.runner.JUnitCore',*(a.classes or ['com.hcbiu.elcton.'+f.stem for f in sorted(test.glob('*Test.kt'))])]]
++for label,cmd in zip(['compile','junit'],commands):
++    r=subprocess.run(cmd,cwd=root,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
++    (out/(label+'.log')).write_text(r.stdout); (out/(label+'.exit')).write_text(str(r.returncode)+'\n')
++    receipt['commands'].append({'name':label,'argv':cmd,'exit':r.returncode})
++    (out/'receipt.json').write_text(json.dumps(receipt,indent=2))
++    print(r.stdout,flush=True)
++    if r.returncode: sys.exit(r.returncode)
+diff --git a/qa/p2p-trace-0210/run_native_host.py b/qa/p2p-trace-0210/run_native_host.py
+new file mode 100644
+index 0000000..6243313
+--- /dev/null
++++ b/qa/p2p-trace-0210/run_native_host.py
+@@ -0,0 +1,48 @@
++#!/usr/bin/env python3
++"""R5 actual old/new WearProbe source on labelled fake Android/Huawei API.
++This executes SDK-seam call/getter/identity oracles, NOT real Huawei/Android/BLE.
++Outputs are exclusive. Baseline only renames the class, never edits its business bytes.
++Generated *.kt and jars are not placed in tracked QA (qa is a recursive Gradle sourceSet).
++"""
++import argparse, hashlib, json, pathlib, subprocess, tempfile, time, os, sys
++p=argparse.ArgumentParser();p.add_argument('--deps',required=True);p.add_argument('--out',required=True)
++p.add_argument('--source-snapshot');p.add_argument('--skip-junit',action='store_true');p.add_argument('--actual-sdk',action='store_true')
++a=p.parse_args();root=pathlib.Path(__file__).resolve().parents[2]
++out=pathlib.Path(a.out).resolve();out.mkdir(parents=True,exist_ok=False)
++source=root/'app/src/main/java/com/hcbiu/elcton';templates=root/'qa/p2p-trace-0210/native-host'
++names=['WearProbe','P2pTrace','SyncEngine','PacketIngress','SendAttempts','DevicePolicy','Wire','PhoneSnapshot','TransferSession','ExportSession','UserFacingError','WearErrorRecord','OperationDeadline']
++base='bb26c64b67e1cfa7903cd709c2aac482f6490e6b'
++d=pathlib.Path(a.deps);libs=['json','junit','hamcrest']+(['wearengine','tasks'] if a.actual_sdk else [])
++cp=os.pathsep.join(str(d/(n+'.jar')) for n in libs)
++if a.actual_sdk and not a.skip_junit:p.error('--actual-sdk requires --skip-junit (type resolution only, no native SDK execution)')
++row={'scope':('actual Huawei jars type-check, HOST Android type shell/diagnostics; NOT native Android execution' if a.actual_sdk else 'host-test fake Android/Huawei boundary; actual WearProbe source; NOT native Android or network validation'),'base':base,'files':{},'steps':[], 'actual_sdk':a.actual_sdk}
++with tempfile.TemporaryDirectory(prefix='r5-native-host-') as temp:
++    temp=pathlib.Path(temp);files=[]
++    for name in names:
++        f=source/(name+'.kt');b=f.read_bytes()
++        if a.source_snapshot:
++            snap=pathlib.Path(a.source_snapshot)/(name+'.source.txt')
++            if snap.is_file():b=snap.read_bytes()
++        generated=temp/(name+'.kt');generated.write_bytes(b);files.append(generated)
++        (out/(name+'.source.txt')).write_bytes(b)
++        row['files'][f.relative_to(root).as_posix()]=hashlib.sha256(b).hexdigest()
++    raw=subprocess.check_output(['git','show',base+':app/src/main/java/com/hcbiu/elcton/WearProbe.kt'],cwd=root)
++    baseline=raw.replace(b'class WearProbe(',b'class P2pTraceBaselineProbe(',1)
++    f=temp/'P2pTraceBaselineProbe.kt';f.write_bytes(baseline);files.append(f)
++    (out/'P2pTraceBaselineProbe.source.txt').write_bytes(baseline)
++    row['baseline_original_sha256']=hashlib.sha256(raw).hexdigest();row['baseline_renamed_sha256']=hashlib.sha256(baseline).hexdigest()
++    for t in sorted(templates.glob('*.kt.in')):
++        if a.skip_junit and t.name.endswith('Test.kt.in'):continue
++        if a.actual_sdk and t.name.startswith('Huawei'):continue
++        b=t.read_bytes();f=temp/t.name.removesuffix('.in');f.write_bytes(b);files.append(f)
++        row['files'][t.relative_to(root).as_posix()]=hashlib.sha256(b).hexdigest()
++        (out/(t.name+'.source.txt')).write_bytes(b)
++    commands=[('compile',['kotlinc',*map(str,files),'-classpath',cp,'-include-runtime','-d',str(out/'native-host.jar')])]
++    if not a.skip_junit:commands += [('junit',['java','-cp',str(out/'native-host.jar')+os.pathsep+cp,'org.junit.runner.JUnitCore','com.hcbiu.elcton.NativeAdapterOracleTest','com.hcbiu.elcton.NativeAfterReadyAdapterTest'])]
++    for name,cmd in commands:
++        t=time.monotonic();r=subprocess.run(cmd,cwd=root,capture_output=True,text=True,timeout=240)
++        raw=r.stdout+r.stderr;(out/(name+'.log')).write_text(raw);(out/(name+'.exit')).write_text(str(r.returncode))
++        row['steps'].append({'name':name,'argv':cmd,'exit':r.returncode,'seconds':time.monotonic()-t,'sha256':hashlib.sha256(raw.encode()).hexdigest()})
++        (out/'receipt.json').write_text(json.dumps(row,indent=2)+'\n')
++        print(json.dumps({'name':name,'exit':r.returncode,'seconds':row['steps'][-1]['seconds']}),flush=True);print(raw[-4500:],flush=True)
++        if r.returncode:sys.exit(r.returncode)
+diff --git a/qa/p2p-trace-0210/run_runtime_fault_host.py b/qa/p2p-trace-0210/run_runtime_fault_host.py
+new file mode 100644
+index 0000000..81bbf92
+--- /dev/null
++++ b/qa/p2p-trace-0210/run_runtime_fault_host.py
+@@ -0,0 +1,19 @@
++#!/usr/bin/env python3
++"""R5 S2 HOST fault lane: exact current Runtime/trace, independent new tests, no Android claim."""
++import argparse, hashlib, json, os, pathlib, subprocess, sys, tempfile
++p=argparse.ArgumentParser();p.add_argument('--deps',required=True);p.add_argument('--out',required=True);a=p.parse_args()
++root=pathlib.Path(__file__).resolve().parents[2];out=pathlib.Path(a.out).resolve();out.mkdir(parents=True,exist_ok=False)
++s=root/'app/src/main/java/com/hcbiu/elcton';d=pathlib.Path(a.deps)
++files=[s/(n+'.kt') for n in ['DiagnosticRuntime','P2pTrace','PacketIngress','PhoneSnapshot','Wire','WearErrorRecord','ErrorJournal','McpToken','McpToolProvider','DiagnosticTools','DiagnosticMcpServer']]
++inputs=[root/'qa/runtime_revision_host'/n for n in ['HostBuildConfig.kt.in','HostLog.kt.in','DiagnosticRuntimeRevisionTest.kt.in']]+list((root/'qa/p2p-trace-0210/runtime-fault-host').glob('*.kt.in'))
++scratch=pathlib.Path(tempfile.mkdtemp(prefix='p2p-r1-runtime-host-'))
++for f in inputs:
++    target=scratch/f.name.removesuffix('.in');target.write_bytes(f.read_bytes());files.append(target)
++    (out/(target.name+'.source.txt')).write_bytes(target.read_bytes())
++cp=os.pathsep.join(str(d/(n+'.jar')) for n in ['json','junit','hamcrest']);jar=out/'runtime-fault-host.jar'
++receipt={'origin':'host-test','files':{str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in files},'templates':{str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in inputs},'commands':[]}
++for name,cmd in [('compile',['kotlinc',*map(str,files),'-classpath',cp,'-include-runtime','-d',str(jar)]),('junit',['java','-Ddiag.evidence='+str(out),'-Ddiag.work='+str(out),'-cp',str(jar)+os.pathsep+cp,'org.junit.runner.JUnitCore','com.hcbiu.elcton.P2pRuntimeFaultTest','com.hcbiu.elcton.DiagnosticRuntimeRevisionTest'])]:
++    r=subprocess.run(cmd,cwd=root,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
++    (out/(name+'.log')).write_text(r.stdout);(out/(name+'.exit')).write_text(str(r.returncode)+'\n')
++    receipt['commands'].append({'name':name,'argv':cmd,'exit':r.returncode});(out/'receipt.json').write_text(json.dumps(receipt,indent=2));print(r.stdout,flush=True)
++    if r.returncode:sys.exit(r.returncode)
+diff --git a/qa/release-029/verify_apk.py b/qa/release-029/verify_apk.py
+index 4274916..ff3ff5b 100644
+--- a/qa/release-029/verify_apk.py
++++ b/qa/release-029/verify_apk.py
+@@ -11,7 +11,7 @@ apk, out = map(Path, sys.argv[1:])
+ aapt = Path(os.environ['ANDROID_HOME']) / 'build-tools/34.0.0/aapt'
+ result = subprocess.run([str(aapt), 'dump', 'badging', str(apk)], text=True, capture_output=True, check=True)
+ match = re.search(r"package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", result.stdout)
+-assert match and match.groups() == ('com.hcbiu.elcton', '11', '0.2.9'), 'Final APK binary version mismatch'
++assert match and match.groups() == ('com.hcbiu.elcton', '12', '0.2.10'), 'Final APK binary version mismatch'
+ report = {'passed': True, 'package': match[1], 'versionCode': int(match[2]), 'versionName': match[3],
+           'scope': 'Actual binary APK manifest only; not device/WE acceptance'}
+ out.parent.mkdir(parents=True, exist_ok=True)
+diff --git a/qa/test_mcp027_scope.py b/qa/test_mcp027_scope.py
+index e3b4b45..a6cb9f1 100644
+--- a/qa/test_mcp027_scope.py
++++ b/qa/test_mcp027_scope.py
+@@ -63,8 +63,8 @@ class Mcp027ScopeTests(unittest.TestCase):
+     def test_version_027_code9(self):
+         text = (ROOT / 'app/build.gradle.kts').read_text()
+         # Keep the historical method name for count/lineage; explicit release requirement.
+-        self.assertIn('versionCode = 11', text)
+-        self.assertIn('versionName = "0.2.9"', text)
++        self.assertIn('versionCode = 12', text)
++        self.assertIn('versionName = "0.2.10"', text)
+ 
+ if __name__ == '__main__':
+     unittest.main(verbosity=2)

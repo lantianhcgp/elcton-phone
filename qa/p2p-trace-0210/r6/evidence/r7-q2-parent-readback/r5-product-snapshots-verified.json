@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "rows": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+      "saved_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/before/app__src__main__java__com__hcbiu__elcton__WearProbe.kt.source.txt",
+      "bytes": 16949,
+      "sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1"
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "saved_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/before/app__src__main__java__com__hcbiu__elcton__SyncEngine.kt.source.txt",
+      "bytes": 24294,
+      "sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2"
+    },
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+      "saved_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/before/app__src__main__java__com__hcbiu__elcton__DiagnosticRuntime.kt.source.txt",
+      "bytes": 7614,
+      "sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"
+    },
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "saved_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/before/app__src__main__java__com__hcbiu__elcton__P2pTrace.kt.source.txt",
+      "bytes": 10486,
+      "sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8"
+    }
+  },
+  "scope": "Exact preserved source snapshots (R5 uncommitted), not source from evidence-only HEAD"
+}

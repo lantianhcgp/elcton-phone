@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "lane": "full-jvm",
+      "exit": 0,
+      "reused_actual_prior_source_identical_compile": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-regression-1650",
+      "jar_sha256": "7e78e9b28049f21c6f92bad619c9d54fd1a7af9d54d56cfac53a2c8650971adb",
+      "raw_sha256": "7c7d82686339dfaccbeaeafb48813ada758104d60e40fab077e4fe2b21c89809"
+    },
+    {
+      "lane": "app-cwd",
+      "exit": 0,
+      "argv": [
+        "java",
+        "-cp",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-regression-1650/full-jvm/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar",
+        "org.junit.runner.JUnitCore",
+        "com.hcbiu.elcton.P2pTraceRuntimeTest",
+        "com.hcbiu.elcton.DiagnosticsIntegrationTest"
+      ],
+      "raw_sha256": "7348a8cb32bb3f49ce289502f8f57e97e5348f08d981b1bc2eb16ac3ffb2df1b"
+    },
+    {
+      "lane": "python-all",
+      "exit": 0,
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "qa",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "raw_sha256": "108da2fb57f5f7a4fd0514495948083918130d54102fed5dada2c7469cfe26d6"
+    },
+    {
+      "lane": "http",
+      "exit": 0,
+      "argv": [
+        "python",
+        "-B",
+        "qa/mcp_http_selftest.py",
+        "--classpath",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-regression-1650/full-jvm/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar"
+      ],
+      "raw_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"
+    },
+    {
+      "lane": "runtime-fault-and-stop",
+      "exit": 0,
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/run_runtime_fault_host.py",
+        "--deps",
+        "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test",
+        "--out",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/runtime"
+      ],
+      "raw_sha256": "13d9b0d7dbe40d900a3bd491dd96f7912af34647670613acef65ff496764bf77"
+    },
+    {
+      "lane": "native-adapter",
+      "exit": 0,
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/run_native_host.py",
+        "--deps",
+        "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test",
+        "--out",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/native"
+      ],
+      "raw_sha256": "45a77040144ff4ebc3e4d144fb5b4586acf93a478d25f5be459a491cba1f5941"
+    },
+    {
+      "lane": "actual-sdk-type",
+      "exit": 0,
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "python",
+        "-B",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/run_native_host.py",
+        "--deps",
+        "/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test",
+        "--out",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/actual-sdk",
+        "--actual-sdk",
+        "--skip-junit"
+      ],
+      "raw_sha256": "251e439c1b6bd1ffc43088d7f0d748a7def08020a9577d0226ceb9bdbc9f1a7c"
+    }
+  ],
+  "source_manifest_sha256": "8ffc410f3d82a3488e08f8938cddaf40449aaca240f9c69764e8c49660b34f69",
+  "jar_sha256": "7e78e9b28049f21c6f92bad619c9d54fd1a7af9d54d56cfac53a2c8650971adb",
+  "source_rows": 72,
+  "source_drift": [],
+  "jvm": 171,
+  "python": 133,
+  "python_skip": 0,
+  "app_cwd": 6,
+  "http_assertions": 3784,
+  "scope": "Real HOST full regressions only; Android CI and device are separate",
+  "at": "2026-11-15 16:59:37 +0800"
+}

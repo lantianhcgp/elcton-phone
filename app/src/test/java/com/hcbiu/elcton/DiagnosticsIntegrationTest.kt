@@ -22,8 +22,8 @@ class DiagnosticsIntegrationTest {
         val gradle = File(root(), "app/build.gradle.kts").readText(Charsets.UTF_8)
         assertTrue("Version capsule must use the installed build version", main.contains("BuildConfig.VERSION_NAME"))
         assertFalse(main.contains("0.2.4 · 测试构建"))
-        assertTrue(gradle.contains("versionCode = 11"))
-        assertTrue(gradle.contains("versionName = \"0.2.9\""))
+        assertTrue(gradle.contains("versionCode = 12"))
+        assertTrue(gradle.contains("versionName = \"0.2.10\""))
         assertTrue(gradle.contains("buildConfig = true"))
     }
 

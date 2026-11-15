@@ -1,0 +1,21 @@
+test_both_identity_table_reads_use_q1 (__main__.DeliveryIdentityTests.test_both_identity_table_reads_use_q1) ... ok
+test_actual_migration_preserves_original_table_and_registers_q1 (__main__.MigrationTests.test_actual_migration_preserves_original_table_and_registers_q1) ... ok
+test_reject_existing_empty_output (__main__.OutputGuardTests.test_reject_existing_empty_output) ... ok
+test_reject_parent_traversal (__main__.OutputGuardTests.test_reject_parent_traversal) ... usage: run_r6_final_regressions.py [-h] --out OUT
+                                   [--resume-compiled RESUME_COMPILED]
+run_r6_final_regressions.py: error: Output must not contain parent traversal
+usage: check_r6_scope.py [-h] [--out OUT]
+check_r6_scope.py: error: Output must not contain parent traversal
+ok
+test_reject_symlink_ancestor (__main__.OutputGuardTests.test_reject_symlink_ancestor) ... usage: run_r6_final_regressions.py [-h] --out OUT
+                                   [--resume-compiled RESUME_COMPILED]
+run_r6_final_regressions.py: error: Output must not have symlink ancestry
+usage: check_r6_scope.py [-h] [--out OUT]
+check_r6_scope.py: error: Output must not have symlink ancestry
+ok
+test_valid_new_output (__main__.OutputGuardTests.test_valid_new_output) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.089s
+
+OK

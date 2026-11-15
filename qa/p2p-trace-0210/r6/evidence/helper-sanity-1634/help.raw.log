@@ -1,0 +1,10 @@
+usage: pipeline.py [-h] {dispatch-build,dispatch-ui,readback,wait,fetch} ...
+
+R6 explicit-action CLI. Default/help/self-test NEVER dispatch. No
+push/build/ADB.
+
+positional arguments:
+  {dispatch-build,dispatch-ui,readback,wait,fetch}
+
+options:
+  -h, --help            show this help message and exit

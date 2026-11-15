@@ -1,0 +1,449 @@
+{
+  "axis": "quality",
+  "revision": "Q1",
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "Q-R7-Q1-001",
+      "severity": "medium",
+      "blocking": true,
+      "kind": "helper_scope_and_historical_evidence_immutability",
+      "path": "qa/p2p-trace-0210/migrate_r6_quality_identity.py",
+      "line": 48,
+      "end_line": 51,
+      "related_source_lines": [29, 32, 33, 44, 45, 46, 47],
+      "requirement_path": "qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md",
+      "requirement_line": 9,
+      "problem": "迁移辅助在封存 previous-table 后仍用 table.write_text 覆盖原 evidence/identity-migration/table.json；原 SPEC R2 对该精确路径的 SHA 绑定已实际失效。",
+      "proof": {
+        "prior_review_path": "qa/p2p-trace-0210/r6/reviews/r6-spec-r2.json",
+        "prior_review_sha256": "ab7d06e39c73c49f00ec740908cfd24acd3573c0874b778b3d18c513dbff8fe0",
+        "prior_review_lines": "50,131-137",
+        "original_table_path": "qa/p2p-trace-0210/r6/evidence/identity-migration/table.json",
+        "prior_expected_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+        "actual_original_path_sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+        "preserved_old_copy_path": "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/previous-table.json.source.txt",
+        "preserved_old_copy_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+        "new_table_path": "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json",
+        "new_table_sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+        "actual_original_path_equals_new_q1_table_bytes": true,
+        "actual_original_path_equals_preserved_old_bytes": false
+      },
+      "impact": "新路径保存旧副本不等于原路径未覆盖；旧审查引用无法按原路径+SHA读回，违反本轮 prior migration evidence 不得覆盖的合同。当前 Runtime identity 本身迁移正确不消除此问题。",
+      "recommendation": "修辅助只写 current-identity 和新 Q1 table，不再写旧 evidence table；由父在明确授权纠错下用已独立核旧 SHA 的保存副本恢复原路径，保留本 Q1 FAIL 和 Q1 新证据。不得改旧审查 JSON 来迁就已变字节。",
+      "reviewer_modified_target": false
+    },
+    {
+      "id": "Q-R7-Q1-002",
+      "severity": "medium",
+      "blocking": true,
+      "kind": "new_helper_output_containment_logic",
+      "path": "qa/p2p-trace-0210/run_r6_final_regressions.py",
+      "line": 24,
+      "end_line": 26,
+      "related_paths": [
+        {
+          "path": "qa/p2p-trace-0210/check_r6_scope.py",
+          "line": 40,
+          "end_line": 43,
+          "write_lines": "108-109"
+        }
+      ],
+      "problem": "新输出边界用 Path.absolute() 后直接 is_relative_to(evidence)，未拒绝 .. 或解析真实路径；absolute() 保留父目录段，越出 evidence 的路径仍通过检查。",
+      "proof": {
+        "method": "实际只读 Python 执行当前辅助相同路径表达式；未执行辅助或创建反例目录",
+        "argument": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/../reviews/quality-q1-no-write-counterexample",
+        "absolute_guard_accepts_for_both_helpers": true,
+        "resolved_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/quality-q1-no-write-counterexample",
+        "resolved_path_is_relative_to_evidence": false,
+        "counterexample_written": false
+      },
+      "impact": "辅助可在允许 evidence 范围外 mkdir/write。check_r6_scope 还允许存在且没有 receipt.json 的目录，随后可覆盖其中 existing allowed-source.diff；可信本地 CLI 参数不等于边界谓词正确。没有声称远程利用、凭据泄露或产品行为变化。",
+      "recommendation": "写前拒绝父目录段和 symlink ancestry，并检查 canonical containment；使用独占新目录，保留原全部 baseline/旧测试/逆变换谓词。r6_common.new_out 的防护可供对应 evidence 范围实现参考。",
+      "reviewer_modified_target": false
+    }
+  ],
+  "missing": [],
+  "suggestions": [],
+  "input_manifest_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/input-q1/reviewed-manifest.json",
+  "input_manifest_sha256": "93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d",
+  "reviewed_inputs": {
+    "app/build.gradle.kts": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": "51dff0ac27fb73c10fe470b7a0911d5592c2fcaa7fdade1cbdf18077b4c1f6e2",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": "787661d88f7161ffa5ec209a4621d59b60aeacb68fd07953ae026fd6c1b9aba4",
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": "85cac5a68fe22e07e56d18aebb709d4e92874b4ebc186fe50721bbfc9873a127",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+    "qa/P2pCandidateBuildTest.kt": "1fd25cedaed4f90ba4f8cf132b8ac5ef06382fe87eea84b20c2055f62dced31d",
+    "qa/diag_emulator_smoke.py": "0b01c00a0a853a5e436c5ae31f2e7368fde4a4317c7637d87220aee141c1fce1",
+    "qa/diag_source_gate.py": "b3df0fc43ac03f918109a2e32d13ab8a46066b7df0601f0c0b9598e375a7a7b1",
+    "qa/p2p-trace-0210/check_r6_scope.py": "92e1708911fadb1310215b548b66e82a6237084cbf6cb6b626f36435b3c7e08b",
+    "qa/p2p-trace-0210/generate_ci_baseline.py": "bc7a366d2cbc9fa46159db436fe584ba90ab3ec3d1cc9eba10f6d313ae1de56e",
+    "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in": "d54c61255f96b922b31a74a3b0d44b77e62912d31bef208eea1f5c0c882081a9",
+    "qa/p2p-trace-0210/r6/ci/pipeline.py": "c312d6c45392aa43de6a754deb5f7d07596a2743d7aff881a721a9e0dd57e7f7",
+    "qa/p2p-trace-0210/r6/ci/r6_common.py": "5567f532a081b13ed3c2dab0e19188e629646cf225a80ca7f531e6c38c38d73d",
+    "qa/p2p-trace-0210/r6/ci/self_test.py": "e3bb62ad949921dd125e9b8f6cefd518fa1c77bdb72f59e4dc258ab570920df6",
+    "qa/p2p-trace-0210/r6/ci/verify_r6.py": "00b7f556d71d7d25e53fcd852c90228a61f5ef5733e0eccb8fd399a8f019f585",
+    "qa/p2p-trace-0210/r6/current-identity.json": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+    "qa/p2p-trace-0210/r6/fixtures/P2pTraceBaselineEngine.kt": "af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9",
+    "qa/p2p-trace-0210/register_r6_identity.py": "5da56f3ea199a2cf3d39fb147824a3160b4577239eab85c9647e46b9e4c14bff",
+    "qa/p2p-trace-0210/run_host.py": "1aa479adafc0038b40870c927ef3cad93fb14c3d759af22a1a08e88a5c9a8bc6",
+    "qa/p2p-trace-0210/run_native_host.py": "a948e0ff9719b936532cfeb0170b5bb8bf97dd7f8a9a8e6d89151e11d252e396",
+    "qa/p2p-trace-0210/run_runtime_fault_host.py": "f3cba84f77eb526e14b80d4fcd30f69151c29aaef4ad26545a85cb3580de0533",
+    "qa/release-029/verify_apk.py": "c005b01419683235c3c21c8ea1345e8dd7fe7bad910a7c0850497c479c712e18",
+    "qa/test_mcp027_scope.py": "7915281eb830e010c4890f3a5cf15f54a69d4d407ed45bfd17fba1aeeee0157f",
+    "qa/p2p-trace-0210/r6/ci/added-cases.json": "62e9fe15ef80aede736a5b0916251213abda733c41a371f2bc3c34d5786858c7",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in": "6b62c0f49d1775a2a0cb4c005a01964165444637eea82445a9cfdad4c73af9b8",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+    "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py": "7c33cc10ddf03894ab6a84674eadee73c50f8e10bbfa92eaef40192e4476cc7e",
+    "qa/p2p-trace-0210/run_r6_final_regressions.py": "d9fb732f71bdf58e7e4b6689eae26dc6dcd0d36114bcbc4f1c9b3d015acefdf0",
+    "qa/p2p-trace-0210/migrate_r6_quality_identity.py": "0a51868e6df53d5e4f52babe5af64b9dee0ef4d60940f86bd83757b0572777f1",
+    "qa/p2p-trace-0210/r6/QUALITY-R1-REPAIR-SCOPE.md": "7c31de4a4264c75f86e93086957df4723d78f29355dcf3b28fbca3b8353a444a",
+    "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+    "qa/p2p-trace-0210/r6/FINAL-WAKEUP.json": "20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b",
+    "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json": "9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9"
+  },
+  "review": {
+    "mode": "independent_direct_source_quality_delta_review",
+    "created_at": "2026-11-15T10:48:17.434719+00:00",
+    "self_review": false,
+    "jev_called": false,
+    "live_input_rows_verified": 41,
+    "live_input_mismatches": [],
+    "previous_manifest_sha256": "48f9cdcc1c9859cc575363457ef7d63aa6eec1bcd3e9ed5ee6a818e08b76b027",
+    "previous_manifest_rows": 32,
+    "unchanged_prior_inputs": 29,
+    "changed_prior_inputs": [
+      "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "qa/p2p-trace-0210/check_r6_scope.py",
+      "qa/p2p-trace-0210/r6/current-identity.json"
+    ],
+    "new_inputs": 9,
+    "inheritance_basis": "完整读取原 QUALITY R1 JSON/raw；仅继承无漂移 29 输入已有非阻断检查，不继承其 Q-R6-001 失败结论为 PASS，也不将原 table 路径的失效 SHA 绑定误报为仍有效。Runtime/Trace及全部指定新辅助独立完整读取，新增证据独立核 SHA/原始输出/源码行。",
+    "original_quality_r1_preserved": true,
+    "formal_spec_q1_prerequisite_verified": true,
+    "fresh_readonly_javap_executions": 4,
+    "full_test_or_compiler_execution_by_reviewer": false,
+    "baseline_2GB_rehash": false,
+    "all_required_available_evidence_checked": true
+  },
+  "source_review": [
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "sha256": "c82a665d3b06ca53b19c0f8c63eef369a2d4ea4f48c53c1e9e6936969f38a2d6",
+      "full_read_lines": "1-161",
+      "key_lines": "19-22,43-93,128-159",
+      "conclusion": "Q-R6-001产品修复接受。只private worker +4/-1，成功 stateWriter 后登记 processedTraceSeq；writing=false后revision OR traceSeq复查；fail guard保留。",
+      "static_interleavings": [
+        "emit在最终检查后、writing释放前：emit锁内seq递增，原callback因CAS失败返回；153释放后157看到seq!=processedTraceSeq，重新提交。",
+        "emit在finally读取seq之后：writing已释放，原callback获得CAS提交；并发finally/producer/new-worker只由CAS胜者保有writing，未见新lost-wakeup。",
+        "revision-only晚到仍由原revision分支续排；stopListener先stop再revision++的原合同不变。",
+        "stateWriter抛Exception：failed=true，finally不续排，即使trace/revision晚到；显式后续observe重试，故障策略未扩张。",
+        "Trace写失败或quota：processed seq不是pending或committed disk seq，稳定seq不会因pending未清空自旋。"
+      ]
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "full_read_lines": "1-166",
+      "key_lines": "31,53-68,71-105,107-129,132-164",
+      "conclusion": "原Trace字节不变；seq/append锁内，changed回调及write锁外，bounded ring/pending及失败/quota策略保持；整数字段/安全枚举/脱敏transferRef，无新增凭据/SDK行为。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/r6/runtime-wakeup-host/RuntimeWakeupTest.kt.in",
+      "sha256": "d0fef8f507b2efa1722b59ffda8e56cd72f71ffeff2258971c9ba200d9255c85",
+      "full_read_lines": "1-159",
+      "key_lines": "19-37,40-83,84-105,107-158",
+      "conclusion": "真正HOST实际Runtime+real disk断言；目标只有emit CLOSE/UNREG_TASK_OK而无observe/SDK/manual persist。独立断言最终disk/state/ring/pending/writing/writes；其余五个故障/revision/quota/control从RED已绿。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/r6/runtime-wakeup-host/InjectWakeBarrier.java.in",
+      "sha256": "6b62c0f49d1775a2a0cb4c005a01964165444637eea82445a9cfdad4c73af9b8",
+      "full_read_lines": "1-90",
+      "key_lines": "14-46,53-87",
+      "conclusion": "三static lambda release anchor，只加ALOAD0+INVOKESTATIC且净栈不变；原set接收者false/原调用保留；源码及独立逆stream/TRY/frame核查通过。类字节逆相等或Android执行未声称。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/r6/runtime-wakeup-host/run_wakeup_host.py",
+      "sha256": "7c33cc10ddf03894ab6a84674eadee73c50f8e10bbfa92eaef40192e4476cc7e",
+      "full_read_lines": "1-117",
+      "key_lines": "23-48,69-79,89-117",
+      "conclusion": "resolve后独占wakeup证据目录，源封存，真RED6/1和GREEN6，legacy Runtime4/stop1不用overlay，运行后源SHA冻结。未运行该会写证据的helper。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/migrate_r6_quality_identity.py",
+      "sha256": "0a51868e6df53d5e4f52babe5af64b9dee0ef4d60940f86bd83757b0572777f1",
+      "full_read_lines": "1-58",
+      "key_lines": "24-28,29-33,35-55",
+      "conclusion": "Runtime-only current identity变化、other3/version/old029验证正确，但line48确实覆盖旧migration evidence table，阻断Q-R7-Q1-001。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/run_r6_final_regressions.py",
+      "sha256": "d9fb732f71bdf58e7e4b6689eae26dc6dcd0d36114bcbc4f1c9b3d015acefdf0",
+      "full_read_lines": "1-77",
+      "key_lines": "24-26,32-52,58-74",
+      "conclusion": "实际退出/计数/manifest一致复用及原串行HOST入口正确；新absolute/is_relative_to containment不成立，阻断Q-R7-Q1-002。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/check_r6_scope.py",
+      "sha256": "92e1708911fadb1310215b548b66e82a6237084cbf6cb6b626f36435b3c7e08b",
+      "full_read_lines": "1-113",
+      "key_lines": "38-43,44-109",
+      "conclusion": "原9461/7literal/oldtests/35class/fixture/identity/diffcheck谓词不扩大重跑；新output boundary与回归helper同实错，existing dir还非独占。"
+    },
+    {
+      "paths": [
+        "qa/p2p-trace-0210/r6/ci/pipeline.py",
+        "qa/p2p-trace-0210/r6/ci/r6_common.py",
+        "qa/p2p-trace-0210/r6/ci/verify_r6.py",
+        "qa/p2p-trace-0210/r6/ci/self_test.py"
+      ],
+      "full_read_lines_in_path_order": ["1-182", "1-173", "1-234", "1-88"],
+      "key_lines": "pipeline:25-89,110-156; common:26-55,74-166; verify:33-74,77-138,141-207; self_test:22-79",
+      "conclusion": "与旧32输入QUALITY已读字节相等且本轮完整 reread；explicit dispatch/exact run/head/attempt/原唯一172 labels/完整archive/原method继承防护保持。没有云端动作，本审不替代父未来closure/publish白名单接线。"
+    },
+    {
+      "path": "qa/p2p-trace-0210/native-host/NativeAfterReadyAdapterTest.kt.in",
+      "sha256": "d54c61255f96b922b31a74a3b0d44b77e62912d31bef208eea1f5c0c882081a9",
+      "full_read_lines": "1-172",
+      "key_lines": "42-115,116-159",
+      "conclusion": "同源继承并完整复核每mode新probe/Task，Task成功失败互斥，SendResult非Task终态；原共享engine HELLO/READY/attempt和baseline调用/guard/读计数oracle未变；current native raw实际15 mode行+JUnit8。"
+    }
+  ],
+  "resolved_original_finding": {
+    "id": "Q-R6-001",
+    "product_repair_accepted": true,
+    "minimal_diff_sha256": "a1dba07c3c4efbecfad676723803ce6030e904fad1c45e87566b09ae262224ad",
+    "actual_archive_to_live_unified_diff_exact": true,
+    "inserted_lines": 4,
+    "removed_lines": 1,
+    "true_red_tests": 6,
+    "true_red_failures": 1,
+    "same_unchanged_test_green_tests": 6,
+    "green_failures": 0,
+    "original_uninstrumented_runtime_tests": 4,
+    "original_uninstrumented_stop_tests": 1,
+    "new_product_SDK_calls_or_test_hooks_or_credentials": false,
+    "does_not_override_auxiliary_findings": true
+  },
+  "evidence": [
+    {
+      "kind": "formal_independent_SPEC_Q1",
+      "path": "qa/p2p-trace-0210/r6/reviews/r6-spec-q1.json",
+      "sha256": "3ab778dcc0ea54d4c04da86af3d56702ee750633b99ad26deb061b3ed8fd761c",
+      "passed": true,
+      "three_blocking_lists_empty": true,
+      "reviewed_inputs_exact_current_41_manifest": true
+    },
+    {
+      "kind": "preserved_original_quality_rejection",
+      "path": "qa/p2p-trace-0210/r6/reviews/r6-quality-r1.json",
+      "sha256": "d60ccb9fef5481042829787c5d2ac19e1e9be1667fa8aceef7276a7ee6fbf12e",
+      "raw_path": "qa/p2p-trace-0210/r6/reviews/quality-raw.txt",
+      "raw_sha256": "bb6c2b373bbdcedf41d11a084ca6974409200cc2d07818ce9dcc56ad7cc9b5de",
+      "passed": false,
+      "unchanged_at_final_input_check": true
+    },
+    {
+      "kind": "final_source_and_reference_chain",
+      "paths": ["qa/p2p-trace-0210/r6/FINAL-Q1.json", "qa/p2p-trace-0210/r6/FINAL-WAKEUP.json"],
+      "sha256_for_both": "20a1464670f7f2fc3bca14bd67de8dc14522c5d72526e05b4de1969a4f3a428b",
+      "contents_equal": true,
+      "references_enumerated": 27,
+      "reference_exact_SHA_matches": 27,
+      "reference_mismatches": [],
+      "reference_check_method": "递归每一个path+sha256项后哈希其精确target；原始RED/GREEN/receipt/ASM及source-linked当前证据另读，未将仅哈希的manifest内容误称完整审读。"
+    },
+    {
+      "kind": "true_RED_actual_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/wakeup-junit.raw.log",
+      "sha256": "25042c11304ef27f2b7e135af85e2a76eda2a1e5e1a62cfcead7d4f07ead08d2",
+      "lines": "8-9,13-24",
+      "tests": 6,
+      "failures": 1,
+      "compile_exit": 0,
+      "junit_exit": 1,
+      "assertion_source_line": "RuntimeWakeupTest.kt.in:103",
+      "actual_after_release": {"diskSeq": 1, "stateSeq": 1, "ringSeq": 2, "pending": 1, "writing": false, "stateWrites": 1, "revision": 0}
+    },
+    {
+      "kind": "repeat_same_true_RED_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/repeat/wakeup-junit.raw.log",
+      "sha256": "7fb8325832239a052d4bbe3ce34491088d0d5b04129c1568777048e2d0f23f8c",
+      "lines": "13-24",
+      "tests": 6,
+      "failures": 1
+    },
+    {
+      "kind": "same_test_GREEN_actual_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/wakeup-junit.raw.log",
+      "sha256": "a1ca2b22efbc95258eaa8d3a880ef52faa04b13074b6d5d5c82ddc1abe6613db",
+      "lines": "2-9,13",
+      "tests": 6,
+      "failures": 0,
+      "junit_exit": 0,
+      "actual_after_release": {"diskSeq": 2, "stateSeq": 2, "ringSeq": 2, "pending": 0, "writing": false, "stateWrites": 2, "revision": 0},
+      "other_five_controls_already_pass_RED": true
+    },
+    {
+      "kind": "original_uninstrumented_Runtime4",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-runtimefault4.raw.log",
+      "sha256": "758b6f6f68024c96b36951aee859f787024f8fdd71af0fee3c035802b886af84",
+      "lines": "3-5,10",
+      "tests": 4,
+      "exit": 0,
+      "overlay_in_command_classpath": false
+    },
+    {
+      "kind": "original_uninstrumented_Stop1",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/original-stoprevision1.raw.log",
+      "sha256": "f7722f289df59f6866491cc7b3195458e253087c1424fe7ddb6cc879e128c542",
+      "lines": "3-5,10",
+      "tests": 1,
+      "exit": 0,
+      "real_socket_health": 200,
+      "real_socket_refused": true,
+      "final_file_running": false,
+      "writer_quiescent": true,
+      "overlay_in_command_classpath": false
+    },
+    {
+      "kind": "red_ASM_independent_inverse_check",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-red-20261115-1643/instrumentation-proof.txt",
+      "sha256": "b311fc3d8e81c9b616d1b6e0322b7c0a5967c39ee39a56fa4eb33a76cbea40fa",
+      "release_sites": 3,
+      "overlay_load_call_release_lines": [[1713, 1714, 1715], [1793, 1794, 1795], [1810, 1811, 1812]],
+      "original_and_inverse_instructions_sha256": "9a72025aba4e0fdb392b9a10d647ed6be9ad86d18f56dd6d2e8b5ddc178e01e6",
+      "instrumented_instructions_sha256": "1feec0aa23943a49d0593ae12851bc5e755b6da1b0803a14cf259ce4b7101431",
+      "independently_removed_only_six_instructions_and_compared_equal": true,
+      "all_39_TRY_entries_and_84_frames_unchanged_within_phase": true,
+      "fresh_javap_original_and_overlay_exit": [0, 0],
+      "fresh_javap_matches_saved_stdout": true
+    },
+    {
+      "kind": "green_ASM_independent_inverse_check",
+      "path": "qa/p2p-trace-0210/r6/evidence/wakeup-green-20261115-1646/instrumentation-proof.txt",
+      "sha256": "d45ab7ccbcd1c7c6a919f3c9d280a66853be3b4c00addee42a2f1d7fadc71f51",
+      "release_sites": 3,
+      "overlay_load_call_release_lines": [[1721, 1722, 1723], [1811, 1812, 1813], [1828, 1829, 1830]],
+      "original_and_inverse_instructions_sha256": "2f9ff55efb4712d55b4fa9a4324e1ac3de0c9a0c8d44c022e6a77ecc90eec895",
+      "instrumented_instructions_sha256": "397b42d4baf552e5a251f4bb69751108cbb6c5851adb7e3ad3d1dff9b1b3b383",
+      "independently_removed_only_six_instructions_and_compared_equal": true,
+      "all_39_TRY_entries_and_86_frames_unchanged_within_phase": true,
+      "fresh_javap_original_and_overlay_exit": [0, 0],
+      "fresh_javap_matches_saved_stdout": true,
+      "actual_classes_and_jars_hashes_match_bytecode_sha_json": true,
+      "RED_GREEN_jar_members_compared": 3442,
+      "changed_jar_members": ["com/hcbiu/elcton/DiagnosticRuntime.class"],
+      "compiled_new_tests_barrier_legacy_tests_and_Trace_bytes_equal": true,
+      "byte_for_byte_class_inverse_claimed": false
+    },
+    {
+      "kind": "current_identity_exact_migration_and_old_binding_defect",
+      "path": "qa/p2p-trace-0210/r6/evidence/identity-migration-q1/table.json",
+      "sha256": "102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe",
+      "current_manifest_sha256": "22b56c3dea43103dfab771774f385d94e5c4bf45d22005845fbd5ae49015bee8",
+      "preserved_prior_manifest_sha256": "422fce3a3196d017a4a2305b46a8b30e2a7a34dd4d387116178d662032201c45",
+      "preserved_prior_table_sha256": "4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d",
+      "old029_manifest_sha256": "a1fb2668aecbfbc3f12f2e61718837b10d32a3a1423943975ae9b7e8925d6042",
+      "only_current_Runtime_row_plus_repair_metadata_changed": true,
+      "other_three_product_identity_rows_and_version_unchanged": true,
+      "original_table_path_unchanged": false
+    },
+    {
+      "kind": "final_current_HOST_regressions_existing_evidence",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/receipt.json",
+      "sha256": "9b85077c3c5e8be3a319791b555c35a80fa12ee3e2855f1792cd85abb8b006b9",
+      "passed": true,
+      "unique_lanes": 7,
+      "all_original_exit_codes_and_raw_SHA_verified": true,
+      "source_manifest_sha256": "8ffc410f3d82a3488e08f8938cddaf40449aaca240f9c69764e8c49660b34f69",
+      "current_source_rows": 72,
+      "current_source_mismatches": [],
+      "reused_compile_manifest_exact_current": true,
+      "jar_sha256": "7e78e9b28049f21c6f92bad619c9d54fd1a7af9d54d56cfac53a2c8650971adb",
+      "JVM": 171,
+      "Python": 133,
+      "Python_skip": 0,
+      "HTTP_assertions": 3784,
+      "app_cwd": 6,
+      "Runtime": 4,
+      "native_HOST_adapter": 8,
+      "actual_SDK_type_compile_exit": 0,
+      "rerun_by_reviewer": false,
+      "raws": [
+        {"lane": "full-jvm", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-regression-1650/full-jvm/junit.log", "sha256": "7c7d82686339dfaccbeaeafb48813ada758104d60e40fab077e4fe2b21c89809", "line": 5, "tests": 171},
+        {"lane": "app-cwd", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/app-cwd.raw.log", "sha256": "7348a8cb32bb3f49ce289502f8f57e97e5348f08d981b1bc2eb16ac3ffb2df1b", "line": 5, "tests": 6},
+        {"lane": "python-all", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/python-all.raw.log", "sha256": "108da2fb57f5f7a4fd0514495948083918130d54102fed5dada2c7469cfe26d6", "lines": "140,142", "tests": 133, "skip": 0},
+        {"lane": "http", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/http.raw.log", "sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1", "line": 1, "assertions": 3784},
+        {"lane": "runtime-fault-and-stop", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/runtime-fault-and-stop.raw.log", "sha256": "13d9b0d7dbe40d900a3bd491dd96f7912af34647670613acef65ff496764bf77", "exit": 0},
+        {"lane": "native-adapter", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/native-adapter.raw.log", "sha256": "45a77040144ff4ebc3e4d144fb5b4586acf93a478d25f5be459a491cba1f5941", "exit": 0},
+        {"lane": "actual-sdk-type", "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/actual-sdk-type.raw.log", "sha256": "251e439c1b6bd1ffc43088d7f0d748a7def08020a9577d0226ceb9bdbc9f1a7c", "exit": 0}
+      ]
+    },
+    {
+      "kind": "current_original_Runtime_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/runtime/junit.log",
+      "sha256": "c6bb62971a5c9c8b4592af4e9f9e8857630248cb9b18675942caf40d7dfcc843",
+      "lines": "3-5,10",
+      "tests": 4
+    },
+    {
+      "kind": "independent_Task_terminal_and_business_guard_existing_HOST_raw",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/native/junit.log",
+      "sha256": "cfcd12974396e2c92f2203d8db5d67d063a7fc0d867a541523a09a4b99bc2b37",
+      "lines": "2-16,20",
+      "tests": 8,
+      "actual_mode_rows": 15,
+      "baseline_equal_for_all_mode_rows": true
+    },
+    {
+      "kind": "Huawei_actual_jar_type_only_existing_receipt",
+      "path": "qa/p2p-trace-0210/r6/evidence/final-q1-complete-1658/actual-sdk/receipt.json",
+      "sha256": "5d901237f2f7e0619d0a5d2bed4665ec15c56a9cca3badb2fe8d91281318b664",
+      "lines": "25-61",
+      "compile_exit": 0,
+      "native_Android_execution": false
+    },
+    {
+      "kind": "frozen_scope_receipt_readback_not_full_baseline_rerun",
+      "path": "qa/p2p-trace-0210/r6/evidence/frozen-scope-q1-1650/receipt.json",
+      "sha256": "827f1404da0ee56361c5d93e0f8ded1f1cb16b3ed4fa48d765c483dcea3740c3",
+      "recorded_base_entries": 9461,
+      "current_original_test_SHA_rows_verified": 35,
+      "current_literal_SHA_rows_verified": 7,
+      "identity_rows_equal_current": true,
+      "2GB_baseline_rehashed_by_reviewer": false
+    },
+    {
+      "kind": "pure_CI_helper_existing_test_log",
+      "path": "qa/p2p-trace-0210/r6/evidence/helper-sanity-1634/selftest.raw.log",
+      "sha256": "cdcb7be1f204a9bcdac204d214cd6c088594ab07b9f50e8ce17ff4d3b38e73bd",
+      "lines": "10,12",
+      "tests": 7,
+      "rerun_by_reviewer": false
+    }
+  ],
+  "raw_path": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/reviews/quality-q1-raw.txt",
+  "raw_sha256": "6709452158b00c262e74042d20756322894a252cc076a32e06f1ed25afadc058",
+  "raw_encoding": "UTF-8",
+  "limitations": [
+    "仅 Q-R6-001 增量及指定新辅助QUALITY；无漂移29旧输入已有非阻断QUALITY结论同源继承，不扩为原代码全重审。",
+    "真实既有RED6/1→GREEN6、原Runtime4/stop1及当前7 lane原件核读；本审只新跑四次只读javap及路径/哈希/逆证明脚本，未重编译或重跑全套测试。",
+    "9461基线由冻结scope receipt及既有独立审链保障，本审不重新2GB哈希；发现原migration table路径绑定失效已明确FAIL，不虚称该旧证据未变。",
+    "可信本地helper输入的 containment反例仅只读验证，没有创建越界目录或写入目标，没有声称远程安全攻击。",
+    "实际Huawei jars type-check与HOST synthetic Task不是Android/真Huawei握手/设备验收；未来CI/签名/交付及父新增publish白名单/closure接线未本审验证。",
+    "未改产品、测试、辅助、旧证据、旧审查或skills；仅新建本Q1报告和raw。原R1 FAIL及本Q1 FAIL后续都不得覆盖。"
+  ],
+  "delivery_ready": false,
+  "android_claims": false,
+  "summary": "独立 QUALITY Q1 FAIL：41 current input SHA全匹配，正式SPEC Q1 PASS及原QUALITY R1原件核验。产品Q-R6-001最小+4/-1修复、processedTraceSeq OR revision释放后唤醒、故障/quota静默及原stop合同接受；实核27 references、相同编译测试真实RED6仅1fail→GREEN6、ASM三anchor逆instruction/stack/TRY、原uninstrumented Runtime4/stop1和当前171/133skip0/3784/appcwd6/native8/type0/72源绑定。两个新辅助实错阻断：migrate line48实际覆盖旧migration table使原4f12…绑定失效；regression/checkscope absolute containment实际接受evidence/../reviews越界。security_concerns/missing为空不抹掉非空logic_errors；未修改任何现有文件或补造绿灯。"
+}

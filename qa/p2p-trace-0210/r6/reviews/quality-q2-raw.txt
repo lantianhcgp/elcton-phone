@@ -1,0 +1,45 @@
+R7 独立 QUALITY Q2 — PASS（冻结源审结论，非未来执行/交付成功）
+root=/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115
+axis=quality；revision=Q2；独立实读，未修改受审实现或旧测试/旧证据。
+
+一、正式输入与前置
+实际核 input-q2/reviewed-manifest.json SHA256=761fdd0b304aa565f53086b2abf399273fae2e4df3a7bb2c4a2ebb668bbb803c，63/63 live mapping 相等；末次落盘前再次核验，0漂移。
+原 r6-spec-q2.json SHA256=c193a6ec05ee79d93d62e01f43eb78f5c2d90194f96b46a54ccacde3ffe3e646；真实 axis=spec、passed=true、input_files=63、完整 reviewed_inputs==当前manifest、全部阻断表空；原 spec-q2-raw.txt SHA256=d94c01466c647a93c019b47ff45739a1c1a59de753c1ec79ca3f38841b607b32 与回执匹配。
+完整实读 Q2-REVIEW-SCOPE.md:1-18、Q2-DELTA.json:1-77、R7-AUTHORIZATION-AND-PLAN.md:1-22、R7-QUALITY-HELPER-REPAIR-SCOPE.md:1-15、原QUALITY Q1 JSON:1-449/raw:1-92与SPEC Q2 JSON:1-233/raw:1-39。
+Q1 manifest SHA93a41045e9896bb419eade7c56cb38242b025cd73604ca9ae28abf2b33327a8d；41→63，38 unchanged/3 changed/22 new。仅38原path+SHA精确相等输入继承原非阻断结论；不把原FAIL变成PASS。
+
+二、原helper修复覆盖与历史恢复
+Q-R7-Q1-001：migrate_r6_quality_identity.py完整1-57；删除唯一旧table.write_text，保留current identity及新Q1 table写入。独立AST对旧before.source.txt删除该唯一节点后整个模块相等。对应最小diff真实核对。
+旧 evidence/identity-migration/table.json 真实SHA=4f12c91fbed49afe409a9361f8e23c3540f6db8234d34ad4969033764eb8944d，逐字节等于独立previous-table.json.source.txt；原SPEC R2:50,131-138所绑定的同SHA恢复成立。
+当前 evidence/identity-migration-q1/table.json 真实SHA=102cc847b76cda3ccc201843174ff6030de2704cd257d9bc8937b604c676d9fe，逐字节等于原overwritten-table.source.txt，source_identities==current-identity；未覆盖或改写其内容。
+原QUALITY R1 FAIL/原raw和Q1 FAIL/原raw四个SHA仍原样，Q1 JSON=7378b05a5ce2a9ed83ae817ff2bc838d72cd8e7a46191696481ce0ebdb571974、raw=6709452158b00c262e74042d20756322894a252cc076a32e06f1ed25afadc058。repair receipt的32 artifact_bindings全部实际SHA/bytes匹配。
+Q-R7-Q1-002：check_r6_scope.py完整1-120，guard40-49；run_r6_final_regressions.py完整1-84，guard24-33。拒绝父段及所有symlink ancestry，resolve后核canonical containment及禁止base本身，再exist_ok=False独占mkdir。
+check的tree=json.loads后全部原字节、runner的sources=sorted后全部原字节与Q1 before完全相等；旧baseline/身份/计数/原assertions未修改。
+两份新test完整实读：test_helper_repair.py:1-147用实际AST main prefix、实际迁移main+独立冻结fixture；test_finalize_output_guard.py:1-64仅实际delivery prefix。
+真正原始helper RED raw:1-94为Ran6/failures7/errors0/exit1，GREEN:1-21为Ran6/OK/exit0；相同test SHA64b066c0e1a37e60d846c1acdaf0f9c1a4c202013db0dcb8cc7d4f1fabebe09d及保存test字节核实。
+delivery guard RED:1-27为Ran4/failures2/exit1，GREEN:1-9为Ran4/OK/exit0；当前新guard继续实读并实跑内存探针。不将这些HOST guard测试称APK/device执行。
+worker旧delivery after SHA仅验证其历史快照，不等于当前delivery；当前finalize以63manifest SHA0abc0f8586765c355d17104181b43f661bfa6b944e7ed6c06b9fe9beb9274e77为准，全部当前122行已独立读取。
+
+三、新增接线静态安全/逻辑
+close_r6_reviews.py:1-48，20-38核manifest containment、live SHA、actual两轴PASS/blockers、raw SHA、axis/count及完整mapping；39-45新closure独占。它不是造评审，只封存实际Q2回执。
+commit_r6_reviewed.py:1-59，19-32限定唯一diag分支+精确BASEHEAD、当前closure/input、固定新R7 regression/watch路径及计数；33-51显式whitelist和secret门、逐file SHA/size、exact git add -- paths、stage禁二进制、实际stage/committed input SHA。本审未执行其git写。
+prepare_r6_publish.py:1-84，固定源码与显式evidence目录筛选，仅允许指定文本/模板后缀，拒symlink及binary/runtime-files/CI artifact；63-82凭据扫描且不打印值，不git add -A。扫描未见当前25delta凭据格式匹配。
+finalize_r6_delivery.py:1-122，30-36同形path guard；37-73实际CI source/suite/run独立、真实签名v2/单signer/CERT、包/code12/name0.2.10、build main row文件名/SHA/size、current table和committed四source及review mapping/raw绑定；75-78主APK含source8/apksha8独占xb并回hash/size；79-119完整身份及CI/review索引。未执行APK/设备/交付操作。
+prepare_r7_q2_review.py:1-61保留原41manifest/Q1 FAIL/raw、仅允许3helper变化并完整扩展22输入，独占input-q2；本审不重新生成冻结清单。
+verify_r7_cached_scope.py:1-118与receipt完整读；固定旧full9461 receipt SHA，Git原tree blob+mode、tracked diff/cache、全部small source/test/literal、original sourcegate逆恢复。明确不重做2GB hash，未宣称cache等于fresh内容哈希。
+rerun_r7_watch_frozen.py:1-70核原HEAD/所有input SHA与完整argv，TAP完整唯一tests/pass/fail/skipped计数445/445/0/0、前后输入冻结，输出仅phone诊断worktree。测试运行不是表端build/device验收；本审未运行watch。
+独立只读再次核7版本literal整文件逆恢复、35 old-test整文件逆恢复、原sourcegate字节逆恢复、两workflow byte==BASE、9461原Git tree(mode,oid)精确相等。四产品当前SHA==原Q1，原Runtime c82a修复结论继承，不扩大重审旧产品。
+
+四、真实小检查与观察器边界
+实际执行 python -B qa/p2p-trace-0210/r6/ci/self_test.py：exit0，Ran7/OK，零skip；这是纯内存original label/token/archive/comparator/attempt检查，不是CI成功。
+12份当前Python文本compile语法实际执行；7个实际CLI --help均exit0；5 helper × valid/parent/base/outside/symlink 共25实际AST prefix内存探针通过。mkdir及symlink探针下层mock，零目标写入；未运行会创建临时sandbox的完整helper测试。
+首观察器曾错误期待原SPEC R2有reviewed_inputs，实际KeyError；改按原schema read_files/evidence.identity_reconciliation.table_sha256及原行号核实。另首guard观察器对delivery tuple assignment漏识别，实际StopIteration；改用AST tuple递归找到原build赋值后重跑25项通过。两者是本评审观察器错误，不是受审逻辑FAIL；未修改任何原代码/报告来凑绿。
+
+五、非阻断建议与明确限制
+正常R7合同为双审后fresh runner不传--resume-compiled，且不复制/伪造旧回执。未来fresh regression/commit/push/build172/原API33 three-button diagnostics+full/签名交付尚未执行；既不冒充本审PASS，也不因pending虚构FAIL。旧runner有明确历史resume分支不自动违反本轮无resume合同。
+非阻断建议：可进一步在commit helper显式检查fresh compile原receipt/raw与拒reuse字段，加强合同机器自证；不以违反明确授权的旧回执复制反例阻断当前正常R7链，不修改实现或旧assertions。
+原Q1接受Runtime processedTraceSeq OR revision释放后续排、故障/quota/stop原策略，本Q2只按相同SHA继承，HOST不等于JerryScript/Android/真Huawei握手或根因已修复。
+本审没有network/device/ADB/rish/CI/Chromium/fullcompile/2GBhash/stage/commit/push/watch写，没有扩大仓库refactor。只允许独占创建本raw及r6-quality-q2.json。
+
+最终：PASS；security_concerns=0；logic_errors=0；missing=[]；critical=[]；important=[]。
+独立 QUALITY Q2 PASS：63live输入及正式SPEC Q2/raw绑定核实，38同SHA输入精确继承；原两helper finding经最小差分、真实RED6/7fail→GREEN6、delivery RED4/2fail→GREEN4、旧4f12表恢复与current102cc表保持闭合。新增接线完整实读，原断言未改；只读self-test7、12语法/7实际help和25实际AST内存guard探针通过。仅质量源审，不代表未来fresh回归/commit/CI/交付已通过。

@@ -1,0 +1,356 @@
+{
+  "at": "2026-11-15 15:55:54 +0800",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "base_entries": 9461,
+  "allowed_diagnostic_paths": [
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt"
+  ],
+  "literal_migrations": {
+    "app/build.gradle.kts": {
+      "old_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "current_sha256": "3f896d577fae88cce5b0ead8a559ac5f512aacea1f00524d1908cae244c7fae3",
+      "reverse_sha256": "52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2",
+      "counts": [
+        {
+          "new": "versionCode = 12",
+          "old": "versionCode = 11",
+          "count": 1
+        },
+        {
+          "new": "versionName = \"0.2.10\"",
+          "old": "versionName = \"0.2.9\"",
+          "count": 1
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": {
+      "old_sha256": "2572fb52a68c962dbfdb48f80fc201598f09101182c5cbe81be6e74671ede4c0",
+      "current_sha256": "787661d88f7161ffa5ec209a4621d59b60aeacb68fd07953ae026fd6c1b9aba4",
+      "reverse_sha256": "2572fb52a68c962dbfdb48f80fc201598f09101182c5cbe81be6e74671ede4c0",
+      "counts": [
+        {
+          "new": "versionCode = 12",
+          "old": "versionCode = 11",
+          "count": 1
+        },
+        {
+          "new": "0.2.10",
+          "old": "0.2.9",
+          "count": 1
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    },
+    "qa/P2pCandidateBuildTest.kt": {
+      "old_sha256": "3d03974cf7ff5c1728d2978415950dc9cc42987409025a3c9227fe256a9420e9",
+      "current_sha256": "1fd25cedaed4f90ba4f8cf132b8ac5ef06382fe87eea84b20c2055f62dced31d",
+      "reverse_sha256": "3d03974cf7ff5c1728d2978415950dc9cc42987409025a3c9227fe256a9420e9",
+      "counts": [
+        {
+          "new": "assertEquals(12, BuildConfig.VERSION_CODE)",
+          "old": "assertEquals(11, BuildConfig.VERSION_CODE)",
+          "count": 1
+        },
+        {
+          "new": "0.2.10",
+          "old": "0.2.9",
+          "count": 1
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    },
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": {
+      "old_sha256": "c0b50dc722f549766b343f8bc546af006a48f03d07e4793e0df46d7e456ee18d",
+      "current_sha256": "51dff0ac27fb73c10fe470b7a0911d5592c2fcaa7fdade1cbdf18077b4c1f6e2",
+      "reverse_sha256": "c0b50dc722f549766b343f8bc546af006a48f03d07e4793e0df46d7e456ee18d",
+      "counts": [
+        {
+          "new": "0.2.10",
+          "old": "0.2.9",
+          "count": 2
+        },
+        {
+          "new": "assertEquals(12L, installed.longVersionCode)",
+          "old": "assertEquals(11L, installed.longVersionCode)",
+          "count": 1
+        },
+        {
+          "new": "assertEquals(12, version.getInt(\"versionCode\"))",
+          "old": "assertEquals(11, version.getInt(\"versionCode\"))",
+          "count": 1
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    },
+    "qa/test_mcp027_scope.py": {
+      "old_sha256": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+      "current_sha256": "7915281eb830e010c4890f3a5cf15f54a69d4d407ed45bfd17fba1aeeee0157f",
+      "reverse_sha256": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+      "counts": [
+        {
+          "new": "versionCode = 12",
+          "old": "versionCode = 11",
+          "count": 1
+        },
+        {
+          "new": "0.2.10",
+          "old": "0.2.9",
+          "count": 1
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    },
+    "qa/release-029/verify_apk.py": {
+      "old_sha256": "f9b96d77b5a044611068e8756bc59924f077b4556ddb73a7155467dc09dc08eb",
+      "current_sha256": "c005b01419683235c3c21c8ea1345e8dd7fe7bad910a7c0850497c479c712e18",
+      "reverse_sha256": "f9b96d77b5a044611068e8756bc59924f077b4556ddb73a7155467dc09dc08eb",
+      "counts": [
+        {
+          "new": "'12', '0.2.10'",
+          "old": "'11', '0.2.9'",
+          "count": 1
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    },
+    "qa/diag_emulator_smoke.py": {
+      "old_sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e",
+      "current_sha256": "0b01c00a0a853a5e436c5ae31f2e7368fde4a4317c7637d87220aee141c1fce1",
+      "reverse_sha256": "dba39862eb8a146a27c61e2bfcae58c8033bec00f9b52de6227c9432f7bb9d6e",
+      "counts": [
+        {
+          "new": "\"0.2.10\"",
+          "old": "\"0.2.9\"",
+          "count": 3
+        },
+        {
+          "new": "report.get(\"packageCode\") == 12",
+          "old": "report.get(\"packageCode\") == 11",
+          "count": 1
+        },
+        {
+          "new": "version.get(\"versionCode\") == 12",
+          "old": "version.get(\"versionCode\") == 11",
+          "count": 2
+        }
+      ],
+      "all_other_bytes_unchanged": true
+    }
+  },
+  "allowed_identity_gate_path": "qa/diag_source_gate.py",
+  "all_original_sourcegate_predicates_byte_identical": true,
+  "all_other_base_entries_unchanged": true,
+  "old_test_files": {
+    "app/src/androidTest/java/com/hcbiu/elcton/DiagnosticsUiTest.kt": {
+      "old_sha256": "c0b50dc722f549766b343f8bc546af006a48f03d07e4793e0df46d7e456ee18d",
+      "current_sha256": "51dff0ac27fb73c10fe470b7a0911d5592c2fcaa7fdade1cbdf18077b4c1f6e2",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/androidTest/java/com/hcbiu/elcton/McpKeepAliveTest.kt": {
+      "old_sha256": "38d0918efff151be064e7377e451588d3e56f7fd0b872c6ac871dd4640fddcfc",
+      "current_sha256": "38d0918efff151be064e7377e451588d3e56f7fd0b872c6ac871dd4640fddcfc",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/androidTest/java/com/hcbiu/elcton/PaletteUiTest.kt": {
+      "old_sha256": "b48d2c6ea3b465ba130e9e5fb2fbddcc5d6199a9ae1e6824c4d0848be3053ed1",
+      "current_sha256": "b48d2c6ea3b465ba130e9e5fb2fbddcc5d6199a9ae1e6824c4d0848be3053ed1",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/androidTest/java/com/hcbiu/elcton/ProductUiTest.kt": {
+      "old_sha256": "69bdc8a56275dbac91d750ec23e49acc7d05b2313cd4ad29057f7ecefd711c4d",
+      "current_sha256": "69bdc8a56275dbac91d750ec23e49acc7d05b2313cd4ad29057f7ecefd711c4d",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/androidTest/java/com/hcbiu/elcton/ThemeUiTest.kt": {
+      "old_sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10",
+      "current_sha256": "69b32c68b4e2f9172ec3d623d90d8577884542a8831e6eeaf6228d011aeefc10",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt": {
+      "old_sha256": "69192343f911dd236c4e460520fe179688efdea729c839e57fc59331a16a0d56",
+      "current_sha256": "69192343f911dd236c4e460520fe179688efdea729c839e57fc59331a16a0d56",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt": {
+      "old_sha256": "4e881e94c691d51e82b3c8add895998e2a05398230f7a16c4ca01057f2d1c5d7",
+      "current_sha256": "4e881e94c691d51e82b3c8add895998e2a05398230f7a16c4ca01057f2d1c5d7",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt": {
+      "old_sha256": "684519f459a6f48a48fcc984e5bda91d113a6ecbd3975d23df86310042da1a32",
+      "current_sha256": "684519f459a6f48a48fcc984e5bda91d113a6ecbd3975d23df86310042da1a32",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt": {
+      "old_sha256": "390b71d90ab6e339f07b742f6e29d3745dd6fd767f02329a3bfaac0ad412f1db",
+      "current_sha256": "390b71d90ab6e339f07b742f6e29d3745dd6fd767f02329a3bfaac0ad412f1db",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt": {
+      "old_sha256": "2572fb52a68c962dbfdb48f80fc201598f09101182c5cbe81be6e74671ede4c0",
+      "current_sha256": "787661d88f7161ffa5ec209a4621d59b60aeacb68fd07953ae026fd6c1b9aba4",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt": {
+      "old_sha256": "d8b05686ccad9858e2d9fd4849de26b71924a5504ca929d15b60fdfe67a27976",
+      "current_sha256": "d8b05686ccad9858e2d9fd4849de26b71924a5504ca929d15b60fdfe67a27976",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt": {
+      "old_sha256": "4b136d5cade089d8a76811ded5cb654e91d943058f9ab9122ceeb8d483a51943",
+      "current_sha256": "4b136d5cade089d8a76811ded5cb654e91d943058f9ab9122ceeb8d483a51943",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt": {
+      "old_sha256": "558da9cd16c2dce0b8d80b5a837d94f168692e5cd805fe1ac7918f7e4c320725",
+      "current_sha256": "558da9cd16c2dce0b8d80b5a837d94f168692e5cd805fe1ac7918f7e4c320725",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt": {
+      "old_sha256": "9d7db896910c08d8676b39254ec998dd9b47faf2a7bee7913b026ce8e5b13674",
+      "current_sha256": "9d7db896910c08d8676b39254ec998dd9b47faf2a7bee7913b026ce8e5b13674",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt": {
+      "old_sha256": "6e25d49d50813ad1af1d487028c275bcd9ea5bd211fc66078f3d30ebc09dd3e2",
+      "current_sha256": "6e25d49d50813ad1af1d487028c275bcd9ea5bd211fc66078f3d30ebc09dd3e2",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt": {
+      "old_sha256": "e4b53b7f2ab6baa7fddfaeeb8da39e726dfaafc3afbee6e024f109a7fefa0a75",
+      "current_sha256": "e4b53b7f2ab6baa7fddfaeeb8da39e726dfaafc3afbee6e024f109a7fefa0a75",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/McpKeepAlivePolicyTest.kt": {
+      "old_sha256": "883289974b6a0fa87da5623a1340fa3e9ce2698be69d3d2698ac002f6c2aa440",
+      "current_sha256": "883289974b6a0fa87da5623a1340fa3e9ce2698be69d3d2698ac002f6c2aa440",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt": {
+      "old_sha256": "950e6f24e7468570e3508482f59a36dd1bbaf612a2c0736ade01e4091386da3f",
+      "current_sha256": "950e6f24e7468570e3508482f59a36dd1bbaf612a2c0736ade01e4091386da3f",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pReadyErrorTest.kt": {
+      "old_sha256": "6401aca5358b53bc84c6a3c326bda06047624652359cfd8d7d478827d2b7150a",
+      "current_sha256": "6401aca5358b53bc84c6a3c326bda06047624652359cfd8d7d478827d2b7150a",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pReadyIngressTest.kt": {
+      "old_sha256": "d4d6a51f56762eaed1b6a89a476e2c69359e1267fc6830d1a4f80976d9cf43f2",
+      "current_sha256": "d4d6a51f56762eaed1b6a89a476e2c69359e1267fc6830d1a4f80976d9cf43f2",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt": {
+      "old_sha256": "4dd3304bfe44d163dd4bb43420e749421985a802c0361e8da67a90677d7f37bd",
+      "current_sha256": "4dd3304bfe44d163dd4bb43420e749421985a802c0361e8da67a90677d7f37bd",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/PhoneMcpCompositionTest.kt": {
+      "old_sha256": "932238ff9c455f7afa23e437eafda83cb046ec0c659b37b9e0dd6836cca3b4b1",
+      "current_sha256": "932238ff9c455f7afa23e437eafda83cb046ec0c659b37b9e0dd6836cca3b4b1",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/PhoneMcpToolsTest.kt": {
+      "old_sha256": "967d79781d0742d2cf65ac41263b73c45c9c9c20a29c54cb1b5d9fa09a81c982",
+      "current_sha256": "967d79781d0742d2cf65ac41263b73c45c9c9c20a29c54cb1b5d9fa09a81c982",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/PhoneScheduleTest.kt": {
+      "old_sha256": "d6a1ce209a7304b655e3b1054bacce3d7e4efe1c34db8b199ab69d488fdec1a4",
+      "current_sha256": "d6a1ce209a7304b655e3b1054bacce3d7e4efe1c34db8b199ab69d488fdec1a4",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt": {
+      "old_sha256": "1d98ec806368c163c3d9048025753f1ae1f9914a633f81328e0e23b3a4460b29",
+      "current_sha256": "1d98ec806368c163c3d9048025753f1ae1f9914a633f81328e0e23b3a4460b29",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/PickupClientTest.kt": {
+      "old_sha256": "9e034b2df04142c5fcb864c42752cd0d72f815970cb40440fc7fe7da72c4385b",
+      "current_sha256": "9e034b2df04142c5fcb864c42752cd0d72f815970cb40440fc7fe7da72c4385b",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt": {
+      "old_sha256": "4a8b97f4ae3fcb5a085fd13fd48947b86ffe6148d06a4111d84a31e226d1f8aa",
+      "current_sha256": "4a8b97f4ae3fcb5a085fd13fd48947b86ffe6148d06a4111d84a31e226d1f8aa",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt": {
+      "old_sha256": "7ee5e55e8b9dc91eaa0fedb43d5c2c697a3560d08c3491a9d0e7f6c439aed7a4",
+      "current_sha256": "7ee5e55e8b9dc91eaa0fedb43d5c2c697a3560d08c3491a9d0e7f6c439aed7a4",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt": {
+      "old_sha256": "50b4bd60f9f5d977a1020033392157645a253e191be44b6329c52616a49e23cb",
+      "current_sha256": "50b4bd60f9f5d977a1020033392157645a253e191be44b6329c52616a49e23cb",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/SyncEngineTest.kt": {
+      "old_sha256": "6ba2ebe09c298d1f722d667562e05bfeb2b4935ed761c26dfc8decb775a06f33",
+      "current_sha256": "6ba2ebe09c298d1f722d667562e05bfeb2b4935ed761c26dfc8decb775a06f33",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt": {
+      "old_sha256": "2ec7b4bf587a67d4f00bdecf5961321a6e555907d8a9b36e54b3d6f9b6423f15",
+      "current_sha256": "2ec7b4bf587a67d4f00bdecf5961321a6e555907d8a9b36e54b3d6f9b6423f15",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt": {
+      "old_sha256": "07f957bc7f300343fc2b553dfece47f23009edcd42b0e9e5b2a7f49280c5a1f4",
+      "current_sha256": "07f957bc7f300343fc2b553dfece47f23009edcd42b0e9e5b2a7f49280c5a1f4",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt": {
+      "old_sha256": "043b4b6522287da7e3a3ed5d08e889680a55de8fcee1c18faaa96ac0007df29d",
+      "current_sha256": "043b4b6522287da7e3a3ed5d08e889680a55de8fcee1c18faaa96ac0007df29d",
+      "non_version_bytes_unchanged": true
+    },
+    "app/src/test/java/com/hcbiu/elcton/WireTest.kt": {
+      "old_sha256": "88190984b864656508436d1b37441c0edcef1ddbf8275e69c8f3852979b5a759",
+      "current_sha256": "88190984b864656508436d1b37441c0edcef1ddbf8275e69c8f3852979b5a759",
+      "non_version_bytes_unchanged": true
+    },
+    "qa/P2pCandidateBuildTest.kt": {
+      "old_sha256": "3d03974cf7ff5c1728d2978415950dc9cc42987409025a3c9227fe256a9420e9",
+      "current_sha256": "1fd25cedaed4f90ba4f8cf132b8ac5ef06382fe87eea84b20c2055f62dced31d",
+      "non_version_bytes_unchanged": true
+    }
+  },
+  "current_test_classes": 35,
+  "original_business_assertions_byte_identical": true,
+  "source_identities": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": {
+      "old_sha256": "15eb45798a6cb4536500b5aebc30715a2c7ee3190fff79175cab0c23eabe8b8a",
+      "r5_sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+      "current_sha256": "18a693e7a075d1d52a5cc639ff8df005025b18df85318e6dcfe3a321b1d2611c",
+      "current_bytes": 16986
+    },
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": {
+      "old_sha256": "84176876bb297cecfaa8070362bbc0d72b0b99c095557919ba12c9978d26f4e7",
+      "r5_sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+      "current_sha256": "8e0559a571e527e7f5b311cfd770d22c53398bff87fae4adda3a2605e1cce8af",
+      "current_bytes": 24337
+    },
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": {
+      "old_sha256": "270a35fb2c47fddd4466ea2847bc3d06aef44202eca350342f6077680ae6eb64",
+      "r5_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "current_sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "current_bytes": 7614
+    },
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "old_sha256": null,
+      "r5_sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "current_sha256": "9ddb3b0787f8a931d1165793b3501e556e84672f62f43e8c15d54109b6d5dca8",
+      "current_bytes": 10663
+    }
+  },
+  "new_test_only_baseline_sha256": "af97a6fd8e3a9941b6cc11d533423cdb049f038782a6bd9791c8ed8ac5c274e9",
+  "workflow_bytes_frozen": true,
+  "devices": [],
+  "haps": [],
+  "diff_check_exit": 0
+}

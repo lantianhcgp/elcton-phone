@@ -1,0 +1,58 @@
+{
+  "lanes": [
+    {
+      "label": "python",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "qa",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 42.596318784635514,
+      "raw_sha256": "f7e3ef4af81f5a598c8c6b984aaa36510a94e5b04deb3907afce9a11df4d7302",
+      "new_jar_sha256": "882ffe754d803697278c272ebf08023099e8613f88f59c7c1938a22dc28a7393",
+      "count": 133,
+      "skip": 0,
+      "passed": true
+    },
+    {
+      "label": "http",
+      "argv": [
+        "python",
+        "-B",
+        "qa/mcp_http_selftest.py",
+        "--classpath",
+        "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/r6/evidence/adapter-jvm-green-20261115-1545/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar"
+      ],
+      "exit": 0,
+      "seconds": 8.06814098590985,
+      "raw_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+      "new_jar_sha256": "882ffe754d803697278c272ebf08023099e8613f88f59c7c1938a22dc28a7393",
+      "report": {
+        "ok": true,
+        "mode": "actual-kotlin-host",
+        "scope": "local JVM; synthetic callbacks; NOT Android runtime",
+        "assertions": 3784,
+        "clients": [
+          "urllib",
+          "curl"
+        ],
+        "write_eof_transport": {
+          "status": "supported",
+          "excluded_checks": []
+        },
+        "all_raw_checks_passed": true,
+        "token": "REDACTED"
+      },
+      "passed": true
+    }
+  ],
+  "scope": "CURRENT source full Python133 and real JVM HTTP; not Android"
+}

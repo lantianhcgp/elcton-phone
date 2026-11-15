@@ -1,0 +1,5 @@
+package android.util
+object Log {
+    fun w(tag:String,text:String):Int { return 0 }
+    fun i(tag:String,text:String):Int { return 0 }
+}

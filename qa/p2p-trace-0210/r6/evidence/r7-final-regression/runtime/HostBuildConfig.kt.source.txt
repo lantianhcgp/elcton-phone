@@ -1,0 +1,9 @@
+package com.hcbiu.elcton
+
+/** HOST TEST ONLY. Not the generated Android BuildConfig; no Android build claim. */
+object BuildConfig {
+    const val APPLICATION_ID = "host.test.only"
+    const val VERSION_NAME = "host-test"
+    const val VERSION_CODE = 0
+    const val BUILD_TYPE = "host-test"
+}

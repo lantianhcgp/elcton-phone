@@ -1,0 +1,22 @@
+{
+  "actual_executions": [
+    {
+      "label": "helper-preservation",
+      "exit": 0,
+      "raw_sha256": "26d234ebae1cc72df82186c9ea5990b106135dcff9eb7bc4eeeb13cacf1b5646"
+    },
+    {
+      "label": "delivery-output",
+      "exit": 0,
+      "raw_sha256": "fc9140325a4dfef6d1231d52978b52cb7ab4ad0df011efc53c77a94edbf9f8c5"
+    },
+    {
+      "label": "ci-selftest",
+      "exit": 0,
+      "raw_sha256": "b28528851d1fa334e94e6a99f0b252f8214fa54bcb237d4e5b313cd2ca4a811a"
+    }
+  ],
+  "frozen_live_inputs": 63,
+  "unchanged_before_after": true,
+  "scope": "Actual HOST auxiliary tests only; no main regression/CI/device execution"
+}

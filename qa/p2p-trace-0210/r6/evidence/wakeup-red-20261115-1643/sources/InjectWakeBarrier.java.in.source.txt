@@ -1,0 +1,90 @@
+import java.nio.file.*;
+import java.util.*;
+import org.jetbrains.org.objectweb.asm.*;
+import org.jetbrains.org.objectweb.asm.tree.*;
+import org.jetbrains.org.objectweb.asm.util.Printer;
+
+/** HOST ONLY; insert a stack-neutral latch call before the compiled writing.set(false).
+ * The existing AtomicBoolean receiver and false remain on the operand stack.
+ * No existing invocation, conditional, field, frame or method is removed/replaced.
+ */
+public final class InjectWakeBarrier {
+    static final String R = "com/hcbiu/elcton/DiagnosticRuntime";
+    static final String H = "com/hcbiu/elcton/HostWakeBarrier";
+    static List<String> dump(ClassNode c) {
+        List<String> out = new ArrayList<>();
+        for (MethodNode m : c.methods) {
+            out.add("METHOD " + m.access + " " + m.name + m.desc);
+            Map<LabelNode,Integer> labels = new IdentityHashMap<>(); int label = 0;
+            for (AbstractInsnNode n : m.instructions) if (n instanceof LabelNode) labels.put((LabelNode)n, label++);
+            for (AbstractInsnNode n : m.instructions) {
+                String s = n.getOpcode() < 0 ? "META " + n.getType() : Printer.OPCODES[n.getOpcode()];
+                if(n instanceof MethodInsnNode) { MethodInsnNode x=(MethodInsnNode)n;s+=" "+x.owner+"."+x.name+x.desc+" "+x.itf; }
+                else if(n instanceof FieldInsnNode) { FieldInsnNode x=(FieldInsnNode)n;s+=" "+x.owner+"."+x.name+" "+x.desc; }
+                else if(n instanceof VarInsnNode) s+=" "+((VarInsnNode)n).var;
+                else if(n instanceof JumpInsnNode) s+=" L"+labels.get(((JumpInsnNode)n).label);
+                else if(n instanceof LabelNode) s+=" L"+labels.get((LabelNode)n);
+                else if(n instanceof LineNumberNode) { LineNumberNode x=(LineNumberNode)n;s+=" "+x.line+" L"+labels.get(x.start); }
+                else if(n instanceof LdcInsnNode) s+=" "+((LdcInsnNode)n).cst;
+                else if(n instanceof IntInsnNode) s+=" "+((IntInsnNode)n).operand;
+                else if(n instanceof TypeInsnNode) s+=" "+((TypeInsnNode)n).desc;
+                else if(n instanceof IincInsnNode) { IincInsnNode x=(IincInsnNode)n;s+=" "+x.var+" "+x.incr; }
+                else if(n instanceof FrameNode) { FrameNode x=(FrameNode)n;s+=" "+x.type+" "+x.local+" "+x.stack; }
+                else if(n instanceof InvokeDynamicInsnNode) { InvokeDynamicInsnNode x=(InvokeDynamicInsnNode)n;s+=" "+x.name+x.desc+" "+x.bsm+" "+Arrays.toString(x.bsmArgs); }
+                out.add(s);
+            }
+            for(TryCatchBlockNode t:m.tryCatchBlocks) out.add("TRY L"+labels.get(t.start)+" L"+labels.get(t.end)+" L"+labels.get(t.handler)+" "+t.type);
+        }
+        return out;
+    }
+    static Map<String,Integer> calls(ClassNode c) {
+        Map<String,Integer> out=new TreeMap<>();
+        for(MethodNode m:c.methods) for(AbstractInsnNode n:m.instructions) if(n instanceof MethodInsnNode) {
+            MethodInsnNode x=(MethodInsnNode)n;String key=x.owner+"."+x.name+x.desc;
+            out.put(key,out.getOrDefault(key,0)+1);
+        }
+        return out;
+    }
+    public static void main(String[] a) throws Exception {
+        byte[] original=Files.readAllBytes(Paths.get(a[0]));ClassReader cr=new ClassReader(original);
+        ClassNode c=new ClassNode();cr.accept(c,0);
+        List<String> before=dump(c);Map<String,Integer> beforeCalls=calls(c);int sites=0;
+        List<String> anchors=new ArrayList<>();
+        for(MethodNode m:c.methods) {
+            for(AbstractInsnNode n:m.instructions.toArray()) {
+                if(!(n instanceof MethodInsnNode)) continue;
+                MethodInsnNode x=(MethodInsnNode)n;
+                if(!x.owner.equals("java/util/concurrent/atomic/AtomicBoolean") || !x.name.equals("set") || !x.desc.equals("(Z)V"))continue;
+                if(!m.name.startsWith("persistLater$lambda$") || !m.desc.equals("(L"+R+";)V") || (m.access&Opcodes.ACC_STATIC)==0)
+                    throw new AssertionError("unexpected writing release method: "+m.name+m.desc);
+                AbstractInsnNode prev=n.getPrevious();while(prev.getOpcode()<0)prev=prev.getPrevious();
+                if(prev.getOpcode()!=Opcodes.ICONST_0)throw new AssertionError("release is not false");
+                AbstractInsnNode field=prev.getPrevious();while(field.getOpcode()<0)field=field.getPrevious();
+                if(!(field instanceof FieldInsnNode) || !((FieldInsnNode)field).owner.equals(R) || !((FieldInsnNode)field).name.equals("writing"))
+                    throw new AssertionError("release receiver is not Runtime.writing");
+                int originalIndex=m.instructions.indexOf(n);
+                InsnList hook=new InsnList();hook.add(new VarInsnNode(Opcodes.ALOAD,0));
+                hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC,H,"beforeRelease","(L"+R+";)V",false));
+                m.instructions.insertBefore(n,hook);sites++;
+                anchors.add(m.name+m.desc+" index="+originalIndex+" AtomicBoolean.set(false); normal/catch finally release");
+            }
+        }
+        if(sites!=3)throw new AssertionError("expected normal, Exception catch and catch-all finally release sites, found "+sites);
+        List<String> instrumented=dump(c);Map<String,Integer> addedCalls=calls(c);
+        String hookKey=H+".beforeRelease(L"+R+";)V";
+        if(addedCalls.remove(hookKey)!=sites || !addedCalls.equals(beforeCalls))throw new AssertionError("changed product invocation counts");
+        ClassWriter cw=new ClassWriter(cr,ClassWriter.COMPUTE_MAXS);c.accept(cw);
+        Files.createDirectories(Paths.get(a[1]).getParent());Files.write(Paths.get(a[1]),cw.toByteArray());
+        for(MethodNode m:c.methods) for(AbstractInsnNode n:m.instructions.toArray()) if(n instanceof MethodInsnNode && ((MethodInsnNode)n).owner.equals(H)) {
+            AbstractInsnNode load=n.getPrevious();if(load.getOpcode()!=Opcodes.ALOAD || ((VarInsnNode)load).var!=0)throw new AssertionError("inverse load");
+            m.instructions.remove(load);m.instructions.remove(n);
+        }
+        List<String> inverse=dump(c);if(!before.equals(inverse))throw new AssertionError("inverse instruction stream mismatch");
+        Path out=Paths.get(a[2]);Files.write(out.resolve("original.instructions.txt"),before);
+        Files.write(out.resolve("instrumented.instructions.txt"),instrumented);Files.write(out.resolve("inverse.instructions.txt"),inverse);
+        Files.write(out.resolve("instrumentation-proof.txt"),Arrays.asList("source untouched; actual Kotlin compiled Runtime", "release_sites="+sites,
+            "inverse_normalized_instruction_equality=true", "all_original_product_invocation_counts_equal=true",
+            "only additions: ALOAD 0 + INVOKESTATIC HOST beforeRelease; no existing instruction removed or redirected", String.join("\n",anchors),beforeCalls.toString()));
+        System.out.println("ASM VERIFIED release_sites="+sites+" inverse=true original_invocations=true");
+    }
+}

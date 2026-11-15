@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/test_mcp029_http_listing.py", line 5, in <module>
+    from qa import mcp_http_selftest as gate
+ModuleNotFoundError: No module named 'qa'

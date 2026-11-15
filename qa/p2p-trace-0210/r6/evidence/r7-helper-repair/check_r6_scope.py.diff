@@ -1,0 +1,21 @@
+--- check_r6_scope.py.before
++++ check_r6_scope.py.after
+@@ -37,9 +37,16 @@
+     parser = argparse.ArgumentParser()
+     parser.add_argument('--out', type=Path, default=QA/'r6/evidence/frozen-scope-final')
+     args = parser.parse_args()
++    if '..' in args.out.parts:
++        parser.error('Output must not contain parent traversal')
+     out = args.out.absolute()
+-    assert out.is_relative_to(QA/'r6/evidence')
+-    out.mkdir(parents=True, exist_ok=True)
++    if any(path.is_symlink() for path in (out, *out.parents)):
++        parser.error('Output must not have symlink ancestry')
++    base = (QA/'r6/evidence').resolve()
++    out = out.resolve()
++    if out == base or not out.is_relative_to(base):
++        parser.error('Output must be a new directory within R6 evidence')
++    out.mkdir(parents=True, exist_ok=False)
+     assert not (out/'receipt.json').exists(), 'Preserve prior completed scope receipt'
+     tree = json.loads((QA/'r6/evidence/before/base-tree.json').read_bytes())
+     assert tree['base'] == BASE and len(tree['entries']) == 9461

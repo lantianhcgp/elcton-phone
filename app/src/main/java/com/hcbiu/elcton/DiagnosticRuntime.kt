@@ -12,6 +12,15 @@ class DiagnosticRuntime(
     private val filesDir: File,
     private val stateWriter: (File, String) -> Unit = ::replaceDiagnosticFile
 ) {
+    private var traceOrigin = "phone-device"
+    constructor(filesDir: File, stateWriter: (File, String) -> Unit, traceOrigin: String) : this(filesDir, stateWriter) {
+        this.traceOrigin = traceOrigin
+    }
+    val p2pTrace by lazy {
+        P2pTrace(traceOrigin, { System.currentTimeMillis() }, { System.nanoTime() / 1_000_000 }).also { trace ->
+            trace.onChanged { try { persistLater() } catch (_: Throwable) {} }
+        }
+    }
     private val lock = Any()
     private var snapshot = JSONObject().put("status", "尚未连接手表").put("phase", "idle")
         .put("timestampMs", System.currentTimeMillis()).put("ready", false).put("busy", false).put("deviceCount", 0)
@@ -109,6 +118,7 @@ class DiagnosticRuntime(
             .put("mcp", JSONObject().put("host", "127.0.0.1").put("port", 8766)
                 .put("running", server?.running == true).put("readOnly", true)
                 .put("startupError", startupError.takeIf { it.isNotEmpty() } ?: JSONObject.NULL))
+            .also { result -> try { result.put("p2p", p2pTrace.read(0, 128)) } catch (_: Throwable) {} }
     }
     fun versionInfo(): JSONObject = JSONObject().put("packageName", BuildConfig.APPLICATION_ID)
         .put("versionName", BuildConfig.VERSION_NAME).put("versionCode", BuildConfig.VERSION_CODE)
@@ -119,13 +129,22 @@ class DiagnosticRuntime(
         if (!writing.compareAndSet(false, true)) return
         writer.execute {
             var persisted = -1L
+            var processedTraceSeq = -1L
             var failed = false
             try {
                 while (true) {
                     val version = synchronized(lock) { revision }
+                    val traceVersion = p2pTrace.sequence()
+                    p2pTrace.persist { line ->
+                        val target = File(filesDir, "diagnostics/p2p-trace.jsonl")
+                        val bytes = line.toByteArray(Charsets.UTF_8)
+                        if (target.length() + bytes.size > 2L * 1024 * 1024) false
+                        else { target.parentFile?.mkdirs(); target.appendBytes(bytes); true }
+                    }
                     stateWriter(File(filesDir, "diagnostics/state.json"), read().toString())
                     persisted = version
-                    if (synchronized(lock) { revision } == version) break
+                    processedTraceSeq = traceVersion
+                    if (synchronized(lock) { revision } == version && p2pTrace.sequence() == traceVersion) break
                 }
             } catch (error: Exception) {
                 failed = true
@@ -134,7 +153,8 @@ class DiagnosticRuntime(
                 writing.set(false)
                 // A failed disk write is retried only after a later observation,
                 // never a self-sustaining background loop on an unavailable disk.
-                if (!failed && persisted >= 0 && synchronized(lock) { revision } != persisted) persistLater()
+                if (!failed && persisted >= 0 &&
+                    (synchronized(lock) { revision } != persisted || p2pTrace.sequence() != processedTraceSeq)) persistLater()
             }
         }
     }

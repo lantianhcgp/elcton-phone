@@ -31,7 +31,17 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) : 
     private var registration: NativeRegistration? = null
     private var latestDiagnostic = ""
 
-    private class NativeRegistration(val generation: Long, val receiver: Receiver)
+    private class NativeRegistration(val generation: Long, val receiver: Receiver, val traceContext: P2pTrace.Context?)
+    private fun traceContext(): P2pTrace.Context? = try { diagnostics.p2pTrace.context() } catch (_: Throwable) { null }
+    private fun related(c:P2pTrace.Context?):P2pTrace.Context? = try {
+        c?.let { diagnostics.p2pTrace.related(it) }
+    } catch (_:Throwable) { c }
+    private fun stale(c:P2pTrace.Context?):Boolean = try {
+        c==null || c.nativeGeneration!=synchronized(lock){nativeGeneration} || !diagnostics.p2pTrace.matches(c) || c.attemptCurrent?.invoke()==false
+    } catch (_:Throwable) { true }
+    private fun trace(stage: String, c: P2pTrace.Context?, fields: Map<String, Any?> = emptyMap()) {
+        try { diagnostics.p2pTrace.emit("adapter", stage, (c?.let { diagnostics.p2pTrace.fields(it) } ?: emptyMap()) + fields) } catch (_: Throwable) {}
+    }
 
     constructor(context: Context, update: (SyncEngine.State) -> Unit, importCandidate: (String, Long) -> Unit) :
         this(context, (context.applicationContext as ElctonApplication).diagnostics) {
@@ -60,7 +70,9 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) : 
             update(state)
             try { diagnostics.observe(state.status, state.detail, state.ready, state.busy, state.devices.size) }
             catch (_: Exception) {}
-        }, { text, revision -> importCandidate(text, revision) })
+        }, { text, revision -> importCandidate(text, revision) }).also { built ->
+            try { built.attachTrace(diagnostics.p2pTrace) } catch (_: Throwable) {}
+        }
     }
 
     val engine: SyncEngine get() = sharedEngine.value
@@ -86,7 +98,10 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) : 
     private val watchPackage="watchapp.nexus.0zzip"
     // Lite identity: bundleName + '_' + Base64(SEC1 uncompressed certificate EC point), not a cert hash/SPKI.
     private val watchFingerprint="watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM="
-    private fun identify() { p2p.setPeerPkgName(watchPackage).setPeerFingerPrint(watchFingerprint) }
+    private fun identify() {
+        try { diagnostics.p2pTrace.peerIdentity(watchPackage, watchFingerprint); trace("PEER_CONFIG", traceContext()) } catch (_: Throwable) {}
+        p2p.setPeerPkgName(watchPackage).setPeerFingerPrint(watchFingerprint)
+    }
 
     override fun checkPermission(success: (Boolean) -> Unit, failure: (String) -> Unit) {
         try {
@@ -150,35 +165,54 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) : 
     override fun register(device: SyncDevice, message: (String) -> Unit, success: () -> Unit, failure: (String) -> Unit) {
         val selected = native(device)
         if (selected == null) { failure("设备列表已改变，请重新查询真实配对设备。"); return }
+        val captured = try { traceContext()?.copy(attemptId=null) } catch (_:Throwable) { null }
         unregister()
         val generation = synchronized(lock) { nativeGeneration }
+        val correlated = try { captured?.copy(nativeGeneration = generation) } catch (_: Throwable) { null }
+        try { correlated?.let { diagnostics.p2pTrace.bindRegistration(it) } } catch (_:Throwable) {}
         val receiver = Receiver { packet ->
             val current = synchronized(lock) { registration?.generation == generation && nativeGeneration == generation }
-            if (current && packet.type == Message.MESSAGE_TYPE_DATA) {
-                val bytes = packet.data
-                if (bytes != null && bytes.size <= 1024 && bytes.all { it.toInt() in 32..126 }) {
-                    message(bytes.toString(Charsets.US_ASCII))
+            try { trace("RX_NATIVE_ENTRY", related(correlated), mapOf("stale" to !current)) } catch (_: Throwable) {}
+            if (current) {
+                val packetType = packet.type
+                if (packetType == Message.MESSAGE_TYPE_DATA) {
+                    val bytes = packet.data
+                    if (bytes != null && bytes.size <= 1024 && bytes.all { it.toInt() in 32..126 }) {
+                        val decoded = bytes.toString(Charsets.US_ASCII)
+                        try { trace("RX_DECODE", related(correlated), mapOf("bytes" to bytes.size)) } catch (_: Throwable) {}
+                        message(decoded)
+                    } else {
+                        try { trace("RX_ADAPTER_REJECT", related(correlated), mapOf("reason" to (if (bytes == null) "data" else if (bytes.size > 1024) "size" else "ascii"), "bytes" to bytes?.size)) } catch (_: Throwable) {}
+                    }
+                } else {
+                    try { trace("RX_ADAPTER_REJECT", related(correlated), mapOf("reason" to "type")) } catch (_: Throwable) {}
                 }
+            } else {
+                try { trace("RX_ADAPTER_REJECT", correlated, mapOf("reason" to "generation", "stale" to true)) } catch (_: Throwable) {}
             }
         }
-        val item = NativeRegistration(generation, receiver)
+        val item = NativeRegistration(generation, receiver, correlated)
         synchronized(lock) { registration = item }
         try {
             identify()
+            try { trace("REG_CALL", correlated) } catch (_: Throwable) {}
             p2p.registerReceiver(selected, receiver).addOnSuccessListener {
                 // Cleanup is keyed to the exact callback, not whichever receiver is current now.
                 val current = synchronized(lock) { registration === item && generation == nativeGeneration }
-                if (current) success() else release(receiver)
+                try { trace("REG_TASK_OK", correlated, mapOf("stale" to !current)) } catch (_: Throwable) {}
+                if (current) success() else release(receiver, correlated, "stale_registration")
             }.addOnFailureListener { error ->
                 val current = synchronized(lock) {
                     if (registration === item && generation == nativeGeneration) { registration = null; true } else false
                 }
-                release(receiver)
+                try { trace("REG_TASK_FAIL", correlated, mapOf("stale" to !current)) } catch (_: Throwable) {}
+                release(receiver, correlated, "task_fail_cleanup")
                 if (current) failure(describe(error, "registerReceiver"))
             }
         } catch (error: Exception) {
             synchronized(lock) { if (registration === item) registration = null }
-            release(receiver)
+            try { trace("REG_TASK_FAIL", correlated, mapOf("outcome" to "sync_exception")) } catch (_: Throwable) {}
+            release(receiver, correlated, "sync_fail_cleanup")
             failure(describe(error, "registerReceiver"))
         }
     }
@@ -188,24 +222,53 @@ class WearProbe(context: Context, private val diagnostics: DiagnosticRuntime) : 
             nativeGeneration++; scanGeneration++
             registration.also { registration = null }
         }
-        old?.let { release(it.receiver) }
+        old?.let {
+            val cause = try { traceContext()?.trigger ?: "none" } catch (_: Throwable) { "none" }
+            release(it.receiver, related(it.traceContext), cause)
+        }
     }
 
-    private fun release(receiver: Receiver) {
-        try { p2p.unregisterReceiver(receiver).addOnFailureListener { describe(it, "unregisterReceiver") } }
-        catch (error: Exception) { describe(error, "unregisterReceiver") }
+    private fun release(receiver: Receiver, correlated: P2pTrace.Context?, cause: String) {
+        try { trace("UNREG_CALL", correlated, mapOf("trigger" to cause)) } catch (_: Throwable) {}
+        try {
+            val task = p2p.unregisterReceiver(receiver).addOnFailureListener {
+            try { trace("UNREG_TASK_FAIL", correlated, mapOf("trigger" to cause)) } catch (_: Throwable) {}
+            describe(it, "unregisterReceiver")
+            }
+            try { task.addOnSuccessListener {
+                try { trace("UNREG_TASK_OK", correlated, mapOf("trigger" to cause)) } catch (_: Throwable) {}
+            } } catch (_:Throwable) {}
+        }
+        catch (error: Exception) {
+            try { trace("UNREG_TASK_FAIL", correlated, mapOf("trigger" to cause, "outcome" to "sync_exception")) } catch (_: Throwable) {}
+            describe(error, "unregisterReceiver")
+        }
     }
 
     override fun send(device: SyncDevice, text: String, result: (Int) -> Unit, failure: (String) -> Unit) {
         val selected = native(device)
         if (selected == null) { failure("设备列表已改变，请重新查询真实配对设备。"); return }
         if (text.length > 1024 || text.any { it.code !in 32..126 }) { failure("消息超出传输上限，未发送。"); return }
+        val correlated = try { traceContext()?.copy(nativeGeneration = synchronized(lock) { nativeGeneration }) } catch (_: Throwable) { null }
         try {
-            p2p.send(selected, Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(), object : SendCallback {
-                override fun onSendResult(code: Int) { result(code) }
+            try { trace("SEND_CALL", correlated, diagnostics.p2pTrace.metadata(text,true) + mapOf("bytes" to text.length)) } catch (_: Throwable) {}
+            val task = p2p.send(selected, Message.Builder().setPayload(text.toByteArray(Charsets.US_ASCII)).build(), object : SendCallback {
+                override fun onSendResult(code: Int) {
+                    try { trace("SEND_RESULT", correlated, mapOf("resultCode" to code, "stale" to stale(correlated))) } catch (_: Throwable) {}
+                    result(code)
+                }
                 override fun onSendProgress(progress: Long) {}
-            }).addOnFailureListener { failure(describe(it, "p2p.send")) }
-        } catch (error: Exception) { failure(describe(error, "p2p.send")) }
+            }).addOnFailureListener {
+                try { trace("SEND_TASK_FAIL", correlated, mapOf("stale" to stale(correlated))) } catch (_: Throwable) {}
+                failure(describe(it, "p2p.send"))
+            }
+            try { task.addOnSuccessListener {
+                try { trace("SEND_TASK_OK", correlated, mapOf("stale" to stale(correlated))) } catch (_: Throwable) {}
+            } } catch (_:Throwable) {}
+        } catch (error: Exception) {
+            try { trace("SEND_TASK_FAIL", correlated, mapOf("outcome" to "sync_exception", "stale" to stale(correlated))) } catch (_: Throwable) {}
+            failure(describe(error, "p2p.send"))
+        }
     }
 
     private fun describe(e: Exception, phase: String): String {

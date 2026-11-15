@@ -1,0 +1,147 @@
+[
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/AdapterScopeTest.kt",
+    "mode": "100644",
+    "oid": "c9833958be5e807e49ccbe8d3d05c01ea14043ea"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/DevicePolicyTest.kt",
+    "mode": "100644",
+    "oid": "a772be62a23f1e633bbcd3d29a9954b450e53ae1"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/DiagnosticMcpServerTest.kt",
+    "mode": "100644",
+    "oid": "b4b6184256ea7e9369671c058c87f16849a16738"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/DiagnosticToolsTest.kt",
+    "mode": "100644",
+    "oid": "84196078eb14925ad8c2b0e4d966427dd974b376"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/DiagnosticsIntegrationTest.kt",
+    "mode": "100644",
+    "oid": "052dcff2db2eaeb31119ddd9a874c124d4a9571d"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ErrorJournalBoundaryTest.kt",
+    "mode": "100644",
+    "oid": "815642fefe07a91d32c01da12602d56616232932"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ErrorJournalTest.kt",
+    "mode": "100644",
+    "oid": "22304d84190133f8bde7f4276e72fe14e18a7faa"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ErrorRecordBoundaryTest.kt",
+    "mode": "100644",
+    "oid": "a4d3d9f9a7477e348d2ab44c75e1f7f1c858b39d"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ErrorRecordTest.kt",
+    "mode": "100644",
+    "oid": "a4788b86e447e3d6ec8fa8e80af9be72461cc26e"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ExportSessionTest.kt",
+    "mode": "100644",
+    "oid": "704f5213036da8243dce62475bd367c007b3e36b"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/MainThreadActionsTest.kt",
+    "mode": "100644",
+    "oid": "ac2e2b7497550b1710044a77da2fb1d2635b53a1"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/McpKeepAlivePolicyTest.kt",
+    "mode": "100644",
+    "oid": "8bf77c74e6ed4fabe8fae83c625b99140094676a"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/McpTokenTest.kt",
+    "mode": "100644",
+    "oid": "b82d2a7cda2105d7c094086fc95a39c1f8583563"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/P2pReadyErrorTest.kt",
+    "mode": "100644",
+    "oid": "047fb1bab3e2c15af7b0a22accac5ab107ef7fc5"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/P2pReadyIngressTest.kt",
+    "mode": "100644",
+    "oid": "747c145f387ddb1f38b7ba68a17f51d1f7c00d86"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/PhoneActionsTest.kt",
+    "mode": "100644",
+    "oid": "a3832f3d1069f5c7bad1c8e6ddd1914d17c84929"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/PhoneMcpCompositionTest.kt",
+    "mode": "100644",
+    "oid": "91c877a74f4d518e4100f730f88abdc514e480ea"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/PhoneMcpToolsTest.kt",
+    "mode": "100644",
+    "oid": "66a7d1c3ba412929866ab05c451e36849b17c276"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/PhoneScheduleTest.kt",
+    "mode": "100644",
+    "oid": "4614b4e75dfee9856fb28f51488ea367875dc49f"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/PhoneSnapshotTest.kt",
+    "mode": "100644",
+    "oid": "ad7165d77b8c5dd3e0efc7e3a24add373ec8fc5a"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/PickupClientTest.kt",
+    "mode": "100644",
+    "oid": "3ed351f4476503fe2fa0f1c4b2e6445124d67f4e"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ProtocolIngressAuditTest.kt",
+    "mode": "100644",
+    "oid": "93d4113727c22a723ecb739e5a0669e00f130621"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/ScheduleBookTest.kt",
+    "mode": "100644",
+    "oid": "c61f5eb1dacadea5190015be93b84eee1ee6397f"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/SnapshotPrivacyAuditTest.kt",
+    "mode": "100644",
+    "oid": "d8536a621f2ea63dab8c530ebe93330a2af58411"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/SyncEngineTest.kt",
+    "mode": "100644",
+    "oid": "c86bfcb7b5dda60217ed1bba0c245f16fcaffcc2"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/TransferSessionTest.kt",
+    "mode": "100644",
+    "oid": "9bf4affb7271cef0c437078e227ce576c832619e"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/UserFacingErrorTest.kt",
+    "mode": "100644",
+    "oid": "1168df289c108cc9a87ed66c983c93597ae292f3"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/WearEngineConfigTest.kt",
+    "mode": "100644",
+    "oid": "9912933d82b76e55809bef8c44b31b5f6eadb532"
+  },
+  {
+    "path": "app/src/test/java/com/hcbiu/elcton/WireTest.kt",
+    "mode": "100644",
+    "oid": "8a961e4792288112e34960ee23b80527aeb34981"
+  }
+]

@@ -1,0 +1,7 @@
+usage: run_r6_final_regressions.py [-h] --out OUT
+                                   [--resume-compiled RESUME_COMPILED]
+
+options:
+  -h, --help            show this help message and exit
+  --out OUT
+  --resume-compiled RESUME_COMPILED

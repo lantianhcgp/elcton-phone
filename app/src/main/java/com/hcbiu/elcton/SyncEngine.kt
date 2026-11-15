@@ -61,6 +61,16 @@ class SyncEngine(
 
     var state = State()
         private set
+    private var trace: P2pTrace? = null
+    fun attachTrace(value: P2pTrace) { trace = value }
+    private var closingTrace = false
+    private fun emitTrace(stage:String, fields:Map<String,Any?> = emptyMap(), captured:P2pTrace.Context? = null) {
+        try {
+            val t=trace ?: return
+            val c=if(captured==null)t.context()else if(captured.attemptId==null)t.related(captured)else captured
+            t.emit("engine",stage,t.fields(c)+fields)
+        } catch (_:Throwable) {}
+    }
     private var generation = 0
     private var closed = false
     private var peer: SyncDevice? = null
@@ -98,14 +108,18 @@ class SyncEngine(
     }
     private fun unregister() { transport.unregister(); peer = null }
     private fun fail(message: String) {
+        emitTrace("FAIL", mapOf("generation" to generation ,"trigger" to "fail_cleanup"))
+        try { trace?.bind(generation, trigger = "fail_cleanup") } catch (_: Throwable) {}
         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal(); session = null; exporting = null; awaitingReady = false; unregister()
         publish(state.copy(status = "操作未完成", detail = message.take(200), selected = "", ready = false, busy = false))
     }
 
     fun authorizeAndScan(interactive: Boolean = false): Boolean {
         if (closed || state.busy) return false
+        try { trace?.bind(generation, trigger = "scan") } catch (_: Throwable) {}
         unregister(); cancelTimer(); finishTotal(); sendAttempts.invalidate(); awaitingReady = false
         val gen = ++generation
+        try { trace?.bind(gen, trigger = "scan") } catch (_: Throwable) {}
         var checking = true
         publish(state.copy(status = "检查设备授权", selected = "", busy = true, ready = false, diagnostic = ""))
         deadline(20_000) { fail("授权检查超时。请打开运动健康，确认已登录并保持手表连接。") }
@@ -160,6 +174,7 @@ class SyncEngine(
     }
 
     fun connect(deviceId: String): Boolean {
+        emitTrace("CONNECT_REQUEST", mapOf("generation" to generation ,"trigger" to "connect"))
         if (closed || state.busy) return false
         val selected = state.devices.firstOrNull { it.id == deviceId }
         if (selected == null || selected.id.isEmpty()) { fail("请先查询并选择真实配对设备。"); return false }
@@ -167,12 +182,14 @@ class SyncEngine(
         if (!DevicePolicy.canAttemptSync(selected.connected, selected.p2pCapability, 0, 1)) {
             fail("设备未连接，或明确不支持应用间通信。"); return false
         }
+        try { trace?.bind(generation, deviceRef = state.devices.indexOf(selected), trigger = "connect") } catch (_: Throwable) {}
         unregister(); cancelTimer(); finishTotal(); sendAttempts.invalidate(); awaitingReady = false
         val gen = ++generation
+        try { trace?.bind(gen, deviceRef = state.devices.indexOf(selected), trigger = "connect") } catch (_: Throwable) {}
         var installing = true
         publish(state.copy(status = "检查配套手表应用", selected = selected.id, busy = true, ready = false,
             dirty = false, datasetId = "", hasData = false))
-        deadline(15_000) { fail("检查手表应用超时，请确认运动健康仍连接。") }
+        deadline(15_000) { emitTrace("INSTALL_TIMEOUT", mapOf("generation" to generation ,"trigger" to "install_timeout")); fail("检查手表应用超时，请确认运动健康仍连接。") }
         try {
             transport.installed(selected, { installed -> main(gen) {
                 if (!installing) return@main
@@ -183,9 +200,25 @@ class SyncEngine(
                 }
                 peer = selected
                 var registering = true
-                deadline(15_000) { fail("接收器注册超时，未发送课表。") }
+                deadline(15_000) { emitTrace("REG_TIMEOUT", mapOf("generation" to generation ,"trigger" to "reg_timeout")); fail("接收器注册超时，未发送课表。") }
+                var registrationContext:P2pTrace.Context? = null
+                fun registeredContext():P2pTrace.Context? {
+                    try {
+                        if(registrationContext==null) {
+                            val c=trace?.context()
+                            if(c?.generation==gen)registrationContext=c.copy(attemptId=null)
+                        }
+                    } catch (_:Throwable) {}
+                    return registrationContext ?: P2pTrace.Context(generation=gen)
+                }
                 try {
-                    transport.register(selected, { raw -> main(gen) { onMessage(raw) } }, { scheduler.post {
+                    try { trace?.bind(gen, deviceRef = state.devices.indexOf(selected), trigger = "connect"); emitTrace("REG_CALL", mapOf("generation" to gen)) } catch (_: Throwable) {}
+                    transport.register(selected, { raw ->
+                        emitTrace("RX_ENGINE_ENTRY", mapOf("generation" to gen, "stale" to (closed || gen != generation), "bytes" to raw.length), registeredContext())
+                        main(gen) { onMessage(raw) }
+                    }, {
+                        emitTrace("REG_TASK_OK", mapOf("generation" to gen, "stale" to (closed || gen != generation)), registeredContext())
+                        scheduler.post {
                         if (closed || gen != generation) {
                             // The adapter owns exact native cleanup. A global fallback is only
                             // safe while no replacement receiver OR scan can be current.
@@ -196,8 +229,15 @@ class SyncEngine(
                         registering = false; handshakeAttempts = 0; awaitingReady = true
                         publish(state.copy(status = "等待手表准备", detail = "可在手表进入：周视图 → 同步 → 开始接收。手机正在尝试检测对端。"))
                         hello()
-                    } }, { message -> main(gen) { if (registering) { registering = false; fail(message) } } })
-                } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
+                    } }, { message ->
+                        emitTrace("REG_TASK_FAIL", mapOf("generation" to gen, "stale" to (closed || gen != generation)), registeredContext())
+                        main(gen) { if (registering) { registering = false; fail(message) } }
+                    })
+                    registeredContext()
+                } catch (error: Exception) {
+                    emitTrace("REG_TASK_FAIL", mapOf("generation" to gen, "outcome" to "sync_exception", "stale" to (gen != generation)), registeredContext())
+                    if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty()))
+                }
             } }, { message -> main(gen) { if (installing) { installing = false; fail(message) } } })
         } catch (error: Exception) { if (gen == generation) fail(UserFacingError.explain(error.message.orEmpty())) }
         return true
@@ -206,14 +246,16 @@ class SyncEngine(
     private fun hello() {
         if (peer == null) { fail("请先连接设备。"); return }
         deadline(5_000) {
-            if (++handshakeAttempts <= 3) hello()
-            else fail("未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。")
+            if (++handshakeAttempts <= 3) { emitTrace("HELLO_RETRY", mapOf("generation" to generation ,"retry" to handshakeAttempts)); hello() }
+            else { emitTrace("READY_TIMEOUT", mapOf("generation" to generation ,"trigger" to "ready_timeout")); fail("未收到手表准备回执；还没有发送课表。若表端已经开始接收，请记录同步页的 SDK/REG/HELLO/READY 阶段或错误码，不是再次点击接收即可解决。") }
         }
         send("{" + Wire.header("HELLO", "") + "}")
     }
 
     private fun onMessage(raw: String) {
-        val message = PacketIngress.watch(raw) ?: return
+        val observedMessage = PacketIngress.watch(raw)
+        try { emitTrace(if (observedMessage == null) "RX_PROTOCOL_REJECT" else "RX_PROTOCOL_ACCEPT", (trace?.metadata(raw) ?: emptyMap()) + mapOf("generation" to generation, "bytes" to raw.length)) } catch (_: Throwable) {}
+        val message = observedMessage ?: return
         val type = message.optString("type")
         PacketIngress.preparationError(message, awaitingReady, session != null || exporting != null)?.let { fail(it); return }
         val export = exporting
@@ -245,6 +287,7 @@ class SyncEngine(
             return
         }
         if (type == "READY" && session == null && awaitingReady) {
+            emitTrace("READY_ACCEPT", mapOf("generation" to generation))
             awaitingReady = false; cancelTimer(); sendAttempts.invalidate()
             publish(state.copy(status = "手表已准备", detail = "可以同步手机课表，或先导入手表已有课表。",
                 ready = true, busy = false, digest = message.optString("digest"), dirty = message.optBoolean("localDirty"),
@@ -324,6 +367,8 @@ class SyncEngine(
 
     fun cancel() {
         if (closed) return
+        emitTrace("CANCEL", mapOf("generation" to generation ,"trigger" to if(closingTrace)"close"else"cancel"))
+        try { trace?.bind(generation, trigger = if(closingTrace)"close"else"cancel") } catch (_: Throwable) {}
         val id = session?.transferId ?: exporting?.id
         if (id != null) send("{" + Wire.header("CANCEL", id) + "}", reportFailure = false)
         generation++; sendAttempts.invalidate(); cancelTimer(); finishTotal()
@@ -332,7 +377,7 @@ class SyncEngine(
             detail = "已停止等待回执；若已进入保存阶段，请重新连接核对最终课表。手机不会自动导入或合并。"))
     }
 
-    fun close() { if (!closed) { cancel(); closed = true } }
+    fun close() { if (!closed) { emitTrace("CLOSE", mapOf("generation" to generation ,"trigger" to "close")); closingTrace = true; cancel(); closed = true } }
 
     fun updateDiagnostic(full: String) { if (!closed) publish(state.copy(diagnostic = full)) }
 
@@ -345,13 +390,23 @@ class SyncEngine(
             return
         }
         fun accepts() = gen == generation && sendAttempts.accepts(attempt)
+        var sendContext:P2pTrace.Context? = null
         try {
-            transport.send(device, text, { code -> main(gen) {
+            try { trace?.bind(gen, attempt, trigger = if(closingTrace)"close"else trace?.context()?.trigger ?: "none", attemptCurrent = { !closed && accepts() }); sendContext=trace?.context(); emitTrace("SEND_CALL", (trace?.metadata(text,true) ?: emptyMap()) + mapOf("generation" to gen, "attemptId" to attempt, "bytes" to text.length)) } catch (_: Throwable) {}
+            transport.send(device, text, { code ->
+                emitTrace("SEND_RESULT", mapOf("generation" to gen, "attemptId" to attempt, "resultCode" to code, "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
+                main(gen) {
                 if (!accepts()) return@main
                 if (code != 207) {
                     if (reportFailure) fail("Wear Engine 发送失败（$code），没有成功保存证据。")
                 } else session?.transportSucceeded()
-            } }, { message -> main(gen) { if (reportFailure && accepts()) fail(message) } })
-        } catch (error: Exception) { if (reportFailure && accepts()) fail(UserFacingError.explain(error.message.orEmpty())) }
+            } }, { message ->
+                emitTrace("SEND_TASK_FAIL", mapOf("generation" to gen, "attemptId" to attempt, "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
+                main(gen) { if (reportFailure && accepts()) fail(message) }
+            })
+        } catch (error: Exception) {
+            emitTrace("SEND_TASK_FAIL", mapOf("generation" to gen, "attemptId" to attempt, "outcome" to "sync_exception", "stale" to (closed || gen != generation || !sendAttempts.accepts(attempt))), sendContext)
+            if (reportFailure && accepts()) fail(UserFacingError.explain(error.message.orEmpty()))
+        }
     }
 }

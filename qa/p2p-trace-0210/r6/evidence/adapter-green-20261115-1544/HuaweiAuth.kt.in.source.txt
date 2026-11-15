@@ -1,0 +1,8 @@
+package com.huawei.wearengine.auth
+import com.huawei.hmf.tasks.Task
+class Permission private constructor(val name:String) { companion object { val DEVICE_MANAGER=Permission("DEVICE_MANAGER") } }
+interface AuthCallback { fun onOk(permissions:Array<Permission>); fun onCancel() }
+class AuthClient {
+    fun checkPermission(p:Permission)=Task<Boolean>("permission",true)
+    fun requestPermission(cb:AuthCallback,p:Permission)=Task<Void>("request")
+}

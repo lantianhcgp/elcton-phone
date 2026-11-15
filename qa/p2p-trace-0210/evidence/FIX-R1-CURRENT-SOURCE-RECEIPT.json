@@ -1,0 +1,65 @@
+{
+  "at": "2026-11-15T13:41:08.029871+08:00",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "writer_start": "2026-11-15T13:24:04+08:00",
+  "hard_stop": "2026-11-15T13:44:00+08:00",
+  "product_frozen_at": "2026-11-15T13:40:00.315101+08:00",
+  "product_files": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8"
+  },
+  "new_test_files": {
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": "d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208"
+  },
+  "frozen_drift": [],
+  "gates": {
+    "fix-r1-green-1333": {
+      "exits": {
+        "compile": 0,
+        "junit": 0
+      },
+      "tests": 171,
+      "input_sha_drift": [],
+      "receipt_sha256": "789746051e24fe1d269d5d2cff489a8183b72f8234f84c3346af5298ce51ad3a",
+      "junit_log_sha256": "a94da293c92cad6d3bb710368ecf8436e8af8fdba06b0d7f40c7690b1f87b232"
+    },
+    "fix-r1-runtime-1337": {
+      "exits": {
+        "compile": 0,
+        "junit": 0
+      },
+      "tests": 4,
+      "input_sha_drift": [],
+      "receipt_sha256": "cabfecf606413a97354b73d05e4b4fc20d7c180d9413ea1fb80d89261f1fe19a",
+      "junit_log_sha256": "aebcc6e9c0459cfeed9315b8e4f94a87a08cc421b5dbbc18405629d15e7e3cef"
+    },
+    "native-green-1336": {
+      "exits": {
+        "compile": 0,
+        "junit": 0
+      },
+      "tests": 3,
+      "input_sha_drift": [],
+      "receipt_sha256": "064e2b116702bba5618d95fa6126f89da8eacaa4a55467a22b79907ebd04c5e8",
+      "junit_log_sha256": "bf855b42c7b6d51410f3ff03474a3aef58ee82ad6274bf8a679a7c8d585b1869"
+    }
+  },
+  "changed_tracked": [
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt"
+  ],
+  "tracked_out_of_scope": [],
+  "git_diff_check_exit": 0,
+  "git_diff_check_output": "",
+  "runtime_fault_tests": "verification GREEN only; no new Runtime product modification in this box, no RED claim",
+  "version": "unchanged11/0.2.9; no source lock migration",
+  "device_ci_push_commit": false
+}

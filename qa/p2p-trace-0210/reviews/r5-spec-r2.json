@@ -1,0 +1,258 @@
+{
+  "schema": 2,
+  "axis": "SPEC",
+  "round": "r2",
+  "mode": "independent_agent_review",
+  "jev_called": false,
+  "passed": false,
+  "product_passed": false,
+  "release_ready": false,
+  "fail_closed_rule": "passed == product_passed == (not security_concerns and not logic_errors and not missing_requirements); release_ready separately requires product pass and authorized release gates",
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "L3-r2",
+      "severity": "blocking",
+      "r1_origin": "L3",
+      "path": "app/src/main/java/com/hcbiu/elcton/WearProbe.kt:39-41,257,262,265-269; P2pTrace.kt:48-50; SyncEngine.kt:289-291,397-405",
+      "spec": "方案41/56/70：迟到Task/SendResult的stale必须反映原generation/attempt守卫，不能用诊断context代替原守卫。",
+      "finding": "READY_ACCEPT后原sendAttempts.invalidate()已经作废HELLO attempt，但P2pTrace.context().attemptId仍为旧值。WearProbe.stale只比nativeGeneration及P2pTrace.matches，故同代次READY后的迟到SEND_TASK_OK、SEND_TASK_FAIL及adapter SEND_RESULT仍可标stale=false；同一failure进入engine层原sendAttempts.accepts检查却标stale=true并拒绝业务推进。新修仅覆盖新send bind导致的retry失配及换代，不覆盖READY/完成处原attempt invalidation。",
+      "counterexample": "当前SOURCE编译的native-green-1336 jar，HOST内存JShell将共享engine布置generation=1/peer/awaitingReady=true，反射调用真实private send(HELLO,true)，再真实onMessage合法READY。READY=true、READY_ACCEPT attemptId=1。随后fake Task探针得到adapter SEND_TASK_OK attemptId=1 stale=false；fake failure探针得到adapter SEND_TASK_FAIL stale=false、engine SEND_TASK_FAIL stale=true。",
+      "proof_level": "真实当前编译字节的HOST反例；Android/Huawei均为fake边界，非设备/真实SDK回调时序。探针先调用success再failure仅为分别观察两个分支，不声称真实Task能有双终态。静态predicate同样证明单独任一迟到分支。",
+      "business_impact": "本轮未发现由此改变原业务guard；阻断的是诊断的有效/过期因果标记合同，不将日志错误冒称实际握手根因。",
+      "fix_boundary": "只从已有原attempt生命周期/闭包同步诊断有效性；不得改变原READY、attempt、callback或SDK行为。需另棒范围内修并补可执行afterREADY adapter反例；本审查不修改产品/测试。"
+    }
+  ],
+  "missing_requirements": [],
+  "summary": "R1 L1/S4修正及跨代关联修正可核；L3仍有同代次合法READY后adapter stale错误，产品SPEC拒绝。发布另因版本/精确源身份门授权未决而拒绝，非以无APK自动否决产品。",
+  "scope": {
+    "repository": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115",
+    "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+    "review": "仅批准纯观测产品与R1反例修正；全读4目标生产源码、PacketIngress/SendAttempts、相关测试/真实回执及完整diff。唯一本轮写入本JSON；不改产品、测试、R1、构建/CI或设备。",
+    "hard_box_seconds": 480,
+    "started_at": "2026-11-15T13:39:46+08:00",
+    "finished_at": "2026-11-15T13:48:42.301744+08:00",
+    "source_stable_at_seal": true
+  },
+  "sourceSHA": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+    "app/src/main/java/com/hcbiu/elcton/PacketIngress.kt": "3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb",
+    "app/src/main/java/com/hcbiu/elcton/SendAttempts.kt": "5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529"
+  },
+  "actual_read": [
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/WearProbe.kt",
+      "sha256": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+      "bytes": 16949,
+      "fully_read": true,
+      "expected_sha_matches": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+      "sha256": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+      "bytes": 24294,
+      "fully_read": true,
+      "expected_sha_matches": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+      "sha256": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+      "bytes": 7614,
+      "fully_read": true,
+      "expected_sha_matches": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt",
+      "sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "bytes": 10486,
+      "fully_read": true,
+      "expected_sha_matches": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/PacketIngress.kt",
+      "sha256": "3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb",
+      "bytes": 2481,
+      "fully_read": true,
+      "expected_sha_matches": true
+    },
+    {
+      "path": "app/src/main/java/com/hcbiu/elcton/SendAttempts.kt",
+      "sha256": "5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529",
+      "bytes": 277,
+      "fully_read": true,
+      "expected_sha_matches": true
+    }
+  ],
+  "r1_disposition": [
+    {
+      "id": "L1",
+      "status": "corrected",
+      "evidence": "send/release原failure listener先注册，新success listener attach整体独立catch(Throwable)。实读native-red-nullfix-1333原3测红1及native-green-1336绿3；独立重跑绿3，基线WearProbe仅类名替换字节精确。"
+    },
+    {
+      "id": "L2",
+      "status": "substantially_corrected_not_blanket_causality_certification",
+      "evidence": "bind换engine generation清旧attempt；注册copy(attemptId=null)且绑定nativeGeneration；related只允许捕获两代精确匹配；engine emit合并context；终止前bind cleanup trigger，原业务语句/顺序不动。5个P2pContext反例当前通过。此次有限box不宣称所有SDK并发因果已穷尽。"
+    },
+    {
+      "id": "L3",
+      "status": "partially_corrected_still_blocking",
+      "evidence": "engine Task failure新增原sendAttempts.accepts检查；adapter新增native/context匹配。但READY invalidate后context仍旧attempt，L3-r2实证残留。"
+    },
+    {
+      "id": "S4",
+      "status": "corrected",
+      "evidence": "phone-outgoing分类显式sender=phone、protocolVersion；每SID有界盐化摘要→rN匿名引用，非空ID可区分，不持久化raw transferId；实读P2pContext相关RED5与当前GREEN。"
+    },
+    {
+      "id": "S1/S3",
+      "status": "native_fake_oracle_added",
+      "evidence": "当前WearProbe与精确类名改名基线实际fake SDK运行3测，参数/调用/业务结果/getter计数/receiver清理/attach异常等比较。HOST不是Android执行。"
+    },
+    {
+      "id": "S2",
+      "status": "runtime_specific_evidence_added",
+      "evidence": "实读Runtime故障模板和当前runtime4回执：quota停止追加保留原状态写；日志路径失败不跳状态写/不自重试；snapshot字段失败隔离；真实socket/state写race。未在本轮重跑会写文件的runtime测试。"
+    }
+  ],
+  "evidence_validation": {
+    "fix-r1-green-1333": {
+      "receipt_sha256": "789746051e24fe1d269d5d2cff489a8183b72f8234f84c3346af5298ce51ad3a",
+      "actual_hash_checks": 62,
+      "missing": 0,
+      "mismatches": 0,
+      "compile_exit": 0,
+      "junit_exit": 0,
+      "tests": 171
+    },
+    "native-green-1336": {
+      "receipt_sha256": "064e2b116702bba5618d95fa6126f89da8eacaa4a55467a22b79907ebd04c5e8",
+      "actual_hash_checks": 25,
+      "missing": 0,
+      "mismatches": 0,
+      "baseline_exact_class_rename": true,
+      "compile_exit": 0,
+      "junit_exit": 0,
+      "tests": 3,
+      "actual_sdk": false
+    },
+    "fix-r1-runtime-1337": {
+      "receipt_sha256": "cabfecf606413a97354b73d05e4b4fc20d7c180d9413ea1fb80d89261f1fe19a",
+      "actual_hash_checks": 15,
+      "missing": 0,
+      "mismatches": 0,
+      "compile_exit": 0,
+      "junit_exit": 0,
+      "tests": 4,
+      "origin": "host-test"
+    },
+    "actual-sdk-type-1338": {
+      "receipt_sha256": "12ba3017cb3f85eab213ed51111d8a1a2703867623c033efebd576bad8670bf0",
+      "actual_hash_checks": 19,
+      "missing": 0,
+      "mismatches": 0,
+      "compile_exit": 0,
+      "actual_huawei_jars_typecheck": true,
+      "android_full_build": false
+    },
+    "parent_scope": "实读parent-scope-1341：base9447、only3allowed modified、35oldtests、114watch unchanged；parent声明，未冒称本审查重核9447全文件。",
+    "original_python": "实读current-original-python-1309原log：Ran133/4 failures，旧scope source门拒绝；这是R1时点未迁移历史红件，不伪称R2已全suite重跑。父明确当前源身份授权仍未决。"
+  },
+  "independent_executions": [
+    {
+      "name": "six_current_P2pTrace_classes_first",
+      "exit": 1,
+      "tests": 19,
+      "failures": 2,
+      "cause": "本审查首次cwd=HOME使两项source-read测试FileNotFound；17通过/2环境失败，不判产品回归，原结果留工具会话。"
+    },
+    {
+      "name": "six_current_P2pTrace_classes_correct_cwd",
+      "cwd": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115",
+      "exit": 0,
+      "stdout": "JUnit version 4.13.2\n...................\nTime: 3.423\n\nOK (19 tests)\n",
+      "note": "同jar同类不改测试，修正cwd重跑；包含P2pContext/Engine/Concurrency/Ingress/Runtime静态/Test。"
+    },
+    {
+      "name": "NativeAdapterOracleTest_current",
+      "exit": 0,
+      "stdout": "JUnit version 4.13.2\n...\nTime: 0.666\n\nOK (3 tests)\n"
+    },
+    {
+      "name": "after_READY_same_generation_adapter_stale_counterexample",
+      "exit": 0,
+      "jshell_errors": false,
+      "ready": true,
+      "events": [
+        {
+          "layer": "engine",
+          "stage": "READY_ACCEPT",
+          "generation": 1,
+          "nativeGeneration": 1,
+          "attemptId": 1,
+          "stale": false
+        },
+        {
+          "layer": "adapter",
+          "stage": "SEND_TASK_OK",
+          "generation": 1,
+          "nativeGeneration": 1,
+          "attemptId": 1,
+          "stale": false
+        },
+        {
+          "layer": "adapter",
+          "stage": "SEND_TASK_FAIL",
+          "generation": 1,
+          "nativeGeneration": 1,
+          "attemptId": 1,
+          "stale": false
+        },
+        {
+          "layer": "engine",
+          "stage": "SEND_TASK_FAIL",
+          "generation": 1,
+          "nativeGeneration": 1,
+          "attemptId": 1,
+          "stale": true
+        }
+      ],
+      "proof": "内存HOST反射fixture，真实当前方法，不写产品/测试/fixture文件；无设备或SDK执行证明。"
+    },
+    {
+      "name": "first_jshell_probe",
+      "exit": 0,
+      "valid_probe": false,
+      "cause": "字符串转义产生JShell语法错误，随后无send导致IndexOutOfBounds；无成功反例主张，原输出留工具会话。"
+    }
+  ],
+  "release_blockers": [
+    {
+      "id": "AUTH-VERSION",
+      "kind": "authorization_unresolved",
+      "evidence": "app/build.gradle.kts仍versionCode11/versionName0.2.9且与base未改；0.2.10/code12及旧版本/精确源身份门迁移不得自主猜授权、改断言或skip。"
+    },
+    {
+      "id": "RELEASE-GATES",
+      "kind": "not_executed_not_authorized_in_box",
+      "evidence": "最终Android全门、CI/APK精确源SHA/同签名/升级/UI验收未完成；仅Huawei jar HOST typecheck不替代Android build。无APK本身不是product SPEC自动失败理由。"
+    },
+    {
+      "id": "PRODUCT-L3",
+      "kind": "product_logic_blocker",
+      "evidence": "L3-r2同代次READY后adapter stale反例未修，独立于正常authority阻塞。"
+    }
+  ],
+  "suggestions": [
+    "不得把现有171/3/4门绿等同诊断因果全面正确；afterREADY adapter反例需修后独立再审。",
+    "不动旧源身份门/断言/红证据，保持产品SPEC和release readiness分层。"
+  ],
+  "no_product_or_test_edits": true,
+  "no_r1_edits": true,
+  "no_device_operations": true,
+  "no_ci_apk_haps_operations": true,
+  "at": "2026-11-15T13:48:42.301744+08:00"
+}

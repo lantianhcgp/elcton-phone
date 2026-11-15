@@ -1,0 +1,14 @@
+JUnit version 4.13.2
+..E.
+Time: 0.834
+There was 1 failure:
+1) diagnosticSuccessListenerAttachFailureNeverCreatesBusinessFailure(com.hcbiu.elcton.NativeAdapterOracleTest)
+java.lang.AssertionError: new success listener registration is diagnostic-only expected:<Outcome(calls=[setPeerPkgName:watchapp.nexus.0zzip, setPeerFingerPrint:watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM=, register:d1:1, send:d1:{"type":"HELLO"}, unregister:1], business=[scan:1, registered, rx:{}, result:207, result:206], errors=0, messageReads=0, counts=[(1, 1), (1, 0), (1, 1), (1, 1), (1, 1), (0, 0)], failureListeners=[true, true])> but was:<Outcome(calls=[setPeerPkgName:watchapp.nexus.0zzip, setPeerFingerPrint:watchapp.nexus.0zzip_BOc6BPXgVZY7Ik7lETcDy6ezKw77Dqm0EDBscNFv9kHcXaW7gXBRQmA8RfLcDvcCLkOSQIsB33zj/s2IS6u5utM=, register:d1:1, send:d1:{"type":"HELLO"}, unregister:1], business=[scan:1, registered, rx:{}, send_fail:Wear Engine 暂不可用。可打开诊断记录查看错误类型；如已开始同步，请重新连接核对手表最终版本。, result:207, result:206], errors=2, messageReads=0, counts=[(1, 1), (1, 0), (1, 1), (1, 1), (1, 1), (0, 0)], failureListeners=[false, false])>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at com.hcbiu.elcton.NativeAdapterOracleTest.diagnosticSuccessListenerAttachFailureNeverCreatesBusinessFailure(NativeAdapterOracleTest.kt:74)
+
+FAILURES!!!
+Tests run: 3,  Failures: 1
+

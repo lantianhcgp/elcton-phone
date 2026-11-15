@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-15 13:55:23 +0800",
+  "argv": [
+    "python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "qa",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "env_explicit": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "MCP_HTTP_TEST_CLASSPATH": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/evidence/fix-r1-green-1333/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar"
+  },
+  "exit": 1,
+  "seconds": 49.63735373085365,
+  "log_sha256": "5699025409010daee4a5db7d5a2c91ea0bcf408c5602a2828488edb0d98ad768",
+  "tests": [
+    "133"
+  ],
+  "skip_count": [],
+  "failures": [
+    "test_exact_authorized_observation_reverses_to_version_025_baseline (test_diag_source_gate.DiagnosticSourceGateTest.test_exact_authorized_observation_reverses_to_version_025_baseline)",
+    "test_we_and_signing_and_themes_remain_exact (test_mcp027_scope.Mcp027ScopeTests.test_we_and_signing_and_themes_remain_exact)",
+    "test_only_reviewed_ready_delta_reverses_to_pinned_original (test_p2p_ready_source_gate.P2pReadySourceGateTest.test_only_reviewed_ready_delta_reverses_to_pinned_original)",
+    "test_course_display_is_tonal_but_color_index_and_delete_actions_are_preserved (test_palette_source.PaletteSourceTest.test_course_display_is_tonal_but_color_index_and_delete_actions_are_preserved)"
+  ],
+  "jar_sha256": "a40b10c3216b3518ddf94895de7c41cd2e4d0bd45fc7483fb241cfe2d3ffffee",
+  "compiled_source_receipt_sha256": "789746051e24fe1d269d5d2cff489a8183b72f8234f84c3346af5298ce51ad3a",
+  "test_sha256": {
+    "qa/test_capture_readiness.py": "6ae100e1d59415c41ca1d8b756d13e0c4469ece98a3f675a257704d36db3f551",
+    "qa/test_cloud_observer.py": "eab122b814529411e327d2126482d58b0413bae19968b6b123f4388ecc946758",
+    "qa/test_cloud_observer_crash_containment.py": "a7cb8959cf3d567e9429860697f8cb74a115c09b22bdb938b65cdd35b48767eb",
+    "qa/test_cloud_observer_crash_limits.py": "32ecab5ba21a0658345143d7f844ad24dc4783c1bb073239d0196529809bce6e",
+    "qa/test_cloud_observer_isolation.py": "ae9f1eb7966d4d80f2848aa8681603428722dac633878777e773e03314c7e99b",
+    "qa/test_diag_source_gate.py": "5bacc49053d492cf03a8fd405aca57dae30740df77b5bb30e539181664d25a00",
+    "qa/test_diag_workflow_env.py": "a012c64f3b86be15b065b52def667b0c9320ea6cd5d80a029ef1f50197190d41",
+    "qa/test_final_report_gate.py": "0d8e45219fd1efe32e772f0ab218dd4c2c177109ddf420f5a5239d66e01b53b3",
+    "qa/test_keepalive_gate.py": "7b612f908a8c09ed48a1da25b4227d6a944d507d9d390be47ebcf070e0d039e1",
+    "qa/test_keepalive_return_fixture.py": "fcafa9fc4436b8a36ec94bfcba1d5946d516de3eb4b7ecda3bd66eae1173b193",
+    "qa/test_mcp027_scope.py": "0203e00a1b00f317f3a919d3796c55203d31154f8a0170945d2549988806cb61",
+    "qa/test_mcp029_http_listing.py": "f9214871477b3022cfcd8503d9e8650b96701d0a05a4da96579f5be759c589da",
+    "qa/test_mcp_clients.py": "719eba472002f0c183d0500a96c7aa075f7a519e5b088449f3577a888eda49b4",
+    "qa/test_mcp_http_selftest.py": "169836aa46e9fc1cb2694a315fde4b8ea508e6d57fbffc7d9aff359d798ffd57",
+    "qa/test_notification_fixture.py": "532939076e873d89bade06cb3163b722fe18a64c31e7b37fce9f726fff482ab1",
+    "qa/test_p2p_ready_source_gate.py": "6f090a897f55e5d1906f5d3f7d6c7c0e63513bade049e07108609de4bc60b268",
+    "qa/test_palette_evidence.py": "d5768e3b9e1f1dec5ca1c26d4decf648900023cd3c4465236c543e141864bcec",
+    "qa/test_palette_source.py": "aafe9f0e80e86f28480d0c234d69f342f5bcf84eeef9aa00e50e3df79e0c5c89",
+    "qa/test_termux_mcp.py": "f7be6d58274c3bd7ee726122c0e0485362027335adbfe0151309772c71e69c89",
+    "qa/test_theme_evidence.py": "e0c295f2593a694eae2c1ea21d7ea24e2dc1a651ada5d5f8a90e4a5e48782a3a",
+    "qa/test_theme_source.py": "d6a4c3a7ce233b10346780b38e286e2f2ac71b03f53b259fa48b6d978992cbbe"
+  }
+}

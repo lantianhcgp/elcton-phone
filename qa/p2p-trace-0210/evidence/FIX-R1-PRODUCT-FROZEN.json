@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "at": "2026-11-15T13:40:00.315101+08:00",
+  "writer_start": "2026-11-15T13:24:04+08:00",
+  "hard_stop": "2026-11-15T13:44:00+08:00",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "product_frozen": true,
+  "origin": "host-test",
+  "product_files": {
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8"
+  },
+  "new_test_files": {
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": "d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43",
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208"
+  },
+  "new_test_file_count": 6,
+  "gates": {
+    "fix-r1-red-1325": {
+      "compile": 0,
+      "junit": 1,
+      "tests": 5,
+      "failures": 5
+    },
+    "fix-r1-green-1333": {
+      "compile": 0,
+      "junit": 0,
+      "tests": 171
+    },
+    "fix-r1-runtime-1337": {
+      "compile": 0,
+      "junit": 0,
+      "tests": 4
+    },
+    "native-green-1336": {
+      "compile": 0,
+      "junit": 0,
+      "tests": 3,
+      "owner": "parent",
+      "actual_sdk": false
+    }
+  },
+  "remaining": [
+    "independent SPEC r2 review",
+    "Android full CI/build/APK not authorized in this box",
+    "version11/0.2.9 and old exact-source gates unresolved user authorization",
+    "device proof/root-cause not claimed"
+  ],
+  "no_commit": true,
+  "no_stage": true,
+  "no_ci": true,
+  "no_push": true,
+  "no_device_operations": true
+}

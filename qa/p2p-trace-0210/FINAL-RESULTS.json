@@ -1,0 +1,68 @@
+{
+  "at": "2026-11-15 13:56:24 +0800",
+  "status": "BLOCKED_NOT_DELIVERED",
+  "root_cause": "unknown",
+  "version": {
+    "actualCode": 11,
+    "actualName": "0.2.9",
+    "targetCode": 12,
+    "targetName": "0.2.10"
+  },
+  "apk": null,
+  "ci": null,
+  "signing_not_run": true,
+  "device_operations": [],
+  "haps_operations": [],
+  "tests": {
+    "watch_original": {
+      "tests": 445,
+      "pass": 445,
+      "fail": 0,
+      "skip": 0
+    },
+    "phone_original_frozen_jvm": 152,
+    "phone_original_frozen_python": 133,
+    "current_jvm": 171,
+    "current_fake_sdk_oracle": 3,
+    "current_runtime": 4,
+    "current_http_assertions": 3784,
+    "actual_huawei_jar_type_compile_exit": 0,
+    "current_original_python": {
+      "executed": true,
+      "exit": 1,
+      "tests": [
+        "133"
+      ],
+      "failure_summary": [
+        "FAILED (failures=4)"
+      ],
+      "skipped": [],
+      "receipt": "qa/p2p-trace-0210/evidence/final-original-python-full-1354/receipt.json"
+    }
+  },
+  "review": {
+    "SPEC_r1": false,
+    "SPEC_r2": false,
+    "QUALITY": "not started because SPEC rejected",
+    "blocker": "L3-r2: READY invalidates HELLO attempt but adapter trace context still marks late Task/result current"
+  },
+  "source_scope": {
+    "git_entries": 9461,
+    "symlinks": 8,
+    "old_product_changed_only": [
+      "WearProbe.kt",
+      "SyncEngine.kt",
+      "DiagnosticRuntime.kt"
+    ],
+    "new_product": "P2pTrace.kt",
+    "new_test_classes": 6,
+    "old_test_files_preserved": 35,
+    "watch_files_preserved": 114
+  },
+  "source_ready_to_ship": false,
+  "release_blockers": [
+    "L3-r2",
+    "old version/source identity expectation migration unresolved",
+    "full Android CI/UI/signature not executed"
+  ]
+}

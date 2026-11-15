@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-15 13:51:24 +0800",
+  "argv": [
+    "python",
+    "-B",
+    "qa/mcp_http_selftest.py",
+    "--classpath",
+    "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115/qa/p2p-trace-0210/evidence/fix-r1-green-1333/host-tests.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/json.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/junit.jar:/data/data/com.termux/files/home/.hermes/tmp/elcton-jvm-test/hamcrest.jar"
+  ],
+  "exit": 0,
+  "seconds": 9.963288955390453,
+  "log_sha256": "eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1",
+  "test_sha256": "dc44fefc3b145b80a41cf5ff272e1d32e7116aa648e60ac4a7ebadb085c3187a",
+  "jar_sha256": "a40b10c3216b3518ddf94895de7c41cd2e4d0bd45fc7483fb241cfe2d3ffffee",
+  "compiled_source_receipt_sha256": "789746051e24fe1d269d5d2cff489a8183b72f8234f84c3346af5298ce51ad3a"
+}

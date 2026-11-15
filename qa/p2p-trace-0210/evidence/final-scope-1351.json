@@ -1,0 +1,70 @@
+{
+  "at": "2026-11-15 13:52:43 +0800",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "tracked_entries": 9461,
+  "regular_entries": 9453,
+  "symlink_entries": 8,
+  "only_allowed_modified": [
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt"
+  ],
+  "all_other_base_entries_unchanged": true,
+  "diff_check_exit": 0,
+  "product_frozen_hashes_match": true,
+  "target_not_built": {
+    "code": 12,
+    "name": "0.2.10"
+  },
+  "actual_version_unchanged": {
+    "code": 11,
+    "name": "0.2.9"
+  },
+  "device_operations": [],
+  "haps_operations": [],
+  "source_commit_created": false,
+  "new_source_files": {
+    "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt": {
+      "sha256": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8",
+      "bytes": 10486
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pContextTest.kt": {
+      "sha256": "4c7a6d997b35ca9696df2fb356eb51ac60960e714c18428cf2d65ba11ede1208",
+      "bytes": 3117
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pReadyErrorTest.kt": {
+      "sha256": "6401aca5358b53bc84c6a3c326bda06047624652359cfd8d7d478827d2b7150a",
+      "bytes": 1326
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pReadyIngressTest.kt": {
+      "sha256": "d4d6a51f56762eaed1b6a89a476e2c69359e1267fc6830d1a4f80976d9cf43f2",
+      "bytes": 832
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt": {
+      "sha256": "5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f",
+      "bytes": 1682
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt": {
+      "sha256": "048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61",
+      "bytes": 7952
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt": {
+      "sha256": "87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54",
+      "bytes": 2251
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt": {
+      "sha256": "d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43",
+      "bytes": 1393
+    },
+    "app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt": {
+      "sha256": "b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0",
+      "bytes": 4885
+    }
+  },
+  "reconstruction": {
+    "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+    "tracked_patch": "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "new_sources_suffix": ".kt.source.txt",
+    "source_only_not_installable": true
+  }
+}

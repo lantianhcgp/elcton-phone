@@ -1,0 +1,5 @@
+{
+  "at": "2026-11-15 13:54:09 +0800",
+  "new_source_count_note": "final snapshot includes 2 prior P2pReady* tracked tests as protective copies, NOT new tests; actual new files are new P2pTrace + 6newtests = 7",
+  "unittest_retry_reason": "Missing MCP classpath env caused 4client methods setUpClass skip in final-original-python-1350 (129/4fail/skip1). Previous1309 complete133 required MCP_HTTP_TEST_CLASSPATH. Retry exact original suite with same final compiled jar (no test edits). Original partial receipt preserved."
+}

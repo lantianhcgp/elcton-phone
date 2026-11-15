@@ -1,0 +1,30 @@
+{
+  "at": "2026-11-15 13:57:08 +0800",
+  "original_diff_check_exit": 2,
+  "only_raw_diff_and_junit_log_findings": true,
+  "not_claimed_green": true,
+  "no_raw_evidence_rewritten": true,
+  "exception": "Exact original raw diff context blanks and JUnit trailing EOF preserved, no product/old assertion changes",
+  "files": [
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff",
+    "qa/p2p-trace-0210/evidence/fix-r1-green-1333/junit.log",
+    "qa/p2p-trace-0210/evidence/fix-r1-red-1325/junit.log",
+    "qa/p2p-trace-0210/evidence/fix-r1-runtime-1337/junit.log",
+    "qa/p2p-trace-0210/evidence/native-green-1336/junit.log",
+    "qa/p2p-trace-0210/evidence/native-red-nullfix-1333/junit.log"
+  ]
+}

@@ -1,0 +1,35 @@
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:52: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:77: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:89: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:168: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:186: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:197: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:200: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:202: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:237: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:250: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:262: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:273: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:349: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:369: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/final-source-snapshot-1351/tracked-product.diff:399: trailing whitespace.
++ 
+qa/p2p-trace-0210/evidence/fix-r1-green-1333/junit.log:6: new blank line at EOF.
+qa/p2p-trace-0210/evidence/fix-r1-red-1325/junit.log:42: new blank line at EOF.
+qa/p2p-trace-0210/evidence/fix-r1-runtime-1337/junit.log:11: new blank line at EOF.
+qa/p2p-trace-0210/evidence/native-green-1336/junit.log:6: new blank line at EOF.
+qa/p2p-trace-0210/evidence/native-red-nullfix-1333/junit.log:14: new blank line at EOF.

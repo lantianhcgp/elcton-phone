@@ -1,0 +1,109 @@
+{
+  "axis": "SPEC",
+  "schema1": 1,
+  "passed": false,
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "L1",
+      "path": "app/src/main/java/com/hcbiu/elcton/WearProbe.kt:224-259",
+      "spec": "方案37：字段/诊断异常不得改变业务返回、回调次数与顺序；55只允许纯观测Listener。",
+      "finding": "send与release把新增addOnSuccessListener串在原addOnFailureListener之前且仍在原业务try中；隔离的是lambda执行，不是Listener注册。若成功监听注册同步抛Exception，原failure listener未注册，send落257-259调用business.failure/describe；release落232-234调用describe。未打点基线同一Task只挂原failure listener，不会因诊断attach异常产生该业务失败。",
+      "counterexample": "Task返回成功；仅addOnSuccessListener抛IllegalStateException，addOnFailureListener正常。新版send产生原本不存在的failure回调，可能fail→unregister；新版release产生原本不存在的错误journal/update。静态可构造，未声称真实SDK已执行此反例。",
+      "severity": "blocking"
+    },
+    {
+      "id": "L2",
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:29-45; SyncEngine.kt:168-217,234-269,349-386; WearProbe.kt:162-187,218-220",
+      "spec": "方案41/44/60：从现有闭包关联generation、nativeGeneration、attempt，记录清理原因及作废前代次，不强行相等。",
+      "finding": "bind跨generation仍以attemptId ?: context.attemptId沿用旧attempt；连接在++generation前bind，首次安装PEER_CONFIG因此引用上一engine代次。engine.emit不自动合并context，除SEND_CALL/RESULT显式字段外，RX_ENGINE_ENTRY/PROTOCOL/READY/FAIL等虽知道相关连接仍丢attempt/native引用。NativeRegistration捕获的是发送前context，unregister使用该旧context而非相关终止attempt；注册后的所有RX也固定为该context。比如上次发送attempt=9，重新连接无新发送即注册失败，REG/RX/UNREG可把新generation与旧attempt=9串联。数字没有被伪造相等，但因果相关引用不可靠。",
+      "severity": "blocking"
+    },
+    {
+      "id": "L3",
+      "path": "app/src/main/java/com/hcbiu/elcton/WearProbe.kt:251-255; SyncEngine.kt:381-386",
+      "spec": "方案56/70：迟到/重复回执可见，stale与原generation/attempt守卫语义不变。",
+      "finding": "adapter SEND_TASK_OK/FAIL始终继承默认stale=false，注销或换native代次后的迟到Task仍标当前。engine SEND_TASK_FAIL只检查closed/generation，不检查原accepts(attempt)；同代次HELLO retry或READY已invalidate后的旧Task failure也标stale=false，原业务守卫实际上会拒绝它。SEND_RESULT有attempt检查，不等于Task层也正确。",
+      "severity": "blocking"
+    }
+  ],
+  "spec_gaps": [
+    {
+      "id": "S1",
+      "kind": "missing_test",
+      "path": "app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt:16-21; qa/p2p-trace-0210/evidence/green-final-12/receipt.json",
+      "spec": "方案69-71：原fake SDK oracle逐项比参数/次数/顺序/关闭守卫，发送Task与原生206/207分别覆盖。",
+      "finding": "166门禁没有编译WearProbe或DiagnosticRuntime；adapter测试仅源码contains和packet.type/data出现一次，不是实际SDK getter调用计数、异常对象/回调身份、Task attach异常、迟到取消/重注册oracle。已实际git show原native路径，静态看type/data原短路读数保留，但不能据此补齐可执行证明或Android/Huawei编译凭证。"
+    },
+    {
+      "id": "S2",
+      "kind": "missing_test",
+      "path": "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt; qa/p2p-trace-0210/evidence/runtime-13/source.json",
+      "spec": "方案33/37/46/68：最终源码单writer、失败隔离、quota停止、满队列与原状态写race。",
+      "finding": "末轮已实读runtime-current-1312/execution.json及junit.log、核source.json全部hash当前匹配：exit0/OK1，真实socket/file race与原两参构造器兼容闭合，撤回最终Runtime未编译缺口。该原race仅测状态写/stop，并非P2p事件quota、writer故障或snapshot字段失败隔离；新14项锁外write/latch也不替代这些Runtime专测。runtime-13源不匹配且HOST快照p2p.origin=phone-device、traceSeq=0，只是历史证据，不能作硬件事件。"
+    },
+    {
+      "id": "S3",
+      "kind": "missing_test",
+      "path": "qa/p2p-trace-0210/evidence/red-02; qa/p2p-trace-0210/evidence/red-engine-09; app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt",
+      "spec": "方案66、69-71：先RED只缺事件，原oracle不改，再GREEN两层回执。",
+      "finding": "已查真实red-02与red-engine-09各5个AssertionError缺P2pTrace/attachTrace，前者测试hash与最终一致，证明这部分RED原件保留；未找到adapter可执行oracle/TDD时序与Listener注册抛异常的RED→GREEN。静态缺stage的RED及引擎fake transport不能替代native adapter任务的TDD。"
+    },
+    {
+      "id": "S4",
+      "kind": "incomplete_requirement",
+      "path": "app/src/main/java/com/hcbiu/elcton/P2pTrace.kt:98-120; SyncEngine.kt:236,373; WearProbe.kt:244",
+      "spec": "方案45/54/58：文本仅元数据，包含type/protocol/version/sender及transferId匿名相关引用。",
+      "finding": "transferRef仅none/present，两个非空transferId完全无法匿名区分；version用于拒绝判断但未进入事件schema。SEND_CALL复用仅watch入口classifier，正常phone HELLO的sender被记other、reason=sender，type=HELLO已有但方向被误标为拒绝。没有泄漏正文，不过诊断元数据合同不完整，且正常发送不应携带入口拒绝原因。"
+    }
+  ],
+  "suggestions": [
+    "保留原SDK调用及failure listener链与业务catch；新增成功监听attach整体置于独立诊断try，不能让attach异常调用业务failure/describe；仅允许范围内修并补当前adapter反例oracle。",
+    "从现有注册/发送闭包提供诊断相关上下文，跨generation不得继承旧attempt；原守卫不改。按原guard补Task层stale与清理前引用，新增匿名transfer映射不参与业务状态推进。",
+    "旧断言/RED原件保持不动。原Python源门冲突交父明确授权裁决，不因诊断合同授权就把真实4个失败改成绿或跳过。",
+    "原test sourceSet递归qa，现evidence含14个生成.kt，多个同名baseline/Runtime HOST类可被Gradle拾取。保留证据原件并在发布前确认精确staging白名单；不能把这次手选HOST编译等同Android全编译。",
+    "Java内存source反例启动被环境阻断；未写临时文件或伪造结果。L1-L3/S4静态发现，新14项真实执行。"
+  ],
+  "checked_files": [
+    {"path":"app/src/main/java/com/hcbiu/elcton/WearProbe.kt","sha256":"6ecb721385578a8edaf7ee9ffd0294d3dc13124696f1b3a96dcfa1e2949ba680"},
+    {"path":"app/src/main/java/com/hcbiu/elcton/SyncEngine.kt","sha256":"9f78592b387ab1ae4c278de8ac8a6c62713d5155d465b518c4af6a4228c50897"},
+    {"path":"app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt","sha256":"e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7"},
+    {"path":"app/src/main/java/com/hcbiu/elcton/P2pTrace.kt","sha256":"7c629b51b7ed863f6bd2105a37f830daf88de87902603c370d66d0d7ae913ed2"},
+    {"path":"app/src/main/java/com/hcbiu/elcton/PacketIngress.kt","sha256":"3a59181bfe0e1cfd801cd21699ba00c3cfe9ebcfa9fc6f3aa6ab45696536f7fb"},
+    {"path":"app/src/main/java/com/hcbiu/elcton/SendAttempts.kt","sha256":"5cc8fdbdcab8b2373c62bbeb2943c4f43c6e7dd9a0087b136c01a84d51051529"},
+    {"path":"app/src/test/java/com/hcbiu/elcton/P2pTraceConcurrencyTest.kt","sha256":"5681ff57438988783ab6090fa6dae27614c9b05455e6ac7800329a4eafa8752f"},
+    {"path":"app/src/test/java/com/hcbiu/elcton/P2pTraceEngineTest.kt","sha256":"048fb5a4674c02fa410efa684ac00814c5f4de525a6b45a07911ce14db7eed61"},
+    {"path":"app/src/test/java/com/hcbiu/elcton/P2pTraceIngressTest.kt","sha256":"87c54291fb71ce0bbcfecb12bce55c91c98dc58497cb928354a122e8d6347d54"},
+    {"path":"app/src/test/java/com/hcbiu/elcton/P2pTraceRuntimeTest.kt","sha256":"d6d3b801d3bbfbb5a264457aeee0658e847aeaaa3e0fabb3cb6e052ff03fec43"},
+    {"path":"app/src/test/java/com/hcbiu/elcton/P2pTraceTest.kt","sha256":"b2fe75b91c5e2244c76ec305d5c19940e42f5fc593e9c0ab8ad59f54713445b0"},
+    {"path":"app/build.gradle.kts","sha256":"52ff1325ad7c160431634d4187e5c59c9e8a5a0ef6696f38be8ef5695720a2e2"},
+    {"path":"qa/p2p-trace-0210/evidence/green-final-12/receipt.json","sha256":"5453d246599391488577f369f8a28934a0b3ddbb9423aaba77a532b6fecae4a5"},
+    {"path":"qa/p2p-trace-0210/evidence/green-final-12/junit.log","sha256":"58ca2a49d2440d8bd3404725640d508352da6449bf941b8025dd16b85de44abc"},
+    {"path":"qa/p2p-trace-0210/evidence/frozen-1308/manifest.json","sha256":"ebffcf19795a77ee1ea57d06c82f116ef889454797cefa3273ab739147e3bfc5"},
+    {"path":"qa/p2p-trace-0210/evidence/current-original-python-1309/raw.log","sha256":"20e4a685fbfc3d5331476bd79089eee42135ab5ec4c7ae6a07341ca1ebef51b7"},
+    {"path":"qa/p2p-trace-0210/evidence/current-http-1309/raw.log","sha256":"eb0d02c91485de26cf2dad6c2b9e362cd771c7d0b2b1a1a3a78b93a3d6e9a7a1"},
+    {"path":"qa/p2p-trace-0210/evidence/runtime-13/source.json","sha256":"78056bbca36dccd70a52489e3c7238d924b9c12c1570b8282b032d66da05067d"},
+    {"path":"qa/p2p-trace-0210/evidence/runtime-13/final-state.json","sha256":"6294efda5d9e8a97a691e8f33eabf0e6e4733f3d69ddfecf803bf33fb5d4c29d"},
+    {"path":"/data/data/com.termux/files/home/we-handshake-repair-20261115-watch/qa/we-handshake-20261115/research/r4/PHONE-DIAGNOSTIC-PATCH-PLAN.md","sha256":"f720f1653775d0a22d5ceaea5fb3b1c862387898d69b8177662c332f87574859"}
+  ],
+  "scope": {
+    "repository": "/data/data/com.termux/files/home/elcton-phone-diagnostics-0210-20261115",
+    "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+    "branch_expected": "diag/p2p-trace-0.2.10-20261115",
+    "review": "只审批准手机观测合同；全读4源码/5新增测试/方案，实git diff及git show原WearProbe；不审改旧断言，不写产品，不设备、不CI、不push。唯一写入本JSON。",
+    "freeze": "13:19:19核四源码与五新测试均匹配frozen-1308 manifest，无漂移。",
+    "gates": {
+      "jvm166": "实读receipt+junit.log：compile=0/junit=0/OK166；61输入hash全部当前匹配；34类库存、166@Test及JUnit argv精确；旧tracked测试diff为空。baseline engine仅HOST类名替换后与git show正文精确相等。",
+      "independent_new14": "复用green-final-12 jar按receipt实际classpath重新执行5个P2pTrace类：exit0，OK14，Time0.737；其中Runtime/adapter两项仅静态源码断言，不误称已编译它们。",
+      "http3784": "实读raw与receipt且SHA匹配，exit0，3784 assertions，curl/urllib/真实loopback，excluded_checks=[]；classpath来自green-11，相关未变生产工具输入hash与当前相等；不是Android Runtime。",
+      "python133": "实读完整当前原suite raw/receipt且SHA匹配，exit1，Ran133，failures4，无skip。四处均调用共享旧精确scope source门；不改、不skip、不计全绿。",
+      "current_runtime1": "末轮实读runtime-current-1312/execution.json、junit.log，source.json所有hash当前匹配，exit0/OK1，socket health200/stop拒连接/最终文件running=false；原构造器兼容闭合，HOST非设备。",
+      "historical_only": "旧152 JVM、表端445不作新Android凭证；runtime-13绿1源码不匹配且HOST快照错标phone-device，不作当前Runtime或设备凭证。"
+    },
+    "release_boundary": {
+      "completed": false,
+      "finding": "无APK不是本补丁SPEC独立否决理由，但完整.release_boundary未闭合：当前build.gradle仍versionCode11/versionName0.2.9（与base字节相同）；0.2.10/code12、BuildConfig/旧版本门、精确scope source门冲突、安装UI、新APK同签名/精确源SHA及最终Android全门尚缺。两次clarify未答由parent提供，不在本审查猜授权或迁旧断言。没有执行CI/push/APK/装机。"
+    }
+  },
+  "at": "2026-11-15T13:20:46+08:00"
+}

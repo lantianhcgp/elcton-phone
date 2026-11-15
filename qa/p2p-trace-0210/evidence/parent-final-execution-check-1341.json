@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-15 13:41:26 +0800",
+  "lanes": {
+    "native-green-1336": {
+      "input_files": 25,
+      "all_existing_inputs_sha_match": true,
+      "steps": [
+        {
+          "name": "compile",
+          "exit": 0
+        },
+        {
+          "name": "junit",
+          "exit": 0
+        }
+      ]
+    },
+    "actual-sdk-type-1338": {
+      "input_files": 19,
+      "all_existing_inputs_sha_match": true,
+      "steps": [
+        {
+          "name": "compile",
+          "exit": 0
+        }
+      ]
+    },
+    "fix-r1-runtime-1337": {
+      "input_files": 15,
+      "all_existing_inputs_sha_match": true,
+      "steps": [
+        {
+          "name": "compile",
+          "exit": 0
+        },
+        {
+          "name": "junit",
+          "exit": 0
+        }
+      ]
+    },
+    "fix-r1-green-1333": {
+      "input_files": 62,
+      "all_existing_inputs_sha_match": true,
+      "steps": [
+        {
+          "name": "compile",
+          "exit": 0
+        },
+        {
+          "name": "junit",
+          "exit": 0
+        }
+      ]
+    }
+  }
+}

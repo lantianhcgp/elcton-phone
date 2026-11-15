@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-15 13:41:25 +0800",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "base_file_count": 9447,
+  "allowed_modified": [
+    "app/src/main/java/com/hcbiu/elcton/DiagnosticRuntime.kt",
+    "app/src/main/java/com/hcbiu/elcton/SyncEngine.kt",
+    "app/src/main/java/com/hcbiu/elcton/WearProbe.kt"
+  ],
+  "original_tests_preserved": 35,
+  "watch_source_preserved": 114,
+  "frozen_input_count": 12,
+  "passed": true
+}

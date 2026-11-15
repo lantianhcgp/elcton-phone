@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "writer": "R5-fix-independent-spec-r1",
+  "status": "stopped-product-frozen-pending-independent-review-and-release-authorization",
+  "start": "2026-11-15T13:24:04+08:00",
+  "product_freeze": "2026-11-15T13:40:00.315101+08:00",
+  "current_source_verified": "2026-11-15T13:41:08.029871+08:00",
+  "stop": "before-2026-11-15T13:44:00+08:00",
+  "base": "bb26c64b67e1cfa7903cd709c2aac482f6490e6b",
+  "implemented_findings": ["L1", "L2", "L3", "S4"],
+  "independent_spec_r2": "pending-parent-readonly-review",
+  "semantic_tdd": {
+    "red": "evidence/fix-r1-red-1325",
+    "compile_exit": 0,
+    "junit_exit": 1,
+    "tests": 5,
+    "failures": 5,
+    "green": "evidence/fix-r1-green-1333",
+    "green_compile_exit": 0,
+    "green_junit_exit": 0,
+    "green_full_tests": 171,
+    "breakdown": {"original": 152, "earlier_new": 14, "this_new": 5}
+  },
+  "runtime": {
+    "evidence": "evidence/fix-r1-runtime-1337",
+    "compile_exit": 0,
+    "junit_exit": 0,
+    "tests": 4,
+    "new_fault_tests": 3,
+    "original_socket_file_race_tests": 1,
+    "tdd_claim": false,
+    "label": "real-current-Runtime-HOST-files-and-loopback-with-Android-Log-BuildConfig-stubs"
+  },
+  "parent_native_fake_api": {
+    "red": "evidence/native-red-nullfix-1333",
+    "red_compile_exit": 0,
+    "red_junit_exit": 1,
+    "red_tests": 3,
+    "target_failures": 1,
+    "green": "evidence/native-green-1336",
+    "green_compile_exit": 0,
+    "green_junit_exit": 0,
+    "green_tests": 3,
+    "actual_sdk": false,
+    "android_ci": false,
+    "read_and_current_source_sha_verified": true
+  },
+  "product_sha256": {
+    "WearProbe.kt": "8858aa73e7c69e9b7d3cafbf19fe26c224300409536f8a921dca1e77bff8b7d1",
+    "SyncEngine.kt": "f59966880018477c7bbab7768ca5e0b2bc5ad3e83594fc45e0ab7ff367ca63a2",
+    "DiagnosticRuntime.kt": "e6e10f6ddb3f4cd620879509a28e61433139feddf84b90d783e34167ecfe2cc7",
+    "P2pTrace.kt": "ba747e234bb4f61bb5ffb801a8abac6e5a4eba28014c7627febf4ad84c0c0bc8"
+  },
+  "receipts": ["evidence/FIX-R1-PRODUCT-FROZEN.json", "evidence/FIX-R1-CURRENT-SOURCE-RECEIPT.json"],
+  "continuation": "FIX-R1-CONTINUATION.md",
+  "runtime_product_changed_this_box": false,
+  "old_tracked_assertions_changed": false,
+  "version": "unchanged-code11-name0.2.9",
+  "ci_push_commit_stage_device_browser_watch_actions": false,
+  "remaining": [
+    "Independent SPEC r2, especially adapter post-READY attempt staleness and cleanup context completeness",
+    "Version12/0.2.10 and legacy exact-source/old-version gate migration require unanswered user authorization",
+    "Current original Python133 source-lock failures are unresolved; not skipped or relabeled GREEN",
+    "Android full CI/build/APK/signature/install/device proof not executed in this box",
+    "Historical qa generated Kotlin recursive sourceSet staging risk remains",
+    "No root-cause or handshake-success claim"
+  ]
+}
